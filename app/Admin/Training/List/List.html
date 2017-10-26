@@ -10,7 +10,7 @@
 <main class="container" role="main">
     <h1 class="page-heading">Liste des contenus</h1>
     <div class="row">
-        <div class="col-xl-10 col-12">
+        <div class="col-xl-12">
             <table class="table table-sm table-bordered">
                 <caption><a ui-sref="transcript.admin.training.new">Ajouter un nouvel élément</a><span ng-if="trainingContents.length > 0"> - <a ui-sref="transcript.admin.training.list">Accéder à tous les éléments</a></span></caption>
                 <thead>
@@ -19,9 +19,9 @@
                     <th>#</th>
                     <th>Titre</th>
                     <th>Type</th>
-                    <th>Status</th>
-                    <th>Author</th>
-                    <th>Date</th>
+                    <th>Statut</th>
+                    <th>Auteur</th>
+                    <th>Mise à jour</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -29,10 +29,10 @@
                     <td>{{ $index+1 }}</td>
                     <td><a ui-sref="transcript.admin.training.edit({id: trainingContent.id})"><i class="fa fa-edit"></i></a></td>
                     <td><a ui-sref="transcript.admin.training.view({id: trainingContent.id})">{{ trainingContent.title }}</a></td>
-                    <td>{{ trainingContent.pageType }}</td>
-                    <td>{{ trainingContent.pageStatus }}</td>
-                    <td>{{ trainingContent.createUser.name }}</td>
-                    <td data-ng-bind="trainingContent.createDate | date:'dd-MM-yyyy HH:mm'"></td>
+                    <td>{{ trainingContent.pageType | trainingTypePageName }}</td>
+                    <td>{{ trainingContent.pageStatus | status | ucFirstStrict }}</td>
+                    <td>{{ trainingContent.editorialResponsibility.name }}</td>
+                    <td data-ng-bind="trainingContent.updateDate | date:'dd-MM-yyyy à HH:mm'"></td>
                 </tr>
                 <tr ng-if="trainingContents.length == 0">
                     <td colspan="7" class="bg-warning">Aucun contenu d'entrainement n'existe pour le moment. <a ui-sref="transcript.admin.training.new">Commencer à configurer le module d'entrainement</a></td>

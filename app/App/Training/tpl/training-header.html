@@ -18,5 +18,5 @@
         <strong>Par <a ui-sref="transcript.app.user.profile({id: trainingContent.editorialeResponsibility.id})">{{ trainingContent.editorialResponsibility.name }}</a></strong>
         <div ng-if="trainingContent.editorialResponsibility.biography != null" ng-bind="trainingContent.editorialResponsibility.biography"></div>
     </div>
-    <div class="col-auto">Publié le <span data-ng-bind="trainingContent.createDate |  date:'MM/dd/yyyy à HH:mm'"></span></span></div>
+    <div class="col-auto">Publié le <span data-ng-bind="trainingContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
 </div>

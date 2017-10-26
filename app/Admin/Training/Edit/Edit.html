@@ -13,94 +13,88 @@
 
     <form>
         <div class="col-xl-10 col-12">
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-title" class="col-md-2 col-form-label text-md-right">Titre </label>
-                <div class="col-md-10">
-                    <input id="admin-trainingContent-edit-title" type="text" class="form-control" data-ng-model="trainingContent.title" />
-                    <small class="form-text text-muted">Optez pour un titre clair, décrivant précisément votre contenu et comportant des mots-clés signifiant si vous publiez un article.</small>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-orderInTraining" class="col-md-2 col-form-label text-md-right">Ordre d'apparition</label>
-                <div class="col-md-10 row">
-                    <div class="col-md-8">
-                        <input id="admin-trainingContent-edit-orderInTraining" type="number" class="form-control" data-ng-model="trainingContent.orderInTraining" />
+            <fieldset>
+                <div class="form-group row">
+                    <label for="admin-trainingContent-edit-title" class="col-md-2 col-form-label text-md-right">Titre</label>
+                    <div class="col-md-10">
+                        <input id="admin-trainingContent-edit-title" type="text" class="form-control" data-ng-model="trainingContent.title" />
+                        <small class="form-text text-muted">Optez pour un titre clair, décrivant précisément votre contenu et comportant des mots-clés signifiant si vous publiez un article.</small>
                     </div>
+                </div>
+                <div class="form-group row">
+                    <label for="admin-trainingContent-edit-internalGoal"  class="col-md-2 col-form-label text-md-right">Objectif de la page</label>
+                    <div class="col-md-10">
+                        <div id="admin-trainingContent-edit-internalGoal" ckeditor="options" data-ng-model="trainingContent.internalGoal"></div>
+                        <small class="form-text text-muted">Précisez ici l'objectif de votre page - Ce texte est à destination des autres administrateurs.</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="admin-trainingContent-edit-orderInTraining" class="col-md-2 col-form-label text-md-right">Ordre d'apparition</label>
+                    <div class="col-md-10 row">
+                        <div class="col-md-3">
+                            <input id="admin-trainingContent-edit-orderInTraining" type="number" class="form-control" data-ng-model="trainingContent.orderInTraining" />
+                        </div>
+                        <div class="col-md-9 form-control-plaintext">
+                            / <span ng-if="trainingContent.id === undefined">{{ trainingContents.length+1 }}</span><span ng-if="trainingContent.id !== undefined">{{ trainingContents.length }}</span>
+                        </div>
+                        <div class="col-md-12">
+                            <small class="form-text text-muted">Définissez ici l'ordre d'apparition de votre page dans le module d'entrainement. Saisissez 1 pour définir la page comme page d'accueil. Laissez vide si vous souhaitez désindexer la page.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="admin-trainingContent-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsable éditorial</label>
+                    <div class="col-md-10">
+                        <angucomplete id="admin-trainingContent-edit-editorialResponsibility"
+                                      placeholder=""
+                                      pause="100"
+                                      selectedobject="trainingContent.editorialResponsibility"
+                                      localdata="users"
+                                      searchfields="name"
+                                      titlefield="name"
+                                      minlength="1"
+                                      inputclass="form-control form-control-sm"/>
+                    </div>
+                    <div class="col-md-10 offset-md-2">
+                        <small class="form-text text-muted">Le nom et la qualité de cette personne seront ajoutés en haut de la page d'entrainement, en tant que personne référente.</small>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="admin-trainingContent-edit-type" class="col-md-2 col-form-label text-md-right">Type</label>
                     <div class="col-md-4">
-                        / <span ng-if="trainingContent.id === undefined">{{ trainingContents.length+1 }}</span><span ng-if="trainingContent.id !== undefined">{{ trainingContents.length }}</span>
+                        <select id="admin-trainingContent-edit-type" name="admin-trainingContent-edit-type" class="custom-select" data-ng-model="trainingContent.pageType">
+                            <option value="" disabled>Sélectionnez ...</option>
+                            <option value="presentation">Page de présentation</option>
+                            <option value="exercise">Bloc d'exercice</option>
+                        </select>
                     </div>
-                    <div class="col-md-12">
-                        <small class="form-text text-muted">Définissez ici l'ordre d'apparition de votre page dans le module d'entrainement. Saisissez 1 pour définir la page comme page d'accueil. Laissez vide si vous souhaitez désindexer la page.</small>
+                    <label for="admin-trainingContent-edit-status" class="col-md-2 col-form-label text-md-right">Statut</label>
+                    <div class="col-md-4">
+                        <select id="admin-trainingContent-edit-status" name="admin-trainingContent-edit-status" class="custom-select" data-ng-model="trainingContent.pageStatus">
+                            <option value="" disabled>Sélectionnez ...</option>
+                            <option value="draft">Brouillon</option>
+                            <option value="public">Public</option>
+                            <option value="notIndexed">Non indexé</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-type" class="col-md-2 col-form-label text-md-right">Type </label>
-                <div class="col-md-10">
-                    <select id="admin-trainingContent-edit-type" name="admin-trainingContent-edit-type" class="custom-select" data-ng-model="trainingContent.pageType">
-                        <option value="" disabled>Sélectionnez ...</option>
-                        <option value="presentation">Page de présentation</option>
-                        <option value="exercise">Bloc d'exercice</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-status" class="col-md-2 col-form-label text-md-right">Statut </label>
-                <div class="col-md-10">
-                    <select id="admin-trainingContent-edit-status" name="admin-trainingContent-edit-status" class="custom-select" data-ng-model="trainingContent.pageStatus">
-                        <option value="" disabled>Sélectionnez ...</option>
-                        <option value="draft">Brouillon</option>
-                        <option value="public">Public</option>
-                        <option value="notIndexed">Non indexé</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsable éditorial</label>
-                <div class="col-md-10">
-                    <angucomplete id="admin-trainingContent-edit-editorialResponsibility"
-                                  placeholder=""
-                                  pause="100"
-                                  selectedobject="trainingContent.editorialResponsibility"
-                                  localdata="users"
-                                  searchfields="name"
-                                  titlefield="name"
-                                  minlength="1"
-                                  inputclass="form-control form-control-sm"/>
-                </div>
-            </div>
-            <hr />
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
-                <div class="col-md-10">
-                    <input id="admin-trainingContent-edit-image" type="string" class="form-control form-control-sm" data-ng-model="trainingContent.illustration" />
-                    <small class="form-text text-muted">Spécifiez une URL externe, ou uploadez une image par la suite</small>
-                    <div ng-if="isExternMedia() == true"><img src="{{ trainingContent.illustration }}" class="img-150px" /></div>
-                    <div ng-if="isExternMedia() == false"><img src="{{ api_web}}/uploads/{{ trainingContent.illustration }}" class="img-150px" /></div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-videoContainer" class="col-md-2 col-form-label text-md-right">Conteneur vidéo</label>
-                <div class="col-md-10">
-                    <textarea id="admin-trainingContent-edit-videoContainer" class="form-control form-control-sm" data-ng-model="trainingContent.videoContainer"></textarea>
-                    <small class="form-text text-muted">Copiez-collez un code de vidéo</small>
-                </div>
-            </div>
-            <hr />
-            <div class="form-group row">
-                <label for="admin-trainingContent-edit-content"  class="col-md-2 col-form-label text-md-right">Contenu </label>
-                <div class="col-md-10">
-                    <div id="admin-trainingContent-edit-content" ckeditor="options" data-ng-model="trainingContent.content"></div>
-                </div>
-            </div>
+            </fieldset>
 
-            <hr data-ng-if="trainingContent.id != null && trainingContent.id !== undefined" />
-            <div class="form-group row" data-ng-if="trainingContent.id != null && trainingContent.id !== undefined">
-                <label for="admin-trainingContent-edit-updateComment" class="col-md-2 col-form-label text-md-right">Qu'avez-vous modifié ?</label>
-                <div class="col-md-10">
-                    <input id="admin-trainingContent-edit-updateComment" type="text" class="form-control form-control-sm" data-ng-model="trainingContent.updateComment" />
+            <fieldset data-ng-if="trainingContent.pageType == 'presentation'">
+                <label>Page de présentation</label>
+                <div ng-include="'Admin/Training/Edit/tpl/edit-presentation.html'"></div>
+            </fieldset>
+
+            <fieldset data-ng-if="trainingContent.pageType == 'exercise'" ng-include="'Admin/Training/Edit/tpl/edit-exercise.html'"></fieldset>
+
+            <fieldset data-ng-if="trainingContent.id != null && trainingContent.id !== undefined">
+                <div>
+                    <label for="admin-trainingContent-edit-updateComment" class="col-md-2 col-form-label text-md-right">Qu'avez-vous modifié ?</label>
+                    <div class="col-md-10">
+                        <input id="admin-trainingContent-edit-updateComment" type="text" class="form-control form-control-sm" data-ng-model="trainingContent.updateComment" />
+                    </div>
                 </div>
-            </div>
+            </fieldset>
 
             <div class="text-right">
                 <button data-ng-if="submit.success == false" class="btn btn-sm btn-primary" type="button" data-ng-click="submit.action()">Soumettre <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>

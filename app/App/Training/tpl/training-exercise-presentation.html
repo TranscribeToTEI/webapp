@@ -1,0 +1,15 @@
+<div ng-if="trainingContent.illustration != null" class="row">
+    <div class="col-md-7">
+        <div ng-include="'App/Training/tpl/training-mainContent.html'"></div>
+        <div class="text-center">
+            <button class="btn btn-primary" ng-click="trainingContent.exerciseStatus = 'inProgress'">Commencer l'exercise</button>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div ng-if="isExternMedia() == true"><img src="{{ trainingContent.illustration }}" class="img-fluid" /></div>
+        <div ng-if="isExternMedia() == false"><img src="{{ api_web}}/uploads/{{ trainingContent.illustration }}" class="img-fluid" /></div>
+    </div>
+</div>
+<div ng-if="trainingContent.illustration == null" class="row">
+    <div class="col-md-10 col-12" ng-include="'App/Training/tpl/training-mainContent.html'"></div>
+</div>

@@ -25,6 +25,12 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                     },
                     trainingContents: function(TrainingContentService) {
                         return TrainingContentService.getTrainingContents(null, null);
+                    },
+                    users: function(UserService) {
+                        return UserService.getUsers('short');
+                    },
+                    config: function() {
+                        return YAML.load('App/Transcript/toolbar.yml');
                     }
                 }
             })
@@ -48,18 +54,22 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                         return TrainingContentService.getTrainingContent($transition$.params().id, false);
                     },
                     trainingContents: function(TrainingContentService) {
-                        return TrainingContentService.getTrainingContents(null, null);
+                        return TrainingContentService.getTrainingContents(null, null, null);
                     },
                     users: function(UserService) {
                         return UserService.getUsers('short');
+                    },
+                    config: function() {
+                        return YAML.load('App/Transcript/toolbar.yml');
                     }
                 }
             })
     }])
 
-    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'trainingContent', 'trainingContents', 'users', function($rootScope, $scope, $http, $sce, $state, flash, trainingContent, trainingContents, users) {
+    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'trainingContent', 'trainingContents', 'users', 'config', function($rootScope, $scope, $http, $sce, $state, flash, trainingContent, trainingContents, users, config) {
         $scope.trainingContents = trainingContents;
         $scope.users = users;
+        $scope.config = config;
         if(trainingContent !== null) {
             console.log(trainingContent);
             $scope.trainingContent = trainingContent;
@@ -67,15 +77,39 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
         } else {
             $scope.trainingContent = {
                 title: null,
+                internalGoal: null,
                 editorialResponsibility: null,
                 orderInTraining: null,
-                illustration: null,
-                videoContainer: null,
-                content: null,
                 pageStatus: null,
                 pageType: null,
                 updateComment: "Creation of the content",
+                illustration: null,
+                videoContainer: null,
+                content: null,
+                exercise: {
+                    header: null,
+                    imageToTranscribe: null,
+                    preferences: {
+                        isSmartTEI: null,
+                        isAttributesManagement: null,
+                        activeTags: null,
+                        isLiveRender: null,
+                        isHelp: null,
+                        isDocumentation: null,
+                        isTaxonomy: null,
+                        isBibliography: null,
+                        isNotes: null,
+                        isVersioning: null,
+                        isComplexFields: null
+                    },
+                    correction: {
+                        transcript: null,
+                        errorsToAvoid: null
+                    }
+                }
+
             };
+            $scope.trainingContent.orderInTraining = trainingContents.length+1;
         }
 
         $scope.submit = {
@@ -120,16 +154,33 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             $scope.submit.success = false;
             $scope.submit.loading = true;
             $scope.form = {
-                content: $scope.trainingContent.content,
+                title: $scope.trainingContent.title,
+                internalGoal: $scope.trainingContent.internalGoal,
                 editorialResponsibility: $scope.trainingContent.editorialResponsibility,
-                illustration: $scope.trainingContent.illustration,
-                videoContainer: $scope.trainingContent.videoContainer,
                 orderInTraining: $scope.trainingContent.orderInTraining,
                 pageStatus: $scope.trainingContent.pageStatus,
                 pageType: $scope.trainingContent.pageType,
-                title: $scope.trainingContent.title,
-                updateComment: $scope.trainingContent.updateComment
+                updateComment: $scope.trainingContent.updateComment,
+                illustration: $scope.trainingContent.illustration,
+                videoContainer: $scope.trainingContent.videoContainer,
+                content: $scope.trainingContent.content,
+                exerciseHeader: $scope.trainingContent.exercise.header,
+                exerciseImageToTranscribe: $scope.trainingContent.exercise.imageToTranscribe,
+                exerciseIsSmartTEI: $scope.trainingContent.exercise.preferences.isSmartTEI,
+                exerciseIsAttributesManagement: $scope.trainingContent.exercise.preferences.isAttributesManagement,
+                exerciseTagsList: $scope.trainingContent.exercise.preferences.activeTags,
+                exerciseIsLiveRender: $scope.trainingContent.exercise.preferences.isLiveRender,
+                exerciseIsHelp: $scope.trainingContent.exercise.preferences.isHelp,
+                exerciseIsDocumentation: $scope.trainingContent.exercise.preferences.isDocumentation,
+                exerciseIsTaxonomy: $scope.trainingContent.exercise.preferences.isTaxonomy,
+                exerciseIsBibliography: $scope.trainingContent.exercise.preferences.isBibliography,
+                exerciseIsNotes: $scope.trainingContent.exercise.preferences.isNotes,
+                exerciseIsVersioning: $scope.trainingContent.exercise.preferences.isVersioning,
+                exerciseIsComplexFields: $scope.trainingContent.exercise.preferences.isComplexFields,
+                exerciseCorrectionTranscript: $scope.trainingContent.exercise.correction.transcript,
+                exerciseCorrectionErrorsToAvoid: $scope.trainingContent.exercise.correction.errorsToAvoid
             };
+            console.log($scope.trainingContent.exercise.preferences.activeTags);
 
             if($scope.trainingContent.id === null || $scope.trainingContent.id === undefined) {
                 /* If trainingContent.id == null > The trainingContent doesn't exist, we post it */

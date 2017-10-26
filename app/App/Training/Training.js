@@ -78,5 +78,11 @@ angular.module('transcript.app.training', ['ui.router'])
             $scope.nextContent = $scope.nextContent[0];
         }
         /* End: Compute next content & training end ----------------------------------------------------------------- */
+
+        /* Exercise status management ------------------------------------------------------------------------------- */
+        if($scope.trainingContent.pageType === 'exercise') {
+            $scope.trainingContent.exerciseStatus = 'todo';
+        }
+        /* End: Exercise status management -------------------------------------------------------------------------- */
     }])
 ;

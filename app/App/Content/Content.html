@@ -18,7 +18,7 @@
             <h1 class="mb-3">{{ content.title }}</h1>
             <div class="row bg-body post-meta">
                 <div class="col-auto mr-auto"><strong><a ui-sref="transcript.app.user.profile({id: content.userName.id})">{{ content.createUser.name }}</a></strong></div>
-                <div class="col-auto">Publié le <span data-ng-bind="content.createDate |  date:'MM/dd/yyyy à HH:mm'"></span></span></div>
+                <div class="col-auto">Publié le <span data-ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
             </div>
             <div class="text-justify mt-2 pr-md-3" data-ng-bind-html="content.content"></div>
             <!--   Exemple avec image dans le texte et paragraphe "lead" :

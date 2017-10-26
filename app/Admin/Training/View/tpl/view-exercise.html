@@ -1,0 +1,112 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2>Présentation de l'exercise</h2>
+        <div ng-bind-html="trainingContent.content | trustAsHtml"></div>
+
+        <div ng-if="trainingContent.videoContainer != null">
+            <hr />
+            <div class="text-center" ng-bind-html="trainingContent.videoContainer | trustAsHtml"></div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <h3>Média associé</h3>
+
+        <div ng-if="trainingContent.illustration != null">
+            <img class="img-fluid" src="{{ api_web  }}/uploads/{{ trainingContent.illustration }}"/>
+        </div>
+        <div ng-if="trainingContent.illustration == null">
+            <form class="mt-2 mb-2">
+                <div class="form-group row">
+                    <label for="admin-training-view-add-illustration" class="control-label col-md-2 text-md-right">Image</label>
+                    <div class="col-md-10">
+                        <input id="admin-training-view-add-illustration" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" data-ng-click="media.submit.action('illustration')" class="btn btn-sm  btn-primary">Mettre à jour l'illustration <i data-ng-if="media.submit.loading.illustration == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h2>Réalisation de l'exercice</h2>
+<div class="row">
+    <div class="col-md-8">
+        <h3>En-tête de l'exercice</h3>
+        <div ng-if="trainingContent.exerciseHeader != null" ng-bind-html="trainingContent.exerciseHeader | trustAsHtml"></div>
+        <div ng-if="trainingContent.exerciseHeader == null" class="alert alert-info">Cet exercise ne comporte pas d'en-tête</div>
+
+        <h3>Paramètres de l'exercice</h3>
+        <dl class="row pr-3 ml-1">
+            <dt class="col-sm-4">Activation de SmartTEI</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsSmartTEI | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de la gestion des attributs</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsAttributesManagement | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Liste des balises utilisables</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseTagsList | arrayRender }}</dd>
+
+            <dt class="col-sm-4">Activation du rendu en direct</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsLiveRender | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation des pages d'aide</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsHelp | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de la documentation contextuelle</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsDocumentation | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation des notices descriptives</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsTaxonomy | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de la gestion bibliographique</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsBibliography | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de la gestion des notes</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsNotes | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de l'historique</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsVersioning | booleanRender }}</dd>
+
+            <dt class="col-sm-4">Activation de la gestion des champs complexes</dt>
+            <dd class="col-sm-8">{{ trainingContent.exerciseIsComplexFields | booleanRender }}</dd>
+        </dl>
+    </div>
+    <div class="col-md-4">
+        <h3>Image à transcrire</h3>
+        <div ng-if="trainingContent.exerciseImageToTranscribe != null">
+            <img class="img-fluid" src="{{ api_web  }}/uploads/{{ trainingContent.exerciseImageToTranscribe }}"/>
+        </div>
+        <div ng-if="trainingContent.exerciseImageToTranscribe == null">
+            <form class="mt-2 mb-2">
+                <div class="form-group row">
+                    <label for="admin-training-view-add-exerciseImageToTranscribe" class="control-label col-md-2 text-md-right">Image</label>
+                    <div class="col-md-10">
+                        <input id="admin-training-view-add-exerciseImageToTranscribe" type="file" ngf-select ng-model="media.form.exerciseImageToTranscribe" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button type="submit" data-ng-click="media.submit.action('exerciseImageToTranscribe')" class="btn btn-sm  btn-primary">Mettre à jour l'illustration <i data-ng-if="media.submit.loading.exerciseImageToTranscribe == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-7">
+        <h2>Correction de l'exercice</h2>
+        <div ng-bind="trainingContent.exerciseCorrectionTranscript"></div>
+    </div>
+    <div class="col-md-5">
+        <h3>Erreurs à éviter dans l'exercice</h3>
+        <div ng-bind-html="trainingContent.exerciseCorrectionErrorsToAvoid | trustAsHtml"></div>
+    </div>
+</div>

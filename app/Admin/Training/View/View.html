@@ -9,40 +9,40 @@
 
 <main class="container" role="main">
     <div ng-include="'Admin/Training/View/tpl/view-header.html'"></div>
+
     <div class="row">
-        <div class="col-xl-8 col-12">
-            <h2>Contenu de la page</h2>
-            <div ng-bind-html="trainingContent.content"></div>
-
-            <div ng-if="trainingContent.videoContainer != null">
-                <hr />
-                <div class="text-center" ng-bind-html="trainingContent.videoContainer | trustAsHtml"></div>
-            </div>
-
-            <hr />
-            <h2>Fil de discussion associé</h2>
-            <div ui-view="comment"></div>
-        </div>
-        <div class="col-xl-4 col-12">
-            <div ng-include="'Admin/Training/View/tpl/view-associate-medias.html'"></div>
-
-            <div class="card-deck mt-5" data-ng-if="content.id !== null" >
-                <div class="card bg-info mb-3 mt-4">
-                    <h2 class="card-header bg-dark text-white">Informations</h2>
-                    <div class="card-body">
-                        <dl class="row pr-3 ml-1">
-                            <dt class="col-sm-4">Type</dt>
-                            <dd class="col-sm-8">{{ trainingContent.pageType }}</dd>
-
-                            <dt class="col-sm-4">Statut</dt>
-                            <dd class="col-sm-8">{{ trainingContent.pageStatus }}</dd>
-
-                            <dt class="col-sm-4">Responsable éditorial</dt>
-                            <dd class="col-sm-8"><a class="btn btn-sm btn-secondary" ui-sref="transcript.app.content({id: trainingContent.editorialResponsibility.id})">{{ trainingContent.editorialResponsibility.name }}</a></dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
+        <div class="col-xl-12 col-12">
+            <div class="alert alert-info text-left" role="alert" ng-bind-html="trainingContent.internalGoal | trustAsHtml"></div>
         </div>
     </div>
+
+    <h2>Informations</h2>
+    <dl class="row pr-3 ml-1">
+        <dt class="col-sm-4">Type</dt>
+        <dd class="col-sm-8">{{ trainingContent.pageType | trainingTypePageName }}</dd>
+
+        <dt class="col-sm-4">Ordre d'apparition</dt>
+        <dd class="col-sm-8">
+            <div ng-if="trainingContent.orderInTraining != null">
+                <strong>#{{ trainingContent.orderInTraining }}</strong>
+                <span ng-if="previousContent !== null || nextContent !== null"> - </span>
+                <span ng-if="previousContent !== null"><a ui-sref="transcript.admin.training.view({id: previousContent.id})">Contenu précédent</a> <i class="fa fa-chevron-left"></i></span>
+                <span ng-if="nextContent !== null"><i class="fa fa-chevron-right"></i> <a ui-sref="transcript.admin.training.view({id: nextContent.id})">Contenu suivant</a></span>
+            </div>
+        </dd>
+
+        <dt class="col-sm-4">Statut</dt>
+        <dd class="col-sm-8">{{ trainingContent.pageStatus }}</dd>
+
+        <dt class="col-sm-4">Responsable éditorial</dt>
+        <dd class="col-sm-8"><a class="btn btn-sm btn-secondary" ui-sref="transcript.app.content({id: trainingContent.editorialResponsibility.id})" ng-if="trainingContent.editorialResponsibility != null">{{ trainingContent.editorialResponsibility.name }}</a><span ng-if="trainingContent.editorialResponsibility == null">Aucun</span></dd>
+    </dl>
+    <hr />
+
+    <div ng-if="trainingContent.pageType == 'presentation'" ng-include="'Admin/Training/View/tpl/view-presentation.html'"></div>
+    <div ng-if="trainingContent.pageType == 'exercise'" ng-include="'Admin/Training/View/tpl/view-exercise.html'"></div>
+
+    <hr />
+    <h2>Fil de discussion associé</h2>
+    <div ui-view="comment"></div>
 </main>
