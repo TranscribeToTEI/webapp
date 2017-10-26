@@ -1,0 +1,10 @@
+<div class="d-flex w-100 justify-content-between">
+    <h4 class="mb-1"><span ng-if="item.manuscriptReference.documentName !== null">{{ item.manuscriptReference.documentName }}, </span>{{ item.manuscriptReference.documentNumber }}</h4>
+    <div>
+        <button class="btn btn-sm btn-primary" title="Modifier cette référence" ng-click="transcriptArea.interaction.bibliography.addForm.action(item.id)"><i class="fa fa-edit"></i></button>
+        <button class="btn btn-sm btn-primary" title="Citer cette référence"><i class="fa fa-quote-right"></i></button>
+    </div>
+</div>
+<p class="mb-1">Conservé à {{ item.manuscriptReference.institutionName }}<span ng-if="item.manuscriptReference.collectionName !== null">, collection {{ item.manuscriptReference.collectionName }}</span></p>
+<p class="mb-1" ng-if="item.manuscriptReference.url != null"><a href="{{ item.manuscriptReference.url }}" target="_blank">Lien vers la référence</a></p>
+<small>Référence manuscrite</small>

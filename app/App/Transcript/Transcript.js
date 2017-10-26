@@ -928,25 +928,83 @@ angular.module('transcript.app.transcript', ['ui.router'])
             $scope.transcriptArea.interaction.status = 'bibliography';
         };
 
-        $scope.transcriptArea.interaction.bibliography.addForm.action = function() {
-            $scope.transcriptArea.interaction.status = 'bibliographyAdd';
+        $scope.transcriptArea.interaction.bibliography.addForm.action = function(id) {
+            // If an id is defined > this is an edition of existent element
+            $scope.transcriptArea.interaction.bibliography.addForm.id = null;
+            if(id !== undefined && id !== null) {
+                let elementToEdit = $scope.transcriptArea.interaction.bibliography.elements.filter(function (element) {
+                    return (element.id === id);
+                });
+                if(elementToEdit !== null) {elementToEdit = elementToEdit[0];}
+
+                $scope.transcriptArea.interaction.bibliography.addForm.id = id;
+                if(elementToEdit.printedReference !== null) {
+                    $scope.transcriptArea.interaction.bibliography.addForm.type = 'printedReference';
+                    $scope.transcriptArea.interaction.bibliography.addForm.printedReference = elementToEdit.printedReference;
+                    $scope.transcriptArea.interaction.bibliography.addForm.printedReference.authors = $scope.transcriptArea.interaction.bibliography.addForm.printedReference.authors.join(', ');
+                } else if(elementToEdit.manuscriptReference !== null) {
+                    $scope.transcriptArea.interaction.bibliography.addForm.type = 'manuscriptReference';
+                    $scope.transcriptArea.interaction.bibliography.addForm.manuscriptReference = elementToEdit.manuscriptReference;
+                }
+            }
+            $scope.transcriptArea.interaction.status = 'bibliographyForm';
         };
 
-        $scope.transcriptArea.interaction.bibliography.addForm.submit.action = function() {
+        // This methods posts a new bibliographic element
+        $scope.transcriptArea.interaction.bibliography.addForm.submit.action = function(method, id) {
             $scope.transcriptArea.interaction.bibliography.addForm.submit.loading = true;
-
-            let reference = {};
-            if ($scope.transcriptArea.interaction.bibliography.addForm.type === "printedItem") {
-                reference = $scope.transcriptArea.interaction.bibliography.addForm.printedReference;
-            } else if ($scope.transcriptArea.interaction.bibliography.addForm.type === "manuscriptItem") {
-                reference = $scope.transcriptArea.interaction.bibliography.addForm.manuscriptItem;
-            }
-            return BibliographyService.postBibliography($scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type)
-            .then(function (response) {
-                return BibliographyService.getBibliographiesByEntity($scope.entity.id).then(function(data) {
-                    $scope.transcriptArea.interaction.bibliography.elements = data;
-                });
+            let elementToEdit = $scope.transcriptArea.interaction.bibliography.elements.filter(function (element) {
+                return (element.id === id);
             });
+            if (elementToEdit !== null) {
+                elementToEdit = elementToEdit[0];
+            }
+
+                // According to the type of the element
+            let reference = {};
+            if ($scope.transcriptArea.interaction.bibliography.addForm.type === "printedReference") {
+                reference = $scope.transcriptArea.interaction.bibliography.addForm.printedReference;
+                if(typeof reference.authors === 'string' && reference.authors.indexOf(',') !== -1) {
+                    reference.authors = reference.authors.split(",");
+                } else {
+                    reference.authors = [reference.authors];
+                }
+                console.log(reference);
+            } else if ($scope.transcriptArea.interaction.bibliography.addForm.type === "manuscriptReference") {
+                reference = $scope.transcriptArea.interaction.bibliography.addForm.manuscriptReference;
+                console.log(reference);
+            }
+
+            if(method === 'post') {
+                reference.updateComment = 'Creation of the reference';
+
+                return BibliographyService.postBibliography($scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type)
+                    .then(function (response) {
+                        return BibliographyService.getBibliographiesByEntity($scope.entity.id).then(function (data) {
+                            $scope.transcriptArea.interaction.bibliography.elements = data;
+                            $scope.transcriptArea.interaction.bibliography.addForm.submit.loading = false;
+                            $scope.transcriptArea.interaction.status = 'bibliography';
+                        });
+                    });
+            } else if(method === 'patch') {
+                let idToPatch = reference.id;
+                delete reference._links;
+                delete reference.createDate;
+                delete reference.createUser;
+                delete reference.id;
+                delete reference.updateDate;
+                delete reference.updateUser;
+                reference.updateComment = "Update bibliography element";
+
+                return BibliographyService.patchBibliography($scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type, idToPatch)
+                    .then(function (response) {
+                        return BibliographyService.getBibliographiesByEntity($scope.entity.id).then(function (data) {
+                            $scope.transcriptArea.interaction.bibliography.elements = data;
+                            $scope.transcriptArea.interaction.bibliography.addForm.submit.loading = false;
+                            $scope.transcriptArea.interaction.status = 'bibliography';
+                        });
+                    });
+            }
         };
         /* Bibliography Management -------------------------------------------------------- */
 

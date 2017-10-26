@@ -4,6 +4,53 @@ angular.module('transcript.service.bibliography', ['ui.router'])
 
     .service('BibliographyService', function($http, $rootScope, $filter) {
         let BS = this;
+
+        let postManuscriptReference = function(data) {
+            return $http.post($rootScope.api+"/manuscript-references", data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        },
+        postPrintedReference = function(data) {
+            return $http.post($rootScope.api+"/printed-references", data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        },
+        postReferenceItem = function(data) {
+            return $http.post($rootScope.api+"/reference-items", data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        },
+        patchManuscriptReference = function(data, id) {
+            return $http.patch($rootScope.api+"/manuscript-references/"+id, data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        },
+        patchPrintedReference = function(data, id) {
+            return $http.patch($rootScope.api+"/printed-references/"+id, data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                console.log(response);
+                return response;
+            });
+        };
+
         return {
             getBibliographies: function() {
                 return $http.get($rootScope.api+"/reference-items"
@@ -37,57 +84,41 @@ angular.module('transcript.service.bibliography', ['ui.router'])
 
             postBibliography: function(entity, reference, type) {
                 if(type === "manuscriptReference") {
-                    return BS.postManuscriptReference(entity).then(function(data) {
+                    return postManuscriptReference(reference).then(function(data) {
                         let item = {
                             entity: entity.id,
-                            manuscriptItem: data.id
+                            manuscriptReference: data.id,
+                            updateComment: 'Creation of the item'
                         };
-                        return BS.postReferenceItem(item).then(function(RData) {
+                        return postReferenceItem(item).then(function(RData) {
                             return RData;
                         });
                     });
                 } else if(type === "printedReference") {
-                    return BS.postPrintedReference(entity).then(function(data) {
+                    return postPrintedReference(reference).then(function(data) {
                         let item = {
                             entity: entity.id,
-                            printedItem: data.id
+                            printedReference: data.id,
+                            updateComment: 'Creation of the item'
                         };
-                        return BS.postReferenceItem(item).then(function(RData) {
+                        return postReferenceItem(item).then(function(RData) {
                             return RData;
                         });
                     });
                 }
             },
 
-            postManuscriptReference: function(data) {
-                return $http.post($rootScope.api+"/manuscript-references", data).
-                then(function(response) {
-                    return response.data;
-                }, function errorCallback(response) {
-                    console.log(response);
-                    return response;
-                });
+            patchBibliography: function(entity, reference, type, id) {
+                if(type === "manuscriptReference") {
+                    return patchManuscriptReference(reference, id).then(function(data) {
+                        return data;
+                    });
+                } else if(type === "printedReference") {
+                    return patchPrintedReference(reference, id).then(function(data) {
+                        return data;
+                    });
+                }
             },
-
-            postPrintedReference: function(data) {
-                return $http.post($rootScope.api+"/printed-references", data).
-                then(function(response) {
-                    return response.data;
-                }, function errorCallback(response) {
-                    console.log(response);
-                    return response;
-                });
-            },
-
-            postReferenceItem: function(data) {
-                return $http.post($rootScope.api+"/reference-items", data).
-                then(function(response) {
-                    return response.data;
-                }, function errorCallback(response) {
-                    console.log(response);
-                    return response;
-                });
-            }
         };
     })
 ;

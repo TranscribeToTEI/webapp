@@ -1,11 +1,12 @@
 <div class="float-right">
     <button class="btn btn-sm btn-primary" ng-click="transcriptArea.interaction.bibliography.action()">Retour</button>
 </div>
-<h2 class="mb-3">Nouvelle entrée bibliographique</h2>
+<h2 class="mb-3" ng-if="transcriptArea.interaction.bibliography.addForm.id === null">Nouvelle entrée bibliographique</h2>
+<h2 class="mb-3" ng-if="transcriptArea.interaction.bibliography.addForm.id !== null">Édition</h2>
 
 <div class="mt-3">
     <form class="form-conntrol-sm p-3">
-        <div class="form-group">
+        <div class="form-group" ng-if="transcriptArea.interaction.bibliography.addForm.id === null && transcriptArea.interaction.bibliography.addForm.type === null">
             <h3>Type d'entrée bibliographique</h3>
             <label class="custom-control custom-radio">
                 <input class="custom-control-input" type="radio" name="app-transcript-interaction-form-biblio-add-type" id="app-transcript-interaction-form-biblio-add-type-1" ng-model="transcriptArea.interaction.bibliography.addForm.type" value="printedReference" checked >
@@ -23,13 +24,13 @@
             <label>Référence imprimée</label>
 
             <div class="form-group col-md-12">
-                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-authors" class="form-control-label">Auteurs</label>
+                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-authors" class="form-control-label">Auteurs <span class="red-color" title="Ce champ est obligatoire">*</span></label>
                 <input id="transcriptArea-interaction-bibliography-addForm-printedReference-authors" class="form-control form-control-sm" data-ng-model="transcriptArea.interaction.bibliography.addForm.printedReference.authors" />
-                <p class="help-block">Séparer les auteurs par des virgules</p>
+                <small class="form-text text-muted">Séparer les auteurs par des virgules</small>
             </div>
 
             <div class="form-group col-md-12">
-                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-referenceTitle" class="form-control-label">Titre de la référence</label>
+                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-referenceTitle" class="form-control-label">Titre de la référence <span class="red-color" title="Ce champ est obligatoire">*</span></label>
                 <input id="transcriptArea-interaction-bibliography-addForm-printedReference-referenceTitle" class="form-control form-control-sm" data-ng-model="transcriptArea.interaction.bibliography.addForm.printedReference.referenceTitle" />
             </div>
 
@@ -73,7 +74,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-institutionName" class="form-control-label">Nom de l'institution de conservation</label>
+                <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-institutionName" class="form-control-label">Nom de l'institution de conservation <span class="red-color" title="Ce champ est obligatoire">*</span></label>
                 <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-institutionName" class="form-control form-control-sm" data-ng-model="transcriptArea.interaction.bibliography.addForm.manuscriptReference.institutionName" />
             </div>
 
@@ -83,7 +84,7 @@
             </div>
 
             <div class="form-group col-md-12">
-                <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentNumber" class="form-control-label">Numéro d'identification</label>
+                <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentNumber" class="form-control-label">Numéro d'identification <span class="red-color" title="Ce champ est obligatoire">*</span></label>
                 <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentNumber" class="form-control form-control-sm" data-ng-model="transcriptArea.interaction.bibliography.addForm.manuscriptReference.documentNumber" />
             </div>
 
@@ -93,7 +94,8 @@
             </div>
         </fieldset>
 
-        <button data-ng-click="transcriptArea.interaction.bibliography.addForm.submit.action()" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.bibliography.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+        <button ng-if="transcriptArea.interaction.bibliography.addForm.id !== null" data-ng-click="transcriptArea.interaction.bibliography.addForm.submit.action('patch', transcriptArea.interaction.bibliography.addForm.id)" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.bibliography.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+        <button ng-if="transcriptArea.interaction.bibliography.addForm.id === null" data-ng-click="transcriptArea.interaction.bibliography.addForm.submit.action('post', null)" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.bibliography.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
     </form>
 </div>
 
