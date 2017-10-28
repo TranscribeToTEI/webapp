@@ -8,4 +8,27 @@
 </div>
 <main class="container" role="main">
     <h1 class="page-heading">Validation</h1>
+
+    <p>Voici la liste des testaments à valider :</p>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Testament</th>
+                <th>Page</th>
+                <th>Lien</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="transcript in transcripts">
+                <td>{{ $index+1 }}</td>
+                <td>{{ transcript._embedded.resource.entity.will.title }}</td>
+                <td>{{ transcript._embedded.resource.type | resourceTypeName }} {{ transcript._embedded.resource.orderInWill }}</td>
+                <td><a ui-sref="transcript.app.transcript({idEntity: transcript._embedded.resource.entity.id, idResource: transcript._embedded.resource.id, idTranscript: transcript.id})">Accès</a></td>
+            </tr>
+            <tr ng-if="transcripts.length === 0">
+                <td colspan="4" class="bg-info">Aucune transcription n'est en attente de validation pour le moment</td>
+            </tr>
+        </tbody>
+    </table>
 </main>

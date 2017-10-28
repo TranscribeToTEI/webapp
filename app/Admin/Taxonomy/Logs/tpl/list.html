@@ -1,0 +1,19 @@
+<nav class="nav nav-pills nav-justified" id="Tab">
+    <a role="presentation" class="nav-item nav-link" ui-sref="transcript.admin.taxonomy.logs.list({types: 'Place,Testator,MilitaryUnit'})" ng-class="{active: dataType == 'Place,Testator,MilitaryUnit'}">Tout</a>
+    <a role="presentation" class="nav-item nav-link" ui-sref="transcript.admin.taxonomy.logs.list({types: 'Testator'})" ng-class="{active: dataType == 'Testator'}">Hommes</a>
+    <a role="presentation" class="nav-item nav-link" ui-sref="transcript.admin.taxonomy.logs.list({types: 'Place'})" ng-class="{active: dataType == 'Place'}">Lieux</a>
+    <a role="presentation" class="nav-item nav-link" ui-sref="transcript.admin.taxonomy.logs.list({types: 'MilitaryUnit'})" ng-class="{active: dataType == 'MilitaryUnit'}">Unités militaires</a>
+</nav>
+
+<div class="alert alert-warning" data-ng-if="logContainers.length == 0">
+    <p><i class="fa fa-warning"></i> Cette liste de logs ne compte aucune entrée pour le moment.</p>
+</div>
+
+<div class="tab-content">
+    <ul  class="tab-content" data-ng-if="logContainers.length > 0">
+        <li data-ng-repeat="iLogContainer in logContainers | orderBy:'loggedAt':'DESC'">
+            <a data-ng-if="iLogContainer.log.id != log.id" ui-sref="transcript.admin.taxonomy.logs.view({types: dataType, id: iLogContainer.id})">{{ iLogContainer.log.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.entity.name }}</a>
+            <span data-ng-if="iLogContainer.log.id == log.id">{{ iLogContainer.log.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.entity.name }}</span>
+        </li>
+    </ul>
+</div>

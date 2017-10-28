@@ -33,7 +33,20 @@
             </div>
         </div>
         <div class="col-sm-12" ng-if="preferences.taxonomyEditAccess == 'selfAuthorization'">
-            <button type="submit"  data-ng-click="submit.action()" class="btn btn-primary ">Accéder à l'éditio, ma demande <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+            <form ng-if="context == 'ask'" class="text-center">
+                <p>Cliquez sur le bouton ci-dessous pour obtenir les droits de modification des notices descriptives.</p>
+                <button type="submit"  data-ng-click="submit.action()" class="btn btn-primary ">Accéder à l'édition <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+            </form>
+
+            <div class="card" ng-if="context == 'sent'" >
+                <div class="card-body text-center">
+                    <h3 class="card-title">Requête envoyée</h3>
+                    <p>Merci pour votre participation !<br />Vous avez désormais accès à l'édition des notices descriptives.</p>
+                    <p>Rafraichissez la page pour mettre votre application à jour <i class="fa fa-smile-o"></i></p>
+                    <button class="btn btn-secondary" ng-click="refresh()">Rafraichir</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </main>

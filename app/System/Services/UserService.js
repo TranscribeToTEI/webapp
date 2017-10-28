@@ -158,8 +158,8 @@ angular.module('transcript.service.user', ['ui.router'])
                     return false;
                 });
             },
-            setRole: function(role, user) {
-                return $http.post($rootScope.api+"/users/"+user.id+"/roles", {role: role})
+            setRole: function(user, roles, action) {
+                return $http.post($rootScope.api+"/users/"+user.id+"/roles", {roles: roles, id: user.id, action: action})
                 .then(function (response) {
                     console.log(response.data);
                     return true;

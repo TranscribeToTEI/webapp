@@ -48,7 +48,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
             }
         }
         if($scope.entity.dataType === 'testators') {
-            if($scope.entity.placeOfBirth.names.length > 0) {
+            if($scope.entity.placeOfBirth !== null && $scope.entity.placeOfBirth.names.length > 0) {
                 $scope.entity.placeOfBirth.name = $scope.entity.placeOfBirth.names[0].name;
             }
             if($scope.entity.placeOfDeath.names.length > 0) {

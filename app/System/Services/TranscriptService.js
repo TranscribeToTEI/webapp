@@ -14,6 +14,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     return response;
                 });
             },
+            getTranscriptsByStatus: function(status) {
+                return $http.get(
+                    $rootScope.api+"/transcripts?status="+status
+                ).then(function(response) {
+                    return response.data;
+                }, function errorCallback(response) {
+                    console.log(response);
+                    return response;
+                });
+            },
             getTranscript: function(id) {
                 return $http.get(
                     $rootScope.api+"/transcripts/"+id

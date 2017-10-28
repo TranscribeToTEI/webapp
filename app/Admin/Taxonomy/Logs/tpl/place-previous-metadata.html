@@ -1,0 +1,14 @@
+<dl class="row pr-3 ml-1">
+    <dt class="col-sm-4">Localisation</dt>
+    <dd class="col-sm-8">
+        <span data-ng-if="logContainer.log.data.cities > 0" title="Ville">{{ logContainer.log.data.cities[0].name }}</span>
+        <span data-ng-if="logContainer.log.data.frenchDepartements.length > 0" title="Département"><span data-ng-if="logContainer.log.data.cities.length > 0">, </span>{{ logContainer.log.data.frenchDepartements[0].name }}</span>
+        <span data-ng-if="logContainer.log.data.frenchRegions > 0" title="Région"><span data-ng-if="logContainer.log.data.cities.length > 0 || logContainer.log.data.frenchDepartements.length > 0">, </span>{{ logContainer.log.data.frenchRegions[0].name }}</span>
+        <span data-ng-if="logContainer.log.data.countries > 0" title="Pays"><span data-ng-if="logContainer.log.data.cities.length > 0 || logContainer.log.data.frenchDepartement.length > 0 || logContainer.log.data.frenchRegions.length > 0">, </span>{{ logContainer.log.data.countries[0].name }}</span>
+    </dd>
+
+    <dt class="col-sm-4">Identifiant Geonames</dt>
+    <dd class="col-sm-8">
+        <a ng-if="logContainer.log.data.geonamesId != null" href="http://sws.geonames.org/{{ logContainer.log.data.geonamesId }}" target="_blank">{{ logContainer.log.data.geonamesId }}</a>
+    </dd>
+</dl>

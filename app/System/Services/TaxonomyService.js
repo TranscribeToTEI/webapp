@@ -76,7 +76,6 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                             addressCity: entity.addressCity,
                             dateOfBirth: entity.dateOfBirth,
                             yearOfBirth: entity.yearOfBirth,
-                            placeOfBirth: entity.placeOfBirth.id,
                             dateOfDeath: entity.dateOfDeath,
                             yearOfDeath: entity.yearOfDeath,
                             placeOfDeath: entity.placeOfDeath.id,
@@ -87,6 +86,10 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                             description: entity.description,
                             updateComment: entity.updateComment
                         };
+
+                        if(entity.placeOfBirth !== null) {
+                            form.placeOfBirth = entity.placeOfBirth.id;
+                        }
                         break;
                     case 'military-units':
                         form = {

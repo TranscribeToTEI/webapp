@@ -21,7 +21,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
         })
     }])
 
-    .controller('AppTaxonomyAskCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'AccessService', '$filter', function($rootScope, $scope, $http, $sce, $state, flash, AccessService, $filter) {
+    .controller('AppTaxonomyAskCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'flash', 'AccessService', 'UserService', function($rootScope, $scope, $http, $sce, $state, $filter, flash, AccessService, UserService) {
         if($rootScope.user === undefined) {$state.go('transcript.error.403');}
         if($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === true || $rootScope.preferences.taxonomyEditAccess === 'free' || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.app.taxonomy.home');}
 
@@ -43,11 +43,28 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
             patchAccess();
         };
 
+        $scope.refresh = function() {
+            $state.reload();
+        };
+
         function patchAccess() {
-            return AccessService.patchAccess($scope.form, $rootScope.user._embedded.accesses.id).then(function(data) {
-                $scope.submit.loading = false;
-                $scope.context = "sent";
-                $rootScope.user._embedded.accesses = data;
+            let form = null;
+            if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
+                form = $scope.form;
+            } else if($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization') {
+                form = {isTaxonomyAccess: true, taxonomyRequest: null};
+            }
+
+            console.log(form);
+            return AccessService.patchAccess(form, $rootScope.user._embedded.accesses.id).then(function(data) {
+                if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
+                    $scope.submit.loading = false;
+                    $scope.context = "sent";
+                    $rootScope.user._embedded.accesses = data;
+                } else if($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization') {
+                    $rootScope.user._embedded.accesses = data;
+                    setRole();
+                }
             }, function errorCallback(response) {
                 $scope.submit.loading = false;
                 if(response.data.code === 400) {
@@ -63,6 +80,12 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                     flash.error = $sce.trustAsHtml(flash.error);
                 }
                 console.log(response);
+            });
+        }
+        function setRole() {
+            return UserService.setRole($rootScope.user, ["ROLE_TAXONOMY_EDIT"], "promote").then(function(data) {
+                $scope.submit.loading = false;
+                $scope.context = "sent";
             });
         }
     }])

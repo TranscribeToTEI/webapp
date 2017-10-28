@@ -10,10 +10,24 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
                     controller: 'AdminTranscriptValidationCtrl'
                 }
             },
-            url: '/validation'
+            url: '/validation',
+            ncyBreadcrumb: {
+                parent: 'transcript.admin.home',
+                label: 'Testaments à valider'
+            },
+            tfMetaTags: {
+                title: 'Testaments à valider',
+            },
+            resolve: {
+                transcripts: function(TranscriptService) {
+                    return TranscriptService.getTranscriptsByStatus("validation");
+                }
+            }
         })
     }])
 
-    .controller('AdminTranscriptValidationCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {
+    .controller('AdminTranscriptValidationCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'transcripts', function($rootScope, $scope, $http, $sce, $state, transcripts) {
+        $scope.transcripts = transcripts;
+        console.log($scope.transcripts);
     }])
 ;

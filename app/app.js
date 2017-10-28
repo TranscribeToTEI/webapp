@@ -114,6 +114,7 @@ angular.module('transcriptApp', [
         'transcript.service.entity',
         'transcript.service.geonames',
         'transcript.service.image',
+        'transcript.service.log',
         'transcript.service.resource',
         'transcript.service.search',
         'transcript.service.taxonomy',
