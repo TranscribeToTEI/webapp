@@ -94,6 +94,7 @@ angular.module('transcriptApp', [
         'transcript.filter.booleanRender',
         'transcript.filter.classicDate',
         'transcript.filter.contentTypeName',
+        'transcript.filter.imageRender',
         'transcript.filter.organisationName',
         'transcript.filter.resourceTypeName',
         'transcript.filter.taxonomyEntityNameConstruct',

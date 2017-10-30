@@ -103,6 +103,6 @@ angular.module('transcript.admin.training.view', ['ui.router'])
                 else if(type === 'exerciseImageToTranscribe') { $scope.media.submit.loading.exerciseImageToTranscribe = false;}
             });
         }
-        /* New: Upload new media ------------------------------------------------------------------------------------ */
+        /* End: Upload new media ------------------------------------------------------------------------------------ */
     }])
 ;

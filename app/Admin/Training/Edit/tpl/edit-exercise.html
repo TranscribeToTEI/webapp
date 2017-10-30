@@ -9,8 +9,7 @@
         <div class="col-md-10">
             <input id="admin-trainingContent-edit-exercise-image" type="string" class="form-control form-control-sm" data-ng-model="trainingContent.exercise.imageToTranscribe" required="required" />
             <small class="form-text text-muted">Spécifiez une URL externe, ou uploadez une image par la suite</small>
-            <div ng-if="isExternMedia() == true && trainingContent.illustration != null"><img src="{{ trainingContent.illustration }}" class="img-150px" /></div>
-            <div ng-if="isExternMedia() == false && trainingContent.illustration != null"><img src="{{ api_web}}/uploads/{{ trainingContent.illustration }}" class="img-150px" /></div>
+            <div ng-if="trainingContent.illustration != null"><img src="{{ trainingContent.illustration | imageRender }}" class="img-150px" /></div>
         </div>
     </div>
     <div class="form-group row">

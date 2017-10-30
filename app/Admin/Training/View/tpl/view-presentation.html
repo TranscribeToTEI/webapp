@@ -12,7 +12,7 @@
         <h3>Média associé</h3>
 
         <div ng-if="trainingContent.illustration != null">
-            <img class="img-fluid" src="{{ api_web  }}/uploads/{{ trainingContent.illustration }}"/>
+            <img class="img-fluid" src="{{ trainingContent.illustration | imageRender }}"/>
         </div>
         <div ng-if="trainingContent.illustration == null">
             <form class="mt-2 mb-2">

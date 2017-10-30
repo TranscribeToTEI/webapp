@@ -131,12 +131,6 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             ]
         };
 
-        /* Image loading -------------------------------------------------------------------------------------------- */
-        $scope.isExternMedia = function(){
-            return /^http/.test($scope.trainingContent.illustration);
-        };
-        /* End: Image loading --------------------------------------------------------------------------------------- */
-
         /* Autocompletion management -------------------------------------------------------------------------------- */
         $scope.$watch('trainingContent.editorialResponsibility', function() {
             console.log($scope.trainingContent.editorialResponsibility);

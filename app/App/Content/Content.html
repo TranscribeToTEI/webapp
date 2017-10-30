@@ -24,7 +24,7 @@
             <div data-ng-if="content.type == 'blogContent'" ui-view="comment"></div>
         </div>
         <div class="col-md-4 order-md-1">
-            <img src="{{ content.illustration }}" class="img-fluid" alt="Illustration de {{ content.title }}" title="{{ content.title }}" data-ng-if="content.illustration != '' && content.illustration != null" />
+            <img src="{{ content.illustration | imageRender }}" class="img-fluid" alt="Illustration de {{ content.title }}" title="{{ content.title }}" ng-if="content.illustration != '' && content.illustration != null" />
             <div class="card">
                 <ul class="list-group list-group-flush mb-5 mt-5">
                     <li class="list-group-item" data-ng-repeat="iContent in contents" ng-class="{'list-group-item active': content.id === iContent.id}"> <!--ajouter la classe active pour l'article sur lequel on est : class="list-group-item active"-->

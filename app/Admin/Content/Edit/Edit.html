@@ -63,17 +63,20 @@
             <hr />
             <div class="form-group row">
                 <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
-                <div class="col-md-10">
-                    <input id="app-user-edit-picture" type="file" ngf-select ng-model="form.picture" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                <div class="col-md-5">
+                   <input id="admin-content-edit-image" class="form-control form-control-sm" data-ng-model="content.illustration" />
+                    <small class="form-text text-muted">Spécifiez l'URL de votre image ou uploadez une image ci-contre</small>
+                    <div ng-if="content.illustration != null"><img src="{{ content.illustration | imageRender }}" class="img-150px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" /></div>
+                </div>
+                <div class="col-md-5">
+                    <input id="app-user-edit-picture" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
                     <i ng-show="myForm.file.$error.required">*required</i><br>
                     <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
                     <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" />
                     <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-                    <button type="submit" data-ng-click="submit.action()" class="btn btn-sm  btn-primary">Uploader l'image<i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-
-                    <input id="admin-content-edit-image" type="url" class="form-control form-control-sm" data-ng-model="content.illustration" />
-                    <small class="form-text text-muted">Spécifiez l'URL de votre image</small>
-                    <img src="{{ content.illustration }}" class="img-fluid" style="max-height: 200px; max-width: 200px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" data-ng-if="content.illustration != '' && content.illustration != null" />
+                    <button data-ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" data-ng-click="media.submit.action()">Soumettre</button>
+                    <button data-ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+                    <button data-ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
                 </div>
             </div>
             <hr />

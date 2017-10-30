@@ -48,7 +48,8 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminContentEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', function($rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash) {
+    .controller('AdminContentEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', 'Upload', function($rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash, Upload) {
+        /* Scope management ----------------------------------------------------------------------------------------- */
         if(content !== null) {
             console.log(content);
             $scope.content = content;
@@ -90,10 +91,54 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 ['Styles','Format','Font','FontSize','-','TextColor','BGColor']
             ]
         };
+        /* End: Scope management ------------------------------------------------------------------------------------ */
 
-        /**
-         * Submit management
-         */
+        /* Upload new media ----------------------------------------------------------------------------------------- */
+        $scope.media = {
+            form: {
+                image: null
+            },
+            submit: {
+                loading: false,
+                success: false
+            }
+        };
+
+        /* Submit data */
+        $scope.media.submit.action = function() {
+            $scope.media.submit.loading = true;
+            upload();
+        };
+
+        function upload() {
+            let url = "/media-contents?type=Content&field=illustration";
+            if($scope.content.id !== undefined && $scope.content.id !== null) {
+                url = "/media-contents?type=Content&field=illustration&id="+$scope.content.id;
+            }
+            Upload.upload = Upload.upload({
+                url: $rootScope.api+url,
+                data: {media: $scope.media.form.illustration}
+            }).then(function (response) {
+                console.log(response);
+                $scope.media.submit.loading = false;
+                $scope.media.submit.success = true;
+                $timeout(function() {
+                    $scope.media.submit.success = false;
+                }, 5000);
+
+                if($scope.content.id !== undefined && $scope.content.id !== null) {
+                    $scope.content.illustration = response.data.illustration;
+                } else {
+                    $scope.content.illustration = response.data;
+                }
+            }, function errorCallback(error) {
+                console.log(error);
+                $scope.media.submit.loading = false;
+            });
+        }
+        /* End: Upload new media ------------------------------------------------------------------------------------ */
+
+        /* Submit Management ---------------------------------------------------------------------------------------- */
         $scope.submit.action = function() {
             $scope.submit.success = false;
             $scope.submit.loading = true;
@@ -174,10 +219,9 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 });
             }
         };
+        /* End: Submit Management ----------------------------------------------------------------------------------- */
 
-        /**
-         * Submit management
-         */
+        /* Submit Management ---------------------------------------------------------------------------------------- */
         $scope.remove.action = function() {
             $scope.remove.loading = true;
             $http.delete($rootScope.api+'/contents/'+$scope.content.id).
@@ -190,11 +234,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 $scope.validation.loading = false;
                 console.log(response);
             });
-
         };
-
-        $(document).on('ready', function() {
-            $("#admin-content-edit-image").fileinput({'showUpload':false, 'previewFileType':'any'});
-        });
+        /* End: Remove Management ----------------------------------------------------------------------------------- */
     }])
 ;

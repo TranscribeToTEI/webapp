@@ -6,8 +6,7 @@
         </div>
     </div>
     <div class="col-md-5">
-        <div ng-if="isExternMedia() == true"><img src="{{ trainingContent.illustration }}" class="img-fluid" /></div>
-        <div ng-if="isExternMedia() == false"><img src="{{ api_web}}/uploads/{{ trainingContent.illustration }}" class="img-fluid" /></div>
+        <img src="{{ trainingContent.illustration | imageRender }}" class="img-fluid" />
     </div>
 </div>
 <div ng-if="trainingContent.illustration == null" class="row">
