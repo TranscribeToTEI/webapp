@@ -13,7 +13,7 @@
         <div class="col-xl-10 col-12">
             <form class="mt-2 mb-2">
                 <div class="form-group row">
-                    <label for="app-user-edit-picture" class="control-label col-md-2 text-md-right">Image</label>
+                    <label for="app-user-edit-picture" class="control-label col-md-2 text-md-right">Image <span class="red-color">*</span></label>
                     <div class="col-md-10">
                         <input id="app-user-edit-picture" type="file" ngf-select ng-model="form.picture" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
                         <i ng-show="myForm.file.$error.required">*required</i><br>

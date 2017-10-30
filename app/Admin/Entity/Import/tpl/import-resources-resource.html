@@ -3,9 +3,9 @@
 </div>
 <h3>Ressource {{ $index+1 }}</h3>
 <div class="form-group row">
-    <label for="admin-entity-edit-resource-type" class="col-md-4 col-form-label text-md-right">Type de ressource</label>
+    <label for="admin-entity-edit-resource-type" class="col-md-4 col-form-label text-md-right">Type de ressource <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <select id="admin-entity-edit-resource-type" name="admin-entity-edit-resource-type" class="custom-select" data-ng-model="resource.type" required>
+        <select id="admin-entity-edit-resource-type" name="admin-entity-edit-resource-type" class="custom-select" data-ng-model="resource.type" required="required">
             <option value="" disabled>Sélectionnez ...</option>
             <option value="page">Page</option>
             <option value="envelop">Enveloppe</option>
@@ -14,9 +14,9 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-resource-orderInWill" class="col-md-4 col-form-label text-md-right">Index de la ressource dans le testament</label>
+    <label for="admin-entity-edit-resource-orderInWill" class="col-md-4 col-form-label text-md-right">Index de la ressource dans le testament <span class="red-color">*</span></label>
     <div class="col-md-4">
-        <input type="number" id="admin-entity-edit-resource-orderInWill" class="form-control form-control-sm" data-ng-model="resource.orderInWill" required />
+        <input type="number" id="admin-entity-edit-resource-orderInWill" class="form-control form-control-sm" data-ng-model="resource.orderInWill" required="required" />
     </div>
     <div class="col-md-2">
         <p class="form-control-static">/</p>
@@ -26,9 +26,9 @@
     </div>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-resource-image" class="col-md-4 col-form-label text-md-right">Identifiants des images</label>
+    <label for="admin-entity-edit-resource-image" class="col-md-4 col-form-label text-md-right">Identifiants des images <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <input id="admin-entity-edit-resource-image" class="form-control form-control-sm" data-ng-model="resource.images"  />
+        <input id="admin-entity-edit-resource-image" class="form-control form-control-sm" data-ng-model="resource.images" required="required" />
         <small  class="form-text text-muted">Identifiants des images de la ressource, séparés par des virgules. Ex: 02a, 02b, 02c</small>
     </div>
 </div>

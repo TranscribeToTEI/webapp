@@ -24,7 +24,8 @@ angular.module('transcript.admin.preference', ['ui.router'])
 
     .controller('AdminAppPreferenceCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'AppService', function($rootScope, $scope, $http, $sce, $state, flash, AppService) {
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
         let id = $rootScope.preferences.id;
         $scope.preferences = $rootScope.preferences;
@@ -42,6 +43,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
                 then(function(data) {
                     $rootScope.preferences = data;
                     $scope.submit.loading = false;
+                    $scope.submit.success = true;
                     $state.go('transcript.admin.home');
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;

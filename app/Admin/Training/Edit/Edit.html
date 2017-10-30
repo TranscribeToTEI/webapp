@@ -15,24 +15,24 @@
         <div class="col-xl-10 col-12">
             <fieldset>
                 <div class="form-group row">
-                    <label for="admin-trainingContent-edit-title" class="col-md-2 col-form-label text-md-right">Titre</label>
+                    <label for="admin-trainingContent-edit-title" class="col-md-2 col-form-label text-md-right">Titre <span class="red-color">*</span></label>
                     <div class="col-md-10">
-                        <input id="admin-trainingContent-edit-title" type="text" class="form-control" data-ng-model="trainingContent.title" />
+                        <input id="admin-trainingContent-edit-title" type="text" class="form-control" data-ng-model="trainingContent.title" required="required" />
                         <small class="form-text text-muted">Optez pour un titre clair, décrivant précisément votre contenu et comportant des mots-clés signifiant si vous publiez un article.</small>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="admin-trainingContent-edit-internalGoal"  class="col-md-2 col-form-label text-md-right">Objectif de la page</label>
+                    <label for="admin-trainingContent-edit-internalGoal"  class="col-md-2 col-form-label text-md-right">Objectif de la page <span class="red-color">*</span></label>
                     <div class="col-md-10">
                         <div id="admin-trainingContent-edit-internalGoal" ckeditor="options" data-ng-model="trainingContent.internalGoal"></div>
                         <small class="form-text text-muted">Précisez ici l'objectif de votre page - Ce texte est à destination des autres administrateurs.</small>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="admin-trainingContent-edit-orderInTraining" class="col-md-2 col-form-label text-md-right">Ordre d'apparition</label>
+                    <label for="admin-trainingContent-edit-orderInTraining" class="col-md-2 col-form-label text-md-right">Ordre d'apparition <span class="red-color">*</span></label>
                     <div class="col-md-10 row">
                         <div class="col-md-3">
-                            <input id="admin-trainingContent-edit-orderInTraining" type="number" class="form-control" data-ng-model="trainingContent.orderInTraining" />
+                            <input id="admin-trainingContent-edit-orderInTraining" type="number" class="form-control" data-ng-model="trainingContent.orderInTraining" required="required" />
                         </div>
                         <div class="col-md-9 form-control-plaintext">
                             / <span ng-if="trainingContent.id === undefined">{{ trainingContents.length+1 }}</span><span ng-if="trainingContent.id !== undefined">{{ trainingContents.length }}</span>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="admin-trainingContent-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsable éditorial</label>
+                    <label for="admin-trainingContent-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsable éditorial <span class="red-color">*</span></label>
                     <div class="col-md-10">
                         <angucomplete id="admin-trainingContent-edit-editorialResponsibility"
                                       placeholder=""
@@ -60,17 +60,17 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="admin-trainingContent-edit-type" class="col-md-2 col-form-label text-md-right">Type</label>
+                    <label for="admin-trainingContent-edit-type" class="col-md-2 col-form-label text-md-right">Type <span class="red-color">*</span></label>
                     <div class="col-md-4">
-                        <select id="admin-trainingContent-edit-type" name="admin-trainingContent-edit-type" class="custom-select" data-ng-model="trainingContent.pageType">
+                        <select id="admin-trainingContent-edit-type" name="admin-trainingContent-edit-type" class="custom-select" data-ng-model="trainingContent.pageType" required="required">
                             <option value="" disabled>Sélectionnez ...</option>
                             <option value="presentation">Page de présentation</option>
                             <option value="exercise">Bloc d'exercice</option>
                         </select>
                     </div>
-                    <label for="admin-trainingContent-edit-status" class="col-md-2 col-form-label text-md-right">Statut</label>
+                    <label for="admin-trainingContent-edit-status" class="col-md-2 col-form-label text-md-right">Statut <span class="red-color">*</span></label>
                     <div class="col-md-4">
-                        <select id="admin-trainingContent-edit-status" name="admin-trainingContent-edit-status" class="custom-select" data-ng-model="trainingContent.pageStatus">
+                        <select id="admin-trainingContent-edit-status" name="admin-trainingContent-edit-status" class="custom-select" data-ng-model="trainingContent.pageStatus" required="required">
                             <option value="" disabled>Sélectionnez ...</option>
                             <option value="draft">Brouillon</option>
                             <option value="public">Public</option>

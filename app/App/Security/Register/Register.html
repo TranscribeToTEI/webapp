@@ -17,27 +17,27 @@
         <div class="col-xl-10 col-12" ng-if="preferences.enableRegister == true">
             <form class="mt-2 mb-2">
                 <div class="form-group row">
-                    <label for="app-security-register-name" class="col-md-4 col-form-label text-md-right">Nom</label>
+                    <label for="app-security-register-name" class="col-md-4 col-form-label text-md-right">Nom <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="text" data-ng-model="form.name" class="form-control form-control-sm" id="app-security-register-name" name="app-security-register-name" placeholder="Saissisez votre nom" required />
+                        <input type="text" data-ng-model="form.name" class="form-control form-control-sm" id="app-security-register-name" name="app-security-register-name" placeholder="Saissisez votre nom" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-security-register-email" class="col-md-4 col-form-label text-md-right">Email</label>
+                    <label for="app-security-register-email" class="col-md-4 col-form-label text-md-right">Email <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="email" data-ng-model="form.email" class="form-control form-control-sm" id="app-security-register-email" name="app-security-register-email" placeholder="Saissisez votre adresse email" required />
+                        <input type="email" data-ng-model="form.email" class="form-control form-control-sm" id="app-security-register-email" name="app-security-register-email" placeholder="Saissisez votre adresse email" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-security-register-password-plain" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
+                    <label for="app-security-register-password-plain" class="col-md-4 col-form-label text-md-right">Mot de passe <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="password" data-ng-model="form.password.plain" class="form-control form-control-sm" id="app-security-register-password-plain" name="app-security-register-password-plain" placeholder="Saissisez votre mot de passe" required />
+                        <input type="password" data-ng-model="form.password.plain" class="form-control form-control-sm" id="app-security-register-password-plain" name="app-security-register-password-plain" placeholder="Saissisez votre mot de passe" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-security-register-password-confirmation" class="col-md-4 col-form-label text-md-right">Confirmation</label>
+                    <label for="app-security-register-password-confirmation" class="col-md-4 col-form-label text-md-right">Confirmation <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="password" data-ng-model="form.password.confirmation" class="form-control form-control-sm" id="app-security-register-password-confirmation" name="app-security-register-password-confirmation" placeholder="Confirmez votre mot de passe" required />
+                        <input type="password" data-ng-model="form.password.confirmation" class="form-control form-control-sm" id="app-security-register-password-confirmation" name="app-security-register-password-confirmation" placeholder="Confirmez votre mot de passe" required="required" />
                     </div>
                 </div>
                 <div class="row text-right">

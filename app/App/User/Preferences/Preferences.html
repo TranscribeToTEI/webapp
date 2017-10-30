@@ -16,9 +16,9 @@
             <div class="card-body">
                 <form>
                     <div class="form-group row">
-                        <label for="app-user-preference-transcriptionDeskPosition" class="col-sm-3 text-md-right">Affichage de l'interface de transcription</label>
+                        <label for="app-user-preference-transcriptionDeskPosition" class="col-sm-3 text-md-right">Affichage de l'interface de transcription <span class="red-color">*</span></label>
                         <div class="col-sm-9">
-                            <select id="app-user-preference-transcriptionDeskPosition" name="app-user-preference-transcriptionDeskPosition" class="custom-select" data-ng-model="form.transcriptionDeskPosition">
+                            <select id="app-user-preference-transcriptionDeskPosition" name="app-user-preference-transcriptionDeskPosition" class="custom-select" data-ng-model="form.transcriptionDeskPosition" required="required">
                                 <option value="" disabled>Sélectionnez ...</option>
                                 <option value="leftRead-centerHelp-rightImage">Écrire à gauche - Aide au centre - Image à droite</option>
                                 <option value="leftHelp-centerRead-rightImage">Aide à gauche - Écrire au centre - Image à droite</option>

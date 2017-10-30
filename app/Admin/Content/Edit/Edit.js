@@ -48,7 +48,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminContentEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'content', 'CommentService', 'flash', function($rootScope, $scope, $http, $sce, $state, content, CommentService, flash) {
+    .controller('AdminContentEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', function($rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash) {
         if(content !== null) {
             console.log(content);
             $scope.content = content;
@@ -151,6 +151,9 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                     flash.success = $sce.trustAsHtml(flash.success);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
+                    $timeout(function() {
+                        $scope.submit.success = false;
+                    }, 5000);
                 }, function errorCallback(response) {
                     if(response.data.code === 400) {
                         flash.error = "<ul>";

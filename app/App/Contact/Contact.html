@@ -13,27 +13,27 @@
         <div class="col-xl-10 col-12">
             <form class="mt-2 mb-5">
                 <div class="form-group row">
-                    <label for="app-contact-name" class="col-md-3 col-form-label text-md-right">Votre nom</label>
+                    <label for="app-contact-name" class="col-md-3 col-form-label text-md-right">Votre nom <span class="red-color">*</span></label>
                     <div class="col-md-9">
-                        <input id="app-contact-name" class="form-control form-control-sm" data-ng-model="contact.name" required />
+                        <input id="app-contact-name" class="form-control form-control-sm" data-ng-model="contact.name" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-contact-email" class="col-md-3 col-form-label text-md-right">Votre email</label>
+                    <label for="app-contact-email" class="col-md-3 col-form-label text-md-right">Votre email <span class="red-color">*</span></label>
                     <div class="col-md-9">
-                        <input id="app-contact-email" type="email" class="form-control form-control-sm" data-ng-model="contact.email" required />
+                        <input id="app-contact-email" type="email" class="form-control form-control-sm" data-ng-model="contact.email" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-contact-object" class="col-md-3 col-form-label text-md-right">Objet de votre message</label>
+                    <label for="app-contact-object" class="col-md-3 col-form-label text-md-right">Objet de votre message <span class="red-color">*</span></label>
                     <div class="col-md-9">
-                        <input id="app-contact-object" class="form-control form-control-sm" data-ng-model="contact.object" required />
+                        <input id="app-contact-object" class="form-control form-control-sm" data-ng-model="contact.object" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="app-contact-message" class="col-md-3 col-form-label text-md-right">Message</label>
+                    <label for="app-contact-message" class="col-md-3 col-form-label text-md-right">Message <span class="red-color">*</span></label>
                     <div class="col-md-9">
-                        <textarea id="app-contact-message" class="form-control form-control-sm" data-ng-model="contact.message" required></textarea>
+                        <textarea id="app-contact-message" class="form-control form-control-sm" data-ng-model="contact.message" required="required"></textarea>
                     </div>
                 </div>
                 <div class="row text-right">

@@ -16,9 +16,9 @@
                 <fieldset>
                     <label class="big">Paramètres généraux</label>
                     <div class="form-group">
-                        <label for="admin-app-preference-project-title" class="col-form-label">Titre du Projet</label>
+                        <label for="admin-app-preference-project-title" class="col-form-label">Titre du Projet <span class="red-color">*</span></label>
                         <div>
-                            <input id="admin-app-preference-project-title" type="text" class="form-control form-control-sm" data-ng-model="preferences.projectTitle" />
+                            <input id="admin-app-preference-project-title" type="text" class="form-control form-control-sm" data-ng-model="preferences.projectTitle" required="required" />
                         </div>
                     </div>
                 </fieldset>
@@ -35,7 +35,7 @@
                         <small  class="form-text text-muted">Cette page permet aux utilisateurs de vous contacter par mail</small>
                     </div>
                     <div class="form-group">
-                        <label for="admin-app-preference-system-email" class="col-form-label">Email du système</label>
+                        <label for="admin-app-preference-system-email" class="col-form-label">Email du système <span class="red-color">*</span></label>
                         <div>
                             <input id="admin-app-preference-system-email" type="email" class="form-control form-control-sm" data-ng-model="preferences.systemEmail" />
                             <small  class="form-text text-muted">Cet email est utilisé par le système pour envoyer des emails automatiques. Il n'est pas nécessaire que l'adresse existe réellement.</small>
@@ -73,9 +73,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="admin-app-preference-user-taxonomyEditAccess" class="col-form-label">Contrôle d'accès aux notices d'autorité</label>
+                        <label for="admin-app-preference-user-taxonomyEditAccess" class="col-form-label">Contrôle d'accès aux notices d'autorité <span class="red-color">*</span></label>
                         <div>
-                            <select id="admin-app-preference-user-taxonomyEditAccess" name="admin-app-preference-user-taxonomyEditAccess" class="custom-select" data-ng-model="preferences.taxonomyEditAccess">
+                            <select id="admin-app-preference-user-taxonomyEditAccess" name="admin-app-preference-user-taxonomyEditAccess" class="custom-select" data-ng-model="preferences.taxonomyEditAccess" required="required">
                                 <option value="" disabled>Sélectionnez ...</option>
                                 <option value="selfAuthorization">Auto-autorisation</option>
                                 <option value="controlledAuthorization">Autorisation controllée</option>
@@ -154,7 +154,9 @@
 
         <div class="row">
             <div class="text-center col-md-12">
-                <button class="btn btn-lg btn-primary" type="button" ng-click="submit.action()">Soumettre <i ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                <button data-ng-if="submit.success == false && submit.loading == false" class="btn btn-sm btn-primary" type="button" data-ng-click="submit.action()">Soumettre</button>
+                <button data-ng-if="submit.success == false && submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+                <button data-ng-if="submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
             </div>
         </div>
     </form>
