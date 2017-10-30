@@ -85,6 +85,13 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="admin-content-edit-abstract"  class="col-md-2 col-form-label text-md-right">Résumé <span class="red-color">*</span></label>
+                <div class="col-md-10">
+                    <div id="admin-content-edit-abstract" ckeditor="options" data-ng-model="content.abstract"></div>
+                    <small class="form-text text-muted">Ce texte apparaitra sur la page d'accueil et la page du blog. Merci de ne pas dépasser les 500 caractères.</small>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="admin-content-edit-content"  class="col-md-2 col-form-label text-md-right">Contenu <span class="red-color">*</span></label>
                 <div class="col-md-10">
                     <div id="admin-content-edit-content" ckeditor="options" data-ng-model="content.content"></div>

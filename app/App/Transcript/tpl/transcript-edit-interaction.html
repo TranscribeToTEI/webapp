@@ -1,122 +1,122 @@
 <div id="transcript-interaction" class="h-100">
     <div id="transcript-interaction-heading">
-        <div data-ng-if="transcriptArea.interaction.status == 'live'">
+        <div ng-if="transcriptArea.interaction.status == 'live'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm active" title="Rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rendu</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'content'">
+        <div ng-if="transcriptArea.interaction.status == 'content'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Guides</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'doc'">
+        <div ng-if="transcriptArea.interaction.status == 'doc'">
            <div class="clearfix">
                 <div class="float-right">
                    <div class="btn-group" role="group">
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!--<button class="btn btn-sm active" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!--<button class="btn btn-sm active" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                      </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Documentation</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'info'">
+        <div ng-if="transcriptArea.interaction.status == 'info'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Information</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'version'">
+        <div ng-if="transcriptArea.interaction.status == 'version'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-eye-slash fa-lg"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-eye-slash fa-lg"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Historique : version #{{ transcriptArea.interaction.version.id }}</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'taxonomySearch'">
+        <div ng-if="transcriptArea.interaction.status == 'taxonomySearch'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rechercher un identifiant</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'bibliography' || transcriptArea.interaction.status == 'bibliographyForm'">
+        <div ng-if="transcriptArea.interaction.status == 'bibliography' || transcriptArea.interaction.status == 'bibliographyForm'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Bibliographie</h3>
             </div>
         </div>
-        <div data-ng-if="transcriptArea.interaction.status == 'complexEntry'">
+        <div ng-if="transcriptArea.interaction.status == 'complexEntry'">
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()"  title="Accéder à la la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>-->
-                        <!-- <button class="btn btn-sm" data-ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" data-toggle="modal" data-target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
+                        <!-- <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoDoc()" title="Documentation" toggle="modal" target="#DocModal"><i class="fa fa-list-alt" aria-hidden="true"></i></button>-->
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Saisie complexe</h3>
@@ -124,37 +124,37 @@
         </div>
     </div>
 
-    <div id="transcript-interaction-main">
-        <div id="div-interaction-live" data-ng-if="transcriptArea.interaction.status == 'live'">
-            <div  id="div-container-encode" data-ng-bind-html="transcriptArea.interaction.live.content"></div>
+    <div id="transcript-interaction-main" class="h-100">
+        <div id="div-interaction-live" ng-if="transcriptArea.interaction.status == 'live'">
+            <div  id="div-container-encode" ng-bind-html="transcriptArea.interaction.live.content"></div>
         </div>
-        <div id="div-interaction-help" data-ng-if="transcriptArea.interaction.status == 'content'">
+        <div id="div-interaction-help" ng-if="transcriptArea.interaction.status == 'content'">
             <ol class="breadcrumb breadcrumb-interaction">
-                <li data-ng-repeat="page in transcriptArea.interaction.content.history">
-                    <a data-ng-if="page.title != transcriptArea.interaction.content.title" data-ng-click="transcriptArea.interaction.help(page.id, 'helpContent', false)">{{ page.title }}</a>
-                    <span data-ng-if="page.title == transcriptArea.interaction.content.title" class="active">{{ page.title }}</span>
+                <li ng-repeat="page in transcriptArea.interaction.content.history">
+                    <a ng-if="page.title != transcriptArea.interaction.content.title" ng-click="transcriptArea.interaction.help(page.id, 'helpContent', false)">{{ page.title }}</a>
+                    <span ng-if="page.title == transcriptArea.interaction.content.title" class="active">{{ page.title }}</span>
                 </li>
             </ol>
             <div id="div-interaction-help-content" class="mt-2" compile="transcriptArea.interaction.content.text"></div>
         </div>
-        <div id="div-interaction-doc" data-ng-if="transcriptArea.interaction.status == 'doc'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-doc.html'"></div>
-        <div id="div-interaction-info" data-ng-if="transcriptArea.interaction.status == 'info'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-info.html'"></div>
-        <div id="div-interaction-biblio" data-ng-if="transcriptArea.interaction.status == 'bibliography'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio.html'"></div>
-        <div id="div-interaction-biblio-form" data-ng-if="transcriptArea.interaction.status == 'bibliographyForm'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio-form.html'"></div>
-        <div id="div-interaction-version" data-ng-if="transcriptArea.interaction.status == 'version'" class="h-100" style="padding: 0;">
-            <div id="div-interaction-version-ace" class="h-100">
+        <div id="div-interaction-doc" ng-if="transcriptArea.interaction.status == 'doc'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-doc.html'"></div>
+        <div id="div-interaction-info" ng-if="transcriptArea.interaction.status == 'info'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-info.html'"></div>
+        <div id="div-interaction-biblio" ng-if="transcriptArea.interaction.status == 'bibliography'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio.html'"></div>
+        <div id="div-interaction-biblio-form" ng-if="transcriptArea.interaction.status == 'bibliographyForm'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio-form.html'"></div>
+        <div id="div-interaction-version" ng-if="transcriptArea.interaction.status == 'version'" class="h-100" style="padding: 0;">
+            <div id="div-interaction-version-ace" class="height: calc(100% - 22px);">
                 <div ui-ace="{
                 mode: 'xml',
                 onLoad: versionAceLoaded,
                 onChange: versionAceChanged,
                 useWrapMode: true
-                }" id="transcript-edit-interaction-version-ace-area" class="h-100" style="min-height: 400px;" data-ng-model="transcriptArea.interaction.version.content"></div>
+                }" id="transcript-edit-interaction-version-ace-area" class="h-100" ng-model="transcriptArea.interaction.version.content"></div>
             </div>
         </div>
-        <div id="div-interaction-taxonomy" data-ng-if="transcriptArea.interaction.status == 'taxonomySearch'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-taxonomy-search.html'"></div>
-        <div id="div-interaction-complexEntry" data-ng-if="transcriptArea.interaction.status == 'complexEntry'" data-ng-include="'App/Transcript/tpl/transcript-edit-interaction-complexEntry.html'"></div>
+        <div id="div-interaction-taxonomy" ng-if="transcriptArea.interaction.status == 'taxonomySearch'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-taxonomy-search.html'"></div>
+        <div id="div-interaction-complexEntry" ng-if="transcriptArea.interaction.status == 'complexEntry'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-complexEntry.html'"></div>
         <div ng-if="transcriptArea.interaction.alertZone.alerts.length > 0 && transcriptArea.interaction.alertZone.show == true" class="m-3 alert alert-warning alert-dismissible fade show" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
             <h3>Point de vigilance</h3>
             <div ng-bind="transcriptArea.interaction.alertZone.alerts[0].content"></div>
         </div>

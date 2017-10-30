@@ -61,6 +61,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             $scope.content = {
                 id: null,
                 title: null,
+                abstract: null,
                 content: null,
                 status: null,
                 type: null,
@@ -107,6 +108,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
 
             let form = {
                 title: $scope.content.title,
+                abstract: $scope.content.abstract,
                 content: $scope.content.content,
                 type: $scope.content.type,
                 status: $scope.content.status,

@@ -1,10 +1,10 @@
-<nav class="nav nav-pills nav-justified" id="Tab">
+<nav class="nav nav-pills nav-fill" id="Tab">
     <a role="presentation" class="nav-item nav-link" ui-sref="transcript.app.taxonomy.list({type: 'testators'})" ng-class="{active: entity.dataType == 'testators'}">Les hommes</a>
     <a role="presentation" class="nav-item nav-link" ui-sref="transcript.app.taxonomy.list({type: 'places'})" ng-class="{active: entity.dataType == 'places'}">Les lieux</a>
     <a role="presentation" class="nav-item nav-link" ui-sref="transcript.app.taxonomy.list({type: 'military-units'})" ng-class="{active: entity.dataType == 'military-units'}">Les unités militaires</a>
 </nav>
 
-<div class="alert alert-warning" data-ng-if="entities.length == 0">
+<div class="alert alert-warning" ng-if="entities.length == 0">
     <p><i class="fa fa-warning"></i> Cette liste de notices descriptives ne compte aucune entrée pour le moment.</p>
 </div>
 
@@ -13,10 +13,10 @@
 </div>
 
 <div class="tab-content">
-    <ul  class="tab-content" data-ng-if="entities.length > 0">
+    <ul ng-if="entities.length > 0">
         <li data-ng-repeat="iEntity in entities">
-            <a data-ng-if="iEntity.id != entity.id" ui-sref="transcript.app.taxonomy.view({type: entity.dataType, id: iEntity.id})">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</a>
-            <span data-ng-if="iEntity.id == entity.id">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</span>
+            <a ng-if="iEntity.id != entity.id" ui-sref="transcript.app.taxonomy.view({type: entity.dataType, id: iEntity.id})" class="ng-binding ng-scope">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</a>
+            <span ng-if="iEntity.id == entity.id">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</span>
         </li>
     </ul>
 </div>

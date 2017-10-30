@@ -1,18 +1,9 @@
-.form-control {
-    outline: 0;
-    border-color: #ECECEC;
-    border-style: solid;
-    border-width: 1px;
-    width: 95%;
-    background-color: #ffffff;
-    padding: 6px;
-    border-radius: 2px;
-    margin-bottom: 5px;
-    font-size: 14px;
+.angucomplete-holder {
+    position: relative;
+    color: #8Faebd;
 }
 
 .angucomplete-holder {
-    position: relative;
 }
 
 .angucomplete-dropdown {
@@ -45,11 +36,9 @@
     padding: 5px;
     color: #000000;
     margin-bottom: 4px;
-
 }
-
 .angucomplete-selected-row, .angucomplete-row:hover {
-    background-color: lightblue;
+    background-color: #8Faebd;
     color: #ffffff;
 }
 

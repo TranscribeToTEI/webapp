@@ -1,32 +1,35 @@
-<h2>{{ transcriptArea.ace.currentTag.name }}</h2>
-
-<div class="list-group">
-    <div class="list-group-item">
-        <strong>Nom</strong>
-        <pre>{{ transcriptArea.ace.currentTag.name | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Type</strong>
-        <pre>{{ transcriptArea.ace.currentTag.type | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Attributs</strong>
-        <pre>{{ transcriptArea.ace.currentTag.attributes | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Balise de départ</strong>
-        <pre>{{ transcriptArea.ace.currentTag.startTag | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Balise de fin</strong>
-        <pre>{{ transcriptArea.ace.currentTag.endTag | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Contenu</strong>
-        <pre>{{ transcriptArea.ace.currentTag.content | json}}</pre>
-    </div>
-    <div class="list-group-item">
-        <strong>Parents</strong>
-        <pre>{{ transcriptArea.ace.currentTag.parents | json}}</pre>
+<div class="card">
+    <div class="card-body">
+        <h2>{{ transcriptArea.ace.currentTag.name }}</h2>
+        <div class="list-group">
+            <div class="list-group-item">
+                <strong>Nom</strong>
+                <pre>{{ transcriptArea.ace.currentTag.name | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Type</strong>
+                <pre>{{ transcriptArea.ace.currentTag.type | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Attributs</strong>
+                <pre>{{ transcriptArea.ace.currentTag.attributes | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Balise de départ</strong>
+                <pre>{{ transcriptArea.ace.currentTag.startTag | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Balise de fin</strong>
+                <pre>{{ transcriptArea.ace.currentTag.endTag | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Contenu</strong>
+                <pre>{{ transcriptArea.ace.currentTag.content | json}}</pre>
+            </div>
+            <div class="list-group-item">
+                <strong>Parents</strong>
+                <pre>{{ transcriptArea.ace.currentTag.parents | json}}</pre>
+            </div>
+        </div>
     </div>
 </div>

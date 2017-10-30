@@ -26,6 +26,9 @@ angular.module('transcript.app.content', ['ui.router'])
                 content: function(ContentService, $transition$) {
                     return ContentService.getContent($transition$.params().id, true);
                 },
+                contents: function(ContentService) {
+                    return ContentService.getContents("blogContent", "public", "DESC", 5);
+                },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread('content-'+$transition$.params().id);
                 }
@@ -33,8 +36,9 @@ angular.module('transcript.app.content', ['ui.router'])
         })
     }])
 
-    .controller('AppContentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'content', function($rootScope, $scope, $http, $sce, $state, content) {
+    .controller('AppContentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'content', 'contents', function($rootScope, $scope, $http, $sce, $state, content, contents) {
        $scope.content = content;
+       $scope.contents = contents;
        console.log($scope.content);
     }])
 ;

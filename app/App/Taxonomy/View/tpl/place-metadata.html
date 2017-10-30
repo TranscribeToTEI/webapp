@@ -20,16 +20,16 @@
     </dd>
 </dl>
 
-<div class="row mt-4">
+<div class="row mt-5">
     <div class="col-md-12 ml-2">
-        <h4 class="mb-1"><strong>Testateurs en lien avec ce lieu</strong></h4>
-        <div class="col-md-3 col-6" data-ng-repeat="testator in entity._embedded.testators">
-            <div class="img-thumbnail">
+        <h4 class="mb-2"><strong>Testateurs en lien avec ce lieu</strong></h4>
+        <div class="row mt-4" data-ng-repeat="testator in entity._embedded.testators">
+            <div class="col-md-1 pr-0">
                 <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
                     <img src="./web/images/default-testator.png" class="img-fluid" />
                 </a>
-                <div class="caption">
-                    <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" ><strong>{{ testator.name }}</strong></a>
+                <div class="col-md-10">
+                    <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })">{{ testator.name }}</a>
                     <p ng-if="testator.placeOfDeath != null">Originaire de {{ entity.name }}</p>
                     <p ng-if="testator.placeOfDeath == null">Décédé à {{ entity.name }}</p>
                 </div>

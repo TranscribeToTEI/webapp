@@ -8,11 +8,11 @@
 </div>
 <main class="container blog" role="container">
     <h1 class="page-heading">Actualités</h1>
-    <div class="row ml-2 mr-2"  data-ng-repeat="article in contents">
-        <div class="col-md-2 mb-3"><img src="" class="img-fluid"/></div>
-        <div class="col-md-10 col-xl-8">
+    <div class="row" data-ng-repeat="article in contents">
+        <div class="col-md-3 mb-3"><img src="" class="img-fluid"/></div>
+        <div class="col-lg-7 col-md-9">
             <h2><a ui-sref="transcript.app.content({ id: article.id })">{{ article.title }}</a></h2>
-            <div data-ng-bind-html="article.content | limitTo: 300"></div>
+            <div data-ng-bind-html="article.abstract | trustAsHtml"></div>
             <div class="text-right mt-1"><a ui-sref="transcript.app.content({ id: article.id })" class="btn btn-sm btn-primary">Lire</a></div>
         </div>
     </div>
