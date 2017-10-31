@@ -7,7 +7,7 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link" ui-sref="transcript.app.search"><i class="fa fa-search fa-lg" aria-hidden="true"></i> Autres testaments</a></li>
                 <li class="nav-item" data-ng-if="user.roles | contains:'ROLE_ADMIN'">
-                    <a class="btn btn-light" ui-sref="transcript.admin.entity.edit({id: entity.id})"><i class="fa fa-edit fa-lg"></i> Modifier</a>
+                    <a class="nav-link" ui-sref="transcript.admin.entity.edit({id: entity.id})"><i class="fa fa-edit fa-lg"></i> Modifier</a>
                 </li>
             </ul>
         </nav>

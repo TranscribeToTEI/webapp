@@ -1,6 +1,6 @@
 <div class="card bg-body">
-    <div data-ng-if="resource.id" class="row">
-        <div class="col-md-9">
+    <div data-ng-if="resource.id" class="card-body row">
+        <div class="col-md-7">
             <div class="form-group row">
                 <label for="admin-entity-edit-resource-type" class="col-md-4 col-form-label text-md-right">Type de ressource <span class="red-color">*</span></label>
                 <div class="col-md-8">
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-5">
             <div class="card text-white bg-danger mb-3 mt-4">
                 <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                 <div class="card-body">
@@ -47,19 +47,17 @@
                 </div>
             </div>
             <div class="thumbnail">
-                <img src="{{ api_web  }}/images/data/testament_{{ entity.willNumber | willNumberFormat }}/JPEG/FRAN_Poilus_t-{{ entity.willNumber | willNumberFormat }}_{{ resource.images[0] }}_L.jpg" class="img-150px" />
+                <img src="{{ api_web  }}/images/data/testament_{{ entity.willNumber | willNumberFormat }}/JPEG/FRAN_Poilus_t-{{ entity.willNumber | willNumberFormat }}_{{ resource.images[0] | willNumberFormat:2 }}_L.jpg" class="img-150px" />
             </div>
-            <dl>
-                <dt>Identifiant</dt>
-                <dd>{{ resource.id }}</dd>
-            </dl>
-            <dl>
-                <dt>Création</dt>
-                <dd><span ng-if="resource.createUser != null">Par {{ resource.createUser.name }}</span> le {{ resource.createDate | date:'dd/MM/yyyy à HH:mm' }}</dd>
-            </dl>
-            <dl>
-                <dt>Statut de transcription</dt>
-                <dd>{{ resource.transcript.status | transcriptionStatusName }}</dd>
+            <dl class="row pr-3 ml-1">
+                <dt class="col-sm-4">Identifiant</dt>
+                <dd class="col-sm-8">{{ resource.id }}</dd>
+
+                <dt class="col-sm-4">Création</dt>
+                <dd class="col-sm-8"><span ng-if="resource.createUser != null">Par {{ resource.createUser.name }}</span> le {{ resource.createDate | date:'dd/MM/yyyy à HH:mm' }}</dd>
+
+                <dt class="col-sm-4">Statut de transcription</dt>
+                <dd class="col-sm-8">{{ resource.transcript.status | transcriptionStatusName }}</dd>
             </dl>
         </div>
     </div>

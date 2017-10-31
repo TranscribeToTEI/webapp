@@ -18,7 +18,7 @@ groups:
         parent: false
     notes:
         type: "real"
-        id: "note"
+        id: "app"
         idStrict: "notes"
         parent: false
 tags:
@@ -544,6 +544,30 @@ tags:
             name: "subst"
             unique: false
         complex_entry: false
+    note:
+        btn:
+            id: "note"
+            label: false
+            title: "Note du testateur"
+            label_forced: false
+            icon: "fa fa-stack-overflow"
+            btn_class: ""
+            btn_group: "microPhenomena"
+            btn_is_group: false
+            allow_root: false
+            restrict_to_root: false
+            enabled: false
+            level: 2
+        caret:
+            position: "prepend"
+        html:
+            name: "span"
+            attributes:
+                class: "note"
+        xml:
+            name: "note"
+            unique: false
+        complex_entry: false
     damage:
         btn:
             id: "damage"
@@ -885,13 +909,13 @@ tags:
             unique: false
         complex_entry: false
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
-    note:
+    app:
         btn:
-            id: "note"
+            id: "app"
             label: false
-            title: "Note du testateur"
+            title: "Note d'apparat critique"
             label_forced: false
-            icon: "fa fa-stack-overflow"
+            icon: "fa fa-bookmark-o"
             btn_class: ""
             btn_group: false
             btn_is_group: "notes"
@@ -904,10 +928,13 @@ tags:
         html:
             name: "span"
             attributes:
-                class: "note"
+                class: "app"
         xml:
-            name: "note"
+            name: "app"
             unique: false
+            contains:
+                lem: "default"
+                note: "emptyContent"
         complex_entry: false
     ref:
         btn:
@@ -931,30 +958,6 @@ tags:
                 class: "ref"
         xml:
             name: "ref"
-            unique: false
-        complex_entry: false
-    app:
-        btn:
-            id: "app"
-            label: false
-            title: "Note d'apparat critique"
-            label_forced: false
-            icon: "fa fa-bookmark-o"
-            btn_class: ""
-            btn_group: "notes"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            attributes:
-                class: "app"
-        xml:
-            name: "app"
             unique: false
         complex_entry: false
     lem:

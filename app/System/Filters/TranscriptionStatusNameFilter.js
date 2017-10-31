@@ -7,19 +7,19 @@ angular.module('transcript.filter.transcriptionStatusName', ['ui.router'])
             let transcriptionStatusName = "";
             switch(transcriptionStatusID) {
                 case "todo":
-                    transcriptionStatusName = "À faire";
+                    transcriptionStatusName = "à faire";
                     break;
                 case "transcription":
-                    transcriptionStatusName = "En cours";
+                    transcriptionStatusName = "en cours";
                     break;
                 case "validation":
-                    transcriptionStatusName = "En validation";
+                    transcriptionStatusName = "en validation";
                     break;
                 case "validated":
-                    transcriptionStatusName = "Validé";
+                    transcriptionStatusName = "validé";
                     break;
                 default:
-                    transcriptionStatusName = "Inconnu";
+                    transcriptionStatusName = "inconnu";
             }
             return transcriptionStatusName;
         }

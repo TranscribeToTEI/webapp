@@ -73,134 +73,7 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
         $scope.form.submit.action = function() {
             console.log($scope.entity);
             $scope.form.submit.loading = true;
-
-            if(typeof($scope.entity.will.testator) === "object") {
-                postTestatorStarter();
-            }
-            if(typeof($scope.entity.will.willWritingPlace) === "object") {
-                postPlace($scope.entity.will.willWritingPlace, 'willWritingPlace');
-            }
-            if(typeof($scope.entity.will.willWritingPlace) === "number" && typeof($scope.entity.will.testator) === "number") {
-                postEntityStarter();
-            }
-
-            function postEntityStarter() {
-                console.log('postEntityStarter');
-                if (typeof($scope.entity.will.testator) === "number" && typeof($scope.entity.will.willWritingPlace) === "number") {
-                    console.log($scope.entity);
-                    postEntity();
-                }
-            }
-
-            function postPlace(entity, entityName) {
-                console.log('postPlace');
-                return TaxonomyService.postTaxonomyEntity('places',
-                    {
-                        name: entity.name,
-                        updateComment: 'Creation of '+entity.name
-                    }
-                ).then(function(data) {
-                    if(entityName === "willWritingPlace") {
-                        $scope.entity.will.willWritingPlace = data.id;
-                        postEntityStarter();
-                    } else if(entityName === "testator.placeOfDeath") {
-                        $scope.entity.will.testator.placeOfDeath = data.id;
-                        postTestatorStarter();
-                    } else if(entityName === "testator.placeOfBirth") {
-                        $scope.entity.will.testator.placeOfBirth = data.id;
-                        postTestatorStarter();
-                    }
-                }, function errorCallback(response) {
-                    $scope.form.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
-                                }
-                            }
-                        }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
-                    console.log(response);
-                });
-            }
-
-            function postMilitaryUnit(entity, entityName) {
-                console.log('postMilitaryUnit');
-                return TaxonomyService.postTaxonomyEntity('military-units',
-                    {
-                        name: entity.name,
-                        updateComment: 'Creation of '+entity.name
-                    }
-                ).then(function(data) {
-                    if(entityName === "testator.militaryUnit") {
-                        $scope.entity.will.testator.militaryUnit = data.id;
-                        postTestatorStarter();
-                    }
-                }, function errorCallback(response) {
-                    $scope.form.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
-                                }
-                            }
-                        }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
-                    console.log(response);
-                });
-            }
-
-            function postTestatorStarter() {
-                console.log('postTestatorStarter');
-                if(typeof($scope.entity.will.testator.placeOfDeath) === "number" && typeof($scope.entity.will.testator.placeOfBirth) === "number"  && typeof($scope.entity.will.testator.militaryUnit) === "number") {
-                    postTestator();
-                }
-                else {
-                    if(typeof($scope.entity.will.testator.placeOfDeath) === "object") {
-                        postPlace($scope.entity.will.testator.placeOfDeath, 'testator.placeOfDeath');
-                    }
-
-                    if(typeof($scope.entity.will.testator.placeOfBirth) === "object") {
-                        postPlace($scope.entity.will.testator.placeOfBirth, 'testator.placeOfBirth');
-                    }
-
-                    if(typeof($scope.entity.will.testator.militaryUnit) === "object") {
-                        postMilitaryUnit($scope.entity.will.testator.militaryUnit, 'testator.militaryUnit');
-                    }
-                }
-            }
-
-            function postTestator() {
-                console.log('postTestator');
-                $scope.entity.will.testator.updateComment = "Creation of the entity";
-                return TaxonomyService.postTaxonomyEntity('testators', $scope.entity.will.testator).then(function(data) {
-                    $scope.entity.will.testator = data.id;
-                    postEntityStarter();
-                }, function errorCallback(response) {
-                    $scope.form.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
-                                }
-                            }
-                        }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
-                    console.log(response);
-                });
-            }
+            postEntity();
 
             function postEntity() {
                 console.log('postEntity');
@@ -208,12 +81,9 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
                     resource.images = resource.images.split(",");
                 }
 
-                // Rewriting of special fields
-                $scope.entity.will.title = "Testament "+$scope.entity.will.callNumber;
-
                 return EntityService.postEntity($scope.entity).then(function(data) {
                     $scope.form.submit.loading = false;
-                    $state.go('transcript.app.entity', {id: data.id});
+                    $state.go('transcript.app.entity', {'id': data.id});
                 }, function errorCallback(response) {
                     $scope.form.submit.loading = false;
                     if(response.data.code === 400) {

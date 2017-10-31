@@ -1423,6 +1423,9 @@ input[type=text]{
 .text-success .custom-control-input:checked ~ .custom-control-indicator {
 	background-color: #1b9543!important;
 }
+.text-white {
+	color: #FFF;
+}
 .form-control:-ms-input-placeholder {
 	color: #8Faebd;
 }

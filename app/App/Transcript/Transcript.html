@@ -31,8 +31,8 @@
                 <div class="col-md-4 other-tools">
                     <div class="text-right">
                         <div class="float-right clearfix btn-group pt-2"  role="group">
-                            <a data-ng-click="page.fullscreen.open()" class="btn btn-sm" title="Mode plein-écran"><i class="fa fa-arrows-alt"></i></a>
-                            <a data-ng-click="page.fullscreen.close()" class="btn btn-sm" title="Quitter le mode plein-écran"><i class="fa fa-close fa-lg"></i></a>
+                            <a ng-if="page.fullscreen.status == false" ng-click="page.fullscreen.open()" class="btn btn-sm" title="Mode plein-écran"><i class="fa fa-arrows-alt"></i> Passer en plein-écran</a>
+                            <a ng-if="page.fullscreen.status == true" ng-click="page.fullscreen.close()" class="btn btn-sm" title="Quitter le mode plein-écran"><i class="fa fa-close fa-lg"></i> Quitter le plein-écran</a>
                         </div>
                     </div>
                 </div>

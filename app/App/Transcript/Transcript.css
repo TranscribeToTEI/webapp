@@ -1,4 +1,6 @@
-
+#transcript-edit-editor-ace-area {
+    min-height: 400px;
+}
 
 /* Editing page */
 #transcriptContainer #transcript-workarea #transcript-edit {

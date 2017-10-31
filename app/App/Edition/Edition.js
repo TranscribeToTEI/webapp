@@ -44,8 +44,16 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
         $scope.config = config;
         $scope.tfMetaTagsName = $filter('ucFirstStrict')($filter('resourceTypeName')($scope.resource.type));
+        $scope.currentEdition = null;
 
-        /* -- EncodedContent management ---------------------------------------------------- */
+        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
+        if($scope.resource.transcript._embedded.isOpened === false) {
+            $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isOpened: false})[0];
+        }
+        console.log($scope.currentEdition);
+        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
+
+        /* -- EncodedContent management ----------------------------------------------------------------------------- */
         if($scope.resource.transcript.content !== null) {
             let encodeLiveRender = $scope.resource.transcript.content;
             for (let buttonId in $scope.config.tags) {
@@ -53,9 +61,9 @@ angular.module('transcript.app.edition', ['ui.router'])
             }
             $scope.encodedContent = $sce.trustAsHtml(encodeLiveRender);
         }
-        /* -- EncodedContent management ---------------------------------------------------- */
+        /* -- EncodedContent management ----------------------------------------------------------------------------- */
 
-        /* -- Contributors management ------------------------------------------------------ */
+        /* -- Contributors management ------------------------------------------------------------------------------- */
         function getUser(username) {
             return UserService.getUserByUsername(username).then(function(data) {
                 $scope.contributors.push({
@@ -70,9 +78,9 @@ angular.module('transcript.app.edition', ['ui.router'])
         for(let id in contributors) {
             getUser(contributors[id]);
         }
-        /* -- Contributors management ------------------------------------------------------ */
+        /* -- Contributors management ------------------------------------------------------------------------------- */
 
-        /* -- Modal Login management ------------------------------------------------------- */
+        /* -- Modal Login management -------------------------------------------------------------------------------- */
         $scope.goRegister = function() {
             $('#loginModal').modal('hide');
             $state.go('transcript.app.security.register');
@@ -81,9 +89,9 @@ angular.module('transcript.app.edition', ['ui.router'])
             $('#loginModal').modal('hide');
             $state.go('transcript.app.security.login');
         };
-        /* -- Modal Login management ------------------------------------------------------- */
+        /* -- Modal Login management -------------------------------------------------------------------------------- */
 
-        /* -- Admin management ------------------------------------------------------------- */
+        /* -- Admin management -------------------------------------------------------------------------------------- */
         $scope.admin = {
             status: {
                 loading: false
@@ -97,7 +105,7 @@ angular.module('transcript.app.edition', ['ui.router'])
                 $scope.admin.status.loading = false;
             });
         };
-        /* -- Admin management ------------------------------------------------------------- */
+        /* -- Admin management -------------------------------------------------------------------------------------- */
 
     }])
 ;

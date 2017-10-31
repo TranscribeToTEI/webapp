@@ -121,12 +121,14 @@ angular.module('transcriptApp', [
         'transcript.service.taxonomy',
         'transcript.service.training-content',
         'transcript.service.transcript',
+        'transcript.service.transcript-log',
         'transcript.service.user',
         'transcript.service.user-preference',
         'transcript.service.will'
     ]).
     config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider) {
         $urlRouterProvider.otherwise('/');
+        //$urlRouterProvider.deferIntercept();
         $qProvider.errorOnUnhandledRejections(false);
 
         OAuthTokenProvider.configure({
@@ -157,6 +159,8 @@ angular.module('transcriptApp', [
         tfMetaTagsProvider.setTitleSuffix('');
         tfMetaTagsProvider.setTitlePrefix('');
         /* ------------------------------------------------------ */
+
+
     }])
     .run(['$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
         /* -- Parameters management ------------------------------------------------------ */
@@ -248,10 +252,10 @@ angular.module('transcriptApp', [
             else{return "badge-danger";}
         };
         $rootScope.getStatusLabel = function(status) {
-            if(status === "todo") {return "À faire";}
-            else if(status === "transcription") {return "En cours";}
-            else if(status === "validation") {return "Validation";}
-            else if(status === "validated") {return "Validée";}
+            if(status === "todo") {return "à faire";}
+            else if(status === "transcription") {return "en cours";}
+            else if(status === "validation") {return "en validation";}
+            else if(status === "validated") {return "validé";}
             else{return "Inconnu";}
         };
         /* -- End : Resource label management -------------------------------------------- */

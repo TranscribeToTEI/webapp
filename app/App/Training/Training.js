@@ -42,12 +42,6 @@ angular.module('transcript.app.training', ['ui.router'])
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
 
-        /* Image loading -------------------------------------------------------------------------------------------- */
-        $scope.isExternMedia = function(){
-            return /^http/.test($scope.trainingContent.illustration);
-        };
-        /* End: Image loading --------------------------------------------------------------------------------------- */
-
         /* Updating user's preferences ------------------------------------------------------------------------------ */
         if($rootScope.user._embedded.preferences.tutorialStatus === 'todo' || $rootScope.user._embedded.preferences.tutorialStatus === 'inProgress') {
             UserPreferenceService.patchPreferences({
