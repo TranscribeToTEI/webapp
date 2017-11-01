@@ -1799,10 +1799,7 @@ ul.listPages li .badge-status{
 	margin: auto;
 	z-index: 1;
 }
-ul.listPages li a.disabled{
-	cursor: not-allowed!important;
-}
-ul.listPages li a.disabled span{
+ul.listPages li a.locked span{
 	font-variant: small-caps;
 	font-size: 0.9rem;
 	position: relative;
@@ -1812,7 +1809,7 @@ ul.listPages li a.disabled span{
 	margin: auto;
 	z-index: 1;
 }
-ul.listPages li a.disabled img{
+ul.listPages li a.locked img{
 	opacity: 0.3;
 	margin-top: -21px;
 }
@@ -1821,7 +1818,7 @@ ul.listPages li a.disabled img{
 	ul.listPages li img{
 		max-height: 180px;
 	}
-	ul.listPages li a.disabled span{
+	ul.listPages li a.locked span{
 		top: 35%;
 	}
 }

@@ -31,7 +31,7 @@ tags:
         btn:
             id: "head"
             label: false
-            title: "Ajouter un en-tête"
+            title: "Marque un en-tête"
             label_forced: true
             icon: "fa fa-header"
             btn_class: ""
@@ -45,11 +45,16 @@ tags:
             position: "prepend"
         html:
             name: "div"
+            unique: false
             attributes:
                 class: "tei-header"
+            icon:
+                position: "prepend"
         xml:
             name: "head"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     dateline:
         btn:
@@ -69,17 +74,22 @@ tags:
             position: "prepend"
         html:
             name: "div"
+            unique: false
             attributes:
                 class: "dateline"
+            icon:
+                position: "prepend"
         xml:
             name: "dateline"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     p:
         btn:
             id: "p"
             label: false
-            title: "Ajouter un paragraphe"
+            title: "Marque un paragraphe"
             label_forced: true
             icon: "fa fa-paragraph"
             btn_class: ""
@@ -92,16 +102,23 @@ tags:
         caret:
             position: "prepend"
         html:
-            name: "p"
+            name: "div"
+            attributes:
+                class: "paragraph"
+            unique: false
+            icon:
+                position: "prepend"
         xml:
             name: "p"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: true
         complex_entry: false
     list:
         btn:
             id: "list"
             label: false
-            title: "Ajouter une liste"
+            title: "Marque une liste"
             label_forced: true
             icon: "fa fa-list"
             btn_class: ""
@@ -115,15 +132,20 @@ tags:
             position: "prepend"
         html:
             name: "ul"
+            unique: false
         xml:
             name: "list"
             unique: false
+            contains:
+                item: "default"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     signed:
         btn:
             id: "signed"
             label: false
-            title: "Ajouter une signature"
+            title: "Marque une signature"
             label_forced: true
             icon: "fa fa-skyatlas"
             btn_class: ""
@@ -137,15 +159,20 @@ tags:
             position: "prepend"
         html:
             name: "signed"
+            unique: false
+            icon:
+                position: "prepend"
         xml:
             name: "signed"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     postscript:
         btn:
             id: "postscript"
             label: false
-            title: "Ajouter un post-scriptum"
+            title: "Marque un post-scriptum"
             label_forced: true
             icon: ""
             btn_class: ""
@@ -159,15 +186,20 @@ tags:
             position: "prepend"
         html:
             name: "postscript"
+            unique: false
+            icon:
+                position: "prepend"
         xml:
             name: "postscript"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     space:
         btn:
             id: "space"
             label: false
-            title: "Ajouter un espace"
+            title: "Marque un espace"
             label_forced: true
             icon: "fa fa-arrows-v"
             btn_class: ""
@@ -181,11 +213,16 @@ tags:
             position: "after"
         html:
             name: "div"
+            unique: false
             attributes:
                 class: "space"
+            icon:
+                position: "prepend"
         xml:
             name: "space"
             unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     metamark:
         btn:
@@ -205,11 +242,16 @@ tags:
             position: "after"
         html:
             name: "div"
+            unique: false
             attributes:
                 class: "metamark"
+            icon:
+                position: "prepend"
         xml:
             name: "metamark"
             unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     # Lvl2
     hi:
@@ -231,17 +273,20 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "hi"
         xml:
             name: "hi"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     item:
         btn:
             id: "item"
             label: false
-            title: "Ajouter un item à la liste"
+            title: "Item dans une liste"
             label_forced: false
             icon: "fa fa-list"
             btn_class: ""
@@ -256,9 +301,12 @@ tags:
             position: "prepend"
         html:
             name: "li"
+            unique: false
         xml:
             name: "item"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: true
         complex_entry: false
     lb:
         btn:
@@ -279,9 +327,14 @@ tags:
             position: "after"
         html:
             name: "br"
+            unique: true
+            icon:
+                position: "before"
         xml:
             name: "lb"
             unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     # Particularité de l'écriture :
     choice:
@@ -302,11 +355,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
-                class: "choice"
+                class: "choice text-secondary"
+            marker: true
         xml:
             name: "choice"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     abbr:
         btn:
@@ -326,11 +383,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "abbr"
         xml:
             name: "abbr"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     expan:
         btn:
@@ -350,12 +410,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "expan"
                 hidden: "hidden"
         xml:
             name: "expan"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     sic:
         btn:
@@ -376,11 +439,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "sic"
         xml:
             name: "sic"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     corr:
         btn:
@@ -400,12 +466,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "corr"
                 hidden: "hidden"
         xml:
             name: "corr"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     orig:
         btn:
@@ -425,11 +494,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "orig"
         xml:
             name: "orig"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     reg:
         btn:
@@ -449,12 +521,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "reg"
                 hidden: "hidden"
         xml:
             name: "reg"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: true
     surplus:
         btn:
@@ -475,11 +550,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "surplus"
         xml:
             name: "surplus"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     add:
         btn:
@@ -499,11 +577,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "add"
         xml:
             name: "add"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     del:
         btn:
@@ -523,9 +604,12 @@ tags:
             position: "prepend"
         html:
             name: "del"
+            unique: false
         xml:
             name: "del"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     subst:
         btn:
@@ -545,11 +629,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "subst"
         xml:
             name: "subst"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     note:
         btn:
@@ -569,11 +656,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "note"
         xml:
             name: "note"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     damage:
         btn:
@@ -593,11 +683,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "damage"
         xml:
             name: "damage"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     supplied:
         btn:
@@ -617,12 +710,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "supplied"
                 hidden: "hidden"
         xml:
             name: "supplied"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     unclear:
         btn:
@@ -642,11 +738,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "unclear"
         xml:
             name: "unclear"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     gap:
         btn:
@@ -666,12 +765,15 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "gap"
                 style: "background-color: #000; min-width: 10px;"
         xml:
             name: "gap"
             unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
 
     # sémantique :
@@ -693,11 +795,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "date"
+            icon:
+                position: "prepend"
         xml:
             name: "date"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     persName:
         btn:
@@ -717,11 +824,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "persName"
+            icon:
+                position: "prepend"
         xml:
             name: "persName"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     surname:
         btn:
@@ -741,11 +853,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "surname"
+            icon:
+                position: "prepend"
         xml:
             name: "surname"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     placeName:
         btn:
@@ -765,11 +882,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "placeName"
+            icon:
+                position: "prepend"
         xml:
             name: "placeName"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     address:
         btn:
@@ -789,11 +911,18 @@ tags:
             position: "prepend"
         html:
             name: "span"
-            attributes:
-                class: "addrLine"
-        xml:
-            name: "addrLine"
             unique: false
+            attributes:
+                class: "address"
+            icon:
+                position: "prepend"
+        xml:
+            name: "address"
+            unique: false
+            contains:
+                addrLine: "default"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     addrLine:
         btn:
@@ -813,11 +942,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "addrLine"
         xml:
             name: "addrLine"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: true
         complex_entry: false
     orgName:
         btn:
@@ -837,11 +969,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "orgName"
+            icon:
+                position: "prepend"
         xml:
             name: "orgName"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     term:
         btn:
@@ -861,11 +998,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "term"
+            icon:
+                position: "prepend"
         xml:
             name: "term"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     foreign:
         btn:
@@ -885,11 +1027,16 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "term"
+            icon:
+                position: "prepend"
         xml:
             name: "term"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     seg:
         btn:
@@ -909,11 +1056,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "segment"
         xml:
             name: "seg"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
     app:
@@ -934,6 +1084,7 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "app"
         xml:
@@ -942,6 +1093,8 @@ tags:
             contains:
                 lem: "default"
                 note: "emptyContent"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     ref:
         btn:
@@ -961,11 +1114,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "ref"
         xml:
             name: "ref"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     lem:
         btn:
@@ -985,11 +1141,14 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "lem"
         xml:
             name: "lem"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false
     bibl:
         btn:
@@ -1009,9 +1168,12 @@ tags:
             position: "prepend"
         html:
             name: "span"
+            unique: false
             attributes:
                 class: "bibl"
         xml:
             name: "bibl"
             unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
         complex_entry: false

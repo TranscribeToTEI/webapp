@@ -29,9 +29,10 @@
 }
 
 /* Live encoder rules */
-#div-container-encode p {
-    border-left: solid 2px #000;
-    padding-left: 10px;
+#div-container-encode div.paragraph {
+    margin-left: -20px;
+    border-left: solid 12px #c6c6c6;
+    padding: 10px 10px 10px 8px;
 }
 #div-container-encode div.tei-header {
     font-size: 105%;

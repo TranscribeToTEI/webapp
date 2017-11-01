@@ -1,8 +1,11 @@
 <div class="btn-toolbar bg-secondary" role="toolbar">
     <!-- Tags management Level 1 -->
     <div class="clearfix level level-1 bg-secondary">
+        <div class="float-right bg-danger text-white">
+            <small ng-if="transcriptArea.toolbar.mouseOverLvl1 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl1.xml.name }}&gt;</small>
+        </div>
         <div class="btn-group btn-group-sm" role="group">
-            <button ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" ng-click="transcriptArea.ace.addTag(button.btn.id)" ng-if="button.btn.level == 1" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false">
+            <button ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" ng-click="transcriptArea.ace.addTag(button.btn.id)" ng-if="button.btn.level == 1" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl1 = button" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl1 = null">
                 <i class="{{ button.btn.icon }}" ng-if="button.btn.icon != ''"></i>
                 <span ng-if="(button.btn.icon != '' && button.btn.label_forced == true) || button.btn.icon == ''"><span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span></span>
                 <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
@@ -12,31 +15,34 @@
 
     <!-- Tags management Level 2 -->
     <div class="clearfix level level-2">
+        <div class="float-right bg-danger text-white">
+            <small ng-if="transcriptArea.toolbar.mouseOverLvl2 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl2.xml.name }}&gt;</small>
+        </div>
         <div style="display: inline-flex;" ng-repeat="item in transcriptArea.toolbar.level2 | orderBy:'order'">
-            <div class="btn-group" role="group" ng-if="item.lType == 'group' && item.type == 'virtual' && item.parent == false">
-                <button type="button" class="btn btn-sm dropdown-toggle" id="dropdown-{{ item.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <div class="dropdown" role="group" ng-if="item.lType == 'group' && item.type == 'virtual' && item.parent == false">
+                <button type="button" class="btn btn-sm dropdown-toggle" id="dropdown-{{ item.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="{{ item.icon }}"></i> {{ item.name }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-{{ item.id }}">
-                    <button class="dropdown-item" ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" ng-repeat="button in transcriptArea.toolbar.tags" ng-if="button.btn.btn_group == group.id" ng-disabled="button.btn.enabled == false">
+                    <button type="button" class="dropdown-item" ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" ng-repeat="button in transcriptArea.toolbar.tags" ng-if="button.btn.btn_group == item.id" ng-disabled="button.btn.enabled == false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = button" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">
                         <i class="{{ button.btn.icon }}"></i> <span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span> <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
                     </button>
                 </div>
             </div>
             <div class="btn-group" ng-if="item.lType == 'group' && item.type == 'real' && item.parent == false">
-                <button type="button" class="btn" ng-click="transcriptArea.ace.addTag(transcriptArea.toolbar.tags[item.id].btn.id)" title="{{ transcriptArea.toolbar.tags[item.id].btn.title }}" ng-disabled="transcriptArea.toolbar.tags[group.id].btn.enabled == false">
+                <button type="button" class="btn" ng-click="transcriptArea.ace.addTag(transcriptArea.toolbar.tags[item.id].btn.id)" title="{{ transcriptArea.toolbar.tags[item.id].btn.title }}" ng-disabled="transcriptArea.toolbar.tags[group.id].btn.enabled == false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = transcriptArea.toolbar.tags[item.id]" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">
                     <i class="{{ transcriptArea.toolbar.tags[item.id].btn.icon }}"></i> <span ng-if="transcriptArea.toolbar.tags[item.id].btn.label == false">{{ teiInfo[item.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="transcriptArea.toolbar.tags[item.id].btn.label != false">{{ transcriptArea.toolbar.tags[item.id].btn.label }}</span> <span ng-class="{'red-color': transcriptArea.toolbar.tags[item.id].btn.enabled == true}"><i class="fa fa-circle"></i></span>
                 </button>
-                <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn dropdown-toggle dropdown-toggle-split" id="ddropdown-{{ item.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
                 </button>
-                <div class="dropdown-menu">
-                    <button class="dropdown-item" ng-repeat="button in transcriptArea.toolbar.tags" ng-if="button.btn.btn_group == group.idStrict" ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false">
+                <div class="dropdown-menu" aria-labelledby="ddropdown-{{ item.id }}">
+                    <button type="button" class="dropdown-item" ng-repeat="button in transcriptArea.toolbar.tags" ng-if="button.btn.btn_group == item.idStrict" ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = button" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">
                         <i class="{{ button.btn.icon }}"></i> <span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span> <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
                     </button>
                 </div>
             </div>
-            <button class="btn btn-sm" ng-click="transcriptArea.ace.addTag(item.btn.id)" ng-if="item.lType == 'btn' && item.btn.level == 2 && item.btn.allow_root == true && item.btn.btn_group == false && item.btn.btn_is_group == false" title="{{ item.btn.title }}" ng-disabled="button.btn.enabled == false">
+            <button class="btn btn-sm" ng-click="transcriptArea.ace.addTag(item.btn.id)" ng-if="item.lType == 'btn' && item.btn.level == 2 && item.btn.allow_root == true && item.btn.btn_group == false && item.btn.btn_is_group == false" title="{{ item.btn.title }}" ng-disabled="button.btn.enabled == false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = item" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">
                 <span ng-if="item.btn.icon != '' && item.btn.label_forced == false"><i class="{{ item.btn.icon }}"></i></span>
                 <span ng-if="item.btn.icon != '' && item.btn.label_forced == true"><i class="{{ item.btn.icon }}"></i> <span ng-if="item.btn.label == false">{{ teiInfo[item.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="item.btn.label != false">{{ item.btn.label }}</span></span>
                 <span ng-if="item.btn.icon == ''">{{ item.btn.label }}</span>
@@ -47,16 +53,29 @@
 
     <!-- Attributes management Level 3-->
     <div class="clearfix level level-3">
+        <div class="float-right bg-danger text-white">
+            <small ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value !== null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}="{{ transcriptArea.toolbar.mouseOverLvl3.value.value }}"</small>
+            <small ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value === null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}=""</small>
+        </div>
         <div class="btn-group" role="group">
             <div class="btn-group" role="group" ng-repeat="attribute in transcriptArea.toolbar.attributes" ng-if="attribute.values.length > 0">
                 <button id="dropdown-attr-{{ attribute.id }}" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true">
-                    {{ attribute.id | ucfirst }}
+                    <span ng-if="attribute.gloss === undefined || attribute.gloss === null">{{ attribute.id }}</span>
+                    <span ng-if="attribute.gloss !== null">{{ attribute.gloss | ucfirst }}</span>
+                    <span ng-if="attribute.alreadyUsed == false && attribute.usage == 'req'" class="red-color"><i class="fa fa-circle"></i></span>
+                    <span ng-if="attribute.alreadyUsed == true" class="text-success"><i class="fa fa-check"></i></span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-attr-{{ attribute.id }}">
-                    <button ng-repeat="value in attribute.values" class="dropdown-item" ng-click="transcriptArea.ace.addAttribute(attribute, value)" ><span ng-if="value.label != '' && value.label != null">{{ value.label | ucfirst }}</span><span ng-if="value.label == '' || value.label == null">{{ value.value | ucfirst }}</span></button>
+                    <button ng-repeat="value in attribute.values" class="dropdown-item" ng-click="transcriptArea.ace.addAttribute(attribute, value)" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl3 = {attribute: attribute, value: value}" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl3 = null"><span ng-if="value.label != '' && value.label != null">{{ value.label | ucfirst }}</span><span ng-if="value.label == '' || value.label == null">{{ value.value | ucfirst }}</span></button>
                 </div>
             </div>
         </div>
-        <button ng-repeat="attribute in transcriptArea.toolbar.attributes" class="btn btn-sm" ng-click="transcriptArea.ace.addAttribute(attribute, null)" ng-if="attribute.values.length == 0" data-toggle="tooltip" data-placement="bottom" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true">{{ attribute.id | ucfirst }}</button>
+        <button ng-repeat="attribute in transcriptArea.toolbar.attributes" class="btn" ng-click="transcriptArea.ace.addAttribute(attribute, null)" ng-if="attribute.values.length == 0" data-toggle="tooltip" data-placement="bottom" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl3 = {attribute: attribute, value: null}" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl3 = null">
+            <span ng-if="attribute.gloss === undefined || attribute.gloss === null">{{ attribute.id }}</span>
+            <span ng-if="attribute.gloss !== null">{{ attribute.gloss | ucfirst }}</span>
+            <span ng-if="attribute.alreadyUsed == false && attribute.usage == 'req'" class="red-color"><i class="fa fa-circle"></i></span>
+            <span ng-if="attribute.alreadyUsed == true" class="text-success"><i class="fa fa-check"></i></span>
+        </button>
+        <div ng-if="transcriptArea.toolbar.attributes !== array">Saisir une valeur pour chaque attribut marqué d'un point rouge</div>
     </div>
 </div>

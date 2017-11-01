@@ -57,12 +57,15 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 },
                 bibliographies: function(BibliographyService, $transition$) {
                     return BibliographyService.getBibliographiesByEntity($transition$.params().idEntity);
+                },
+                notes: function(NoteService, $transition$) {
+                    return NoteService.getNotesByTranscript($transition$.params().idTranscript);
                 }
             }
         })
     }])
 
-    .controller('AppTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'BibliographyService', 'entity', 'resource', 'transcript', 'teiInfo', 'config', 'testators', 'places', 'militaryUnits', 'bibliographies', function($rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, BibliographyService, entity, resource, transcript, teiInfo, config, testators, places, militaryUnits, bibliographies) {
+    .controller('AppTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'BibliographyService', 'NoteService', 'entity', 'resource', 'transcript', 'teiInfo', 'config', 'testators', 'places', 'militaryUnits', 'bibliographies', 'notes', function($rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, BibliographyService, NoteService, entity, resource, transcript, teiInfo, config, testators, places, militaryUnits, bibliographies, notes) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         else if(transcript._embedded.isOpened === false && $filter('filter')(transcript._embedded.logs, {isOpened: false})[0].createUser.id !== $rootScope.user.id) {
             console.log('Redirection to edition -> Already in edition');
@@ -95,7 +98,11 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 interaction: {
                     status: "live",
                     live: {
-                        content: ""
+                        content: "",
+                        microObjects: {
+                            active: true,
+                            activeClass: 'active bg-danger'
+                        }
                     },
                     content: {
                         title: "",
@@ -133,6 +140,17 @@ angular.module('transcript.app.transcript', ['ui.router'])
                                 collectionName: null,
                                 documentNumber: null,
                                 url: null
+                            }
+                        }
+                    },
+                    historicalNotes: {
+                        elements: notes,
+                        addForm: {
+                            submit: {
+                                loading: false
+                            },
+                            form: {
+                                content: null
                             }
                         }
                     },
@@ -199,6 +217,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     tags: $scope.config.tags,
                     groups: $scope.config.groups,
                     level2: [],
+                    mouseOverLvl1: null,
+                    mouseOverLvl2: null,
+                    mouseOverLvl3: null,
                     attributes: []
                 }
             };
@@ -245,14 +266,14 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Computing Level2 */
             /* ---------------------------------------------------------------------------------------------------------- */
-            for(let iG in $scope.transcriptArea.toolbar.groups) {
-                if($scope.transcriptArea.toolbar.groups[iG].order !== false) {
+            for (let iG in $scope.transcriptArea.toolbar.groups) {
+                if ($scope.transcriptArea.toolbar.groups[iG].order !== false) {
                     $scope.transcriptArea.toolbar.groups[iG].lType = "group";
                     $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[iG]);
                 }
             }
-            for(let iT in $scope.transcriptArea.toolbar.tags) {
-                if($scope.transcriptArea.toolbar.tags[iT].order !== undefined && $scope.transcriptArea.toolbar.tags[iT].order !== false) {
+            for (let iT in $scope.transcriptArea.toolbar.tags) {
+                if ($scope.transcriptArea.toolbar.tags[iT].order !== undefined && $scope.transcriptArea.toolbar.tags[iT].order !== false) {
                     $scope.transcriptArea.toolbar.tags[iT].lType = "btn";
                     $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[iT]);
                 }
@@ -263,7 +284,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Updating Transcript Log */
             /* ---------------------------------------------------------------------------------------------------------- */
-            if($scope.transcript._embedded.isOpened === true) {
+            if ($scope.transcript._embedded.isOpened === true) {
                 console.log('creation of transcript log -> Transcript is now closed');
                 TranscriptLogService.postTranscriptLog({
                     'isOpened': false,
@@ -287,16 +308,15 @@ angular.module('transcript.app.transcript', ['ui.router'])
              * @param button
              * @returns {*}
              */
-            $scope.functions.encodeHTML = function(encodeLiveRender, button) {
-                return TranscriptService.encodeHTML(encodeLiveRender, button);
+            $scope.functions.encodeHTML = function (encodeLiveRender, button) {
+                return TranscriptService.encodeHTML(encodeLiveRender, button, $scope.transcriptArea.interaction.live.microObjects.active);
             };
             /* Functions ------------------------------------------------------------------------------------------------ */
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Toolbar */
-
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.functions.updateToolbar = function() {
+            $scope.functions.updateToolbar = function () {
                 // Reset every enabled buttons
                 for (let btn in $scope.transcriptArea.toolbar.tags) {
                     $scope.transcriptArea.toolbar.tags[btn].btn.enabled = false;
@@ -359,11 +379,11 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         let line = $scope.aceEditor.getCursorPosition().row,
                             column = $scope.aceEditor.getCursorPosition().column;
 
-                        /* *Item replacement:*
-                         * Conditions: if current tag is an "item" tag which is empty and smartTEI is available
-                         * Result: remove the "item" tag and jump to the end of the "list" tag
+                        /* replicateOnCtrlEnter Management :
+                         * Conditions: if the tag has replicateOnCtrlEnter: true in the config, and the tag is empty and smartTEI is available
+                         * Result: remove the tag and jump to the end of the parent tag
                          */
-                        if ($scope.transcriptArea.ace.currentTag.name === "item" && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
+                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
                             $scope.aceSession.getDocument().remove(new AceRange($scope.transcriptArea.ace.currentTag.startTag.start.row, $scope.transcriptArea.ace.currentTag.startTag.start.column - 1, $scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1));
                             $scope.$apply(function () {
                                 $scope.transcriptArea.ace.currentTag = TranscriptService.getParentTag($scope.functions.getLeftOfCursor(), $scope.functions.getLeftOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
@@ -378,15 +398,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         else if ($scope.transcriptArea.toolbar.tags.lb.btn.enabled === true && $scope.smartTEI === true) {
                             editor.insert("<lb/>\n");
                         }
-                        /* *Item insert:*
-                         * Conditions: if current tag is an "list" tag and smartTEI is available
-                         * Result: insert a "item" tag and jump into
-                         */
-                        else if ($scope.transcriptArea.ace.currentTag.name === "list" && $scope.smartTEI === true) {
-                            editor.insert("\n<item></item>");
-                            $scope.aceEditor.getSelection().moveCursorTo(line + 1, 6);
-                            $scope.aceEditor.focus();
-                        } else {
+                        else {
                             return false;
                         }
 
@@ -405,36 +417,19 @@ angular.module('transcript.app.transcript', ['ui.router'])
                             $scope.transcriptArea.ace.currentTag = TranscriptService.getParentTag($scope.functions.getLeftOfCursor(), $scope.functions.getLeftOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                         });
 
-                        /* *Item insert:*
-                         * Conditions: if current tag is an "item" tag and smartTEI is available
-                         * Result: insert a new "item" tag after the current one and jump into
+                        /* *replicateOnCtrlEnter insert:*
+                         * Conditions: if current tag has replicateOnCtrlEnter: true on the config file and smartTEI is available
+                         * Result: insert the same new tag after the current one and jump into
                          */
-                        if ($scope.transcriptArea.ace.currentTag.name === "item" && $scope.smartTEI === true) {
+                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && $scope.smartTEI === true) {
                             let row = $scope.transcriptArea.ace.currentTag.endTag.end.row,
                                 column = $scope.transcriptArea.ace.currentTag.endTag.end.column;
 
                             $scope.aceSession.insert(
                                 {row: row, column: column + 1},
-                                "\n<item></item>");
-                            $scope.aceEditor.getSelection().moveCursorTo(row + 1, 6);
-                            $scope.aceEditor.focus();
-                            $scope.$apply(function () {
-                                /* Computing of current tag value */
-                                $scope.transcriptArea.ace.currentTag = TranscriptService.getParentTag($scope.functions.getLeftOfCursor(), $scope.functions.getLeftOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
-                            });
-                        }
-                        /* *Paragraph insert:*
-                         * Conditions: if current tag is a "p" tag and smartTEI is available
-                         * Result: insert a new "p" tag after the current one and jump into
-                         */
-                        else if ($scope.transcriptArea.ace.currentTag.name === "p" && $scope.smartTEI === true) {
-                            let row = $scope.transcriptArea.ace.currentTag.endTag.end.row,
-                                column = $scope.transcriptArea.ace.currentTag.endTag.end.column;
-
-                            $scope.aceSession.insert(
-                                {row: row, column: column + 1},
-                                "\n<p></p>");
-                            $scope.aceEditor.getSelection().moveCursorTo(row + 1, 3);
+                                "\n" + $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name], "default")
+                            );
+                            $scope.aceEditor.getSelection().moveCursorTo(row + 1, 2 + $scope.transcriptArea.ace.currentTag.name.length);
                             $scope.aceEditor.focus();
                             $scope.$apply(function () {
                                 /* Computing of current tag value */
@@ -601,7 +596,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* XML Parser :
              * Find the current tag in AceEditor */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.functions.getLeftOfCursor = function() {
+            $scope.functions.getLeftOfCursor = function () {
                 let partOfCode = "";
 
                 for (let r = 0; r <= $scope.aceEditor.getCursorPosition().row; r++) {
@@ -621,7 +616,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             };
 
-            $scope.functions.getRightOfCursor = function() {
+            $scope.functions.getRightOfCursor = function () {
                 let partOfCode = "";
 
                 for (let r = $scope.aceEditor.getCursorPosition().row; r < $scope.aceSession.getLength(); r++) {
@@ -661,20 +656,28 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Tags Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.functions.constructTag = function(tag, action, parent) {
+            /**
+             * Generate the tag
+             *
+             * @param tag (From the config)
+             * @param action
+             * @param parent
+             * @returns {string}
+             */
+            $scope.functions.constructTag = function (tag, action, parent) {
                 let tagInsert = "",
                     requiredAttributes = "";
 
                 /* Required attributes management ------------------------------------------------------------------- */
-                for(let iAttribute in $scope.teiInfo[tag.btn.id].attributes) {
+                for (let iAttribute in $scope.teiInfo[tag.btn.id].attributes) {
                     let attribute = $scope.teiInfo[tag.btn.id].attributes[iAttribute];
-                    if(attribute.usage === "req") {
+                    if (attribute.usage === "req") {
                         requiredAttributes += $scope.functions.constructAttribute(attribute.id, null);
                     }
                 }
 
                 //Special cases:
-                if(tag.btn.id === "note" && parent !== undefined && parent.btn.id === "app") {
+                if (tag.btn.id === "note" && parent !== undefined && parent.btn.id === "app") {
                     //In case of note from app context, we add the resp attribute
                     requiredAttributes += $scope.functions.constructAttribute("resp", null);
                 }
@@ -684,15 +687,15 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 if (tag.xml.unique === true) {
                     tagInsert = "<" + tag.xml.name + requiredAttributes + "/>";
                 } else if (tag.xml.unique === false) {
-                    if(tag.xml.contains === undefined) {
-                        if(action === "default") {
+                    if (tag.xml.contains === undefined) {
+                        if (action === "default") {
                             tagInsert = "<" + tag.xml.name + requiredAttributes + ">" + $scope.aceSession.getTextRange($scope.aceEditor.getSelectionRange()) + "</" + tag.xml.name + ">";
-                        } else if(action === "emptyContent") {
+                        } else if (action === "emptyContent") {
                             tagInsert = "<" + tag.xml.name + requiredAttributes + "></" + tag.xml.name + ">";
                         }
                     } else {
-                        tagInsert =  "<" + tag.xml.name + requiredAttributes + ">";
-                        for(let subTag in tag.xml.contains) {
+                        tagInsert = "<" + tag.xml.name + requiredAttributes + ">";
+                        for (let subTag in tag.xml.contains) {
                             tagInsert += $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[subTag], tag.xml.contains[subTag], tag);
                         }
                         tagInsert += "</" + tag.xml.name + ">";
@@ -730,7 +733,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Attributes Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.functions.updateAttributes = function() {
+            $scope.functions.updateAttributes = function () {
                 $scope.transcriptArea.toolbar.attributes = [];
 
                 if ($scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].attributes !== undefined) {
@@ -750,9 +753,10 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     }
 
                 }
+                console.log($scope.transcriptArea.toolbar.attributes);
             };
 
-            $scope.functions.constructAttribute = function(attribute, value) {
+            $scope.functions.constructAttribute = function (attribute, value) {
                 let attributeInsert = " " + attribute + "=\"\"";
                 if (value !== null) {
                     attributeInsert = " " + attribute + "=\"" + value.value + "\"";
@@ -798,16 +802,16 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 $scope.functions.resetInfoZone();
             };
 
-            $scope.functions.resetVersionZone = function() {
+            $scope.functions.resetVersionZone = function () {
                 $scope.transcriptArea.interaction.version.content = null;
                 $scope.transcriptArea.interaction.version.id = null;
             };
 
-            $scope.functions.resetContentZone = function() {
+            $scope.functions.resetContentZone = function () {
                 $scope.transcriptArea.interaction.content.text = '<p class="text-center" style="margin-top: 20px;"><i class="fa fa-5x fa-spin fa-circle-o-notch"></i></p>';
             };
 
-            $scope.functions.resetTaxonomySearchZone = function() {
+            $scope.functions.resetTaxonomySearchZone = function () {
                 $scope.transcriptArea.interaction.taxonomy.dataType = null;
                 $scope.transcriptArea.interaction.taxonomy.result = null;
                 $scope.transcriptArea.interaction.taxonomy.string = null;
@@ -815,19 +819,38 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 $scope.transcriptArea.interaction.taxonomy.taxonomySelected = null;
             };
 
-            $scope.functions.resetDocZone = function() {
+            $scope.functions.resetDocZone = function () {
                 $scope.transcriptArea.interaction.doc.structure = null;
                 $scope.transcriptArea.interaction.doc.title = null;
                 $scope.transcriptArea.interaction.doc.element = null;
             };
 
-            $scope.functions.resetInfoZone = function() {
+            $scope.functions.resetInfoZone = function () {
                 $scope.transcriptArea.interaction.info.structure = null;
                 $scope.transcriptArea.interaction.info.title = null;
                 $scope.transcriptArea.interaction.info.element = null;
             };
 
             /* Interaction Management ----------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
+            /* Live management */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            /**
+             * This function loads documentation about a TEI element
+             */
+            $scope.transcriptArea.interaction.live.microObjects.action = function () {
+                if($scope.transcriptArea.interaction.live.microObjects.active === true) {
+                    $scope.transcriptArea.interaction.live.microObjects.active = false;
+                    $scope.transcriptArea.interaction.live.microObjects.activeClass = '';
+                } else {
+                    $scope.transcriptArea.interaction.live.microObjects.active = true;
+                    $scope.transcriptArea.interaction.live.microObjects.activeClass = 'active bg-danger';
+                }
+                $scope.transcriptArea.ace.currentTag = TranscriptService.getParentTag($scope.functions.getLeftOfCursor(), $scope.functions.getLeftOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+            };
+            /* Live Management ------------------------------------------------------------------------------------------ */
+
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Complex Entry Management */
@@ -854,7 +877,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Documentation Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.functions.defineDocumentation = function(element) {
+            $scope.functions.defineDocumentation = function (element) {
                 $scope.transcriptArea.interaction.doc.title = element;
                 $scope.transcriptArea.interaction.doc.element = element;
                 if ($scope.teiInfo[element] !== undefined && $scope.teiInfo[element].doc !== undefined) {
@@ -928,7 +951,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
              * @param file
              * @param resetBreadcrumb boolean
              */
-            $scope.functions.loadHelpData = function(file, resetBreadcrumb) {
+            $scope.functions.loadHelpData = function (file, resetBreadcrumb) {
                 return ContentService.getContent(file).then(function (data) {
                     let doc = document.createElement('div');
                     doc.innerHTML = data.content;
@@ -956,7 +979,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
              * @param content
              * @param reset
              */
-            $scope.functions.breadcrumbManagement = function(content, reset) {
+            $scope.functions.breadcrumbManagement = function (content, reset) {
                 let elementToBreadcrumb = {
                     title: content.title,
                     id: content.id
@@ -1018,7 +1041,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* Bibliography Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcriptArea.interaction.bibliography.action = function () {
-                if($scope.transcriptArea.interaction.bibliography.addForm.type !== null) {
+                if ($scope.transcriptArea.interaction.bibliography.addForm.type !== null) {
                     $scope.transcriptArea.interaction.bibliography.addForm.type = null;
                 } else {
                     $scope.transcriptArea.interaction.status = 'bibliography';
@@ -1108,6 +1131,75 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* Bibliography Management ---------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
+            /* Historical Notes Management */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.historicalNotes.action = function () {
+                $scope.transcriptArea.interaction.status = 'historicalNotes';
+            };
+
+            $scope.transcriptArea.interaction.historicalNotes.addForm.action = function (id) {
+                // If an id is defined > this is an edition of existent element
+                $scope.transcriptArea.interaction.historicalNotes.addForm.id = null;
+                if (id !== undefined && id !== null) {
+                    let elementToEdit = $scope.transcriptArea.interaction.historicalNotes.elements.filter(function (element) {
+                        return (element.id === id);
+                    });
+                    if (elementToEdit !== null) {
+                        elementToEdit = elementToEdit[0];
+                    }
+
+                    $scope.transcriptArea.interaction.historicalNotes.addForm.id = id;
+                    $scope.transcriptArea.interaction.historicalNotes.addForm.content = elementToEdit.content;
+                }
+                $scope.transcriptArea.interaction.status = 'historicalNotesForm';
+            };
+
+            // This methods posts a new note
+            $scope.transcriptArea.interaction.historicalNotes.addForm.submit.action = function (method, id) {
+                $scope.transcriptArea.interaction.historicalNotes.addForm.submit.loading = true;
+                let elementToEdit = $scope.transcriptArea.interaction.historicalNotes.elements.filter(function (element) {
+                    return (element.id === id);
+                });
+                if (elementToEdit !== null) {
+                    elementToEdit = elementToEdit[0];
+                }
+
+                let noteData = $scope.transcriptArea.interaction.historicalNotes.addForm.form;
+                if (method === 'post') {
+                    noteData.transcript = $scope.transcript.id;
+                    noteData.updateComment = 'Creation of the note';
+
+                    return NoteService.postNote(noteData)
+                        .then(function (response) {
+                            return NoteService.getNotesByTranscript($scope.transcript.id).then(function (data) {
+                                $scope.transcriptArea.interaction.historicalNotes.elements = data;
+                                $scope.transcriptArea.interaction.historicalNotes.addForm.submit.loading = false;
+                                $scope.transcriptArea.interaction.status = 'historicalNotes';
+                            });
+                        });
+                } else if (method === 'patch') {
+                    let idToPatch = noteData.id;
+                    delete noteData._links;
+                    delete noteData.createDate;
+                    delete noteData.createUser;
+                    delete noteData.id;
+                    delete noteData.updateDate;
+                    delete noteData.updateUser;
+                    noteData.updateComment = "Updating note";
+
+                    return NoteService.patchNote(idToPatch, noteData)
+                        .then(function (response) {
+                            return NoteService.getNotesByTranscript($scope.transcript.id).then(function (data) {
+                                $scope.transcriptArea.interaction.historicalNotes.elements = data;
+                                $scope.transcriptArea.interaction.historicalNotes.addForm.submit.loading = false;
+                                $scope.transcriptArea.interaction.status = 'historicalNotes';
+                            });
+                        });
+                }
+            };
+            /* Bibliography Management ---------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
             /* Taxonomy Search Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcriptArea.interaction.taxonomy.action = function () {
@@ -1154,7 +1246,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     }
                 });
 
-                $scope.functions.refresh = function() {
+                $scope.functions.refresh = function () {
                     let toEntities = $scope.transcriptArea.interaction.taxonomy.entities;
                     let toForm = {name: $scope.transcriptArea.interaction.taxonomy.string};
                     $scope.transcriptArea.interaction.taxonomy.result = SearchService.search(toEntities, toForm);
@@ -1170,7 +1262,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 console.log($scope.transcriptArea.interaction.alertZone.alerts);
             });
 
-            $scope.functions.updateAlerts = function() {
+            $scope.functions.updateAlerts = function () {
                 for (let kLine in $scope.transcriptArea.ace.lines) {
                     kLine = parseInt(kLine);
                     let line = $scope.transcriptArea.ace.lines[kLine];
@@ -1360,8 +1452,16 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 $scope.page.fullscreen.status = true;
             };
 
+            // Doc here > https://stackoverflow.com/questions/7836204/chrome-fullscreen-api#7934009
             $scope.page.fullscreen.close = function () {
-                document.exitFullscreen();
+                if (document.exitFullscreen)
+                    document.exitFullscreen();
+                else if (document.msExitFullscreen)
+                    document.msExitFullscreen();
+                else if (document.mozCancelFullScreen)
+                    document.mozCancelFullScreen();
+                else if (document.webkitExitFullscreen)
+                    document.webkitExitFullscreen();
                 $scope.page.fullscreen.status = false;
             };
             /* Full screen Management ----------------------------------------------------------------------------------- */

@@ -68,9 +68,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
              *
              * @param encodeLiveRender string
              * @param buttons array
+             * @param microObject
              * @returns string
              */
-            encodeHTML: function(encodeLiveRender, buttons) {
+            encodeHTML: function(encodeLiveRender, buttons, microObject) {
                 let TS = this;
                 let matchList = encodeLiveRender.match(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
                 $.each(matchList, (function(index, value) {
@@ -80,25 +81,25 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         /* End tags need special regex*/
                         valueTagName = value.replace(/<\/([a-zA-Z]+).*>/g, '$1');
                         if(buttons[valueTagName] !== undefined) {
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "endTag"));
+                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "endTag", microObject));
                         }
                     } else if(value[value.length-2] === "/") {
                         /* Match with single tag */
                         if(buttons[valueTagName] !== undefined) {
                             // console.log(valueTagName);
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "singleTag"));
+                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "singleTag", microObject));
                         }
                     } else if(value[value.length-2] !== "/") {
                         /* Match with start tag, escaping single tags */
                         if(buttons[valueTagName] !== undefined) {
-                            // console.log(valueTagName);
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "startTag"));
+                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "startTag", microObject));
                         }
                     }
                 }));
                 return encodeLiveRender;
             },
-            tagConstruction: function(tag, type) {
+            tagConstruction: function(tag, type, microObject) {
+                console.log(microObject);
                 let attributesHtml = "";
                 if(tag.html.attributes !== undefined) {
                     for(let attribute in tag.html.attributes) {
@@ -106,13 +107,68 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                 }
 
-                if(type === "endTag") {
-                    return "</"+tag.html.name+">";
-                } else if(type === "startTag") {
-                    return "<"+tag.html.name+attributesHtml+">";
-                } else if(type === "singleTag") {
-                    return "<"+tag.html.name+attributesHtml+" />";
+                let construction = '',
+                    bgColor = '';
+                if(tag.btn.level === 1) {
+                    bgColor = 'text-info';
+                } else if(tag.btn.level === 2) {
+                    bgColor = 'text-secondary';
                 }
+
+                /* Icon content ------------------------------------------------------------------------------------- */
+                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "before" && (type === "startTag" || type === "singleTag")) {
+                    construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                }
+                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "append" && type === "endTag") {
+                    construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                }
+                /* Icon content ------------------------------------------------------------------------------------- */
+
+                if(tag.html.marker === true && type === "endTag") {
+                    if(tag.btn.id === 'choice') {
+                        construction += ']';
+                    } else if(tag.btn.id === '') {
+
+                    }
+                }
+
+                /* Tag content -------------------------------------------------------------------------------------- */
+                if(type === "endTag") {
+                    construction += "</"+tag.html.name+">";
+                } else if(type === "startTag") {
+                    construction +=  "<"+tag.html.name+attributesHtml+">";
+                } else if(type === "singleTag") {
+                    if(tag.html.unique === true) {
+                        construction +=  "<"+tag.html.name+attributesHtml+" />";
+                    } else {
+                        construction +=  "<"+tag.html.name+attributesHtml+">";
+                        if(microObject === true && tag.html.icon !== undefined && (tag.html.icon.position === "prepend" || tag.html.icon.position === "append")) {
+                            construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                        }
+                        construction += "</"+tag.html.name+">";
+                    }
+                }
+                /* Tag content -------------------------------------------------------------------------------------- */
+
+                if(tag.html.marker === true && type === "startTag") {
+                    if(tag.btn.id === 'choice') {
+                        construction += '[';
+                    } else if(tag.btn.id === '') {
+
+                    }
+                }
+
+                /* Icon content ------------------------------------------------------------------------------------- */
+                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "prepend" && type === "startTag") {
+                    construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                }
+                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "after" && (type === "endTag" || type === "singleTag")) {
+                    construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                }
+                /* Icon content ------------------------------------------------------------------------------------- */
+
+                //console.log(construction);
+                return construction;
             },
             loadFile: function(file) {
                 return 'App/Transcript/tpl/'+file+'.html';

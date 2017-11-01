@@ -116,6 +116,7 @@ angular.module('transcriptApp', [
         'transcript.service.geonames',
         'transcript.service.image',
         'transcript.service.log',
+        'transcript.service.note',
         'transcript.service.resource',
         'transcript.service.search',
         'transcript.service.taxonomy',
