@@ -198,6 +198,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 toolbar: {
                     tags: $scope.config.tags,
                     groups: $scope.config.groups,
+                    level2: [],
                     attributes: []
                 }
             };
@@ -240,6 +241,24 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 $scope.transcriptArea.ace.area = "";
             }
             /* $scope & variables --------------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
+            /* Computing Level2 */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            for(let iG in $scope.transcriptArea.toolbar.groups) {
+                if($scope.transcriptArea.toolbar.groups[iG].order !== false) {
+                    $scope.transcriptArea.toolbar.groups[iG].lType = "group";
+                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[iG]);
+                }
+            }
+            for(let iT in $scope.transcriptArea.toolbar.tags) {
+                if($scope.transcriptArea.toolbar.tags[iT].order !== undefined && $scope.transcriptArea.toolbar.tags[iT].order !== false) {
+                    $scope.transcriptArea.toolbar.tags[iT].lType = "btn";
+                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[iT]);
+                }
+            }
+            console.log($scope.transcriptArea.toolbar.level2);
+            /* Computing Level2 ----------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Updating Transcript Log */

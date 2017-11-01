@@ -2,9 +2,9 @@
     <!-- Tags management Level 1 -->
     <div class="clearfix level level-1 bg-secondary">
         <div class="btn-group btn-group-sm" role="group">
-            <button data-ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" data-ng-click="transcriptArea.ace.addTag(button.btn.id)" data-ng-if="button.btn.level == 1" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false">
-                <i class="{{ button.btn.icon }}" data-ng-if="button.btn.icon != ''"></i>
-                <span data-ng-if="(button.btn.icon != '' && button.btn.label_forced == true) || button.btn.icon == ''"><span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span></span>
+            <button ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" ng-click="transcriptArea.ace.addTag(button.btn.id)" ng-if="button.btn.level == 1" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false">
+                <i class="{{ button.btn.icon }}" ng-if="button.btn.icon != ''"></i>
+                <span ng-if="(button.btn.icon != '' && button.btn.label_forced == true) || button.btn.icon == ''"><span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span></span>
                 <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
             </button>
         </div>
@@ -12,21 +12,20 @@
 
     <!-- Tags management Level 2 -->
     <div class="clearfix level level-2">
-        <div data-ng-repeat="group in transcriptArea.toolbar.groups" style="display: inline-flex;">
-            <!-- Demander cette adaptation à Pauline > https://stackoverflow.com/questions/18023493/bootstrap-3-dropdown-sub-menu-missing#18024991 -->
-            <div class="btn-group" role="group" data-ng-if="group.type == 'virtual' && group.parent == false">
-                <button type="button" class="btn btn-sm dropdown-toggle" id="dropdown-{{ group.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    <i class="{{ group.icon }}"></i> {{ group.name }}
+        <div style="display: inline-flex;" ng-repeat="item in transcriptArea.toolbar.level2 | orderBy:'order'">
+            <div class="btn-group" role="group" ng-if="item.lType == 'group' && item.type == 'virtual' && item.parent == false">
+                <button type="button" class="btn btn-sm dropdown-toggle" id="dropdown-{{ item.id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="{{ item.icon }}"></i> {{ item.name }}
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdown-{{ group.id }}">
-                    <button class="dropdown-item" data-ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" data-ng-repeat="button in transcriptArea.toolbar.tags" data-ng-if="button.btn.btn_group == group.id" ng-disabled="button.btn.enabled == false">
+                <div class="dropdown-menu" aria-labelledby="dropdown-{{ item.id }}">
+                    <button class="dropdown-item" ng-click="transcriptArea.ace.addTag(button.btn.id)" title="{{ button.btn.title }}" ng-repeat="button in transcriptArea.toolbar.tags" ng-if="button.btn.btn_group == group.id" ng-disabled="button.btn.enabled == false">
                         <i class="{{ button.btn.icon }}"></i> <span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span> <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
                     </button>
                 </div>
             </div>
-            <div class="btn-group" data-ng-if="group.type == 'real' && group.parent == false">
-                <button type="button" class="btn" data-ng-click="transcriptArea.ace.addTag(transcriptArea.toolbar.tags[group.id].btn.id)" title="{{ transcriptArea.toolbar.tags[group.id].btn.title }}" ng-disabled="transcriptArea.toolbar.tags[group.id].btn.enabled == false">
-                    <i class="{{ transcriptArea.toolbar.tags[group.id].btn.icon }}"></i> <span ng-if="transcriptArea.toolbar.tags[group.id].btn.label == false">{{ teiInfo[group.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="transcriptArea.toolbar.tags[group.id].btn.label != false">{{ transcriptArea.toolbar.tags[group.id].btn.label }}</span> <span ng-class="{'red-color': transcriptArea.toolbar.tags[group.id].btn.enabled == true}"><i class="fa fa-circle"></i></span>
+            <div class="btn-group" ng-if="item.lType == 'group' && item.type == 'real' && item.parent == false">
+                <button type="button" class="btn" ng-click="transcriptArea.ace.addTag(transcriptArea.toolbar.tags[item.id].btn.id)" title="{{ transcriptArea.toolbar.tags[item.id].btn.title }}" ng-disabled="transcriptArea.toolbar.tags[group.id].btn.enabled == false">
+                    <i class="{{ transcriptArea.toolbar.tags[item.id].btn.icon }}"></i> <span ng-if="transcriptArea.toolbar.tags[item.id].btn.label == false">{{ teiInfo[item.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="transcriptArea.toolbar.tags[item.id].btn.label != false">{{ transcriptArea.toolbar.tags[item.id].btn.label }}</span> <span ng-class="{'red-color': transcriptArea.toolbar.tags[item.id].btn.enabled == true}"><i class="fa fa-circle"></i></span>
                 </button>
                 <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span class="sr-only">Toggle Dropdown</span>
@@ -37,27 +36,27 @@
                     </button>
                 </div>
             </div>
+            <button class="btn btn-sm" ng-click="transcriptArea.ace.addTag(item.btn.id)" ng-if="item.lType == 'btn' && item.btn.level == 2 && item.btn.allow_root == true && item.btn.btn_group == false && item.btn.btn_is_group == false" title="{{ item.btn.title }}" ng-disabled="button.btn.enabled == false">
+                <span ng-if="item.btn.icon != '' && item.btn.label_forced == false"><i class="{{ item.btn.icon }}"></i></span>
+                <span ng-if="item.btn.icon != '' && item.btn.label_forced == true"><i class="{{ item.btn.icon }}"></i> <span ng-if="item.btn.label == false">{{ teiInfo[item.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="item.btn.label != false">{{ item.btn.label }}</span></span>
+                <span ng-if="item.btn.icon == ''">{{ item.btn.label }}</span>
+                <span ng-class="{'red-color': item.btn.enabled == true}"><i class="fa fa-circle"></i></span>
+            </button>
         </div>
-        <button data-ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" data-ng-click="transcriptArea.ace.addTag(button.btn.id)" data-ng-if="button.btn.level == 2 && button.btn.allow_root == true && button.btn.btn_group == false && button.btn.btn_is_group == false" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled == false">
-            <span data-ng-if="button.btn.icon != '' && button.btn.label_forced == false"><i class="{{ button.btn.icon }}"></i></span>
-            <span data-ng-if="button.btn.icon != '' && button.btn.label_forced == true"><i class="{{ button.btn.icon }}"></i> <span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span></span>
-            <span data-ng-if="button.btn.icon == ''">{{ button.btn.label }}</span>
-            <span ng-class="{'red-color': button.btn.enabled == true}"><i class="fa fa-circle"></i></span>
-        </button>
     </div>
 
     <!-- Attributes management Level 3-->
     <div class="clearfix level level-3">
         <div class="btn-group" role="group">
-            <div class="btn-group" role="group" data-ng-repeat="attribute in transcriptArea.toolbar.attributes" data-ng-if="attribute.values.length > 0">
+            <div class="btn-group" role="group" ng-repeat="attribute in transcriptArea.toolbar.attributes" ng-if="attribute.values.length > 0">
                 <button id="dropdown-attr-{{ attribute.id }}" type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true">
                     {{ attribute.id | ucfirst }}
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdown-attr-{{ attribute.id }}">
-                    <button data-ng-repeat="value in attribute.values" class="dropdown-item" data-ng-click="transcriptArea.ace.addAttribute(attribute, value)" ><span ng-if="value.label != '' && value.label != null">{{ value.label | ucfirst }}</span><span ng-if="value.label == '' || value.label == null">{{ value.value | ucfirst }}</span></button>
+                    <button ng-repeat="value in attribute.values" class="dropdown-item" ng-click="transcriptArea.ace.addAttribute(attribute, value)" ><span ng-if="value.label != '' && value.label != null">{{ value.label | ucfirst }}</span><span ng-if="value.label == '' || value.label == null">{{ value.value | ucfirst }}</span></button>
                 </div>
             </div>
         </div>
-        <button data-ng-repeat="attribute in transcriptArea.toolbar.attributes" class="btn btn-sm" data-ng-click="transcriptArea.ace.addAttribute(attribute, null)" data-ng-if="attribute.values.length == 0" data-toggle="tooltip" data-placement="bottom" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true">{{ attribute.id | ucfirst }}</button>
+        <button ng-repeat="attribute in transcriptArea.toolbar.attributes" class="btn btn-sm" ng-click="transcriptArea.ace.addAttribute(attribute, null)" ng-if="attribute.values.length == 0" data-toggle="tooltip" data-placement="bottom" title="{{ attribute.desc | ucFirstStrict }}" ng-disabled="attribute.alreadyUsed == true">{{ attribute.id | ucfirst }}</button>
     </div>
 </div>
