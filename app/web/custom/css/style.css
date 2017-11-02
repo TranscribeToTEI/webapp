@@ -1014,12 +1014,12 @@ ul.grid a{
 }
 /* @end */
 
+
+
 /* @group Transcription */
 #transcript-workarea {
 	padding-bottom: 60px;
 }
-
-
 
 /* @group Boutons/Icônes transcription */
 /* Boutons Plein écran/Fermer plein écran/Biblio */
@@ -1269,6 +1269,7 @@ ul.grid a{
 }
 #transcript-toolbar .dropdown-item{
 	background: #ededed!important;
+	padding-left: 0.5rem;
 }
 #transcript-toolbar .dropdown-menu li a{
 	padding-top: 0.075rem;
@@ -1279,6 +1280,9 @@ ul.grid a{
 #transcript-toolbar .dropdown-menu .dropdown-divider{
 	border-bottom: 1px dotted #0d5367;
 	height: 1px;
+}
+#transcript-toolbar .level-2 .show  .dropdown-toggle:focus{
+	border-color: #0d5367!important;
 }
 
 
@@ -1985,18 +1989,7 @@ i[class="fa fa-angle-right"]
 	background: #0d5367;
 	color: white!important;
 }
-.transcript-submit .alert-danger a[role=button]:hover i{
-	background: #bb1026!important;
-}
-.transcript-submit .alert-warning a[role=button]:hover i{
-	background: #e8631c!important;
-}
-.transcript-submit .alert-info a[role=button]:hover i{
-	background: #1d90cd!important;
-}
-.transcript-submit .alert-success a[role=button]:hover i{
-	background: #1b9543!important;
-}
+
 .transcript-submit .alert + .card-footer{
 	padding: 0!important;
 }
