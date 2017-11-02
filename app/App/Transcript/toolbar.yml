@@ -4,7 +4,7 @@ groups:
         id: "renderingDifficulties"
         name: "Lisibilité"
         icon: "fa fa-puzzle-piece"
-        parent: "physicalStructure"
+        parent: "choice"
         order: null
     microPhenomena:
         type: "real"
@@ -351,13 +351,14 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            group_children: ["renderingDifficulties"]
         caret:
             position: "prepend"
         html:
             name: "span"
             unique: false
             attributes:
-                class: "choice text-secondary"
+                class: "choice text-primary"
             marker: true
         xml:
             name: "choice"
@@ -665,6 +666,7 @@ tags:
             replicateOnEnter: false
             replicateOnCtrlEnter: false
         complex_entry: false
+    # Groupe renderingDifficulties
     damage:
         btn:
             id: "damage"
@@ -673,7 +675,7 @@ tags:
             label_forced: false
             icon: "fa fa-yelp"
             btn_class: ""
-            btn_group: "microPhenomena"
+            btn_group: "renderingDifficulties"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
@@ -700,7 +702,7 @@ tags:
             label_forced: false
             icon: "fa fa-star-half-o"
             btn_class: ""
-            btn_group: "microPhenomena"
+            btn_group: "renderingDifficulties"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
@@ -728,7 +730,7 @@ tags:
             label_forced: false
             icon: "fa fa-star-half"
             btn_class: ""
-            btn_group: "microPhenomena"
+            btn_group: "renderingDifficulties"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
@@ -755,7 +757,7 @@ tags:
             label_forced: false
             icon: "fa fa-square-o"
             btn_class: ""
-            btn_group: "microPhenomena"
+            btn_group: "renderingDifficulties"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false

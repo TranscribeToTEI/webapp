@@ -596,7 +596,7 @@ button{
 	.dropdown-menu
 	{
 		width: 100%;
-		margin-top: -0.025rem;
+		margin-top: -0.02rem;
 	}
 }
 .dropdown-menu a:hover
@@ -607,6 +607,59 @@ button{
 .nav-item .dropdown-menu
 {
 	width: 100%;
+}
+
+
+/* Dropsown Submenu */
+
+.dropdown-submenu {
+	position: relative;
+	padding: 0!important;
+}
+.dropdown-submenu > .dropdown-menu {
+	top: 0;
+	left: 100%;
+	margin-left: -1px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+	display: block;
+}
+#transcript-toolbar .dropdown-submenu > a{
+	background: #ededed;
+	padding: 2px 25px 2px 5px;
+	float: left;
+	width: 100%;
+	color: black!important;
+	position: relative;
+}
+.dropdown-submenu > a:after {
+	display: block;
+	content: " ";
+	float: right;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+	border-width: 5px 0 5px 5px;
+	border-left-color:black;
+	margin-right: -20px;
+	margin-top: 2px;
+}
+
+.dropdown-submenu:hover>a:after {
+	border-left-color: #fff;
+}
+
+.dropdown-submenu.pull-left {
+	float: none;
+}
+
+.dropdown-submenu.pull-left>.dropdown-menu {
+	left: -100%;
+	-webkit-border-radius: 6px 0 6px 6px;
+	-moz-border-radius: 6px 0 6px 6px;
+	border-radius: 6px 0 6px 6px;
 }
 /* @end */
 
@@ -1067,6 +1120,7 @@ ul.grid a{
 	border-right: 1px solid!important;
 }
 .other-tools .btn:first-child,
+#transcript-toolbar .btn:first-child,
 #transcript-content-heading .btn:first-child,
 #transcript-interaction-heading .btn:first-child{
 	border-left: none!important;
@@ -1081,9 +1135,8 @@ ul.grid a{
 	padding-left: 4px!important;
 	padding-right: 4px!important;
 }
-#transcript-toolbar  .btn-group:first-child > .btn:first-child{
-	border-left: none!important;
-}
+
+
 
 /*#transcript-toolbar .level-1  .btn {
 	border-color:  #016e82!important;
@@ -1208,8 +1261,9 @@ ul.grid a{
 	color: white!important;
 }
 
+#transcript-toolbar .level-2 .show .btn,
 #transcript-toolbar .level-2 .btn:hover {
-	background: #588096;
+	background: #588096!important;
 	color: white!important;
 	border-color: #588096!important;
 }
@@ -1243,18 +1297,20 @@ ul.grid a{
 /* Toolbar Dropdown menu */
 #transcript-toolbar .dropdown-menu{
 	background: #ededed!important;
-	font-size: 80%;
 	line-height: 0.9rem;
 	padding-bottom: 0;
 	padding-top: 0;
-	float: left;
+	font-size: 0.675rem;
+	/*	float: left;*/
 	width: auto;
-	-moz-box-shadow: 3px 3px 5px 0px #cfcfcf;
-	-webkit-box-shadow: 3px 3px 5px 0px #cfcfcf;
-	-o-box-shadow: 3px 3px 5px 0px #cfcfcf;
-	box-shadow: 3px 3px 5px 0px #cfcfcf;
+	-moz-box-shadow: 2px 2px 5px 0px #cfcfcf;
+	-webkit-box-shadow: 2px 2px 5px 0px #cfcfcf;
+	-o-box-shadow: 2px 2px 5px 0px #cfcfcf;
+	box-shadow: 2px 2px 5px 0px #cfcfcf;
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=135, Strength=5);
 }
+
+
 #transcript-toolbar .dropdown-toggle::after {
 	font-size: 1.075rem;
 	vertical-align: 0.05rem;
@@ -1265,21 +1321,28 @@ ul.grid a{
 	padding: 2px 5px 2px 5px;
 	float: left;
 	width: 100%;
+	color: black!important;
 	position: relative;
 }
 #transcript-toolbar .dropdown-item{
 	background: #ededed!important;
 	padding-left: 0.5rem;
+	color: black!important;
 }
-#transcript-toolbar .dropdown-menu li a{
+#transcript-toolbar .dropdown-item a{
+	color: black!important;
+}
+/*#transcript-toolbar .dropdown-menu li a{
 	padding-top: 0.075rem;
 	padding-right: 0.5rem;
 	padding-bottom: 0.075rem;
 	padding-left: 0rem;
-}
+}*/
 #transcript-toolbar .dropdown-menu .dropdown-divider{
 	border-bottom: 1px dotted #0d5367;
 	height: 1px;
+	margin-top: 0.2rem;
+	margin-bottom: 0.3rem;
 }
 #transcript-toolbar .level-2 .show  .dropdown-toggle:focus{
 	border-color: #0d5367!important;
@@ -1291,14 +1354,14 @@ ul.grid a{
 }
 #transcript-toolbar .dropdown-menu .dropdown-item:hover,
 #transcript-toolbar .dropdown-menu li:hover,
-#transcript-toolbar .dropdown-menu li:hover a,
-#transcript-toolbar .dropdown-menu li:hover a:hover{
+#transcript-toolbar .dropdown-menu li:hover > a,
+#transcript-toolbar .dropdown-menu li a:hover{
 	background: #8Faebd!important;
 	color: white!important;
 }
-#transcript-toolbar .dropdown-menu li i{
+/*#transcript-toolbar .dropdown-menu li i{
 	padding-right: 0.2rem;
-}
+}*/
 #transcript-toolbar .fa-circle{
 	font-size: 50%;
 	vertical-align: 0.05rem;
@@ -2045,7 +2108,7 @@ i[class="fa fa-angle-right"]
 	font-size: 0.8rem;
 }
 .tab-content ul li{
-	padding: 0.1rem 1.25rem 0.1rem 1.25rem;
+	padding: 0.15rem 1.25rem 0.15rem 1.25rem;
 	line-height: 0.9rem;
 }
 .tab-content ul li:hover{

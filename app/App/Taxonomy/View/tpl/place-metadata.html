@@ -28,11 +28,11 @@
                 <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
                     <img src="./web/images/default-testator.png" class="img-fluid" />
                 </a>
-                <div class="col-md-10">
-                    <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })">{{ testator.name }}</a>
-                    <p ng-if="testator.placeOfDeath != null">Originaire de {{ entity.name }}</p>
-                    <p ng-if="testator.placeOfDeath == null">Décédé à {{ entity.name }}</p>
-                </div>
+            </div>
+            <div class="col-md-10">
+                <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })">{{ testator.name }}</a>
+                <p ng-if="testator.placeOfDeath != null">Originaire de {{ entity.name }}</p>
+                <p ng-if="testator.placeOfDeath == null">Décédé à {{ entity.name }}</p>
             </div>
         </div>
     </div>

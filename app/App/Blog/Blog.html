@@ -9,7 +9,7 @@
 <main class="container blog" role="container">
     <h1 class="page-heading">Actualités</h1>
     <div class="row" data-ng-repeat="article in contents">
-        <div class="col-md-3 mb-3"><img src="" class="img-fluid"/></div>
+        <div class="col-md-3 mb-3"><img src="{{ article.illustration | imageRender }}" ng-if="article.illustration != null" class="img-fluid"/></div>
         <div class="col-lg-7 col-md-9">
             <h2><a ui-sref="transcript.app.content({ id: article.id })">{{ article.title }}</a></h2>
             <div data-ng-bind-html="article.abstract | trustAsHtml"></div>

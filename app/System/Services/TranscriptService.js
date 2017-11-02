@@ -112,7 +112,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 if(tag.btn.level === 1) {
                     bgColor = 'text-info';
                 } else if(tag.btn.level === 2) {
-                    bgColor = 'text-secondary';
+                    bgColor = 'text-primary';
                 }
 
                 /* Icon content ------------------------------------------------------------------------------------- */
