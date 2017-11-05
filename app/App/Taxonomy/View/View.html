@@ -31,6 +31,9 @@
                 <h4 ng-if="entity.dataType == 'testators'" class="mb-1"><strong>Biographie</strong></h4>
                 {{ entity.description }}
             </div>
+
+            <hr />
+            <div ui-view="comment"></div>
         </div>
         <div class="col-sm-4 pl-0 pr-0 pb-2 bg-white" ng-include="'App/Taxonomy/tpl/entities.html'"></div>
     </div>

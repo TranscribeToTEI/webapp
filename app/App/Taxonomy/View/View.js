@@ -8,6 +8,10 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                 "page" : {
                     templateUrl: 'App/Taxonomy/View/View.html',
                     controller: 'AppTaxonomyViewCtrl'
+                },
+                "comment@transcript.app.taxonomy.view" : {
+                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    controller: 'SystemCommentCtrl'
                 }
             },
             url: '/{type}/{id}',
@@ -24,6 +28,9 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                 },
                 entities: function(TaxonomyService, $transition$) {
                     return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                },
+                thread: function(CommentService, $transition$) {
+                    return CommentService.getThread($transition$.params().type+'-'+$transition$.params().id);
                 }
             }
         })
