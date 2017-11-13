@@ -1,10 +1,10 @@
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Localisation</dt>
     <dd class="col-sm-8">
-        <span data-ng-if="entity.cities > 0" title="Ville">{{ entity.cities[0].name }}</span>
-        <span data-ng-if="entity.frenchDepartements.length > 0" title="Département"><span data-ng-if="entity.cities.length > 0">, </span>{{ entity.frenchDepartements[0].name }}</span>
-        <span data-ng-if="entity.frenchRegions > 0" title="Région"><span data-ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0">, </span>{{ entity.frenchRegions[0].name }}</span>
-        <span data-ng-if="entity.countries > 0" title="Pays"><span data-ng-if="entity.cities.length > 0 || entity.frenchDepartement.length > 0 || entity.frenchRegions.length > 0">, </span>{{ entity.countries[0].name }}</span>
+        <span ng-if="entity.cities > 0" title="Ville">{{ entity.cities[0].name }}</span>
+        <span ng-if="entity.frenchDepartements.length > 0" title="Département"><span ng-if="entity.cities.length > 0">, </span>{{ entity.frenchDepartements[0].name }}</span>
+        <span ng-if="entity.frenchRegions > 0" title="Région"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0">, </span>{{ entity.frenchRegions[0].name }}</span>
+        <span ng-if="entity.countries > 0" title="Pays"><span ng-if="entity.cities.length > 0 || entity.frenchDepartement.length > 0 || entity.frenchRegions.length > 0">, </span>{{ entity.countries[0].name }}</span>
     </dd>
 
     <dt class="col-sm-4">Identifiant Geonames</dt>
@@ -23,7 +23,7 @@
 <div class="row mt-5">
     <div class="col-md-12 ml-2">
         <h4 class="mb-2"><strong>Testateurs en lien avec ce lieu</strong></h4>
-        <div class="row mt-4" data-ng-repeat="testator in entity._embedded.testators">
+        <div class="row mt-4" ng-repeat="testator in entity._embedded.testators">
             <div class="col-md-1 pr-0">
                 <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
                     <img src="./web/images/default-testator.png" class="img-fluid" />

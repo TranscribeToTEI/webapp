@@ -38,7 +38,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         })
     }])
 
-    .controller('AppEditionCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'entity', 'config', 'resource', function($rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, entity, config, resource) {
+    .controller('AppEditionCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', function($rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource) {
         $scope.entity = entity; console.log($scope.entity);
         $scope.resource = resource;
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
@@ -100,9 +100,24 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.admin.status.action = function(state) {
             $scope.admin.status.loading = true;
 
-            return TranscriptService.patchTranscript({status: state, updateComment: "Changing status to "+state}, $scope.resource.transcript.id).then(function(data) {
-                $scope.resource.transcript.status = data.status;
+            return TranscriptService.patchTranscript({status: state, updateComment: "Changing status to "+state}, $scope.resource.transcript.id)
+            .then(function(response) {
                 $scope.admin.status.loading = false;
+                if(response.status === 200) {
+                    $scope.resource.transcript.status = response.data.status;
+                    flash.success = "Le status de la transcription a bien été mis à jour";
+                } else if(response.status === 400) {
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
+                            }
+                        }
+                    }
+                    flash.error += "</ul>";
+                    console.log(response);
+                }
             });
         };
         /* -- Admin management -------------------------------------------------------------------------------------- */

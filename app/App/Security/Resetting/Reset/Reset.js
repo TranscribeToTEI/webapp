@@ -16,7 +16,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
                 label: 'Mot de passe oublié'
             },
             tfMetaTags: {
-                title: 'Réinitialisation',
+                title: 'Réinitialisation | Réinitialisation du mot de passe',
             }
         })
     }])
@@ -29,7 +29,8 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
             }
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         $scope.submit.action = function() {
@@ -38,17 +39,20 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
             if($scope.form.password.plain === $scope.form.password.confirmation) {
                 reset();
             } else {
-                flash.error = $sce.trustAdHtml("<ul><li>Les mots de passe doivent être identiques !</li></ul>");
+                flash.error = "Les mots de passe doivent être identiques !";
             }
 
             function reset() {
                 return UserService.sendReset($transition$.params().token, $scope.form.password.plain,$scope.form.password.confirmation).
                 then(function(data) {
                     $scope.submit.loading = false;
-
+                    $scope.submit.success = true;
+                    flash.success = "Votre mot de passe a bien été réinitialisé.";
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
                     console.log(response);
+                    flash.error = response;
+
                 });
             }
         };

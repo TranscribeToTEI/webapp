@@ -16,7 +16,9 @@ angular.module('transcript.app.user.edit', ['ui.router'])
                 label: 'Modification du profil'
             },
             tfMetaTags: {
-                title: 'Modification du profil',
+                title: function(userEdit) {
+                    return 'Modification | '+ userEdit.name +' | Profil utilisateur';
+                },
             },
             resolve: {
                 userEdit: function(UserService, $transition$) {
@@ -38,7 +40,8 @@ angular.module('transcript.app.user.edit', ['ui.router'])
             biography: $rootScope.user.biography
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Submit data */
@@ -46,23 +49,24 @@ angular.module('transcript.app.user.edit', ['ui.router'])
             $scope.submit.loading = true;
             $http.patch($rootScope.api+"/users/"+$rootScope.user.id, $scope.form)
             .then(function (response) {
+                $scope.submit.loading = false;
                 if(response.status === 200) {
+                    $scope.submit.success = true;
+                    flash.success = "Votre profil a bien été modifié. Vous allez être redirigé dans quelques instants ...";
                     $state.go('transcript.app.user.profile', {id: userEdit.id});
-                }
-            }, function errorCallback(response) {
-                console.log(response);
-                if(response.data.code === 400) {
+                } else if(response.data.code === 400) {
                     flash.error = "<ul>";
-                    for(var field in response.data.errors.children) {
-                        for(var error in response.data.errors.children[field]) {
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
                             if(error === "errors") {
                                 flash.error += "<li>"+field+" : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
                     }
                     flash.error += "</ul>";
-                    flash.error = $sce.trustAsHtml(flash.error);
                 }
+            }, function errorCallback(response) {
+                console.log(response);
                 $scope.submit.loading = false;
             });
         };

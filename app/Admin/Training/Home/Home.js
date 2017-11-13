@@ -17,7 +17,7 @@ angular.module('transcript.admin.training.home', ['ui.router'])
                     label: 'Entrainement'
                 },
                 tfMetaTags: {
-                    title: 'Accueil',
+                    title: 'Accueil | Entrainement | Administration ',
                 },
                 resolve: {
                     trainingContents: function(TrainingContentService) {

@@ -16,7 +16,9 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                 label: 'Modification des préférences'
             },
             tfMetaTags: {
-                title: 'Modification des préférences',
+                title: function(userEdit) {
+                    return 'Préférences | '+ userEdit.name +' | Profil utilisateur';
+                },
             },
             resolve: {
                 userPreferences: function(UserPreferenceService, $transition$) {
@@ -37,10 +39,12 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         $scope.form = {
             transcriptionDeskPosition: $scope.userPreferences.transcriptionDeskPosition,
             smartTEI: $scope.userPreferences.smartTEI,
-            showComplexEntry: $scope.userPreferences.showComplexEntry
+            showComplexEntry: $scope.userPreferences.showComplexEntry,
+            creditActions: $scope.userPreferences.creditActions
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Submit data */
@@ -51,23 +55,25 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                 $scope.form, $scope.iUser.id
             ).then(function (response) {
                 console.log(response);
-                $rootScope.user._embedded.preferences = response;
-                flash.success = $sce.trustAsHtml("<strong>Vos préférences ont bien été modifiées</strong>");
-                $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
-            }, function errorCallback(response) {
-                console.log(response);
-                if(response.data.code === 400) {
+                $scope.submit.loading = false;
+                if(response.status === 200) {
+                    $rootScope.user._embedded.preferences = response.data;
+                    $scope.submit.success = true;
+                    flash.success = "Vous allez être redirigé dans quelques instants ...";
+                    $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
+                } else if(response.data.code === 400) {
                     flash.error = '<ul>';
-                    for(var field in response.data.errors.children) {
-                        for(var error in response.data.errors.children[field]) {
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
                             if(error === "errors") {
                                 flash.error += "<li>"+field+" : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
                     }
                     flash.error += '</ul>';
-                    flash.error = $sce.trustAsHtml(flash.error);
                 }
+            }, function errorCallback(response) {
+                console.log(response);
                 $scope.submit.loading = false;
             });
         };

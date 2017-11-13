@@ -1,15 +1,15 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
     <div class="alert alert-info" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-        Attention, pendant votre contribution, les autres utilisateurs ne peuvent pas modifier cette transcription.<br/>Veillez à sauvegarder votre travail (<strong>régulièrement</strong>) et à quitter l'interface lorsque vous avez fini.
+        Attention, pendant votre contribution, les autres utilisateurs ne peuvent pas modifier cette transcription.<br/>Veillez à sauvegarder votre travail (<strong>régulièrement</strong>) et à fermer la page lorsque vous avez fini.
     </div>
 </div>
 

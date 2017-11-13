@@ -10,6 +10,6 @@
                 <div class="cote"> Cote aux {{ entity.will.hostingOrganization | organisationName }} {{ entity.will.callNumber }}, minute du {{ entity.will.minuteDate }}</div>
             </div>
         </div>
-        <div class="col-md-12 pr-0 text-right align-self-end"><span class="badge badge-secondary" title="Nombre de ressources à transcrire">{{ entity.resources.length }}</span></div>
+        <div class="col-md-12 pr-0 text-right align-self-end"><span class="badge badge-secondary" title="Nombre de ressources à transcrire">{{ entity.resources.length }} page<span ng-if="entity.resources.length > 1">s</span></span></div>
     </li>
 </ul>

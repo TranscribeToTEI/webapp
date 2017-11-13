@@ -24,6 +24,6 @@ angular.module('transcript.admin', ['ui.router'])
     }])
 
     .controller('AdminCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, user, appPreference, tfMetaTags) {
-        tfMetaTags.setTitleSuffix(' | Administration '+tfMetaTags.getTitleSuffix());
+        tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;

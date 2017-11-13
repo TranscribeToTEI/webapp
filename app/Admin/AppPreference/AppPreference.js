@@ -17,7 +17,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
                     label: 'Préférences système'
                 },
                 tfMetaTags: {
-                    title: 'Préférence système',
+                    title: 'Préférence système | Administration',
                 }
             })
     }])
@@ -27,10 +27,24 @@ angular.module('transcript.admin.preference', ['ui.router'])
             loading: false,
             success: false
         };
+        $scope.options = {
+            language: 'fr',
+            allowedContent: true,
+            entities: false,
+            toolbar: [
+                ['Source','NewPage','Print','Templates','-','Find','Replace','Scayt','RemoveFormat','-','Undo','Redo','-','Maximize','ShowBlocks'],
+                ['Bold','Italic','Underline','StrikeThrough','Strike','Subscript','Superscript','-','NumberedList','BulletedList','Outdent','Indent','Blockquote','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Link','Unlink','Anchor'],
+                ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','InsertPre'],
+                ['Styles','Format','Font','FontSize','-','TextColor','BGColor']
+            ]
+        };
+
         let id = $rootScope.preferences.id;
         $scope.preferences = $rootScope.preferences;
         delete $scope.preferences.id;
         delete $scope.preferences._links;
+        delete $scope.preferences.updateDate;
+        delete $scope.preferences.updateUser;
 
         $scope.submit.action = function() {
             $scope.submit.loading = true;
@@ -40,14 +54,14 @@ angular.module('transcript.admin.preference', ['ui.router'])
                 if($scope.preferences.enableContact === null) {$scope.preferences.enableContact = false;}
 
                 return AppService.patchPreference(id, $scope.preferences).
-                then(function(data) {
-                    $rootScope.preferences = data;
-                    $scope.submit.loading = false;
-                    $scope.submit.success = true;
-                    $state.go('transcript.admin.home');
-                }, function errorCallback(response) {
-                    $scope.submit.loading = false;
-                    if(response.data.code === 400) {
+                then(function(response) {
+                    if(response.status === 200) {
+                        $rootScope.preferences = response.data;
+                        $scope.submit.loading = false;
+                        $scope.submit.success = true;
+                        flash.success = "Vous allez être redirigé dans quelques instants ...";
+                        $state.go('transcript.admin.home');
+                    } else if(response.status === 400) {
                         flash.error = "<ul>";
                         for(let field of response.data.errors.children) {
                             for(let error of field) {
@@ -57,8 +71,9 @@ angular.module('transcript.admin.preference', ['ui.router'])
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
+                }, function errorCallback(response) {
+                    $scope.submit.loading = false;
                     console.log(response);
                 });
             }

@@ -16,7 +16,7 @@ angular.module('transcript.admin.taxonomy.access', ['ui.router'])
                 label: 'Accès'
             },
             tfMetaTags: {
-                title: 'Accès',
+                title: 'Accès | Notices d\'autorité | Administration',
             },
             resolve: {
                 accesses: function(AccessService) {

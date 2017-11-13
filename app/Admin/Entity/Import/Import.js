@@ -16,7 +16,7 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
                 label: 'Importation'
             },
             tfMetaTags: {
-                title: 'Importation',
+                title: 'Importation | Entités | Administration',
             },
             resolve: {
                 testators: function(TaxonomyService) {
@@ -35,7 +35,8 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
     .controller('AdminEntityImportCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'testators', 'places', 'militaryUnits', 'EntityService', 'TaxonomyService', 'flash', function($rootScope, $scope, $http, $sce, $state, $filter, testators, places, militaryUnits, EntityService, TaxonomyService, flash) {
         $scope.form = {
             submit: {
-                loading: false
+                loading: false,
+                success: false
             }
         };
         $scope.entity = {
@@ -81,12 +82,14 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
                     resource.images = resource.images.split(",");
                 }
 
-                return EntityService.postEntity($scope.entity).then(function(data) {
+                return EntityService.postEntity($scope.entity).then(function(response) {
+                    console.log(response);
                     $scope.form.submit.loading = false;
-                    $state.go('transcript.app.entity', {'id': data.id});
-                }, function errorCallback(response) {
-                    $scope.form.submit.loading = false;
-                    if(response.data.code === 400) {
+                    if(response.status === 200 || response.status === 201) {
+                        $scope.form.submit.success = true;
+                        flash.success = "Vous allez être redirigé dans quelques instants ...";
+                        $state.go('transcript.app.entity', {'id': data.id});
+                    } else if(response.data.code === 400) {
                         flash.error = "<ul>";
                         for(let field of response.data.errors.children) {
                             for(let error of field) {
@@ -96,8 +99,10 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
+
+                }, function errorCallback(response) {
+                    $scope.form.submit.loading = false;
                     console.log(response);
                 });
             }

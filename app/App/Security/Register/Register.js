@@ -22,7 +22,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityRegisterCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {
+    .controller('AppSecurityRegisterCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', function($rootScope, $scope, $http, $sce, $state, flash) {
         if($rootScope.user !== undefined && $rootScope.user !== null) {
             $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
         }
@@ -38,46 +38,42 @@ angular.module('transcript.app.security.register', ['ui.router'])
             errors: []
         };
         $scope.submit = {
-            isLoading: false
+            loading: false
         };
 
         /* Register data */
         $scope.submit.action = function() {
-            $scope.submit.isLoading = true;
-            if($scope.form.password.plain === $scope.form.password.confirmation) {
-                $scope.form.errors = [];
-                $http.post($rootScope.api+"/users",
-                    {
-                        'fos_user_registration_form' : {
-                            'name': $scope.form.name,
-                            'email': $scope.form.email,
-                            'plainPassword': {
-                                'first': $scope.form.password.plain,
-                                'second': $scope.form.password.confirmation
+            $scope.submit.loading = true;
+            $scope.form.errors = [];
+            $http.post($rootScope.api+"/users",
+                {
+                    'fos_user_registration_form' : {
+                        'name': $scope.form.name,
+                        'email': $scope.form.email,
+                        'plainPassword': {
+                            'first': $scope.form.password.plain,
+                            'second': $scope.form.password.confirmation
+                        }
+                    }
+                })
+                .then(function (response) {
+                    $scope.submit.loading = false;
+                    $scope.submit.success = true;
+                    flash.success = "Votre compte a bien été créé. Vous allez être redirigé dans quelques instants...";
+                    $state.go('transcript.app.security.check');
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.submit.loading = false;
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
-                    })
-                    .then(function (response) {
-                        if(response.status === 201) {
-                            $state.go('transcript.app.security.check');
-                        }
-                    }, function errorCallback(response) {
-                        console.log(response);
-                        if(response.data.code === 400) {
-                            for(var field in response.data.errors.children) {
-                                for(var error in response.data.errors.children[field]) {
-                                    if(error === "errors") {
-                                        $scope.form.errors.push({field: field, error: response.data.errors.children[field][error]});
-                                    }
-                                }
-                            }
-                        }
-                        $scope.submit.isLoading = false;
-                    });
-            } else {
-                $scope.form.errors.push('Password and confirmation are not the same');
-                $scope.submit.isLoading = false;
-            }
+                    }
+                    flash.error += "</ul>";
+                });
         };
     }])
 ;

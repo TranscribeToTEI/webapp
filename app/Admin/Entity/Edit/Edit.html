@@ -1,9 +1,9 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
     <div class="alert alert-info">
         <p>Déposez le dossier contenant les images de votre testament <br/>(dont le nom doit correspondre au numéro de numérisation du testament) dans le dossier <strong>web/toImport</strong> de l'API.</p>
@@ -26,7 +26,16 @@
                 <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-will.html'"></fieldset>
                 <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-resources.html'"></fieldset>
                 <div class="text-right">
-                    <button data-ng-click="submit.action()" class="btn btn-primary">Soumettre <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                    <button class="btn btn-sm" type="button"
+                            ng-disabled="!(!!entity.willNumber && !!entity.will.callNumber && !!entity.will.minuteDate && !!entity.will.minuteYear
+                             && !!entity.will.willWritingDate && !!entity.will.willWritingYear && !!entity.will.hostingOrganization && !!entity.will.identificationUser
+                              && !!entity.will.testator)"
+                            ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                            ng-click="submit.action()">
+                        <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
+                        <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                        <span ng-if="submit.success == true">Succès !</span>
+                    </button>
                 </div>
             </form>
         </div>

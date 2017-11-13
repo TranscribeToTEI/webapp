@@ -17,7 +17,7 @@ angular.module('transcript.service.app', ['ui.router'])
             patchPreference: function(id,data) {
                 return $http.patch($rootScope.api+"/app-preference/"+id, data).
                 then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;

@@ -16,7 +16,7 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
                 label: 'Liste des entités'
             },
             tfMetaTags: {
-                title: 'Liste des entités',
+                title: 'Liste | Entités | Administration',
             },
             resolve: {
                 entities: function(EntityService) {

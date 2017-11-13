@@ -16,7 +16,7 @@ angular.module('transcript.app.taxonomy.home', ['ui.router'])
                 label: 'Documenter'
             },
             tfMetaTags: {
-                title: 'Documenter',
+                title: 'Documenter | Notices d\'autorité',
             }
         })
     }])

@@ -29,7 +29,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
             postTaxonomyEntity: function(type, data) {
                 return $http.post($rootScope.api+"/"+type, data).
                 then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;
@@ -39,7 +39,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
             patchTaxonomyEntity: function(type, id, data) {
                 return $http.patch($rootScope.api+"/"+type+"/"+id, data).
                 then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;
@@ -49,7 +49,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
             removeTaxonomyEntity: function(type, id) {
                 return $http.delete($rootScope.api+"/"+type+"/"+id).
                 then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;
@@ -61,8 +61,13 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 switch(type) {
                     case 'testators':
                         let MDH = entity.memoireDesHommes.split(',');
-                        if(entity.memoireDesHommes.indexOf(',') !== -1) {
+                        if(entity.memoireDesHommes.indexOf(',') === -1) {
                             MDH = [entity.memoireDesHommes];
+                        }
+
+                        let updateComment = null;
+                        if(entity.updateComment !== null && entity.updateComment !== "") {
+                            updateComment = entity.updateComment;
                         }
 
                         form = {
@@ -84,7 +89,8 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                             militaryUnit: entity.militaryUnit.id,
                             rank: entity.rank,
                             description: entity.description,
-                            updateComment: entity.updateComment
+                            updateComment: updateComment,
+                            isOfficialVersion: false
                         };
 
                         if(entity.placeOfBirth !== null) {

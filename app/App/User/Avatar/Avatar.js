@@ -16,7 +16,9 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
                 label: 'Modification de l\'avatar'
             },
             tfMetaTags: {
-                title: 'Modification de l\'avatar',
+                title: function(userEdit) {
+                    return 'Avatar | '+ userEdit.name +' | Profil utilisateur';
+                },
             },
             resolve: {
                 userEdit: function(UserService, $transition$) {
@@ -37,7 +39,8 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
             picture: null
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Submit data */
@@ -50,6 +53,8 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
             }).then(function (response) {
                 console.log(response);
                 $scope.submit.loading = false;
+                $scope.submit.success = true;
+                flash.success = "Vous allez être redirigé dans quelques instants ...";
                 $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
             });
         };

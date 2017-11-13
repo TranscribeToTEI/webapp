@@ -40,7 +40,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     form
                 ).then(function(response) {
                     console.log(response);
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;

@@ -16,7 +16,7 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
                 label: 'Liste des {{ pluralType }}'
             },
             tfMetaTags: {
-                title: 'Liste des {{ pluralType }}'
+                title: 'Liste des {{ pluralType }} | Notices d\'autorité'
             },
             resolve: {
                 entities: function(TaxonomyService, $transition$) {

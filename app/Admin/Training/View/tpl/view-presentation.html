@@ -14,19 +14,5 @@
         <div ng-if="trainingContent.illustration != null">
             <img class="img-fluid" src="{{ trainingContent.illustration | imageRender }}"/>
         </div>
-        <div ng-if="trainingContent.illustration == null">
-            <form class="mt-2 mb-2">
-                <div class="form-group row">
-                    <label for="admin-training-view-add-illustration" class="control-label col-md-2 text-md-right">Image</label>
-                    <div class="col-md-10">
-                        <input id="admin-training-view-add-illustration" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
-                    </div>
-                </div>
-
-                <div class="text-right">
-                    <button type="submit" data-ng-click="media.submit.action('illustration')" class="btn btn-sm  btn-primary">Mettre à jour l'illustration <i data-ng-if="media.submit.loading.illustration == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-                </div>
-            </form>
-        </div>
     </div>
 </div>

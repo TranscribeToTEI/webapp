@@ -12,7 +12,7 @@ angular.module('transcript.app.security.resetting.check', ['ui.router'])
             },
             url: '/check',
             tfMetaTags: {
-                title: 'Vérification',
+                title: 'Vérification | Réinitialisation du mot de passe',
             }
         })
     }])

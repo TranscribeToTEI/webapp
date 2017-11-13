@@ -21,7 +21,7 @@ angular.module('transcript.app.contact', ['ui.router'])
         })
     }])
 
-    .controller('AppContactCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'ContactService', 'flash', function($rootScope, $scope, $http, $sce, $state, ContactService, flash) {
+    .controller('AppContactCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'ContactService', 'flash', '$timeout', function($rootScope, $scope, $http, $sce, $state, ContactService, flash, $timeout) {
         $scope.contact = {
             name: null,
             email: null,
@@ -29,7 +29,8 @@ angular.module('transcript.app.contact', ['ui.router'])
             message: null
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         $scope.submit.action = function() {
@@ -39,12 +40,15 @@ angular.module('transcript.app.contact', ['ui.router'])
 
             function contact() {
                 return ContactService.send($scope.contact).
-                then(function(data) {
+                then(function(response) {
                     $scope.submit.loading = false;
-                    flash.success = $sce.trustAsHtml("<strong>Votre message a bien été envoyé.</strong>");
-                }, function errorCallback(response) {
-                    $scope.submit.loading = false;
-                    if(response.data.code === 400) {
+                    if(response.status === 200 || response.status === 201) {
+                        $scope.submit.success = true;
+                        flash.success = "Votre message a bien été envoyé.";
+                        $timeout(function() {
+                            $scope.submit.success = false;
+                        }, 5000);
+                    } else if(response.data.code === 400) {
                         flash.error = "<ul>";
                         for(let field of response.data.errors.children) {
                             for(let error of field) {
@@ -54,8 +58,9 @@ angular.module('transcript.app.contact', ['ui.router'])
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
+                }, function errorCallback(response) {
+                    $scope.submit.loading = false;
                     console.log(response);
                 });
             }

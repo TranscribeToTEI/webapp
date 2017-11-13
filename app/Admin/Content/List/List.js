@@ -16,7 +16,7 @@ angular.module('transcript.admin.content.list', ['ui.router'])
                 label: 'Liste des contenus'
             },
             tfMetaTags: {
-                title: 'Liste',
+                title: 'Liste | Contenus  | Administration',
             },
             resolve: {
                 contents: function(ContentService) {

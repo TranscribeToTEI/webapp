@@ -28,26 +28,31 @@ angular.module('transcript.app.security.login', ['ui.router'])
 
         $scope.form = {
             username: null,
-            password: null,
-            //grant_type: "password",
-            //client_id: $rootScope.client_id,
-            //client_secret: $rootScope.client_secret
+            password: null
         };
         $scope.errors = [];
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Loading data */
         $scope.submit.action = function() {
             $scope.submit.loading = true;
-            // Connecting user:
+
             login();
             function login() {
                 return UserService.login($scope.form, "transcript.app.home").
-                then(function(data) {
-                    console.log(data);
+                then(function(response) {
+                    console.log(response);
                     $scope.submit.loading = false;
+                    if(response.status === 200) {
+                        $scope.submit.success = true;
+                        flash.success = "Vous allez être redirigé dans quelques instants ...";
+                    } else if(response.status === 400) {
+                        flash.error = response.data.error_description;
+                        console.log(flash);
+                    }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
                     console.log(response);

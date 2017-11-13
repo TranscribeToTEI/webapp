@@ -16,17 +16,18 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
                 label: 'Mot de passe oublié'
             },
             tfMetaTags: {
-                title: 'Demande',
+                title: 'Demande | Réinitialisation du mot de passe',
             }
         })
     }])
 
-    .controller('AppSecurityResettingRequestCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserService', function($rootScope, $scope, $http, $sce, $state, UserService) {
+    .controller('AppSecurityResettingRequestCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'flash', function($rootScope, $scope, $http, $sce, $state, UserService, flash) {
         $scope.form = {
             email: null
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         $scope.submit.action = function() {
@@ -37,12 +38,14 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
                 return UserService.askReset($scope.form.email).
                 then(function(data) {
                     $scope.submit.loading = false;
+                    $scope.submit.success = true;
                     if(data === true) {
                         $state.go("transcript.app.security.resetting.check");
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
                     console.log(response);
+                    flash.error = response;
                 });
             }
         };

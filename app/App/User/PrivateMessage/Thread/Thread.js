@@ -20,7 +20,7 @@ angular.module('transcript.app.user.private-message.thread', ['ui.router'])
                 label: '{{ recipientUser.name }}'
             },
             tfMetaTags: {
-                title: 'Discussion avec {{ recipientUser.name }}',
+                title: 'Discussion avec {{ recipientUser.name }} | Messagerie',
             },
             resolve: {
                 thread: function(CommentService, $transition$) {

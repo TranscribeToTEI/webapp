@@ -16,7 +16,7 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
                 label: 'Messages privés'
             },
             tfMetaTags: {
-                title: 'Messages privés',
+                title: 'Liste des messages | Messagerie',
             },
             resolve: {
                 threads: function(CommentService) {

@@ -18,4 +18,4 @@
         </li>
     </ul>
 </nav>
-<div class="mb-4 nbResults">{{ results.length }} testaments trouvés</div>
+<div class="mb-4 nbResults">{{ results.length }} <span ng-if="results.length > 1">testaments trouvés</span><span ng-if="results.length <= 1">testament trouvé</span></div>

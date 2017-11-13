@@ -48,7 +48,7 @@
     <label for="admin-entity-edit-will-testator" class="col-md-4 col-form-label text-md-right">Testateur <span class="red-color">*</span></label>
     <div class="col-md-8">
         <select class="custom-select col-md-6" id="admin-entity-edit-will-testator" data-ng-model="entity.will.testator" name="admin-entity-edit-will-testator" data-ng-options="testator.id as testator.name for testator in testators" required="required"></select>
-        <p class="help-block"><a ui-sref="transcript.app.taxonomy.create({type: 'testators'})" target="_blank">Créer un nouveau testateur</a></p>
+        <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'testators'})" target="_blank">Créer un nouveau testateur</a></small>
     </div>
 </div>
 

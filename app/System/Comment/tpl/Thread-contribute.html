@@ -6,7 +6,13 @@
             <div id="thread-new-content" ckeditor="options" data-ng-model="comment.form.content"></div>
         </div>
         <div id="comment-thread-contribute-form-footer">
-            <button type="submit" class="btn btn-primary btn-sm" data-ng-click="comment.action.post()"> Soumettre <i data-ng-if="comment.action.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+            <button class="btn btn-sm" type="button"
+                    ng-class="{'btn-success': comment.action.success == true, 'btn-primary': comment.action.success != true}"
+                    ng-click="comment.action.post()">
+                <span ng-if="comment.action.success == false && comment.action.loading == false">Soumettre</span>
+                <span ng-if="comment.action.success == false && comment.action.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                <span ng-if="comment.action.success == true">Succès !</span>
+            </button>
         </div>
     </form>
 </div>

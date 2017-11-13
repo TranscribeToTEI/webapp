@@ -16,7 +16,9 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
                 label: 'Modification du mot de passe'
             },
             tfMetaTags: {
-                title: 'Modification du mot de passe',
+                title: function(userEdit) {
+                    return 'Mot de passe | '+ userEdit.name +' | Profil utilisateur';
+                },
             },
             resolve: {
                 userEdit: function(UserService, $transition$) {
@@ -26,7 +28,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
         })
     }])
 
-    .controller('AppUserChangePasswordCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'userEdit', 'UserService', function($rootScope, $scope, $http, $sce, $state, userEdit, UserService) {
+    .controller('AppUserChangePasswordCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'userEdit', 'flash', function($rootScope, $scope, $http, $sce, $state, UserService, userEdit, flash) {
         if($rootScope.user === undefined && $rootScope.user !== userEdit) {$state.go('transcript.app.security.login');}
 
         /* -- Breadcrumb management -------------------------------------------------------- */
@@ -34,14 +36,15 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
         /* -- End : breadcrumb management -------------------------------------------------- */
 
         $scope.form = {
-            current_password: "",
+            currentPassword: "",
             password: {
                 first: "",
                 second: ""
             }
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Submit data */
@@ -50,11 +53,18 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
 
             submit();
             function submit() {
-                return UserService.changePassword($scope.form.current_password, $scope.form.password.first, $scope.form.password.second).
-                then(function(data) {
-                    console.log(data);
-                    $scope.submit.loading = false;
-                    $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
+                return UserService.changePassword($scope.form.currentPassword, $scope.form.password.first, $scope.form.password.second).
+                then(function(response) {
+                    if(response.status === 200 && response.data !== false) {
+                        console.log(response);
+                        $scope.submit.loading = false;
+                        $scope.submit.success = true;
+                        flash.success = "Votre mot de passe a bien été mis à jour, vous allez être redirigé dans quelques instants ...";
+                        $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
+                    } else {
+                        flash.error = "Mot de passe actuel incorrect";
+                        $scope.submit.loading = false;
+                    }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
                     console.log(response);

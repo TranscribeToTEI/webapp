@@ -16,7 +16,7 @@ angular.module('transcript.admin.home', ['ui.router'])
                 label: 'Admin'
             },
             tfMetaTags: {
-                title: 'Accueil',
+                title: 'Accueil | Administration',
             },
             resolve: {
                 accesses: function(AccessService) {

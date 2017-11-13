@@ -1,6 +1,9 @@
 <div class="row mb-4" >
     <div class="col-md-4"></div>
-    <div class="col-md-2"><img class="img-fluid" src="./web/images/default-testator.png"/></div>
+    <div class="col-md-2">
+        <img class="img-fluid" src="{{ entity.picture | imageRender }}" alt="Photographie du testateur" title="Photographie du testateur" ng-if="entity.picture !== null" />
+        <img class="img-fluid" src="./web/images/default-testator.png" alt="icône générique testateur" ng-if="entity.picture === null" />
+    </div>
 </div>
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Nom complet</dt>
@@ -34,6 +37,6 @@
 <div class="row mt-4">
     <div class="col-md-12 ml-2">
         <h4 class="mb-1"><strong>Mémoire des hommes</strong></h4>
-        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche sur Mémoire des hommes</a></div>
+        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 0">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
     </div>
 </div>

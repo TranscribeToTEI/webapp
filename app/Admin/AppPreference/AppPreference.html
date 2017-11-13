@@ -1,9 +1,9 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 
@@ -32,7 +32,12 @@
                                 <span class="custom-control-description">Activer la page de Contact</span>
                             </label>
                         </div>
-                        <small  class="form-text text-muted">Cette page permet aux utilisateurs de vous contacter par mail</small>
+                        <small class="form-text text-muted">Cette page permet aux utilisateurs de vous contacter par mail</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-app-preference-infoContact" >Contenu d'information de la page de Contact</label>
+                        <div id="admin-app-preference-infoContact" ckeditor="options" data-ng-model="preferences.infoContact"></div>
+                        <small class="form-text text-muted">Vous pouvez ici donner des informations aux personnes souhaitant vous contacter</small>
                     </div>
                     <div class="form-group">
                         <label for="admin-app-preference-system-email" class="col-form-label">Email du système <span class="red-color">*</span></label>
@@ -94,7 +99,7 @@
                         <label for="admin-app-preference-help-home-content" class="col-form-label col-sm-6">Page d'accueil de l'aide</label>
                         <div class="col-sm-6">
                             <input id="admin-app-preference-help-home-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.helpHomeContent" />
-                            <small  class="form-text text-muted">Cette page correspond à la page accessible dans le menu "Aide"</small>
+                            <small class="form-text text-muted">Cette page correspond à la page accessible dans le menu "Aide"</small>
                         </div>
 
                     </div>
@@ -102,7 +107,7 @@
                         <label for="admin-app-preference-help-inside-home-content" class="col-form-label col-sm-6">Page d'accueil de l'aide interne</label>
                         <div class="col-sm-6">
                             <input id="admin-app-preference-help-inside-home-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.helpInsideHomeContent" />
-                            <small  class="form-text text-muted">Cette page correspond à la page d'accueil de l'aide du module de transcription</small>
+                            <small class="form-text text-muted">Cette page correspond à la page d'accueil de l'aide du module de transcription</small>
                         </div>
 
                     </div>
@@ -133,6 +138,26 @@
                 </fieldset>
 
                 <fieldset>
+                    <label class="big">Notices descriptives</label>
+
+                    <div class="form-group">
+                        <label for="admin-app-preference-taxonomyAccessProposal">Proposition de contribution aux notices descriptives</label>
+                        <div id="admin-app-preference-taxonomyAccessProposal" ckeditor="options" data-ng-model="preferences.taxonomyAccessProposal"></div>
+                        <small class="form-text text-muted">Ce texte s'affichera dans l'encart permettant aux contributeurs d'accéder au formulaire de demande de modification des notices descriptives.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-app-preference-taxonomyAskQuestion">Formulaire de demande d'accès à la modification des notices descriptives</label>
+                        <div id="admin-app-preference-taxonomyAskQuestion" ckeditor="options" data-ng-model="preferences.taxonomyAskQuestion"></div>
+                        <small class="form-text text-muted">Ce texte s'affichera au-dessus du formulaire permettant aux contributeurs de demander accès à la modification des notices descriptives.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-app-preference-infoContentEditTaxonomy">Contenu d'information d'édition des notices descriptives</label>
+                        <div id="admin-app-preference-infoContentEditTaxonomy" ckeditor="options" data-ng-model="preferences.infoContentEditTaxonomy"></div>
+                        <small class="form-text text-muted">Ce texte sera affiché au-dessus des formulaires d'édition des notices descriptives. Vous pouvez y spécifier des règles d'édition, régimes de valeurs ou autre.</small>
+                    </div>
+                </fieldset>
+
+                <fieldset>
                     <label class="big">Réseaux sociaux</label>
 
                     <div class="form-group row">
@@ -154,9 +179,14 @@
 
         <div class="row">
             <div class="text-center col-md-12">
-                <button data-ng-if="submit.success == false && submit.loading == false" class="btn btn-sm btn-primary" type="button" data-ng-click="submit.action()">Soumettre</button>
-                <button data-ng-if="submit.success == false && submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
-                <button data-ng-if="submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
+                <button class="btn btn-sm" type="button"
+                        ng-disabled="!(!!preferences.projectTitle && !!preferences.systemEmail && !!preferences.taxonomyEditAccess)"
+                        ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                        ng-click="submit.action()">
+                    <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
+                    <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                    <span ng-if="submit.success == true">Succès !</span>
+                </button>
             </div>
         </div>
     </form>

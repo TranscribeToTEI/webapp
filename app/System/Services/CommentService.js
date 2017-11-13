@@ -7,7 +7,7 @@ angular.module('transcript.service.comment', ['ui.router'])
             getThread: function(id) {
                 let CS = this;
                 return $http.get($rootScope.api+"/threads/"+id+"/comments").then(function(response) {
-                    for(var comment in response.data.comments) {
+                    for(let comment in response.data.comments) {
                         response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
                     }
                     console.log(response.data);
@@ -27,7 +27,7 @@ angular.module('transcript.service.comment', ['ui.router'])
             getThreadSharedByUsers: function(id1, id2) {
                 let CS = this;
                 return $http.get($rootScope.api+"/threads/users-"+id1+"-"+id2+"/comments").then(function(response) {
-                    for(var comment in response.data.comments) {
+                    for(let comment in response.data.comments) {
                         response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
                     }
                     console.log(response.data);
@@ -35,7 +35,7 @@ angular.module('transcript.service.comment', ['ui.router'])
                 }, function errorCallback(response) {
                     if((response.status === 404 || response.status === 400) && $rootScope.user !== undefined) {
                         return $http.get($rootScope.api+"/threads/users-"+id2+"-"+id1+"/comments").then(function(response) {
-                            for(var comment in response.data.comments) {
+                            for(let comment in response.data.comments) {
                                 response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
                             }
                             console.log(response.data);

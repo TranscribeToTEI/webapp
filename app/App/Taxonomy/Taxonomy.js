@@ -16,7 +16,7 @@ angular.module('transcript.app.taxonomy', ['ui.router'])
     }])
 
     .controller('AppTaxonomyCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
-        tfMetaTags.setTitleSuffix(' | Notices d\'autorité '+tfMetaTags.getTitleSuffix());
+        tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;
 

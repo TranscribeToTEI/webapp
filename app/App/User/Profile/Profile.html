@@ -1,51 +1,51 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 <main class="container" role="main">
     <div class="row mb-2">
         <div class="col-md-5">
             <h1 class="page-heading mb-3">{{ iUser.name }}</h1>
-            <div><span data-ng-repeat="role in iUser.roles" ng-if="role != 'ROLE_USER'"><span ng-if="$index > 0"> </span><span class="badge badge-pill badge-primary">{{ role }}</span></span></div>
+            <div><span ng-repeat="role in iUser.roles" ng-if="role != 'ROLE_USER'"><span ng-if="$index > 0"> </span><span class="badge badge-pill badge-primary">{{ role | roleName }}</span></span></div>
             <p ng-if="iUser.biography != null" ng-bind="iUser.biography"></p>
         </div>
         <div class="col-md-2 mt-3 text-center">
-            <i data-ng-if="iUser.picture == null || iUser.picture == ''" class="fa fa-user-circle fa-5x text-light" aria-hidden="true"></i>
-            <img data-ng-if="iUser.picture != null && iUser.picture != ''" class="img-fluid rounded-circle" src="{{ iUser.picture | imageRender }}" />
+            <i ng-if="iUser.picture == null || iUser.picture == ''" class="fa fa-user-circle fa-5x text-light" aria-hidden="true"></i>
+            <img ng-if="iUser.picture != null && iUser.picture != ''" class="img-fluid rounded-circle" src="{{ iUser.picture | imageRender }}" />
         </div>
         <div class="col-md-5 mt-3 text-right">
-            <a ui-sref="transcript.app.user.private-message.thread({idUser: user.id, idRecipient: iUser.id})" data-ng-if="context != 'self' && user !== undefined" class="btn btn-default" title="Envoyer un message privé"><i class="fa fa-send"></i> Envoyer un message privé</a>
+            <a ui-sref="transcript.app.user.private-message.thread({idUser: user.id, idRecipient: iUser.id})" ng-if="context != 'self' && user !== undefined" class="btn btn-default" title="Envoyer un message privé"><i class="fa fa-send"></i> Envoyer un message privé</a>
         </div>
     </div>
-    <div class="row" data-ng-if="context == 'self' || context == 'admin'">
+    <div class="row" ng-if="context == 'self' || context == 'admin'">
         <div class="col-md-3">
             <ul class="list-group">
                 <li class="list-group-item">
                     <a ui-sref="transcript.app.user.edit({id: iUser.id})">
-                        <span data-ng-if="context == 'self'">Modifier mon profil</span>
-                        <span data-ng-if="context == 'admin'">Modifier le profil</span>
+                        <span ng-if="context == 'self'">Modifier mon profil</span>
+                        <span ng-if="context == 'admin'">Modifier le profil</span>
                     </a>
                 </li>
                 <li class="list-group-item">
                     <a ui-sref="transcript.app.user.preferences({id: iUser.id})">
-                        <span data-ng-if="context == 'self'">Modifier mes préférences</span>
-                        <span data-ng-if="context == 'admin'">Modifier les préférences</span>
+                        <span ng-if="context == 'self'">Modifier mes préférences</span>
+                        <span ng-if="context == 'admin'">Modifier les préférences</span>
                     </a>
                 </li>
-                <li class="list-group-item" data-ng-if="context == 'self'">
+                <li class="list-group-item" ng-if="context == 'self'">
                     <a>
                         Mes messages <span class="badge badge-info">0</span>
                     </a>
                 </li>
             </ul>
         </div>
-        <div class="col-lg-9 col-md-9" data-ng-include="'App/User/Profile/tpl/profile-public.html'"></div>
+        <div class="col-lg-9 col-md-9" ng-include="'App/User/Profile/tpl/profile-public.html'"></div>
     </div>
-    <div class="row" data-ng-if="context != 'self' && context != 'admin'">
-        <div class="col-sm-12" data-ng-include="'App/User/Profile/tpl/profile-public.html'"></div>
+    <div class="row" ng-if="context != 'self' && context != 'admin'">
+        <div class="col-sm-12" ng-include="'App/User/Profile/tpl/profile-public.html'"></div>
     </div>
 </main>

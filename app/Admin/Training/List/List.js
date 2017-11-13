@@ -16,7 +16,7 @@ angular.module('transcript.admin.training.list', ['ui.router'])
                 label: 'Liste des contenus'
             },
             tfMetaTags: {
-                title: 'Liste',
+                title: 'Liste | Entrainement | Administration ',
             },
             resolve: {
                 trainingContents: function(TrainingContentService) {

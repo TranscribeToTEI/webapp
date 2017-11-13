@@ -1,8 +1,8 @@
 <div class="container">
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
     <div class="card bg-primary" data-ng-if="user != null && (user._embedded.preferences.tutorialStatus == 'todo' || user._embedded.preferences.tutorialStatus == 'inProgress')">
         <div class="card-body">
@@ -24,12 +24,11 @@
                 <h2 class="card-header bg-dark">Projet</h2>
                 <div class="card-body">
                     <h3 class="card-title"><a ui-sref="transcript.app.content({id: preferences.discoverHomeContent})">Comprendre le projet</a></h3>
-                    <p class="card-text">Le projet <strong>Testaments de Poilus</strong> vise à produire une
-                        édition électronique des testaments des poilus de la Première Guerre
-                        mondiale. La difficulté de cette tâche réside dans la transcription
-                        en XML TEI du millier de testaments identifiés aux
-                        Archives nationales et aux Archives départementales des Yvelines.</p>
-                    <p class="card-text">Afin de mener cette tâche à bien, nous faisons donc appel au public dans le cadre d'une contribution participative.</p>
+                    <p class="card-text">Le projet <strong>Testaments de Poilus</strong> vise à produire une édition électronique d’un
+                        millier de testaments des Poilus de la Première Guerre mondiale
+                        retrouvés dans les fonds des Archives nationales et des Archives Départementales des Yvelines.</p>
+                    <p class="card-text">Pour cela, deux opérations sont nécessaires : transcrire le texte des testaments et l’encoder en XML TEI. </p>
+                    <p class="card-text">Afin de mener ces tâches à bien, nous faisons appel à des volontaires du grand public.</p>
                     <div class="text-right"><a ui-sref="transcript.app.content({id: preferences.discoverHomeContent})" class="btn btn-sm btn-primary">Lire</a></div>
                 </div>
             </div>
@@ -37,9 +36,20 @@
                 <h2 class="card-header bg-dark">Contribuer</h2>
                 <div class="card-body">
                     <h3 class="card-title"><a ui-sref="transcript.app.search">Vous pouvez contribuer au projet !</a></h3>
-                    <p class="card-text">Le projet <strong>Testaments de Poilus</strong> s’appuie sur l'aide de bénévoles et d'internautes pour progresser.
-                        Nous avons développé cette plateforme participative sur laquelle vous pouvez nous aider à transcrire des testaments, et ainsi contribuer à leur analyse historique et à leur publication à venir.</p>
+                    <p class="card-text">Le projet <strong>Testaments de Poilus</strong> ne peut aboutir sans l'aide d’internautes bénévoles.
+                        Nous avons développé une plateforme participative sur laquelle vous pourrez nous aider à transcrire des testaments et
+                        à les encoder. Vous contribuerez ainsi à leur analyse historique et à leur publication en ligne.</p>
                     <div class="text-right"><a ui-sref="transcript.app.search" class="btn btn-sm btn-primary">Participer</a><a ui-sref="transcript.app.content({id: preferences.helpHomeContent})" class="btn btn-sm btn-primary">En savoir plus</a></div>
+                </div>
+            </div>
+            <div class="card bg-none">
+                <h2 class="card-header bg-dark">Encoder</h2>
+                <div class="card-body">
+                    <h3 class="card-title">Qu’est-ce que XML TEI ?</h3>
+                    <p class="card-text"><strong>XML TEI</strong> est un standard informatique utilisé notamment pour produire des éditions
+                        électroniques de documents manuscrits rigoureuses et faciles à exploiter. On ajoute au texte transcrit des informations
+                        sur la structure de ce texte, sur sa mise en page et sur la nature des objets qui le composent. Dans la plateforme, un
+                        tutoriel explique les différentes étapes de ce travail.</p>
                 </div>
             </div>
             <div class="card bg-white">
@@ -47,7 +57,6 @@
                 <div class="card-body">
                     <p class="card-text lead">Vous vous intéressez au projet et souhaitez des informations&nbsp;?</p>
                     <p class="card-text lead">Vous avez une question, une observation&nbsp;?</p>
-                    <p class="card-text lead">Vous souhaitez participer à l'opération de transcription collaborative&nbsp;?</p>
                     <div class="text-right"><a href="#" class="btn btn-sm btn-primary">Contactez-nous</a></div>
                 </div>
             </div>

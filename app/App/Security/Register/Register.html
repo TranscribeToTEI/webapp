@@ -1,48 +1,55 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 <main class="container" role="main">
     <h1 class="page-heading">Page d'inscription</h1>
-    <section class="alert alert-danger" data-ng-if="errors.length > 0">
+    <section class="alert alert-danger" ng-if="errors.length > 0">
         <ul class="list-unstyled text-left mb-0">
-            <li data-ng-repeat="error in form.errors"><strong>{{ error.field }}:</strong> <span data-ng-repeat="content in error.error"><span data-ng-if="$first == false">, </span>{{ content }}</span></li>
+            <li ng-repeat="error in form.errors"><strong>{{ error.field }}:</strong> <span ng-repeat="content in error.error"><span ng-if="$first == false">, </span>{{ content }}</span></li>
         </ul>
     </section>
     <div class="row">
         <div class="col-xl-10 col-12" ng-if="preferences.enableRegister == true">
             <form class="mt-2 mb-2">
                 <div class="form-group row">
-                    <label for="app-security-register-name" class="col-md-4 col-form-label text-md-right">Nom <span class="red-color">*</span></label>
+                    <label for="app-security-register-name" class="col-md-4 col-form-label text-md-right">Nom d'utilisateur ou pseudo<span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="text" data-ng-model="form.name" class="form-control form-control-sm" id="app-security-register-name" name="app-security-register-name" placeholder="Saissisez votre nom" required="required" />
+                        <input type="text" ng-model="form.name" class="form-control form-control-sm" id="app-security-register-name" name="app-security-register-name" placeholder="saisisser votre nom" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app-security-register-email" class="col-md-4 col-form-label text-md-right">Email <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="email" data-ng-model="form.email" class="form-control form-control-sm" id="app-security-register-email" name="app-security-register-email" placeholder="Saissisez votre adresse email" required="required" />
+                        <input type="email" ng-model="form.email" class="form-control form-control-sm" id="app-security-register-email" name="app-security-register-email" placeholder="saisisser votre adresse email" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app-security-register-password-plain" class="col-md-4 col-form-label text-md-right">Mot de passe <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="password" data-ng-model="form.password.plain" class="form-control form-control-sm" id="app-security-register-password-plain" name="app-security-register-password-plain" placeholder="Saissisez votre mot de passe" required="required" />
+                        <input type="password" ng-model="form.password.plain" class="form-control form-control-sm" id="app-security-register-password-plain" name="app-security-register-password-plain" placeholder="saisisser votre mot de passe" required="required" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="app-security-register-password-confirmation" class="col-md-4 col-form-label text-md-right">Confirmation <span class="red-color">*</span></label>
                     <div class="col-md-8">
-                        <input type="password" data-ng-model="form.password.confirmation" class="form-control form-control-sm" id="app-security-register-password-confirmation" name="app-security-register-password-confirmation" placeholder="Confirmez votre mot de passe" required="required" />
+                        <input type="password" ng-model="form.password.confirmation" class="form-control form-control-sm" id="app-security-register-password-confirmation" name="app-security-register-password-confirmation" placeholder="Confirmez votre mot de passe" required="required" />
                     </div>
                 </div>
                 <div class="row text-right">
                     <div class="col-12">
-                        <button type="submit" data-ng-click="submit.action()" class="btn btn-sm btn-primary">Créer un compte <i data-ng-if="submit.isLoading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                        <button class="btn btn-sm" type="button"
+                                ng-disabled="!((!!form.name && !!form.email && !!form.password.plain && !!form.password.confirmation) || (form.password.plain !== form.password.confirmation))"
+                                ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                                ng-click="submit.action()">
+                            <span ng-if="submit.success == false && submit.loading == false">Créer mon compte</span>
+                            <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                            <span ng-if="submit.success == true">Succès !</span>
+                        </button>
                         <small class="form-text"><a ui-sref="transcript.app.security.login" class="text-muted">J'ai déjà un compte</a></small>
                     </div>
                 </div>

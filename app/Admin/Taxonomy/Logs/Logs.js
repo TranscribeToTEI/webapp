@@ -26,7 +26,7 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
                     label: 'Log {{ log.id }}'
                 },
                 tfMetaTags: {
-                    title: 'Historique des modifications',
+                    title: 'Historique des modifications | Notices d\'autorité | Administration',
                 },
                 resolve: {
                     logs: function(LogService, $transition$) {
@@ -50,7 +50,7 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
                     label: 'Historique des modifications'
                 },
                 tfMetaTags: {
-                    title: 'Historique des modifications',
+                    title: 'Historique des modifications | Notices d\'autorité | Administration',
                 },
                 resolve: {
                     logs: function(LogService, $transition$) {

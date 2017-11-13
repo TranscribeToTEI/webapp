@@ -29,7 +29,7 @@ angular.module('transcript.service.entity', ['ui.router'])
             postEntity: function(data) {
                 return $http.post($rootScope.api+"/entities", data).
                 then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;

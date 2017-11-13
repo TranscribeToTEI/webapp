@@ -17,7 +17,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                     label: 'Nouvel élément d\'entrainement'
                 },
                 tfMetaTags: {
-                    title: 'Nouveau',
+                    title: 'Nouveau | Entrainement | Administration ',
                 },
                 resolve: {
                     trainingContent: function() {
@@ -47,7 +47,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                     label: 'Modification'
                 },
                 tfMetaTags: {
-                    title: 'Modification de {{trainingContent.title}}',
+                    title: 'Modification de {{trainingContent.title}} | Entrainement | Administration ',
                 },
                 resolve: {
                     trainingContent: function(TrainingContentService, $transition$) {
@@ -66,7 +66,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'trainingContent', 'trainingContents', 'users', 'config', function($rootScope, $scope, $http, $sce, $state, flash, trainingContent, trainingContents, users, config) {
+    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'trainingContent', 'trainingContents', 'users', 'config', function($rootScope, $scope, $http, $sce, $state, $timeout, flash, trainingContent, trainingContents, users, config) {
         $scope.trainingContents = trainingContents;
         $scope.users = users;
         $scope.config = config;
@@ -131,18 +131,6 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             ]
         };
 
-        /* Autocompletion management -------------------------------------------------------------------------------- */
-        $scope.$watch('trainingContent.editorialResponsibility', function() {
-            console.log($scope.trainingContent.editorialResponsibility);
-            if($scope.trainingContent.editorialResponsibility !== undefined) {
-                if ($scope.trainingContent.editorialResponsibility !== null && $scope.trainingContent.editorialResponsibility !== "" && $scope.trainingContent.editorialResponsibility.originalObject !== undefined) {
-                    $scope.trainingContent.editorialResponsibility = $scope.trainingContent.editorialResponsibility.originalObject.id;
-                    console.log($scope.trainingContent.editorialResponsibility);
-                }
-            }
-        });
-        /* End: Autocompletion management --------------------------------------------------------------------------- */
-
         /* Submit management ---------------------------------------------------------------------------------------- */
         $scope.submit.action = function() {
             $scope.submit.success = false;
@@ -157,32 +145,33 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 updateComment: $scope.trainingContent.updateComment,
                 illustration: $scope.trainingContent.illustration,
                 videoContainer: $scope.trainingContent.videoContainer,
-                content: $scope.trainingContent.content,
-                exerciseHeader: $scope.trainingContent.exercise.header,
-                exerciseImageToTranscribe: $scope.trainingContent.exercise.imageToTranscribe,
-                exerciseIsSmartTEI: $scope.trainingContent.exercise.preferences.isSmartTEI,
-                exerciseIsAttributesManagement: $scope.trainingContent.exercise.preferences.isAttributesManagement,
-                exerciseTagsList: $scope.trainingContent.exercise.preferences.activeTags,
-                exerciseIsLiveRender: $scope.trainingContent.exercise.preferences.isLiveRender,
-                exerciseIsHelp: $scope.trainingContent.exercise.preferences.isHelp,
-                exerciseIsDocumentation: $scope.trainingContent.exercise.preferences.isDocumentation,
-                exerciseIsTaxonomy: $scope.trainingContent.exercise.preferences.isTaxonomy,
-                exerciseIsBibliography: $scope.trainingContent.exercise.preferences.isBibliography,
-                exerciseIsNotes: $scope.trainingContent.exercise.preferences.isNotes,
-                exerciseIsVersioning: $scope.trainingContent.exercise.preferences.isVersioning,
-                exerciseIsComplexFields: $scope.trainingContent.exercise.preferences.isComplexFields,
-                exerciseCorrectionTranscript: $scope.trainingContent.exercise.correction.transcript,
-                exerciseCorrectionErrorsToAvoid: $scope.trainingContent.exercise.correction.errorsToAvoid
+                content: $scope.trainingContent.content
             };
-            console.log($scope.trainingContent.exercise.preferences.activeTags);
+            if($scope.trainingContent.exercise !== undefined && $scope.trainingContent.exercise !== null) {
+                $scope.form.exerciseHeader = $scope.trainingContent.exercise.header;
+                $scope.form.exerciseImageToTranscribe = $scope.trainingContent.exercise.imageToTranscribe;
+                $scope.form.exerciseIsSmartTEI = $scope.trainingContent.exercise.preferences.isSmartTEI;
+                $scope.form.exerciseIsAttributesManagement = $scope.trainingContent.exercise.preferences.isAttributesManagement;
+                $scope.form.exerciseTagsList = $scope.trainingContent.exercise.preferences.activeTags;
+                $scope.form.exerciseIsLiveRender = $scope.trainingContent.exercise.preferences.isLiveRender;
+                $scope.form.exerciseIsHelp = $scope.trainingContent.exercise.preferences.isHelp;
+                $scope.form.exerciseIsDocumentation = $scope.trainingContent.exercise.preferences.isDocumentation;
+                $scope.form.exerciseIsTaxonomy = $scope.trainingContent.exercise.preferences.isTaxonomy;
+                $scope.form.exerciseIsBibliography = $scope.trainingContent.exercise.preferences.isBibliography;
+                $scope.form.exerciseIsNotes = $scope.trainingContent.exercise.preferences.isNotes;
+                $scope.form.exerciseIsVersioning = $scope.trainingContent.exercise.preferences.isVersioning;
+                $scope.form.exerciseIsComplexFields = $scope.trainingContent.exercise.preferences.isComplexFields;
+                $scope.form.exerciseCorrectionTranscript = $scope.trainingContent.exercise.correction.transcript;
+                $scope.form.exerciseCorrectionErrorsToAvoid = $scope.trainingContent.exercise.correction.errorsToAvoid;
+                console.log($scope.trainingContent.exercise.preferences.activeTags);
+            }
 
             if($scope.trainingContent.id === null || $scope.trainingContent.id === undefined) {
                 /* If trainingContent.id == null > The trainingContent doesn't exist, we post it */
                 $http.post($rootScope.api+'/training-contents', $scope.form).
                 then(function (response) {
                     console.log(response.data);
-                    flash.success = "Votre contenu a bien été créé";
-                    flash.success = $sce.trustAsHtml(flash.success);
+                    flash.success = "Vous allez être redirigé dans quelques instants ...";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     $state.go('transcript.admin.training.view', {id: response.data.id});
@@ -190,15 +179,14 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                     $scope.submit.loading = false;
                     if(response.data.code === 400) {
                         flash.error = "<ul>";
-                        for(var field in response.data.errors.children) {
-                            for(var error in response.data.errors.children[field]) {
+                        for(let field in response.data.errors.children) {
+                            for(let error in response.data.errors.children[field]) {
                                 if(error === "errors") {
                                     flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                                 }
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
                     console.log(response);
                 });
@@ -209,21 +197,23 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 then(function (response) {
                     console.log(response.data);
                     flash.success = "Votre contenu a bien été mis à jour";
-                    flash.success = $sce.trustAsHtml(flash.success);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
+                    $timeout(function() {
+                        $scope.submit.success = false;
+                    }, 5000);
                 }, function errorCallback(response) {
                     if(response.data.code === 400) {
                         flash.error = "<ul>";
-                        for(var field in response.data.errors.children) {
-                            for(var error in response.data.errors.children[field]) {
+                        for(let field in response.data.errors.children) {
+                            for(let error in response.data.errors.children[field]) {
                                 if(error === "errors") {
                                     flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                                 }
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
+
                     }
                     $scope.submit.loading = false;
                     console.log(response);
@@ -248,5 +238,40 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
 
         };
         /* End: Remove management ----------------------------------------------------------------------------------- */
+
+        /* Media management ----------------------------------------------------------------------------------------- */
+        $scope.media.submit.action = function(type) {
+            let picture = null;
+            if(type === 'illustration') {
+                $scope.media.submit.loading.illustration = true;
+                picture = $scope.media.form.illustration;
+            } else if(type === 'exerciseImageToTranscribe') {
+                $scope.media.submit.loading.exerciseImageToTranscribe = true;
+                picture = $scope.media.form.exerciseImageToTranscribe;
+            }
+
+            upload(type, picture);
+        };
+
+        function upload(type, picture) {
+            Upload.upload = Upload.upload({
+                url: $rootScope.api+"/media-contents?type=TrainingContent&field="+type+"&id="+$scope.trainingContent.id,
+                data: {media: picture}
+            }).then(function (response) {
+                console.log(response);
+                if(type === 'illustration') {
+                    $scope.media.submit.loading.illustration = false;
+                    $scope.trainingContent.illustration = response.data.illustration;
+                } else if(type === 'exerciseImageToTranscribe') {
+                    $scope.media.submit.loading.exerciseImageToTranscribe = false;
+                    $scope.trainingContent.exerciseImageToTranscribe = response.data.exerciseImageToTranscribe;
+                }
+            }, function errorCallback(error) {
+                console.log(error);
+                if(type === 'illustration') { $scope.media.submit.loading.illustration = false;}
+                else if(type === 'exerciseImageToTranscribe') { $scope.media.submit.loading.exerciseImageToTranscribe = false;}
+            });
+        }
+        /* End: Media management ------------------------------------------------------------------------------------ */
     }])
 ;

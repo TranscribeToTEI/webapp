@@ -16,7 +16,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 label: 'Modification'
             },
             tfMetaTags: {
-                title: 'Modification',
+                title: 'Modification | Entités | Administration',
             },
             resolve: {
                 entity: function(EntityService, $transition$) {
@@ -42,7 +42,8 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         $scope.testators = testators;
 
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
         $scope.remove = {
             loading: false
@@ -124,7 +125,8 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             $http.patch($rootScope.api+'/entities/'+$scope.entity.id, formEntity).
             then(function (response) {
                 console.log(response.data);
-                $scope.submit.loading = true;
+                $scope.submit.loading = false;
+                $scope.submit.success = true;
                 $state.go('transcript.app.entity', {id: response.data.id});
             }, function errorCallback(response) {
                 if(response.data.code === 400) {
@@ -137,7 +139,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    flash.error = $sce.trustAsHtml(flash.error);
+
                 }
                 $scope.submit.loading = false;
                 console.log(response);
@@ -167,7 +169,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                             }
                         }
                         flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
+
                     }
                     $scope.remove.loading = false;
                     console.log(response);

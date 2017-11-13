@@ -16,7 +16,7 @@ angular.module('transcript.admin.user.list', ['ui.router'])
                 label: 'Liste des utilisateurs'
             },
             tfMetaTags: {
-                title: 'Liste des utilisateurs',
+                title: 'Liste | Utilisateurs | Administration',
             },
             resolve: {
                 users: function(UserService) {

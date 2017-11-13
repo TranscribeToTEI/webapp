@@ -1,0 +1,48 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+<main class="container content pb-3" role="container">
+    <h2 class="card-header bg-dark">{{ content.type | contentTypeName}}</h2>
+    <nav>
+        <ul class="nav nav-pills justify-content-end">
+            <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.content.edit({id: content.id})" title="Modifier la page"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a></li>
+            <li class="nav-item"><a class="nav-link" ui-sref="transcript.app.content({id: content.id})" title="Consulter la page"><i class="fa fa-eye fa-lg" aria-hidden="true"></i></a></li>
+        </ul>
+    </nav>
+    <div class="row mt-4">
+        <div class="col-md-8 order-md-2">
+            <h1 class="mb-3">{{ iContent.title }}</h1>
+            <div class="row bg-body post-meta">
+                <div class="col-auto mr-auto"><strong><a ui-sref="transcript.app.user.profile({id: content.userName.id})">{{ content.createUser.name }}</a></strong><br ng-if="content.createUser.biography !== null" /><span ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></span></div>
+                <div class="col-auto">Publié le <span data-ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span>, modifié le <span data-ng-bind="iContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
+            </div>
+            <h2>Résumé</h2>
+            <div class="text-justify mt-2 pr-md-3" data-ng-bind-html="iContent.abstract | trustAsHtml"></div>
+            <h2>Contenu</h2>
+            <div class="text-justify mt-2 pr-md-3" data-ng-bind-html="iContent.content | trustAsHtml"></div>
+        </div>
+        <div class="col-md-4 order-md-1">
+            <div class="card">
+                <ul class="list-group list-group-flush mb-5 mt-5">
+                    <li class="list-group-item" data-ng-repeat="version in content._embedded.version" ng-class="{'active': version.version === iContent.version}">
+                        <a ng-if="version.version !== iContent.version" ng-click="loadVersion(version)">Version du {{ version.loggedAt|date:'dd-MM-yyyy, HH:mm:ss' }}</a>
+                        <span ng-if="version.version === iContent.version">Version du {{ version.loggedAt|date:'dd-MM-yyyy, HH:mm:ss' }}</span>
+                    </li>
+                </ul>
+            </div>
+            <img src="{{ iContent.illustration | imageRender }}" class="img-fluid" alt="Illustration de {{ iContent.title }}" title="{{ iContent.title }}" ng-if="iContent.illustration != '' && iContent.illustration != null" />
+            <div class="card bg-body tags mt-5" data-ng-if="content.tags.length > 0">
+                <div class="card-body">
+                    <ul>
+                        <li data-ng-repeat="tag in iContent.tags">{{ tag }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

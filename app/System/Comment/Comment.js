@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('transcript.system.comment', ['ui.router'])
-    .controller('SystemCommentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'thread', 'CommentService', function($rootScope, $scope, $http, $sce, $state, thread, CommentService) {
+    .controller('SystemCommentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'CommentService', 'thread',  function($rootScope, $scope, $http, $sce, $state, $timeout, CommentService, thread) {
         $scope.threadContainer = thread;
         console.log($scope.threadContainer);
 
         $scope.comment = {
             action: {
-                loading: false
+                loading: false,
+                success: false
             },
             form: {
                 content: null
@@ -31,13 +32,17 @@ angular.module('transcript.system.comment', ['ui.router'])
                 .then(function (response) {
                     $http.get($rootScope.api+'/threads/'+$scope.threadContainer.thread.id+'/comments')
                         .then(function (response) {
-                                //console.log(response.data);
-                                for(var comment in response.data.comments) {
-                                    response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
-                                }
-                                $scope.threadContainer = response.data;
-                                $scope.comment.form.content = "";
-                                $scope.comment.action.loading = false;
+                            //console.log(response.data);
+                            for(let comment in response.data.comments) {
+                                response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
+                            }
+                            $scope.threadContainer = response.data;
+                            $scope.comment.form.content = "";
+                            $scope.comment.action.loading = false;
+                            $scope.comment.action.success = true;
+                            $timeout(function() {
+                                $scope.comment.action.success = false;
+                            }, 5000);
                             }
                         );
                 }, function errorCallback(response) {

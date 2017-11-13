@@ -16,11 +16,27 @@ angular.module('transcript.app.content', ['ui.router'])
             },
             url: '/content/{id}',
             ncyBreadcrumb: {
-                parent: 'transcript.app.blog',
+                parent: function($scope) {
+                    if($scope.content.type === 'blogContent') {
+                        return 'transcript.app.blog';
+                    } else if($scope.content.type === 'helpContent') {
+                        return 'transcript.app.home';
+                    } else if($scope.content.type === 'staticContent') {
+                        return 'transcript.app.home';
+                    }
+                },
                 label: '{{ content.title }}'
             },
             tfMetaTags: {
-                title: '{{ content.title }}',
+                title:  function(content) {
+                    if(content.type === 'blogContent') {
+                        return content.title;
+                    } else if(content.type === 'helpContent') {
+                        return content.title;
+                    } else if(content.type === 'staticContent') {
+                        return content.title;
+                    }
+                },
             },
             resolve: {
                 content: function(ContentService, $transition$) {

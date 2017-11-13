@@ -17,7 +17,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                     label: 'Nouveau contenu'
                 },
                 tfMetaTags: {
-                    title: 'Nouveau',
+                    title: 'Nouveau | Contenus  | Administration',
                 },
                 resolve: {
                     content: function() {
@@ -38,7 +38,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                     label: 'Modification'
                 },
                 tfMetaTags: {
-                    title: '{{ content.title }} - Modification',
+                    title: '{{ content.title }} | Modification | Contenus  | Administration',
                 },
                 resolve: {
                     content: function(ContentService, $transition$) {
@@ -66,7 +66,8 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 content: null,
                 status: null,
                 type: null,
-                onHomepage: 0,
+                onHomepage: false,
+                enableComments: true,
                 updateComment: "Creation of the content",
                 tags: null,
                 illustration: null
@@ -158,6 +159,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 type: $scope.content.type,
                 status: $scope.content.status,
                 onHomepage: $scope.content.onHomepage,
+                enableComments: $scope.content.enableComments,
                 updateComment: $scope.content.updateComment,
                 tags: tagEncode,
                 illustration: $scope.content.illustration
@@ -167,26 +169,21 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 $http.post($rootScope.api+'/contents', form).
                 then(function (response) {
                     console.log(response.data);
-                    $scope.thread = CommentService.postThread('content-'+response.data.id);
-                    flash.success = "Votre contenu a bien été créé";
-                    flash.success = $sce.trustAsHtml(flash.success);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
+                    flash.success = "Vous allez être redirigé dans quelques instants ...";
                     $state.go('transcript.app.content', {id: response.data.id});
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(var field in response.data.errors.children) {
-                            for(var error in response.data.errors.children[field]) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
-                                }
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
+                    flash.error += "</ul>";
                     console.log(response);
                 });
             } else if($scope.content.id !== null) {
@@ -194,27 +191,23 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 $http.patch($rootScope.api+'/contents/'+$scope.content.id, form).
                 then(function (response) {
                     console.log(response.data);
-                    flash.success = "Votre contenu a bien été mis à jour";
-                    flash.success = $sce.trustAsHtml(flash.success);
+                    flash.success = "Le contenu a bien été mis à jour";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     $timeout(function() {
                         $scope.submit.success = false;
                     }, 5000);
                 }, function errorCallback(response) {
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(var field in response.data.errors.children) {
-                            for(var error in response.data.errors.children[field]) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
-                                }
+                    $scope.submit.loading = false;
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
                     }
-                    $scope.submit.loading = false;
+                    flash.error += "</ul>";
                     console.log(response);
                 });
             }
@@ -226,8 +219,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             $scope.remove.loading = true;
             $http.delete($rootScope.api+'/contents/'+$scope.content.id).
             then(function (response) {
-                flash.success = "Votre contenu a bien été supprimé";
-                flash.success = $sce.trustAsHtml(flash.success);
+                flash.success = "Votre contenu a bien été supprimé. Vous allez être redirigé dans quelques instants ...";
                 $scope.submit.loading = false;
                 $state.go('transcript.admin.content.list');
             }, function errorCallback(response) {

@@ -1,23 +1,23 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <label for="app-entity-edit-name" class="form-control-label">Nom de la localité <span class="red-color">*</span></label>
-        <input id="app-entity-edit-name" class="form-control form-control-sm" data-ng-model="entity.name" required="required" />
+        <input id="app-entity-edit-name" class="form-control form-control-sm" ng-model="entity.name" required="required" />
     </div>
     <div class="form-group col-md-6">
         <label for="app-entity-edit-city" class="form-control-label">Ville</label>
-        <input id="app-entity-edit-city" class="form-control form-control-sm" data-ng-model="entity.city" placeholder="Si la localité n'est pas une ville" />
+        <input id="app-entity-edit-city" class="form-control form-control-sm" ng-model="entity.city" placeholder="Si la localité n'est pas une ville" />
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-6">
         <label for="app-entity-edit-frenchDepartement" class="form-control-label">Département</label>
-        <input id="app-entity-edit-frenchDepartement" class="form-control form-control-sm" data-ng-model="entity.frenchDepartement" />
+        <input id="app-entity-edit-frenchDepartement" class="form-control form-control-sm" ng-model="entity.frenchDepartement" />
         <small class="text-muted">Pour les localités françaises seulement</small>
     </div>
     <div class="form-group col-md-6">
         <label for="app-entity-edit-frenchRegion" class="form-control-label">Région</label>
-        <input id="app-entity-edit-frenchRegion" class="form-control form-control-sm" data-ng-model="entity.frenchRegion" />
+        <input id="app-entity-edit-frenchRegion" class="form-control form-control-sm" ng-model="entity.frenchRegion" />
         <small class="text-muted">Pour les localités françaises seulement</small>
     </div>
 </div>
@@ -25,21 +25,21 @@
 <div class="form-row">
     <div class="form-group col-md-6">
         <label for="app-entity-edit-country" class="form-control-label">Pays</label>
-        <input id="app-entity-edit-country" class="form-control form-control-sm" data-ng-model="entity.country" />
+        <input id="app-entity-edit-country" class="form-control form-control-sm" ng-model="entity.country" />
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-description" class="form-control-label">Description</label>
-        <textarea id="app-entity-edit-description" class="form-control form-control-sm" data-ng-model="entity.description"></textarea>
+        <textarea id="app-entity-edit-description" class="form-control form-control-sm" ng-model="entity.description"></textarea>
     </div>
 </div>
 
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-geonameId" class="form-control-label">Identifiant Geonames</label>
-        <input id="app-entity-edit-geonameId" class="form-control form-control-sm" data-ng-model="entity.geonamesId" />
+        <input id="app-entity-edit-geonameId" class="form-control form-control-sm" ng-model="entity.geonamesId" />
         <small class="text-muted">Inscrire uniquement l'identifiant et non toute l'URL (ex <code>2988784</code>)</small>
     </div>
 </div>
@@ -47,18 +47,10 @@
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-geographicalCoordinates" class="form-control-label">Coordonnées géographiques</label>
-        <input id="app-entity-edit-geographicalCoordinates" class="form-control form-control-sm" data-ng-model="entity.geographicalCoordinates" />
+        <input id="app-entity-edit-geographicalCoordinates" class="form-control form-control-sm" ng-model="entity.geographicalCoordinates" />
         <small class="text-muted">À formater de la manière suivante latitude+longitude (ex <code>49.42535+3.69726</code>)</small>
     </div>
 </div>
 
-<div class="form-row" data-ng-if="context == 'edit'">
-    <div class="form-group col-md-12">
-        <label for="app-entity-edit-updateComment" class="form-control-label">Commentaire de modification</label>
-        <input id="app-entity-edit-updateComment" class="form-control form-control-sm" data-ng-model="entity.updateComment" />
-    </div>
-</div>
-<div class="text-right mt-2">
-    <button data-ng-click="submit.action()" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-</div>
+<div ng-include="'App/Taxonomy/tpl/form-submit.html'"></div>
 <div class="clearfix"></div>

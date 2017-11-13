@@ -1,9 +1,9 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 <main class="container" role="main">
@@ -15,12 +15,12 @@
         <div class="col-sm-2">
             <div class=" text-center">
                 <div class="m-4">
-                    <i data-ng-if="recipientUser.picture == null || recipientUser.picture == ''" class="text-light fa fa-user-circle  fa-5x" aria-hidden="true"></i>
-                    <img data-ng-if="recipientUser.picture != null && recipientUser.picture != ''" class="img-fluid img-rounded" src="{{ recipientUser.picture }}" />
+                    <i ng-if="recipientUser.picture == null || recipientUser.picture == ''" class="text-light fa fa-user-circle  fa-5x" aria-hidden="true"></i>
+                    <img ng-if="recipientUser.picture != null && recipientUser.picture != ''" class="img-fluid img-rounded" src="{{ recipientUser.picture }}" />
                 </div>
                 <div>
                     <h3><a class="text-dark" ui-sref="transcript.app.user.profile({id: recipientUser.id})">{{ recipientUser.name }}</a></h3>
-                    <span data-ng-repeat="role in recipientUser.roles" class="badge badge-pill badge-primary">{{ role }}</span>
+                    <span ng-repeat="role in recipientUser.roles" class="badge badge-pill badge-primary">{{ role }}</span>
                 </div>
             </div>
         </div>

@@ -1,9 +1,9 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 
@@ -15,12 +15,12 @@
                 <div class="form-group row">
                     <label for="app-security-resetting-email" class="col-md-4 col-form-label text-md-right">Votre email</label>
                     <div class="col-md-8 ">
-                        <input type="email" placeholder="Votre email" id="app-security-resetting-email" name="app-security-resetting-email" data-ng-model="form.email" required="required" class="form-control form-control-sm"  />
+                        <input type="email" placeholder="Votre email" id="app-security-resetting-email" name="app-security-resetting-email" ng-model="form.email" required="required" class="form-control form-control-sm"  />
                     </div>
                 </div>
                 <div class="row text-right">
                     <div class="col-12">
-                        <button class="btn btn-sm btn-primary" data-ng-click="submit.action()">Soumettre <i class="fa fa-spin fa-circle-o-notch" data-ng-if="submit.loading == true"></i></button>
+                        <button class="btn btn-sm btn-primary" ng-click="submit.action()">Soumettre <i class="fa fa-spin fa-circle-o-notch" ng-if="submit.loading == true"></i></button>
                     </div>
                 </div>
             </form>

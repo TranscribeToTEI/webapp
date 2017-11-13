@@ -16,7 +16,7 @@ angular.module('transcript.app.security.resetting', ['ui.router'])
     }])
 
     .controller('AppSecurityResettingCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
-        tfMetaTags.setTitleSuffix(' | Réinitialisation du mot de passe '+tfMetaTags.getTitleSuffix());
+        tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
 
         if($rootScope.user !== undefined && $rootScope.user !== null) {
             $state.go('transcript.app.user.profile', {id: $rootScope.user.id});

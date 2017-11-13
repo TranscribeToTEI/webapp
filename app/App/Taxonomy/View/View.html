@@ -3,7 +3,7 @@
     <div flash-alert active-class="in alert" class="fade" duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
     <div ng-if="(user.roles | contains:'ROLE_TAXONOMY_EDIT') == false && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')" ng-include="'App/Taxonomy/tpl/ask-edit-access.html'"></div>
 </div>

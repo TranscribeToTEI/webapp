@@ -14,7 +14,7 @@
 
 <div class="tab-content">
     <ul ng-if="entities.length > 0">
-        <li data-ng-repeat="iEntity in entities">
+        <li ng-repeat="iEntity in entities">
             <a ng-if="iEntity.id != entity.id" ui-sref="transcript.app.taxonomy.view({type: entity.dataType, id: iEntity.id})" class="ng-binding ng-scope">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</a>
             <span ng-if="iEntity.id == entity.id">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</span>
         </li>

@@ -16,7 +16,7 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
                 label: 'Testaments à valider'
             },
             tfMetaTags: {
-                title: 'Testaments à valider',
+                title: 'Testaments à valider | Transcription | Administration',
             },
             resolve: {
                 transcripts: function(TranscriptService) {

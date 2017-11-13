@@ -3,10 +3,10 @@
     <div data-ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
         Cette transcription n'est pas commencée. Cliquez sur le bouton "<i class="fa fa-edit"></i> <span ng-if="role != 'readOnly'">Commencer cette transcription</span><span ng-if="role == 'readOnly'">Participer à la transcription</span>" pour y contribuer.
     </div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 

@@ -20,7 +20,7 @@ angular.module('transcript.service.user-preference', ['ui.router'])
                     $rootScope.api+"/preferences/"+id,
                     form
                 ).then(function(response) {
-                    return response.data;
+                    return response;
                 }, function errorCallback(response) {
                     console.log(response);
                     return response;

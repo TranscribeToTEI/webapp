@@ -21,7 +21,7 @@ angular.module('transcript.admin.training.view', ['ui.router'])
                     label: '{{ trainingContent.title }}'
                 },
                 tfMetaTags: {
-                    title: '{{ trainingContent.title }}',
+                    title: '{{ trainingContent.title }} | Entrainement | Administration ',
                 },
                 resolve: {
                     trainingContent: function(TrainingContentService, $transition$) {
@@ -69,40 +69,6 @@ angular.module('transcript.admin.training.view', ['ui.router'])
                 }
             }
         };
-
-        /* Submit data */
-        $scope.media.submit.action = function(type) {
-            let picture = null;
-            if(type === 'illustration') {
-                $scope.media.submit.loading.illustration = true;
-                picture = $scope.media.form.illustration;
-            } else if(type === 'exerciseImageToTranscribe') {
-                $scope.media.submit.loading.exerciseImageToTranscribe = true;
-                picture = $scope.media.form.exerciseImageToTranscribe;
-            }
-
-            upload(type, picture);
-        };
-
-        function upload(type, picture) {
-            Upload.upload = Upload.upload({
-                url: $rootScope.api+"/media-contents?type=TrainingContent&field="+type+"&id="+$scope.trainingContent.id,
-                data: {media: picture}
-            }).then(function (response) {
-                console.log(response);
-                if(type === 'illustration') {
-                    $scope.media.submit.loading.illustration = false;
-                    $scope.trainingContent.illustration = response.data.illustration;
-                } else if(type === 'exerciseImageToTranscribe') {
-                    $scope.media.submit.loading.exerciseImageToTranscribe = false;
-                    $scope.trainingContent.exerciseImageToTranscribe = response.data.exerciseImageToTranscribe;
-                }
-            }, function errorCallback(error) {
-                console.log(error);
-                if(type === 'illustration') { $scope.media.submit.loading.illustration = false;}
-                else if(type === 'exerciseImageToTranscribe') { $scope.media.submit.loading.exerciseImageToTranscribe = false;}
-            });
-        }
         /* End: Upload new media ------------------------------------------------------------------------------------ */
     }])
 ;

@@ -2,24 +2,24 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-name" class="form-control-label">Nom complet <span class="red-color">*</span></label>
-            <input id="app-entity-edit-name" class="form-control form-control-sm" data-ng-model="entity.name" required="required" />
+            <input id="app-entity-edit-name" class="form-control form-control-sm" ng-model="entity.name" required="required" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-surname" class="form-control-label">Nom de famille <span class="red-color">*</span></label>
-            <input id="app-entity-edit-surname" class="form-control form-control-sm" data-ng-model="entity.surname" required="required" />
+            <input id="app-entity-edit-surname" class="form-control form-control-sm" ng-model="entity.surname" required="required" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-firstnames" class="form-control-label">Prénoms <span class="red-color">*</span></label>
-            <input id="app-entity-edit-firstnames" class="form-control form-control-sm" data-ng-model="entity.firstnames" placeholder="Séparés par des espaces" required="required" />
+            <input id="app-entity-edit-firstnames" class="form-control form-control-sm" ng-model="entity.firstnames" placeholder="Séparés par des espaces" required="required" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-profession" class="form-control-label">Profession</label>
-            <input id="app-entity-edit-profession" class="form-control form-control-sm" data-ng-model="entity.profession" />
+            <input id="app-entity-edit-profession" class="form-control form-control-sm" ng-model="entity.profession" />
         </div>
     </div>
 </fieldset>
@@ -29,24 +29,24 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-address-number" class="form-control-label">Numéro</label>
-            <input id="app-entity-edit-address-number" class="form-control form-control-sm" data-ng-model="entity.addressNumber" />
+            <input id="app-entity-edit-address-number" class="form-control form-control-sm" ng-model="entity.addressNumber" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-address-street" class="form-control-label">Rue</label>
-            <input id="app-entity-edit-address-street" class="form-control form-control-sm" data-ng-model="entity.addressStreet" />
+            <input id="app-entity-edit-address-street" class="form-control form-control-sm" ng-model="entity.addressStreet" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-address-district" class="form-control-label">Quartier</label>
-            <input id="app-entity-edit-address-district" class="form-control form-control-sm" data-ng-model="entity.addressDistrict" />
+            <input id="app-entity-edit-address-district" class="form-control form-control-sm" ng-model="entity.addressDistrict" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-address-city" class="form-control-label">Ville</label>
-            <input id="app-entity-edit-address-city" class="form-control form-control-sm" data-ng-model="entity.addressCity" />
+            <input id="app-entity-edit-address-city" class="form-control form-control-sm" ng-model="entity.addressCity" />
         </div>
     </div>
 </fieldset>
@@ -55,24 +55,24 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-dateOfBirth" class="form-control-label">Date de naissance <span class="red-color">*</span></label>
-            <input id="app-entity-edit-dateOfBirth" class="form-control form-control-sm" data-ng-model="entity.dateOfBirth" required="required" />
+            <input id="app-entity-edit-dateOfBirth" class="form-control form-control-sm" ng-model="entity.dateOfBirth" required="required" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-yearOfBirth" class="form-control-label">Année de naissance <span class="red-color">*</span></label>
-            <input id="app-entity-edit-yearOfBirth" class="form-control form-control-sm" data-ng-model="entity.yearOfBirth" required="required" />
+            <input id="app-entity-edit-yearOfBirth" class="form-control form-control-sm" ng-model="entity.yearOfBirth" required="required" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-dateOfDeath" class="form-control-label">Date de décès <span class="red-color">*</span></label>
-            <input id="app-entity-edit-dateOfDeath" class="form-control form-control-sm" data-ng-model="entity.dateOfDeath" required="required" />
+            <input id="app-entity-edit-dateOfDeath" class="form-control form-control-sm" ng-model="entity.dateOfDeath" required="required" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-yearOfDeath" class="form-control-label">Année de décès <span class="red-color">*</span></label>
-            <input id="app-entity-edit-yearOfDeath" class="form-control form-control-sm" data-ng-model="entity.yearOfDeath" required="required" />
+            <input id="app-entity-edit-yearOfDeath" class="form-control form-control-sm" ng-model="entity.yearOfDeath" required="required" />
         </div>
     </div>
 </fieldset>
@@ -81,12 +81,12 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-placeOfBirth" class="form-control-label">Lieu de naissance</label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirth" data-ng-model="entity.placeOfBirth.id" name="app-entity-edit-placeOfBirth" data-ng-options="place.id as place.name for place in places"></select>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirth" ng-model="entity.placeOfBirth.id" name="app-entity-edit-placeOfBirth" ng-options="place.id as place.name for place in places"></select>
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-placeOfDeath" class="form-control-label">Lieu de décès <span class="red-color">*</span></label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeath" data-ng-model="entity.placeOfDeath.id" name="app-entity-edit-placeOfDeath" data-ng-options="place.id as place.name for place in places" required="required"></select>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeath" ng-model="entity.placeOfDeath.id" name="app-entity-edit-placeOfDeath" ng-options="place.id as place.name for place in places" required="required"></select>
         </div>
     </div>
 
@@ -97,9 +97,9 @@
             <div class="card-body">
                 <div class="form-group col-md-12">
                     <label for="app-entity-edit-addPlace" class="form-control-label">Nom de votre lieu</label>
-                    <input id="app-entity-edit-addPlace" class="form-control form-control-sm" data-ng-model="addPlace.name" />
+                    <input id="app-entity-edit-addPlace" class="form-control form-control-sm" ng-model="addPlace.name" />
                 </div>
-                <button data-ng-click="addPlace.action()" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="addPlace.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                <button ng-click="addPlace.action()" class="btn btn-sm btn-primary">Soumettre <i ng-if="addPlace.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
             </div>
         </div>
     </div>
@@ -109,12 +109,12 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-deathMention" class="form-control-label">Mention de mort <span class="red-color">*</span></label>
-            <input id="app-entity-edit-deathMention" class="form-control form-control-sm" data-ng-model="entity.deathMention" required="required" />
+            <input id="app-entity-edit-deathMention" class="form-control form-control-sm" ng-model="entity.deathMention" required="required" />
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-memoireDesHommes" class="form-control-label">Liens vers Mémoire des Hommes <span class="red-color">*</span></label>
-            <input id="app-entity-edit-memoireDesHommes" class="form-control form-control-sm" data-ng-model="entity.memoireDesHommes" placeholder="Si plusieurs liens, les séparer par des virgules" required="required" />
+            <input id="app-entity-edit-memoireDesHommes" class="form-control form-control-sm" ng-model="entity.memoireDesHommes" placeholder="Si plusieurs liens, les séparer par des virgules" required="required" />
         </div>
     </div>
 </fieldset>
@@ -123,29 +123,45 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-military-unit" class="form-control-label">Unité militaire</label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-military-unit" data-ng-model="entity.militaryUnit.id" name="app-entity-edit-military-unit" data-ng-options="militaryUnit.id as militaryUnit.name for militaryUnit in militaryUnits"></select>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-military-unit" ng-model="entity.militaryUnit.id" name="app-entity-edit-military-unit" ng-options="militaryUnit.id as militaryUnit.name for militaryUnit in militaryUnits"></select>
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-rank" class="form-control-label">Rang</label>
-            <input id="app-entity-edit-rank" class="form-control form-control-sm" data-ng-model="entity.rank" />
+            <input id="app-entity-edit-rank" class="form-control form-control-sm" ng-model="entity.rank" />
         </div>
     </div>
 </fieldset>
 
-<div class="form-row">
-    <div class="form-group col-md-12">
-        <label for="app-entity-edit-description" class="form-control-label">Description - Biographie</label>
-        <textarea id="app-entity-edit-description" class="form-control form-control-sm" data-ng-model="entity.description"></textarea>
+<fieldset>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="app-entity-edit-description" class="form-control-label">Description - Biographie</label>
+            <textarea id="app-entity-edit-description" class="form-control form-control-sm" ng-model="entity.description"></textarea>
+        </div>
     </div>
-</div>
+</fieldset>
 
-<div class="form-row" data-ng-if="context == 'edit'">
-    <div class="form-group col-md-12">
-        <input id="app-entity-edit-updateComment" class="form-control form-control-sm" data-ng-model="entity.updateComment" />
+<fieldset>
+    <div class="form-group row">
+        <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Photographie du testateur</label>
+        <div class="col-md-5">
+            <input id="admin-content-edit-image" class="form-control form-control-sm" ng-model="entity.picture" />
+            <small class="form-text text-muted">Spécifiez l'URL de votre image ou uploadez une image ci-contre</small>
+            <div ng-if="entity.picture != null"><img src="{{ entity.picture | imageRender }}" class="img-150px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" /></div>
+        </div>
+        <div class="col-md-5">
+            <input id="app-user-edit-picture" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+            <i ng-show="myForm.file.$error.required">*required</i><br>
+            <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+            <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" />
+            <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+            <button ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" ng-click="media.submit.action()">Soumettre</button>
+            <button ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+            <button ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
+        </div>
     </div>
-</div>
-<div class="text-right mt-2">
-    <button data-ng-click="submit.action()" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-</div>
+</fieldset>
+
+<div ng-include="'App/Taxonomy/tpl/form-submit.html'"></div>
 <div class="clearfix"></div>

@@ -17,7 +17,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     label: 'Modification'
                 },
                 tfMetaTags: {
-                    title: 'Modification de {{ entity.name }}',
+                    title: 'Modification de {{ entity.name }} | Notices d\'autorité',
                 },
                 resolve: {
                     entity: function(TaxonomyService, $transition$) {
@@ -49,6 +49,9 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     parent: 'transcript.app.taxonomy.home',
                     label: 'Nouveau'
                 },
+                tfMetaTags: {
+                    title: 'Nouvelle | Notices d\'autorité',
+                },
                 resolve: {
                     entity: function() {
                         return null;
@@ -69,7 +72,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             })
     }])
 
-    .controller('AppTaxonomyEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'entity', 'entities', 'TaxonomyService', '$transition$', 'flash', 'testators', 'places', 'militaryUnits', 'GeonamesService', '$filter', function($rootScope, $scope, $http, $sce, $state, entity, entities, TaxonomyService, $transition$, flash, testators, places, militaryUnits, GeonamesService, $filter) {
+    .controller('AppTaxonomyEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', function($rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, entity, entities, testators, places, militaryUnits) {
         if(($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization')) || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.error.403');}
 
         /* -- Functions Loader -------------------------------------------------------------------------------------- */
@@ -80,25 +83,29 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             function fillForm(data, type) {
                 return TaxonomyService.getFormType(data, type);
             }
+            console.log($scope.form);
 
             function patchEntity() {
-                return TaxonomyService.patchTaxonomyEntity(dataType, entity.id, $scope.form).then(function(data) {
-                    $scope.submit.loading = false;
-                    $state.go('transcript.app.taxonomy.view', {type: dataType, id: data.id});
-                }, function errorCallback(response) {
-                    $scope.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                return TaxonomyService.patchTaxonomyEntity(dataType, entity.id, $scope.form)
+                    .then(function(response) {
+                        $scope.submit.loading = false;
+                        if(response.status === 200) {
+                            $scope.submit.success = true;
+                            flash.success = "Vous allez être redirigé dans quelques instants...";
+                            $state.go('transcript.app.taxonomy.view', {type: dataType, id: response.data.id});
+                        } else if(response.data.code === 400) {
+                            flash.error = "<ul>";
+                            for(let field of response.data.errors.children) {
+                                for(let error of field) {
+                                    if(error === "errors") {
+                                        flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                                    }
                                 }
                             }
+                            flash.error += "</ul>";
                         }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
+                }, function errorCallback(response) {
+                    $scope.submit.loading = false;
                     console.log(response);
                 });
             }
@@ -114,30 +121,34 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             }
 
             function postEntity() {
-                return TaxonomyService.postTaxonomyEntity(dataType, $scope.form).then(function(data) {
-                    $scope.submit.loading = false;
-                    if(action === "redirect") {
-                        $state.go('transcript.app.taxonomy.view', {type: dataType, id: data.id});
-                    } else if(action === "reloadPlaces") {
-                        $scope.form = null;
-                        return TaxonomyService.getTaxonomyEntities("places").then(function(data) {
-                            $scope.places = data;
-                        });
-                    }
-                }, function errorCallback(response) {
-                    $scope.submit.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                return TaxonomyService.postTaxonomyEntity(dataType, $scope.form)
+                    .then(function(response) {
+                        $scope.submit.loading = false;
+                        if(response.status === 200 || response.status === 201) {
+                            $scope.submit.success = true;
+                            if(action === "redirect") {
+                                flash.success = "Vous allez être redirigé dans quelques instants...";
+                                $state.go('transcript.app.taxonomy.view', {type: dataType, id: data.id});
+                            } else if(action === "reloadPlaces") {
+                                $scope.form = null;
+                                return TaxonomyService.getTaxonomyEntities("places").then(function(data) {
+                                    $scope.places = data;
+                                });
+                            }
+                            $state.go('transcript.app.taxonomy.view', {type: dataType, id: data.id});
+                        } else if(response.data.code === 400) {
+                            flash.error = "<ul>";
+                            for(let field of response.data.errors.children) {
+                                for(let error of field) {
+                                    if(error === "errors") {
+                                        flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                                    }
                                 }
                             }
+                            flash.error += "</ul>";
                         }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
+                }, function errorCallback(response) {
+                    $scope.submit.loading = false;
                     console.log(response);
                 });
             }
@@ -151,7 +162,8 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         $scope.entities = entities;
 
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
         /* -- End : Scope management -------------------------------------------------------------------------------- */
 
@@ -178,23 +190,25 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
 
                 function removeEntity() {
                     let dataType = $scope.entity.dataType;
-                    return TaxonomyService.removeTaxonomyEntity($scope.entity.dataType, $scope.entity.id).then(function(data) {
-                        $scope.remove.loading = false;
-                        $state.go('transcript.app.taxonomy.list', {type: dataType});
-                    }, function errorCallback(response) {
-                        $scope.remove.loading = false;
-                        if(response.data.code === 400) {
-                            flash.error = "<ul>";
-                            for(let field of response.data.errors.children) {
-                                for(let error of field) {
-                                    if(error === "errors") {
-                                        flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                    return TaxonomyService.removeTaxonomyEntity($scope.entity.dataType, $scope.entity.id)
+                        .then(function(response) {
+                            if(response.status === 200) {
+                                $scope.remove.loading = false;
+                                flash.success = "Ce contenu a bien été supprimé. Vous allez être redirigé dans quelques instants...";
+                                $state.go('transcript.app.taxonomy.list', {type: dataType});
+                            } else if(response.status === 400) {
+                                flash.error = "<ul>";
+                                for(let field of response.data.errors.children) {
+                                    for(let error of field) {
+                                        if(error === "errors") {
+                                            flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                                        }
                                     }
                                 }
+                                flash.error += "</ul>";
                             }
-                            flash.error += "</ul>";
-                            flash.error = $sce.trustAsHtml(flash.error);
-                        }
+                    }, function errorCallback(response) {
+                        $scope.remove.loading = false;
                         console.log(response);
                     });
                 }
@@ -287,28 +301,80 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             requestGeonames();
 
             function requestGeonames() {
-                return GeonamesService.search($scope.geonames.keywords).then(function(data) {
-                    $scope.geonames.loading = false;
-                    console.log(data);
-                    $scope.geonames.result = data;
-                }, function errorCallback(response) {
-                    $scope.geonames.loading = false;
-                    if(response.data.code === 400) {
-                        flash.error = "<ul>";
-                        for(let field of response.data.errors.children) {
-                            for(let error of field) {
-                                if(error === "errors") {
-                                    flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                return GeonamesService.search($scope.geonames.keywords)
+                    .then(function(response) {
+                        $scope.geonames.loading = false;
+                        console.log(response);
+                        if(response.status === 200) {
+                            $scope.geonames.result = response.data;
+                        } else if(response.data.code === 400) {
+                            flash.error = "<ul>";
+                            for(let field of response.data.errors.children) {
+                                for(let error of field) {
+                                    if(error === "errors") {
+                                        flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
+                                    }
                                 }
                             }
+                            flash.error += "</ul>";
                         }
-                        flash.error += "</ul>";
-                        flash.error = $sce.trustAsHtml(flash.error);
-                    }
+                }, function errorCallback(response) {
+                    $scope.geonames.loading = false;
                     console.log(response);
                 });
             }
         };
         /* -- End Geonames management ------------------------------------------------------------------------------- */
+
+        /* Upload new media ----------------------------------------------------------------------------------------- */
+        $scope.media = {
+            form: {
+                image: null
+            },
+            submit: {
+                loading: false,
+                success: false
+            }
+        };
+
+        /* Submit data */
+        $scope.media.submit.action = function() {
+            $scope.media.submit.loading = true;
+            upload();
+        };
+
+        function upload() {
+            let type = "", field = "";
+            if($scope.entity.dataType === 'testators') {
+                type = 'Testator';
+                field = 'picture';
+            }
+
+            let url = "/media-contents?type="+type+"&field="+field;
+            if($scope.entity.id !== undefined && $scope.entity.id !== null) {
+                url = "/media-contents?type="+type+"&field="+field+"&id="+$scope.entity.id;
+            }
+            Upload.upload = Upload.upload({
+                url: $rootScope.api+url,
+                data: {media: $scope.media.form.illustration}
+            }).then(function (response) {
+                console.log(response);
+                $scope.media.submit.loading = false;
+                $scope.media.submit.success = true;
+                $timeout(function() {
+                    $scope.media.submit.success = false;
+                }, 5000);
+
+                if($scope.entity.dataType === 'testators' && $scope.entity.id !== undefined && $scope.entity.id !== null) {
+                    $scope.entity.picture = response.data.picture;
+                } else {
+                    $scope.entity.picture = response.data;
+                }
+            }, function errorCallback(error) {
+                console.log(error);
+                $scope.media.submit.loading = false;
+            });
+        }
+        /* End: Upload new media ------------------------------------------------------------------------------------ */
     }])
 ;

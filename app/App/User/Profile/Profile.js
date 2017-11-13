@@ -17,7 +17,9 @@ angular.module('transcript.app.user.profile', ['ui.router'])
                     label: '{{ iUser.name }}'
                 },
                 tfMetaTags: {
-                    title: 'Profil de {{ iUser.name }}',
+                    title: function(userEdit) {
+                        return userEdit.name+' | Profil utilisateur';
+                    }
                 },
                 resolve: {
                     userEdit: function(UserService, $transition$) {

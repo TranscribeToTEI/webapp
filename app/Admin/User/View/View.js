@@ -16,7 +16,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                 label: 'Modification de {{ iUser.name }}'
             },
             tfMetaTags: {
-                title: 'Modification de {{ iUser.name }}',
+                title: 'Modification de {{ iUser.name }} | Utilisateurs | Administration',
             },
             resolve: {
                 user: function(UserService, $transition$) {
@@ -26,11 +26,12 @@ angular.module('transcript.admin.user.view', ['ui.router'])
         })
     }])
 
-    .controller('AdminUserViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'flash', function($rootScope, $scope, $http, $sce, $state, user, flash) {
+    .controller('AdminUserViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'flash', '$timeout', function($rootScope, $scope, $http, $sce, $state, user, flash, $timeout) {
         $scope.iUser = user;
         $scope.roles = {
             submit: {
-                loading: false
+                loading: false,
+                success: false
             }
         };
 
@@ -46,23 +47,27 @@ angular.module('transcript.admin.user.view', ['ui.router'])
             $http.post($rootScope.api+'/users/'+$scope.iUser.id+"/roles", form).
             then(function (response) {
                 console.log(response.data);
-                flash.success = $sce.trustAsHtml("Les rôles ont bien été mis à jour");
+                flash.success = "Les rôles ont bien été mis à jour";
                 $scope.roles.submit.loading = false;
+                $scope.roles.submit.success = true;
+                $timeout(function() {
+                    $scope.roles.submit.success = false;
+                }, 5000);
             }, function errorCallback(response) {
+                $scope.roles.submit.loading = false;
                 if(response.data.code === 400) {
                     flash.error = "<ul>";
-                    for(var field in response.data.errors.children) {
-                        for(var error in response.data.errors.children[field]) {
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
                             if(error === "errors") {
                                 flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                             }
                         }
                     }
                     flash.error += "</ul>";
-                    flash.error = $sce.trustAsHtml(flash.error);
+
                 }
                 console.log(response);
-                $scope.roles.submit.loading = false;
             });
         };
     }])

@@ -16,12 +16,12 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                 label: 'Demande d\'accès'
             },
             tfMetaTags: {
-                title: 'Demande d\'accès',
+                title: 'Demande d\'accès | Notices d\'autorité',
             }
         })
     }])
 
-    .controller('AppTaxonomyAskCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'flash', 'AccessService', 'UserService', function($rootScope, $scope, $http, $sce, $state, $filter, flash, AccessService, UserService) {
+    .controller('AppTaxonomyAskCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$timeout', 'flash', 'AccessService', 'UserService', function($rootScope, $scope, $http, $sce, $state, $filter, $timeout, flash, AccessService, UserService) {
         if($rootScope.user === undefined) {$state.go('transcript.error.403');}
         if($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === true || $rootScope.preferences.taxonomyEditAccess === 'free' || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.app.taxonomy.home');}
 
@@ -35,7 +35,8 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
             taxonomyRequest: null
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         $scope.submit.action = function() {
@@ -59,8 +60,12 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
             return AccessService.patchAccess(form, $rootScope.user._embedded.accesses.id).then(function(data) {
                 if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
                     $scope.submit.loading = false;
+                    $scope.submit.success = true;
+                    $timeout(function() {
+                        $scope.submit.success = false;
+                    }, 5000);
                     $scope.context = "sent";
-                    $rootScope.user._embedded.accesses = data;
+                    $state.reload();
                 } else if($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization') {
                     $rootScope.user._embedded.accesses = data;
                     setRole();
@@ -77,7 +82,6 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    flash.error = $sce.trustAsHtml(flash.error);
                 }
                 console.log(response);
             });

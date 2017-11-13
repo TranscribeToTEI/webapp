@@ -20,7 +20,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                 label: '{{ entity.name }}'
             },
             tfMetaTags: {
-                title: '{{ entity.name }}',
+                title: '{{ entity.name }} | Notices d\'autorité',
             },
             resolve: {
                 entity: function(TaxonomyService, $transition$) {

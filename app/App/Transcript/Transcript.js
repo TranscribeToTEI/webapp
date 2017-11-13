@@ -1406,8 +1406,8 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         "status": "validated"
                     }, $scope.transcript.id
                 ).then(function (response) {
-                    console.log(response.data);
-                    $scope.transcript = response.data;
+                    console.log(response);
+                    $scope.transcript = response;
                     $scope.admin.validation.accept.loading = false;
                     $state.go('transcript.app.edition', {idEntity: $scope.entity.id, idResource: $scope.resource.id});
                 });
@@ -1425,10 +1425,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         "status": "transcription"
                     }, $scope.transcript.id
                 ).then(function (response) {
-                    console.log(response.data);
-                    $scope.transcript = response.data;
+                    console.log(response);
+                    $scope.transcript = response;
                     $scope.admin.validation.refuse.loading = false;
-                    $state.go('transcript.app.edition', {idEntity: $scope.entity.id, idResource: $scope.resource.id});
                 });
             };
             /* Admin Management ----------------------------------------------------------------------------------------- */

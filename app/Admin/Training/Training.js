@@ -17,6 +17,6 @@ angular.module('transcript.admin.training', ['ui.router'])
 
 
     .controller('AdminTrainingCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
-        tfMetaTags.setTitleSuffix(' - Entrainement '+tfMetaTags.getTitleSuffix());
+        tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;

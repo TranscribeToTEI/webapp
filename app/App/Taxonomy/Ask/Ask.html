@@ -1,9 +1,9 @@
 <div class="container">
     <div ncy-breadcrumb></div>
-    <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
         <button type="button" class="close" ng-click="hide()">&times;</button>
-        <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
 </div>
 
@@ -13,17 +13,25 @@
         <div class="col-sm-12" ng-if="preferences.taxonomyEditAccess == 'controlledAuthorization'">
             <form ng-if="context == 'ask'">
                 <div class="form-group">
-                    <label for="app-taxonomy-ask-request">Pouvez-vous détailler vos connaissances ? <span class="red-color">*</span></label>
-                    <textarea type="text" class="form-control" rows="3" data-ng-model="form.taxonomyRequest"  id="app-taxonomy-ask-request" required="required" ></textarea>
+                    <label for="app-taxonomy-ask-request"><span ng-if="preferences.taxonomyAskQuestion == null">Pouvez-vous détailler vos connaissances ?</span><span ng-if="preferences.taxonomyAskQuestion != null" ng-bind-html="preferences.taxonomyAskQuestion | trustAsHtml" style="display: inline-block;"></span> <span class="red-color">*</span></label>
+                    <textarea class="form-control" rows="3" ng-model="form.taxonomyRequest"  id="app-taxonomy-ask-request" required="required" ></textarea>
                 </div>
-
-                <button type="submit"  data-ng-click="submit.action()" class="btn btn-primary ">Soumettre ma demande <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                <div class="text-right mt-2">
+                    <button class="btn btn-sm" type="button"
+                            ng-disabled="!(!!form.taxonomyRequest)"
+                            ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                            ng-click="submit.action()">
+                        <span ng-if="submit.success == false && submit.loading == false">Soumettre ma demande</span>
+                        <span ng-if="submit.success == false && submit.loading == true">Envoi de la demande <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                        <span ng-if="submit.success == true">Succès !</span>
+                    </button>
+                </div>
             </form>
 
             <div class="card" ng-if="context == 'sent'" >
                 <div class="card-body">
                     <h3 class="card-title">Requête envoyée</h3>
-                    <p>Merci pour votre participation !<br />Votre requête a bien été envoyée. Elle sera examinée par un administrateur dans les meilleurs délais. Vous recevrez un email à l'issue de son traiement.</p>
+                    <p>Merci pour votre participation !<br />Votre requête a bien été envoyée. Elle sera examinée par un administrateur dans les meilleurs délais. Vous recevrez un email à l'issue de son traitement.</p>
                     <a class="btn btn-secondary" ui-sref="transcript.app.taxonomy.home">Retour</a>
                 </div>
             </div>
@@ -35,7 +43,11 @@
         <div class="col-sm-12" ng-if="preferences.taxonomyEditAccess == 'selfAuthorization'">
             <form ng-if="context == 'ask'" class="text-center">
                 <p>Cliquez sur le bouton ci-dessous pour obtenir les droits de modification des notices descriptives.</p>
-                <button type="submit"  data-ng-click="submit.action()" class="btn btn-primary ">Accéder à l'édition <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                <button class="btn btn-sm" type="button" ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}" ng-click="submit.action()">
+                    <span ng-if="submit.success == false && submit.loading == false">Accéder à l'édition</span>
+                    <span ng-if="submit.success == false && submit.loading == true">Mise à jour des accès <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                    <span ng-if="submit.success == true">Succès !</span>
+                </button>
             </form>
 
             <div class="card" ng-if="context == 'sent'" >

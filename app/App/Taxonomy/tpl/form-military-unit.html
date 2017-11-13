@@ -1,40 +1,33 @@
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-name" class="form-control-label">Nom <span class="red-color">*</span></label>
-        <input id="app-entity-edit-name" class="form-control form-control-sm" data-ng-model="entity.name" required="required" />
+        <input id="app-entity-edit-name" class="form-control form-control-sm" ng-model="entity.name" required="required" />
     </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-country" class="form-control-label">Pays</label>
-        <input id="app-entity-edit-country" class="form-control form-control-sm" data-ng-model="entity.country" />
+        <input id="app-entity-edit-country" class="form-control form-control-sm" ng-model="entity.country" />
     </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-army-corps" class="form-control-label">Corps d'armée</label>
-        <input id="app-entity-edit-army-corps" class="form-control form-control-sm" data-ng-model="entity.armyCorps" />
+        <input id="app-entity-edit-army-corps" class="form-control form-control-sm" ng-model="entity.armyCorps" />
     </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-regiment-number" class="form-control-label">Numéro d'unité militaire</label>
-        <input id="app-entity-edit-regiment-number" class="form-control form-control-sm" data-ng-model="entity.regimentNumber" />
+        <input id="app-entity-edit-regiment-number" class="form-control form-control-sm" ng-model="entity.regimentNumber" />
     </div>
 </div>
 <div class="form-row">
     <div class="form-group col-md-12">
         <label for="app-entity-edit-description" class="form-control-label">Description</label>
-        <textarea id="app-entity-edit-description" class="form-control form-control-sm" data-ng-model="entity.description"></textarea>
+        <textarea id="app-entity-edit-description" class="form-control form-control-sm" ng-model="entity.description"></textarea>
     </div>
 </div>
-<div class="form-row" data-ng-if="context == 'edit'">
-    <div class="form-group col-md-12">
-        <label for="app-entity-edit-updateComment" class="form-control-label">Commentaire de modification</label>
-        <input id="app-entity-edit-updateComment" class="form-control form-control-sm" data-ng-model="entity.updateComment" />
-    </div>
-</div>
-<div class="text-right mt-2">
-    <button data-ng-click="submit.action()" type="submit" class="btn btn-sm btn-primary">Soumettre <i data-ng-if="submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-</div>
+
+<div ng-include="'App/Taxonomy/tpl/form-submit.html'"></div>
 <div class="clearfix"></div>
