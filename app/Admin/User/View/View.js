@@ -34,7 +34,12 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                 success: false
             }
         };
+        $scope.remove = {
+            loading: false,
+            success: false
+        };
 
+        /* Edit User Roles ------------------------------------------------------------------------------------------ */
         $scope.roles.submit.action = function() {
             $scope.roles.submit.loading = true;
             let form = {
@@ -70,5 +75,36 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                 console.log(response);
             });
         };
+        /* End: Edit User Roles ------------------------------------------------------------------------------------- */
+
+        /* Remove User ---------------------------------------------------------------------------------------------- */
+        $scope.remove.action = function() {
+            $scope.remove.loading = true;
+
+            $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
+            then(function (response) {
+                console.log(response.data);
+                flash.success = "Vous allez être redirigé dans quelques instants ...";
+                $scope.remove.loading = false;
+                $scope.remove.success = true;
+                $state.go('transcript.admin.user.list');
+            }, function errorCallback(response) {
+                $scope.remove.loading = false;
+                if(response.data.code === 400) {
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
+                            }
+                        }
+                    }
+                    flash.error += "</ul>";
+
+                }
+                console.log(response);
+            });
+        };
+        /* End: Remove User ----------------------------------------------------------------------------------------- */
     }])
 ;

@@ -1,0 +1,119 @@
+<!-- Modal -->
+<div class="modal fade" id="addBibliographicElementModal" tabindex="-1" role="dialog" aria-labelledby="addBibliographicElementModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="addBibliographicElementModalLabel">Ajouter une référence bibliographique</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="form-control-sm">
+                    <div class="form-group" ng-if="bibliography.addForm.id === null && bibliography.addForm.type === null">
+                        <h4>Type d'entrée bibliographique</h4>
+                        <label class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="app-transcript-interaction-form-biblio-add-type" id="app-transcript-interaction-form-biblio-add-type-1" ng-model="bibliography.addForm.type" value="printedReference" checked="checked" >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Référence imprimée</span>
+                        </label>
+                        <label class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="app-transcript-interaction-form-biblio-add-type" id="app-transcript-interaction-form-biblio-add-type-2" ng-model="bibliography.addForm.type" value="manuscriptReference">
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description">Référence manuscrite</span>
+                        </label>
+                    </div>
+
+                    <div ng-if="bibliography.addForm.type == 'printedReference'">
+                        <div class="float-right">
+                            <button class="btn btn-sm btn-primary" ng-click="bibliography.action()">Retour</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-printedReference-authors" class="form-control-label">Auteurs <span class="red-color" title="Ce champ est obligatoire">*</span></label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-printedReference-authors" class="form-control form-control-sm" ng-model="bibliography.addForm.printedReference.authorsEdit" required="required" />
+                            <small class="form-text text-muted">Séparer les auteurs par des virgules</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-printedReference-referenceTitle" class="form-control-label">Titre de la référence <span class="red-color" title="Ce champ est obligatoire">*</span></label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-printedReference-referenceTitle" class="form-control form-control-sm" ng-model="bibliography.addForm.printedReference.referenceTitle" required="required" />
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-printedReference-url" class="form-control-label">URL</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-printedReference-url" class="form-control form-control-sm" ng-model="bibliography.addForm.printedReference.url" />
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-printedReference-otherInformation" class="form-control-label">Autres informations à noter</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-printedReference-otherInformation" class="form-control form-control-sm" ng-model="bibliography.addForm.printedReference.otherInformation" />
+                        </div>
+                        <fieldset>
+                            <label>Si la référence est partie d'un ensemble :</label>
+                            <div class="form-group row">
+                                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-containerType" class="col-md-5 form-control-label">Type d'ensemble</label>
+                                <div class="col-md-7">
+                                    <select id="transcriptArea-interaction-bibliography-addForm-printedReference-containerType" name="transcriptArea-interaction-bibliography-addForm-printedReference-containerType" class="custom-select" ng-model="bibliography.addForm.printedReference.containerType">
+                                        <option value="" disabled>Sélectionnez ...</option>
+                                        <option value="Revue">Revue</option>
+                                        <option value="Monographie">Monographie</option>
+                                        <option value="Ouvrage collectif">Ouvrage collectif</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="transcriptArea-interaction-bibliography-addForm-printedReference-containerTitle" class="form-control-label">Titre de l'ensemble</label>
+                                <input id="transcriptArea-interaction-bibliography-addForm-printedReference-containerTitle" class="form-control form-control-sm" ng-model="bibliography.addForm.printedReference.containerTitle" />
+                                <small class="form-text text-muted">Peut être le titre de la monographie, de la revue, etc.</small>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div ng-if="bibliography.addForm.type == 'manuscriptReference'">
+                        <div class="float-right">
+                            <button class="btn btn-sm btn-primary" ng-click="bibliography.action()">Retour</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentName" class="form-control-label">Nom du document</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentName" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.documentName" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-institutionName" class="form-control-label">Nom de l'institution de conservation <span class="red-color" title="Ce champ est obligatoire">*</span></label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-institutionName" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.institutionName" required="required" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-collectionName" class="form-control-label">Nom de la collection</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-collectionName" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.collectionName" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentNumber" class="form-control-label">Numéro d'identification <span class="red-color" title="Ce champ est obligatoire">*</span></label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-documentNumber" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.documentNumber" required="required" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-url" class="form-control-label">URL</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-url" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.url" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-sm btn-secondary"
+                        ng-if="bibliography.addForm.id !== null"
+                        ng-click="bibliography.form.submit.action('patch', bibliography.addForm.id)" >
+                    <span ng-if="bibliography.form.submit.success == false && bibliography.form.submit.loading == false">Soumettre</span>
+                    <span ng-if="bibliography.form.submit.success == false && bibliography.form.submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                    <span ng-if="bibliography.form.submit.success == true">Succès !</span>
+                </button>
+                <button type="submit" class="btn btn-sm btn-secondary"
+                        ng-if="bibliography.addForm.id === null"
+                        ng-click="bibliography.form.submit.action('post', null)" >
+                    <span ng-if="bibliography.form.submit.success == false && bibliography.form.submit.loading == false">Soumettre</span>
+                    <span ng-if="bibliography.form.submit.success == false && bibliography.form.submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                    <span ng-if="bibliography.form.submit.success == true">Succès !</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>

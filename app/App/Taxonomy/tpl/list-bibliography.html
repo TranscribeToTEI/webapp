@@ -1,0 +1,18 @@
+<fieldset>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <div class="float-right">
+                <button class="btn btn-sm btn-primary" type="button" data-toggle="modal" data-target="#addBibliographicElementModal"><i class="fa fa-plus-circle"></i> Nouvelle référence</button>
+            </div>
+            <label class="form-control-label">Références bibliographiques</label>
+            <small class="form-text text-muted">Vous pouvez ajouter des références bibliographiques attachées. Cliquez pour cela sur le bouton associé.</small>
+
+            <div class="list-group" ng-repeat="item in bibliography.elements">
+                <div class="list-group-item">
+                    <div ng-if="item.manuscriptReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-manuscriptElement.html'" class="card mb-0 bg-body"></div>
+                    <div ng-if="item.printedReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-printedElement.html'" class="card mb-0 bg-body"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -62,8 +62,13 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                 });
             },
 
-            getBibliographiesByEntity: function(id_entity) {
-                return $http.get($rootScope.api+"/reference-items?entity="+id_entity
+            getBibliographiesBy: function(type, id) {
+                if(type === 'entities') {type = 'entity';}
+                else if(type === 'places') {type = 'place';}
+                else if(type === 'testators') {type = 'testator';}
+                else if(type === 'military-units') {type = 'military-unit';}
+
+                return $http.get($rootScope.api+"/reference-items?"+type+"="+id
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
@@ -82,25 +87,35 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                 });
             },
 
-            postBibliography: function(entity, reference, type) {
+            postBibliography: function(entityType, entity, reference, type) {
+                let item = {
+                    updateComment: 'Creation of the item'
+                };
+                switch (entityType) {
+                    case "entity":
+                        item.entity = entity.id;
+                        break;
+                    case "places":
+                        item.place = entity.id;
+                        break;
+                    case "testators":
+                        item.testator = entity.id;
+                        break;
+                    case "military-units":
+                        item.militaryUnit = entity.id;
+                        break;
+                }
+
                 if(type === "manuscriptReference") {
                     return postManuscriptReference(reference).then(function(data) {
-                        let item = {
-                            entity: entity.id,
-                            manuscriptReference: data.id,
-                            updateComment: 'Creation of the item'
-                        };
+                        item.manuscriptReference = data.id;
                         return postReferenceItem(item).then(function(RData) {
                             return RData;
                         });
                     });
                 } else if(type === "printedReference") {
                     return postPrintedReference(reference).then(function(data) {
-                        let item = {
-                            entity: entity.id,
-                            printedReference: data.id,
-                            updateComment: 'Creation of the item'
-                        };
+                        item.printedReference = data.id;
                         return postReferenceItem(item).then(function(RData) {
                             return RData;
                         });
@@ -108,7 +123,7 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                 }
             },
 
-            patchBibliography: function(entity, reference, type, id) {
+            patchBibliography: function(reference, type, id) {
                 if(type === "manuscriptReference") {
                     return patchManuscriptReference(reference, id).then(function(data) {
                         return data;

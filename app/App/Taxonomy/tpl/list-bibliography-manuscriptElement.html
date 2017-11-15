@@ -1,0 +1,11 @@
+<h4 class="card-header bg-dark text-white">Référence manuscrite</h4>
+<div class="card-body">
+    <div>
+        <div class="float-right" ng-if="bibliographyEdit === true">
+            <button type="button" class="btn btn-sm btn-primary" title="Modifier cette référence" ng-click="bibliography.form.action(item.id)" data-toggle="modal" data-target="#addBibliographicElementModal"><i class="fa fa-edit"></i> Modifier</button>
+        </div>
+        <h3><span ng-if="item.manuscriptReference.documentName !== null">{{ item.manuscriptReference.documentName }}, </span>{{ item.manuscriptReference.documentNumber }}</h3>
+    </div>
+    <p class="mb-1">Conservé à {{ item.manuscriptReference.institutionName }}<span ng-if="item.manuscriptReference.collectionName !== null">, collection {{ item.manuscriptReference.collectionName }}</span></p>
+    <p class="mb-1" ng-if="item.manuscriptReference.url != null"><a href="{{ item.manuscriptReference.url }}" target="_blank">Lien vers la référence</a></p>
+</div>

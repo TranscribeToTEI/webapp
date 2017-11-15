@@ -15,12 +15,28 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="col-12">
-                <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></fieldset>
+                <div data-ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></div>
                 <div class="card text-white bg-danger mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">
                         <p>En cliquant ci-dessous, vous supprimerez définitivement cette entité.</p>
                         <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer cette entité ?">Supprimer cette entité <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                    </div>
+                </div>
+
+                <div class="card bg-body">
+                    <h2 class="big card-header bg-dark text-white">Accès utilisateurs</h2>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label class="custom-control custom-checkbox">
+                                    <input ng-model="entity.isShown" class="custom-control-input" type="checkbox">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description">Cochez cette case si vous ne souhaitez pas permettre l'affichage du contenu de ce testament aux utilisateurs</span>
+                                </label>
+                            </div>
+                            <small class="form-text text-muted">Par voix de conséquence, le contenu de ce testament ne sera pas proposé à la transcription</small>
+                        </div>
                     </div>
                 </div>
                 <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-will.html'"></fieldset>

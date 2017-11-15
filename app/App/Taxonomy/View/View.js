@@ -29,6 +29,9 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                 entities: function(TaxonomyService, $transition$) {
                     return TaxonomyService.getTaxonomyEntities($transition$.params().type);
                 },
+                bibliographies: function(BibliographyService, $transition$) {
+                    return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
+                },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread($transition$.params().type+'-'+$transition$.params().id);
                 }
@@ -36,9 +39,11 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         })
     }])
 
-    .controller('AppTaxonomyViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entity', 'entities', '$transition$', function($rootScope, $scope, $http, $sce, $state, $filter, entity, entities, $transition$) {
+    .controller('AppTaxonomyViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
         $scope.entity = entity; console.log($scope.entity);
         $scope.entities = entities;
+        $scope.bibliography = bibliographies;
+        $scope.bibliographyEdit = false;
         $scope.entity.dataType = $transition$.params().type;
 
         /* -- Place name management ---------------------------------------------------------- */
@@ -101,9 +106,5 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
             });
         }
         /* -- End : Place's map management -------------------------------------------------------------------------- */
-
-        /* -- Relative items management ------------------------------------------------------ */
-
-        /* -- End : Relative items management ------------------------------------------------ */
     }])
 ;

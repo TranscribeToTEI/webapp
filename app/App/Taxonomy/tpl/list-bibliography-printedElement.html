@@ -1,0 +1,12 @@
+<h4 class="card-header bg-dark text-white">Référence imprimée</h4>
+<div class="card-body">
+    <div>
+        <div class="float-right" ng-if="bibliographyEdit === true">
+            <button type="button" class="btn btn-sm btn-primary" title="Modifier cette référence" ng-click="bibliography.form.action(item.id)" data-toggle="modal" data-target="#addBibliographicElementModal"><i class="fa fa-edit"></i> Modifier</button>
+        </div>
+        <h3>{{ item.printedReference.referenceTitle }}</h3>
+    </div>
+    <p class="mb-1">Par <span ng-repeat="author in item.printedReference.authors"><span ng-if="$index > 0">, </span>{{ author }}</span></p>
+    <p class="mb-1" ng-if="item.printedReference.url != null"><a href="{{ item.printedReference.url }}" target="_blank">Lien vers la référence</a></p>
+    <p class="mb-1" ng-if="item.printedReference.containerTitle != null">Dans {{ item.printedReference.containerTitle }} <span ng-if="item.printedReference.containerType !== null">({{ item.printedReference.containerType }})</span></p>
+</div>

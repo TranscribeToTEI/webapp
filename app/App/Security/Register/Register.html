@@ -43,7 +43,7 @@
                 <div class="row text-right">
                     <div class="col-12">
                         <button class="btn btn-sm" type="button"
-                                ng-disabled="!((!!form.name && !!form.email && !!form.password.plain && !!form.password.confirmation) || (form.password.plain !== form.password.confirmation))"
+                                ng-disabled="!(!!form.name && !!form.email && !!form.password.plain && !!form.password.confirmation && (form.password.plain === form.password.confirmation))"
                                 ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
                                 ng-click="submit.action()">
                             <span ng-if="submit.success == false && submit.loading == false">Créer mon compte</span>

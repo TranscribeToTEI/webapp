@@ -28,7 +28,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         })
     }])
 
-    .controller('AppUserPreferencesCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserPreferenceService', 'userPreferences', 'flash', function($rootScope, $scope, $http, $sce, $state, UserPreferenceService, userPreferences, flash) {
+    .controller('AppUserPreferencesCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$cookies', 'UserPreferenceService', 'userPreferences', 'flash', function($rootScope, $scope, $http, $sce, $state, $cookies, UserPreferenceService, userPreferences, flash) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         /* -- Breadcrumb management -------------------------------------------------------- */
         $scope.iUser = $rootScope.user;
@@ -47,7 +47,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             success: false
         };
 
-        /* Submit data */
+        /* Submit data ---------------------------------------------------------------------------------------------- */
         $scope.submit.action = function() {
             $scope.submit.loading = true;
 
@@ -77,5 +77,43 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                 $scope.submit.loading = false;
             });
         };
+        /* End: Submit data ----------------------------------------------------------------------------------------- */
+
+        /* Remove User ---------------------------------------------------------------------------------------------- */
+        $scope.remove = {
+            loading: false,
+            success: false
+        };
+        $scope.remove.action = function() {
+            $scope.remove.loading = true;
+
+            $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
+            then(function (response) {
+                console.log(response.data);
+                flash.success = "Vous allez être redirigé dans quelques instants ...";
+                $scope.remove.loading = false;
+                $scope.remove.success = true;
+                delete $rootScope.oauth;
+                delete $rootScope.user;
+                $cookies.remove('transcript_security_token_access');
+                $state.go('transcript.app.home');
+            }, function errorCallback(response) {
+                $scope.remove.loading = false;
+                if(response.data.code === 400) {
+                    flash.error = "<ul>";
+                    for(let field in response.data.errors.children) {
+                        for(let error in response.data.errors.children[field]) {
+                            if(error === "errors") {
+                                flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
+                            }
+                        }
+                    }
+                    flash.error += "</ul>";
+
+                }
+                console.log(response);
+            });
+        };
+        /* End: Remove User ----------------------------------------------------------------------------------------- */
     }])
 ;

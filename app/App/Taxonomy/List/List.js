@@ -16,9 +16,17 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
                 label: 'Liste des {{ pluralType }}'
             },
             tfMetaTags: {
-                title: 'Liste des {{ pluralType }} | Notices d\'autorité'
+                title: function(type, filter) {
+                    return 'Liste des '+filter('taxonomyName')(type, 'plural')+' | Notices d\'autorité';
+                },
             },
             resolve: {
+                type: function($transition$) {
+                    return $transition$.params().type;
+                },
+                filter: function($filter) {
+                    return $filter;
+                },
                 entities: function(TaxonomyService, $transition$) {
                     return TaxonomyService.getTaxonomyEntities($transition$.params().type);
                 }

@@ -2,11 +2,17 @@
     <div class="card bg-body">
         <h3 class="card-header bg-light"><i class="fa fa-folder-open" aria-hidden="true"></i> Composition du testament</h3>
         <div class="card-body">
-            <div class="alert alert-danger" data-ng-if="entity.resources.length == 0">Oups ... Cette entité ne possède pas de ressource à transcrire</div>
-            <ul class="listPages list-unstyled row no-gutters justify-content-center text-center">
-                <li class="col-lg-2 col-md-3 col-sm-4 col-12 pb-3" data-ng-repeat="resource in entity.resources">
+            <div class="alert alert-danger" ng-if="entity.isShown === false">
+                <p><strong>Ce testament n'est pas proposé à la transcription.</strong></p>
+                <p>L'équipe du projet a choisi de ne pas proposer ce testament à la transcription car il peut contenir des informations sensibles. À titre d'information, vous avez tout de même accès à ces métadonnées.</p>
+            </div>
+            <div class="alert alert-danger" ng-if="entity.resources.length == 0">
+                Oups ... Cette entité ne possède pas de ressource à transcrire
+            </div>
+            <ul class="listPages list-unstyled row no-gutters justify-content-center text-center" ng-if="entity.isShown !== false">
+                <li class="col-lg-2 col-md-3 col-sm-4 col-12 pb-3" ng-repeat="resource in entity.resources">
                     <div class="nbPage">{{ resource.type | resourceTypeName | ucFirstStrict }} {{ resource.orderInWill }}</div>
-                    <span title="État de la transcription" class="badge badge-status d-table" data-ng-class="getStatusClassLabel(resource.transcript.status)">{{ getStatusLabel(resource.transcript.status) }}</span>
+                    <span title="État de la transcription" class="badge badge-status d-table" ng-class="getStatusClassLabel(resource.transcript.status)">{{ getStatusLabel(resource.transcript.status) }}</span>
                     <a ui-sref="transcript.app.edition({ idEntity: entity.id, idResource: resource.id })" ng-class="{'locked': resource.transcript._embedded.isOpened == false}">
                         <span ng-if="resource.transcript._embedded.isOpened == false" class="badge d-table" title="En cours d'édition">en cours d'édition</span>
                         <img class="img-fluid" src="{{ api_web  }}/images/data/testament_{{ entity.willNumber | willNumberFormat }}/JPEG/FRAN_Poilus_t-{{ entity.willNumber| willNumberFormat }}_{{ resource.images[0] | willNumberFormat:2 }}_L.jpg"/>

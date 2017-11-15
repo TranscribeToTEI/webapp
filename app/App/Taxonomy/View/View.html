@@ -31,6 +31,15 @@
                 <h4 ng-if="entity.dataType == 'testators'" class="mb-1"><strong>Biographie</strong></h4>
                 {{ entity.description }}
             </div>
+            <div class="mt-4 mb-4 ml-2" ng-if="bibliography.length > 0">
+                <h4 class="mb-1"><strong>Bibliographie</strong></h4>
+                <div class="list-group" ng-repeat="item in bibliography">
+                    <div class="list-group-item">
+                        <div ng-if="item.manuscriptReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-manuscriptElement.html'" class="card mb-0 bg-body"></div>
+                        <div ng-if="item.printedReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-printedElement.html'" class="card mb-0 bg-body"></div>
+                    </div>
+                </div>
+            </div>
 
             <hr />
             <div ui-view="comment"></div>

@@ -79,6 +79,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         $scope.submit.action = function() {
             $scope.submit.loading = true;
             let formEntity = {
+                    isShown: $scope.entity.isShown,
                     willNumber: $scope.entity.willNumber,
                     will: {
                         title: "Testament "+$scope.entity.will.callNumber,
@@ -129,20 +130,19 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 $scope.submit.success = true;
                 $state.go('transcript.app.entity', {id: response.data.id});
             }, function errorCallback(response) {
-                if(response.data.code === 400) {
-                    flash.error = "<ul>";
-                    for(let field of response.data.errors.children) {
-                        for(let error of field) {
-                            if(error === "errors") {
-                                flash.error += "<li><strong>"+field+"</strong> : "+error+"</li>";
-                            }
+                console.log(response);
+                $scope.submit.loading = false;
+                flash.error = "<ul>";
+                for(let field in response.data.errors.children) {
+                    console.log(response.data.errors.children);
+                    console.log(field);
+                    for(let error in response.data.errors.children[field]) {
+                        if(error === "errors") {
+                            flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
                         }
                     }
-                    flash.error += "</ul>";
-
                 }
-                $scope.submit.loading = false;
-                console.log(response);
+                flash.error += "</ul>";
             });
         };
 

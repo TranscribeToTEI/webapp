@@ -56,7 +56,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     return TaxonomyService.getTaxonomyEntities("military-units");
                 },
                 bibliographies: function(BibliographyService, $transition$) {
-                    return BibliographyService.getBibliographiesByEntity($transition$.params().idEntity);
+                    return BibliographyService.getBibliographiesBy('entity', $transition$.params().idEntity);
                 },
                 notes: function(NoteService, $transition$) {
                     return NoteService.getNotesByTranscript($transition$.params().idTranscript);
@@ -1100,9 +1100,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 if (method === 'post') {
                     reference.updateComment = 'Creation of the reference';
 
-                    return BibliographyService.postBibliography($scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type)
+                    return BibliographyService.postBibliography('entity', $scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type)
                         .then(function (response) {
-                            return BibliographyService.getBibliographiesByEntity($scope.entity.id).then(function (data) {
+                            return BibliographyService.getBibliographiesBy('entity', $scope.entity.id).then(function (data) {
                                 $scope.transcriptArea.interaction.bibliography.elements = data;
                                 $scope.transcriptArea.interaction.bibliography.addForm.submit.loading = false;
                                 $scope.transcriptArea.interaction.status = 'bibliography';
@@ -1118,9 +1118,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     delete reference.updateUser;
                     reference.updateComment = "Update bibliography element";
 
-                    return BibliographyService.patchBibliography($scope.entity, reference, $scope.transcriptArea.interaction.bibliography.addForm.type, idToPatch)
+                    return BibliographyService.patchBibliography(reference, $scope.transcriptArea.interaction.bibliography.addForm.type, idToPatch)
                         .then(function (response) {
-                            return BibliographyService.getBibliographiesByEntity($scope.entity.id).then(function (data) {
+                            return BibliographyService.getBibliographiesBy('entity', $scope.entity.id).then(function (data) {
                                 $scope.transcriptArea.interaction.bibliography.elements = data;
                                 $scope.transcriptArea.interaction.bibliography.addForm.submit.loading = false;
                                 $scope.transcriptArea.interaction.status = 'bibliography';

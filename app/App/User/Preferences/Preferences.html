@@ -80,7 +80,7 @@
                 <div class="form-group row">
                     <label class="col-sm-3  text-md-right">Suppression</label>
                     <div class="col-sm-9">
-                        <button class="btn btn-danger"><i class="fa fa-warning"></i> Supprimer mon compte <i class="fa fa-remove"></i></button>
+                        <button class="btn btn-danger" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer votre compte utilisateur ? Cette action est irréversible."><i class="fa fa-warning" ng-if="remove.loading === false;"></i><i class="fa fa-spin fa-circle-o-notch" ng-if="remove.loading === true;"></i> Supprimer mon compte <i class="fa fa-remove"></i></button>
                     </div>
                 </div>
             </div>

@@ -38,7 +38,8 @@ angular.module('transcript.app.security.register', ['ui.router'])
             errors: []
         };
         $scope.submit = {
-            loading: false
+            loading: false,
+            success: false
         };
 
         /* Register data */

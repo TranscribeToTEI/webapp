@@ -26,6 +26,9 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     entities: function(TaxonomyService, $transition$) {
                         return TaxonomyService.getTaxonomyEntities($transition$.params().type);
                     },
+                    bibliographies: function(BibliographyService, $transition$) {
+                        return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
+                    },
                     testators: function(TaxonomyService) {
                         return TaxonomyService.getTaxonomyEntities('testators');
                     },
@@ -59,6 +62,9 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     entities: function(TaxonomyService, $transition$) {
                         return TaxonomyService.getTaxonomyEntities($transition$.params().type);
                     },
+                    bibliographies: function() {
+                        return null;
+                    },
                     testators: function(TaxonomyService) {
                         return TaxonomyService.getTaxonomyEntities('testators');
                     },
@@ -72,7 +78,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             })
     }])
 
-    .controller('AppTaxonomyEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', function($rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, entity, entities, testators, places, militaryUnits) {
+    .controller('AppTaxonomyEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
         if(($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization')) || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.error.403');}
 
         /* -- Functions Loader -------------------------------------------------------------------------------------- */
@@ -376,5 +382,136 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             });
         }
         /* End: Upload new media ------------------------------------------------------------------------------------ */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Bibliography Management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.bibliography = {
+            elements: bibliographies,
+            form: {
+                submit: {
+                    loading: false,
+                    success: false
+                }
+            }
+        };
+        $scope.bibliographyEdit = true;
+        $scope.bibliography.initForm = function() {
+            $scope.bibliography.addForm = {
+                id: null,
+                type: null,
+                printedReference: {
+                    authors: null,
+                    authorsEdit: null,
+                    referenceTitle: null,
+                    containerTitle: null,
+                    containerType: null,
+                    url: null,
+                    otherInformation: null
+                },
+                manuscriptReference: {
+                    documentName: null,
+                    institutionName: null,
+                    collectionName: null,
+                    documentNumber: null,
+                    url: null
+                }
+            };
+        };
+        $scope.bibliography.initForm();
+        
+        $scope.bibliography.action = function () {
+            if ($scope.bibliography.addForm.type !== null) {
+                $scope.bibliography.addForm.type = null;
+            }
+        };
+
+        $scope.bibliography.form.action = function (id) {
+            // If an id is defined > this is an edition of existent element
+            $scope.bibliography.addForm.id = null;
+            if (id !== undefined && id !== null) {
+                let elementToEdit = $scope.bibliography.elements.filter(function (element) {
+                    return (element.id === id);
+                });
+                if (elementToEdit !== null) {
+                    elementToEdit = elementToEdit[0];
+                }
+
+                $scope.bibliography.addForm.id = id;
+                if (elementToEdit.printedReference !== null) {
+                    $scope.bibliography.addForm.type = 'printedReference';
+                    $scope.bibliography.addForm.printedReference = elementToEdit.printedReference;
+                    $scope.bibliography.addForm.printedReference.authorsEdit = $scope.bibliography.addForm.printedReference.authors.join(', ');
+                } else if (elementToEdit.manuscriptReference !== null) {
+                    $scope.bibliography.addForm.type = 'manuscriptReference';
+                    $scope.bibliography.addForm.manuscriptReference = elementToEdit.manuscriptReference;
+                }
+            } else {
+                $scope.bibliography.initForm();
+            }
+        };
+
+        // This methods posts a new bibliographic element
+        $scope.bibliography.form.submit.action = function (method, id) {
+            $scope.bibliography.form.submit.loading = true;
+            let elementToEdit = $scope.bibliography.elements.filter(function (element) {
+                return (element.id === id);
+            });
+            if (elementToEdit !== null) {
+                elementToEdit = elementToEdit[0];
+            }
+
+            // According to the type of the element
+            let reference = {};
+            if ($scope.bibliography.addForm.type === "printedReference") {
+                reference = $scope.bibliography.addForm.printedReference;
+                if (typeof reference.authors === 'string' && reference.authorsEdit.indexOf(',') !== -1) {
+                    reference.authors = reference.authorsEdit.split(",");
+                } else {
+                    reference.authors = [reference.authorsEdit];
+                }
+                delete reference.authorsEdit;
+                console.log(reference);
+            } else if ($scope.bibliography.addForm.type === "manuscriptReference") {
+                reference = $scope.bibliography.addForm.manuscriptReference;
+                console.log(reference);
+            }
+
+            if (method === 'post') {
+                reference.updateComment = 'Creation of the reference';
+
+                return BibliographyService.postBibliography($scope.entity.dataType, $scope.entity, reference, $scope.bibliography.addForm.type)
+                    .then(function (response) {
+                        return BibliographyService.getBibliographiesBy($scope.entity.dataType, $scope.entity.id).then(function (data) {
+                            $scope.bibliography.elements = data;
+                            $scope.bibliography.form.submit.loading = false;
+                            $scope.bibliography.form.submit.success = true;
+                            $('#addBibliographicElementModal').modal('hide');
+                            $scope.bibliography.initForm();
+                        });
+                    });
+            } else if (method === 'patch') {
+                let idToPatch = reference.id;
+                delete reference._links;
+                delete reference.createDate;
+                delete reference.createUser;
+                delete reference.id;
+                delete reference.updateDate;
+                delete reference.updateUser;
+                reference.updateComment = "Update bibliography element";
+
+                return BibliographyService.patchBibliography(reference, $scope.bibliography.addForm.type, idToPatch)
+                    .then(function (response) {
+                        return BibliographyService.getBibliographiesBy($scope.entity.dataType, $scope.entity.id).then(function (data) {
+                            $scope.bibliography.elements = data;
+                            $scope.bibliography.form.submit.loading = false;
+                            $scope.bibliography.form.submit.success = true;
+                            $('#addBibliographicElementModal').modal('hide');
+                            $scope.bibliography.initForm();
+                        });
+                    });
+            }
+        };
+        /* Bibliography Management ---------------------------------------------------------------------------------- */
     }])
 ;

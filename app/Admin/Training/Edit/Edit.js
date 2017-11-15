@@ -66,7 +66,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'trainingContent', 'trainingContents', 'users', 'config', function($rootScope, $scope, $http, $sce, $state, $timeout, flash, trainingContent, trainingContents, users, config) {
+    .controller('AdminTrainingEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'Upload', 'trainingContent', 'trainingContents', 'users', 'config', function($rootScope, $scope, $http, $sce, $state, $timeout, flash, Upload, trainingContent, trainingContents, users, config) {
         $scope.trainingContents = trainingContents;
         $scope.users = users;
         $scope.config = config;
@@ -239,39 +239,51 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
         };
         /* End: Remove management ----------------------------------------------------------------------------------- */
 
-        /* Media management ----------------------------------------------------------------------------------------- */
-        $scope.media.submit.action = function(type) {
-            let picture = null;
-            if(type === 'illustration') {
-                $scope.media.submit.loading.illustration = true;
-                picture = $scope.media.form.illustration;
-            } else if(type === 'exerciseImageToTranscribe') {
-                $scope.media.submit.loading.exerciseImageToTranscribe = true;
-                picture = $scope.media.form.exerciseImageToTranscribe;
+        /* Upload new media ----------------------------------------------------------------------------------------- */
+        $scope.media = {
+            form: {
+                image: null
+            },
+            submit: {
+                loading: false,
+                success: false
             }
-
-            upload(type, picture);
         };
 
-        function upload(type, picture) {
+        /* Submit data */
+        $scope.media.submit.action = function() {
+            $scope.media.submit.loading = true;
+            upload();
+        };
+
+        function upload() {
+            let url = "/media-contents?type=TrainingContent&field=illustration";
+            if($scope.trainingContent.id !== undefined && $scope.trainingContent.id !== null) {
+                url = "/media-contents?type=TrainingContent&field=illustration&id="+$scope.trainingContent.id;
+            }
             Upload.upload = Upload.upload({
-                url: $rootScope.api+"/media-contents?type=TrainingContent&field="+type+"&id="+$scope.trainingContent.id,
-                data: {media: picture}
+                url: $rootScope.api+url,
+                data: {media: $scope.media.form.illustration}
             }).then(function (response) {
                 console.log(response);
-                if(type === 'illustration') {
-                    $scope.media.submit.loading.illustration = false;
+                $scope.media.submit.loading = false;
+                $scope.media.submit.success = true;
+                $timeout(function() {
+                    $scope.media.submit.success = false;
+                }, 5000);
+
+                if($scope.trainingContent.id !== undefined && $scope.trainingContent.id !== null) {
                     $scope.trainingContent.illustration = response.data.illustration;
-                } else if(type === 'exerciseImageToTranscribe') {
-                    $scope.media.submit.loading.exerciseImageToTranscribe = false;
-                    $scope.trainingContent.exerciseImageToTranscribe = response.data.exerciseImageToTranscribe;
+                } else {
+                    $scope.trainingContent.illustration = response.data;
                 }
             }, function errorCallback(error) {
                 console.log(error);
-                if(type === 'illustration') { $scope.media.submit.loading.illustration = false;}
-                else if(type === 'exerciseImageToTranscribe') { $scope.media.submit.loading.exerciseImageToTranscribe = false;}
+                $scope.media.submit.loading = false;
             });
         }
-        /* End: Media management ------------------------------------------------------------------------------------ */
+        /* End: Upload new media ------------------------------------------------------------------------------------ */
+
+
     }])
 ;

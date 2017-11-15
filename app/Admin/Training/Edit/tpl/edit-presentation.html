@@ -1,9 +1,19 @@
 <div class="form-group row">
-    <label for="admin-trainingContent-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration <span class="red-color">*</span></label>
-    <div class="col-md-10">
-        <input id="admin-trainingContent-edit-image" type="string" class="form-control form-control-sm" data-ng-model="trainingContent.illustration" required="required" />
-        <small class="form-text text-muted">Spécifiez une URL externe, ou uploadez une image par la suite</small>
+    <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
+    <div class="col-md-5">
+        <input id="admin-content-edit-image" class="form-control form-control-sm" data-ng-model="trainingContent.illustration" />
+        <small class="form-text text-muted">Spécifiez l'URL de votre image ou uploadez une image ci-contre</small>
         <div ng-if="trainingContent.illustration != null"><img src="{{ trainingContent.illustration | imageRender }}" class="img-150px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" /></div>
+    </div>
+    <div class="col-md-5">
+        <input id="app-user-edit-picture" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+        <i ng-show="myForm.file.$error.required">*required</i><br>
+        <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+        <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" />
+        <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+        <button data-ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" data-ng-click="media.submit.action()">Soumettre</button>
+        <button data-ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+        <button data-ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
     </div>
 </div>
 <div class="form-group row">
