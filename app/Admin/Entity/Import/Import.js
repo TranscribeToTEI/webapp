@@ -27,12 +27,15 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
                 },
                 militaryUnits: function(TaxonomyService) {
                     return TaxonomyService.getTaxonomyEntities('military-units');
+                },
+                organizations: function(HostingOrganizationService) {
+                    return HostingOrganizationService.getOrganizations();
                 }
             }
         })
     }])
 
-    .controller('AdminEntityImportCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'testators', 'places', 'militaryUnits', 'EntityService', 'TaxonomyService', 'flash', function($rootScope, $scope, $http, $sce, $state, $filter, testators, places, militaryUnits, EntityService, TaxonomyService, flash) {
+    .controller('AdminEntityImportCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'EntityService', 'TaxonomyService', 'flash', 'testators', 'places', 'militaryUnits', 'organizations', function($rootScope, $scope, $http, $sce, $state, $filter, EntityService, TaxonomyService, flash, testators, places, militaryUnits, organizations) {
         $scope.form = {
             submit: {
                 loading: false,
@@ -45,6 +48,7 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
         };
         $scope.testators = $filter('orderBy')(testators, 'surname');
         $scope.militaryUnits = $filter('orderBy')(militaryUnits, 'name');
+        $scope.organizations = organizations;
 
         /* Place's name management ---------------------------------------------------------------------------------  */
         $scope.places = places;

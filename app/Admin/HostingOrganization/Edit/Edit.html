@@ -1,0 +1,72 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+
+<main class="container" role="main">
+    <h1 class="page-heading" data-ng-if="organization.name != null && organization.name != ''">{{ organization.name }}</h1>
+    <h1 class="page-heading" data-ng-if="organization.name == null || organization.name == ''">Nouvelle organisation</h1>
+
+    <form>
+        <div class="col-xl-10 col-12">
+            <div class="form-group row">
+                <label for="admin-organization-edit-name" class="col-md-2 col-form-label text-md-right">Nom officiel <span class="red-color">*</span></label>
+                <div class="col-md-10">
+                    <input id="admin-organization-edit-name" type="text" class="form-control" data-ng-model="organization.name" required="required" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="admin-organization-edit-code" class="col-md-2 col-form-label text-md-right">Code <span class="red-color">*</span></label>
+                <div class="col-md-10">
+                    <input id="admin-organization-edit-code" type="text" class="form-control" data-ng-model="organization.code" required="required" placeholder="Ex: AN pour Archives nationales" />
+                </div>
+            </div>
+
+            <div class="text-right mt-2" data-ng-if="organization.id == null">
+                <button class="btn btn-sm" type="button"
+                        ng-disabled="!(!!organization.name && !!organization.code)"
+                        ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                        ng-click="submit.action()">
+                    <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
+                    <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                    <span ng-if="submit.success == true">Succès !</span>
+                </button>
+            </div>
+            <div class="card text-white bg-light mb-3 mt-4" data-ng-if="organization.id != null">
+                <div class="card-body">
+                    <div class="form-row bg-default">
+                        <div class="form-group col-md-10 align-self-end">
+                            <label for="admin-organization-edit-updateComment" class="form-control-label">Commentaire d'édition <span class="red-color">*</span></label>
+                            <textarea id="admin-organization-edit-updateComment" class="form-control form-control-sm" data-ng-model="organization.updateComment" placeholder="Merci de décrire votre modification avant de la soumettre" required="required"></textarea>
+                        </div>
+                        <div class="text-right col-md-2 align-self-end">
+                            <button class="btn btn-sm" type="button"
+                                    ng-disabled="!(!!organization.name && !!organization.code && !!organization.updateComment)"
+                                    ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                                    ng-click="submit.action()">
+                                <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
+                                <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                                <span ng-if="submit.success == true">Succès !</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr data-ng-if="organization.id != null" />
+            <div class="card-deck mt-5" data-ng-if="organization.id !== null" >
+                <div class="card text-white bg-danger mb-3 mt-4">
+                    <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
+                    <div class="card-body">
+                        <p>En cliquant ci-dessous, vous supprimerez définitivement ce contenu.</p>
+                        <button class="btn btn-sm btn-primary" type="button" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce contenu ?">Supprimer <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>

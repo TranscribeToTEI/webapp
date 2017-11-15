@@ -21,12 +21,16 @@ angular.module('transcript.app.search', ['ui.router'])
             resolve: {
                 entities: function(EntityService) {
                     return EntityService.getEntities();
+                },
+                organizations: function(HostingOrganizationService) {
+                    return HostingOrganizationService.getOrganizations();
                 }
             }
         })
     }])
 
-    .controller('AppSearchCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'entities', 'EntityService', 'SearchService', 'ImageService', function($rootScope, $scope, $http, $sce, $state, flash, entities, EntityService, SearchService, ImageService) {
+    .controller('AppSearchCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'EntityService', 'SearchService', 'ImageService', 'entities', 'organizations', function($rootScope, $scope, $http, $sce, $state, flash, EntityService, SearchService, ImageService, entities, organizations) {
+        $scope.organizations = organizations;
         $scope.entities = entities;
         for(let iEntity in $scope.entities) {
             if($scope.entities[iEntity].will.testator.placeOfBirth !== null && $scope.entities[iEntity].will.testator.placeOfBirth.names.length > 0) {
@@ -53,7 +57,9 @@ angular.module('transcript.app.search', ['ui.router'])
                             name: null
                         }
                     },
-                    hostingOrganization: null,
+                    hostingOrganization: {
+                        name: null
+                    },
                     willWritingYear: null,
                     callNumber: null
                 }
@@ -68,10 +74,7 @@ angular.module('transcript.app.search', ['ui.router'])
             },
             values: {
                 will: {
-                    hostingOrganization: [
-                        {value: "AN", name: "Archives nationales"},
-                        {value: "AD78", name: "Archives départementales des Yvelines"}
-                    ],
+                    hostingOrganization: $scope.organizations,
                     testator: {
                         name: SearchService.dataset($scope.entities, "will.testator.name", "string"),
                         placeOfDeath: {
@@ -96,11 +99,11 @@ angular.module('transcript.app.search', ['ui.router'])
         /* -- End : Definition of the fields --------------------------------------------------------- */
 
         /* -- Fields watching ------------------------------------------------------------------------ */
-        $scope.$watch('search.form.will.hostingOrganization', function() {
-            if($scope.search.form.will.hostingOrganization !== undefined) {
-                if ($scope.search.form.will.hostingOrganization !== null && $scope.search.form.will.hostingOrganization !== "" && $scope.search.form.will.hostingOrganization.originalObject !== undefined) {
-                    $scope.search.form.will.hostingOrganization = $scope.search.form.will.hostingOrganization.originalObject.value;
-                    console.log($scope.search.form.will.hostingOrganization);
+        $scope.$watch('search.form.will.hostingOrganization.name', function() {
+            if($scope.search.form.will.hostingOrganization.name !== undefined) {
+                if ($scope.search.form.will.hostingOrganization.name !== null && $scope.search.form.will.hostingOrganization.name !== "" && $scope.search.form.will.hostingOrganization.name.originalObject !== undefined) {
+                    $scope.search.form.will.hostingOrganization.name = $scope.search.form.will.hostingOrganization.originalObject.code;
+                    console.log($scope.search.form.will.hostingOrganization.name);
                 }
                 refresh();
             }

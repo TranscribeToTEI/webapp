@@ -57,8 +57,7 @@
     <div class="col-md-8">
         <select id="admin-entity-edit-will-hostingOrganization" name="admin-entity-edit-will-hostingOrganization" class="custom-select" data-ng-model="entity.will.hostingOrganization" required="required">
             <option value="" disabled>Sélectionnez ...</option>
-            <option value="AN">Archives nationales</option>
-            <option value="AD78">Archives départementales des Yvelines</option>
+            <option ng-repeat="organization in organizations" value="{{ organization.code }}">{{ organization.name }}</option>
         </select>
     </div>
 </div>
