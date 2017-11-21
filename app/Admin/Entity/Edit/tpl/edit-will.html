@@ -55,10 +55,7 @@
 <div class="form-group row">
     <label for="admin-entity-edit-will-hostingOrganization" class="col-md-4 col-form-label text-md-right">Institution de conservation <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <select id="admin-entity-edit-will-hostingOrganization" name="admin-entity-edit-will-hostingOrganization" class="custom-select" data-ng-model="entity.will.hostingOrganization" required="required">
-            <option value="" disabled>Sélectionnez ...</option>
-            <option ng-repeat="organization in organizations" value="{{ organization.code }}">{{ organization.name }}</option>
-        </select>
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-hostingOrganization" data-ng-model="entity.will.hostingOrganization" name="admin-entity-edit-will-hostingOrganization" data-ng-options="organization.id as organization.name for organization in organizations" required="required"></select>
     </div>
 </div>
 <div class="form-group row">

@@ -8,31 +8,20 @@
 </div>
 
 <main class="container" role="main">
-    <h1 class="page-heading">Liste des contenus</h1>
+    <h1 class="page-heading">Liste des institutions</h1>
     <div class="row">
-        <div class="col-xl-12 col-12">
-            <div class="text-right">
-                <a ui-sref="transcript.admin.hosting-organization.new" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Ajouter une institution</a>
-            </div>
-
+        <div class="col-xl-10 col-12">
             <table class="table table-sm table-bordered">
-                <caption>Liste des institutions de conservation</caption>
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>#</th>
                     <th>Nom</th>
-                    <th>Code</th>
-                    <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="organization in organizations">
                     <td>{{ $index+1 }}</td>
-                    <td><a ui-sref="transcript.admin.hosting-organization.edit({id: organization.id})"><i class="fa fa-edit"></i></a></td>
                     <td><a ui-sref="transcript.app.hosting-organization.view({id: organization.id})">{{ organization.name }}</a></td>
-                    <td>{{ organization.code }}</td>
-                    <td data-ng-bind="organization.createDate | date:'dd-MM-yyyy HH:mm'"></td>
                 </tr>
                 </tbody>
             </table>

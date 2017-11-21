@@ -38,7 +38,7 @@
                 <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                 <div class="card-body">
                     <p>En cliquant ci-dessous, vous supprimerez définitivement cet utilisateur.</p>
-                    <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce compte utilisateur ?">Supprimer ce compte <i class="fa fa-remove"></i></button>
+                    <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce compte utilisateur ?">Supprimer ce compte <i class="fa fa-remove" ng-if="remove.loading == false"></i><i class="fa fa-spin fa-circle-o-notch" ng-if="remove.loading == true"></i></button>
                 </div>
             </div>
         </div>

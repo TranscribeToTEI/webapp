@@ -1,0 +1,32 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+<main class="container" role="main">
+    <h1 class="page-heading">Liste des types de testaments</h1>
+    <div class="float-right">
+        <a ui-sref="transcript.admin.will-type.new" class="btn btn-primary btn-sm"><i class="fa fa-plus-circle"></i> Nouveau</a>
+    </div>
+
+    <div class="alert alert-warning" data-ng-if="willTypes.length == 0">
+        <h3>Aucun type de testament</h3>
+        <p>Aucun type de testament n'est présent pour le moment dans la base de données.</p>
+    </div>
+    <table class="table table-bordered table-striped">
+        <caption>Liste des types de testaments</caption>
+        <tr>
+            <th>#</th>
+            <th>Type</th>
+            <th>Action</th>
+        </tr>
+        <tr data-ng-repeat="type in willTypes|orderBy:'name'">
+            <td>{{ $index+1 }}</td>
+            <td>{{ type.name }}</td>
+            <td><a ui-sref="transcript.admin.will-type.edit({id: type.id})"><i class="fa fa-edit"></i></a></td>
+        </tr>
+    </table>
+</main>

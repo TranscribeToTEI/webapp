@@ -32,16 +32,19 @@ angular.module('transcript.app.home', ['ui.router'])
     }])
 
     .controller('AppHomeCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'entities', 'contents', 'staticContents', 'SearchService', 'EntityService', function($rootScope, $scope, $http, $sce, $state, entities, contents, staticContents, SearchService, EntityService) {
-        $scope.entities = entities;
+        $scope.entities = entities; console.log($scope.entities);
         $scope.contents = contents;
         $scope.staticContents = staticContents;
 
         for(let iEntity in $scope.entities) {
-            if($scope.entities[iEntity].will.testator.placeOfBirth !== null && $scope.entities[iEntity].will.testator.placeOfBirth.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfBirth.name = $scope.entities[iEntity].will.testator.placeOfBirth.names[0].name;
+            if($scope.entities[iEntity].will.testator.placeOfBirthNormalized !== null && $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names.length > 0) {
+                $scope.entities[iEntity].will.testator.placeOfBirthNormalized.name = $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names[0].name;
             }
-            if($scope.entities[iEntity].will.testator.placeOfDeath.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfDeath.name = $scope.entities[iEntity].will.testator.placeOfDeath.names[0].name;
+            else if($scope.entities[iEntity].will.testator.placeOfBirthNormalized === null) {
+                $scope.entities[iEntity].will.testator.placeOfBirthNormalized = {name: null};
+            }
+            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized.names.length > 0) {
+                $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
             }
         }
 
@@ -53,11 +56,11 @@ angular.module('transcript.app.home', ['ui.router'])
                 will: {
                     testator: {
                         name: null,
-                        placeOfDeath: {
+                        placeOfDeathNormalized: {
                             names: null
                         },
                         yearOfDeath: null,
-                        placeOfBirth: {
+                        placeOfBirthNormalized: {
                             names: null
                         }
                     }
@@ -67,12 +70,12 @@ angular.module('transcript.app.home', ['ui.router'])
                 will: {
                     testator: {
                         name: SearchService.dataset($scope.entities, "will.testator.name", "string"),
-                        placeOfDeath: {
-                            name: SearchService.dataset($scope.entities, "will.testator.placeOfDeath.name", "string")
+                        placeOfDeathNormalized: {
+                            name: SearchService.dataset($scope.entities, "will.testator.placeOfDeathNormalized.name", "string")
                         },
                         yearOfDeath: SearchService.dataset($scope.entities, "will.testator.yearOfDeath", "string"),
-                        placeOfBirth: {
-                            name: SearchService.dataset($scope.entities, "will.testator.placeOfBirth.name", "string")
+                        placeOfBirthNormalized: {
+                            name: SearchService.dataset($scope.entities, "will.testator.placeOfBirthNormalized.name", "string")
                         }
                     }
                 }
@@ -91,11 +94,11 @@ angular.module('transcript.app.home', ['ui.router'])
             }
         });
 
-        $scope.$watch('search.form.will.testator.placeOfDeath.name', function() {
-            if($scope.search.form.will.testator.placeOfDeath.name !== undefined) {
-                if ($scope.search.form.will.testator.placeOfDeath.name !== null && $scope.search.form.will.testator.placeOfDeath.name !== "" && $scope.search.form.will.testator.placeOfDeath.name.originalObject !== undefined) {
-                    $scope.search.form.will.testator.placeOfDeath.name = $scope.search.form.will.testator.placeOfDeath.name.originalObject.value;
-                    console.log($scope.search.form.will.testator.placeOfDeath.name);
+        $scope.$watch('search.form.will.testator.placeOfDeathNormalized.name', function() {
+            if($scope.search.form.will.testator.placeOfDeathNormalized.name !== undefined) {
+                if ($scope.search.form.will.testator.placeOfDeathNormalized.name !== null && $scope.search.form.will.testator.placeOfDeathNormalized.name !== "" && $scope.search.form.will.testator.placeOfDeathNormalized.name.originalObject !== undefined) {
+                    $scope.search.form.will.testator.placeOfDeathNormalized.name = $scope.search.form.will.testator.placeOfDeathNormalized.name.originalObject.value;
+                    console.log($scope.search.form.will.testator.placeOfDeathNormalized.name);
                 }
                 refresh();
             }
@@ -111,11 +114,11 @@ angular.module('transcript.app.home', ['ui.router'])
             }
         });
 
-        $scope.$watch('search.form.will.testator.placeOfBirth.name', function() {
-            if($scope.search.form.will.testator.placeOfBirth.name !== undefined) {
-                if ($scope.search.form.will.testator.placeOfBirth.name !== null && $scope.search.form.will.testator.placeOfBirth.name !== "" && $scope.search.form.will.testator.placeOfBirth.name.originalObject !== undefined) {
-                    $scope.search.form.will.testator.placeOfBirth.name = $scope.search.form.will.testator.placeOfBirth.name.originalObject.value;
-                    console.log($scope.search.form.will.testator.placeOfBirth.name);
+        $scope.$watch('search.form.will.testator.placeOfBirthNormalized.name', function() {
+            if($scope.search.form.will.testator.placeOfBirthNormalized.name !== undefined) {
+                if ($scope.search.form.will.testator.placeOfBirthNormalized.name !== null && $scope.search.form.will.testator.placeOfBirthNormalized.name !== "" && $scope.search.form.will.testator.placeOfBirthNormalized.name.originalObject !== undefined) {
+                    $scope.search.form.will.testator.placeOfBirthNormalized.name = $scope.search.form.will.testator.placeOfBirthNormalized.name.originalObject.value;
+                    console.log($scope.search.form.will.testator.placeOfBirthNormalized.name);
                 }
                 refresh();
             }
@@ -158,13 +161,13 @@ angular.module('transcript.app.home', ['ui.router'])
             for(let result in $scope.results) {
                 let entity = $scope.results[result];
 
-                if(entity.will.testator.placeOfDeath !== null && entity.will.testator.placeOfDeath.geographicalCoordinates !== null) {
-                    let coord = entity.will.testator.placeOfDeath.geographicalCoordinates.split('+');
+                if(entity.will.testator.placeOfDeathNormalized !== null && entity.will.testator.placeOfDeathNormalized.geographicalCoordinates !== null) {
+                    let coord = entity.will.testator.placeOfDeathNormalized.geographicalCoordinates.split('+');
                     let id = "maker"+entity.will.testator.id;
                     let marker = {
                         lat: parseFloat(coord[0]),
                         lng: parseFloat(coord[1]),
-                        message: entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeath.name,
+                        message: entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name,
                         focus: false,
                         draggable: false
                     };

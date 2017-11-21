@@ -1,0 +1,52 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+
+<main class="container" role="main">
+    <h1 class="page-heading">{{ willType.name }}<span ng-if="!(!!willType.name)">Nouveau type de testament</span></h1>
+    <div class="row">
+        <div class="col-sm-12">
+            <form class="col-12">
+                <div class="form-group row">
+                    <label for="admin-willType-edit-name" class="col-md-4 col-form-label text-md-right">Nom <span class="red-color">*</span></label>
+                    <div class="col-md-8">
+                        <input id="admin-willType-edit-name" class="form-control form-control-sm" data-ng-model="willType.name" required="required" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="admin-willType-edit-description" class="col-md-4 col-form-label text-md-right">Description</label>
+                    <div class="col-md-8">
+                        <textarea id="admin-willType-edit-description" class="form-control form-control-sm" data-ng-model="willType.description"></textarea>
+                    </div>
+                </div>
+
+                <div class="text-right">
+                    <button class="btn btn-sm" type="button"
+                            ng-disabled="!(!!willType.name)"
+                            ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
+                            ng-click="submit.action()">
+                        <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
+                        <span ng-if="submit.success == false && submit.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                        <span ng-if="submit.success == true">Succès !</span>
+                    </button>
+                </div>
+
+                <div class="card text-white bg-danger mb-3 mt-4">
+                    <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
+                    <div class="card-body">
+                        <p>En cliquant ci-dessous, vous supprimerez définitivement cette entité.</p>
+                        <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer cette entité ?">Supprimer cette entité <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</main>

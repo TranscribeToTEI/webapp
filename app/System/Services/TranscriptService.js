@@ -175,6 +175,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
             },
             getParentTag: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
                 console.log(teiInfo);
+                console.log(leftOfCursor);
+                console.log(rightOfCursor);
                 function getTagPos(tpContent, tpTag, order) {
                     let tagPosA = null, tagPosB = null, tagPosC = null;
                     if(order === "ASC") {
@@ -221,6 +223,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     parentLeftOfCursor = null,
                     parentRightOfCursor = null;
 
+                /*if(typeof rightOfCursor !== 'string' && !!rightOfCursor) {
+                    let newRightOfCursor = "";
+                    for(let line in rightOfCursor) {
+                        newRightOfCursor += rightOfCursor[line];
+                    }
+                    rightOfCursor = newRightOfCursor;
+                }*/
+
                 function registerChild(content, type) {
                     children.push({content: content, type: type});
                 }
@@ -254,7 +264,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         return iEndPos;
                     }
                 }
-                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) {
+                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) { // A priori, c'est cette fonction qui renvoie de la merde
                     let iContent = leftOfCursor+rightOfCursor;
                     console.log(endPos);
                     console.log(content.substring(0, endPos));
@@ -313,19 +323,21 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 /* -------------------------------------------------------------------------------------------------- */
 
                 /* -------------------------------------------------------------------------------------------------- */
-                /* -- This part computes the parent tag name: -- */
+                /* -- This part computes the tag name: -- */
                 /* -------------------------------------------------------------------------------------------------- */
-                if(leftOfCursor !== null && leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
+                if(!!leftOfCursor && leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
                     // The caret is inside an end tag > we use this tag as current tag
                     startContent = leftOfCursor.substring(leftOfCursor.lastIndexOf("</"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
                     computeFromEndTag(startContent);
-                } else if(leftOfCursor !== null && leftOfCursor.lastIndexOf("<") > leftOfCursor.lastIndexOf(">")) {
+                } else if(!!leftOfCursor && leftOfCursor.lastIndexOf("<") > leftOfCursor.lastIndexOf(">")) {
                     // The caret is inside a tag > we use this tag as current tag
+                    console.log(leftOfCursor);
+                    console.log(rightOfCursor);
                     startContent = leftOfCursor.substring(leftOfCursor.lastIndexOf("<"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
                     if(startContent[1] === "/") { computeFromEndTag(startContent); }
                     else { computeFromStartTag(startContent); }
 
-                } else if (leftOfCursor !== null && leftOfCursor.indexOf("<") !== -1) {
+                } else if (!!leftOfCursor && leftOfCursor.indexOf("<") !== -1) {
                     // The caret is outside a tag -> we use the nearest tag as current tag
                     /*
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
@@ -470,133 +482,12 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* -------------------------------------------------------------------------------------------------
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
-                    if(tagContent !== null && teiInfo[tag]["textAllowed"] === false) {
-                        /*if(tagContent.indexOf("<") !== -1) {
-                            // First step: we create a list of the tags and the string in the tagContent
-
-                            // There is at least one tag in the tag content
-                            let currentContent = "";
-                            let currentContentType = null;
-                            // Methodology:
-                            // We loop each character and when we detect changes (by < and > characters), we register the entry
-                            for(let key in tagContent) {
-                                key = parseInt(key);
-                                let character           = tagContent[key]; //console.log(character);
-                                let nextCharacter       = tagContent[key+1];
-                                let previousCharacter   = tagContent[key-1];
-
-                                if(character === "<" && nextCharacter !== " ") {
-                                    // This is the start of a tag
-
-                                    if(currentContent !== "") {
-                                        // We register the previous children
-                                        registerChild(currentContent, "string");
-                                    }
-
-                                    currentContent = character;
-                                    currentContentType = "tag";
-                                } else if(character === ">" && currentContentType === "tag") {
-                                    // This is the end of a tag
-                                    currentContent += character;
-                                    registerChild(currentContent, "tag");
-
-                                    // Reset values:
-                                    currentContent = "";
-                                    currentContentType = null;
-                                } else if(currentContentType === null) {
-                                    // Case where we start a new string
-                                    currentContentType = "string";
-                                    currentContent += character;
-                                } else if(nextCharacter === undefined && character !== ">" && currentContent !== "") {
-                                    // This is the last character and this is not the end of a tag
-                                    registerChild(currentContent, "string");
-                                } else {
-                                    currentContent += character;
-                                }
-
-                            }
-
-                            // Second step: we recompute the tag values and string values:
-                            for(let iChild in children) {
-                                iChild = parseInt(iChild);
-                                let child           = children[iChild]; //console.log(character);
-                                let nextChild       = children[iChild+1];
-                                let previousChild   = children[iChild-1];
-
-                                if(child.type === "tag" && child.content[(child.content.length-2)] === "/" && child.content[(child.content.length-1)] === ">") {
-                                    // This is an single tag
-                                    child.subType = "singleTag";
-                                    child.tag = child.content.replace(/<([a-zA-Z]+).*>/g, '$1');
-                                } else if(child.type === "tag" && child.content[1] === "/") {
-                                    // This is an end tag
-                                    child.subType = "endTag";
-                                    child.tag = child.content.replace(/<\/([a-zA-Z]+).*>/g, '$1');
-                                } else if(child.type === "tag" && child.content[1] !== "/") {
-                                    // This is a start tag
-                                    child.subType = "startTag";
-                                    child.tag = child.content.replace(/<([a-zA-Z]+).*>/g, '$1');
-                                }
-                            }
-
-                            // Third step: we merge the tag and the string:
-                            let newChildren3 = [];
-                            let skipList3 = [];
-                            for(let iChild in children) {
-                                iChild = parseInt(iChild);
-                                let child           = children[iChild]; //console.log(character);
-                                let nextChild       = children[iChild+1];
-                                let previousChild   = children[iChild-1];
-
-                                if(skipList3.indexOf(iChild) !== -1) {
-                                    continue;
-                                } else if(child.type === "string" &&
-                                previousChild !== undefined && previousChild.type === "tag" && previousChild.subType === "startTag" &&
-                                nextChild !== undefined && nextChild.type === "tag" && nextChild.subType === "endTag" &&
-                                previousChild.tag === nextChild.tag) {
-                                    newChildren3.splice(newChildren3.length-1, 1);
-                                    skipList3.push(iChild+1);
-                                    newChildren3.push({
-                                        content: previousChild.content+child.content+nextChild.content,
-                                        type: "tag"
-                                    });
-                                } else {
-                                    newChildren3.push(child);
-                                }
-                            }
-                            children = newChildren3;
-
-                            // Fourth step: we merge the tags:
-                            let newChildren4 = [];
-                            let mergeContent4 = "";
-                            let mergeContentTag4 = "";
-                            for(let iChild in children) {
-                                iChild = parseInt(iChild);
-                                let child           = children[iChild]; //console.log(character);
-
-                                if(child.subType === "startTag") {
-                                    mergeContent4 = child.content;
-                                    mergeContentTag4 = child.tag;
-                                } else if((child.type === "tag" && child.subType === undefined) || child.subType !== "endTag" || (child.subType === "endTag" && child.tag !== mergeContentTag4) && mergeContent4 !== "") {
-                                    mergeContent4 += child.content;
-                                } else if(child.type === "tag" && child.subType === "endTag" && child.tag === mergeContentTag4 && mergeContent4 !== "") {
-                                    mergeContent4 += child.content;
-                                    newChildren4.push({
-                                        content: mergeContent4,
-                                        type: "tag"
-                                    });
-                                    mergeContent4 = "";
-                                    mergeContentTag4 = "";
-                                } else if(child.type !== "tag") {
-                                    newChildren4.push(child);
-                                }
-                            }
-                            children = newChildren4;
-                        } else {
-                            // Tag content is string
-                            registerChild(tagContent, "string");
-                        }*/
-                        children = computeChildren(tagContent.indexOf("<")+1, tagContent);
-                    } else if(teiInfo[tag]["textAllowed"] === true) {
+                    if(!!tagContent && !!teiInfo[tag] && teiInfo[tag]["textAllowed"] === false) {
+                        //children = computeChildren(tagContent.indexOf("<")+1, tagContent);
+                        children = null;
+                    } else if(!!tagContent && !!teiInfo[tag] && teiInfo[tag]["textAllowed"] === true) {
+                        children = null;
+                    } else {
                         children = null;
                     }
                     /* ---------------------------------------------------------------------------------------------- */

@@ -15,10 +15,10 @@
     <dd class="col-sm-8">{{ logContainer.log.data.addressNumber }}, {{ logContainer.log.data.addressStreet }}, {{ logContainer.log.data.addressDistrict }}, {{ logContainer.log.data.addressCity }}</dd>
 
     <dt class="col-sm-4">Naissance</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfBirth.id})">{{ logContainer.log.data.placeOfBirth.name }}</a></dd>
+    <dd class="col-sm-8">{{ logContainer.log.data.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfBirthNormalized.id})">{{ logContainer.log.data.placeOfBirthNormalized.name }}</a></dd>
 
     <dt class="col-sm-4">Décès</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfDeath.id})">{{ logContainer.log.data.placeOfDeath.name }}</a></dd>
+    <dd class="col-sm-8">{{ logContainer.log.data.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfDeathNormalized.id})">{{ logContainer.log.data.placeOfDeathNormalized.name }}</a></dd>
 
     <dt class="col-sm-4">Mention</dt>
     <dd class="col-sm-8">{{ logContainer.log.data.deathMention }}</dd>

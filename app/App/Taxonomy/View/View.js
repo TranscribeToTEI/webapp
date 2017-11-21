@@ -60,11 +60,11 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
             }
         }
         if($scope.entity.dataType === 'testators') {
-            if($scope.entity.placeOfBirth !== null && $scope.entity.placeOfBirth.names.length > 0) {
-                $scope.entity.placeOfBirth.name = $scope.entity.placeOfBirth.names[0].name;
+            if($scope.entity.placeOfBirthNormalized !== null && $scope.entity.placeOfBirthNormalized.names.length > 0) {
+                $scope.entity.placeOfBirthNormalized.name = $scope.entity.placeOfBirthNormalized.names[0].name;
             }
-            if($scope.entity.placeOfDeath.names.length > 0) {
-                $scope.entity.placeOfDeath.name = $scope.entity.placeOfDeath.names[0].name;
+            if($scope.entity.placeOfDeathNormalized.names.length > 0) {
+                $scope.entity.placeOfDeathNormalized.name = $scope.entity.placeOfDeathNormalized.names[0].name;
             }
         }
         /* -- End : Place name management ---------------------------------------------------- */

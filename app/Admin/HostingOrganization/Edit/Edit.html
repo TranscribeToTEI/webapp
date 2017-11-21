@@ -8,25 +8,57 @@
 </div>
 
 <main class="container" role="main">
-    <h1 class="page-heading" data-ng-if="organization.name != null && organization.name != ''">{{ organization.name }}</h1>
-    <h1 class="page-heading" data-ng-if="organization.name == null || organization.name == ''">Nouvelle organisation</h1>
+    <h1 class="page-heading" ng-if="organization.name != null && organization.name != ''">{{ organization.name }}</h1>
+    <h1 class="page-heading" ng-if="organization.name == null || organization.name == ''">Nouvelle organisation</h1>
 
     <form>
-        <div class="col-xl-10 col-12">
+        <div class="col-xl-12 col-12">
             <div class="form-group row">
                 <label for="admin-organization-edit-name" class="col-md-2 col-form-label text-md-right">Nom officiel <span class="red-color">*</span></label>
                 <div class="col-md-10">
-                    <input id="admin-organization-edit-name" type="text" class="form-control" data-ng-model="organization.name" required="required" />
+                    <input id="admin-organization-edit-name" type="text" class="form-control" ng-model="organization.name" required="required" />
                 </div>
             </div>
             <div class="form-group row">
                 <label for="admin-organization-edit-code" class="col-md-2 col-form-label text-md-right">Code <span class="red-color">*</span></label>
                 <div class="col-md-10">
-                    <input id="admin-organization-edit-code" type="text" class="form-control" data-ng-model="organization.code" required="required" placeholder="Ex: AN pour Archives nationales" />
+                    <input id="admin-organization-edit-code" type="text" class="form-control" ng-model="organization.code" required="required" placeholder="Ex: AN pour Archives nationales" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="admin-organization-edit-url" class="col-md-2 col-form-label text-md-right">Site web officiel</label>
+                <div class="col-md-10">
+                    <input id="admin-organization-edit-url" type="url" class="form-control" ng-model="organization.website" required="required" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="admin-organization-edit-description"  class="col-md-2 col-form-label text-md-right">Description</label>
+                <div class="col-md-10">
+                    <div id="admin-organization-edit-description" ckeditor="options" ng-model="organization.description"></div>
+                    <small class="form-text text-muted">Ce texte sera affiché au dessus de la liste des testaments de cette institution.</small>
+                </div>
+            </div>
+            <hr />
+            <div class="form-group row">
+                <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
+                <div class="col-md-5">
+                    <input id="admin-content-edit-image" class="form-control form-control-sm" ng-model="content.illustration" />
+                    <small class="form-text text-muted">Spécifiez l'URL de votre image ou uploadez une image ci-contre</small>
+                    <div ng-if="content.illustration != null"><img src="{{ content.illustration | imageRender }}" class="img-150px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" /></div>
+                </div>
+                <div class="col-md-5">
+                    <input id="app-user-edit-picture" type="file" ngf-select ng-model="media.form.illustration" name="file" accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile">
+                    <i ng-show="myForm.file.$error.required">*required</i><br>
+                    <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
+                    <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" />
+                    <button ng-click="picFile = null" ng-show="picFile">Remove</button>
+                    <button ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" ng-click="media.submit.action()">Soumettre</button>
+                    <button ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+                    <button ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
                 </div>
             </div>
 
-            <div class="text-right mt-2" data-ng-if="organization.id == null">
+            <div class="text-right mt-2" ng-if="organization.id == null">
                 <button class="btn btn-sm" type="button"
                         ng-disabled="!(!!organization.name && !!organization.code)"
                         ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
@@ -36,12 +68,12 @@
                     <span ng-if="submit.success == true">Succès !</span>
                 </button>
             </div>
-            <div class="card text-white bg-light mb-3 mt-4" data-ng-if="organization.id != null">
+            <div class="card text-white bg-light mb-3 mt-4" ng-if="organization.id != null">
                 <div class="card-body">
                     <div class="form-row bg-default">
                         <div class="form-group col-md-10 align-self-end">
                             <label for="admin-organization-edit-updateComment" class="form-control-label">Commentaire d'édition <span class="red-color">*</span></label>
-                            <textarea id="admin-organization-edit-updateComment" class="form-control form-control-sm" data-ng-model="organization.updateComment" placeholder="Merci de décrire votre modification avant de la soumettre" required="required"></textarea>
+                            <textarea id="admin-organization-edit-updateComment" class="form-control form-control-sm" ng-model="organization.updateComment" placeholder="Merci de décrire votre modification avant de la soumettre" required="required"></textarea>
                         </div>
                         <div class="text-right col-md-2 align-self-end">
                             <button class="btn btn-sm" type="button"
@@ -57,13 +89,13 @@
                 </div>
             </div>
 
-            <hr data-ng-if="organization.id != null" />
-            <div class="card-deck mt-5" data-ng-if="organization.id !== null" >
+            <hr ng-if="organization.id != null" />
+            <div class="card-deck mt-5" ng-if="organization.id !== null" >
                 <div class="card text-white bg-danger mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">
                         <p>En cliquant ci-dessous, vous supprimerez définitivement ce contenu.</p>
-                        <button class="btn btn-sm btn-primary" type="button" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce contenu ?">Supprimer <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                        <button class="btn btn-sm btn-primary" type="button" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce contenu ?">Supprimer <i ng-if="remove.loading == false" class="fa fa-remove"></i><i ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
                     </div>
                 </div>
             </div>

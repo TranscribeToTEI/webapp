@@ -53,6 +53,9 @@ angular.module('transcriptApp', [
         'transcript.admin.user',
         'transcript.admin.user.list',
         'transcript.admin.user.view',
+        'transcript.admin.will-type',
+        'transcript.admin.will-type.list',
+        'transcript.admin.will-type.edit',
         'transcript.app',
         'transcript.app.blog',
         'transcript.app.contact',
@@ -60,6 +63,9 @@ angular.module('transcriptApp', [
         'transcript.app.edition',
         'transcript.app.entity',
         'transcript.app.home',
+        'transcript.app.hosting-organization',
+        'transcript.app.hosting-organization.list',
+        'transcript.app.hosting-organization.view',
         'transcript.app.search',
         'transcript.app.security',
         'transcript.app.security.check',
@@ -131,7 +137,8 @@ angular.module('transcriptApp', [
         'transcript.service.transcript-log',
         'transcript.service.user',
         'transcript.service.user-preference',
-        'transcript.service.will'
+        'transcript.service.will',
+        'transcript.service.will-type'
     ]).
     config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider) {
         $urlRouterProvider.otherwise('/');

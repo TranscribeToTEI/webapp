@@ -22,10 +22,10 @@
     <dd class="col-sm-8">{{ entity.addressNumber }}, {{ entity.addressStreet }}, {{ entity.addressDistrict }}, {{ entity.addressCity }}</dd>
 
     <dt class="col-sm-4">Naissance</dt>
-    <dd class="col-sm-8">{{ entity.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirth.id})">{{ entity.placeOfBirth.name }}</a></dd>
+    <dd class="col-sm-8">{{ entity.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirthNormalized.id})">{{ entity.placeOfBirthNormalized.name }}</a></dd>
 
     <dt class="col-sm-4">Décès</dt>
-    <dd class="col-sm-8">{{ entity.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeath.id})">{{ entity.placeOfDeath.name }}</a></dd>
+    <dd class="col-sm-8">{{ entity.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeathNormalized.id})">{{ entity.placeOfDeathNormalized.name }}</a></dd>
 
     <dt class="col-sm-4">Mention</dt>
     <dd class="col-sm-8">{{ entity.deathMention }}</dd>

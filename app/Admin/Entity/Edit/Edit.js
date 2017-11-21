@@ -41,9 +41,20 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         console.log($scope.entity);
 
         $scope.entity.will.testator = $scope.entity.will.testator.id;
-        $scope.places = places;
+        if($scope.entity.will.willWritingPlace !== null) {$scope.entity.will.willWritingPlace = $scope.entity.will.willWritingPlace.id;}
+        if($scope.entity.will.hostingOrganization !== null) {$scope.entity.will.hostingOrganization = $scope.entity.will.hostingOrganization.id;}
+
         $scope.testators = testators;
         $scope.organizations = organizations;
+        /* Place names management ----------------------------------------------------------------------------------- */
+        $scope.places = places;
+        for(let iEntity in $scope.places) {
+            if($scope.places[iEntity].names.length > 0) {
+                $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
+            }
+        }
+        /* End: Place names management ------------------------------------------------------------------------------ */
+
 
         $scope.submit = {
             loading: false,
@@ -73,7 +84,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         };
 
         $scope.form.removeResource = function(resource) {
-            let index =$scope.entity.resources.indexOf(resource);
+            let index = $scope.entity.resources.indexOf(resource);
             $scope.entity.resources.splice(index,1);
         };
 
@@ -83,28 +94,28 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         $scope.submit.action = function() {
             $scope.submit.loading = true;
             let formEntity = {
-                    isShown: $scope.entity.isShown,
-                    willNumber: $scope.entity.willNumber,
-                    will: {
-                        title: "Testament "+$scope.entity.will.callNumber,
-                        callNumber: $scope.entity.will.callNumber,
-                        minuteLink: $scope.entity.will.minuteLink,
-                        minuteDate: $scope.entity.will.minuteDate,
-                        willWritingDate: $scope.entity.will.willWritingDate,
-                        willWritingPlace: $scope.entity.will.willWritingPlace.id,
-                        placePhysDescSupport: $scope.entity.will.placePhysDescSupport,
-                        placePhysDescHeight: $scope.entity.will.placePhysDescHeight,
-                        placePhysDescWidth: $scope.entity.will.placePhysDescWidth,
-                        placePhysDescHand: $scope.entity.will.placePhysDescHand,
-                        envelopPhysDescSupport: $scope.entity.will.envelopPhysDescSupport,
-                        envelopPhysDescHeight: $scope.entity.will.envelopPhysDescHeight,
-                        envelopPhysDescWidth: $scope.entity.will.envelopPhysDescWidth,
-                        envelopPhysDescHand: $scope.entity.will.envelopPhysDescHand,
-                        hostingOrganization: $scope.entity.will.hostingOrganization,
-                        identificationUser: $scope.entity.will.identificationUser,
-                    },
-                    resources: []
-                };
+                isShown: $scope.entity.isShown,
+                willNumber: $scope.entity.willNumber,
+                will: {
+                    title: "Testament "+$scope.entity.will.callNumber,
+                    callNumber: $scope.entity.will.callNumber,
+                    minuteLink: $scope.entity.will.minuteLink,
+                    minuteDate: $scope.entity.will.minuteDate,
+                    willWritingDate: $scope.entity.will.willWritingDate,
+                    willWritingPlace: $scope.entity.will.willWritingPlace.id,
+                    placePhysDescSupport: $scope.entity.will.placePhysDescSupport,
+                    placePhysDescHeight: $scope.entity.will.placePhysDescHeight,
+                    placePhysDescWidth: $scope.entity.will.placePhysDescWidth,
+                    placePhysDescHand: $scope.entity.will.placePhysDescHand,
+                    envelopPhysDescSupport: $scope.entity.will.envelopPhysDescSupport,
+                    envelopPhysDescHeight: $scope.entity.will.envelopPhysDescHeight,
+                    envelopPhysDescWidth: $scope.entity.will.envelopPhysDescWidth,
+                    envelopPhysDescHand: $scope.entity.will.envelopPhysDescHand,
+                    hostingOrganization: $scope.entity.will.hostingOrganization,
+                    identificationUser: $scope.entity.will.identificationUser,
+                },
+                resources: []
+            };
 
             for(let resource of $scope.entity.resources) {
                 if(typeof resource.images === 'string') {
@@ -122,16 +133,17 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                         updateComment: 'Creation of the transcript'
                     };
                 }
-
                 formEntity.resources.push(content);
             }
 
+            console.log(formEntity);
             // Entity update :
             $http.patch($rootScope.api+'/entities/'+$scope.entity.id, formEntity).
             then(function (response) {
                 console.log(response.data);
                 $scope.submit.loading = false;
                 $scope.submit.success = true;
+                flash.success = "Vous allez être redirigé dans quelques instants...";
                 $state.go('transcript.app.entity', {id: response.data.id});
             }, function errorCallback(response) {
                 console.log(response);

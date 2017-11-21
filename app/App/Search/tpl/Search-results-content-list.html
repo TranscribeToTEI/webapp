@@ -5,7 +5,7 @@
         <div class="col-9">
             <a ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a><br/>
             <div class="desc">
-                {{ entity.will.testator.deathMention }} le {{ entity.will.testator.dateOfDeath }} <span class="text-danger">|</span> {{ entity.will.testator.placeOfDeath.names[0].name }}<span ng-if="entity.will.testator.placeOfDeath.countries != null">, {{ entity.will.testator.placeOfDeath.countries[0].name }}</span><br />
+                {{ entity.will.testator.deathMention }} le {{ entity.will.testator.dateOfDeath }} <span class="text-danger">|</span> {{ entity.will.testator.placeOfDeathNormalized.names[0].name }}<span ng-if="entity.will.testator.placeOfDeathNormalized.countries != null">, {{ entity.will.testator.placeOfDeathNormalized.countries[0].name }}</span><br />
                 Testament rédigé le {{ entity.will.willWritingDate }} <span class="text-danger">|</span> {{ entity.will.willWritingPlace.names[0].name }}<span ng-if="entity.will.willWritingPlace.countries != null">, {{ entity.will.willWritingPlace.countries[0].name }}</span><br />
                 <div class="cote"> Cote aux {{ entity.will.hostingOrganization.name }} {{ entity.will.callNumber }}, minute du {{ entity.will.minuteDate }}</div>
             </div>

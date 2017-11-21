@@ -43,6 +43,7 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
             }
         };
         $scope.entity = {
+            isShown: true,
             resources: [],
             will: {}
         };
@@ -59,8 +60,6 @@ angular.module('transcript.admin.entity.import', ['ui.router'])
         }
         $scope.places = $filter('orderBy')($scope.places, 'name');
         /* End: Place's name management ----------------------------------------------------------------------------- */
-
-
 
         $scope.form.addResource = function(resourceNumber) {
             $scope.entity.resources.push({

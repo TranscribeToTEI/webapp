@@ -1,0 +1,25 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+<main class="container content pb-3" role="container">
+    <h1 class="card-header bg-dark">{{ organization.name }}</h1>
+    <nav ng-if="user.roles | contains:'ROLE_ADMIN'">
+        <ul class="nav nav-pills justify-content-end">
+            <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.hosting-organization.edit({id: organization.id})"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Modifier cette page</a></li>
+        </ul>
+    </nav>
+    <div class="row mt-4">
+        <div class="col-md-12 order-md-2">
+            <div ng-if="!!organization.logo" class="text-center"><img src="{{ organization.logo | imageRender }}" class="img-fluid thumbnail" /></div>
+            <div class="text-justify mt-2 pr-md-3" data-ng-bind-html="organization.description | trustAsHtml"></div>
+            <p><a href="{{ organization.website }}" target="_blank" ng-if="!!organization.website">Accéder au site web</a></p>
+
+            <h2>Liste des testaments</h2>
+        </div>
+    </div>
+</main>

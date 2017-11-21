@@ -80,13 +80,13 @@
 <fieldset>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-placeOfBirth" class="form-control-label">Lieu de naissance</label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirth" ng-model="entity.placeOfBirth.id" name="app-entity-edit-placeOfBirth" ng-options="place.id as place.name for place in places"></select>
+            <label for="app-entity-edit-placeOfBirthNormalized" class="form-control-label">Lieu de naissance</label>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirthNormalized" ng-model="entity.placeOfBirthNormalized.id" name="app-entity-edit-placeOfBirthNormalized" ng-options="place.id as place.name for place in places"></select>
         </div>
 
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-placeOfDeath" class="form-control-label">Lieu de décès <span class="red-color">*</span></label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeath" ng-model="entity.placeOfDeath.id" name="app-entity-edit-placeOfDeath" ng-options="place.id as place.name for place in places" required="required"></select>
+            <label for="app-entity-edit-placeOfDeathNormalized" class="form-control-label">Lieu de décès <span class="red-color">*</span></label>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeathNormalized" ng-model="entity.placeOfDeathNormalized.id" name="app-entity-edit-placeOfDeathNormalized" ng-options="place.id as place.name for place in places" required="required"></select>
         </div>
     </div>
 

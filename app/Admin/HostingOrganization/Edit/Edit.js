@@ -70,6 +70,18 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
         $scope.remove = {
             loading: false
         };
+
+        $scope.options = {
+            language: 'fr',
+            allowedContent: true,
+            entities: false,
+            toolbar: [
+                ['Source','NewPage','Print','Templates','-','Find','Replace','Scayt','RemoveFormat','-','Undo','Redo','-','Maximize','ShowBlocks'],
+                ['Bold','Italic','Underline','StrikeThrough','Strike','Subscript','Superscript','-','NumberedList','BulletedList','Outdent','Indent','Blockquote','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','Link','Unlink','Anchor'],
+                ['Image','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','InsertPre'],
+                ['Styles','Format','Font','FontSize','-','TextColor','BGColor']
+            ]
+        };
         /* End: Scope management ------------------------------------------------------------------------------------ */
 
         /* Upload new media ----------------------------------------------------------------------------------------- */
@@ -125,6 +137,9 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
             let form = {
                 name: $scope.organization.name,
                 code: $scope.organization.code,
+                website: $scope.organization.website,
+                description: $scope.organization.description,
+                logo: $scope.organization.logo,
                 updateComment: $scope.organization.updateComment,
             };
             if($scope.organization.id === null) {
