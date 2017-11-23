@@ -264,7 +264,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         return iEndPos;
                     }
                 }
-                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) { // A priori, c'est cette fonction qui renvoie de la merde
+                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) { // A priori, c'est cette fonction qui renvoie de la merde (ou peut être les autres d'en dessous)
                     let iContent = leftOfCursor+rightOfCursor;
                     console.log(endPos);
                     console.log(content.substring(0, endPos));
