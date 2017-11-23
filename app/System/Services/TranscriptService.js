@@ -3,7 +3,7 @@
 angular.module('transcript.service.transcript', ['ui.router'])
 
     .service('TranscriptService', function($http, $rootScope) {
-        return {
+        let functions = {
             getTranscripts: function() {
                 return $http.get(
                     $rootScope.api+"/transcripts"
@@ -173,172 +173,283 @@ angular.module('transcript.service.transcript', ['ui.router'])
             loadFile: function(file) {
                 return 'App/Transcript/tpl/'+file+'.html';
             },
-            getParentTag: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
-                console.log(teiInfo);
-                console.log(leftOfCursor);
-                console.log(rightOfCursor);
-                function getTagPos(tpContent, tpTag, order) {
-                    let tagPosA = null, tagPosB = null, tagPosC = null;
-                    if(order === "ASC") {
-                        tagPosA = tpContent.indexOf("<"+tpTag+" ");
-                        tagPosB = tpContent.indexOf("<"+tpTag+"/>");
-                        tagPosC = tpContent.indexOf("<"+tpTag+">");
-                    } else if(order === "DESC") {
-                        tagPosA = tpContent.lastIndexOf("<"+tpTag+" ");
-                        tagPosB = tpContent.lastIndexOf("<"+tpTag+"/>");
-                        tagPosC = tpContent.lastIndexOf("<"+tpTag+">");
+            /* ------------------------------------------------------------------------------------------------------ */
+            /* Functions for transcript */
+            /* ------------------------------------------------------------------------------------------------------ */
+            /**
+             * This function returns the position of a tag
+             * Position meaning position of the '|<' character of the tag
+             *
+             * @param tpContent
+             * @param tpTag
+             * @param order
+             * @returns integer|null
+             */
+            getTagPos: function(tpContent, tpTag, order) {
+                let tagPosA = null, tagPosB = null, tagPosC = null;
+                if(order === "ASC") {
+                    tagPosA = tpContent.indexOf("<"+tpTag+" ");
+                    tagPosB = tpContent.indexOf("<"+tpTag+"/>");
+                    tagPosC = tpContent.indexOf("<"+tpTag+">");
+                } else if(order === "DESC") {
+                    tagPosA = tpContent.lastIndexOf("<"+tpTag+" ");
+                    tagPosB = tpContent.lastIndexOf("<"+tpTag+"/>");
+                    tagPosC = tpContent.lastIndexOf("<"+tpTag+">");
+                }
+
+                let tagPosArray = [tagPosA, tagPosB, tagPosC];
+                tagPosArray.sort();
+                tagPosArray.reverse();
+
+                return (tagPosArray[0] !== -1) ? tagPosArray[0]: null;
+            },
+            /**
+             * This function computes the value of teiElement.endTag.start.index
+             *
+             * @param teiElement
+             * @param leftOfCursor
+             * @param rightOfCursor
+             * @param content
+             * @param relativePosition
+             * @param carriedCounter
+             *
+             * @returns integer
+             */
+            computeEndOfTag: function(teiElement, leftOfCursor, rightOfCursor, content, relativePosition, carriedCounter) {
+                let iEndPos = relativePosition+content.substring(relativePosition, content.length).indexOf("</" + teiElement.name),
+                    iPortion = content.substring(relativePosition+1+teiElement.name.length, iEndPos);
+
+                if(iPortion.indexOf("<"+teiElement.name) !== -1) {
+                    // Meaning there is another similar tag as child
+                    let list = iPortion.match(new RegExp("<"+teiElement.name,'g'));
+                    return functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, iEndPos, carriedCounter+list.length-1);
+                } else if(carriedCounter > 0) {
+                    // If the carried list is not empty
+                    return functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, iEndPos, carriedCounter-1);
+                } else {
+                    if(carriedCounter > 0 && iEndPos !== null) {
+                        // If we are computing the value for a parent:
+                        let previous = 0;
+                        for(let i = 0; i <= carriedCounter; i++) {
+                            previous = rightOfCursor.indexOf("</" + teiElement.name);
+                            rightOfCursor = rightOfCursor.substring(previous+2+teiElement.name.length+1, rightOfCursor.length);
+                            iEndPos += rightOfCursor.indexOf("</" + teiElement.name)+2+teiElement.name.length+1;
+                        }
+                        iEndPos += 2+teiElement.name.length;
+                    }
+                    // Else, we return the tag pos
+                    return iEndPos;
+                }
+            },
+            /**
+             * This function computes the value of teiElement.startTag.start.index
+             *
+             * @param teiElement
+             * @param content
+             * @param relativePosition
+             * @param carriedCounter
+             *
+             * @returns integer
+             */
+            computeStartOfTag: function(teiElement, content, relativePosition, carriedCounter) {
+                // We are looking for the last position of tag pos
+                let iTagPos = functions.getTagPos(content.substring(0, relativePosition), teiElement.name, "DESC");
+                let iPortion = content.substring(iTagPos, relativePosition);
+
+                if(iPortion.indexOf("</"+teiElement.name+">") !== -1) {
+                    // Meaning there is another similar tag as child
+                    let list = iPortion.match(new RegExp("</"+teiElement.name+">",'g'));
+                    return functions.computeStartOfTag(teiElement.name, content, iTagPos, carriedCounter+list.length-1);
+                } else if(carriedCounter > 0) {
+                    // If the carried list is not empty
+                    return functions.computeStartOfTag(teiElement.name, content, iTagPos, carriedCounter-1);
+                } else {
+                    // Else, we return the tag pos
+                    return iTagPos;
+                }
+            },
+            /**
+             * This function computes positions of the start tag and end tag, from the end position
+             *
+             * @param teiElement
+             * @param leftOfCursor
+             * @param rightOfCursor
+             * @param content
+             * 
+             * @returns object
+             */
+            computeFromEndTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
+                console.log('computeFromEndTag');
+                teiElement.name = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
+
+                if(teiElement.name) {
+                    teiElement.type                 = "standard"; // -> This is an end tag, can't be a single tag
+                    teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
+                    teiElement.startTag.start.index = functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0);
+
+                    if(teiElement.startTag.start.index !== null) {
+                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
+                    }
+                }
+
+                return teiElement;
+            },
+            /**
+             * This function computes positions of the start tag and end tag, from the start position
+             *
+             * @param teiElement
+             * @param leftOfCursor
+             * @param rightOfCursor
+             * @param content
+             * @returns object
+             */
+            computeFromStartTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
+                console.log('computeFromStartTag');
+                teiElement.name = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
+
+                if(teiElement.name) {
+                    if(teiElement.startTag.content.substring(teiElement.startTag.content.length-2, teiElement.startTag.content.length) === "/>") {
+                        teiElement.type = "single";
+                    } else {
+                        teiElement.type = "standard";
+                    }
+                    console.log(teiElement.type);
+
+                    if(teiElement.type === "single") {
+                        teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
+                    } else if(teiElement.type === "standard") {
+                        teiElement.startTag.start.index = functions.getTagPos(leftOfCursor, teiElement.name, "DESC");
+                        console.log(teiElement.startTag.start.index);
                     }
 
-                    let tagPosArray = [tagPosA, tagPosB, tagPosC];
-                    tagPosArray.sort();
-                    tagPosArray.reverse();
-                    return tagPosArray[0];
+                    if(teiElement.startTag.start.index !== null) {
+                        if(teiElement.type === "standard") {
+                            teiElement.endTag.start.index = functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, teiElement.startTag.start.index, 0);
+                        }
+
+                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                        console.log(teiElement.parentLeftOfCursor);
+                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
+                        console.log(teiElement.parentRightOfCursor);
+                    }
                 }
+
+                return teiElement;
+            },
+            computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor) {
+                console.log('computeFromSingleTag');
+                teiElement.name = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
+
+                if(teiElement.name) {
+                    teiElement.type = "single";
+                    teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
+
+                    if(teiElement.startTag.start.index) {
+                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                        console.log(teiElement.parentLeftOfCursor);
+                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
+                        console.log(teiElement.parentRightOfCursor);
+                    }
+                }
+
+                return teiElement;
+            },
+            computeChildren: function(tagPos, fullContent) {
+                // Reste à faire cette partie
+            },
+            registerChild: function(content, type) {
+                teiElement.children.push({content: content, type: type});
+            },
+            getTEIElementStartTagEndIndex: function(teiElement, content) {
+                let afterTagPosContent  = content.substring(teiElement.startTag.start.index + 1 + teiElement.name.length, content.length);
+                let tagPosFullContent   = afterTagPosContent.indexOf('>');
+                return teiElement.startTag.start.index + 1 + teiElement.name.length + tagPosFullContent;
+            },
+            /**
+             * This function returns an array with every information about the current TEI Element of the caret position in the transcript
+             *
+             * @param leftOfCursor
+             * @param rightOfCursor
+             * @param lines
+             * @param tags
+             * @param teiInfo
+             * @param computeParent
+             * @returns object
+             */
+            getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
+                if(!(!!leftOfCursor || !!rightOfCursor)) { return null; }
+                // console.log(teiInfo);
+                // console.log(leftOfCursor);
+                // console.log(rightOfCursor);
+
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
                  * - endPos should be an absolute value, not relative to tagPos
                  */
-
-                let tag = "",
-                    tagType = null,
-                    startColS = null,
-                    startRowS = null,
-                    startColE = null,
-                    startRowE = null,
-                    startExtraCounter = 0,
-                    startContent = null,
-                    endColS = null,
-                    endRowS = null,
-                    endColE = null,
-                    endRowE = null,
-                    endContent = null,
-                    tagContent = null,
-                    tagAttributes = [],
-                    parents = [],
-                    parent = null,
-                    children = [],
-                    content = leftOfCursor+rightOfCursor,
-                    tagPos = null,
-                    endPos = null,
-                    parentLeftOfCursor = null,
-                    parentRightOfCursor = null;
-
-                /*if(typeof rightOfCursor !== 'string' && !!rightOfCursor) {
-                    let newRightOfCursor = "";
-                    for(let line in rightOfCursor) {
-                        newRightOfCursor += rightOfCursor[line];
-                    }
-                    rightOfCursor = newRightOfCursor;
-                }*/
-
-                function registerChild(content, type) {
-                    children.push({content: content, type: type});
-                }
-
-                /* -------------------------------------------------------------------------------------------------- */
-                /* -- Functions used to compute start and end position of tags -- */
-                /* -------------------------------------------------------------------------------------------------- */
-                function computeEndOfTag(tag, tagPos, leftOfCursor, rightOfCursor, carriedCounter) {
-                    let iEndPos = tagPos+content.substring(tagPos, content.length).indexOf("</" + tag),
-                        iPortion = content.substring(tagPos+1+tag.length, iEndPos);
-
-                    if(iPortion.indexOf("<"+tag) !== -1) {
-                        // Meaning there is another similar tag as child
-                        let list = iPortion.match(new RegExp("<"+tag,'g'));
-                        return computeEndOfTag(tag, iEndPos, leftOfCursor, rightOfCursor, carriedCounter+list.length-1);
-                    } else if(carriedCounter > 0) {
-                        // If the carried list is not empty
-                        return computeEndOfTag(tag, iEndPos, leftOfCursor, rightOfCursor, carriedCounter-1);
-                    } else {
-                        if(carriedCounter > 0 && iEndPos !== null) {
-                            // If we are computing the value for a parent:
-                            let previous = 0;
-                            for(let i = 0; i <= carriedCounter; i++) {
-                                previous = rightOfCursor.indexOf("</" + tag);
-                                rightOfCursor = rightOfCursor.substring(previous+2+tag.length+1, rightOfCursor.length);
-                                iEndPos += rightOfCursor.indexOf("</" + tag)+2+tag.length+1;
-                            }
-                            iEndPos += leftCredit+1-(2+tag.length+1);
-                        }
-                        // Else, we return the tag pos
-                        return iEndPos;
-                    }
-                }
-                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) { // A priori, c'est cette fonction qui renvoie de la merde (ou peut être les autres d'en dessous)
-                    let iContent = leftOfCursor+rightOfCursor;
-                    console.log(endPos);
-                    console.log(content.substring(0, endPos));
-
-                    // We are looking for the last position of tag pos
-                    let iTagPos = getTagPos(content.substring(0, endPos), tag, "DESC");
-                    console.log(iTagPos);
-
-                    let iPortion = iContent.substring(iTagPos, endPos);
-                    console.log(iPortion);
-
-                    if(iPortion.indexOf("</"+tag+">") !== -1) {
-                        // Meaning there is another similar tag as child
-                        let list = iPortion.match(new RegExp("</"+tag+">",'g'));
-                        return computeStartOfTag(tag, iTagPos, leftOfCursor, rightOfCursor, carriedCounter+list.length-1);
-                    } else if(carriedCounter > 0) {
-                        // If the carried list is not empty
-                        return computeStartOfTag(tag, iTagPos, leftOfCursor, rightOfCursor, carriedCounter-1);
-                    } else {
-                        // Else, we return the tag pos
-                        return iTagPos;
-                    }
-                }
-                function computeFromEndTag(startContent) {
-                    tag = startContent.replace(/<\/([a-zA-Z]+)>/g, '$1');
-
-                    if(tag !== "") {
-                        tagType = "standard"; // -> This is an end tag, can't be a single tag
-                        endPos = leftOfCursor.lastIndexOf("<");
-                        tagPos = computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, 0);
-
-                        parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
-                        parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
-                    }
-                }
-                function computeFromStartTag(startContent) {
-                    tag = startContent.replace(/<([a-zA-Z]+).*>/g, '$1');
-
-                    if(tag !== "") {
-                        if(startContent.substring(startContent.length-2, startContent.length) === "/>") {
-                            tagType = "single";
-                        } else { tagType = "standard"; }
-
-                        tagPos = getTagPos(leftOfCursor, tag, "DESC");
-                        if(tagType === "standard") {
-                            endPos = computeEndOfTag(tag, tagPos, leftOfCursor, rightOfCursor, 0);
-                        }
-
-                        parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
-                        parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
-                    }
-                }
-                function computeChildren(tagPos, fullContent) {
-                    // Reste à faire cette partie
-                }
-                /* -------------------------------------------------------------------------------------------------- */
+                let content = leftOfCursor+rightOfCursor,
+                    teiElement = {
+                        name: null,
+                        type: null,
+                        attributes: [],
+                        startTag: {
+                            start: {
+                                index: null,
+                                row: null,
+                                column: null
+                            },
+                            end: {
+                                index: null, // Refers to the last character (meaning ">"), not the first after
+                                row: null,
+                                column: null
+                            },
+                            content: null
+                        },
+                        endTag: {
+                            start: {
+                                index: null,
+                                row: null,
+                                column: null
+                            },
+                            end: {
+                                index: null, // Refers to the last character (meaning ">"), not the first after
+                                row: null,
+                                column: null
+                            },
+                            content: null
+                        },
+                        content: null,
+                        parent: null,
+                        parents: [],
+                        children: [],
+                        parentLeftOfCursor: null,
+                        parentRightOfCursor: null
+                    },
+                    startExtraCounter = 0;
 
                 /* -------------------------------------------------------------------------------------------------- */
-                /* -- This part computes the tag name: -- */
+                /* -- This part computes the teiElement name: -- */
                 /* -------------------------------------------------------------------------------------------------- */
-                if(!!leftOfCursor && leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
+                if(leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
                     // The caret is inside an end tag > we use this tag as current tag
-                    startContent = leftOfCursor.substring(leftOfCursor.lastIndexOf("</"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
-                    computeFromEndTag(startContent);
-                } else if(!!leftOfCursor && leftOfCursor.lastIndexOf("<") > leftOfCursor.lastIndexOf(">")) {
+                    teiElement.startTag.content = leftOfCursor.substring(leftOfCursor.lastIndexOf("</"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
+                    teiElement = functions.computeFromEndTag(teiElement, leftOfCursor, rightOfCursor, content);
+                } else if(leftOfCursor.lastIndexOf("<") > leftOfCursor.lastIndexOf(">")) {
                     // The caret is inside a tag > we use this tag as current tag
-                    console.log(leftOfCursor);
-                    console.log(rightOfCursor);
-                    startContent = leftOfCursor.substring(leftOfCursor.lastIndexOf("<"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
-                    if(startContent[1] === "/") { computeFromEndTag(startContent); }
-                    else { computeFromStartTag(startContent); }
+                    teiElement.startTag.content = leftOfCursor.substring(leftOfCursor.lastIndexOf("<"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
+                    if(teiElement.startTag.content[1] === "/") {
+                        /* Tag is an endTag */
+                        teiElement = functions.computeFromEndTag(teiElement, leftOfCursor, rightOfCursor, content);
+                    } else if(teiElement.startTag.content[teiElement.startTag.content.length-2] === "/") {
+                        /* Tag is a singleTag */
+                        teiElement = functions.computeFromSingleTag(teiElement, leftOfCursor, rightOfCursor);
+                    } else {
+                        /* Tag is a startTag*/
+                        teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
+                    }
 
-                } else if (!!leftOfCursor && leftOfCursor.indexOf("<") !== -1) {
-                    // The caret is outside a tag -> we use the nearest tag as current tag
+                } else if (leftOfCursor.indexOf("<") !== -1) {
+                    // The caret is outside a tag, but there is at least one tag before -> we use this nearest tag as current teiElement
                     /*
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
                      * Regex from http://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
@@ -366,52 +477,60 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     carriedList.slice(carriedList.indexOf(valueTagName), 1);
                                 } else {
                                     // Else, it is not closed : this is it
-                                    tag = valueTagName;
+                                    teiElement.name = valueTagName;
                                     return false;
                                 }
                             }
                         }));
                     }
 
-                    if(tag !== "") {
-                        tagType = "standard";
-                        let tagPos = getTagPos(leftOfCursor, tag, "DESC");
+                    if(teiElement.name === null) {
+                        teiElement = null;
+                    } else {
+                        teiElement.type = "standard";
+                        teiElement.startTag.start.index = functions.getTagPos(leftOfCursor, teiElement, "DESC");
 
-                        let startContentFull = content.substring(tagPos, content.length);
-                        startContent = startContentFull.substring(0, startContentFull.indexOf(">")+1);
-                        computeFromStartTag(startContent);
+                        let startContentFull = content.substring(teiElement.startTag.start.index, content.length);
+                        teiElement.startTag.content = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+                        teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
 
-                        parentLeftOfCursor = leftOfCursor.substring(0, leftOfCursor.lastIndexOf(tag)-1);
-                        parentRightOfCursor = leftOfCursor.substring(leftOfCursor.lastIndexOf(tag)-1, leftOfCursor.length)+rightOfCursor;
+                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, leftOfCursor.lastIndexOf(teiElement.name)-1);
+                        teiElement.parentRightOfCursor = leftOfCursor.substring(leftOfCursor.lastIndexOf(teiElement.name)-1, leftOfCursor.length)+rightOfCursor;
                     }
+                } else {
+                    teiElement = null;
                 }
                 /* -------------------------------------------------------------------------------------------------- */
 
                 /* -------------------------------------------------------------------------------------------------- */
-                /* -- If a tag has been identified, we compute the relative information -- */
+                /* -- If a TEI element has been identified, we compute the relative information -- */
                 /* -------------------------------------------------------------------------------------------------- */
-                if(tag !== "") {
+                if(teiElement !== null) {
                     /* -------------------------------------------------------------------------------------------------
                      * This part computes the start tag's position
                      ------------------------------------------------------------------------------------------------ */
-                    if(tagType === "standard") {
+                    if (teiElement.type === "standard") {
                         startExtraCounter = 1;
-                    } else if(tagType === "single") {
-                        startExtraCounter = 2;
+                    } else if (teiElement.type === "single") {
+                        startExtraCounter = 0;
                     }
-                    let tagPosStart = tagPos;
-                    for(let kLine in lines) {
+                    let tagPosStart = teiElement.startTag.start.index;
+                    for (let kLine in lines) {
                         let line = lines[kLine];
-                        if(line.length <= tagPosStart) {
+                        if (line.length <= tagPosStart) {
                             tagPosStart -= line.length;
                         } else {
-                            let afterTagPos = line.substring(tagPosStart+tag.length, line.length);
+                            let afterTagPos = line.substring(tagPosStart + teiElement.name.length, line.length);
                             let endTagFull = afterTagPos.indexOf('>');
-                            startRowS = parseInt(kLine);
-                            startColS = parseInt(tagPosStart);
-                            startRowE = parseInt(kLine);
-                            startColE = parseInt(tagPosStart+tag.length+endTagFull+startExtraCounter);
-                            startContent = line.substring(tagPosStart, tagPosStart+tag.length+endTagFull+startExtraCounter);
+                            teiElement.startTag.start.row = parseInt(kLine);
+                            teiElement.startTag.start.column = parseInt(tagPosStart);
+                            teiElement.startTag.end.row = parseInt(kLine);
+                            teiElement.startTag.end.column = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
+                            teiElement.startTag.end.index = functions.getTEIElementStartTagEndIndex(teiElement, content);
+
+                            if (teiElement.startTag.content === null) {
+                                teiElement.startTag.content = line.substring(tagPosStart, tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
+                            }
                             break;
                         }
                     }
@@ -420,18 +539,19 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* -------------------------------------------------------------------------------------------------
                      * This part returns end tag's information
                      ------------------------------------------------------------------------------------------------ */
-                    if(tagType === "standard") {
-                        let endPosStart = endPos;
-                        for(let kLine in lines) {
+                    if (teiElement.type === "standard") {
+                        let endPosStart = teiElement.endTag.start.index;
+                        for (let kLine in lines) {
                             let line = lines[kLine];
-                            if(line.length <= endPosStart) {
+                            if (line.length <= endPosStart) {
                                 endPosStart -= line.length;
                             } else {
-                                endRowS = parseInt(kLine);
-                                endColS = parseInt(endPosStart);
-                                endRowE = parseInt(kLine);
-                                endColE = parseInt(endPosStart+tag.length+3);
-                                endContent = line.substring(endPosStart, endPosStart+tag.length+3);
+                                teiElement.endTag.start.row = parseInt(kLine);
+                                teiElement.endTag.start.column = parseInt(endPosStart);
+                                teiElement.endTag.end.row = parseInt(kLine);
+                                teiElement.endTag.end.column = parseInt(endPosStart + teiElement.name.length + 3);
+                                teiElement.endTag.end.index = parseInt(teiElement.endTag.start.index + teiElement.name.length + 3);
+                                teiElement.endTag.content = line.substring(endPosStart, endPosStart + teiElement.name.length + 3);
                                 break;
                             }
                         }
@@ -439,135 +559,64 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
-                     * This part returns the content of the tag
+                     * This part returns the content of the TEI element
                      ------------------------------------------------------------------------------------------------ */
-                    if(tagType === "standard") {
-                        let afterTagPosContent = content.substring(tagPos + 1 + tag.length, content.length);
-                        let tagPosFullContent = afterTagPosContent.indexOf('>');
-                        tagContent = content.substring(tagPos + 1 + tag.length + tagPosFullContent + 1, endPos);
+                    if (teiElement.type === "standard") {
+                        teiElement.content = content.substring(teiElement.startTag.end.index + 1, teiElement.endTag.start.index);
                     }
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
-                     * This part computes the tag's attributes
+                     * This part computes the start tag's attributes
                      ------------------------------------------------------------------------------------------------ */
-                    let attributesList = startContent.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
-                    for(let kAttribute in attributesList) {
+                    let attributesList = teiElement.startTag.content.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
+                    for (let kAttribute in attributesList) {
                         let attributeFull = attributesList[kAttribute];
                         let attribute = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$1');
                         let value = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$2');
-                        tagAttributes.push({attribute: attribute, value: value});
+                        teiElement.attributes.push({attribute: attribute, value: value});
                     }
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
                      * This part compiles the parents of the tag
                      ------------------------------------------------------------------------------------------------ */
-                    // If tag can have parents, we compute the parents
-                    if(tags[tag] !== undefined && tags[tag].btn.restrict_to_root === false && computeParent === true) {
-                        parent = this.getParentTag(parentLeftOfCursor, parentRightOfCursor, lines, tags, teiInfo, true);
-                        parents = this.getParents(parent, []);
-                        parents.push(parent);
+                    // If TEI Element can have parents, we compute the parents
+                    if (tags[teiElement.name] !== undefined && tags[teiElement.name].btn.restrict_to_root === false && computeParent === true) {
+                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true);
+                        teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
+                        teiElement.parents.push(teiElement.parent);
 
-                        if(tags[tag].btn.allow_root === true && parent.name === null) {
-                            parent = null;
-                            parents = [];
+                        if (tags[teiElement.name].btn.allow_root === true && teiElement.parent.name === null) {
+                            teiElement.parent = null;
+                            teiElement.parents = [];
                         }
-                    } else if(tags[tag] !== undefined && tags[tag].btn.restrict_to_root === true){
-                        parent = null;
-                        parents = [];
+                    } else if (tags[teiElement.name] !== undefined && tags[teiElement.name].btn.restrict_to_root === true) {
+                        teiElement.parent = null;
+                        teiElement.parents = [];
                     }
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
-                    if(!!tagContent && !!teiInfo[tag] && teiInfo[tag]["textAllowed"] === false) {
-                        //children = computeChildren(tagContent.indexOf("<")+1, tagContent);
-                        children = null;
-                    } else if(!!tagContent && !!teiInfo[tag] && teiInfo[tag]["textAllowed"] === true) {
-                        children = null;
+                    if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
+                        //children = functions.computeChildren(teiElement.content.indexOf("<")+1, teiElement.content);
+                        teiElement.children = null;
+                    } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
+                        teiElement.children = null;
                     } else {
-                        children = null;
+                        teiElement.children = null;
                     }
                     /* ---------------------------------------------------------------------------------------------- */
-
-                    /* -------------------------------------------------------------------------------------------------
-                     * Creation of the returned object
-                     ------------------------------------------------------------------------------------------------ */
-                    let varReturn = {
-                        name: tag,
-                        type: tagType,
-                        attributes: tagAttributes,
-                        startTag: {
-                            start: {
-                                row: startRowS,
-                                column: startColS
-                            },
-                            end: {
-                                row: startRowE,
-                                column: startColE
-                            },
-                            content: startContent
-                        },
-                        endTag: {
-                            start: {
-                                row: endRowS,
-                                column: endColS
-                            },
-                            end: {
-                                row: endRowE,
-                                column: endColE
-                            },
-                            content: endContent
-                        },
-                        content: tagContent,
-                        parent: parent,
-                        parents: parents,
-                        children: children
-                    };
-                    console.log(varReturn);
-                    return varReturn;
-                    /* ---------------------------------------------------------------------------------------------- */
-                } else {
-                    return {
-                        name: null,
-                        type: null,
-                        attributes: null,
-                        startTag: {
-                            start: {
-                                row: null,
-                                column: null
-                            },
-                            end: {
-                                row: null,
-                                column: null
-                            },
-                            content: null
-                        },
-                        endTag: {
-                            start: {
-                                row: null,
-                                column: null
-                            },
-                            end: {
-                                row: null,
-                                column: null
-                            },
-                            content: null
-                        },
-                        content: null,
-                        parent: null,
-                        parents: null,
-                        children: null
-                    };
                 }
-                /* -------------------------------------------------------------------------------------------------- */
+                console.log(teiElement);
+                return teiElement;
             },
-            getParents(tagStructure, parents) {
-                if(tagStructure.parent !== null) {
-                    if(tagStructure.parent.parent !== null) {parents = this.getParents(tagStructure.parent, parents);}
-                    parents.push(tagStructure.parent);
+            getTEIElementParents(teiElement, parents) {
+                if(teiElement.parent !== null) {
+                    if(teiElement.parent.parent !== null) {parents = this.getTEIElementParents(teiElement.parent, parents);}
+                    parents.push(teiElement.parent);
                 }
                 return parents;
             },
@@ -582,6 +631,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 });
             }
         };
+        return functions;
     })
-
 ;
