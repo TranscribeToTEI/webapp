@@ -173,6 +173,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
             loadFile: function(file) {
                 return 'App/Transcript/tpl/'+file+'.html';
             },
+
             getParentTag: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
                 console.log(teiInfo);
                 console.log(leftOfCursor);
@@ -192,7 +193,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     let tagPosArray = [tagPosA, tagPosB, tagPosC];
                     tagPosArray.sort();
                     tagPosArray.reverse();
-                    return tagPosArray[0];
+
+                    return (tagPosArray[0] !== -1) ? tagPosArray[0]: null;
                 }
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -264,7 +266,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         return iEndPos;
                     }
                 }
-                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) { // A priori, c'est cette fonction qui renvoie de la merde
+                function computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, carriedCounter) {
                     let iContent = leftOfCursor+rightOfCursor;
                     console.log(endPos);
                     console.log(content.substring(0, endPos));
@@ -289,6 +291,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                 }
                 function computeFromEndTag(startContent) {
+                    console.log('computeFromEndTag');
                     tag = startContent.replace(/<\/([a-zA-Z]+)>/g, '$1');
 
                     if(tag !== "") {
@@ -296,25 +299,55 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         endPos = leftOfCursor.lastIndexOf("<");
                         tagPos = computeStartOfTag(tag, endPos, leftOfCursor, rightOfCursor, 0);
 
-                        parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
-                        parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
+                        if(tagPos !== null) {
+                            parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
+                            parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
+                        }
                     }
                 }
                 function computeFromStartTag(startContent) {
+                    console.log('computeFromStartTag');
                     tag = startContent.replace(/<([a-zA-Z]+).*>/g, '$1');
 
                     if(tag !== "") {
                         if(startContent.substring(startContent.length-2, startContent.length) === "/>") {
                             tagType = "single";
                         } else { tagType = "standard"; }
+                        console.log(tagType);
 
-                        tagPos = getTagPos(leftOfCursor, tag, "DESC");
-                        if(tagType === "standard") {
-                            endPos = computeEndOfTag(tag, tagPos, leftOfCursor, rightOfCursor, 0);
+                        if(tagType === "single") {
+                            tagPos = leftOfCursor.lastIndexOf('<');
+                        } else if(tagType === "standard") {
+                            tagPos = getTagPos(leftOfCursor, tag, "DESC");
+                            console.log(tagPos);
                         }
 
-                        parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
-                        parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
+                        if(tagPos !== null) {
+                            if(tagType === "standard") {
+                                endPos = computeEndOfTag(tag, tagPos, leftOfCursor, rightOfCursor, 0);
+                            }
+
+                            parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
+                            console.log(parentLeftOfCursor);
+                            parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
+                            console.log(parentRightOfCursor);
+                        }
+                    }
+                }
+                function computeFromSingleTag(startContent) {
+                    console.log('computeFromSingleTag');
+                    tag = startContent.replace(/<([a-zA-Z]+).*\/>/g, '$1');
+
+                    if(tag !== "") {
+                        tagType = "single";
+                        tagPos = leftOfCursor.lastIndexOf('<');
+
+                        if(tagPos !== null) {
+                            parentLeftOfCursor = leftOfCursor.substring(0, tagPos);
+                            console.log(parentLeftOfCursor);
+                            parentRightOfCursor = leftOfCursor.substring(tagPos, leftOfCursor.length)+rightOfCursor;
+                            console.log(parentRightOfCursor);
+                        }
                     }
                 }
                 function computeChildren(tagPos, fullContent) {
@@ -334,7 +367,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     console.log(leftOfCursor);
                     console.log(rightOfCursor);
                     startContent = leftOfCursor.substring(leftOfCursor.lastIndexOf("<"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
-                    if(startContent[1] === "/") { computeFromEndTag(startContent); }
+                    if(startContent[1] === "/" /*We are in an end tag*/) { computeFromEndTag(startContent); }
+                    else if(startContent[startContent.length-2] === "/" /*We are in a single tag*/) { computeFromSingleTag(startContent); }
                     else { computeFromStartTag(startContent); }
 
                 } else if (!!leftOfCursor && leftOfCursor.indexOf("<") !== -1) {
@@ -390,14 +424,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 /* -------------------------------------------------------------------------------------------------- */
                 /* -- If a tag has been identified, we compute the relative information -- */
                 /* -------------------------------------------------------------------------------------------------- */
-                if(tag !== "") {
+                if(tag !== "" && tagPos !== null) {
                     /* -------------------------------------------------------------------------------------------------
                      * This part computes the start tag's position
                      ------------------------------------------------------------------------------------------------ */
                     if(tagType === "standard") {
                         startExtraCounter = 1;
                     } else if(tagType === "single") {
-                        startExtraCounter = 2;
+                        startExtraCounter = 0;
                     }
                     let tagPosStart = tagPos;
                     for(let kLine in lines) {
