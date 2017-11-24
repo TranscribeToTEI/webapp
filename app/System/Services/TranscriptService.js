@@ -86,7 +86,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     } else if(value[value.length-2] === "/") {
                         /* Match with single tag */
                         if(buttons[valueTagName] !== undefined) {
-                            // console.log(valueTagName);
                             encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "singleTag", microObject));
                         }
                     } else if(value[value.length-2] !== "/") {
@@ -185,16 +184,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @param order
              * @returns integer|null
              */
-            getTagPos: function(tpContent, tpTag, order) {
+            getTagPos: function(tpContent, teiElement, order) {
                 let tagPosA = null, tagPosB = null, tagPosC = null;
                 if(order === "ASC") {
-                    tagPosA = tpContent.indexOf("<"+tpTag+" ");
-                    tagPosB = tpContent.indexOf("<"+tpTag+"/>");
-                    tagPosC = tpContent.indexOf("<"+tpTag+">");
+                    tagPosA = tpContent.indexOf("<"+teiElement.name+" ");
+                    tagPosB = tpContent.indexOf("<"+teiElement.name+"/>");
+                    tagPosC = tpContent.indexOf("<"+teiElement.name+">");
                 } else if(order === "DESC") {
-                    tagPosA = tpContent.lastIndexOf("<"+tpTag+" ");
-                    tagPosB = tpContent.lastIndexOf("<"+tpTag+"/>");
-                    tagPosC = tpContent.lastIndexOf("<"+tpTag+">");
+                    tagPosA = tpContent.lastIndexOf("<"+teiElement.name+" ");
+                    tagPosB = tpContent.lastIndexOf("<"+teiElement.name+"/>");
+                    tagPosC = tpContent.lastIndexOf("<"+teiElement.name+">");
                 }
 
                 let tagPosArray = [tagPosA, tagPosB, tagPosC];
@@ -314,13 +313,11 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     } else {
                         teiElement.type = "standard";
                     }
-                    console.log(teiElement.type);
 
                     if(teiElement.type === "single") {
                         teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
                     } else if(teiElement.type === "standard") {
                         teiElement.startTag.start.index = functions.getTagPos(leftOfCursor, teiElement.name, "DESC");
-                        console.log(teiElement.startTag.start.index);
                     }
 
                     if(teiElement.startTag.start.index !== null) {
@@ -329,9 +326,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         }
 
                         teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
-                        console.log(teiElement.parentLeftOfCursor);
                         teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
-                        console.log(teiElement.parentRightOfCursor);
                     }
                 }
 
@@ -347,9 +342,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                     if(teiElement.startTag.start.index) {
                         teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
-                        console.log(teiElement.parentLeftOfCursor);
                         teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
-                        console.log(teiElement.parentRightOfCursor);
                     }
                 }
 
@@ -378,10 +371,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
-                if(!(!!leftOfCursor || !!rightOfCursor)) { return null; }
-                // console.log(teiInfo);
-                // console.log(leftOfCursor);
-                // console.log(rightOfCursor);
+                if(!leftOfCursor || !rightOfCursor) { return null; }
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -449,6 +439,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
 
                 } else if (leftOfCursor.indexOf("<") !== -1) {
+                    console.log('inside tag');
                     // The caret is outside a tag, but there is at least one tag before -> we use this nearest tag as current teiElement
                     /*
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g

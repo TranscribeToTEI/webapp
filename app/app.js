@@ -123,6 +123,7 @@ angular.module('transcriptApp', [
         'transcript.service.comment-log',
         'transcript.service.contact',
         'transcript.service.content',
+        'transcript.service.data-interface',
         'transcript.service.entity',
         'transcript.service.geonames',
         'transcript.service.hosting-organization',
