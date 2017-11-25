@@ -751,7 +751,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         column: $scope.transcriptArea.ace.currentTag.startTag.end.column - 1
                     }, attributeInsert);
                     $scope.aceEditor.focus();
-                    $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+                    $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                 }
             };
             /* End : Attributes Management ------------------------------------------------------------------------------ */

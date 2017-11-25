@@ -180,7 +180,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * Position meaning position of the '|<' character of the tag
              *
              * @param tpContent
-             * @param tpTag
+             * @param teiElement
              * @param order
              * @returns integer|null
              */
@@ -252,23 +252,31 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             computeStartOfTag: function(teiElement, content, relativePosition, carriedCounter) {
                 // We are looking for the last position of tag pos
-                let iTagPos = functions.getTagPos(content.substring(0, relativePosition), teiElement.name, "DESC");
+                let iTagPos = functions.getTagPos(content.substring(0, relativePosition), teiElement, "DESC");
                 let iPortion = content.substring(iTagPos, relativePosition);
 
                 if(iPortion.indexOf("</"+teiElement.name+">") !== -1) {
                     // Meaning there is another similar tag as child
                     let list = iPortion.match(new RegExp("</"+teiElement.name+">",'g'));
-                    return functions.computeStartOfTag(teiElement.name, content, iTagPos, carriedCounter+list.length-1);
+                    return functions.computeStartOfTag(teiElement, content, iTagPos, carriedCounter+list.length-1);
                 } else if(carriedCounter > 0) {
                     // If the carried list is not empty
-                    return functions.computeStartOfTag(teiElement.name, content, iTagPos, carriedCounter-1);
+                    return functions.computeStartOfTag(teiElement, content, iTagPos, carriedCounter-1);
                 } else {
                     // Else, we return the tag pos
                     return iTagPos;
                 }
             },
             /**
-             * This function computes positions of the start tag and end tag, from the end position
+             * This function computes the following values from the end position:
+             *  - name
+             *  - type
+             *  - startTag.start.index
+             *  - startTag.content
+             *  - endTag.start.index
+             *  - endTag.content
+             *  - parentLeftOfCursor
+             *  - parentRightOfCursor
              *
              * @param teiElement
              * @param leftOfCursor
@@ -279,23 +287,34 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             computeFromEndTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
                 console.log('computeFromEndTag');
-                teiElement.name = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
 
-                if(teiElement.name) {
-                    teiElement.type                 = "standard"; // -> This is an end tag, can't be a single tag
-                    teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
-                    teiElement.startTag.start.index = functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0);
+                teiElement.name                 = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
+                teiElement.type                 = "standard"; // -> This is an end tag, can't be a single tag
 
-                    if(teiElement.startTag.start.index !== null) {
-                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
-                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
-                    }
-                }
+                teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
+                let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
+                teiElement.endTag.content       = endContentFull.substring(0, endContentFull.indexOf(">")+1);
+
+                console.log(functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0));
+                teiElement.startTag.start.index = functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0);
+                let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
+                teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+
+                teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
 
                 return teiElement;
             },
             /**
-             * This function computes positions of the start tag and end tag, from the start position
+             * This function computes the following values from the start position:
+             *  - name
+             *  - type
+             *  - startTag.start.index
+             *  - startTag.content
+             *  - endTag.start.index
+             *  - endTag.content
+             *  - parentLeftOfCursor
+             *  - parentRightOfCursor
              *
              * @param teiElement
              * @param leftOfCursor
@@ -305,46 +324,51 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             computeFromStartTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
                 console.log('computeFromStartTag');
-                teiElement.name = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
 
-                if(teiElement.name) {
-                    if(teiElement.startTag.content.substring(teiElement.startTag.content.length-2, teiElement.startTag.content.length) === "/>") {
-                        teiElement.type = "single";
-                    } else {
-                        teiElement.type = "standard";
-                    }
+                teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
+                teiElement.type                 = "standard";
 
-                    if(teiElement.type === "single") {
-                        teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
-                    } else if(teiElement.type === "standard") {
-                        teiElement.startTag.start.index = functions.getTagPos(leftOfCursor, teiElement.name, "DESC");
-                    }
+                teiElement.startTag.start.index = functions.getTagPos(leftOfCursor+rightOfCursor.substring(0, rightOfCursor.indexOf('<')), teiElement, "DESC");
+                let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
+                teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
 
-                    if(teiElement.startTag.start.index !== null) {
-                        if(teiElement.type === "standard") {
-                            teiElement.endTag.start.index = functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, teiElement.startTag.start.index, 0);
-                        }
+                teiElement.endTag.start.index   = functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, teiElement.startTag.start.index, 0);
+                let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
+                teiElement.endTag.content       = endContentFull.substring(0, endContentFull.indexOf(">")+1);
 
-                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
-                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
-                    }
-                }
+                teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
 
                 return teiElement;
             },
-            computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor) {
+            /**
+             * This functions computes the following values of single tag:
+             *  - name
+             *  - type
+             *  - startTag.start.index
+             *  - startTag.content
+             *  - parentLeftOfCursor
+             *  - parentRightOfCursor
+             *
+             * @param teiElement
+             * @param leftOfCursor
+             * @param rightOfCursor
+             * @param content
+             *
+             * @returns object
+             */
+            computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
                 console.log('computeFromSingleTag');
-                teiElement.name = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
 
-                if(teiElement.name) {
-                    teiElement.type = "single";
-                    teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
+                teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
+                teiElement.type                 = "single";
 
-                    if(teiElement.startTag.start.index) {
-                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, teiElement.startTag.start.index);
-                        teiElement.parentRightOfCursor = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
-                    }
-                }
+                teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
+                let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
+                teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+
+                teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
+                teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
 
                 return teiElement;
             },
@@ -354,6 +378,13 @@ angular.module('transcript.service.transcript', ['ui.router'])
             registerChild: function(content, type) {
                 teiElement.children.push({content: content, type: type});
             },
+            /**
+             * This function computes the index of the final character of the end tag
+             *
+             * @param teiElement
+             * @param content
+             * @returns integer
+             */
             getTEIElementStartTagEndIndex: function(teiElement, content) {
                 let afterTagPosContent  = content.substring(teiElement.startTag.start.index + 1 + teiElement.name.length, content.length);
                 let tagPosFullContent   = afterTagPosContent.indexOf('>');
@@ -372,6 +403,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
                 if(!leftOfCursor || !rightOfCursor) { return null; }
+                // console.log(leftOfCursor);
+                // console.log(rightOfCursor);
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -432,7 +465,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         teiElement = functions.computeFromEndTag(teiElement, leftOfCursor, rightOfCursor, content);
                     } else if(teiElement.startTag.content[teiElement.startTag.content.length-2] === "/") {
                         /* Tag is a singleTag */
-                        teiElement = functions.computeFromSingleTag(teiElement, leftOfCursor, rightOfCursor);
+                        teiElement = functions.computeFromSingleTag(teiElement, leftOfCursor, rightOfCursor, content);
                     } else {
                         /* Tag is a startTag*/
                         teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
@@ -445,7 +478,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
                      * Regex from http://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
                      */
-                    let matchList = leftOfCursor.match(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
+                    let matchList = leftOfCursor.match(/<\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
+                    console.log(matchList);
                     if(matchList !== null && matchList.length > 0) {
                         matchList = matchList.reverse();
 
@@ -468,25 +502,20 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     carriedList.slice(carriedList.indexOf(valueTagName), 1);
                                 } else {
                                     // Else, it is not closed : this is it
-                                    teiElement.name = valueTagName;
+                                    teiElement.name = valueTagName; console.log(valueTagName);
                                     return false;
                                 }
                             }
                         }));
                     }
+                    console.log(teiElement.name); //On en est rendu au pb de localisation du curseur au sein d'une balise contenant des sous-balises et du texte (un p avec des choices par ex)
 
                     if(teiElement.name === null) {
                         teiElement = null;
                     } else {
-                        teiElement.type = "standard";
-                        teiElement.startTag.start.index = functions.getTagPos(leftOfCursor, teiElement, "DESC");
-
-                        let startContentFull = content.substring(teiElement.startTag.start.index, content.length);
+                        let startContentFull = content.substring(leftOfCursor.lastIndexOf("<"), content.length);
                         teiElement.startTag.content = startContentFull.substring(0, startContentFull.indexOf(">")+1);
                         teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
-
-                        teiElement.parentLeftOfCursor = leftOfCursor.substring(0, leftOfCursor.lastIndexOf(teiElement.name)-1);
-                        teiElement.parentRightOfCursor = leftOfCursor.substring(leftOfCursor.lastIndexOf(teiElement.name)-1, leftOfCursor.length)+rightOfCursor;
                     }
                 } else {
                     teiElement = null;
@@ -517,11 +546,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             teiElement.startTag.start.column = parseInt(tagPosStart);
                             teiElement.startTag.end.row = parseInt(kLine);
                             teiElement.startTag.end.column = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
-                            teiElement.startTag.end.index = functions.getTEIElementStartTagEndIndex(teiElement, content);
-
-                            if (teiElement.startTag.content === null) {
-                                teiElement.startTag.content = line.substring(tagPosStart, tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
-                            }
                             break;
                         }
                     }
@@ -541,8 +565,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                 teiElement.endTag.start.column = parseInt(endPosStart);
                                 teiElement.endTag.end.row = parseInt(kLine);
                                 teiElement.endTag.end.column = parseInt(endPosStart + teiElement.name.length + 3);
-                                teiElement.endTag.end.index = parseInt(teiElement.endTag.start.index + teiElement.name.length + 3);
-                                teiElement.endTag.content = line.substring(endPosStart, endPosStart + teiElement.name.length + 3);
                                 break;
                             }
                         }
@@ -578,7 +600,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
                         teiElement.parents.push(teiElement.parent);
 
-                        if (tags[teiElement.name].btn.allow_root === true && teiElement.parent.name === null) {
+                        if (tags[teiElement.name].btn.allow_root === true && teiElement.parent === null) {
                             teiElement.parent = null;
                             teiElement.parents = [];
                         }
@@ -605,7 +627,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 return teiElement;
             },
             getTEIElementParents(teiElement, parents) {
-                if(teiElement.parent !== null) {
+                if(teiElement && teiElement.parent !== null) {
                     if(teiElement.parent.parent !== null) {parents = this.getTEIElementParents(teiElement.parent, parents);}
                     parents.push(teiElement.parent);
                 }
