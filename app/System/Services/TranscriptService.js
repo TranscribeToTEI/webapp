@@ -272,8 +272,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
              *  - name
              *  - type
              *  - startTag.start.index
+             *  - startTag.end.index
              *  - startTag.content
              *  - endTag.start.index
+             *  - endTag.end.index
              *  - endTag.content
              *  - parentLeftOfCursor
              *  - parentRightOfCursor
@@ -294,11 +296,13 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
                 let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
                 teiElement.endTag.content       = endContentFull.substring(0, endContentFull.indexOf(">")+1);
+                teiElement.endTag.end.index     = teiElement.endTag.start.index+teiElement.endTag.content.length-1;
 
                 console.log(functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0));
                 teiElement.startTag.start.index = functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0);
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
                 teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+                teiElement.startTag.end.index   = teiElement.startTag.start.index+teiElement.startTag.content.length-1;
 
                 teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
                 teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
@@ -310,8 +314,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
              *  - name
              *  - type
              *  - startTag.start.index
+             *  - startTag.end.index
              *  - startTag.content
              *  - endTag.start.index
+             *  - endTag.end.index
              *  - endTag.content
              *  - parentLeftOfCursor
              *  - parentRightOfCursor
@@ -331,10 +337,12 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 teiElement.startTag.start.index = functions.getTagPos(leftOfCursor+rightOfCursor.substring(0, rightOfCursor.indexOf('<')), teiElement, "DESC");
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
                 teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+                teiElement.startTag.end.index   = teiElement.startTag.start.index+teiElement.startTag.content.length-1;
 
                 teiElement.endTag.start.index   = functions.computeEndOfTag(teiElement, leftOfCursor, rightOfCursor, content, teiElement.startTag.start.index, 0);
                 let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
                 teiElement.endTag.content       = endContentFull.substring(0, endContentFull.indexOf(">")+1);
+                teiElement.endTag.end.index     = teiElement.endTag.start.index+teiElement.endTag.content.length-1;
 
                 teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
                 teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
@@ -346,6 +354,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              *  - name
              *  - type
              *  - startTag.start.index
+             *  - startTag.end.index
              *  - startTag.content
              *  - parentLeftOfCursor
              *  - parentRightOfCursor
@@ -366,29 +375,15 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
                 teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
+                teiElement.startTag.end.index   = teiElement.startTag.start.index+teiElement.startTag.content.length-1;
 
                 teiElement.parentLeftOfCursor   = leftOfCursor.substring(0, teiElement.startTag.start.index);
                 teiElement.parentRightOfCursor  = leftOfCursor.substring(teiElement.startTag.start.index, leftOfCursor.length)+rightOfCursor;
 
                 return teiElement;
             },
-            computeChildren: function(tagPos, fullContent) {
+            computeChildren: function(teiElement, content) {
                 // Reste à faire cette partie
-            },
-            registerChild: function(content, type) {
-                teiElement.children.push({content: content, type: type});
-            },
-            /**
-             * This function computes the index of the final character of the end tag
-             *
-             * @param teiElement
-             * @param content
-             * @returns integer
-             */
-            getTEIElementStartTagEndIndex: function(teiElement, content) {
-                let afterTagPosContent  = content.substring(teiElement.startTag.start.index + 1 + teiElement.name.length, content.length);
-                let tagPosFullContent   = afterTagPosContent.indexOf('>');
-                return teiElement.startTag.start.index + 1 + teiElement.name.length + tagPosFullContent;
             },
             /**
              * This function returns an array with every information about the current TEI Element of the caret position in the transcript
@@ -478,8 +473,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
                      * Regex from http://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
                      */
-                    let matchList = leftOfCursor.match(/<\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
-                    console.log(matchList);
+                    let matchList = leftOfCursor.match(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
                     if(matchList !== null && matchList.length > 0) {
                         matchList = matchList.reverse();
 
@@ -502,18 +496,17 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     carriedList.slice(carriedList.indexOf(valueTagName), 1);
                                 } else {
                                     // Else, it is not closed : this is it
-                                    teiElement.name = valueTagName; console.log(valueTagName);
+                                    teiElement.name = valueTagName;
                                     return false;
                                 }
                             }
                         }));
                     }
-                    console.log(teiElement.name); //On en est rendu au pb de localisation du curseur au sein d'une balise contenant des sous-balises et du texte (un p avec des choices par ex)
 
                     if(teiElement.name === null) {
                         teiElement = null;
                     } else {
-                        let startContentFull = content.substring(leftOfCursor.lastIndexOf("<"), content.length);
+                        let startContentFull = content.substring(leftOfCursor.lastIndexOf("<"+teiElement.name), content.length);
                         teiElement.startTag.content = startContentFull.substring(0, startContentFull.indexOf(">")+1);
                         teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
                     }
