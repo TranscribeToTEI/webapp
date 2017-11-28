@@ -288,17 +288,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromEndTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                console.log('computeFromEndTag');
+                // console.log('computeFromEndTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
-                teiElement.type                 = "standard"; // -> This is an end tag, can't be a single tag
+                teiElement.type                 = "standard";
 
                 teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
                 let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
                 teiElement.endTag.content       = endContentFull.substring(0, endContentFull.indexOf(">")+1);
                 teiElement.endTag.end.index     = teiElement.endTag.start.index+teiElement.endTag.content.length-1;
 
-                console.log(functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0));
                 teiElement.startTag.start.index = functions.computeStartOfTag(teiElement, content, teiElement.endTag.start.index, 0);
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
                 teiElement.startTag.content     = startContentFull.substring(0, startContentFull.indexOf(">")+1);
@@ -329,7 +328,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromStartTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                console.log('computeFromStartTag');
+                // console.log('computeFromStartTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
                 teiElement.type                 = "standard";
@@ -367,7 +366,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                console.log('computeFromSingleTag');
+                // console.log('computeFromSingleTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
                 teiElement.type                 = "single";
@@ -382,8 +381,48 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                 return teiElement;
             },
-            computeChildren: function(teiElement, content) {
-                // Reste à faire cette partie
+            /**
+             * This function computes children of TEI Element
+             * @param teiElement
+             * @param content
+             * @param lines
+             * @param tags
+             * @param teiInfo
+             */
+            computeChildren: function(teiElement, content, lines, tags, teiInfo) {
+                console.log(teiElement);
+                let array = [];
+
+                if(teiElement.content.indexOf('<') !== -1) {
+                    array = functions.computeChildStructure(teiElement, content, lines, tags, teiInfo, null, array);
+                }
+
+                return array;
+            },
+            computeChildStructure: function(teiElement, content, lines, tags, teiInfo, previousChild, array) {
+                let newChild = functions.computeChild(teiElement, content, lines, tags, teiInfo, previousChild);
+                array.push(newChild);
+
+                console.log(newChild.endTag.end.index+1);
+                console.log(teiElement.endTag.start.index);
+                if(newChild.endTag.end.index+1 !== teiElement.endTag.start.index) {
+                    functions.computeChildStructure(teiElement, content, lines, tags, teiInfo, newChild, array);
+                }
+
+                return array;
+            },
+            computeChild: function(teiElement, content, lines, tags, teiInfo, previousChild) {
+                let childrenLeftOfCursor = "";
+                if(previousChild === null) {
+                    childrenLeftOfCursor = teiElement.parentLeftOfCursor+teiElement.startTag.content+teiElement.content.substring(0, teiElement.content.indexOf('<')+2);
+                } else {
+                    let endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
+                    childrenLeftOfCursor = endPreviousChild+content.substring(endPreviousChild.length, endPreviousChild.length+2);
+                    console.log(childrenLeftOfCursor);
+                }
+                let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
+
+                return functions.getTEIElementInformation(childrenLeftOfCursor, childrenRightOfCursor, lines, tags, teiInfo, false);
             },
             /**
              * This function returns an array with every information about the current TEI Element of the caret position in the transcript
@@ -506,9 +545,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     if(teiElement.name === null) {
                         teiElement = null;
                     } else {
-                        let startContentFull = content.substring(leftOfCursor.lastIndexOf("<"+teiElement.name), content.length);
+                        let startContentFull        = content.substring(leftOfCursor.lastIndexOf("<"+teiElement.name), content.length);
                         teiElement.startTag.content = startContentFull.substring(0, startContentFull.indexOf(">")+1);
-                        teiElement = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
+                        teiElement                  = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
                     }
                 } else {
                     teiElement = null;
@@ -533,12 +572,12 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         if (line.length <= tagPosStart) {
                             tagPosStart -= line.length;
                         } else {
-                            let afterTagPos = line.substring(tagPosStart + teiElement.name.length, line.length);
-                            let endTagFull = afterTagPos.indexOf('>');
-                            teiElement.startTag.start.row = parseInt(kLine);
-                            teiElement.startTag.start.column = parseInt(tagPosStart);
-                            teiElement.startTag.end.row = parseInt(kLine);
-                            teiElement.startTag.end.column = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
+                            let afterTagPos                     = line.substring(tagPosStart + teiElement.name.length, line.length);
+                            let endTagFull                      = afterTagPos.indexOf('>');
+                            teiElement.startTag.start.row       = parseInt(kLine);
+                            teiElement.startTag.start.column    = parseInt(tagPosStart);
+                            teiElement.startTag.end.row         = parseInt(kLine);
+                            teiElement.startTag.end.column      = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
                             break;
                         }
                     }
@@ -554,10 +593,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             if (line.length <= endPosStart) {
                                 endPosStart -= line.length;
                             } else {
-                                teiElement.endTag.start.row = parseInt(kLine);
-                                teiElement.endTag.start.column = parseInt(endPosStart);
-                                teiElement.endTag.end.row = parseInt(kLine);
-                                teiElement.endTag.end.column = parseInt(endPosStart + teiElement.name.length + 3);
+                                teiElement.endTag.start.row     = parseInt(kLine);
+                                teiElement.endTag.start.column  = parseInt(endPosStart);
+                                teiElement.endTag.end.row       = parseInt(kLine);
+                                teiElement.endTag.end.column    = parseInt(endPosStart + teiElement.name.length + 3);
                                 break;
                             }
                         }
@@ -607,8 +646,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
                     if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
-                        //children = functions.computeChildren(teiElement.content.indexOf("<")+1, teiElement.content);
-                        teiElement.children = null;
+                        teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
                     } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
                         teiElement.children = null;
                     } else {
