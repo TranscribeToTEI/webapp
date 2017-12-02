@@ -10,7 +10,8 @@
             <div class="list-group">
                 <div class="list-group-item flex-column align-items-start" ng-repeat="note in transcriptArea.interaction.historicalNotes.elements">
                     <div class="float-right">
-                        <span class="btn btn-sm btn-primary" ng-click="transcriptArea.interaction.historicalNotes.addForm.action(note.id)"><i class="fa fa-eye"></i></span>
+                        <button class="btn btn-sm btn-primary" ng-click="transcriptArea.interaction.historicalNotes.quote(note.id)" ng-disabled="transcriptArea.toolbar.tags['ref'].btn.enabled === false" data-toggle="tooltip" data-placement="top" title="Citer cette note"><i class="fa fa-quote-right"></i></button>
+                        <button class="btn btn-sm btn-primary" ng-click="transcriptArea.interaction.historicalNotes.addForm.action(note.id)" data-toggle="tooltip" data-placement="top" title="Modifier cette note"><i class="fa fa-eye"></i></button>
                     </div>
                     #{{ note.id }}
                 </div>

@@ -55,7 +55,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     dateline:
         btn:
             id: "dateline"
@@ -84,7 +85,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     p:
         btn:
             id: "p"
@@ -113,7 +115,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: true
-        complex_entry: false
+        complex_entry: 
+            enable: false
     list:
         btn:
             id: "list"
@@ -140,7 +143,8 @@ tags:
                 item: "default"
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     signed:
         btn:
             id: "signed"
@@ -167,7 +171,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     postscript:
         btn:
             id: "postscript"
@@ -194,7 +199,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     space:
         btn:
             id: "space"
@@ -223,7 +229,8 @@ tags:
             unique: true
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     metamark:
         btn:
             id: "metamark"
@@ -252,7 +259,8 @@ tags:
             unique: true
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     # Lvl2
     hi:
         btn:
@@ -281,7 +289,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     item:
         btn:
             id: "item"
@@ -307,7 +316,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: true
-        complex_entry: false
+        complex_entry: 
+            enable: false
     lb:
         btn:
             id: "lb"
@@ -335,7 +345,8 @@ tags:
             unique: true
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     # Particularité de l'écriture :
     choice:
         btn:
@@ -365,7 +376,9 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: true
+            children: "(abbr&&expan)||(sic&&corr)||(orig&&reg)"
     abbr:
         btn:
             id: "abbr"
@@ -392,7 +405,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     expan:
         btn:
             id: "expan"
@@ -420,7 +434,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     sic:
         btn:
             id: "sic"
@@ -448,7 +463,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     corr:
         btn:
             id: "corr"
@@ -476,7 +492,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     orig:
         btn:
             id: "orig"
@@ -503,7 +520,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     reg:
         btn:
             id: "orig"
@@ -531,7 +549,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: true
+        complex_entry: 
+            enable: false
     surplus:
         btn:
             id: "surplus"
@@ -559,7 +578,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     add:
         btn:
             id: "add"
@@ -586,7 +606,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     del:
         btn:
             id: "del"
@@ -611,7 +632,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     subst:
         btn:
             id: "subst"
@@ -638,7 +660,9 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: true
+            children: "del&&add"
     note:
         btn:
             id: "note"
@@ -665,7 +689,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     # Groupe renderingDifficulties
     damage:
         btn:
@@ -693,7 +718,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     supplied:
         btn:
             id: "supplied"
@@ -721,7 +747,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     unclear:
         btn:
             id: "unclear"
@@ -748,7 +775,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     gap:
         btn:
             id: "gap"
@@ -776,7 +804,8 @@ tags:
             unique: true
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
 
     # sémantique :
     date:
@@ -807,7 +836,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     persName:
         btn:
             id: "persName"
@@ -836,7 +866,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     surname:
         btn:
             id: "surname"
@@ -865,7 +896,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     placeName:
         btn:
             id: "placeName"
@@ -894,7 +926,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     address:
         btn:
             id: "address"
@@ -925,7 +958,8 @@ tags:
                 addrLine: "default"
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     addrLine:
         btn:
             id: "addrLine"
@@ -952,7 +986,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: true
-        complex_entry: false
+        complex_entry: 
+            enable: false
     orgName:
         btn:
             id: "orgName"
@@ -981,7 +1016,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     term:
         btn:
             id: "term"
@@ -1010,7 +1046,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     foreign:
         btn:
             id: "foreign"
@@ -1039,7 +1076,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     seg:
         btn:
             id: "seg"
@@ -1066,7 +1104,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
     app:
         btn:
@@ -1097,7 +1136,9 @@ tags:
                 note: "emptyContent"
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: true
+            children: "lem&&note"
     ref:
         btn:
             id: "ref"
@@ -1124,7 +1165,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     lem:
         btn:
             id: "lem"
@@ -1151,7 +1193,8 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false
     bibl:
         btn:
             id: "bibl"
@@ -1178,4 +1221,5 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
-        complex_entry: false
+        complex_entry: 
+            enable: false

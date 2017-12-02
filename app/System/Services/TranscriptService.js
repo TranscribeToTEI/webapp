@@ -512,7 +512,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
                      * Regex from http://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
                      */
-                    let matchList = leftOfCursor.match(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
+                    let matchList = leftOfCursor.match(/<\/?\w+((\s+[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
+                    console.log(matchList);
                     if(matchList !== null && matchList.length > 0) {
                         matchList = matchList.reverse();
 
@@ -646,6 +647,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
                     if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
+                        console.log(teiElement.content);
                         teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
                     } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
                         teiElement.children = null;

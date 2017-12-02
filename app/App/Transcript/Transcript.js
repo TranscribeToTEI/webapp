@@ -28,9 +28,6 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             },
             resolve: {
-                /*mainData: function(DataInterfaceService, $transition$) {
-                    return DataInterfaceService.getTranscript($transition$.params().idEntity, $transition$.params().idResource, $transition$.params().idTranscript);
-                },*/
                 transcript: function(TranscriptService, $transition$) {
                     return TranscriptService.getTranscript($transition$.params().idTranscript);
                 },
@@ -48,27 +45,12 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 },
                 config: function() {
                     return YAML.load('App/Transcript/toolbar.yml');
-                },
-                /*testators: function(TaxonomyService) {
-                    return TaxonomyService.getTaxonomyEntities("testators");
-                },
-                places: function(TaxonomyService) {
-                    return TaxonomyService.getTaxonomyEntities("places");
-                },
-                militaryUnits: function(TaxonomyService) {
-                    return TaxonomyService.getTaxonomyEntities("military-units");
-                },
-                bibliographies: function(BibliographyService, $transition$) {
-                    return BibliographyService.getBibliographiesBy('entity', $transition$.params().idEntity);
-                },
-                notes: function(NoteService, $transition$) {
-                    return NoteService.getNotesByTranscript($transition$.params().idTranscript);
-                }*/
+                }
             }
         })
     }])
 
-    .controller('AppTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'BibliographyService', 'NoteService', 'transcript', 'entity', 'resource', 'teiInfo', 'config', function($rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, BibliographyService, NoteService, transcript, entity, resource, teiInfo, config) {
+    .controller('AppTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'BibliographyService', 'NoteService', 'TaxonomyService', 'transcript', 'entity', 'resource', 'teiInfo', 'config', function($rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, BibliographyService, NoteService, TaxonomyService, transcript, entity, resource, teiInfo, config) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         else if(transcript._embedded.isOpened === false && $filter('filter')(transcript._embedded.logs, {isOpened: false})[0].createUser.id !== $rootScope.user.id) {
             console.log('Redirection to edition -> Already in edition');
@@ -168,7 +150,11 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         content: null
                     },
                     complexEntry: {
-                        name: null
+                        available: false,
+                        name: null,
+                        arrayListTags: [],
+                        extendAvailabilityList: [],
+                        referenceTEIElement: null
                     },
                     alertZone: {
                         show: true,
@@ -233,6 +219,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
             if ($scope.transcript.content === null) {
                 $scope.transcriptArea.ace.area = "";
             }
+
+            $scope.submit.form.continueBefore = $scope.transcript.continueBefore;
+            $scope.submit.form.continueAfter = $scope.transcript.continueAfter;
             /* $scope & variables --------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
@@ -318,6 +307,22 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             };
             /* Toolbar -------------------------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
+            /* Complex Entry Management */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            for(let iTag in $scope.transcriptArea.toolbar.tags) {
+                let tag = $scope.transcriptArea.toolbar.tags[iTag];
+                if(tag.complex_entry.enable === true) {
+                    let listTagsComplexEntry = [];
+                    listTagsComplexEntry = tag.complex_entry.children.split(/\(|&&|\)|\)\|\|\(|\|\|/);
+                    listTagsComplexEntry.push(iTag);
+                    listTagsComplexEntry = listTagsComplexEntry.filter(function(n){ return n !== "" });
+                    $scope.transcriptArea.interaction.complexEntry.arrayListTags.push({element: tag, list: listTagsComplexEntry});
+                    $scope.transcriptArea.interaction.complexEntry.extendAvailabilityList = $scope.transcriptArea.interaction.complexEntry.extendAvailabilityList.concat(listTagsComplexEntry);
+                }
+            }
+            /* Complex Entry Management --------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Ace Editor */
@@ -530,20 +535,18 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     $scope.functions.updateToolbar();
                     $scope.functions.updateAttributes();
 
-                    // Ci-dessous, fonction de déclenchement et de désactivation des complexEntry > à réenclencher quand l'algo d'encodage marchera
-                    /*if ($scope.transcriptArea.ace.currentTag.name !== null && $scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].complex_entry === true && $scope.complexEntry === true) {
-                        $scope.transcriptArea.interaction.complexEntry.action();
-                    } else if($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name] === 'undefined' && $scope.transcriptArea.interaction.status === 'complexEntry') {
-                        $scope.transcriptArea.interaction.status = 'live';
+                    if ($scope.transcriptArea.ace.currentTag !== null && $scope.transcriptArea.interaction.complexEntry.extendAvailabilityList[$scope.transcriptArea.ace.currentTag.name] !== -1) {
+                        $scope.transcriptArea.interaction.complexEntry.available = true;
+                        $scope.transcriptArea.interaction.complexEntry.computeFieldAnalyzed();
                     } else if(
-                        $scope.transcriptArea.interaction.status === 'complexEntry' &&
-                        (
-                            ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name] !== 'undefined' && $scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].complex_entry === 'undefined') ||
-                            ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name] !== 'undefined' && $scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].complex_entry !== 'undefined' && $scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].complex_entry === false)
-                        )
+                        ($scope.transcriptArea.ace.currentTag === null || $scope.transcriptArea.interaction.complexEntry.extendAvailabilityList[$scope.transcriptArea.ace.currentTag.name] === -1) &&
+                        $scope.transcriptArea.interaction.complexEntry.available === true
                     ) {
-                        $scope.transcriptArea.interaction.status = 'live';
-                    }*/
+                        $scope.transcriptArea.interaction.complexEntry.available = false;
+                        if($scope.transcriptArea.interaction.status === 'complexEntry') {
+                            $scope.transcriptArea.interaction.status = 'live';
+                        }
+                    }
                 });
 
                 /**
@@ -632,9 +635,10 @@ angular.module('transcript.app.transcript', ['ui.router'])
              * @param tag (From the config)
              * @param action
              * @param parent
+             * @param attributes
              * @returns {string}
              */
-            $scope.functions.constructTag = function (tag, action, parent) {
+            $scope.functions.constructTag = function (tag, action, parent, attributes) {
                 let tagInsert = "",
                     requiredAttributes = "";
 
@@ -643,6 +647,14 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     let attribute = $scope.teiInfo[tag.btn.id].attributes[iAttribute];
                     if (attribute.usage === "req") {
                         requiredAttributes += $scope.functions.constructAttribute(attribute.id, null);
+                    }
+                }
+
+                if(attributes !== null) {
+                    console.log(attributes);
+                    for(let iAttribute in attributes) {
+                        console.log(attributes[iAttribute]);
+                        requiredAttributes += $scope.functions.constructAttribute(attributes[iAttribute].id, attributes[iAttribute].value);
                     }
                 }
 
@@ -676,11 +688,12 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 return tagInsert;
             };
 
-            $scope.transcriptArea.ace.addTag = function (tagName) {
+            $scope.transcriptArea.ace.addTag = function(tagName, attributes) {
+                console.log(attributes);
                 let tag = $scope.transcriptArea.toolbar.tags[tagName],
                     defaultAddChar = 2;
 
-                let tagInsert = $scope.functions.constructTag(tag, "default"),
+                let tagInsert = $scope.functions.constructTag(tag, "default", null, attributes),
                     lineNumber = $scope.aceEditor.getCursorPosition().row,
                     column = $scope.aceEditor.getCursorPosition().column + tag.xml.name.length + defaultAddChar;
 
@@ -821,23 +834,33 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Complex Entry Management */
             /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.complexEntry.computeFieldAnalyzed = function() {
+                if($scope.transcriptArea.interaction.complexEntry.name === $scope.transcriptArea.ace.currentTag.name) {
+                    $scope.transcriptArea.interaction.complexEntry.referenceTEIElement = $scope.transcriptArea.ace.currentTag;
+                } else {
+                    for(let iP in $scope.transcriptArea.ace.currentTag.parents.reverse()) {
+                        if($scope.transcriptArea.ace.currentTag.parents[iP].name === $scope.transcriptArea.interaction.complexEntry.name) {
+                            $scope.transcriptArea.interaction.complexEntry.referenceTEIElement = $scope.transcriptArea.ace.currentTag.parents[iP];
+                            break;
+                        }
+                    }
+                }
+                //console.log($scope.transcriptArea.interaction.complexEntry.referenceTEIElement);
+            };
+
             /**
              * This function loads documentation about a TEI element
              */
             $scope.transcriptArea.interaction.complexEntry.action = function () {
-                function findChoice(tag) {
-                    return tag.name === 'choice';
+                for(let iA in $scope.transcriptArea.interaction.complexEntry.arrayListTags) {
+                    if($scope.transcriptArea.interaction.complexEntry.arrayListTags[iA].list.indexOf($scope.transcriptArea.ace.currentTag.name) !== -1) {
+                        $scope.transcriptArea.interaction.complexEntry.name = $scope.transcriptArea.interaction.complexEntry.arrayListTags[iA].element.btn.id;
+                        $scope.transcriptArea.interaction.complexEntry.computeFieldAnalyzed();
+                    }
                 }
-
-                $scope.functions.defineDocumentation($scope.transcriptArea.ace.currentTag.name);
-                if ($scope.transcriptArea.ace.currentTag.name === "choice" || $scope.transcriptArea.ace.currentTag.parents.find(findChoice) !== undefined) {
-                    $scope.transcriptArea.interaction.complexEntry.name = "choice";
-                }
-
                 $scope.transcriptArea.interaction.status = 'complexEntry';
             };
             /* Complex Entry Management --------------------------------------------------------------------------------- */
-
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Documentation Management */
@@ -853,9 +876,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     $scope.transcriptArea.interaction.doc.structure = $scope.teiInfo[element].doc;
 
                     if ($scope.transcriptArea.interaction.doc.structure.exemplum !== undefined) {
-                        for (let idExample in $scope.transcriptArea.interaction.doc.structure.exemplum) {
+                        /*for (let idExample in $scope.transcriptArea.interaction.doc.structure.exemplum) {
                             $scope.transcriptArea.interaction.doc.structure.exemplum[idExample] = $scope.transcriptArea.interaction.doc.structure.exemplum[idExample].replace('<egXML xmlns="http://www.tei-c.org/ns/Examples">', '').replace('</egXML>', '').replace(/\s+/g, " ");
-                        }
+                        }*/
                     } else {
                         $scope.transcriptArea.interaction.doc.structure.exemplum = [];
                     }
@@ -1002,7 +1025,17 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Bibliography Management */
             /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.bibliography.loadElements = function() {
+                return BibliographyService.getBibliographiesBy('entity', $scope.entity.id).then(function(response) {
+                    $scope.transcriptArea.interaction.bibliography.elements = response;
+                });
+            };
+
             $scope.transcriptArea.interaction.bibliography.action = function () {
+                if($scope.transcriptArea.interaction.bibliography.elements === null) {
+                    $scope.transcriptArea.interaction.bibliography.loadElements();
+                }
+
                 if ($scope.transcriptArea.interaction.bibliography.addForm.type !== null) {
                     $scope.transcriptArea.interaction.bibliography.addForm.type = null;
                 } else {
@@ -1093,7 +1126,16 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Historical Notes Management */
             /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.historicalNotes.loadElements = function() {
+                return NoteService.getNotesByTranscript($scope.transcript.id).then(function(response) {
+                    $scope.transcriptArea.interaction.historicalNotes.elements = response;
+                });
+            };
+
             $scope.transcriptArea.interaction.historicalNotes.action = function () {
+                if($scope.transcriptArea.interaction.historicalNotes.elements === null) {
+                    $scope.transcriptArea.interaction.historicalNotes.loadElements();
+                }
                 $scope.transcriptArea.interaction.status = 'historicalNotes';
             };
 
@@ -1108,8 +1150,8 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         elementToEdit = elementToEdit[0];
                     }
 
-                    $scope.transcriptArea.interaction.historicalNotes.addForm.id = id;
-                    $scope.transcriptArea.interaction.historicalNotes.addForm.content = elementToEdit.content;
+                    $scope.transcriptArea.interaction.historicalNotes.addForm.form.id = id;
+                    $scope.transcriptArea.interaction.historicalNotes.addForm.form.content = elementToEdit.content;
                 }
                 $scope.transcriptArea.interaction.status = 'historicalNotesForm';
             };
@@ -1157,12 +1199,35 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         });
                 }
             };
-            /* Bibliography Management ---------------------------------------------------------------------------------- */
+
+            $scope.transcriptArea.interaction.historicalNotes.quote = function(id) {
+                if($scope.transcriptArea.ace.currentTag.name === "ref") {
+                    $scope.transcriptArea.ace.addAttribute({id:"xml:id"}, {value:"note-"+id});
+                } else if($scope.transcriptArea.ace.currentTag.name !== "ref" && $scope.transcriptArea.toolbar.tags["ref"].btn.enabled === true) {
+                    $scope.transcriptArea.ace.addTag("ref", [{id:"xml:id", value:{value:"note-"+id}}]);
+                }
+            };
+            /* Historical notes Management ------------------------------------------------------------------------------ */
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Taxonomy Search Management */
             /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.taxonomy.loadEntities = function() {
+                TaxonomyService.getTaxonomyEntities("testators").then(function(response) {
+                    $scope.taxonomy.testators = response;
+                });
+                TaxonomyService.getTaxonomyEntities("places").then(function(response) {
+                    $scope.taxonomy.places = response;
+                });
+                TaxonomyService.getTaxonomyEntities("military-units").then(function(response) {
+                    $scope.taxonomy.militaryUnits = response;
+                });
+            };
+
             $scope.transcriptArea.interaction.taxonomy.action = function () {
+                if($scope.taxonomy.testators === null || $scope.taxonomy.places === null || $scope.taxonomy.militaryUnits === null) {
+                    $scope.transcriptArea.interaction.taxonomy.loadEntities();
+                }
                 $scope.functions.resetTaxonomySearchZone();
                 $scope.transcriptArea.interaction.status = 'taxonomySearch';
 
@@ -1274,7 +1339,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         {
                             "content": $scope.transcriptArea.ace.area,
                             "updateComment": $scope.submit.form.comment,
-                            "status": $scope.transcript.status
+                            "status": $scope.transcript.status,
+                            "continueBefore": $scope.submit.form.continueBefore,
+                            "continueAfter": $scope.submit.form.continueAfter
                         }
                     ).then(function (response) {
                         console.log(response.data);

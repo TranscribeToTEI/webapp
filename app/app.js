@@ -104,6 +104,7 @@ angular.module('transcriptApp', [
         'transcript.filter.booleanRender',
         'transcript.filter.classicDate',
         'transcript.filter.contentTypeName',
+        'transcript.filter.encodeXML',
         'transcript.filter.imageRender',
         'transcript.filter.resourceTypeName',
         'transcript.filter.taxonomyEntityNameConstruct',
@@ -174,6 +175,7 @@ angular.module('transcriptApp', [
         tfMetaTagsProvider.setTitleSuffix('');
         tfMetaTagsProvider.setTitlePrefix('');
         /* ------------------------------------------------------ */
+
 
 
     }])
@@ -274,7 +276,6 @@ angular.module('transcriptApp', [
             else{return "Inconnu";}
         };
         /* -- End : Resource label management -------------------------------------------- */
-
 
         $('[data-toggle="tooltip"]').tooltip();
         $('.tooltip').tooltip();

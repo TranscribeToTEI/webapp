@@ -9,17 +9,13 @@
         </div>
         <form class="form-control-sm">
             <div id="div-interaction-version-ace" style="height: 250px;">
-                <div ui-ace="{
-                    mode: 'xml',
-                    onLoad: noteAceLoaded,
-                    onChange: noteAceChanged,
-                    useWrapMode: true
-                    }" id="transcript-edit-interaction-notes-ace-area" class="h-100" ng-model="transcriptArea.interaction.historicalNotes.addForm.form.content"></div>
+                <label for="transcript-edit-interaction-notes-ace-area">Contenu de votre note</label>
+                <textarea id="transcript-edit-interaction-notes-ace-area" ng-model="transcriptArea.interaction.historicalNotes.addForm.form.content" class="form-control form-control-sm"></textarea>
             </div>
             <small class="form-text text-muted">Veuillez saisir le contenu de votre note selon le standard TEI, de la même manière que la transcription.</small>
 
-            <button ng-if="transcriptArea.interaction.historicalNotes.addForm.id !== null" ng-click="transcriptArea.interaction.historicalNotes.addForm.submit.action('patch', transcriptArea.interaction.historicalNotes.addForm.id)" type="submit" class="float-right btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.historicalNotes.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-            <button ng-if="transcriptArea.interaction.historicalNotes.addForm.id === null" ng-click="transcriptArea.interaction.historicalNotes.addForm.submit.action('post', null)" type="submit" class="float-right btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.historicalNotes.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+            <button ng-if="transcriptArea.interaction.historicalNotes.addForm.form.id !== undefined" ng-click="transcriptArea.interaction.historicalNotes.addForm.submit.action('patch', transcriptArea.interaction.historicalNotes.addForm.form.id)" type="submit" class="float-right btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.historicalNotes.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+            <button ng-if="transcriptArea.interaction.historicalNotes.addForm.form.id === undefined" ng-click="transcriptArea.interaction.historicalNotes.addForm.submit.action('post', null)" type="submit" class="float-right btn btn-sm btn-primary">Soumettre <i data-ng-if="transcriptArea.interaction.historicalNotes.addForm.submit.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
         </form>
     </div>
 </div>
