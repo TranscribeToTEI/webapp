@@ -222,6 +222,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
 
             $scope.submit.form.continueBefore = $scope.transcript.continueBefore;
             $scope.submit.form.continueAfter = $scope.transcript.continueAfter;
+            $scope.TranscriptService = TranscriptService;
             /* $scope & variables --------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
@@ -283,24 +284,22 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     $scope.transcriptArea.toolbar.tags[btn].btn.enabled = false;
                 }
 
-                if($scope.transcriptArea.ace.currentTag !== null) {
-                    if ($scope.transcriptArea.ace.currentTag.name === null || $scope.transcriptArea.ace.currentTag.name === "") {
-                        // If the caret is at the root of the doc, we allow root items == true
-                        for (let btn in $scope.transcriptArea.toolbar.tags) {
-                            if ($scope.transcriptArea.toolbar.tags[btn].btn.allow_root === true && $scope.transcriptArea.toolbar.tags[btn].btn.level === 1) {
-                                $scope.transcriptArea.toolbar.tags[btn].btn.enabled = true;
-                            }
+                if ($scope.transcriptArea.ace.currentTag === null) {
+                    // If the caret is at the root of the doc, we allow root items == true
+                    for (let btn in $scope.transcriptArea.toolbar.tags) {
+                        if ($scope.transcriptArea.toolbar.tags[btn].btn.allow_root === true && $scope.transcriptArea.toolbar.tags[btn].btn.level === 1) {
+                            $scope.transcriptArea.toolbar.tags[btn].btn.enabled = true;
                         }
-                    } else {
-                        // Else, we allow items according to the parent tag
-                        if ($scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined) {
-                            for (let elemId in $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content) {
-                                let elem = $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content[elemId];
-                                //console.log(elem);
-                                if ($scope.transcriptArea.toolbar.tags[elem] !== undefined &&
-                                    $scope.transcriptArea.toolbar.tags[elem].xml.name === elem) {
-                                    $scope.transcriptArea.toolbar.tags[elem].btn.enabled = true;
-                                }
+                    }
+                } else {
+                    // Else, we allow items according to the parent tag
+                    if ($scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined) {
+                        for (let elemId in $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content) {
+                            let elem = $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content[elemId];
+                            //console.log(elem);
+                            if ($scope.transcriptArea.toolbar.tags[elem] !== undefined &&
+                                $scope.transcriptArea.toolbar.tags[elem].xml.name === elem) {
+                                $scope.transcriptArea.toolbar.tags[elem].btn.enabled = true;
                             }
                         }
                     }
@@ -689,7 +688,6 @@ angular.module('transcript.app.transcript', ['ui.router'])
             };
 
             $scope.transcriptArea.ace.addTag = function(tagName, attributes) {
-                console.log(attributes);
                 let tag = $scope.transcriptArea.toolbar.tags[tagName],
                     defaultAddChar = 2;
 

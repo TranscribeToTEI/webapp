@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.transcript', ['ui.router'])
 
-    .service('TranscriptService', function($http, $rootScope) {
+    .service('TranscriptService', function($http, $rootScope, $filter) {
         let functions = {
             getTranscripts: function() {
                 return $http.get(
@@ -675,6 +675,80 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     console.log(response);
                     return response;
                 });
+            },
+            buildListTagToolbar: function(transcriptArea, teiInfo, item) {
+                let htmlToReturn = "";
+                console.log(transcriptArea); console.log(item);
+                //transcriptArea.toolbar.tags = $filter('orderBy')(transcriptArea.toolbar.tags, 'btn.order');
+
+                for (let iT in transcriptArea.toolbar.tags) {
+                    let button = transcriptArea.toolbar.tags[iT];
+
+                    if(button.btn.btn_group === item.idStrict) {
+                        let btnClass = "", btnContent = "", circleColor = "";
+
+                        if(button.btn.enabled === false) {
+                            btnClass += "disabled";
+                        }
+
+                        if(button.btn.label === false) {
+                            btnContent += teiInfo[button.btn.id].doc.gloss[0].content;
+                        } else if(button.btn.label !== false) {
+                            btnContent += button.btn.label;
+                        }
+
+                        if(button.btn.enabled === true) {
+                            circleColor += "red-color";
+                        }
+
+                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
+                                        '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', '+null+')" title="'+ button.btn.title +'" class="'+btnClass+'">' +
+                                        '       <i class="'+ button.btn.icon +'"></i> ' +
+                                                $filter('ucFirstStrict')(btnContent) +
+                                        '       <span class="'+circleColor+'"><i class="fa fa-circle"></i></span>' +
+                                        '   </a>' +
+                                        '</li>';
+                    }
+                }
+                if(transcriptArea.toolbar.tags[item.id] !== undefined) {
+                    for (let iG in transcriptArea.toolbar.tags[item.id].btn.group_children) {
+                        let subGroup = transcriptArea.toolbar.tags[item.id].btn.group_children[iG];
+                        htmlToReturn += '<li class="dropdown-submenu">' +
+                                        '   <a class="dropdown-item" tabindex="-1">' + transcriptArea.toolbar.groups[subGroup].name + '</a>' +
+                                        '   <ul class="dropdown-menu">';
+                        for (let iB in transcriptArea.toolbar.tags) {
+                            let subButton = transcriptArea.toolbar.tags[iB];
+                            if (subButton.btn.btn_group === transcriptArea.toolbar.groups[subGroup].id) {
+                                let btnClass = "", btnContent = "", circleColor = "";
+
+                                if (subButton.btn.enabled === false) {
+                                    btnClass += "disabled";
+                                }
+
+                                if (subButton.btn.label === false) {
+                                    btnContent += teiInfo[subButton.btn.id].doc.gloss[0].content;
+                                } else if (subButton.btn.label !== false) {
+                                    btnContent += subButton.btn.label;
+                                }
+
+                                if (subButton.btn.enabled === true) {
+                                    circleColor += "red-color";
+                                }
+                                htmlToReturn += '       <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
+                                                '           <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', ' + null + ')" title="' + subButton.btn.title + '" class="' + btnClass + '">' +
+                                                '               <i class="' + subButton.btn.icon + '"></i> ' +
+                                    $filter('ucFirstStrict')(btnContent) +
+                                                '               <span class="' + circleColor + '" ><i class="fa fa-circle"></i></span>' +
+                                                '           </a>' +
+                                                '       </li>';
+                            }
+                        }
+                        htmlToReturn += '   </ul>' +
+                                        '</li>';
+                    }
+                }
+
+                return htmlToReturn;
             }
         };
         return functions;

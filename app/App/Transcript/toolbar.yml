@@ -2,6 +2,7 @@ groups:
     renderingDifficulties:
         type: "virtual"
         id: "renderingDifficulties"
+        idStrict: "renderingDifficulties"
         name: "Lisibilité"
         icon: "fa fa-puzzle-piece"
         parent: "choice"
@@ -16,6 +17,7 @@ groups:
         type: "virtual"
         name: "Sémantique"
         id: "semantic"
+        idStrict: "semantic"
         icon: "fa fa-bug"
         parent: false
         order: 3
@@ -30,6 +32,7 @@ tags:
     head:
         btn:
             id: "head"
+            idStrict: "head"
             label: false
             title: "Marque un en-tête"
             label_forced: true
@@ -41,6 +44,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 1
         caret:
             position: "prepend"
         html:
@@ -60,6 +64,7 @@ tags:
     dateline:
         btn:
             id: "dateline"
+            idStrict: "dateline"
             label: false
             title: "Ajouter une ligne de date"
             label_forced: true
@@ -71,6 +76,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 2
         caret:
             position: "prepend"
         html:
@@ -90,6 +96,7 @@ tags:
     p:
         btn:
             id: "p"
+            idStrict: "p"
             label: false
             title: "Marque un paragraphe"
             label_forced: true
@@ -101,6 +108,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 3
         caret:
             position: "prepend"
         html:
@@ -120,6 +128,7 @@ tags:
     list:
         btn:
             id: "list"
+            idStrict: "list"
             label: false
             title: "Marque une liste"
             label_forced: true
@@ -131,6 +140,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 4
         caret:
             position: "prepend"
         html:
@@ -148,6 +158,7 @@ tags:
     signed:
         btn:
             id: "signed"
+            idStrict: "signed"
             label: false
             title: "Marque une signature"
             label_forced: true
@@ -159,6 +170,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 5
         caret:
             position: "prepend"
         html:
@@ -176,6 +188,7 @@ tags:
     postscript:
         btn:
             id: "postscript"
+            idStrict: "postscript"
             label: false
             title: "Marque un post-scriptum"
             label_forced: true
@@ -187,6 +200,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
+            order: 6
         caret:
             position: "prepend"
         html:
@@ -204,6 +218,7 @@ tags:
     space:
         btn:
             id: "space"
+            idStrict: "space"
             label: false
             title: "Marque un espace"
             label_forced: true
@@ -215,6 +230,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 1
+            order: 7
         caret:
             position: "after"
         html:
@@ -234,6 +250,7 @@ tags:
     metamark:
         btn:
             id: "metamark"
+            idStrict: "metamark"
             label: false
             title: "Signaler une marque"
             label_forced: true
@@ -245,6 +262,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 1
+            order: 8
         caret:
             position: "after"
         html:
@@ -265,6 +283,7 @@ tags:
     hi:
         btn:
             id: "hi"
+            idStrict: "hi"
             label: "Mise en forme du texte"
             title: "Marquer le texte"
             label_forced: true
@@ -294,6 +313,7 @@ tags:
     item:
         btn:
             id: "item"
+            idStrict: "item"
             label: false
             title: "Item dans une liste"
             label_forced: false
@@ -321,6 +341,7 @@ tags:
     lb:
         btn:
             id: "lb"
+            idStrict: "lb"
             label: false
             title: "Changement de ligne"
             label_forced: false
@@ -351,6 +372,7 @@ tags:
     choice:
         btn:
             id: "choice"
+            idStrict: "choice"
             label: "Particularité de l'écriture"
             label_forced: true
             title: "Consigner un micro-phénomène de l'écriture"
@@ -382,6 +404,7 @@ tags:
     abbr:
         btn:
             id: "abbr"
+            idStrict: "abbr"
             label: false
             label_forced: false
             title: "Signaliser la présence d'une abbréviation"
@@ -393,6 +416,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 1
         caret:
             position: "prepend"
         html:
@@ -410,6 +434,7 @@ tags:
     expan:
         btn:
             id: "expan"
+            idStrict: "expan"
             label: false
             label_forced: false
             title: "Déplier une abbréviation"
@@ -421,6 +446,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 2
         caret:
             position: "prepend"
         html:
@@ -439,6 +465,7 @@ tags:
     sic:
         btn:
             id: "sic"
+            idStrict: "sic"
             label: false
             label_forced: false
             title: "Signaler une faute"
@@ -450,6 +477,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 4
             children: "surplus"
         caret:
             position: "prepend"
@@ -468,6 +496,7 @@ tags:
     corr:
         btn:
             id: "corr"
+            idStrict: "corr"
             label: false
             label_forced: false
             title: "Correction d'une faute"
@@ -479,6 +508,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 5
         caret:
             position: "prepend"
         html:
@@ -497,6 +527,7 @@ tags:
     orig:
         btn:
             id: "orig"
+            idStrict: "orig"
             label: false
             label_forced: false
             title: "Marquer une forme ancienne"
@@ -508,6 +539,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 6
         caret:
             position: "prepend"
         html:
@@ -524,7 +556,8 @@ tags:
             enable: false
     reg:
         btn:
-            id: "orig"
+            id: "reg"
+            idStrict: "reg"
             label: false
             label_forced: false
             title: "Préciser une forme correcte"
@@ -536,6 +569,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 7
         caret:
             position: "prepend"
         html:
@@ -554,6 +588,7 @@ tags:
     surplus:
         btn:
             id: "surplus"
+            idStrict: "surplus"
             label: false
             title: "Marquer le texte comme superflu"
             label_forced: false
@@ -566,6 +601,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 8
         caret:
             position: "prepend"
         html:
@@ -583,6 +619,7 @@ tags:
     add:
         btn:
             id: "add"
+            idStrict: "add"
             label: false
             title: "Marquer le texte comme ajouté"
             label_forced: false
@@ -594,6 +631,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 10
         caret:
             position: "prepend"
         html:
@@ -611,6 +649,7 @@ tags:
     del:
         btn:
             id: "del"
+            idStrict: "del"
             label: false
             title: "Marquer le texte comme supprimé"
             label_forced: false
@@ -622,6 +661,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 11
         caret:
             position: "prepend"
         html:
@@ -637,6 +677,7 @@ tags:
     subst:
         btn:
             id: "subst"
+            idStrict: "subst"
             label: false
             title: "Marquer le texte comme remplacé"
             label_forced: false
@@ -648,6 +689,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 12
         caret:
             position: "prepend"
         html:
@@ -666,6 +708,7 @@ tags:
     note:
         btn:
             id: "note"
+            idStrict: "note"
             label: false
             title: "Note du testateur"
             label_forced: false
@@ -677,6 +720,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            order: 14
         caret:
             position: "prepend"
         html:
@@ -695,6 +739,7 @@ tags:
     damage:
         btn:
             id: "damage"
+            idStrict: "damage"
             label: false
             title: "Marquer le texte comme endommagé"
             label_forced: false
@@ -723,6 +768,7 @@ tags:
     supplied:
         btn:
             id: "supplied"
+            idStrict: "supplied"
             label: false
             title: "Texte restitué par le transcripteur"
             label_forced: false
@@ -752,6 +798,7 @@ tags:
     unclear:
         btn:
             id: "unclear"
+            idStrict: "unclear"
             label: false
             title: "Texte transcript incertain"
             label_forced: false
@@ -780,6 +827,7 @@ tags:
     gap:
         btn:
             id: "gap"
+            idStrict: "gap"
             label: false
             title: "Présence d'un manque dans la transcription"
             label_forced: false
@@ -811,6 +859,7 @@ tags:
     date:
         btn:
             id: "date"
+            idStrict: "date"
             label: false
             title: "Marquer une date"
             label_forced: false
@@ -841,6 +890,7 @@ tags:
     persName:
         btn:
             id: "persName"
+            idStrict: "persName"
             label: false
             title: "Marquer un nom de personne"
             label_forced: false
@@ -871,6 +921,7 @@ tags:
     surname:
         btn:
             id: "surname"
+            idStrict: "surname"
             label: false
             title: "Marquer un nom de famille"
             label_forced: false
@@ -901,6 +952,7 @@ tags:
     placeName:
         btn:
             id: "placeName"
+            idStrict: "placeName"
             label: false
             title: "Marquer un nom de lieu"
             label_forced: false
@@ -931,6 +983,7 @@ tags:
     address:
         btn:
             id: "address"
+            idStrict: "address"
             label: false
             title: "Baliser une adresse"
             label_forced: true
@@ -963,6 +1016,7 @@ tags:
     addrLine:
         btn:
             id: "addrLine"
+            idStrict: "addrLine"
             label: false
             title: "Baliser une ligne d'adresse postale dans le corps de la transcription"
             label_forced: true
@@ -991,6 +1045,7 @@ tags:
     orgName:
         btn:
             id: "orgName"
+            idStrict: "orgName"
             label: false
             title: "Marquer un nom d'organisation"
             label_forced: false
@@ -1021,6 +1076,7 @@ tags:
     term:
         btn:
             id: "term"
+            idStrict: "term"
             label: false
             title: "Marquer un terme"
             label_forced: false
@@ -1051,6 +1107,7 @@ tags:
     foreign:
         btn:
             id: "foreign"
+            idStrict: "foreign"
             label: false
             title: "Marquer une langue autre que le français"
             label_forced: false
@@ -1081,6 +1138,7 @@ tags:
     seg:
         btn:
             id: "seg"
+            idStrict: "seg"
             label: false
             title: "Segment de texte"
             label_forced: false
@@ -1110,6 +1168,7 @@ tags:
     app:
         btn:
             id: "app"
+            idStrict: "app"
             label: false
             title: "Note d'apparat critique"
             label_forced: false
@@ -1142,6 +1201,7 @@ tags:
     ref:
         btn:
             id: "ref"
+            idStrict: "ref"
             label: false
             title: "Pointer vers une note sur le contenu"
             label_forced: false
@@ -1170,6 +1230,7 @@ tags:
     lem:
         btn:
             id: "lem"
+            idStrict: "lem"
             label: false
             title: "Leçon textuelle"
             label_forced: false
@@ -1198,6 +1259,7 @@ tags:
     bibl:
         btn:
             id: "bibl"
+            idStrict: "bibl"
             label: false
             title: "Référence bibliographique"
             label_forced: false
