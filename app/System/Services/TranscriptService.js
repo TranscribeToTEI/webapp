@@ -62,49 +62,198 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 return role;
             },
             /**
-             * This function encodes the TEI XML in HTML for live rendering.
+             * This function encodes the TEI XML in HTML for live render.
              *
-             * More information about the buttons, the tags and their rendering into toolbar.yml
+             * More information about the tags, the tags and their render into toolbar.yml
              *
              * @param encodeLiveRender string
-             * @param buttons array
-             * @param microObject
+             * @param tags array
+             * @param isMicroObject
+             * @param teiInfo
              * @returns string
              */
-            encodeHTML: function(encodeLiveRender, buttons, microObject) {
-                let TS = this;
-                let matchList = encodeLiveRender.match(/<\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
-                $.each(matchList, (function(index, value) {
-                    let valueTagName = value.replace(/<([a-zA-Z]+).*>/g, '$1');
-                    if(value[1] === "/") {
-                        /* Match with end tag */
-                        /* End tags need special regex*/
-                        valueTagName = value.replace(/<\/([a-zA-Z]+).*>/g, '$1');
-                        if(buttons[valueTagName] !== undefined) {
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "endTag", microObject));
-                        }
-                    } else if(value[value.length-2] === "/") {
-                        /* Match with single tag */
-                        if(buttons[valueTagName] !== undefined) {
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "singleTag", microObject));
-                        }
-                    } else if(value[value.length-2] !== "/") {
-                        /* Match with start tag, escaping single tags */
-                        if(buttons[valueTagName] !== undefined) {
-                            encodeLiveRender = encodeLiveRender.replace(value, TS.tagConstruction(buttons[valueTagName], "startTag", microObject));
-                        }
-                    }
-                }));
-                return encodeLiveRender;
-            },
-            tagConstruction: function(tag, type, microObject) {
-                console.log(microObject);
-                let attributesHtml = "";
-                if(tag.html.attributes !== undefined) {
-                    for(let attribute in tag.html.attributes) {
-                        attributesHtml += " "+attribute+"=\""+tag.html.attributes[attribute]+"\"";
+            encodeHTML: function(encodeLiveRender, tags, isMicroObject, teiInfo) {
+                console.log(encodeLiveRender);
+                console.log(tags);
+
+                for(let iT in tags) {
+                    let tag = tags[iT];
+
+                    let replace = "";
+
+                    if(tag.xml.unique === true) {
+                        replace = "<"+tag.xml.name+"(.*?)/>";
+                        let regExp = new RegExp(replace,"g");
+                        encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, index, original) {
+                            return functions.tagConstruction(tags[tag.btn.id], "singleTag", functions.extractAttributes(attributesString), null, isMicroObject);
+                        });
+                    } else if(tag.xml.unique === false) {
+                        replace = "<"+tag.xml.name+"(.*?)>(.*?)</"+tag.xml.name+">";
+                        let regExp = new RegExp(replace,"g");
+
+                        encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, content, index, original) {
+                            /* Computing tooltip for special tags (like Choice) ------------------------------------- */
+                            let extraTooltip = null;
+                            if(tag.btn.id === "choice") {
+                                let //TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
+                                    content = "",
+                                    prefix = "";
+                                /*console.log(TEIElement);
+
+                                for(let iC in TEIElement.children) {
+                                    let child = TEIElement.children[iC];
+                                    if(child.name === "corr") {
+                                        content = child.content;
+                                        prefix = "Forme correcte : ";
+                                    } else if(child.name === "reg") {
+                                        content = child.content;
+                                        prefix = "Forme régulière : ";
+                                    } else if(child.name === "expan") {
+                                        content = child.content;
+                                        prefix = "Forme complète : ";
+                                    }
+                                }*/
+
+                                extraTooltip = {
+                                    type: "tooltip",
+                                    content: content,
+                                    prefix: prefix
+                                }
+                            }
+                            /* End: Computing tooltip --------------------------------------------------------------- */
+
+                            return functions.tagConstruction(tags[tag.btn.id], "startTag", functions.extractAttributes(attributesString), extraTooltip, isMicroObject)+content+functions.tagConstruction(tags[tag.btn.id], "endTag", functions.extractAttributes(attributesString), null, isMicroObject);
+                        });
                     }
                 }
+
+                return encodeLiveRender;
+            },
+            /**
+             * This function extracts attributes array from string
+             *
+             * @param attributesString
+             * @returns {Array}
+             */
+            extractAttributes: function(attributesString) {
+                let attributes = [];
+                if(attributesString) {
+                    let matchListAttributes = attributesString.match(/[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))/g);
+                    console.log(matchListAttributes);
+                    if(matchListAttributes && matchListAttributes.length > 0) {
+                        for(let iA in matchListAttributes) {
+                            attributes.push({
+                                name: matchListAttributes[iA].replace(/([a-zA-Z0-9:_]+)\s*=\s*(?:"(.*?)"|'(.*?)'|[\^'">\s]+)/, "$1"),
+                                value: matchListAttributes[iA].replace(/([a-zA-Z0-9:_]+)\s*=\s*(?:"(.*?)"|'(.*?)'|[\^'">\s]+)/, "$2$3")
+                            });
+                        }
+                    }
+
+                    console.log(attributes);
+                }
+
+                return attributes;
+            },
+            /**
+             *
+             * @param xmlAttributes
+             * @returns {Array}
+             */
+            convertXMLAttributes: function(xmlAttributes) {
+                let attributes = [];
+                if(xmlAttributes.length > 0) {
+                    for(let iA in xmlAttributes) {
+                        if(xmlAttributes[iA].name === "rend") {
+                            let value = "";
+                            switch (xmlAttributes[iA].value) {
+                                case "left":
+                                    value = "text-left";
+                                    break;
+                                case "right":
+                                    value = "text-right";
+                                    break;
+                                case "centered":
+                                    value = "text-center";
+                                    break;
+                                case "superscript":
+                                    value = "text-sup";
+                                    break;
+                                case "underlined":
+                                    value = "text-underlined";
+                                    break;
+                                case "double-underlined":
+                                    value = "text-double-underlined";
+                                    break;
+                                case "superscript-underlined":
+                                    value = "text-sup text-underlined";
+                                    break;
+                                case "capital-letters":
+                                    value = "text-uppercase";
+                                    break;
+                                case "horizontal-line": //for metamark
+                                    value = "";
+                                    break;
+                                case "horizontal-wavy-line": //for metamark
+                                    value = "";
+                                    break;
+                                case "cross": //for metamark
+                                    value = "";
+                                    break;
+                                case "other": //for metamark
+                                    value = "";
+                                    break;
+                            }
+
+                            if(attributes["class"] !== undefined) {
+                                attributes["class"] = value;
+                            } else {
+                                attributes["class"] = " "+value;
+                            }
+                        } else {
+                            attributes[xmlAttributes[iA].name] = xmlAttributes[iA].value;
+                        }
+                    }
+                }
+
+                return attributes;
+            },
+            /**
+             * This function returns the HTML value of an XML tag
+             *
+             * @param tag -> object from tags list
+             * @param type -> startTag, endTag, singleTag
+             * @param xmlAttributes array
+             * @param extraTooltip null|array
+             * @param isMicroObject bool
+             * @returns {string}
+             */
+            tagConstruction: function(tag, type, xmlAttributes, extraTooltip, isMicroObject) {
+                /* Attributes management ---------------------------------------------------------------------------- */
+                let attributesHtml = "",
+                    attributes = functions.convertXMLAttributes(xmlAttributes);
+
+                if(tag.html.attributes !== undefined) {
+                    for(let attribute in tag.html.attributes) {
+                        if(attributes[attribute] !== undefined) {
+                            attributes[attribute] += " "+tag.html.attributes[attribute];
+                        } else {
+                            attributes[attribute] = tag.html.attributes[attribute];
+                        }
+                    }
+                }
+
+                for(let iA in attributes) {
+                    attributesHtml += " "+iA+"=\""+attributes[iA]+"\"";
+                }
+
+                if(extraTooltip !== null) {
+                    if(extraTooltip.type === 'tooltip') {
+                        attributesHtml += ' data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" tooltip';
+                    } else if(extraTooltip.type === 'popover') {
+                        attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '"';
+                    }
+                }
+                /* End: Attributes management ----------------------------------------------------------------------- */
 
                 let construction = '',
                     bgColor = '';
@@ -115,10 +264,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
 
                 /* Icon content ------------------------------------------------------------------------------------- */
-                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "before" && (type === "startTag" || type === "singleTag")) {
+                if(isMicroObject === true && tag.html.icon !== undefined && tag.html.icon.position === "before" && (type === "startTag" || type === "singleTag")) {
                     construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
                 }
-                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "append" && type === "endTag") {
+                if(isMicroObject === true && tag.html.icon !== undefined && tag.html.icon.position === "append" && type === "endTag") {
                     construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
                 }
                 /* Icon content ------------------------------------------------------------------------------------- */
@@ -127,7 +276,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     if(tag.btn.id === 'choice') {
                         construction += ']';
                     } else if(tag.btn.id === '') {
-
+                        // Cette sous-condition a-t-elle vraiment une importance ?
                     }
                 }
 
@@ -141,7 +290,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         construction +=  "<"+tag.html.name+attributesHtml+" />";
                     } else {
                         construction +=  "<"+tag.html.name+attributesHtml+">";
-                        if(microObject === true && tag.html.icon !== undefined && (tag.html.icon.position === "prepend" || tag.html.icon.position === "append")) {
+                        if(isMicroObject === true && tag.html.icon !== undefined && (tag.html.icon.position === "prepend" || tag.html.icon.position === "append")) {
                             construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
                         }
                         construction += "</"+tag.html.name+">";
@@ -153,15 +302,15 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     if(tag.btn.id === 'choice') {
                         construction += '[';
                     } else if(tag.btn.id === '') {
-
+                        // Cette sous-condition a-t-elle vraiment une importance ?
                     }
                 }
 
                 /* Icon content ------------------------------------------------------------------------------------- */
-                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "prepend" && type === "startTag") {
+                if(isMicroObject === true && tag.html.icon !== undefined && tag.html.icon.position === "prepend" && type === "startTag") {
                     construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
                 }
-                if(microObject === true && tag.html.icon !== undefined && tag.html.icon.position === "after" && (type === "endTag" || type === "singleTag")) {
+                if(isMicroObject === true && tag.html.icon !== undefined && tag.html.icon.position === "after" && (type === "endTag" || type === "singleTag")) {
                     construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
                 }
                 /* Icon content ------------------------------------------------------------------------------------- */
@@ -390,7 +539,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @param teiInfo
              */
             computeChildren: function(teiElement, content, lines, tags, teiInfo) {
-                console.log(teiElement);
+                //console.log(teiElement);
                 let array = [];
 
                 if(teiElement.content.indexOf('<') !== -1) {
@@ -403,8 +552,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 let newChild = functions.computeChild(teiElement, content, lines, tags, teiInfo, previousChild);
                 array.push(newChild);
 
-                console.log(newChild.endTag.end.index+1);
-                console.log(teiElement.endTag.start.index);
+                //console.log(newChild.endTag.end.index+1);
+                //console.log(teiElement.endTag.start.index);
                 if(newChild.endTag.end.index+1 !== teiElement.endTag.start.index) {
                     functions.computeChildStructure(teiElement, content, lines, tags, teiInfo, newChild, array);
                 }
@@ -418,7 +567,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 } else {
                     let endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
                     childrenLeftOfCursor = endPreviousChild+content.substring(endPreviousChild.length, endPreviousChild.length+2);
-                    console.log(childrenLeftOfCursor);
+                    //console.log(childrenLeftOfCursor);
                 }
                 let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
 
@@ -562,32 +711,34 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* -------------------------------------------------------------------------------------------------
                      * This part computes the start tag's position
                      ------------------------------------------------------------------------------------------------ */
-                    if (teiElement.type === "standard") {
-                        startExtraCounter = 1;
-                    } else if (teiElement.type === "single") {
-                        startExtraCounter = 0;
-                    }
-                    let tagPosStart = teiElement.startTag.start.index;
-                    for (let kLine in lines) {
-                        let line = lines[kLine];
-                        if (line.length <= tagPosStart) {
-                            tagPosStart -= line.length;
-                        } else {
-                            let afterTagPos                     = line.substring(tagPosStart + teiElement.name.length, line.length);
-                            let endTagFull                      = afterTagPos.indexOf('>');
-                            teiElement.startTag.start.row       = parseInt(kLine);
-                            teiElement.startTag.start.column    = parseInt(tagPosStart);
-                            teiElement.startTag.end.row         = parseInt(kLine);
-                            teiElement.startTag.end.column      = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
-                            break;
+                    if(lines !== null) {
+                        if (teiElement.type === "standard") {
+                            startExtraCounter = 1;
+                        } else if (teiElement.type === "single") {
+                            startExtraCounter = 0;
                         }
-                    }
+                        let tagPosStart = teiElement.startTag.start.index;
+                        for (let kLine in lines) {
+                            let line = lines[kLine];
+                            if (line.length <= tagPosStart) {
+                                tagPosStart -= line.length;
+                            } else {
+                                let afterTagPos                     = line.substring(tagPosStart + teiElement.name.length, line.length);
+                                let endTagFull                      = afterTagPos.indexOf('>');
+                                teiElement.startTag.start.row       = parseInt(kLine);
+                                teiElement.startTag.start.column    = parseInt(tagPosStart);
+                                teiElement.startTag.end.row         = parseInt(kLine);
+                                teiElement.startTag.end.column      = parseInt(tagPosStart + teiElement.name.length + endTagFull + startExtraCounter);
+                                break;
+                            }
+                        }
+                    }    
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
                      * This part returns end tag's information
                      ------------------------------------------------------------------------------------------------ */
-                    if (teiElement.type === "standard") {
+                    if (teiElement.type === "standard" && lines !== null) {
                         let endPosStart = teiElement.endTag.start.index;
                         for (let kLine in lines) {
                             let line = lines[kLine];
@@ -615,13 +766,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* -------------------------------------------------------------------------------------------------
                      * This part computes the start tag's attributes
                      ------------------------------------------------------------------------------------------------ */
-                    let attributesList = teiElement.startTag.content.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
+                    /*let attributesList = teiElement.startTag.content.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
                     for (let kAttribute in attributesList) {
                         let attributeFull = attributesList[kAttribute];
                         let attribute = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$1');
                         let value = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$2');
                         teiElement.attributes.push({attribute: attribute, value: value});
-                    }
+                    }*/
+                    teiElement.attributes = functions.extractAttributes(teiElement.startTag.content);
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
@@ -647,7 +799,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
                     if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
-                        console.log(teiElement.content);
+                        //console.log(teiElement.content);
                         teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
                     } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
                         teiElement.children = null;
@@ -678,13 +830,42 @@ angular.module('transcript.service.transcript', ['ui.router'])
             },
             buildListTagToolbar: function(transcriptArea, teiInfo, item) {
                 let htmlToReturn = "";
-                console.log(transcriptArea); console.log(item);
-                //transcriptArea.toolbar.tags = $filter('orderBy')(transcriptArea.toolbar.tags, 'btn.order');
+
+                /* -------------------------------------------------------------------------------------------------- */
+                /* Starting by computing the tags list */
+                /* -------------------------------------------------------------------------------------------------- */
+                let listTags = [];
 
                 for (let iT in transcriptArea.toolbar.tags) {
                     let button = transcriptArea.toolbar.tags[iT];
 
                     if(button.btn.btn_group === item.idStrict) {
+                        listTags.push(button);
+                    }
+                }
+                if(transcriptArea.toolbar.tags[item.id] !== undefined) {
+                    for (let iG in transcriptArea.toolbar.tags[item.id].btn.group_children) {
+                        let subGroup = transcriptArea.toolbar.tags[item.id].btn.group_children[iG];
+                        listTags.push(transcriptArea.toolbar.groups[subGroup]);
+                    }
+                } else if(transcriptArea.toolbar.groups[item.id] !== undefined) {
+                    for (let iG in transcriptArea.toolbar.groups) {
+                        if(transcriptArea.toolbar.groups[iG].parent === item.id) {
+                            listTags.push(transcriptArea.toolbar.groups[iG]);
+                        }
+                    }
+                }
+
+                listTags = $filter('orderBy')(listTags, 'order');
+                /* End: Computing list tags ------------------------------------------------------------------------- */
+
+                /* -------------------------------------------------------------------------------------------------- */
+                /* Creation of the DOM */
+                /* -------------------------------------------------------------------------------------------------- */
+                for (let iT in listTags) {
+                    let button = listTags[iT];
+
+                    if(button.btn !== undefined) {
                         let btnClass = "", btnContent = "", circleColor = "";
 
                         if(button.btn.enabled === false) {
@@ -701,6 +882,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             circleColor += "red-color";
                         }
 
+                        if(button.btn.separator_before === true) {
+                            htmlToReturn += '<li class="dropdown-divider"></li>';
+                        }
+
                         htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
                                         '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', '+null+')" title="'+ button.btn.title +'" class="'+btnClass+'">' +
                                         '       <i class="'+ button.btn.icon +'"></i> ' +
@@ -708,17 +893,18 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                         '       <span class="'+circleColor+'"><i class="fa fa-circle"></i></span>' +
                                         '   </a>' +
                                         '</li>';
-                    }
-                }
-                if(transcriptArea.toolbar.tags[item.id] !== undefined) {
-                    for (let iG in transcriptArea.toolbar.tags[item.id].btn.group_children) {
-                        let subGroup = transcriptArea.toolbar.tags[item.id].btn.group_children[iG];
-                        htmlToReturn += '<li class="dropdown-submenu">' +
-                                        '   <a class="dropdown-item" tabindex="-1">' + transcriptArea.toolbar.groups[subGroup].name + '</a>' +
+                    } else {
+                        let subGroup = button;
+                        if(subGroup.separator_before === true) {
+                            htmlToReturn += '<li class="dropdown-divider"></li>';
+                        }
+
+                        htmlToReturn += '<li class="dropdown-submenu" id="'+subGroup.id+'">' +
+                                        '   <a class="dropdown-item" tabindex="-1">' + subGroup.name + '</a>' +
                                         '   <ul class="dropdown-menu">';
                         for (let iB in transcriptArea.toolbar.tags) {
                             let subButton = transcriptArea.toolbar.tags[iB];
-                            if (subButton.btn.btn_group === transcriptArea.toolbar.groups[subGroup].id) {
+                            if (subButton.btn.btn_group === subGroup.id) {
                                 let btnClass = "", btnContent = "", circleColor = "";
 
                                 if (subButton.btn.enabled === false) {
@@ -737,7 +923,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                 htmlToReturn += '       <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
                                                 '           <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', ' + null + ')" title="' + subButton.btn.title + '" class="' + btnClass + '">' +
                                                 '               <i class="' + subButton.btn.icon + '"></i> ' +
-                                    $filter('ucFirstStrict')(btnContent) +
+                                                $filter('ucFirstStrict')(btnContent) +
                                                 '               <span class="' + circleColor + '" ><i class="fa fa-circle"></i></span>' +
                                                 '           </a>' +
                                                 '       </li>';
@@ -749,6 +935,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
 
                 return htmlToReturn;
+                /* End: Creation of the DOM ------------------------------------------------------------------------- */
+
             }
         };
         return functions;

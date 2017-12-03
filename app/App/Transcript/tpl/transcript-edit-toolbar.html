@@ -1,8 +1,8 @@
 <div class="btn-toolbar bg-secondary" role="toolbar">
     <!-- Tags management Level 1 -->
     <div class="clearfix level level-1 bg-secondary">
-        <div class="float-right bg-danger text-white">
-            <small ng-if="transcriptArea.toolbar.mouseOverLvl1 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl1.xml.name }}&gt;</small>
+        <div class="float-right bg-danger text-white" style="height: 100%;">
+            <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl1 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl1.xml.name }}&gt;</small>
         </div>
         <div class="btn-group btn-group-sm" role="group">
             <button ng-repeat="button in transcriptArea.toolbar.tags" class="btn btn-sm" ng-click="transcriptArea.ace.addTag(button.btn.id, null)" ng-if="button.btn.level == 1" title="{{ button.btn.title }}" ng-disabled="button.btn.enabled === false" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl1 = button" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl1 = null">
@@ -15,8 +15,8 @@
 
     <!-- Tags management Level 2 -->
     <div class="clearfix level level-2">
-        <div class="float-right bg-danger text-white">
-            <small ng-if="transcriptArea.toolbar.mouseOverLvl2 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl2 }}&gt;</small>
+        <div class="float-right bg-danger text-white align-middle" style="height: 100%;">
+            <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl2 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl2 }}&gt;</small>
         </div>
         <div class="btn-group" role="group">
             <div style="display: inline-flex;" ng-repeat="item in transcriptArea.toolbar.level2 | orderBy:'order'">
@@ -47,9 +47,9 @@
 
     <!-- Attributes management Level 3-->
     <div class="clearfix level level-3">
-        <div class="float-right bg-danger text-white">
-            <small ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value !== null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}="{{ transcriptArea.toolbar.mouseOverLvl3.value.value }}"</small>
-            <small ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value === null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}=""</small>
+        <div class="float-right bg-danger text-white" style="height: 100%;">
+            <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value !== null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}="{{ transcriptArea.toolbar.mouseOverLvl3.value.value }}"</small>
+            <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value === null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}=""</small>
         </div>
         <div class="btn-group" role="group">
             <div class="btn-group" role="group">

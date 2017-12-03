@@ -145,7 +145,7 @@
         <div id="div-interaction-live" ng-if="transcriptArea.interaction.status == 'live'">
             <div id="div-container-encode">
                 <div class="card">
-                    <div class="card-body" ng-bind-html="transcriptArea.interaction.live.content"></div>
+                    <div class="card-body" compile="transcriptArea.interaction.live.content"></div>
                 </div>
             </div>
         </div>

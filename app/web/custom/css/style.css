@@ -2236,3 +2236,19 @@ div#cke_admin-content-edit-content .cke_bottom
 	margin-right: 8px;
 	opacity: 0.7;
 }
+
+
+.text-sup {
+	position: relative;
+	bottom: 1px;
+	font-size: .8em;
+	line-height: .8em;
+	vertical-align:super;
+	text-decoration:none;
+}
+.text-underlined {
+	text-decoration: underline;
+}
+.text-double-underlined {
+	border-bottom: 3px double;
+}

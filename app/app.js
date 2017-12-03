@@ -100,6 +100,7 @@ angular.module('transcriptApp', [
         'transcript.system.error.404',
         'transcript.directive.compile',
         'transcript.directive.mwConfirmClick',
+        'transcript.directive.tooltip',
         'transcript.filter.arrayRender',
         'transcript.filter.booleanRender',
         'transcript.filter.classicDate',

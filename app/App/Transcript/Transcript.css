@@ -90,3 +90,9 @@
     color:#bb1026;
 }
 
+.toolbarLeftTooltip {
+    height: 100%;
+    font-size: 80%;
+    padding: 0 5px;
+}
+

@@ -226,6 +226,18 @@ angular.module('transcript.app.transcript', ['ui.router'])
             /* $scope & variables --------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
+            /* Encoding function */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.transcriptArea.interaction.live.encode = function() {
+                let encodeLiveRender = "";
+                for (let r = 0; r < $scope.aceSession.getLength(); r++) {
+                    encodeLiveRender += $scope.aceSession.getLine(r);
+                }
+                $scope.transcriptArea.interaction.live.content = TranscriptService.encodeHTML(encodeLiveRender, $scope.transcriptArea.toolbar.tags, $scope.transcriptArea.interaction.live.microObjects.active, $scope.teiInfo);
+            };
+            /* End: Encoding function ----------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
             /* Computing Level2 */
             /* ---------------------------------------------------------------------------------------------------------- */
             for (let iG in $scope.transcriptArea.toolbar.groups) {
@@ -259,21 +271,6 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 $scope.currentLog = $filter('filter')($scope.transcript._embedded.logs, {isOpened: false})[0];
             }
             /* End: Updating Transcript Log ----------------------------------------------------------------------------- */
-
-            /* ---------------------------------------------------------------------------------------------------------- */
-            /* Functions */
-            /* ---------------------------------------------------------------------------------------------------------- */
-            /**
-             * Encode the transcription in HTML
-             *
-             * @param encodeLiveRender
-             * @param button
-             * @returns {*}
-             */
-            $scope.functions.encodeHTML = function (encodeLiveRender, button) {
-                return TranscriptService.encodeHTML(encodeLiveRender, button, $scope.transcriptArea.interaction.live.microObjects.active);
-            };
-            /* Functions ------------------------------------------------------------------------------------------------ */
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Toolbar */
@@ -552,11 +549,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                  * This function watches the transcription (ace area), encodes it and displays it in the live
                  */
                 $scope.$watch('transcriptArea.ace.area', function () {
-                    let encodeLiveRender = "";
-                    for (let r = 0; r < $scope.aceSession.getLength(); r++) {
-                        encodeLiveRender += $scope.aceSession.getLine(r);
-                    }
-                    $scope.transcriptArea.interaction.live.content = $sce.trustAsHtml($scope.functions.encodeHTML(encodeLiveRender, $scope.transcriptArea.toolbar.tags));
+                    $scope.transcriptArea.interaction.live.encode();
                     $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                     $scope.transcriptArea.ace.lines = $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1);
                     $scope.functions.updateAlerts();
@@ -723,7 +716,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         for (let iAttr in $scope.transcriptArea.toolbar.attributes) {
                             $scope.transcriptArea.toolbar.attributes[iAttr].alreadyUsed = false;
                             for (let iAttribute in $scope.transcriptArea.ace.currentTag.attributes) {
-                                if ($scope.transcriptArea.ace.currentTag.attributes[iAttribute].attribute === $scope.transcriptArea.toolbar.attributes[iAttr].id) {
+                                if ($scope.transcriptArea.ace.currentTag.attributes[iAttribute].name === $scope.transcriptArea.toolbar.attributes[iAttr].id) {
                                     $scope.transcriptArea.toolbar.attributes[iAttr].alreadyUsed = true;
                                 }
                             }
@@ -746,7 +739,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             $scope.transcriptArea.ace.addAttribute = function (attribute, value) {
                 let alreadyHaveAttribute = false;
                 for (let iAttribute in $scope.transcriptArea.ace.currentTag.attributes) {
-                    if ($scope.transcriptArea.ace.currentTag.attributes[iAttribute].attribute === attribute.id) {
+                    if ($scope.transcriptArea.ace.currentTag.attributes[iAttribute].name === attribute.id) {
                         alreadyHaveAttribute = true;
                     }
                 }
@@ -824,6 +817,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     $scope.transcriptArea.interaction.live.microObjects.active = true;
                     $scope.transcriptArea.interaction.live.microObjects.activeClass = 'active bg-danger';
                 }
+                $scope.transcriptArea.interaction.live.encode();
                 $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
             };
             /* Live Management ------------------------------------------------------------------------------------------ */

@@ -6,7 +6,8 @@ groups:
         name: "Lisibilité"
         icon: "fa fa-puzzle-piece"
         parent: "choice"
-        order: null
+        order: 11
+        separator_before: true
     microPhenomena:
         type: "real"
         id: "choice"
@@ -22,11 +23,31 @@ groups:
         parent: false
         order: 3
     notes:
-        type: "real"
-        id: "app"
+        type: "virtual"
+        name: "Notes éditoriales"
+        id: "notes"
         idStrict: "notes"
+        icon: "fa fa-stack-overflow"
         parent: false
         order: 4
+    notesApp:
+        type: "virtual"
+        id: "notesApp"
+        idStrict: "notesApp"
+        name: "Apparat critique"
+        icon: ""
+        parent: "notes"
+        order: 1
+        separator_before: false
+    notesRef:
+        type: "virtual"
+        id: "notesRef"
+        idStrict: "notesRef"
+        name: "Référence biblio"
+        icon: ""
+        parent: "notes"
+        order: 2
+        separator_before: false
 tags:
     # Level 1 :
     head:
@@ -44,7 +65,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 1
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -76,7 +97,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 2
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -108,7 +129,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 3
+        order: 3
         caret:
             position: "prepend"
         html:
@@ -140,7 +161,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 4
+        order: 4
         caret:
             position: "prepend"
         html:
@@ -170,7 +191,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 5
+        order: 5
         caret:
             position: "prepend"
         html:
@@ -200,7 +221,7 @@ tags:
             restrict_to_root: true
             enabled: false
             level: 1
-            order: 6
+        order: 6
         caret:
             position: "prepend"
         html:
@@ -230,7 +251,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 1
-            order: 7
+        order: 7
         caret:
             position: "after"
         html:
@@ -262,7 +283,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 1
-            order: 8
+        order: 8
         caret:
             position: "after"
         html:
@@ -384,7 +405,9 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            separator_before: false
             group_children: ["renderingDifficulties"]
+        order: false
         caret:
             position: "prepend"
         html:
@@ -416,7 +439,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 1
+            separator_before: false
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -446,7 +470,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 2
+            separator_before: false
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -477,8 +502,9 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 4
+            separator_before: true
             children: "surplus"
+        order: 3
         caret:
             position: "prepend"
         html:
@@ -508,7 +534,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 5
+            separator_before: false
+        order: 4
         caret:
             position: "prepend"
         html:
@@ -539,7 +566,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 6
+            separator_before: true
+        order: 5
         caret:
             position: "prepend"
         html:
@@ -569,7 +597,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 7
+            separator_before: false
+        order: 6
         caret:
             position: "prepend"
         html:
@@ -601,7 +630,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 8
+            separator_before: false
+        order: 7
         caret:
             position: "prepend"
         html:
@@ -631,7 +661,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 10
+            separator_before: true
+        order: 8
         caret:
             position: "prepend"
         html:
@@ -661,7 +692,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 11
+            separator_before: false
+        order: 9
         caret:
             position: "prepend"
         html:
@@ -689,7 +721,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 12
+            separator_before: false
+        order: 10
         caret:
             position: "prepend"
         html:
@@ -720,7 +753,8 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            order: 14
+            separator_before: true
+        order: 12
         caret:
             position: "prepend"
         html:
@@ -751,6 +785,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -780,6 +815,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -810,6 +846,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 3
         caret:
             position: "prepend"
         html:
@@ -839,6 +876,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 4
         caret:
             position: "prepend"
         html:
@@ -871,6 +909,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -902,6 +941,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -933,6 +973,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 3
         caret:
             position: "prepend"
         html:
@@ -964,6 +1005,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 4
         caret:
             position: "prepend"
         html:
@@ -995,6 +1037,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 5
         caret:
             position: "prepend"
         html:
@@ -1028,6 +1071,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 6
         caret:
             position: "prepend"
         html:
@@ -1057,6 +1101,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 7
         caret:
             position: "prepend"
         html:
@@ -1088,6 +1133,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 8
         caret:
             position: "prepend"
         html:
@@ -1119,6 +1165,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 9
         caret:
             position: "prepend"
         html:
@@ -1150,6 +1197,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 10
         caret:
             position: "prepend"
         html:
@@ -1174,12 +1222,13 @@ tags:
             label_forced: false
             icon: "fa fa-bookmark-o"
             btn_class: ""
-            btn_group: false
-            btn_is_group: "notes"
+            btn_group: "notesApp"
+            btn_is_group: false
             allow_root: false
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -1207,12 +1256,13 @@ tags:
             label_forced: false
             icon: "fa fa-tag"
             btn_class: ""
-            btn_group: "notes"
+            btn_group: "notesRef"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 1
         caret:
             position: "prepend"
         html:
@@ -1236,12 +1286,13 @@ tags:
             label_forced: false
             icon: "fa fa-graduation-cap"
             btn_class: ""
-            btn_group: "notes"
+            btn_group: "notesApp"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -1265,12 +1316,13 @@ tags:
             label_forced: false
             icon: "fa fa-book"
             btn_class: ""
-            btn_group: "notes"
+            btn_group: "notesRef"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
             enabled: false
             level: 2
+        order: 2
         caret:
             position: "prepend"
         html:
