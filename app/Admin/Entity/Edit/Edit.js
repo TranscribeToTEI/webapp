@@ -3,59 +3,79 @@
 angular.module('transcript.admin.entity.edit', ['ui.router'])
 
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('transcript.admin.entity.edit', {
-            views: {
-                "page" : {
-                    templateUrl: 'Admin/Entity/Edit/Edit.html',
-                    controller: 'AdminEntityEditCtrl'
+        $stateProvider
+            .state('transcript.admin.entity.edit', {
+                views: {
+                    "page" : {
+                        templateUrl: 'Admin/Entity/Edit/Edit.html',
+                        controller: 'AdminEntityEditCtrl'
+                    }
+                },
+                url: '/edit/:id',
+                ncyBreadcrumb: {
+                    parent: 'transcript.app.entity({id: entity.id})',
+                    label: 'Modification'
+                },
+                tfMetaTags: {
+                    title: 'Modification | Entités | Administration',
+                },
+                resolve: {
+                    entity: function(EntityService, $transition$) {
+                        return EntityService.getEntity($transition$.params().id);
+                    },
+                    places: function(TaxonomyService) {
+                        return TaxonomyService.getTaxonomyEntities('places');
+                    },
+                    testators: function(TaxonomyService) {
+                        return TaxonomyService.getTaxonomyEntities('testators');
+                    },
+                    organizations: function(HostingOrganizationService) {
+                        return HostingOrganizationService.getOrganizations();
+                    },
+                    willTypes: function(WillTypeService) {
+                        return WillTypeService.getTypes();
+                    }
                 }
-            },
-            url: '/edit/:id',
-            ncyBreadcrumb: {
-                parent: 'transcript.app.entity({id: entity.id})',
-                label: 'Modification'
-            },
-            tfMetaTags: {
-                title: 'Modification | Entités | Administration',
-            },
-            resolve: {
-                entity: function(EntityService, $transition$) {
-                    return EntityService.getEntity($transition$.params().id);
+            })
+            .state('transcript.admin.entity.import', {
+                views: {
+                    "page" : {
+                        templateUrl: 'Admin/Entity/Edit/Edit.html',
+                        controller: 'AdminEntityEditCtrl'
+                    }
                 },
-                places: function(TaxonomyService) {
-                    return TaxonomyService.getTaxonomyEntities('places');
+                url: '/import',
+                ncyBreadcrumb: {
+                    parent: 'transcript.admin.entity.list',
+                    label: 'Importation'
                 },
-                testators: function(TaxonomyService) {
-                    return TaxonomyService.getTaxonomyEntities('testators');
+                tfMetaTags: {
+                    title: 'Importation | Entités | Administration',
                 },
-                organizations: function(HostingOrganizationService) {
-                    return HostingOrganizationService.getOrganizations();
+                resolve: {
+                    entity: function() {
+                        return null;
+                    },
+                    testators: function(TaxonomyService) {
+                        return TaxonomyService.getTaxonomyEntities('testators');
+                    },
+                    places: function(TaxonomyService) {
+                        return TaxonomyService.getTaxonomyEntities('places');
+                    },
+                    organizations: function(HostingOrganizationService) {
+                        return HostingOrganizationService.getOrganizations();
+                    },
+                    willTypes: function(WillTypeService) {
+                        return WillTypeService.getTypes();
+                    }
                 }
-            }
-        })
+            })
     }])
 
-    .controller('AdminEntityEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'entity', 'flash', 'EntityService', 'places', 'testators', 'organizations', function($rootScope, $scope, $http, $sce, $state, entity, flash, EntityService, places, testators, organizations) {
-        if(entity === null) {$state.go('transcript.error.404');}
-        else {$scope.entity = entity;}
-        console.log($scope.entity);
-
-        $scope.entity.will.testator = $scope.entity.will.testator.id;
-        if($scope.entity.will.willWritingPlace !== null) {$scope.entity.will.willWritingPlace = $scope.entity.will.willWritingPlace.id;}
-        if($scope.entity.will.hostingOrganization !== null) {$scope.entity.will.hostingOrganization = $scope.entity.will.hostingOrganization.id;}
-
-        $scope.testators = testators;
-        $scope.organizations = organizations;
-        /* Place names management ----------------------------------------------------------------------------------- */
-        $scope.places = places;
-        for(let iEntity in $scope.places) {
-            if($scope.places[iEntity].names.length > 0) {
-                $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
-            }
-        }
-        /* End: Place names management ------------------------------------------------------------------------------ */
-
-
+    .controller('AdminEntityEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entity', 'flash', 'EntityService', 'HostingOrganizationService', 'TaxonomyService', 'WillTypeService', 'places', 'testators', 'organizations', 'willTypes', function($rootScope, $scope, $http, $sce, $state, $filter, entity, flash, EntityService, HostingOrganizationService, TaxonomyService, WillTypeService, places, testators, organizations, willTypes) {
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Scope management */
+        /* ---------------------------------------------------------------------------------------------------------- */
         $scope.submit = {
             loading: false,
             success: false
@@ -64,16 +84,53 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             loading: false
         };
         $scope.form = {};
+        /* End: Scope management ------------------------------------------------------------------------------------ */
 
-        /* Loading datepicker toogles */
-        $(function () {
-            $('.datepicker').datetimepicker({
-                locale: 'fr',
-                format: 'DD/MM/YYYY',
-                showClear: true
-            });
-        });
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Entity management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        if(entity === null) {
+            $scope.entity = {
+                isShown: true,
+                resources: [],
+                will: {}
+            };
+        } else {
+            $scope.entity = entity;
+            $scope.entity.will.testator = $scope.entity.will.testator.id;
+            if($scope.entity.will.willWritingPlaceNormalized) {$scope.entity.will.willWritingPlaceNormalized = $scope.entity.will.willWritingPlaceNormalized.id;}
+            if($scope.entity.will.hostingOrganization) {$scope.entity.will.hostingOrganization = $scope.entity.will.hostingOrganization.id;}
+            if($scope.entity.will.willType) {$scope.entity.will.willType = $scope.entity.will.willType.id;}
 
+            if($scope.entity.will.minuteDateNormalized) {$scope.entity.will.minuteDateNormalized = $filter('date')($scope.entity.will.minuteDateNormalized, 'yyyy-MM-dd')}
+            if($scope.entity.will.minuteDateEndNormalized) {$scope.entity.will.minuteDateEndNormalized = $filter('date')($scope.entity.will.minuteDateEndNormalized, 'yyyy-MM-dd')}
+            if($scope.entity.will.willWritingDateNormalized) {$scope.entity.will.willWritingDateNormalized = $filter('date')($scope.entity.will.willWritingDateNormalized, 'yyyy-MM-dd')}
+            if($scope.entity.will.willWritingDateEndNormalized) {$scope.entity.will.willWritingDateEndNormalized = $filter('date')($scope.entity.will.willWritingDateEndNormalized, 'yyyy-MM-dd')}
+        }
+        console.log($scope.entity);
+        /* End: Entity management ----------------------------------------------------------------------------------- */
+
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Taxonomy management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.testators = $filter('orderBy')(testators, 'surname');
+        $scope.organizations = $filter('orderBy')(organizations, 'name');
+        $scope.willTypes = $filter('orderBy')(willTypes, 'name');
+        /* Place names management ----------------------------------------------------------------------------------- */
+        $scope.places = places;
+        for(let iEntity in $scope.places) {
+            if($scope.places[iEntity].names.length > 0) {
+                $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
+            }
+        }
+        $scope.places = $filter('orderBy')($scope.places, 'name');
+        /* End: Place names management ------------------------------------------------------------------------------ */
+        /* End: Taxonomy management --------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Resources management */
+        /* ---------------------------------------------------------------------------------------------------------- */
         $scope.form.addResource = function(resourceNumber) {
             $scope.entity.resources.push({
                 type: '',
@@ -87,10 +144,11 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             let index = $scope.entity.resources.indexOf(resource);
             $scope.entity.resources.splice(index,1);
         };
+        /* End: Resources management -------------------------------------------------------------------------------- */
 
-        /**
-         * Submit management
-         */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Submit management */
+        /* ---------------------------------------------------------------------------------------------------------- */
         $scope.submit.action = function() {
             $scope.submit.loading = true;
             let formEntity = {
@@ -99,24 +157,44 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 will: {
                     title: "Testament "+$scope.entity.will.callNumber,
                     callNumber: $scope.entity.will.callNumber,
+                    notaryNumber: $scope.entity.will.notaryNumber,
+                    crpcenNumber: $scope.entity.will.crpcenNumber,
+                    minuteDateString: $scope.entity.will.minuteDateString,
+                    minuteYear: $scope.entity.will.minuteYear,
+                    minuteDateNormalized: $filter('stringToDate')($scope.entity.will.minuteDateNormalized),
+                    minuteDateEndNormalized: $filter('stringToDate')($scope.entity.will.minuteDateEndNormalized),
                     minuteLink: $scope.entity.will.minuteLink,
-                    minuteDate: $scope.entity.will.minuteDate,
-                    willWritingDate: $scope.entity.will.willWritingDate,
-                    willWritingPlace: $scope.entity.will.willWritingPlace.id,
+                    willWritingDateString: $scope.entity.will.willWritingDateString,
+                    willWritingYear: $scope.entity.will.willWritingYear,
+                    willWritingDateNormalized: $filter('stringToDate')($scope.entity.will.willWritingDateNormalized),
+                    willWritingDateEndNormalized: $filter('stringToDate')($scope.entity.will.willWritingDateEndNormalized),
+                    willWritingPlaceString: $scope.entity.will.willWritingPlaceString,
+                    willWritingPlaceNormalized: $scope.entity.will.willWritingPlaceNormalized.id,
+                    testator: $scope.entity.will.testator.id,
+                    hostingOrganization: $scope.entity.will.hostingOrganization,
+                    identificationUsers: $scope.entity.will.identificationUsers,
+                    willType: $scope.entity.will.willType,
+                    additionalComments: $scope.entity.will.additionalComments,
+                    description: $scope.entity.will.description,
                     placePhysDescSupport: $scope.entity.will.placePhysDescSupport,
                     placePhysDescHeight: $scope.entity.will.placePhysDescHeight,
                     placePhysDescWidth: $scope.entity.will.placePhysDescWidth,
                     placePhysDescHand: $scope.entity.will.placePhysDescHand,
+                    placePhysDescNumber: $scope.entity.will.placePhysDescNumber,
                     envelopPhysDescSupport: $scope.entity.will.envelopPhysDescSupport,
                     envelopPhysDescHeight: $scope.entity.will.envelopPhysDescHeight,
                     envelopPhysDescWidth: $scope.entity.will.envelopPhysDescWidth,
                     envelopPhysDescHand: $scope.entity.will.envelopPhysDescHand,
-                    hostingOrganization: $scope.entity.will.hostingOrganization,
-                    identificationUser: $scope.entity.will.identificationUser,
+                    codicilPhysDescSupport: $scope.entity.will.codicilPhysDescSupport,
+                    codicilPhysDescHeight: $scope.entity.will.codicilPhysDescHeight,
+                    codicilPhysDescWidth: $scope.entity.will.codicilPhysDescWidth,
+                    codicilPhysDescHand: $scope.entity.will.codicilPhysDescHand,
+                    codicilPhysDescNumber: $scope.entity.will.codicilPhysDescNumber,
+                    isOfficialVersion: true,
                 },
                 resources: []
             };
-
+            console.log($filter('stringToDate')($scope.entity.will.minuteDateNormalized));
             for(let resource of $scope.entity.resources) {
                 if(typeof resource.images === 'string') {
                     resource.images = resource.images.split(",");
@@ -135,39 +213,60 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 }
                 formEntity.resources.push(content);
             }
-
             console.log(formEntity);
-            // Entity update :
-            $http.patch($rootScope.api+'/entities/'+$scope.entity.id, formEntity).
-            then(function (response) {
-                console.log(response.data);
-                $scope.submit.loading = false;
-                $scope.submit.success = true;
-                flash.success = "Vous allez être redirigé dans quelques instants...";
-                $state.go('transcript.app.entity', {id: response.data.id});
-            }, function errorCallback(response) {
-                console.log(response);
-                $scope.submit.loading = false;
-                flash.error = "<ul>";
-                for(let field in response.data.errors.children) {
-                    console.log(response.data.errors.children);
-                    console.log(field);
-                    for(let error in response.data.errors.children[field]) {
-                        if(error === "errors") {
-                            flash.error += "<li><strong>"+field+"</strong> : "+response.data.errors.children[field][error]+"</li>";
+
+            if($scope.entity.id === undefined) {
+                $http.post($rootScope.api + '/entities', formEntity).then(function (response) {
+                    console.log(response.data);
+                    $scope.submit.loading = false;
+                    $scope.submit.success = true;
+                    flash.success = "Vous allez être redirigé dans quelques instants...";
+                    $state.go('transcript.app.entity', {id: response.data.id});
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.submit.loading = false;
+                    flash.error = "<ul>";
+                    for (let field in response.data.errors.children) {
+                        for (let error in response.data.errors.children[field]) {
+                            if (error === "errors") {
+                                flash.error += "<li><strong>" + field + "</strong> : " + response.data.errors.children[field][error] + "</li>";
+                            }
                         }
                     }
-                }
-                flash.error += "</ul>";
-            });
+                    flash.error += "</ul>";
+                });
+            } else {
+                $http.patch($rootScope.api + '/entities/' + $scope.entity.id, formEntity).then(function (response) {
+                    console.log(response.data);
+                    $scope.submit.loading = false;
+                    $scope.submit.success = true;
+                    flash.success = "Vous allez être redirigé dans quelques instants...";
+                    $state.go('transcript.app.entity', {id: response.data.id});
+                }, function errorCallback(response) {
+                    console.log(response);
+                    $scope.submit.loading = false;
+                    flash.error = "<ul>";
+                    for (let field in response.data.errors.children) {
+                        for (let error in response.data.errors.children[field]) {
+                            if (error === "errors") {
+                                flash.error += "<li><strong>" + field + "</strong> : " + response.data.errors.children[field][error] + "</li>";
+                            }
+                        }
+                    }
+                    flash.error += "</ul>";
+                });
+            }
         };
+        /* End: Submit management ----------------------------------------------------------------------------------- */
 
-        /**
-         * Remove entity
-         * */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Remove entity */
+        /* ---------------------------------------------------------------------------------------------------------- */
         $scope.remove.action = function() {
-            $scope.remove.loading = true;
-            removeEntity();
+            if($scope.entity.id !== undefined) {
+                $scope.remove.loading = true;
+                removeEntity();
+            }
 
             function removeEntity() {
                 return EntityService.removeEntity($scope.entity.id).
@@ -192,5 +291,51 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 });
             }
         };
+        /* End: Remove entity --------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Reload related entity */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.reload = {
+            places: false,
+            testators: false,
+            organizations: false,
+            willTypes: false
+        };
+
+        $scope.reload.action = function(type) {
+            if(type === "testators") {
+                $scope.reload.testators = true;
+                return TaxonomyService.getTaxonomyEntities(type).then(function(response) {
+                    $scope.testators = $filter('orderBy')(response, 'surname');
+                    $scope.reload.testators = false;
+                });
+            } else if(type === "places") {
+                $scope.reload.places = true;
+                return TaxonomyService.getTaxonomyEntities(type).then(function(response) {
+                    $scope.places = response;
+                    for(let iEntity in $scope.places) {
+                        if($scope.places[iEntity].names.length > 0) {
+                            $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
+                        }
+                    }
+                    $scope.places = $filter('orderBy')($scope.places, 'name');
+                    $scope.reload.places = false;
+                });
+            } else if(type === "organizations") {
+                $scope.reload.organizations = true;
+                return HostingOrganizationService.getOrganizations().then(function(response) {
+                    $scope.organizations = $filter('orderBy')(response, 'name');
+                    $scope.reload.organizations = false;
+                });
+            } else if(type === "willTypes") {
+                $scope.reload.willTypes = true;
+                return WillTypeService.getTypes().then(function(response) {
+                    $scope.willTypes = $filter('orderBy')(response, 'name');
+                    $scope.reload.willTypes = false;
+                });
+            }
+        };
+        /* End: Reload related entity ------------------------------------------------------------------------------- */
     }])
 ;

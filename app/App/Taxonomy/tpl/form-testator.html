@@ -1,4 +1,5 @@
 <fieldset>
+    <label class="big">À propos du nom du testateur</label>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-name" class="form-control-label">Nom complet <span class="red-color">*</span></label>
@@ -6,26 +7,42 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-surname" class="form-control-label">Nom de famille <span class="red-color">*</span></label>
-            <input id="app-entity-edit-surname" class="form-control form-control-sm" ng-model="entity.surname" required="required" />
+            <label for="app-entity-edit-indexName" class="form-control-label">Nom à indexer <span class="red-color">*</span></label>
+            <input id="app-entity-edit-indexName" class="form-control form-control-sm" ng-model="entity.indexName" required="required" />
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
+            <label for="app-entity-edit-surname" class="form-control-label">Nom de famille <span class="red-color">*</span></label>
+            <input id="app-entity-edit-surname" class="form-control form-control-sm" ng-model="entity.surname" required="required" />
+            <small class="form-text text-muted">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+        </div>
+
+        <div class="form-group col-md-6">
             <label for="app-entity-edit-firstnames" class="form-control-label">Prénoms <span class="red-color">*</span></label>
             <input id="app-entity-edit-firstnames" class="form-control form-control-sm" ng-model="entity.firstnames" placeholder="Séparés par des espaces" required="required" />
+            <small class="form-text text-muted">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-otherNames" class="form-control-label">Autres noms</label>
+            <input id="app-entity-edit-otherNames" class="form-control form-control-sm" ng-model="entity.otherNames" />
+            <small class="form-text text-muted">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-profession" class="form-control-label">Profession</label>
             <input id="app-entity-edit-profession" class="form-control form-control-sm" ng-model="entity.profession" />
+            <small class="form-text text-muted">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
     </div>
 </fieldset>
 
 <fieldset>
-    <label>Adresse</label>
+    <label class="big">À propos de l'adresse du testateur</label>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-address-number" class="form-control-label">Numéro</label>
@@ -45,67 +62,108 @@
         </div>
 
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-address-city" class="form-control-label">Ville</label>
-            <input id="app-entity-edit-address-city" class="form-control form-control-sm" ng-model="entity.addressCity" />
+            <label for="app-entity-edit-address-city" class="form-control-label">Commune</label>
+            <select class="custom-select col-md-6" id="app-entity-edit-address-city" data-ng-model="entity.addressCity" name="app-entity-edit-address-city" data-ng-options="place.id as place.name for place in places"></select>
+            <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'places'})" target="_blank">Ajouter une commune</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="app-entity-edit-address-string" class="form-control-label">Adresse complète</label>
+            <input id="app-entity-edit-address-string" class="form-control form-control-sm" ng-model="entity.addressString" />
+            <small class="form-text text-muted">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
     </div>
 </fieldset>
 
 <fieldset>
+    <label class="big">À propos de la naissance du testateur</label>
+
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-dateOfBirth" class="form-control-label">Date de naissance <span class="red-color">*</span></label>
-            <input id="app-entity-edit-dateOfBirth" class="form-control form-control-sm" ng-model="entity.dateOfBirth" required="required" />
+            <label for="app-entity-edit-dateOfBirthString" class="form-control-label">Date de naissance</label>
+            <input id="app-entity-edit-dateOfBirthString" class="form-control form-control-sm" ng-model="entity.dateOfBirthString" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
-
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-yearOfBirth" class="form-control-label">Année de naissance <span class="red-color">*</span></label>
-            <input id="app-entity-edit-yearOfBirth" class="form-control form-control-sm" ng-model="entity.yearOfBirth" required="required" />
+            <label for="app-entity-edit-yearOfBirth" class="form-control-label">Année de naissance</label>
+            <input id="app-entity-edit-yearOfBirth" class="form-control form-control-sm" ng-model="entity.yearOfBirth" />
+            <small class="form-text text-muted">Année de début s'il s'agit d'un interval de date</small>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-dateOfBirthNormalized" class="form-control-label">Date normalisée</label>
+            <input id="app-entity-edit-dateOfBirthNormalized" class="form-control form-control-sm" data-ng-model="entity.dateOfBirthNormalized" placeholder="Ex: 1915-07-23" />
+            <small class="form-text text-muted">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-dateOfBirthEndNormalized" class="form-control-label">Fin de l'interval</label>
+            <input id="app-entity-edit-dateOfBirthEndNormalized" class="form-control form-control-sm" data-ng-model="entity.dateOfBirthEndNormalized" placeholder="Si la date est une plage" />
+            <small class="form-text text-muted">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
         </div>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-dateOfDeath" class="form-control-label">Date de décès <span class="red-color">*</span></label>
-            <input id="app-entity-edit-dateOfDeath" class="form-control form-control-sm" ng-model="entity.dateOfDeath" required="required" />
+            <label for="app-entity-edit-placeOfBirthString" class="form-control-label">Lieu de naissance</label>
+            <input id="app-entity-edit-placeOfBirthString" class="form-control form-control-sm" ng-model="entity.placeOfBirthString" required="required" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-placeOfBirthNormalized" class="form-control-label">Commune</label>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirthNormalized" ng-model="entity.placeOfBirthNormalized" name="app-entity-edit-placeOfBirthNormalized" ng-options="place.id as place.name for place in places"></select>
+            <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'places'})" target="_blank">Ajouter une commune</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
+        </div>
+    </div>
+</fieldset>
 
+<fieldset>
+    <label class="big">À propos de la mort du testateur</label>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-dateOfDeathString" class="form-control-label">Date de décès <span class="red-color">*</span></label>
+            <input id="app-entity-edit-dateOfDeathString" class="form-control form-control-sm" ng-model="entity.dateOfDeathString" required="required" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+        </div>
         <div class="form-group col-md-6">
             <label for="app-entity-edit-yearOfDeath" class="form-control-label">Année de décès <span class="red-color">*</span></label>
             <input id="app-entity-edit-yearOfDeath" class="form-control form-control-sm" ng-model="entity.yearOfDeath" required="required" />
+            <small class="form-text text-muted">Année de début s'il s'agit d'un interval de date</small>
         </div>
     </div>
-</fieldset>
-
-<fieldset>
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-placeOfBirthNormalized" class="form-control-label">Lieu de naissance</label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfBirthNormalized" ng-model="entity.placeOfBirthNormalized.id" name="app-entity-edit-placeOfBirthNormalized" ng-options="place.id as place.name for place in places"></select>
+            <label for="app-entity-edit-dateOfDeathNormalized" class="form-control-label">Date normalisée <span class="red-color">*</span></label>
+            <input id="app-entity-edit-dateOfDeathNormalized" class="form-control form-control-sm" data-ng-model="entity.dateOfDeathNormalized" placeholder="Ex: 1915-07-23" required="required" />
+            <small class="form-text text-muted">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
         </div>
-
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-placeOfDeathNormalized" class="form-control-label">Lieu de décès <span class="red-color">*</span></label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeathNormalized" ng-model="entity.placeOfDeathNormalized.id" name="app-entity-edit-placeOfDeathNormalized" ng-options="place.id as place.name for place in places" required="required"></select>
+            <label for="app-entity-edit-dateOfDeathEndNormalized" class="form-control-label">Fin de l'interval</label>
+            <input id="app-entity-edit-dateOfDeathEndNormalized" class="form-control form-control-sm" data-ng-model="entity.dateOfDeathEndNormalized" placeholder="Si la date est une plage" />
+            <small class="form-text text-muted">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
         </div>
     </div>
 
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#addPlace-Collapse" aria-expanded="false" aria-controls="addPlace-Collapse">Ajouter un nouveau lieu</button>
-    <div class="collapse" id="addPlace-Collapse">
-        <div class="card bg-body">
-            <h3 class="card-header bg-light"><i class="fa fa-plus-circle" aria-hidden="true"></i> Nouveau lieu</h3>
-            <div class="card-body">
-                <div class="form-group col-md-12">
-                    <label for="app-entity-edit-addPlace" class="form-control-label">Nom de votre lieu</label>
-                    <input id="app-entity-edit-addPlace" class="form-control form-control-sm" ng-model="addPlace.name" />
-                </div>
-                <button ng-click="addPlace.action()" class="btn btn-sm btn-primary">Soumettre <i ng-if="addPlace.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
-            </div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-placeOfDeathString" class="form-control-label">Lieu de décès</label>
+            <input id="app-entity-edit-placeOfDeathString" class="form-control form-control-sm" ng-model="entity.placeOfDeathString" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="app-entity-edit-placeOfDeathNormalized" class="form-control-label">Commune</label>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-placeOfDeathNormalized" ng-model="entity.placeOfDeathNormalized" name="app-entity-edit-placeOfDeathNormalized" ng-options="place.id as place.name for place in places"></select>
+            <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'places'})" target="_blank">Ajouter une commune</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
         </div>
     </div>
 </fieldset>
 
 <fieldset>
+    <label class="big">À propos de la mémoire du testateur</label>
+
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="app-entity-edit-deathMention" class="form-control-label">Mention de mort <span class="red-color">*</span></label>
@@ -114,26 +172,41 @@
 
         <div class="form-group col-md-6">
             <label for="app-entity-edit-memoireDesHommes" class="form-control-label">Liens vers Mémoire des Hommes <span class="red-color">*</span></label>
-            <input id="app-entity-edit-memoireDesHommes" class="form-control form-control-sm" ng-model="entity.memoireDesHommes" placeholder="Si plusieurs liens, les séparer par des virgules" required="required" />
+            <input id="app-entity-edit-memoireDesHommes" class="form-control form-control-sm" ng-model="entity.memoireDesHommes" placeholder="" required="required" />
+            <small class="form-text text-muted">Si plusieurs liens, les séparer par des virgules ; Si pas de lien, donner la date d'aujourd'hui au format AAAA/MM/DD</small>
         </div>
     </div>
 </fieldset>
 
 <fieldset>
+    <label class="big">À propos de l'incorporation du testateur</label>
+
     <div class="form-row">
         <div class="form-group col-md-6">
-            <label for="app-entity-edit-military-unit" class="form-control-label">Unité militaire</label>
-            <select class="custom-select form-control form-control-sm" id="app-entity-edit-military-unit" ng-model="entity.militaryUnit.id" name="app-entity-edit-military-unit" ng-options="militaryUnit.id as militaryUnit.name for militaryUnit in militaryUnits"></select>
+            <label for="app-entity-edit-military-unit-string" class="form-control-label">Unité militaire</label>
+            <input id="app-entity-edit-military-unit-string" class="form-control form-control-sm" ng-model="entity.militaryUnitString" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
 
         <div class="form-group col-md-6">
+            <label for="app-entity-edit-military-unit-normalized" class="form-control-label">Régiment</label>
+            <select class="custom-select form-control form-control-sm" id="app-entity-edit-military-unit-normalized" ng-model="entity.militaryUnitNormalized" name="app-entity-edit-military-unit-normalized" ng-options="militaryUnit.id as militaryUnit.name for militaryUnit in militaryUnits"></select>
+            <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'military-units'})" target="_blank">Ajouter une unité militaire</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
             <label for="app-entity-edit-rank" class="form-control-label">Rang</label>
             <input id="app-entity-edit-rank" class="form-control form-control-sm" ng-model="entity.rank" />
+            <small class="form-text text-muted">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
         </div>
     </div>
 </fieldset>
 
 <fieldset>
+    <label class="big">Autres informations sur le testateur</label>
+
     <div class="form-row">
         <div class="form-group col-md-12">
             <label for="app-entity-edit-description" class="form-control-label">Description - Biographie</label>

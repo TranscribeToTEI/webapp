@@ -95,10 +95,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             /* Computing tooltip for special tags (like Choice) ------------------------------------- */
                             let extraTooltip = null;
                             if(tag.btn.id === "choice") {
-                                let //TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
+                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
                                     content = "",
                                     prefix = "";
-                                /*console.log(TEIElement);
+                                console.log(TEIElement);
 
                                 for(let iC in TEIElement.children) {
                                     let child = TEIElement.children[iC];
@@ -112,7 +112,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                         content = child.content;
                                         prefix = "Forme complète : ";
                                     }
-                                }*/
+                                }
 
                                 extraTooltip = {
                                     type: "tooltip",

@@ -15,8 +15,8 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="col-12">
-                <div data-ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></div>
-                <div class="card text-white bg-danger mb-3 mt-4">
+                <div ng-if="entity.id !== undefined" data-ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></div>
+                <div ng-if="entity.id !== undefined" class="card text-white bg-danger mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">
                         <p>En cliquant ci-dessous, vous supprimerez définitivement cette entité.</p>
@@ -43,9 +43,12 @@
                 <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-resources.html'"></fieldset>
                 <div class="text-right">
                     <button class="btn btn-sm" type="button"
-                            ng-disabled="!(!!entity.willNumber && !!entity.will.callNumber && !!entity.will.minuteDate && !!entity.will.minuteYear
-                             && !!entity.will.willWritingDate && !!entity.will.willWritingYear && !!entity.will.hostingOrganization && !!entity.will.identificationUser
-                              && !!entity.will.testator)"
+                            ng-disabled="!(
+                            !!entity.willNumber &&
+                            !!entity.will.callNumber && !!entity.will.notaryNumber &&
+                            !!entity.will.minuteDateString && !!entity.will.minuteDateNormalized && !!entity.will.minuteYear &&
+                            !!entity.will.willWritingDateString && !!entity.will.willWritingDateNormalized && !!entity.will.willWritingYear &&
+                            !!entity.will.hostingOrganization && !!entity.will.identificationUsers && !!entity.will.willType && !!entity.will.testator)"
                             ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
                             ng-click="submit.action()">
                         <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>
@@ -57,3 +60,5 @@
         </div>
     </div>
 </main>
+
+<div ng-include="'App/tpl/modal-helpSource.html'"></div>

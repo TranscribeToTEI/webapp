@@ -8,6 +8,36 @@
 </div>
 <main class="container" role="main">
     <h1 class="page-heading">Liste des entités</h1>
+
+    <form id="search-form">
+        <div class="row">
+            <div class="form-group col-md-12 row">
+                <label class="col-md-12">
+                    Effectuer une recherche dans la liste
+                </label>
+                <div class="col-md-6 text-right">
+                    <select ng-model="fieldSearch" class="custom-select" title="Critère de recherche">
+                        <option value="" disabled>Sélectionnez le champ</option>
+                        <option value="will.callNumber">Cote du testament</option>
+                        <option value="willNumber">Numéro de numérisation</option>
+                        <option value="will.notaryNumber">Numéro d'étude</option>
+                        <option value="will.crpcenNumber">Numéro CRPCEN</option>
+                        <option value="will.testator.name">Testateur</option>
+                        <option value="will.hostingOrganization.name">Institution de conservation</option>
+                        <option value="will.willWritingDateString">Date d'écriture</option>
+                        <option value="will.minuteDateString">Date de la minute</option>
+                        <option value="will.willWritingPlaceString">Lieu d'écriture</option>
+                        <option value="will.willType.name">Type de testament</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <input class="form-control form-control-sm" ng-model="valueSearch" placeholder="Rechercher une valeur" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <hr />
+
     <div class="alert alert-warning" data-ng-if="entities.length == 0">
         <h3>Aucune entité</h3>
         <p>Aucune entité n'est présente pour le moment dans la base de données.</p>
@@ -22,7 +52,7 @@
             <th><a ng-click="entitiesSorting = 'will.testator.surname'" title="Trier par nom de famille du testateur">Testateur <i class="fa fa-caret-down"></i></a></th>
             <th><a ng-click="entitiesSorting = '_embedded.status'" title="Trier par statut de la transcription">Statut <i class="fa fa-caret-down"></i></a></th>
         </tr>
-        <tr data-ng-repeat="entity in entities|orderBy:entitiesSorting">
+        <tr data-ng-repeat="entity in results|orderBy:entitiesSorting">
             <td>{{ $index+1 }}</td>
             <td>{{ entity.willNumber }}</td>
             <td>{{ entity.will.hostingOrganization.name }}</td>

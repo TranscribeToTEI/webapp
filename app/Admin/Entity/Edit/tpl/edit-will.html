@@ -1,73 +1,126 @@
-<label class="big">À propos du testament</label>
+<label class="big">Identifiants relatifs au testament</label>
 
 <div class="form-group row">
     <label for="admin-entity-edit-will-callNumber" class="col-md-4 col-form-label text-md-right">Cote <span class="red-color">*</span></label>
-    <div class="col-md-8">
+    <div class="col-md-3">
         <input id="admin-entity-edit-will-callNumber" class="form-control form-control-sm" data-ng-model="entity.will.callNumber" required="required" />
+    </div>
+    <label for="admin-entity-edit-will-willNumber" class="col-md-2 col-form-label text-md-right">Numéro de numérisation <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input type="number" id="admin-entity-edit-will-willNumber" class="form-control form-control-sm" data-ng-model="entity.willNumber" placeholder="Ex: 0001" required="required" />
     </div>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-will-minuteDate" class="col-md-4 col-form-label text-md-right">Date de la minute <span class="red-color">*</span></label>
-    <div class="col-md-8 row">
-        <div class="col-md-5">
-            <input id="admin-entity-edit-will-minuteDate" class="form-control form-control-sm" data-ng-model="entity.will.minuteDate" placeholder="Ex: 23 juillet 1915" required="required" />
-        </div>
-        <label for="admin-entity-edit-will-minuteYear" class="col-md-3 col-form-label text-md-right">Précisez l'année <span class="red-color">*</span></label>
-        <div class="col-md-4">
-            <input id="admin-entity-edit-will-minuteYear" class="form-control form-control-sm" placeholder="de début s'il s'agit d'une plage" data-ng-model="entity.will.minuteYear" required="required" />
-        </div>
+    <label for="admin-entity-edit-will-notaryNumber" class="col-md-4 col-form-label text-md-right">Numéro d'étude notariale <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-notaryNumber" class="form-control form-control-sm" data-ng-model="entity.will.notaryNumber" required="required" placeholder="En chiffres arabes" />
     </div>
+    <label for="admin-entity-edit-will-crpcenNumber" class="col-md-2 col-form-label text-md-right">Numéro CRPCEN</label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-crpcenNumber" class="form-control form-control-sm" data-ng-model="entity.will.crpcenNumber" placeholder="Format code postal" />
+    </div>
+</div>
+
+<label class="big">À propos de la minute</label>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-minuteDateString" class="col-md-4 col-form-label text-md-right">Date de la minute <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-minuteDateString" class="form-control form-control-sm" data-ng-model="entity.will.minuteDateString" placeholder="Ex: 23 juillet 1915" required="required" />
+    </div>
+    <label for="admin-entity-edit-will-minuteYear" class="col-md-2 col-form-label text-md-right">Précisez l'année <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-minuteYear" class="form-control form-control-sm" placeholder="Ex: 1915" data-ng-model="entity.will.minuteYear" required="required" />
+    </div>
+    <small class="col-md-7 form-text text-muted text-right">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+    <small class="col-md-5 form-text text-muted text-right">Année de début s'il s'agit d'un interval de date</small>
+</div>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-minuteDateNormalized" class="col-md-4 col-form-label text-md-right">Date normalisée de la minute <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-minuteDateNormalized" class="form-control form-control-sm" data-ng-model="entity.will.minuteDateNormalized" placeholder="Ex: 1915-07-23" required="required" />
+    </div>
+    <label for="admin-entity-edit-will-minuteDateEndNormalized" class="col-md-2 col-form-label text-md-right">Fin de l'interval</label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-minuteDateEndNormalized" class="form-control form-control-sm" data-ng-model="entity.will.minuteDateEndNormalized" placeholder="Si la date est une plage" />
+    </div>
+    <small class="col-md-7 form-text text-muted text-right">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
+    <small class="col-md-5 form-text text-muted text-right">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
 </div>
 <div class="form-group row">
     <label for="admin-entity-edit-will-minuteLink" class="col-md-4 col-form-label text-md-right">Lien vers la minute</label>
     <div class="col-md-8">
-        <input id="admin-entity-edit-will-minuteLink" type="url" class="form-control form-control-sm" data-ng-model="entity.will.minuteLink" />
+        <input id="admin-entity-edit-will-minuteLink" type="url" class="form-control form-control-sm" data-ng-model="entity.will.minuteLink" placeholder="http://www.siv.archives-nationales.culture.gouv.fr/siv/rechercheconsultation/consultation/ir/consultationIR.action?" />
     </div>
 </div>
 
+<label class="big">À propos de l'écriture du testament</label>
 <div class="form-group row">
-    <label for="admin-entity-edit-will-willWritingDate" class="col-md-4 col-form-label text-md-right">Date d'écriture du testament <span class="red-color">*</span></label>
-    <div class="col-md-8 row">
-        <div class="col-md-5">
-            <input id="admin-entity-edit-will-willWritingDate" class="form-control form-control-sm" data-ng-model="entity.will.willWritingDate" placeholder="Ex: 23 juillet 1915" required="required" />
-        </div>
-        <label for="admin-entity-edit-will-willWritingYear" class="col-md-3 col-form-label text-md-right">Précisez l'année <span class="red-color">*</span></label>
-        <div class="col-md-4">
-            <input id="admin-entity-edit-will-willWritingYear" class="form-control form-control-sm" placeholder="de début s'il s'agit d'une plage" data-ng-model="entity.will.willWritingYear" required="required" />
-        </div>
+    <label for="admin-entity-edit-will-willWritingDateString" class="col-md-4 col-form-label text-md-right">Date d'écriture <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-willWritingDateString" class="form-control form-control-sm" data-ng-model="entity.will.willWritingDateString" placeholder="Ex: 23 juillet 1915" required="required" />
     </div>
+    <label for="admin-entity-edit-will-willWritingYear" class="col-md-2 col-form-label text-md-right">Précisez l'année <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-willWritingYear" class="form-control form-control-sm" placeholder="Ex: 1915" data-ng-model="entity.will.willWritingYear" required="required" />
+    </div>
+    <small class="col-md-7 form-text text-muted text-right">Telle qu'écrite sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+    <small class="col-md-5 form-text text-muted text-right">Année de début s'il s'agit d'un interval de date</small>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-will-willWritingPlace" class="col-md-4 col-form-label text-md-right">Lieu d'écriture du testament</label>
-    <div class="col-md-8">
-        <select class="custom-select col-md-6" id="admin-entity-edit-will-willWritingPlace" data-ng-model="entity.will.willWritingPlace" name="admin-entity-edit-will-willWritingPlace" data-ng-options="place.id as place.name for place in places"></select>
+    <label for="admin-entity-edit-will-willWritingDateNormalized" class="col-md-4 col-form-label text-md-right">Date d'écriture normalisée <span class="red-color">*</span></label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-willWritingDateNormalized" class="form-control form-control-sm" data-ng-model="entity.will.willWritingDateNormalized" placeholder="Ex: 1915-07-23" required="required" />
     </div>
+    <label for="admin-entity-edit-will-willWritingDateEndNormalized" class="col-md-2 col-form-label text-md-right">Fin de l'interval</label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-willWritingDateEndNormalized" class="form-control form-control-sm" data-ng-model="entity.will.willWritingDateEndNormalized" placeholder="Si la date est une plage" />
+    </div>
+    <small class="col-md-7 form-text text-muted text-right">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
+    <small class="col-md-5 form-text text-muted text-right">Au format normalisé <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a></small>
 </div>
 
+<div class="form-group row">
+    <label for="admin-entity-edit-will-willWritingPlaceString" class="col-md-4 col-form-label text-md-right">Lieu d'écriture</label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-willWritingPlaceString" class="form-control form-control-sm" data-ng-model="entity.will.willWritingPlaceString" placeholder="Ex: À la mairie du 19e arr. de Paris" />
+    </div>
+    <label for="admin-entity-edit-will-willWritingPlaceNormalized" class="col-md-2 col-form-label text-md-right">Commune</label>
+    <div class="col-md-3">
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-model="entity.will.willWritingPlaceNormalized" name="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-options="place.id as place.name for place in places"></select>
+    </div>
+    <small class="col-md-7 form-text text-muted text-right">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
+    <small class="col-md-5 form-text text-muted text-right"><a ui-sref="transcript.app.taxonomy.create({type: 'places'})" target="_blank">Ajouter une commune</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
+</div>
+
+<label class="big">À propos du testateur</label>
 <div class="form-group row">
     <label for="admin-entity-edit-will-testator" class="col-md-4 col-form-label text-md-right">Testateur <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <select class="custom-select col-md-6" id="admin-entity-edit-will-testator" data-ng-model="entity.will.testator" name="admin-entity-edit-will-testator" data-ng-options="testator.id as testator.name for testator in testators" required="required"></select>
-        <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'testators'})" target="_blank">Créer un nouveau testateur</a></small>
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-testator" data-ng-model="entity.will.testator" name="admin-entity-edit-will-testator" data-ng-options="testator.id as (testator | taxonomyEntityNameConstruct:'testators') for testator in testators" required="required"></select>
+        <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'testators'})" target="_blank">Ajouter une personne</a> - <a ng-click="reload.action('testators')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.testators === true"></i></a></small>
     </div>
 </div>
 
+<label class="big">À propos de la conservation du testament</label>
 <div class="form-group row">
     <label for="admin-entity-edit-will-hostingOrganization" class="col-md-4 col-form-label text-md-right">Institution de conservation <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <select class="custom-select col-md-6" id="admin-entity-edit-will-hostingOrganization" data-ng-model="entity.will.hostingOrganization" name="admin-entity-edit-will-hostingOrganization" data-ng-options="organization.id as organization.name for organization in organizations" required="required"></select>
+        <select id="admin-entity-edit-will-hostingOrganization" name="admin-entity-edit-will-hostingOrganization" class="custom-select col-md-6" data-ng-model="entity.will.hostingOrganization" ng-options="organization.id as organization.name for organization in organizations" required="required"></select>
+        <small class="form-text text-muted"><a ui-sref="transcript.admin.hosting-organization.new" target="_blank">Ajouter une institution</a> - <a ng-click="reload.action('organizations')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.organizations === true"></i></a></small>
     </div>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-will-identificationUser" class="col-md-4 col-form-label text-md-right">Personne ayant identifié le document <span class="red-color">*</span></label>
+    <label for="admin-entity-edit-will-identificationUsers" class="col-md-4 col-form-label text-md-right">Liste des personnes ayant identifié le document <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <input id="admin-entity-edit-will-identificationUser" class="form-control form-control-sm" data-ng-model="entity.will.identificationUser" required="required" />
+        <input id="admin-entity-edit-will-identificationUsers" class="form-control form-control-sm" data-ng-model="entity.will.identificationUsers" required="required" />
+        <small class="form-text text-muted">Séparer les noms des personnes par des virgules</small>
     </div>
 </div>
 <div class="form-group row">
-    <label for="admin-entity-edit-will-willNumber" class="col-md-4 col-form-label text-md-right">Numéro de numérisation <span class="red-color">*</span></label>
+    <label for="admin-entity-edit-will-willType" class="col-md-4 col-form-label text-md-right">Type de testament <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <input type="number" id="admin-entity-edit-will-willNumber" class="form-control form-control-sm" data-ng-model="entity.willNumber" placeholder="Permettant d'identifier les images du testament" required="required" />
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-willType" data-ng-model="entity.will.willType" name="admin-entity-edit-will-willType" data-ng-options="willType.id as willType.name for willType in willTypes" required="required"></select>
+        <small class="form-text text-muted"><a ui-sref="transcript.admin.will-type.new" target="_blank">Ajouter un type de testament</a> - <a ng-click="reload.action('willTypes')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.willTypes === true"></i></a></small>
     </div>
 </div>
 
@@ -86,14 +139,16 @@
 </div>
 <div class="form-group row">
     <label for="admin-entity-edit-will-page-physDescHeight" class="col-md-4 col-form-label text-md-right">Hauteur des pages</label>
-    <div class="col-md-8 row">
-        <div class="col-md-5">
-            <input id="admin-entity-edit-will-page-physDescHeight" class="form-control form-control-sm" data-ng-model="entity.will.pagePhysDescHeight" placeholder="en cm" />
-        </div>
-        <label for="admin-entity-edit-will-page-physDescWidth" class="col-md-3 col-form-label text-md-right">Largeur</label>
-        <div class="col-md-4">
-            <input id="admin-entity-edit-will-page-physDescWidth" class="form-control form-control-sm" data-ng-model="entity.will.pagePhysDescWidth" placeholder="en cm" />
-        </div>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-page-physDescHeight" class="form-control form-control-sm" data-ng-model="entity.will.pagePhysDescHeight" placeholder="en cm" />
+    </div>
+    <label for="admin-entity-edit-will-page-physDescWidth" class="col-md-1 col-form-label text-md-right">Largeur</label>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-page-physDescWidth" class="form-control form-control-sm" data-ng-model="entity.will.pagePhysDescWidth" placeholder="en cm" />
+    </div>
+    <label for="admin-entity-edit-will-page-physDescNumber" class="col-md-1 col-form-label text-md-right">Nombre</label>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-page-physDescNumber" class="form-control form-control-sm" data-ng-model="entity.will.pagePhysDescNumber" placeholder="de pages" />
     </div>
 </div>
 
@@ -112,13 +167,53 @@
 </div>
 <div class="form-group row">
     <label for="admin-entity-edit-will-envelope-physDescHeight" class="col-md-4 col-form-label text-md-right">Hauteur de l'enveloppe</label>
-    <div class="col-md-8 row">
-        <div class="col-md-5">
-            <input id="admin-entity-edit-will-envelope-physDescHeight" class="form-control form-control-sm" data-ng-model="entity.will.envelopePhysDescHeight" placeholder="en cm" />
-        </div>
-        <label for="admin-entity-edit-will-envelope-physDescWidth" class="col-md-3 col-form-label text-md-right">Largeur</label>
-        <div class="col-md-4">
-            <input id="admin-entity-edit-will-envelope-physDescWidth" class="form-control form-control-sm" data-ng-model="entity.will.envelopePhysDescWidth" placeholder="en cm" />
-        </div>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-envelope-physDescHeight" class="form-control form-control-sm" data-ng-model="entity.will.envelopePhysDescHeight" placeholder="en cm" />
+    </div>
+    <label for="admin-entity-edit-will-envelope-physDescWidth" class="col-md-2 col-form-label text-md-right">Largeur</label>
+    <div class="col-md-3">
+        <input id="admin-entity-edit-will-envelope-physDescWidth" class="form-control form-control-sm" data-ng-model="entity.will.envelopePhysDescWidth" placeholder="en cm" />
+    </div>
+</div>
+
+<label class="big">À propos de la structure physique des codicilles</label>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-codicil-physDescSupport" class="col-md-4 col-form-label text-md-right">Support physique des codiciles</label>
+    <div class="col-md-8">
+        <input id="admin-entity-edit-will-codicil-physDescSupport" class="form-control form-control-sm" data-ng-model="entity.will.codicilPhysDescSupport" />
+    </div>
+</div>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-codicil-physDescHand" class="col-md-4 col-form-label text-md-right">Type d'écriture des codiciles</label>
+    <div class="col-md-8">
+        <input id="admin-entity-edit-will-codicil-physDescHand" class="form-control form-control-sm" data-ng-model="entity.will.codicilPhysDescHand" />
+    </div>
+</div>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-codicil-physDescHeight" class="col-md-4 col-form-label text-md-right">Hauteur des codiciles</label>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-codicil-physDescHeight" class="form-control form-control-sm" data-ng-model="entity.will.codicilPhysDescHeight" placeholder="en cm" />
+    </div>
+    <label for="admin-entity-edit-will-codicil-physDescWidth" class="col-md-1 col-form-label text-md-right">Largeur</label>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-codicil-physDescWidth" class="form-control form-control-sm" data-ng-model="entity.will.codicilPhysDescWidth" placeholder="en cm" />
+    </div>
+    <label for="admin-entity-edit-will-codicil-physDescNumber" class="col-md-1 col-form-label text-md-right">Nombre</label>
+    <div class="col-md-2">
+        <input id="admin-entity-edit-will-codicil-physDescNumber" class="form-control form-control-sm" data-ng-model="entity.will.codicilPhysDescNumber" placeholder="de pages" />
+    </div>
+</div>
+
+<label class="big">Description du testament</label>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-additionalComments" class="col-md-4 col-form-label text-md-right">Commentaires additionnels</label>
+    <div class="col-md-8">
+        <textarea id="admin-entity-edit-will-additionalComments" class="form-control form-control-sm" data-ng-model="entity.will.additionalComments"></textarea>
+    </div>
+</div>
+<div class="form-group row">
+    <label for="admin-entity-edit-will-description" class="col-md-4 col-form-label text-md-right">Description générique</label>
+    <div class="col-md-8">
+        <textarea id="admin-entity-edit-will-description" class="form-control form-control-sm" data-ng-model="entity.will.description"></textarea>
     </div>
 </div>

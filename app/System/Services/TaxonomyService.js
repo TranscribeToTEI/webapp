@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.taxonomy', ['ui.router'])
 
-    .service('TaxonomyService', function($http, $rootScope) {
+    .service('TaxonomyService', function($http, $rootScope, $filter) {
         return {
             getTaxonomyEntities: function(type) {
                 return $http.get(
@@ -60,42 +60,45 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 let form;
                 switch(type) {
                     case 'testators':
-                        let MDH = entity.memoireDesHommes.split(',');
-                        if(entity.memoireDesHommes.indexOf(',') === -1) {
-                            MDH = [entity.memoireDesHommes];
-                        }
-
                         let updateComment = null;
                         if(entity.updateComment !== null && entity.updateComment !== "") {
                             updateComment = entity.updateComment;
                         }
 
+
                         form = {
                             name: entity.name,
                             surname: entity.surname,
                             firstnames: entity.firstnames,
+                            indexName: entity.indexName,
+                            otherNames: entity.otherNames,
                             profession: entity.profession,
                             addressNumber: entity.addressNumber,
                             addressStreet: entity.addressStreet,
                             addressDistrict: entity.addressDistrict,
                             addressCity: entity.addressCity,
-                            dateOfBirth: entity.dateOfBirth,
+                            addressString: entity.addressString,
+                            dateOfBirthString: entity.dateOfBirthString,
+                            dateOfBirthNormalized: $filter('stringToDate')(entity.dateOfBirthNormalized),
+                            dateOfBirthEndNormalized: $filter('stringToDate')(entity.dateOfBirthEndNormalized),
                             yearOfBirth: entity.yearOfBirth,
-                            dateOfDeath: entity.dateOfDeath,
+                            placeOfBirthString: entity.placeOfBirthString,
+                            placeOfBirthNormalized: entity.placeOfBirthNormalized,
+                            dateOfDeathString: entity.dateOfDeathString,
+                            dateOfDeathNormalized: $filter('stringToDate')(entity.dateOfDeathNormalized),
+                            dateOfDeathEndNormalized: $filter('stringToDate')(entity.dateOfDeathEndNormalized),
                             yearOfDeath: entity.yearOfDeath,
-                            placeOfDeath: entity.placeOfDeath.id,
+                            placeOfDeathString: entity.placeOfDeathString,
+                            placeOfDeathNormalized: entity.placeOfDeathNormalized,
                             deathMention: entity.deathMention,
-                            memoireDesHommes: MDH,
-                            militaryUnit: entity.militaryUnit.id,
+                            memoireDesHommes: $filter('stringToArray')(entity.memoireDesHommes),
+                            militaryUnitString: entity.militaryUnitString,
+                            militaryUnitNormalized: entity.militaryUnitNormalized,
                             rank: entity.rank,
                             description: entity.description,
                             updateComment: updateComment,
                             isOfficialVersion: false
                         };
-
-                        if(entity.placeOfBirth !== null) {
-                            form.placeOfBirth = entity.placeOfBirth.id;
-                        }
                         break;
                     case 'military-units':
                         form = {

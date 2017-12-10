@@ -1,20 +1,12 @@
 <h2 class="big card-header bg-dark text-white">Informations</h2>
 
-<div class="form-group row">
-    <label class="col-md-4 col-form-label text-md-right">Identifiant</label>
-    <div class="col-md-8">
-        <p class="form-control-static">{{ entity.id }}</p>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-4 col-form-label text-md-right">Créé par</label>
-    <div class="col-md-8">
-        <p class="form-control-static">{{ entity.createUser.name }}</p>
-    </div>
-</div>
-<div class="form-group row">
-    <label class="col-md-4 col-form-label text-md-right">Date de création</label>
-    <div class="col-md-8">
-        <p class="form-control-static">{{ entity.createDate | date:'dd-mm-yyyy à HH:mm' }}</p>
-    </div>
+<div class="row">
+        <label class="col-md-2 col-form-label text-md-right">Identifiant</label>
+        <div class="col-md-2">
+            <p class="form-control-static">{{ entity.id }}</p>
+        </div>
+        <label class="col-md-2 col-form-label text-md-right">Création</label>
+        <div class="col-md-6">
+            <p class="form-control-static">par {{ entity.createUser.name }}, le {{ entity.createDate | date:'dd-mm-yyyy à HH:mm' }}</p>
+        </div>
 </div>
