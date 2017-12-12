@@ -2,15 +2,15 @@
 
 angular.module('transcript.service.taxonomy', ['ui.router'])
 
-    .service('TaxonomyService', function($http, $rootScope, $filter) {
+    .service('TaxonomyService', function($log, $http, $rootScope, $filter) {
         return {
-            getTaxonomyEntities: function(type) {
+            getTaxonomyEntities: function(type, profile) {
                 return $http.get(
-                    $rootScope.api+"/"+type
+                    $rootScope.api+"/"+type+"&profile="+profile
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -21,7 +21,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -31,7 +31,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -41,7 +41,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -51,7 +51,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

@@ -2,14 +2,14 @@
 
 angular.module('transcript.service.will-type', ['ui.router'])
 
-    .service('WillTypeService', function($http, $rootScope) {
+    .service('WillTypeService', function($log, $http, $rootScope) {
         return {
             getTypes: function() {
                 return $http.get($rootScope.api+"/will-types").
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -18,7 +18,7 @@ angular.module('transcript.service.will-type', ['ui.router'])
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

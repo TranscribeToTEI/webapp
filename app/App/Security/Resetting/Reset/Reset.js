@@ -21,7 +21,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityResettingResetCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', '$transition$', 'UserService', function($rootScope, $scope, $http, $sce, $state, flash, $transition$, UserService) {
+    .controller('AppSecurityResettingResetCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', '$transition$', 'UserService', function($log, $rootScope, $scope, $http, $sce, $state, flash, $transition$, UserService) {
         $scope.form = {
             password: {
                 plain: null,
@@ -50,7 +50,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
                     flash.success = "Votre mot de passe a bien été réinitialisé.";
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                     flash.error = response;
 
                 });

@@ -52,9 +52,9 @@ angular.module('transcript.app.content', ['ui.router'])
         })
     }])
 
-    .controller('AppContentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'content', 'contents', function($rootScope, $scope, $http, $sce, $state, content, contents) {
+    .controller('AppContentCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'content', 'contents', function($log, $rootScope, $scope, $http, $sce, $state, content, contents) {
         $scope.content = content;
         $scope.contents = contents;
-        console.log($scope.content);
+        $log.log($scope.content);
     }])
 ;

@@ -26,8 +26,8 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
         })
     }])
 
-    .controller('AdminTranscriptValidationCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'transcripts', function($rootScope, $scope, $http, $sce, $state, transcripts) {
+    .controller('AdminTranscriptValidationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'transcripts', function($log, $rootScope, $scope, $http, $sce, $state, transcripts) {
         $scope.transcripts = transcripts;
-        console.log($scope.transcripts);
+        $log.log($scope.transcripts);
     }])
 ;

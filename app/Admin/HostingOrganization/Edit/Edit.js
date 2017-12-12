@@ -48,10 +48,10 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminHostingOrganizationEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'Upload', 'organization', function($rootScope, $scope, $http, $sce, $state, $timeout, flash, Upload, organization) {
+    .controller('AdminHostingOrganizationEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'Upload', 'organization', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, flash, Upload, organization) {
         /* Scope management ----------------------------------------------------------------------------------------- */
         if(organization !== null) {
-            console.log(organization);
+            $log.log(organization);
             $scope.organization = organization;
             $scope.organization.updateComment = null;
         } else {
@@ -110,7 +110,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                 url: $rootScope.api+url,
                 data: {media: $scope.media.form.illustration}
             }).then(function (response) {
-                console.log(response);
+                $log.log(response);
                 $scope.media.submit.loading = false;
                 $scope.media.submit.success = true;
                 $timeout(function() {
@@ -123,7 +123,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                     $scope.organization.logo = response.data;
                 }
             }, function errorCallback(error) {
-                console.log(error);
+                $log.log(error);
                 $scope.media.submit.loading = false;
             });
         }
@@ -146,7 +146,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                 /* If content.id == null > The content doesn't exist, we post it */
                 $http.post($rootScope.api+'/hosting-organizations', form).
                 then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
@@ -162,13 +162,13 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    console.log(response);
+                    $log.log(response);
                 });
             } else if($scope.organization.id !== null) {
                 /* If content.id != null > The content already exists, we just patch it */
                 $http.patch($rootScope.api+'/hosting-organizations/'+$scope.organization.id, form).
                 then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     flash.success = "Le contenu a bien été mis à jour. Vous allez être redirigé dans quelques instants ...";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
@@ -184,7 +184,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };
@@ -200,7 +200,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                 $state.go('transcript.admin.hosting-organization.list');
             }, function errorCallback(response) {
                 $scope.validation.loading = false;
-                console.log(response);
+                $log.log(response);
             });
         };
         /* End: Remove Management ----------------------------------------------------------------------------------- */

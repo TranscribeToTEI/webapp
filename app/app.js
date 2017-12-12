@@ -106,6 +106,7 @@ angular.module('transcriptApp', [
         'transcript.filter.contentTypeName',
         'transcript.filter.encodeXML',
         'transcript.filter.imageRender',
+        'transcript.filter.objectToId',
         'transcript.filter.resourceTypeName',
         'transcript.filter.taxonomyEntityNameConstruct',
         'transcript.filter.taxonomyName',
@@ -143,7 +144,8 @@ angular.module('transcriptApp', [
         'transcript.service.user',
         'transcript.service.user-preference',
         'transcript.service.will',
-        'transcript.service.will-type'
+        'transcript.service.will-type',
+        'transcript.system.transcript'
     ]).
     config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider) {
         $urlRouterProvider.otherwise('/');
@@ -182,7 +184,7 @@ angular.module('transcriptApp', [
 
 
     }])
-    .run(['$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
+    .run(['$log', '$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($log, $rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
         /* -- Parameters management ------------------------------------------------------ */
         let parameters = YAML.load('parameters.yml');
         $rootScope.version = parameters.version;
@@ -239,7 +241,7 @@ angular.module('transcriptApp', [
                     return ($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN'));
                 } else {
                     return UserService.getCurrent().then(function() {
-                        console.log(!!($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN')));
+                        $log.log(!!($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN')));
                         return ($rootScope.user !== undefined && $rootScope.user.roles !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN'));
                     });
                 }
@@ -250,7 +252,7 @@ angular.module('transcriptApp', [
                     return ($rootScope.user !== undefined);
                 } else {
                     return UserService.getCurrent().then(function() {
-                        console.log($rootScope.user);
+                        $log.log($rootScope.user);
                         return ($rootScope.user !== undefined);
                     });
                 }

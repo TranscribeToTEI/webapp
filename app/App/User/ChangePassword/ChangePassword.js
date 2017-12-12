@@ -28,7 +28,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
         })
     }])
 
-    .controller('AppUserChangePasswordCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'userEdit', 'flash', function($rootScope, $scope, $http, $sce, $state, UserService, userEdit, flash) {
+    .controller('AppUserChangePasswordCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'userEdit', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, UserService, userEdit, flash) {
         if($rootScope.user === undefined && $rootScope.user !== userEdit) {$state.go('transcript.app.security.login');}
 
         /* -- Breadcrumb management -------------------------------------------------------- */
@@ -56,7 +56,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
                 return UserService.changePassword($scope.form.currentPassword, $scope.form.password.first, $scope.form.password.second).
                 then(function(response) {
                     if(response.status === 200 && response.data !== false) {
-                        console.log(response);
+                        $log.log(response);
                         $scope.submit.loading = false;
                         $scope.submit.success = true;
                         flash.success = "Votre mot de passe a bien été mis à jour, vous allez être redirigé dans quelques instants ...";
@@ -67,7 +67,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };

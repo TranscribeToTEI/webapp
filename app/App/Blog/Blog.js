@@ -26,7 +26,7 @@ angular.module('transcript.app.blog', ['ui.router'])
         })
     }])
 
-    .controller('AppBlogCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'contents', function($rootScope, $scope, $http, $sce, $state, contents) {
+    .controller('AppBlogCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'contents', function($log, $rootScope, $scope, $http, $sce, $state, contents) {
        $scope.contents = contents;
     }])
 ;

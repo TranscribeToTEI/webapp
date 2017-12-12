@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.transcript', ['ui.router'])
 
-    .service('TranscriptService', function($http, $rootScope, $filter) {
+    .service('TranscriptService', function($log, $http, $rootScope, $filter) {
         let functions = {
             getTranscripts: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -30,7 +30,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -39,16 +39,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     $rootScope.api+"/transcripts/"+id,
                     form
                 ).then(function(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
             getTranscriptRights: function(user) {
                 let role;
-                console.log(user);
+                $log.log(user);
 
                 if(user !== undefined && user !== null) {
                     if ($.inArray("ROLE_SUPER_ADMIN", user.roles) !== -1 || $.inArray("ROLE_ADMIN", user.roles) !== -1 || $.inArray("ROLE_MODO", user.roles) !== -1) {
@@ -73,8 +73,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns string
              */
             encodeHTML: function(encodeLiveRender, tags, isMicroObject, teiInfo) {
-                console.log(encodeLiveRender);
-                console.log(tags);
+                $log.log(encodeLiveRender);
+                $log.log(tags);
 
                 for(let iT in tags) {
                     let tag = tags[iT];
@@ -98,7 +98,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                 let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
                                     content = "",
                                     prefix = "";
-                                console.log(TEIElement);
+                                $log.log(TEIElement);
 
                                 for(let iC in TEIElement.children) {
                                     let child = TEIElement.children[iC];
@@ -139,7 +139,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 let attributes = [];
                 if(attributesString) {
                     let matchListAttributes = attributesString.match(/[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))/g);
-                    console.log(matchListAttributes);
+                    $log.log(matchListAttributes);
                     if(matchListAttributes && matchListAttributes.length > 0) {
                         for(let iA in matchListAttributes) {
                             attributes.push({
@@ -149,7 +149,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         }
                     }
 
-                    console.log(attributes);
+                    $log.log(attributes);
                 }
 
                 return attributes;
@@ -315,7 +315,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
                 /* Icon content ------------------------------------------------------------------------------------- */
 
-                //console.log(construction);
+                //$log.log(construction);
                 return construction;
             },
             loadFile: function(file) {
@@ -437,7 +437,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromEndTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // console.log('computeFromEndTag');
+                // $log.log('computeFromEndTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
                 teiElement.type                 = "standard";
@@ -477,7 +477,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromStartTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // console.log('computeFromStartTag');
+                // $log.log('computeFromStartTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
                 teiElement.type                 = "standard";
@@ -515,7 +515,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // console.log('computeFromSingleTag');
+                // $log.log('computeFromSingleTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
                 teiElement.type                 = "single";
@@ -539,7 +539,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @param teiInfo
              */
             computeChildren: function(teiElement, content, lines, tags, teiInfo) {
-                //console.log(teiElement);
+                //$log.log(teiElement);
                 let array = [];
 
                 if(teiElement.content.indexOf('<') !== -1) {
@@ -552,8 +552,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 let newChild = functions.computeChild(teiElement, content, lines, tags, teiInfo, previousChild);
                 array.push(newChild);
 
-                //console.log(newChild.endTag.end.index+1);
-                //console.log(teiElement.endTag.start.index);
+                //$log.log(newChild.endTag.end.index+1);
+                //$log.log(teiElement.endTag.start.index);
                 if(newChild.endTag.end.index+1 !== teiElement.endTag.start.index) {
                     functions.computeChildStructure(teiElement, content, lines, tags, teiInfo, newChild, array);
                 }
@@ -567,7 +567,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 } else {
                     let endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
                     childrenLeftOfCursor = endPreviousChild+content.substring(endPreviousChild.length, endPreviousChild.length+2);
-                    //console.log(childrenLeftOfCursor);
+                    //$log.log(childrenLeftOfCursor);
                 }
                 let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
 
@@ -586,8 +586,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
                 if(!leftOfCursor || !rightOfCursor) { return null; }
-                // console.log(leftOfCursor);
-                // console.log(rightOfCursor);
+                // $log.log(leftOfCursor);
+                // $log.log(rightOfCursor);
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -655,14 +655,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
 
                 } else if (leftOfCursor.indexOf("<") !== -1) {
-                    console.log('inside tag');
+                    $log.log('inside tag');
                     // The caret is outside a tag, but there is at least one tag before -> we use this nearest tag as current teiElement
                     /*
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
                      * Regex from http://haacked.com/archive/2004/10/25/usingregularexpressionstomatchhtml.aspx/
                      */
                     let matchList = leftOfCursor.match(/<\/?\w+((\s+[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g);
-                    console.log(matchList);
+                    $log.log(matchList);
                     if(matchList !== null && matchList.length > 0) {
                         matchList = matchList.reverse();
 
@@ -799,7 +799,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * This part compiles the children of the tag
                      ------------------------------------------------------------------------------------------------ */
                     if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
-                        //console.log(teiElement.content);
+                        //$log.log(teiElement.content);
                         teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
                     } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
                         teiElement.children = null;
@@ -808,7 +808,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                     /* ---------------------------------------------------------------------------------------------- */
                 }
-                console.log(teiElement);
+                $log.log(teiElement);
                 return teiElement;
             },
             getTEIElementParents(teiElement, parents) {
@@ -824,7 +824,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

@@ -26,7 +26,7 @@ angular.module('transcript.admin.training.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminTrainingListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'trainingContents', function($rootScope, $scope, $http, $sce, $state, trainingContents) {
+    .controller('AdminTrainingListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'trainingContents', function($log, $rootScope, $scope, $http, $sce, $state, trainingContents) {
         $scope.trainingContents = trainingContents;
     }])
 ;

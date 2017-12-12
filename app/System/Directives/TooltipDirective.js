@@ -2,7 +2,7 @@
 
 angular.module('transcript.directive.tooltip', ['ui.router'])
 
-    .directive('tooltip', [function () {
+    .directive('$log', 'tooltip', [function ($log) {
         return function (scope, element, attrs) {
             $(element).hover(function(){
                 // on mouseenter

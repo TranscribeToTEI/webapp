@@ -26,7 +26,7 @@ angular.module('transcript.admin.content.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminContentListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'contents', function($rootScope, $scope, $http, $sce, $state, contents) {
+    .controller('AdminContentListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'contents', function($log, $rootScope, $scope, $http, $sce, $state, contents) {
         $scope.contents = contents;
     }])
 ;

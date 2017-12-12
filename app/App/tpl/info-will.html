@@ -2,9 +2,26 @@
 <div class="col-lg-11 col-10 pl-4">
     <div class="mb-1">Testament de <a class="big" href="" ui-sref="transcript.app.taxonomy.view({type: 'testators', id: entity.will.testator.id})">{{ entity.will.testator.name }}</a></div>
     <p>
-        {{ entity.will.testator.deathMention | ucFirstStrict }} le {{ entity.will.testator.dateOfDeathString }} <span class="text-danger">|</span> <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.testator.placeOfDeathNormalized.id})">{{ entity.will.testator.placeOfDeathString }}</a><span ng-if="entity.will.testator.placeOfDeathNormalized.countries[0] != null">, {{ entity.will.testator.placeOfDeathNormalized.countries[0].name }}</span><br />
-        Testament rédigé le {{ entity.will.willWritingDateString }} <span class="text-danger">|</span> <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.willWritingPlaceNormalized.id})">{{ entity.will.willWritingPlaceString | sourceRender:'TES' }}</a><span ng-if="entity.will.willWritingPlaceNormalized.countries != null">, {{ entity.will.willWritingPlaceNormalized.countries[0].name }}</span><br />
+        {{ entity.will.testator.deathMention | ucFirstStrict }} le {{ entity.will.testator.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS' }}
+        <span ng-if="entity.will.testator.dateOfDeathString && (entity.will.testator.placeOfDeathString || entity.will.testator.placeOfDeathNormalized)" class="text-danger">|</span>
+        <a ng-if="entity.will.testator.placeOfDeathNormalized" ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.testator.placeOfDeathNormalized.id})">
+            <span ng-if="entity.will.testator.placeOfDeathString" ng-bind="entity.will.testator.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS'"></span>
+            <span ng-if="!entity.will.testator.placeOfDeathString" ng-bind="entity.will.testator.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
+        </a>
+        <span ng-if="!entity.will.testator.placeOfDeathNormalized && entity.will.testator.placeOfDeathString">{{ entity.will.testator.placeOfDeathString }}</span>
+        <span ng-if="entity.will.testator.placeOfDeathNormalized.countries.length > 0">, {{ entity.will.testator.placeOfDeathNormalized.countries[0].name }}</span><br />
+
+        Testament rédigé le {{ entity.will.willWritingDateString | sourceRender:'TES' }}
+        <span class="text-danger" ng-if="entity.will.willWritingDateString && (entity.will.willWritingPlaceString || entity.will.willWritingPlaceNormalized)">|</span>
+        <a ng-if="entity.will.willWritingPlaceNormalized" ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.willWritingPlaceNormalized.id})">
+            <span ng-if="entity.will.willWritingPlaceString" ng-bind="entity.will.willWritingPlaceString | sourceRender:'TES'"></span>
+            <span ng-if="!entity.will.willWritingPlaceString" ng-bind="entity.will.willWritingPlaceNormalized | taxonomyEntityNameConstruct:'places'"></span>
+        </a>
+        <span ng-if="!entity.will.willWritingPlaceNormalized && entity.will.willWritingPlaceString">{{ entity.will.willWritingPlaceString | sourceRender:'TES' }}</span>
+        <span ng-if="entity.will.willWritingPlaceNormalized.countries.length > 0">, {{ entity.will.willWritingPlaceNormalized.countries[0].name }}</span><br />
+
         Cote aux <a ui-sref="transcript.app.hosting-organization.view({id: entity.will.hostingOrganization.id})">{{ entity.will.hostingOrganization.name }}</a> <a href="{{ entity.will.minuteLink }}" target="_blank" class="big" ng-if="entity.will.minuteLink != null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT' }}</a><span ng-if="entity.will.minuteLink == null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT' }}</span><br />
-        <span ng-if="entity.will.pagePhysDescSupport != null">{{ entity.will.pagePhysDescSupport }},</span> <span ng-if="entity.will.pagePhysDescHand != null">{{ entity.will.pagePhysDescHand }},</span> <span ng-if="entity.will.pagePhysDescHeight != null && entity.will.pagePhysDescWidth != null">{{ entity.will.pagePhysDescHeight }}cm x {{ entity.will.pagePhysDescWidth }}cm,</span> {{ entity.will.pagePhysDescNumber }} pages.
+
+        <span ng-if="entity.will.pagePhysDescSupport != null">{{ entity.will.pagePhysDescSupport }},</span> <span ng-if="entity.will.pagePhysDescHand != null">{{ entity.will.pagePhysDescHand }},</span> <span ng-if="entity.will.pagePhysDescHeight != null && entity.will.pagePhysDescWidth != null">{{ entity.will.pagePhysDescHeight }}cm x {{ entity.will.pagePhysDescWidth }}cm,</span> <span ng-if="entity.will.pagePhysDescNumber">{{ entity.will.pagePhysDescNumber }} pages</span>
     </p>
 </div>

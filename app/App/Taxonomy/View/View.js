@@ -27,7 +27,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                     return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id);
                 },
                 entities: function(TaxonomyService, $transition$) {
-                    return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                    return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                 },
                 bibliographies: function(BibliographyService, $transition$) {
                     return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
@@ -39,8 +39,8 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         })
     }])
 
-    .controller('AppTaxonomyViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
-        $scope.entity = entity; console.log($scope.entity);
+    .controller('AppTaxonomyViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
+        $scope.entity = entity; $log.log($scope.entity);
         $scope.entities = entities;
         $scope.bibliography = bibliographies;
         $scope.bibliographyEdit = false;
@@ -50,7 +50,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         if($scope.entity.dataType === 'places') {
             if($scope.entity.names.length > 0) {
                 $scope.entity.name = $scope.entity.names[0].name;
-                console.log($scope.entity.name);
+                $log.log($scope.entity.name);
             }
 
             for(let iEntity in $scope.entities) {
@@ -106,5 +106,24 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
             });
         }
         /* -- End : Place's map management -------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.results = $scope.entities;
+        $scope.itemsPerPage = 100;
+        $scope.$watch('results', function() {
+            $scope.totalItems = $scope.results.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

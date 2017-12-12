@@ -13,7 +13,7 @@ angular.module('transcript.system.error.403', ['ui.router'])
         })
     }])
 
-    .controller('SystemError403Ctrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {
+    .controller('SystemError403Ctrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', function($log, $rootScope, $scope, $http, $sce, $state) {
 
     }])
 ;

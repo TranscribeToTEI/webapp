@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.booleanRender', ['ui.router'])
 
-    .filter('booleanRender', [function() {
+    .filter('booleanRender', ['$log', function($log) {
         return function (boolean) {
             let string = "";
 

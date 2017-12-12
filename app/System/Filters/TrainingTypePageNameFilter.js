@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.trainingTypePageName', ['ui.router'])
 
-    .filter('trainingTypePageName', [function() {
+    .filter('trainingTypePageName', ['$log', function($log) {
         return function (trainingTypePageId) {
             let trainingTypePageName = "";
             switch(trainingTypePageId) {

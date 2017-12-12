@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.transcript-log', ['ui.router'])
 
-    .service('TranscriptLogService', function($http, $rootScope, $sce, $filter) {
+    .service('TranscriptLogService', function($log, $http, $rootScope, $sce, $filter) {
         return {
             getTranscriptLogs: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.transcript-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.transcript-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -30,7 +30,7 @@ angular.module('transcript.service.transcript-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -40,17 +40,17 @@ angular.module('transcript.service.transcript-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
-            isOpenedTranscript: function(idTranscript) {
+            isCurrentlyEditedTranscript: function(idTranscript) {
                 return $http.get(
-                    $rootScope.api+"/transcript-logs?transcript="+idTranscript+"&isOpened=true"
+                    $rootScope.api+"/transcript-logs?transcript="+idTranscript+"&isCurrentlyEdited=true"
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

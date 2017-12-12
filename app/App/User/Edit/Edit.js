@@ -28,7 +28,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
         })
     }])
 
-    .controller('AppUserEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'userEdit', 'flash', function($rootScope, $scope, $http, $sce, $state, userEdit, flash) {
+    .controller('AppUserEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'userEdit', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, userEdit, flash) {
         if($rootScope.user === undefined && $rootScope.user !== userEdit) {$state.go('transcript.app.security.login');}
 
         /* -- Breadcrumb management -------------------------------------------------------- */
@@ -66,7 +66,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
                     flash.error += "</ul>";
                 }
             }, function errorCallback(response) {
-                console.log(response);
+                $log.log(response);
                 $scope.submit.loading = false;
             });
         };

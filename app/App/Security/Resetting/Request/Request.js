@@ -21,7 +21,7 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityResettingRequestCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'flash', function($rootScope, $scope, $http, $sce, $state, UserService, flash) {
+    .controller('AppSecurityResettingRequestCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'UserService', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, UserService, flash) {
         $scope.form = {
             email: null
         };
@@ -44,7 +44,7 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                     flash.error = response;
                 });
             }

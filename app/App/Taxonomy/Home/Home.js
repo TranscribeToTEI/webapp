@@ -21,7 +21,7 @@ angular.module('transcript.app.taxonomy.home', ['ui.router'])
         })
     }])
 
-    .controller('AppTaxonomyHomeCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', function($rootScope, $scope, $http, $sce, $state, flash) {
+    .controller('AppTaxonomyHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, flash) {
 
     }])
 ;

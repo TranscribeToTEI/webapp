@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.resourceTypeName', ['ui.router'])
 
-    .filter('resourceTypeName', [function() {
+    .filter('resourceTypeName', ['$log', function($log) {
         return function (resourceType) {
             let resourceTypeName = "";
             switch(resourceType) {

@@ -15,7 +15,7 @@ angular.module('transcript.admin.entity', ['ui.router'])
         })
     }])
 
-    .controller('AdminEntityCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
+    .controller('AdminEntityCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, tfMetaTags) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;

@@ -2,8 +2,8 @@
 
 angular.module('transcript.directive.mwConfirmClick', ['ui.router'])
 
-    .directive( "mwConfirmClick", [
-        function( ) {
+    .directive( "mwConfirmClick", ['$log',
+        function($log) {
             return {
                 priority: -1,
                 restrict: 'A',

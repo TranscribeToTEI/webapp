@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.classicDate', ['ui.router'])
 
-    .filter('classicDate', [function() {
+    .filter('classicDate', ['$log', function($log) {
         return function (dateStr) {
             let date = new Date(dateStr);
             let monthNames = [ 'janvier', 'février', 'mars', 'avril', 'mai', 'juin',

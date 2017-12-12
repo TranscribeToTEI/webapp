@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.hosting-organization', ['ui.router'])
 
-    .service('HostingOrganizationService', function($http, $rootScope, $sce) {
+    .service('HostingOrganizationService', function($log, $http, $rootScope, $sce) {
         return {
             getOrganizations: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.hosting-organization', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.hosting-organization', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

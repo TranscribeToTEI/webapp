@@ -72,7 +72,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminEntityEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entity', 'flash', 'EntityService', 'HostingOrganizationService', 'TaxonomyService', 'WillTypeService', 'places', 'testators', 'organizations', 'willTypes', function($rootScope, $scope, $http, $sce, $state, $filter, entity, flash, EntityService, HostingOrganizationService, TaxonomyService, WillTypeService, places, testators, organizations, willTypes) {
+    .controller('AdminEntityEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entity', 'flash', 'EntityService', 'HostingOrganizationService', 'TaxonomyService', 'WillTypeService', 'places', 'testators', 'organizations', 'willTypes', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entity, flash, EntityService, HostingOrganizationService, TaxonomyService, WillTypeService, places, testators, organizations, willTypes) {
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Scope management */
         /* ---------------------------------------------------------------------------------------------------------- */
@@ -107,7 +107,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             if($scope.entity.will.willWritingDateNormalized) {$scope.entity.will.willWritingDateNormalized = $filter('date')($scope.entity.will.willWritingDateNormalized, 'yyyy-MM-dd')}
             if($scope.entity.will.willWritingDateEndNormalized) {$scope.entity.will.willWritingDateEndNormalized = $filter('date')($scope.entity.will.willWritingDateEndNormalized, 'yyyy-MM-dd')}
         }
-        console.log($scope.entity);
+        $log.log($scope.entity);
         /* End: Entity management ----------------------------------------------------------------------------------- */
 
 
@@ -169,8 +169,8 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                     willWritingDateNormalized: $filter('stringToDate')($scope.entity.will.willWritingDateNormalized),
                     willWritingDateEndNormalized: $filter('stringToDate')($scope.entity.will.willWritingDateEndNormalized),
                     willWritingPlaceString: $scope.entity.will.willWritingPlaceString,
-                    willWritingPlaceNormalized: $scope.entity.will.willWritingPlaceNormalized.id,
-                    testator: $scope.entity.will.testator.id,
+                    willWritingPlaceNormalized: $scope.entity.will.willWritingPlaceNormalized,
+                    testator: $filter('objectToId')($scope.entity.will.testator),
                     hostingOrganization: $scope.entity.will.hostingOrganization,
                     identificationUsers: $scope.entity.will.identificationUsers,
                     willType: $scope.entity.will.willType,
@@ -194,7 +194,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 },
                 resources: []
             };
-            console.log($filter('stringToDate')($scope.entity.will.minuteDateNormalized));
+
             for(let resource of $scope.entity.resources) {
                 if(typeof resource.images === 'string') {
                     resource.images = resource.images.split(",");
@@ -213,17 +213,17 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 }
                 formEntity.resources.push(content);
             }
-            console.log(formEntity);
+            $log.log(formEntity);
 
             if($scope.entity.id === undefined) {
                 $http.post($rootScope.api + '/entities', formEntity).then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.entity', {id: response.data.id});
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
@@ -237,13 +237,13 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 });
             } else {
                 $http.patch($rootScope.api + '/entities/' + $scope.entity.id, formEntity).then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.entity', {id: response.data.id});
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
@@ -287,7 +287,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
 
                     }
                     $scope.remove.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };

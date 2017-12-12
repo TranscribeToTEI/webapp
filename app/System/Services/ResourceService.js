@@ -2,14 +2,14 @@
 
 angular.module('transcript.service.resource', ['ui.router'])
 
-    .service('ResourceService', function($http, $rootScope, $filter) {
+    .service('ResourceService', function($log, $http, $rootScope, $filter) {
         return {
             getResource: function(id_resource) {
                 return $http.get($rootScope.api+"/resources/"+id_resource
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -30,7 +30,7 @@ angular.module('transcript.service.resource', ['ui.router'])
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

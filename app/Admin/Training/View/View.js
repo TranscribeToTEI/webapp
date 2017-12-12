@@ -37,7 +37,7 @@ angular.module('transcript.admin.training.view', ['ui.router'])
             })
     }])
 
-    .controller('AdminTrainingViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'Upload', 'trainingContent', 'trainingContents', function($rootScope, $scope, $http, $sce, $state, $filter, Upload, trainingContent, trainingContents) {
+    .controller('AdminTrainingViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'Upload', 'trainingContent', 'trainingContents', function($log, $rootScope, $scope, $http, $sce, $state, $filter, Upload, trainingContent, trainingContents) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
 

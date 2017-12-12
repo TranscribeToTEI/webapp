@@ -1,24 +1,24 @@
-<button data-ng-if="resource.transcript._embedded.isOpened == true && role == 'readOnly'" data-toggle="modal" data-target="#loginModal" class="nav-link bg-primary">
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'readOnly'" data-toggle="modal" data-target="#loginModal" class="nav-link bg-primary">
     <i class="fa fa-edit"></i> Participer à la transcription
-</button>
-<a data-ng-if="resource.transcript._embedded.isOpened == true && (role == 'editor' || role == 'validator') && resource.transcript.status == 'todo'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
+</a>
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && (role == 'editor' || role == 'validator') && resource.transcript.status == 'todo'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
     <i class="fa fa-edit"></i> Commencer cette transcription
 </a>
-<a data-ng-if="resource.transcript._embedded.isOpened == true && (role == 'editor' || role == 'validator') && resource.transcript.status == 'transcription'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && (role == 'editor' || role == 'validator') && resource.transcript.status == 'transcription'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
     <i class="fa fa-edit"></i> Modifier cette transcription
 </a>
-<button data-ng-if="resource.transcript._embedded.isOpened == true && role == 'editor' && resource.transcript.status == 'validation'" class="nav-link bg-info disabled">
-    <i class="fa fa-check-square-o"></i> En cours de validation
-</button>
-<a data-ng-if="resource.transcript._embedded.isOpened == true && role == 'validator' && resource.transcript.status == 'validation'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-info">
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'editor' && resource.transcript.status == 'validation'" class="nav-link bg-info disabled">
     <i class="fa fa-check-square-o"></i> En cours de validation
 </a>
-<button data-ng-if="resource.transcript._embedded.isOpened == true && role == 'editor' && resource.transcript.status == 'validated'" class="nav-link bg-success disabled">
-    <i class="fa fa-check"></i> Cette transcription est terminée
-</button>
-<a data-ng-if="resource.transcript._embedded.isOpened == true && role == 'validator' && resource.transcript.status == 'validated'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-success">
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'validator' && resource.transcript.status == 'validation'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-info">
+    <i class="fa fa-check-square-o"></i> En cours de validation
+</a>
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'editor' && resource.transcript.status == 'validated'" class="nav-link bg-success disabled">
     <i class="fa fa-check"></i> Cette transcription est terminée
 </a>
-<button data-ng-if="resource.transcript._embedded.isOpened == false" class="nav-link bg-warning text-white">
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'validator' && resource.transcript.status == 'validated'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-success">
+    <i class="fa fa-check"></i> Cette transcription est terminée
+</a>
+<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === true" class="nav-link bg-warning text-white">
     <i class="fa fa-pencil-square-o"></i> En cours d'édition par {{ currentEdition.createUser.name }}
-</button>
+</a>

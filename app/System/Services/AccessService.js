@@ -2,14 +2,14 @@
 
 angular.module('transcript.service.access', ['ui.router'])
 
-    .service('AccessService', function($http, $rootScope, $cookies, $state, $sce, flash) {
+    .service('AccessService', function($log, $http, $rootScope, $cookies, $state, $sce, flash) {
         return {
             getAccesses: function() {
                 return $http.get($rootScope.api+"/accesses").
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     //if()
                     return response;
                 });
@@ -20,7 +20,7 @@ angular.module('transcript.service.access', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -30,17 +30,17 @@ angular.module('transcript.service.access', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
             patchAccess: function(form, accessId) {
                 return $http.patch($rootScope.api+"/accesses/"+accessId, form).
                 then(function(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

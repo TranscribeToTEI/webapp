@@ -27,8 +27,8 @@ angular.module('transcript.admin.comments', ['ui.router'])
             })
     }])
 
-    .controller('AdminCommentsCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'CommentLogService', 'logs', function($rootScope, $scope, $http, $sce, $state, $transition$, CommentLogService, logs) {
+    .controller('AdminCommentsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'CommentLogService', 'logs', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, CommentLogService, logs) {
         $scope.logContainers = logs;
-        console.log($scope.logContainers);
+        $log.log($scope.logContainers);
     }])
 ;

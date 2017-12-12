@@ -33,7 +33,10 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
                         return LogService.getLogs($transition$.params().types);
                     },
                     log: function(LogService, $transition$) {
-                        return LogService.getLog($transition$.params().types, $transition$.params().id);
+                        return LogService.getLog($transition$.params().types, $transition$.params().id, true);
+                    },
+                    logPrevious: function(LogService, $transition$) {
+                        return LogService.getPreviousLog($transition$.params().types, $transition$.params().id, false);
                     }
                 }
             })
@@ -54,37 +57,41 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
                 },
                 resolve: {
                     logs: function(LogService, $transition$) {
-                        return LogService.getLogs($transition$.params().types).then(function(repo,se){
-                            return data;
-                        });
+                        return LogService.getLogs($transition$.params().types);
                     },
                     log: function() {
+                        return null;
+                    },
+                    logPrevious: function() {
                         return null;
                     }
                 }
             })
     }])
 
-    .controller('AdminTaxonomyLogsCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'logs', 'log', function($rootScope, $scope, $http, $sce, $state, $transition$, logs, log) {
+    .controller('AdminTaxonomyLogsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'logs', 'log', 'logPrevious', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, logs, log, logPrevious) {
         $scope.logContainers = logs;
         $scope.logContainer = log;
+        $scope.logPreviousContainer = logPrevious;
+
         $scope.dataType = $transition$.params().types;
 
-        /* Place names management ----------------------------------------------------------------------------------- */
-        if($scope.logContainer !== null && $scope.logContainer.log !== null && $scope.logContainer.log.objectClass === 'AppBundle\\Entity\\Place') {
-            if($scope.logContainer.entity.names.length > 0) {
-                $scope.logContainer.entity.name = $scope.logContainer.entity.names[0].name;
-            }
-        }
-        for(let iContainer in $scope.logContainers) {
-            console.log(iContainer);
-            if((iContainer.log !== null && iContainer.log !== undefined) && iContainer.log.objectClass === 'AppBundle\\Entity\\Place' && iContainer.entity.names.length > 0) {
-                iContainer.entity.name = iContainer.entity.names[0].name;
-            }
-        }
-        /* End: Place names management ------------------------------------------------------------------------------ */
+        if(log !== null) {
+            $scope.entity = log.entity;
 
-        console.log($scope.logContainers);
-        console.log($scope.logContainer);
+            if($scope.logContainer.type === 'Testator') {
+                $scope.typeTaxo = 'testators';
+            } else if($scope.logContainer.type === 'Place') {
+                $scope.typeTaxo = 'places';
+            } else if($scope.logContainer.type === 'MilitaryUnit') {
+                $scope.typeTaxo = 'military-units';
+            }
+        }
+
+        $log.log($scope.logContainers);
+        $log.log('logContainer');
+        $log.log($scope.logContainer);
+        $log.log('logPreviousContainer');
+        $log.log($scope.logPreviousContainer);
     }])
 ;

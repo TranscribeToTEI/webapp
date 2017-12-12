@@ -26,8 +26,8 @@ angular.module('transcript.admin.will-type.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminWillTypeListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'willTypes', function($rootScope, $scope, $http, $sce, $state, willTypes) {
+    .controller('AdminWillTypeListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'willTypes', function($log, $rootScope, $scope, $http, $sce, $state, willTypes) {
         $scope.willTypes = willTypes;
-        console.log($scope.willTypes);
+        $log.log($scope.willTypes);
     }])
 ;

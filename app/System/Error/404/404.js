@@ -13,7 +13,7 @@ angular.module('transcript.system.error.404', ['ui.router'])
         })
     }])
 
-    .controller('SystemError404Ctrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {
+    .controller('SystemError404Ctrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', function($log, $rootScope, $scope, $http, $sce, $state) {
 
     }])
 ;

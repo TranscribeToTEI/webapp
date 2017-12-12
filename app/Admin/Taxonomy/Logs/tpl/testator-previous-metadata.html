@@ -1,35 +1,70 @@
+<div class="alert alert-info" ng-bind="logPreviousContainer.log.data.updateComment"></div>
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Nom complet</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.name }}</dd>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.name }}</dd>
 
     <dt class="col-sm-4">Nom de famille</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.surname }}</dd>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.surname }}</dd>
 
     <dt class="col-sm-4">Prénoms</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.firstnames }}</dd>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.firstnames }}</dd>
+
+    <dt class="col-sm-4">Autres noms</dt>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.otherNames }}</dd>
 
     <dt class="col-sm-4">Profession</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.profession }}</dd>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.profession }}</dd>
 
     <dt class="col-sm-4">Adresse</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.addressNumber }}, {{ logContainer.log.data.addressStreet }}, {{ logContainer.log.data.addressDistrict }}, {{ logContainer.log.data.addressCity }}</dd>
+    <dd class="col-sm-8">
+        <span ng-if="(!!logPreviousContainer.log.data.addressString && !!logPreviousContainer.log.data.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: logPreviousContainer.log.data.addressCity.id})">{{ logPreviousContainer.log.data.addressString }}</a></span>
+        <span ng-if="(!!logPreviousContainer.log.data.addressString) && !logPreviousContainer.log.data.addressCity">{{ logPreviousContainer.log.data.addressString }}</span>
+        <span ng-if="!logPreviousContainer.log.data.addressString && (!!logPreviousContainer.log.data.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: logPreviousContainer.log.data.addressCity.id})">{{ logPreviousContainer.log.data.addressCity | taxonomyEntityNameConstruct:'places' }}</a></span>
+    </dd>
 
     <dt class="col-sm-4">Naissance</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfBirthNormalized.id})">{{ logContainer.log.data.placeOfBirthNormalized.name }}</a></dd>
+    <dd class="col-sm-8">
+        {{ logPreviousContainer.log.data.dateOfBirthString }}
+        <span ng-if="logPreviousContainer.log.data.placeOfBirthNormalized">
+            <span class="text-danger">|</span>
+            <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logPreviousContainer.log.data.placeOfBirthNormalized.id})">
+                <span ng-if="logPreviousContainer.log.data.placeOfBirthString" ng-bind="logPreviousContainer.log.data.placeOfBirthString"></span>
+                <span ng-if="logPreviousContainer.log.data.placeOfBirthNormalized" ng-bind="logPreviousContainer.log.data.placeOfBirthNormalized | taxonomyEntityNameConstruct:'places'"></span>
+            </a>
+        </span>
+        <span ng-if="!logPreviousContainer.log.data.placeOfBirthNormalized && !!logPreviousContainer.log.data.placeOfBirthString">
+            <span class="text-danger">|</span> {{ logPreviousContainer.log.data.placeOfBirthString }}
+        </span>
+        <span ng-if="!logPreviousContainer.log.data.placeOfBirthNormalized && !logPreviousContainer.log.data.placeOfBirthString && !logPreviousContainer.log.data.dateOfBirthString"><i>Aucune information</i></span>
+    </dd>
 
     <dt class="col-sm-4">Décès</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logContainer.log.data.placeOfDeathNormalized.id})">{{ logContainer.log.data.placeOfDeathNormalized.name }}</a></dd>
+    <dd class="col-sm-8">
+        {{ logPreviousContainer.log.data.dateOfDeathString }}
+        <span ng-if="logPreviousContainer.log.data.placeOfDeathNormalized">
+            <span class="text-danger">|</span>
+            <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: logPreviousContainer.log.data.placeOfDeathNormalized.id})">
+                <span ng-if="logPreviousContainer.log.data.placeOfDeathString" ng-bind="logPreviousContainer.log.data.placeOfDeathString"></span>
+                <span ng-if="logPreviousContainer.log.data.placeOfDeathNormalized" ng-bind="logPreviousContainer.log.data.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
+            </a>
+        </span>
+        <span ng-if="!logPreviousContainer.log.data.placeOfDeathNormalized && !!logPreviousContainer.log.data.placeOfDeathString">
+            <span class="text-danger">|</span> {{ logPreviousContainer.log.data.placeOfDeathString }}
+        </span>
+        <span ng-if="!logPreviousContainer.log.data.placeOfDeathNormalized && !logPreviousContainer.log.data.placeOfDeathString && !logPreviousContainer.log.data.dateOfDeathString"><i>Aucune information</i></span>
+    </dd>
 
-    <dt class="col-sm-4">Mention</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.deathMention }}</dd>
+    <dt class="col-sm-4">Mention de décès</dt>
+    <dd class="col-sm-8">{{ logPreviousContainer.log.data.deathMention }}</dd>
 
-    <dt class="col-sm-4">Grade</dt>
-    <dd class="col-sm-8">{{ logContainer.log.data.rank }}, <a ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: logContainer.log.data.militaryUnit.id})">{{ logContainer.log.data.militaryUnit.name }}</a></dd>
+    <dt class="col-sm-4">Incorporation</dt>
+    <dd class="col-sm-8">
+        {{ logPreviousContainer.log.data.rank }}
+        <span class="text-danger" ng-if="logPreviousContainer.log.data.rank && (logPreviousContainer.log.data.militaryUnitString || logPreviousContainer.log.data.militaryUnitNormalized)">|</span>
+        <a ng-if="logPreviousContainer.log.data.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: logPreviousContainer.log.data.militaryUnit.id})">
+            <span ng-if="logPreviousContainer.log.data.militaryUnitString" ng-bind="logPreviousContainer.log.data.militaryUnitString"></span>
+            <span ng-if="!logPreviousContainer.log.data.militaryUnitString" ng-bind="logPreviousContainer.log.data.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
+        </a>
+        <span ng-if="logPreviousContainer.log.data.militaryUnitString && !logPreviousContainer.log.data.militaryUnitNormalized">{{logPreviousContainer.log.data.militaryUnitString}}</span>
+    </dd>
 </dl>
-
-<div class="row mt-4">
-    <div class="col-md-12 ml-2">
-        <h4 class="mb-1"><strong>Mémoire des hommes</strong></h4>
-        <div ng-repeat="memoireDesHommes in logContainer.log.data.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche sur Mémoire des hommes</a></div>
-    </div>
-</div>

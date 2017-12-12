@@ -15,6 +15,34 @@
                 <h2>Sélectionnez votre entrée dans la liste</h2>
                 <p ng-if="((user.roles | contains:'ROLE_TAXONOMY_EDIT') && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')) || preferences.taxonomyEditAccess == 'free'"><a ui-sref="transcript.app.taxonomy.create({type: entity.dataType})">Insérer une nouvelle entrée</a></p>
             </div>
+
+            <form id="search-form">
+                <div class="row">
+                    <div class="form-group col-md-12 row">
+                        <label class="col-md-4 text-right">
+                            Rechercher dans la liste
+                        </label>
+                        <div class="col-md-4 text-right">
+                            <select ng-model="fieldSearch" class="custom-select" title="Critère de recherche">
+                                <option value="" disabled>Sélectionnez le champ</option>
+                                <option ng-if="entity.dataType === 'testators'" value="yearOfDeath">Année de décès</option>
+                                <option ng-if="entity.dataType === 'testators'" value="placeOfDeathNormalized">Lieu de décès</option>
+                                <option ng-if="entity.dataType === 'testators'" value="profession">Profession</option>
+                                <option ng-if="entity.dataType === 'testators'" value="addressCity">Commune de résidence</option>
+                                <option ng-if="entity.dataType === 'testators'" value="yearOfBirth">Année de naissance</option>
+                                <option ng-if="entity.dataType === 'testators'" value="placeOfBirthNormalized">Lieu de naissance</option>
+                                <option ng-if="entity.dataType === 'places'" value="frenchDepartements">Département</option>
+                                <option ng-if="entity.dataType === 'places'" value="frenchRegions">Région</option>
+                                <option ng-if="entity.dataType === 'places'" value="countries">Pays</option>
+                                <option ng-if="entity.dataType === 'places'" value="geonamesId">Identifiant Geonames</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control form-control-sm" ng-model="valueSearch" placeholder="Rechercher une valeur" />
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="col-md-4 pl-0 pr-0 bg-white"  ng-include="'App/Taxonomy/tpl/entities.html'"></div>
     </div>

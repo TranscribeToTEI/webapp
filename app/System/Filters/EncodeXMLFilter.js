@@ -2,9 +2,9 @@
 
 angular.module('transcript.filter.encodeXML', ['ui.router'])
 
-    .filter('encodeXML', [function() {
+    .filter('encodeXML', ['$log', function($log) {
         return function (text) {
-            console.log(text);
+            $log.log(text);
             text = text.replace(/<gi>/g, "<code>").replace(/<\/gi>/g, "</code>")
                        .replace(/<list>/g, "<ul>").replace(/<\/list>/g, "</ul>")
                        .replace(/<item>/g, "<li>").replace(/<\/item>/g, "</li>")

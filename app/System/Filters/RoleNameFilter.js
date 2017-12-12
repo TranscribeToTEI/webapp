@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.roleName', ['ui.router'])
 
-    .filter('roleName', [function() {
+    .filter('roleName', ['$log', function($log) {
         return function (role) {
             let roleName = "";
             switch(role) {

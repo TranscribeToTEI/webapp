@@ -36,14 +36,14 @@ angular.module('transcript.app.user.private-message.thread', ['ui.router'])
         })
     }])
 
-    .controller('AppUserPrivateMessageThreadCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'thread', 'iUser', 'recipientUser', function($rootScope, $scope, $http, $sce, $state, flash, thread, iUser, recipientUser) {
+    .controller('AppUserPrivateMessageThreadCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'thread', 'iUser', 'recipientUser', function($log, $rootScope, $scope, $http, $sce, $state, flash, thread, iUser, recipientUser) {
         $scope.thread = thread;
         $scope.iUser = iUser;
         $scope.recipientUser = recipientUser;
 
         if($scope.thread === null || $scope.thread === undefined || $scope.thread.thread === undefined || $scope.thread.thread.id === undefined) {
             $state.reload();
-            console.log('reload');
+            $log.log('reload');
         }
     }])
 ;

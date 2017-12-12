@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.taxonomyName', ['ui.router'])
 
-    .filter('taxonomyName', [function() {
+    .filter('taxonomyName', ['$log', function($log) {
         return function (taxonomyId, qualification) {
             let taxonomyName = "";
             switch(taxonomyId) {

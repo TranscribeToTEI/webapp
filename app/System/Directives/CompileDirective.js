@@ -2,7 +2,7 @@
 
 angular.module('transcript.directive.compile', ['ui.router'])
 
-    .directive('compile', ['$compile', function ($compile) {
+    .directive('compile', ['$log', '$compile', function ($log, $compile) {
         return function (scope, element, attrs) {
             scope.$watch(
                 function (scope) {

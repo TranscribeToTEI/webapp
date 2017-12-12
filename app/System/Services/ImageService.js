@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.image', ['ui.router'])
 
-    .service('ImageService', function($http, $rootScope, $filter) {
+    .service('ImageService', function($log, $http, $rootScope, $filter) {
         return {
             getThumbnail: function(entity) {
                 let sendNoImage = false;

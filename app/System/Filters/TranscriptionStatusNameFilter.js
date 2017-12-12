@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.transcriptionStatusName', ['ui.router'])
 
-    .filter('transcriptionStatusName', [function() {
+    .filter('transcriptionStatusName', ['$log', function($log) {
         return function (transcriptionStatusID) {
             let transcriptionStatusName = "";
             switch(transcriptionStatusID) {

@@ -15,7 +15,7 @@ angular.module('transcript.admin.taxonomy', ['ui.router'])
         })
     }])
 
-    .controller('AdminTaxonomyCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
+    .controller('AdminTaxonomyCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, tfMetaTags) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;

@@ -31,12 +31,12 @@ angular.module('transcript', ['ui.router'])
         })
     }])
 
-    .controller('TranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, user, appPreference, tfMetaTags) {
+    .controller('TranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, user, appPreference, tfMetaTags) {
         if (user !== null) {
             if($rootScope.user === undefined) {
                 $rootScope.user = user;
             }
-            console.log($rootScope.user);
+            $log.log($rootScope.user);
         }
         $rootScope.preferences = appPreference;
         tfMetaTags.setTitleSuffix(' | '+$rootScope.preferences.projectTitle+tfMetaTags.getTitleSuffix());

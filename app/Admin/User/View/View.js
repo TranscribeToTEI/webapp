@@ -26,7 +26,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
         })
     }])
 
-    .controller('AdminUserViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'flash', '$timeout', function($rootScope, $scope, $http, $sce, $state, user, flash, $timeout) {
+    .controller('AdminUserViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'user', 'flash', '$timeout', function($log, $rootScope, $scope, $http, $sce, $state, user, flash, $timeout) {
         $scope.iUser = user;
         $scope.roles = {
             submit: {
@@ -47,11 +47,11 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                 roles: $scope.iUser.roles,
                 action: "set"
             };
-            console.log(form);
+            $log.log(form);
 
             $http.post($rootScope.api+'/users/'+$scope.iUser.id+"/roles", form).
             then(function (response) {
-                console.log(response.data);
+                $log.log(response.data);
                 flash.success = "Les rôles ont bien été mis à jour";
                 $scope.roles.submit.loading = false;
                 $scope.roles.submit.success = true;
@@ -72,7 +72,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                console.log(response);
+                $log.log(response);
             });
         };
         /* End: Edit User Roles ------------------------------------------------------------------------------------- */
@@ -83,7 +83,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
 
             $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
             then(function (response) {
-                console.log(response.data);
+                $log.log(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";
                 $scope.remove.loading = false;
                 $scope.remove.success = true;
@@ -102,7 +102,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                console.log(response);
+                $log.log(response);
             });
         };
         /* End: Remove User ----------------------------------------------------------------------------------------- */

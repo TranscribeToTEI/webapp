@@ -17,5 +17,5 @@ angular.module('transcript.app.security.resetting.check', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityResettingCheckCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {}])
+    .controller('AppSecurityResettingCheckCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', function($log, $rootScope, $scope, $http, $sce, $state) {}])
 ;

@@ -26,7 +26,7 @@
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" data-ng-model="submit.form.continueAfter" id="app-transcript-edit-submit-continueAfter" name="app-transcript-edit-submit-continueAfter" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Cochez cette case si le paragraphe du fin de page continue sur la page suivante.</span>
+                                <span class="custom-control-description">Cochez cette case si le paragraphe de fin de page continue sur la page suivante.</span>
                             </label>
                         </div>
                         <label><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ user.name }}</label>
@@ -41,7 +41,7 @@
                                 <span class="custom-control-description">Cochez cette case si vous estimez que la transcription est <strong>totalement</strong> achevée.</span>
                             </label>
                         </div>
-                        <div id="transcript-check" data-ng-if="submit.form.isEnded == true" data-ng-include="'App/Transcript/tpl/transcript-check.html'"></div>
+                        <div id="transcript-check" data-ng-if="submit.form.isEnded == true" data-ng-include="'System/Transcript/tpl/transcript-check.html'"></div>
                     </form>
                 </div>
                 <div class="card-footer text-dark">

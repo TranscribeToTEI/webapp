@@ -33,7 +33,7 @@ angular.module('transcript.admin.home', ['ui.router'])
         })
     }])
 
-    .controller('AdminHomeCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'transcriptsToValidate', function($rootScope, $scope, $http, $sce, $state, accesses, transcriptsToValidate) {
+    .controller('AdminHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'transcriptsToValidate', function($log, $rootScope, $scope, $http, $sce, $state, accesses, transcriptsToValidate) {
         $scope.accesses = accesses;
         $scope.transcriptsToValidate = transcriptsToValidate;
     }])

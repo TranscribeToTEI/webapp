@@ -158,12 +158,12 @@
             </ol>
             <div id="div-interaction-help-content" class="mt-2" compile="transcriptArea.interaction.content.text"></div>
         </div>
-        <div id="div-interaction-doc" ng-if="transcriptArea.interaction.status == 'doc'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-doc.html'"></div>
-        <div id="div-interaction-info" ng-if="transcriptArea.interaction.status == 'info'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-info.html'"></div>
-        <div id="div-interaction-biblio" ng-if="transcriptArea.interaction.status == 'bibliography'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio.html'"></div>
-        <div id="div-interaction-biblio-form" ng-if="transcriptArea.interaction.status == 'bibliographyForm'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-biblio-form.html'"></div>
-        <div id="div-interaction-historical-notes" ng-if="transcriptArea.interaction.status == 'historicalNotes'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-notes.html'"></div>
-        <div id="div-interaction-historical-notes-form" ng-if="transcriptArea.interaction.status == 'historicalNotesForm'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-notes-form.html'"></div>
+        <div id="div-interaction-doc" ng-if="transcriptArea.interaction.status == 'doc'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-doc.html'"></div>
+        <div id="div-interaction-info" ng-if="transcriptArea.interaction.status == 'info'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-info.html'"></div>
+        <div id="div-interaction-biblio" ng-if="transcriptArea.interaction.status == 'bibliography'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-biblio.html'"></div>
+        <div id="div-interaction-biblio-form" ng-if="transcriptArea.interaction.status == 'bibliographyForm'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-biblio-form.html'"></div>
+        <div id="div-interaction-historical-notes" ng-if="transcriptArea.interaction.status == 'historicalNotes'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-notes.html'"></div>
+        <div id="div-interaction-historical-notes-form" ng-if="transcriptArea.interaction.status == 'historicalNotesForm'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-notes-form.html'"></div>
         <div id="div-interaction-version" ng-if="transcriptArea.interaction.status == 'version'" class="h-100" style="padding: 0;">
             <div id="div-interaction-version-ace" style="height: calc(100% - 22px);">
                 <div ui-ace="{
@@ -174,8 +174,8 @@
                 }" id="transcript-edit-interaction-version-ace-area" class="h-100" ng-model="transcriptArea.interaction.version.content"></div>
             </div>
         </div>
-        <div id="div-interaction-taxonomy" ng-if="transcriptArea.interaction.status == 'taxonomySearch'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-taxonomy-search.html'"></div>
-        <div id="div-interaction-complexEntry" ng-if="transcriptArea.interaction.status == 'complexEntry'" ng-include="'App/Transcript/tpl/transcript-edit-interaction-complexEntry.html'"></div>
+        <div id="div-interaction-taxonomy" ng-if="transcriptArea.interaction.status == 'taxonomySearch'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-taxonomy-search.html'"></div>
+        <div id="div-interaction-complexEntry" ng-if="transcriptArea.interaction.status == 'complexEntry'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-complexEntry.html'"></div>
         <div ng-if="transcriptArea.interaction.alertZone.alerts.length > 0 && transcriptArea.interaction.alertZone.show == true" class="m-3 alert alert-warning alert-dismissible fade show" role="alert">
             <button type="button" class="close" dismiss="alert" aria-label="Fermer"><span aria-hidden="true">&times;</span></button>
             <h3>Point de vigilance</h3>

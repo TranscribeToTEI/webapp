@@ -2,14 +2,14 @@
 
 angular.module('transcript.service.user-preference', ['ui.router'])
 
-    .service('UserPreferenceService', function($http, $rootScope, $cookies, $state, $sce, $filter, flash) {
+    .service('UserPreferenceService', function($log, $http, $rootScope, $cookies, $state, $sce, $filter, flash) {
         return {
             getPreferences: function(id) {
                 return $http.get($rootScope.api+"/preferences?user="+id
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.user-preference', ['ui.router'])
                 ).then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

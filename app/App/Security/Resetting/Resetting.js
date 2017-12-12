@@ -15,7 +15,7 @@ angular.module('transcript.app.security.resetting', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityResettingCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, tfMetaTags) {
+    .controller('AppSecurityResettingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, tfMetaTags) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
 
         if($rootScope.user !== undefined && $rootScope.user !== null) {

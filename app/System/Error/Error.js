@@ -15,7 +15,7 @@ angular.module('transcript.system.error', ['ui.router'])
         })
     }])
 
-    .controller('ErrorCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', function($rootScope, $scope, $http, $sce, $state, user, appPreference) {
+    .controller('ErrorCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', function($log, $rootScope, $scope, $http, $sce, $state, user, appPreference) {
 
     }])
 ;

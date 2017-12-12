@@ -15,28 +15,69 @@
     <dt class="col-sm-4">Prénoms</dt>
     <dd class="col-sm-8">{{ entity.firstnames }}</dd>
 
+    <dt class="col-sm-4">Autres noms</dt>
+    <dd class="col-sm-8">{{ entity.otherNames }}</dd>
+
     <dt class="col-sm-4">Profession</dt>
     <dd class="col-sm-8">{{ entity.profession }}</dd>
 
     <dt class="col-sm-4">Adresse</dt>
-    <dd class="col-sm-8">{{ entity.addressNumber }}, {{ entity.addressStreet }}, {{ entity.addressDistrict }}, {{ entity.addressCity }}</dd>
+    <dd class="col-sm-8">
+        <span ng-if="(!!entity.addressString && !!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressString }}</a></span>
+        <span ng-if="(!!entity.addressString) && !entity.addressCity">{{ entity.addressString }}</span>
+        <span ng-if="!entity.addressString && (!!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressCity | taxonomyEntityNameConstruct:'places' }}</a></span>
+    </dd>
 
     <dt class="col-sm-4">Naissance</dt>
-    <dd class="col-sm-8">{{ entity.dateOfBirth }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirthNormalized.id})">{{ entity.placeOfBirthNormalized.name }}</a></dd>
+    <dd class="col-sm-8">
+        {{ entity.dateOfBirthString }}
+        <span ng-if="entity.placeOfBirthNormalized">
+            <span class="text-danger" ng-if="entity.dateOfBirthString">|</span>
+            <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirthNormalized.id})">
+                <span ng-if="entity.placeOfBirthString" ng-bind="entity.placeOfBirthString"></span>
+                <span ng-if="entity.placeOfBirthNormalized" ng-bind="entity.placeOfBirthNormalized | taxonomyEntityNameConstruct:'places'"></span>
+            </a>
+        </span>
+        <span ng-if="!entity.placeOfBirthNormalized && !!entity.placeOfBirthString">
+            <span class="text-danger">|</span> {{ entity.placeOfBirthString }}
+        </span>
+        <span ng-if="!entity.placeOfBirthNormalized && !entity.placeOfBirthString && !entity.dateOfBirthString"><i>Aucune information</i></span>
+    </dd>
 
     <dt class="col-sm-4">Décès</dt>
-    <dd class="col-sm-8">{{ entity.dateOfDeath }} à <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeathNormalized.id})">{{ entity.placeOfDeathNormalized.name }}</a></dd>
+    <dd class="col-sm-8">
+        {{ entity.dateOfDeathString }}
+        <span ng-if="entity.placeOfDeathNormalized">
+            <span class="text-danger" ng-if="entity.dateOfDeathString">|</span>
+            <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeathNormalized.id})">
+                <span ng-if="entity.placeOfDeathString" ng-bind="entity.placeOfDeathString"></span>
+                <span ng-if="entity.placeOfDeathNormalized" ng-bind="entity.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
+            </a>
+        </span>
+        <span ng-if="!entity.placeOfDeathNormalized && !!entity.placeOfDeathString">
+            <span class="text-danger">|</span> {{ entity.placeOfDeathString }}
+        </span>
+        <span ng-if="!entity.placeOfDeathNormalized && !entity.placeOfDeathString && !entity.dateOfDeathString"><i>Aucune information</i></span>
+    </dd>
 
-    <dt class="col-sm-4">Mention</dt>
+    <dt class="col-sm-4">Mention de décès</dt>
     <dd class="col-sm-8">{{ entity.deathMention }}</dd>
 
-    <dt class="col-sm-4">Grade</dt>
-    <dd class="col-sm-8">{{ entity.rank }}, <a ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnit.id})">{{ entity.militaryUnit.name }}</a></dd>
+    <dt class="col-sm-4">Incorporation</dt>
+    <dd class="col-sm-8">
+        {{ entity.rank }}
+        <span class="text-danger" ng-if="entity.rank && (entity.militaryUnitString || entity.militaryUnitNormalized)">|</span>
+        <a ng-if="entity.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnit.id})">
+            <span ng-if="entity.militaryUnitString" ng-bind="entity.militaryUnitString"></span>
+            <span ng-if="!entity.militaryUnitString" ng-bind="entity.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
+        </a>
+        <span ng-if="entity.militaryUnitString && !entity.militaryUnitNormalized">{{entity.militaryUnitString}}</span>
+    </dd>
 </dl>
 
 <div class="row mt-4">
     <div class="col-md-12 ml-2">
         <h4 class="mb-1"><strong>Mémoire des hommes</strong></h4>
-        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 0">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
+        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 1">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
     </div>
 </div>

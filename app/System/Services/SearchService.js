@@ -2,10 +2,10 @@
 
 angular.module('transcript.service.search', ['ui.router'])
 
-    .service('SearchService', function($http, $rootScope, $sce, $filter) {
+    .service('SearchService', function($log, $http, $rootScope, $sce, $filter) {
         return {
             search: function(entities, form) {
-                console.log(form);
+                $log.log(form);
                 // Deleting empty value in the form
                 (function filter(obj) {
                     $.each(obj, function(key, value){

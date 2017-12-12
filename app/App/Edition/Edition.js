@@ -38,19 +38,19 @@ angular.module('transcript.app.edition', ['ui.router'])
         })
     }])
 
-    .controller('AppEditionCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', function($rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource) {
-        $scope.entity = entity; console.log($scope.entity);
-        $scope.resource = resource;
+    .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource) {
+        $scope.entity = entity; $log.log($scope.entity);
+        $scope.resource = resource; $log.log($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
         $scope.config = config;
         $scope.tfMetaTagsName = $filter('ucFirstStrict')($filter('resourceTypeName')($scope.resource.type));
         $scope.currentEdition = null;
 
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
-        if($scope.resource.transcript._embedded.isOpened === false) {
-            $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isOpened: false})[0];
+        if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
+            $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
         }
-        console.log($scope.currentEdition);
+        $log.log($scope.currentEdition);
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
 
         /* -- EncodedContent management ----------------------------------------------------------------------------- */
@@ -116,7 +116,7 @@ angular.module('transcript.app.edition', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    console.log(response);
+                    $log.log(response);
                 }
             });
         };

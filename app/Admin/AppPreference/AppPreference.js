@@ -22,7 +22,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
             })
     }])
 
-    .controller('AdminAppPreferenceCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'AppService', function($rootScope, $scope, $http, $sce, $state, flash, AppService) {
+    .controller('AdminAppPreferenceCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'AppService', function($log, $rootScope, $scope, $http, $sce, $state, flash, AppService) {
         $scope.submit = {
             loading: false,
             success: false
@@ -74,7 +74,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };

@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.status', ['ui.router'])
 
-    .filter('status', [function() {
+    .filter('status', ['$log', function($log) {
         return function (status) {
             let string = "";
             switch(status) {

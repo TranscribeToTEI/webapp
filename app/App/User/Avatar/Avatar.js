@@ -28,7 +28,7 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
         })
     }])
 
-    .controller('AppUserAvatarCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'userEdit', 'flash', 'Upload', function($rootScope, $scope, $http, $sce, $state, userEdit, flash, Upload) {
+    .controller('AppUserAvatarCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'userEdit', 'flash', 'Upload', function($log, $rootScope, $scope, $http, $sce, $state, userEdit, flash, Upload) {
         if($rootScope.user === undefined && $rootScope.user !== userEdit) {$state.go('transcript.app.security.login');}
 
         /* -- Breadcrumb management -------------------------------------------------------- */
@@ -51,7 +51,7 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
                 url: $rootScope.api+"/users-avatar?id="+$rootScope.user.id,
                 data: {picture: $scope.form.picture}
             }).then(function (response) {
-                console.log(response);
+                $log.log(response);
                 $scope.submit.loading = false;
                 $scope.submit.success = true;
                 flash.success = "Vous allez être redirigé dans quelques instants ...";

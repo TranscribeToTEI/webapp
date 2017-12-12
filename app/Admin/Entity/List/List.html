@@ -52,7 +52,7 @@
             <th><a ng-click="entitiesSorting = 'will.testator.surname'" title="Trier par nom de famille du testateur">Testateur <i class="fa fa-caret-down"></i></a></th>
             <th><a ng-click="entitiesSorting = '_embedded.status'" title="Trier par statut de la transcription">Statut <i class="fa fa-caret-down"></i></a></th>
         </tr>
-        <tr data-ng-repeat="entity in results|orderBy:entitiesSorting">
+        <tr data-ng-repeat="entity in results|limitTo:itemsPerPage:(currentPage*itemsPerPage-itemsPerPage)|orderBy:entitiesSorting">
             <td>{{ $index+1 }}</td>
             <td>{{ entity.willNumber }}</td>
             <td>{{ entity.will.hostingOrganization.name }}</td>
@@ -62,4 +62,5 @@
             <td><span class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName }}</span></td>
         </tr>
     </table>
+    <ul uib-pagination items-per-page="itemsPerPage" boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
 </main>

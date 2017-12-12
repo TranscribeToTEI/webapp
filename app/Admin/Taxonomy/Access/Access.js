@@ -28,7 +28,7 @@ angular.module('transcript.admin.taxonomy.access', ['ui.router'])
         })
     }])
 
-    .controller('AdminTaxonomyAccessCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'AccessService', 'UserService', function($rootScope, $scope, $http, $sce, $state, accesses, AccessService, UserService) {
+    .controller('AdminTaxonomyAccessCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'AccessService', 'UserService', function($log, $rootScope, $scope, $http, $sce, $state, accesses, AccessService, UserService) {
         $scope.accesses = accesses;
         $scope.submit = {
             valid: {
@@ -50,7 +50,7 @@ angular.module('transcript.admin.taxonomy.access', ['ui.router'])
                     });
             }
             function setRole(access) {
-                console.log(access.user);
+                $log.log(access.user);
                 return UserService.setRole(access.user, ["ROLE_TAXONOMY_EDIT"], "promote").then(function(data) {
                     $state.reload();
                 });

@@ -2,14 +2,14 @@
 
 angular.module('transcript.service.note', ['ui.router'])
 
-    .service('NoteService', function($http, $rootScope, $filter) {
+    .service('NoteService', function($log, $http, $rootScope, $filter) {
         return {
             getNotes: function() {
                 return $http.get($rootScope.api+"/notes"
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -19,7 +19,7 @@ angular.module('transcript.service.note', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -29,7 +29,7 @@ angular.module('transcript.service.note', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -39,7 +39,7 @@ angular.module('transcript.service.note', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -49,7 +49,7 @@ angular.module('transcript.service.note', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

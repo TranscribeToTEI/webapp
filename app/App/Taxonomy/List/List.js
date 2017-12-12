@@ -28,19 +28,19 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
                     return $filter;
                 },
                 entities: function(TaxonomyService, $transition$) {
-                    return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                    return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                 }
             }
         })
     }])
 
-    .controller('AppTaxonomyListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'entities', '$transition$', '$filter', function($rootScope, $scope, $http, $sce, $state, entities, $transition$, $filter) {
+    .controller('AppTaxonomyListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'entities', '$transition$', '$filter', function($log, $rootScope, $scope, $http, $sce, $state, entities, $transition$, $filter) {
         $scope.entity = {
             id: null,
             dataType: $transition$.params().type
         };
         $scope.entities = entities;
-        console.log($scope.entities);
+        $log.log($scope.entities);
 
         $scope.pluralType = $filter('taxonomyName')($scope.entity.dataType, 'plural');
 
@@ -63,5 +63,63 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
             $scope.entities = $filter('orderBy')($scope.entities, 'name');
         }
         /* End: Entities sort management ---------------------------------------------------------------------------- */
+
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Facets system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.fieldSearch = null;
+        $scope.valueSearch = null;
+        $scope.$watch('[fieldSearch,valueSearch]', function() {
+            if($scope.fieldSearch && $scope.valueSearch) {
+                let arraySearch = {};
+                if($scope.fieldSearch === 'yearOfDeath') {
+                    arraySearch = {yearOfDeath: $scope.valueSearch}
+                } else if($scope.fieldSearch === 'placeOfDeathNormalized') {
+                    arraySearch = {placeOfDeathNormalized: {names: {name: $scope.valueSearch}}}
+                } else if($scope.fieldSearch === 'profession') {
+                    arraySearch = {profession: $scope.valueSearch}
+                } else if($scope.fieldSearch === 'addressCity') {
+                    arraySearch = {addressCity: {names: {name: $scope.valueSearch}}}
+                } else if($scope.fieldSearch === 'yearOfBirth') {
+                    arraySearch = {yearOfBirth: $scope.valueSearch}
+                } else if($scope.fieldSearch === 'placeOfBirthNormalized') {
+                    arraySearch = {placeOfBirthNormalized: {names: {name: $scope.valueSearch}}}
+                } else if($scope.fieldSearch === 'frenchDepartements') {
+                    arraySearch = {frenchDepartements: {name: $scope.valueSearch}}
+                } else if($scope.fieldSearch === 'frenchRegions') {
+                    arraySearch = {frenchRegions: {name: $scope.valueSearch}}
+                } else if($scope.fieldSearch === 'countries') {
+                    arraySearch = {countries: {name: $scope.valueSearch}}
+                } else if($scope.fieldSearch === 'geonamesId') {
+                    arraySearch = {geonamesId: $scope.valueSearch}
+                }
+
+                $log.log(arraySearch);
+                $scope.results = $filter('filter')($scope.entities, arraySearch);
+            } else {
+                $scope.results = $scope.entities;
+            }
+            $log.log($scope.results);
+        });
+        /* ---------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.itemsPerPage = 100;
+        $scope.$watch('results', function() {
+            $scope.totalItems = $scope.results.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

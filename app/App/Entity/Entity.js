@@ -33,7 +33,7 @@ angular.module('transcript.app.entity', ['ui.router'])
         })
     }])
 
-    .controller('AppEntityCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'entity', 'EntityService', 'UserService', function($rootScope, $scope, $http, $sce, $state, entity, EntityService, UserService) {
+    .controller('AppEntityCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'entity', 'EntityService', 'UserService', function($log, $rootScope, $scope, $http, $sce, $state, entity, EntityService, UserService) {
         function getUser(username) {
             return UserService.getUserByUsername(username).then(function(data) {
                 $scope.contributors.push({
@@ -47,7 +47,7 @@ angular.module('transcript.app.entity', ['ui.router'])
             loading: true
         };
         $scope.entity = entity;
-        console.log(entity);
+        $log.log(entity);
 
         /* -- Contributors management ---------------------------------------------------- */
         $scope.contributors = [];
@@ -88,13 +88,13 @@ angular.module('transcript.app.entity', ['ui.router'])
         $scope.admin.export.submit.action = function() {
             $scope.admin.export.submit.loading = true;
             EntityService.exportEntity(entity.id).then(function(response) {
-                console.log(response);
+                $log.log(response);
                 $scope.admin.export.submit.loading = false;
                 $scope.admin.export.submit.result = true;
                 $scope.admin.export.submit.content = response.link;
             }, function errorCallback(response) {
                 $scope.admin.export.submit.loading = false;
-                console.log(response);
+                $log.log(response);
             });
         };
         /* -- Admin management ----------------------------------------------------------- */

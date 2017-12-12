@@ -27,7 +27,7 @@ angular.module('transcript.app.hosting-organization.view', ['ui.router'])
             })
     }])
 
-    .controller('AppHostingOrganizationViewCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'organization', function($rootScope, $scope, $http, $sce, $state, $timeout, organization) {
+    .controller('AppHostingOrganizationViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'organization', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, organization) {
         $scope.organization = organization;
     }])
 ;

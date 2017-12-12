@@ -23,7 +23,7 @@ angular.module('transcript.admin', ['ui.router'])
         })
     }])
 
-    .controller('AdminCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', 'tfMetaTags', function($rootScope, $scope, $http, $sce, $state, user, appPreference, tfMetaTags) {
+    .controller('AdminCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'user', 'appPreference', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, user, appPreference, tfMetaTags) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
     }])
 ;

@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.training-content', ['ui.router'])
 
-    .service('TrainingContentService', function($http, $rootScope, $sce) {
+    .service('TrainingContentService', function($log, $http, $rootScope, $sce) {
         return {
             getTrainingContents: function(type, status, orderInTraining) {
                 let typeContainer = "",
@@ -25,7 +25,7 @@ angular.module('transcript.service.training-content', ['ui.router'])
                     }
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -35,7 +35,7 @@ angular.module('transcript.service.training-content', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -50,7 +50,7 @@ angular.module('transcript.service.training-content', ['ui.router'])
                         return null;
                     }
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

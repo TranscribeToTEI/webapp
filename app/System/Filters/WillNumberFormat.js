@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.willNumberFormat', ['ui.router'])
 
-    .filter('willNumberFormat', [function() {
+    .filter('willNumberFormat', ['$log', function($log) {
         return function (number, length) {
             let str = number.toString();
             if(length === undefined || length === 4) {

@@ -38,7 +38,7 @@ angular.module('transcript.app.training', ['ui.router'])
         })
     }])
 
-    .controller('AppTrainingCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
+    .controller('AppTrainingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
 

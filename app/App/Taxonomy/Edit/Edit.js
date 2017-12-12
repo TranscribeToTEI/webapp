@@ -24,7 +24,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id);
                     },
                     entities: function(TaxonomyService, $transition$) {
-                        return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                        return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                     },
                     bibliographies: function(BibliographyService, $transition$) {
                         return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
@@ -60,7 +60,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         return null;
                     },
                     entities: function(TaxonomyService, $transition$) {
-                        return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                        return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                     },
                     bibliographies: function() {
                         return null;
@@ -78,7 +78,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             })
     }])
 
-    .controller('AppTaxonomyEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
+    .controller('AppTaxonomyEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
         if(($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization')) || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.error.403');}
 
         /* -- Functions Loader -------------------------------------------------------------------------------------- */
@@ -89,7 +89,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             function fillForm(data, type) {
                 return TaxonomyService.getFormType(data, type);
             }
-            console.log($scope.form);
+            $log.log($scope.form);
 
             function patchEntity() {
                 return TaxonomyService.patchTaxonomyEntity(dataType, entity.id, $scope.form)
@@ -112,14 +112,14 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         }
         function postEntityLoader(entity, dataType, action) {
             $scope.form = fillForm(entity, dataType);
             $scope.form.updateComment = "Creation of the entity";
-            console.log($scope.form);
+            $log.log($scope.form);
             postEntity();
 
             function fillForm(data, type) {
@@ -155,7 +155,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         }
@@ -186,6 +186,25 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             $scope.entity.updateComment = "";
             $scope.context = "edit";
 
+            /* ------------------------------------------------------------------------------------------------------ */
+            /* If entity is testator */
+            /* ------------------------------------------------------------------------------------------------------ */
+            if($scope.entity.dataType === 'testators') {
+                if($scope.entity.placeOfDeathNormalized) {$scope.entity.placeOfDeathNormalized = $scope.entity.placeOfDeathNormalized.id;}
+                if($scope.entity.placeOfBirthNormalized) {$scope.entity.placeOfBirthNormalized = $scope.entity.placeOfBirthNormalized.id;}
+                if($scope.entity.addressCity) {$scope.entity.addressCity = $scope.entity.addressCity.id;}
+                if($scope.entity.militaryUnitNormalized) {$scope.entity.militaryUnitNormalized = $scope.entity.militaryUnitNormalized.id;}
+
+                if($scope.entity.dateOfBirthNormalized) {$scope.entity.dateOfBirthNormalized = $filter('date')($scope.entity.dateOfBirthNormalized, 'yyyy-MM-dd')}
+                if($scope.entity.dateOfBirthEndNormalized) {$scope.entity.dateOfBirthEndNormalized = $filter('date')($scope.entity.dateOfBirthEndNormalized, 'yyyy-MM-dd')}
+                if($scope.entity.dateOfDeathNormalized) {$scope.entity.dateOfDeathNormalized = $filter('date')($scope.entity.dateOfDeathNormalized, 'yyyy-MM-dd')}
+                if($scope.entity.dateOfDeathEndNormalized) {$scope.entity.dateOfDeathEndNormalized = $filter('date')($scope.entity.dateOfDeathEndNormalized, 'yyyy-MM-dd')}
+            }
+            /* ------------------------------------------------------------------------------------------------------ */
+
+            /* ------------------------------------------------------------------------------------------------------ */
+            /* Removing management */
+            /* ------------------------------------------------------------------------------------------------------ */
             $scope.remove = {
                 loading: false
             };
@@ -215,17 +234,18 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                             }
                     }, function errorCallback(response) {
                         $scope.remove.loading = false;
-                        console.log(response);
+                        $log.log(response);
                     });
                 }
             };
+            /* ------------------------------------------------------------------------------------------------------ */
         }
 
         /* -- Place name management --------------------------------------------------------------------------------- */
         if($scope.entity.dataType === 'places' && $scope.entity.id !== undefined) {
             if($scope.entity.names.length > 0) {
                 $scope.entity.name = $scope.entity.names[0].name;
-                console.log($scope.entity.name);
+                $log.log($scope.entity.name);
             }
         }
 
@@ -260,7 +280,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             if($scope.entity.city !== undefined && $scope.entity.city !== null) {
                 $scope.entity.cities = [{name: $scope.entity.city, updateComment: "entity creation"}];
             } else {$scope.entity.city = null;}
-            console.log($scope.entity);
+            $log.log($scope.entity);
         }
         /* -- End : Place name management --------------------------------------------------------------------------- */
 
@@ -279,7 +299,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             $scope.submit.loading = true;
 
             if($scope.entity.dataType === "places") {parsePlaceNames();}
-            console.log($scope.entity);
+            $log.log($scope.entity);
 
             if(entity === null) {
                 postEntityLoader($scope.entity, $scope.entity.dataType, "redirect");
@@ -310,7 +330,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 return GeonamesService.search($scope.geonames.keywords)
                     .then(function(response) {
                         $scope.geonames.loading = false;
-                        console.log(response);
+                        $log.log(response);
                         if(response.status === 200) {
                             $scope.geonames.result = response.data;
                         } else if(response.data.code === 400) {
@@ -326,7 +346,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.geonames.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };
@@ -364,7 +384,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 url: $rootScope.api+url,
                 data: {media: $scope.media.form.illustration}
             }).then(function (response) {
-                console.log(response);
+                $log.log(response);
                 $scope.media.submit.loading = false;
                 $scope.media.submit.success = true;
                 $timeout(function() {
@@ -377,7 +397,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     $scope.entity.picture = response.data;
                 }
             }, function errorCallback(error) {
-                console.log(error);
+                $log.log(error);
                 $scope.media.submit.loading = false;
             });
         }
@@ -471,10 +491,10 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     reference.authors = [reference.authorsEdit];
                 }
                 delete reference.authorsEdit;
-                console.log(reference);
+                $log.log(reference);
             } else if ($scope.bibliography.addForm.type === "manuscriptReference") {
                 reference = $scope.bibliography.addForm.manuscriptReference;
-                console.log(reference);
+                $log.log(reference);
             }
 
             if (method === 'post') {
@@ -513,5 +533,24 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             }
         };
         /* Bibliography Management ---------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.results = $scope.entities;
+        $scope.itemsPerPage = 100;
+        $scope.$watch('results', function() {
+            $scope.totalItems = $scope.results.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

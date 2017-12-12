@@ -48,10 +48,10 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminContentEditCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', 'Upload', function($rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash, Upload) {
+    .controller('AdminContentEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', 'Upload', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash, Upload) {
         /* Scope management ----------------------------------------------------------------------------------------- */
         if(content !== null) {
-            console.log(content);
+            $log.log(content);
             $scope.content = content;
             $scope.content.updateComment = "";
             if($scope.content.onHomepage === true) { $scope.content.onHomepage = 1; }
@@ -120,7 +120,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 url: $rootScope.api+url,
                 data: {media: $scope.media.form.illustration}
             }).then(function (response) {
-                console.log(response);
+                $log.log(response);
                 $scope.media.submit.loading = false;
                 $scope.media.submit.success = true;
                 $timeout(function() {
@@ -133,7 +133,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                     $scope.content.illustration = response.data;
                 }
             }, function errorCallback(error) {
-                console.log(error);
+                $log.log(error);
                 $scope.media.submit.loading = false;
             });
         }
@@ -168,7 +168,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 /* If content.id == null > The content doesn't exist, we post it */
                 $http.post($rootScope.api+'/contents', form).
                 then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants ...";
@@ -184,13 +184,13 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    console.log(response);
+                    $log.log(response);
                 });
             } else if($scope.content.id !== null) {
                 /* If content.id != null > The content already exists, we just patch it */
                 $http.patch($rootScope.api+'/contents/'+$scope.content.id, form).
                 then(function (response) {
-                    console.log(response.data);
+                    $log.log(response.data);
                     flash.success = "Le contenu a bien été mis à jour";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
@@ -208,7 +208,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };
@@ -224,7 +224,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 $state.go('transcript.admin.content.list');
             }, function errorCallback(response) {
                 $scope.validation.loading = false;
-                console.log(response);
+                $log.log(response);
             });
         };
         /* End: Remove Management ----------------------------------------------------------------------------------- */

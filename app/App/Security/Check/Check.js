@@ -17,7 +17,7 @@ angular.module('transcript.app.security.check', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityCheckCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($rootScope, $scope, $http, $sce, $state) {
+    .controller('AppSecurityCheckCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', function($log, $rootScope, $scope, $http, $sce, $state) {
         $scope.page = {};
 
         if($rootScope.user !== undefined && $rootScope.user !== null) {

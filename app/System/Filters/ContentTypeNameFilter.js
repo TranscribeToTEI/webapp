@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.contentTypeName', ['ui.router'])
 
-    .filter('contentTypeName', [function() {
+    .filter('contentTypeName', ['$log', function($log) {
         return function (contentStatusId) {
             let contentTypeName = "";
             switch(contentStatusId) {

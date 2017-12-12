@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.app', ['ui.router'])
 
-    .service('AppService', function($http, $rootScope) {
+    .service('AppService', function($log, $http, $rootScope) {
         return {
             getPreference: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.app', ['ui.router'])
                 ).then(function(response) {
                     return response.data[0];
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -19,7 +19,7 @@ angular.module('transcript.service.app', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

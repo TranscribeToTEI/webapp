@@ -1,10 +1,11 @@
+<h3>Localisation actuelle</h3>
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Localisation</dt>
     <dd class="col-sm-8">
-        <span ng-if="entity.cities > 0" title="Ville">{{ entity.cities[0].name }}</span>
-        <span ng-if="entity.frenchDepartements.length > 0" title="Département"><span ng-if="entity.cities.length > 0">, </span>{{ entity.frenchDepartements[0].name }}</span>
-        <span ng-if="entity.frenchRegions > 0" title="Région"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0">, </span>{{ entity.frenchRegions[0].name }}</span>
-        <span ng-if="entity.countries > 0" title="Pays"><span ng-if="entity.cities.length > 0 || entity.frenchDepartement.length > 0 || entity.frenchRegions.length > 0">, </span>{{ entity.countries[0].name }}</span>
+        <span ng-if="entity.cities.length > 0" title="Ville">{{ entity | taxonomyEntityNameConstruct:'places':'cities' }}</span>
+        <span ng-if="entity.frenchDepartements.length > 0" title="Département"><span ng-if="entity.cities.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchDepartements' }}</span>
+        <span ng-if="entity.frenchRegions.length > 0" title="Région"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchRegions' }}</span>
+        <span ng-if="entity.countries.length > 0" title="Pays"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0 || entity.frenchRegions.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'countries' }}</span>
     </dd>
 
     <dt class="col-sm-4">Identifiant Geonames</dt>
@@ -20,6 +21,8 @@
     </dd>
 </dl>
 
+<h3>Localisations durant la Première Guerre mondiale</h3>
+
 <div class="row mt-5">
     <div class="col-md-12 ml-2">
         <h4 class="mb-2"><strong>Testateurs en lien avec ce lieu</strong></h4>
@@ -31,8 +34,9 @@
             </div>
             <div class="col-md-10">
                 <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })">{{ testator.name }}</a>
-                <p ng-if="testator.placeOfDeathNormalized != null">Originaire de {{ entity.name }}</p>
-                <p ng-if="testator.placeOfDeathNormalized == null">Décédé à {{ entity.name }}</p>
+                <p ng-if="testator.placeOfBirthNormalized != null && testator.placeOfBirthNormalized.id == entity.id">Originaire de {{ entity.name }}</p>
+                <p ng-if="testator.placeOfDeathNormalized != null && testator.placeOfDeathNormalized.id == entity.id">Décédé à {{ entity.name }}</p>
+                <p ng-if="testator.addressCity != null && testator.addressCity.id == entity.id">A vécu à {{ entity.name }}</p>
             </div>
         </div>
     </div>

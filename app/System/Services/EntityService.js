@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.entity', ['ui.router'])
 
-    .service('EntityService', function($http, $rootScope, ResourceService) {
+    .service('EntityService', function($log, $http, $rootScope, ResourceService) {
         return {
             getEntities: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -21,7 +21,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -31,7 +31,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -41,7 +41,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -52,7 +52,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

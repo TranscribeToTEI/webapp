@@ -28,13 +28,13 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         })
     }])
 
-    .controller('AppUserPreferencesCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$cookies', 'UserPreferenceService', 'userPreferences', 'flash', function($rootScope, $scope, $http, $sce, $state, $cookies, UserPreferenceService, userPreferences, flash) {
+    .controller('AppUserPreferencesCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$cookies', 'UserPreferenceService', 'userPreferences', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, $cookies, UserPreferenceService, userPreferences, flash) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         /* -- Breadcrumb management -------------------------------------------------------- */
         $scope.iUser = $rootScope.user;
         /* -- End : breadcrumb management -------------------------------------------------- */
 
-        console.log(userPreferences);
+        $log.log(userPreferences);
         $scope.userPreferences = userPreferences;
         $scope.form = {
             transcriptionDeskPosition: $scope.userPreferences.transcriptionDeskPosition,
@@ -54,7 +54,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             return UserPreferenceService.patchPreferences(
                 $scope.form, $scope.iUser.id
             ).then(function (response) {
-                console.log(response);
+                $log.log(response);
                 $scope.submit.loading = false;
                 if(response.status === 200) {
                     $rootScope.user._embedded.preferences = response.data;
@@ -73,7 +73,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                     flash.error += '</ul>';
                 }
             }, function errorCallback(response) {
-                console.log(response);
+                $log.log(response);
                 $scope.submit.loading = false;
             });
         };
@@ -89,7 +89,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
 
             $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
             then(function (response) {
-                console.log(response.data);
+                $log.log(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";
                 $scope.remove.loading = false;
                 $scope.remove.success = true;
@@ -111,7 +111,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                console.log(response);
+                $log.log(response);
             });
         };
         /* End: Remove User ----------------------------------------------------------------------------------------- */

@@ -21,7 +21,7 @@ angular.module('transcript.app.contact', ['ui.router'])
         })
     }])
 
-    .controller('AppContactCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'ContactService', 'flash', '$timeout', function($rootScope, $scope, $http, $sce, $state, ContactService, flash, $timeout) {
+    .controller('AppContactCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'ContactService', 'flash', '$timeout', function($log, $rootScope, $scope, $http, $sce, $state, ContactService, flash, $timeout) {
         $scope.contact = {
             name: null,
             email: null,
@@ -61,7 +61,7 @@ angular.module('transcript.app.contact', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                 });
             }
         };

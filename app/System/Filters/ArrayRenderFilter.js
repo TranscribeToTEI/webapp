@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.arrayRender', ['ui.router'])
 
-    .filter('arrayRender', [function() {
+    .filter('arrayRender', ['$log', function($log) {
         return function (array) {
             let string = "";
 

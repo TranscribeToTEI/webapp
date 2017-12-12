@@ -26,7 +26,7 @@ angular.module('transcript.admin.hosting-organization.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminHostingOrganizationListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'organizations', function($rootScope, $scope, $http, $sce, $state, organizations) {
+    .controller('AdminHostingOrganizationListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'organizations', function($log, $rootScope, $scope, $http, $sce, $state, organizations) {
         $scope.organizations = organizations;
     }])
 ;

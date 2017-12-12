@@ -26,7 +26,7 @@ angular.module('transcript.admin.user.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminUserListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'users', function($rootScope, $scope, $http, $sce, $state, users) {
+    .controller('AdminUserListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'users', function($log, $rootScope, $scope, $http, $sce, $state, users) {
         $scope.users = users;
     }])
 ;

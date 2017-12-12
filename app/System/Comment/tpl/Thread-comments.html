@@ -4,7 +4,7 @@
         <span data-ng-if="user.roles | contains:'ROLE_ADMIN'">&nbsp;<a class="badge badge-pill badge-primary" ng-click="comment.edit.load(commentContainer.comment.id)">Edit</a>&nbsp;<a class="badge badge-pill badge-danger" data-ng-click="admin.remove(commentContainer.comment.id)">Remove</a></span> <a ng-if="commentContainer.editAction == true" ng-click="commentContainer.editAction = false"><i class="fa fa-close"></i></a>
         <div class="date">Écrit le <span data-ng-bind="commentContainer.comment.createdAt | date:'MM/dd/yyyy'"></span> à <span data-ng-bind="commentContainer.comment.createdAt | date:'H:mm'"></span></div>
     </div>
-    <blockquote data-ng-bind-html="commentContainer.comment.body" ng-if="commentContainer.comment.state == 0 && commentContainer.editAction != true"></blockquote>
+    <blockquote data-ng-bind-html="commentContainer.comment.body | trustAsHtml" ng-if="commentContainer.comment.state == 0 && commentContainer.editAction != true"></blockquote>
     <form ng-if="commentContainer.comment.state == 0 && commentContainer.editAction == true">
         <div class="form-group comment-post-form-group">
             <label for="thread-edit-content" class="form-control-label sr-only">Contenu :</label>

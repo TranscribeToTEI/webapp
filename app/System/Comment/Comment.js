@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('transcript.system.comment', ['ui.router'])
-    .controller('SystemCommentCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'CommentService', 'thread',  function($rootScope, $scope, $http, $sce, $state, $timeout, CommentService, thread) {
+    .controller('SystemCommentCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'CommentService', 'thread',  function($log, $rootScope, $scope, $http, $sce, $state, $timeout, CommentService, thread) {
         $scope.threadContainer = thread;
-        console.log($scope.threadContainer);
+        $log.log($scope.threadContainer);
 
         $scope.comment = {
             action: {
@@ -32,7 +32,7 @@ angular.module('transcript.system.comment', ['ui.router'])
                 .then(function (response) {
                     $http.get($rootScope.api+'/threads/'+$scope.threadContainer.thread.id+'/comments')
                         .then(function (response) {
-                            //console.log(response.data);
+                            //$log.log(response.data);
                             for(let comment in response.data.comments) {
                                 response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
                             }
@@ -46,7 +46,7 @@ angular.module('transcript.system.comment', ['ui.router'])
                             }
                         );
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     $scope.comment.action.loading = false;
                 }
             );
@@ -72,7 +72,7 @@ angular.module('transcript.system.comment', ['ui.router'])
                 })
                 .then(function (response) {
                     $scope.comment.edit.loading = false;
-                    console.log(response);
+                    $log.log(response);
                     for(let iC in $scope.threadContainer.comments) {
                         if($scope.threadContainer.comments[iC].comment.id === id) {
                             delete $scope.threadContainer.comments[iC].editAction;
@@ -104,14 +104,14 @@ angular.module('transcript.system.comment', ['ui.router'])
                     }
                 })
                 .then(function (response) {
-                    console.log(response);
+                    $log.log(response);
                     for(let iC in $scope.threadContainer.comments) {
                         if($scope.threadContainer.comments[iC].comment.id === id) {
                             $scope.threadContainer.comments[iC].comment.state = 1;
                         }
                     }
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     $scope.comment.action.loading = false;
                 });
         }

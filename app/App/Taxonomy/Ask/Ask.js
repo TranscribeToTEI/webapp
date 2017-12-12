@@ -21,7 +21,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
         })
     }])
 
-    .controller('AppTaxonomyAskCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$timeout', 'flash', 'AccessService', 'UserService', function($rootScope, $scope, $http, $sce, $state, $filter, $timeout, flash, AccessService, UserService) {
+    .controller('AppTaxonomyAskCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$timeout', 'flash', 'AccessService', 'UserService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $timeout, flash, AccessService, UserService) {
         if($rootScope.user === undefined) {$state.go('transcript.error.403');}
         if($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === true || $rootScope.preferences.taxonomyEditAccess === 'free' || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.app.taxonomy.home');}
 
@@ -56,7 +56,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                 form = {isTaxonomyAccess: true, taxonomyRequest: null};
             }
 
-            console.log(form);
+            $log.log(form);
             return AccessService.patchAccess(form, $rootScope.user._embedded.accesses.id).then(function(data) {
                 if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
                     $scope.submit.loading = false;
@@ -83,7 +83,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                     }
                     flash.error += "</ul>";
                 }
-                console.log(response);
+                $log.log(response);
             });
         }
         function setRole() {

@@ -27,13 +27,13 @@ angular.module('transcript.admin.content.history', ['ui.router'])
             })
     }])
 
-    .controller('AdminContentHistoryCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', function($rootScope, $scope, $http, $sce, $state, $timeout, content) {
+    .controller('AdminContentHistoryCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, content) {
         $scope.content = content;
-        console.log($scope.content);
+        $log.log($scope.content);
         $scope.iContent = content;
 
         $scope.loadVersion = function(version) {
-            console.log(version);
+            $log.log(version);
             $scope.iContent = version.data;
             $scope.iContent.version = version.version;
         };

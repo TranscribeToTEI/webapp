@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.trustAsHtml', ['ui.router'])
 
-    .filter('trustAsHtml', ['$sce', function($sce) {
+    .filter('trustAsHtml', ['$log', '$sce', function($log, $sce) {
         return function (value) {
             return $sce.trustAsHtml(value);
         }

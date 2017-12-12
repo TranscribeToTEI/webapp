@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.comment-log', ['ui.router'])
 
-    .service('CommentLogService', function($http, $rootScope, $sce, $filter) {
+    .service('CommentLogService', function($log, $http, $rootScope, $sce, $filter) {
         return {
             getLogs: function() {
                 return $http.get(
@@ -10,7 +10,7 @@ angular.module('transcript.service.comment-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.comment-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },

@@ -27,7 +27,7 @@ angular.module('transcript.admin.training.home', ['ui.router'])
             })
     }])
 
-    .controller('AdminTrainingHomeCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'trainingContents', function($rootScope, $scope, $http, $sce, $state, trainingContents) {
+    .controller('AdminTrainingHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'trainingContents', function($log, $rootScope, $scope, $http, $sce, $state, trainingContents) {
         $scope.trainingContents = trainingContents;
     }])
 ;

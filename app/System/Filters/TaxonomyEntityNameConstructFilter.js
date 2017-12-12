@@ -2,15 +2,29 @@
 
 angular.module('transcript.filter.taxonomyEntityNameConstruct', ['ui.router'])
 
-    .filter('taxonomyEntityNameConstruct', [function() {
-        return function (entity, type) {
+    .filter('taxonomyEntityNameConstruct', ['$log', function($log) {
+        return function (entity, type, context) {
             let entityName = "";
             switch(type) {
                 case "testators":
-                    entityName = entity.surname+", "+entity.firstnames;
+                    if(context === 'index') {
+                        entityName = entity.indexName;
+                    } else {
+                        entityName = entity.surname + ", " + entity.firstnames;
+                    }
                     break;
                 case "places":
-                    entityName = entity.name;
+                    if(context === "cities") {
+                        entityName = entity.cities[0].name;
+                    } else if(context === "countries") {
+                        entityName = entity.countries[0].name;
+                    } else if(context === "frenchDepartements") {
+                        entityName = entity.frenchDepartements[0].name;
+                    } else if(context === "frenchRegions") {
+                        entityName = entity.frenchRegions[0].name;
+                    } else {
+                        entityName = entity.names[0].name;
+                    }
                     break;
                 case "military-units":
                     entityName = entity.name;

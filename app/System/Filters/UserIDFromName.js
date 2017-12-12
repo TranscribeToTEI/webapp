@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.userIDFromName', ['ui.router'])
 
-    .filter('userIDFromName', [function() {
+    .filter('userIDFromName', ['$log', function($log) {
         return function (name) {
             let id = '';
             let elements = name.split(' ');

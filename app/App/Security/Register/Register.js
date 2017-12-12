@@ -22,7 +22,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityRegisterCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'flash', function($rootScope, $scope, $http, $sce, $state, flash) {
+    .controller('AppSecurityRegisterCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, flash) {
         if($rootScope.user !== undefined && $rootScope.user !== null) {
             $state.go('transcript.app.user.profile', {id: $rootScope.user.id});
         }
@@ -63,7 +63,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
                     flash.success = "Votre compte a bien été créé. Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.security.check');
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for(let field in response.data.errors.children) {

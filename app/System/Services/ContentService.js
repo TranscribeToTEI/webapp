@@ -2,7 +2,7 @@
 
 angular.module('transcript.service.content', ['ui.router'])
 
-    .service('ContentService', function($http, $rootScope, $sce) {
+    .service('ContentService', function($log, $http, $rootScope, $sce) {
         return {
             getContents: function(type, status, date, limit, onHomepage) {
                 let typeContainer = "",
@@ -27,7 +27,7 @@ angular.module('transcript.service.content', ['ui.router'])
                     }
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             },
@@ -38,7 +38,7 @@ angular.module('transcript.service.content', ['ui.router'])
                     if(encode === true) {response.data.content = $sce.trustAsHtml(response.data.content);}
                     return response.data;
                 }, function errorCallback(response) {
-                    console.log(response);
+                    $log.log(response);
                     return response;
                 });
             }

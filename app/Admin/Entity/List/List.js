@@ -26,13 +26,16 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
         })
     }])
 
-    .controller('AdminEntityListCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', function($rootScope, $scope, $http, $sce, $state, $filter, entities) {
+    .controller('AdminEntityListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities) {
         $scope.entities = entities;
-        console.log($scope.entities);
+        $log.log($scope.entities);
         $scope.entitiesSorting = "willNumber";
         $scope.fieldSearch = null;
         $scope.valueSearch = null;
 
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Facets system */
+        /* ---------------------------------------------------------------------------------------------------------- */
         $scope.$watch('[fieldSearch,valueSearch]', function() {
             if($scope.fieldSearch && $scope.valueSearch) {
                 let arraySearch = {};
@@ -58,12 +61,31 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
                     arraySearch = {will: {willType: {name: $scope.valueSearch}}}
                 }
 
-                console.log(arraySearch);
+                $log.log(arraySearch);
                 $scope.results = $filter('filter')($scope.entities, arraySearch);
             } else {
                 $scope.results = $scope.entities;
             }
-            console.log($scope.results);
+            $log.log($scope.results);
         });
+        /* ---------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.itemsPerPage = 100;
+        $scope.$watch('results', function() {
+            $scope.totalItems = $scope.results.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.log('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

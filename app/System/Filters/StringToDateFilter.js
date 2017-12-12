@@ -2,7 +2,7 @@
 
 angular.module('transcript.filter.stringToDate', ['ui.router'])
 
-    .filter('stringToDate', [function() {
+    .filter('stringToDate', ['$log', function($log) {
         return function (string) {
             if(string) {
                 return new Date(string);

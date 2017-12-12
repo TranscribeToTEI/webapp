@@ -21,7 +21,7 @@ angular.module('transcript.app.security.logout', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityLogoutCtrl', ['$rootScope', '$scope', '$http', '$sce', '$state', '$cookies', function($rootScope, $scope, $http, $sce, $state, $cookies) {
+    .controller('AppSecurityLogoutCtrl', ['$log', '$rootScope', '$scope', '$http', '$sce', '$state', '$cookies', function($log, $rootScope, $scope, $http, $sce, $state, $cookies) {
         if($rootScope.user !== undefined) {
             delete $rootScope.oauth;
             delete $rootScope.user;
