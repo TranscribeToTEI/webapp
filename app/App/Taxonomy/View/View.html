@@ -15,7 +15,7 @@
                 <div class="float-right mt-3" ng-if="((user.roles | contains:'ROLE_TAXONOMY_EDIT') && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')) || preferences.taxonomyEditAccess == 'free'">
                     <a class="btn btn-light" ui-sref="transcript.app.taxonomy.edit({type: entity.dataType, id: entity.id})"><i class="fa fa-edit"></i> Modifier</a>
                 </div>
-                <h1 class="page-heading">{{ entity.name }}</h1>
+                <h1 class="page-heading"><span ng-if="entity.dataType != 'places'">{{ entity.name }}</span><span ng-if="entity.dataType == 'places'">{{ entity | taxonomyEntityNameConstruct:'places' }}</span></h1>
             </nav>
 
             <div ng-if="entity.dataType == 'places' && entity.geographicalCoordinates != null">

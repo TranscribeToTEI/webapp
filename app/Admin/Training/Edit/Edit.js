@@ -30,7 +30,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                         return UserService.getUsers('short');
                     },
                     config: function() {
-                        return YAML.load('App/Transcript/toolbar.yml');
+                        return YAML.load('System/Transcript/toolbar.yml');
                     }
                 }
             })
@@ -60,7 +60,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                         return UserService.getUsers('short');
                     },
                     config: function() {
-                        return YAML.load('App/Transcript/toolbar.yml');
+                        return YAML.load('System/Transcript/toolbar.yml');
                     }
                 }
             })

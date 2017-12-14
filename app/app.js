@@ -83,6 +83,8 @@ angular.module('transcriptApp', [
         'transcript.app.taxonomy.list',
         'transcript.app.taxonomy.view',
         'transcript.app.training',
+        'transcript.app.training.exercise',
+        'transcript.app.training.presentation',
         'transcript.app.transcript',
         'transcript.app.user',
         'transcript.app.user.avatar',

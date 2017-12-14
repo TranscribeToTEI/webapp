@@ -22,6 +22,8 @@ angular.module('transcript.filter.taxonomyEntityNameConstruct', ['ui.router'])
                         entityName = entity.frenchDepartements[0].name;
                     } else if(context === "frenchRegions") {
                         entityName = entity.frenchRegions[0].name;
+                    } else if(context === 'index') {
+                        entityName = entity.indexName;
                     } else {
                         entityName = entity.names[0].name;
                     }

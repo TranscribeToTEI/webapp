@@ -758,9 +758,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Live management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            /**
-             * This function loads documentation about a TEI element
-             */
             $scope.transcriptArea.interaction.live.microObjects.action = function () {
                 if($scope.transcriptArea.interaction.live.microObjects.active === true) {
                     $scope.transcriptArea.interaction.live.microObjects.active = false;
@@ -773,7 +770,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
             };
             /* Live Management ------------------------------------------------------------------------------------------ */
-
 
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Complex Entry Management */
@@ -1157,13 +1153,13 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Taxonomy Search Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcriptArea.interaction.taxonomy.loadEntities = function() {
-                TaxonomyService.getTaxonomyEntities("testators").then(function(response) {
+                TaxonomyService.getTaxonomyEntities("testators", "index").then(function(response) {
                     $scope.taxonomy.testators = response;
                 });
-                TaxonomyService.getTaxonomyEntities("places").then(function(response) {
+                TaxonomyService.getTaxonomyEntities("places", "index").then(function(response) {
                     $scope.taxonomy.places = response;
                 });
-                TaxonomyService.getTaxonomyEntities("military-units").then(function(response) {
+                TaxonomyService.getTaxonomyEntities("military-units", "index").then(function(response) {
                     $scope.taxonomy.militaryUnits = response;
                 });
             };

@@ -33,9 +33,6 @@ angular.module('transcript.system.comment', ['ui.router'])
                     $http.get($rootScope.api+'/threads/'+$scope.threadContainer.thread.id+'/comments')
                         .then(function (response) {
                             //$log.log(response.data);
-                            for(let comment in response.data.comments) {
-                                response.data.comments[comment].comment.body = $sce.trustAsHtml(response.data.comments[comment].comment.body);
-                            }
                             $scope.threadContainer = response.data;
                             $scope.comment.form.content = "";
                             $scope.comment.action.loading = false;
@@ -56,7 +53,7 @@ angular.module('transcript.system.comment', ['ui.router'])
             for(let iC in $scope.threadContainer.comments) {
                 if($scope.threadContainer.comments[iC].comment.id === id) {
                     $scope.threadContainer.comments[iC].editAction = true;
-                    $scope.editContent[id] = $sce.getTrustedHtml($scope.threadContainer.comments[iC].comment.body);
+                    $scope.editContent[id] = $scope.threadContainer.comments[iC].comment.body;
                 }
             }
         };
@@ -76,7 +73,7 @@ angular.module('transcript.system.comment', ['ui.router'])
                     for(let iC in $scope.threadContainer.comments) {
                         if($scope.threadContainer.comments[iC].comment.id === id) {
                             delete $scope.threadContainer.comments[iC].editAction;
-                            $scope.threadContainer.comments[iC].comment.body = $sce.trustAsHtml($scope.editContent[id]);
+                            $scope.threadContainer.comments[iC].comment.body = $scope.editContent[id];
                         }
                     }
                     delete $scope.editContent[id];

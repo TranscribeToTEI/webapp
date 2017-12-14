@@ -10,52 +10,52 @@
     <dd class="col-sm-8">{{ entity.name }}</dd>
 
     <dt class="col-sm-4">Nom de famille</dt>
-    <dd class="col-sm-8">{{ entity.surname }}</dd>
+    <dd class="col-sm-8">{{ entity.surname | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Prénoms</dt>
-    <dd class="col-sm-8">{{ entity.firstnames }}</dd>
+    <dd class="col-sm-8">{{ entity.firstnames | sourceRender:'NOT|TES|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Autres noms</dt>
-    <dd class="col-sm-8">{{ entity.otherNames }}</dd>
+    <dd class="col-sm-8">{{ entity.otherNames | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Profession</dt>
-    <dd class="col-sm-8">{{ entity.profession }}</dd>
+    <dd class="col-sm-8">{{ entity.profession | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Adresse</dt>
     <dd class="col-sm-8">
-        <span ng-if="(!!entity.addressString && !!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressString }}</a></span>
-        <span ng-if="(!!entity.addressString) && !entity.addressCity">{{ entity.addressString }}</span>
+        <span ng-if="(!!entity.addressString && !!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressString | sourceRender:'NOT|TES|EC|AS':true }}</a></span>
+        <span ng-if="(!!entity.addressString) && !entity.addressCity">{{ entity.addressString | sourceRender:'NOT|TES|EC|AS':true }}</span>
         <span ng-if="!entity.addressString && (!!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressCity | taxonomyEntityNameConstruct:'places' }}</a></span>
     </dd>
 
     <dt class="col-sm-4">Naissance</dt>
     <dd class="col-sm-8">
-        {{ entity.dateOfBirthString }}
+        {{ entity.dateOfBirthString | sourceRender:'MDH|EC|TES|NOT|AS':true }}
         <span ng-if="entity.placeOfBirthNormalized">
             <span class="text-danger" ng-if="entity.dateOfBirthString">|</span>
             <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirthNormalized.id})">
-                <span ng-if="entity.placeOfBirthString" ng-bind="entity.placeOfBirthString"></span>
+                <span ng-if="entity.placeOfBirthString" ng-bind="entity.placeOfBirthString | sourceRender:'MDH|EC|TES|NOT|AS':true"></span>
                 <span ng-if="entity.placeOfBirthNormalized" ng-bind="entity.placeOfBirthNormalized | taxonomyEntityNameConstruct:'places'"></span>
             </a>
         </span>
         <span ng-if="!entity.placeOfBirthNormalized && !!entity.placeOfBirthString">
-            <span class="text-danger">|</span> {{ entity.placeOfBirthString }}
+            <span class="text-danger">|</span> {{ entity.placeOfBirthString | sourceRender:'MDH|EC|TES|NOT|AS':true }}
         </span>
         <span ng-if="!entity.placeOfBirthNormalized && !entity.placeOfBirthString && !entity.dateOfBirthString"><i>Aucune information</i></span>
     </dd>
 
     <dt class="col-sm-4">Décès</dt>
     <dd class="col-sm-8">
-        {{ entity.dateOfDeathString }}
+        {{ entity.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS':true }}
         <span ng-if="entity.placeOfDeathNormalized">
             <span class="text-danger" ng-if="entity.dateOfDeathString">|</span>
             <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeathNormalized.id})">
-                <span ng-if="entity.placeOfDeathString" ng-bind="entity.placeOfDeathString"></span>
+                <span ng-if="entity.placeOfDeathString" ng-bind="entity.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS':true"></span>
                 <span ng-if="entity.placeOfDeathNormalized" ng-bind="entity.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
             </a>
         </span>
         <span ng-if="!entity.placeOfDeathNormalized && !!entity.placeOfDeathString">
-            <span class="text-danger">|</span> {{ entity.placeOfDeathString }}
+            <span class="text-danger">|</span> {{ entity.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS':true }}
         </span>
         <span ng-if="!entity.placeOfDeathNormalized && !entity.placeOfDeathString && !entity.dateOfDeathString"><i>Aucune information</i></span>
     </dd>
@@ -65,13 +65,13 @@
 
     <dt class="col-sm-4">Incorporation</dt>
     <dd class="col-sm-8">
-        {{ entity.rank }}
+        {{ entity.rank | sourceRender:'MDH|NOT|TES|EC|AS':true }}
         <span class="text-danger" ng-if="entity.rank && (entity.militaryUnitString || entity.militaryUnitNormalized)">|</span>
         <a ng-if="entity.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnit.id})">
-            <span ng-if="entity.militaryUnitString" ng-bind="entity.militaryUnitString"></span>
+            <span ng-if="entity.militaryUnitString" ng-bind="entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true"></span>
             <span ng-if="!entity.militaryUnitString" ng-bind="entity.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
         </a>
-        <span ng-if="entity.militaryUnitString && !entity.militaryUnitNormalized">{{entity.militaryUnitString}}</span>
+        <span ng-if="entity.militaryUnitString && !entity.militaryUnitNormalized">{{ entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true }}</span>
     </dd>
 </dl>
 

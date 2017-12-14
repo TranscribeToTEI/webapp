@@ -28,13 +28,17 @@ angular.module('transcript.admin.home', ['ui.router'])
                     return TranscriptService.getTranscriptsByStatus('validation').then(function(data){
                         return data;
                     });
+                },
+                unReadComments: function(CommentLogService) {
+                    return CommentLogService.getLogs(false, true);
                 }
             }
         })
     }])
 
-    .controller('AdminHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'transcriptsToValidate', function($log, $rootScope, $scope, $http, $sce, $state, accesses, transcriptsToValidate) {
+    .controller('AdminHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'accesses', 'transcriptsToValidate', 'unReadComments', function($log, $rootScope, $scope, $http, $sce, $state, accesses, transcriptsToValidate, unReadComments) {
         $scope.accesses = accesses;
         $scope.transcriptsToValidate = transcriptsToValidate;
+        $scope.unReadComments = unReadComments;
     }])
 ;

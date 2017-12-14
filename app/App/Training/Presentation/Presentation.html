@@ -10,8 +10,7 @@
 <main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
     <div ng-include="'App/Training/tpl/training-header.html'"></div>
 
-    <div ng-if="trainingContent.pageType == 'presentation'" ng-include="'App/Training/tpl/training-presentation.html'"></div>
-    <div ng-if="trainingContent.pageType == 'exercise'" ng-include="'App/Training/tpl/training-exercise.html'"></div>
+    <div ng-include="'App/Training/Presentation/tpl/training-presentation.html'"></div>
 
     <hr />
     <div ui-view="comment"></div>

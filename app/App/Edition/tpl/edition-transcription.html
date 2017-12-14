@@ -1,11 +1,12 @@
 <div class="card bg-white">
     <h3 class="card-header bg-light d-block"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Transcription</h3>
     <h4 class="card-header bg-dark align-right">{{ resource.type | ucfirst }} {{resource.orderInWill}}</h4>
+    <div class="card-header align-right"><button class="btn btn-sm {{ microObjects.activeClass }}" title="Activer les micro-objets" ng-click="microObjects.action()"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></button></div>
     <div class="card-body">
-        <div data-ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
+        <div ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
             Cette transcription n'est pas commencée.
             <div ng-include="'App/Edition/tpl/edition-header-editButton.html'"></div>
         </div>
-        <div data-ng-bind-html="encodedContent"></div>
+        <div ng-bind-html="encodedContent | trustAsHtml"></div>
     </div>
 </div>

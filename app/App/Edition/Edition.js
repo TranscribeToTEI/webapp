@@ -32,19 +32,44 @@ angular.module('transcript.app.edition', ['ui.router'])
                     return CommentService.getThread('transcript-'+$transition$.params().idResource);
                 },
                 config: function() {
-                    return YAML.load('App/Transcript/toolbar.yml');
-                }
+                    return YAML.load('System/Transcript/toolbar.yml');
+                },
+                teiInfo: function(TranscriptService) {
+                    return TranscriptService.getTeiInfo();
+                },
             }
         })
     }])
 
-    .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource) {
+    .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', 'teiInfo', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource, teiInfo) {
         $scope.entity = entity; $log.log($scope.entity);
         $scope.resource = resource; $log.log($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
-        $scope.config = config;
-        $scope.tfMetaTagsName = $filter('ucFirstStrict')($filter('resourceTypeName')($scope.resource.type));
+        $scope.config = config; $log.log($scope.config);
+        $scope.teiInfo = teiInfo.data; $log.log($scope.teiInfo);
         $scope.currentEdition = null;
+        $scope.microObjects = {
+            active: true,
+            activeClass: 'bg-danger'
+        };
+        $scope.tfMetaTagsName = $filter('ucFirstStrict')($filter('resourceTypeName')($scope.resource.type));
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Content Management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
+        $scope.microObjects.action = function () {
+            $log.log('test');
+            if($scope.microObjects.active === true) {
+                $scope.microObjects.active = false;
+                $scope.microObjects.activeClass = 'active';
+            } else {
+                $scope.microObjects.active = true;
+                $scope.microObjects.activeClass = 'bg-danger';
+            }
+            $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
+        };
+        /* Content Management --------------------------------------------------------------------------------------- */
 
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
         if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
@@ -52,16 +77,6 @@ angular.module('transcript.app.edition', ['ui.router'])
         }
         $log.log($scope.currentEdition);
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
-
-        /* -- EncodedContent management ----------------------------------------------------------------------------- */
-        if($scope.resource.transcript.content !== null) {
-            let encodeLiveRender = $scope.resource.transcript.content;
-            for (let buttonId in $scope.config.tags) {
-                encodeLiveRender = TranscriptService.encodeHTML(encodeLiveRender, $scope.config.tags[buttonId]);
-            }
-            $scope.encodedContent = $sce.trustAsHtml(encodeLiveRender);
-        }
-        /* -- EncodedContent management ----------------------------------------------------------------------------- */
 
         /* -- Contributors management ------------------------------------------------------------------------------- */
         function getUser(username) {

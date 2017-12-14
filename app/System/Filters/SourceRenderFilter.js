@@ -3,7 +3,7 @@
 angular.module('transcript.filter.sourceRender', ['ui.router'])
 
     .filter('sourceRender', ['$log', '$filter', function($log, $filter) {
-        return function (sourceString, listSourceString) {
+        return function (sourceString, listSourceString, allList) {
             let sourcesValues = sourceString.split('|'),
                 sourcesType = listSourceString.split('|'),
                 sourcesTrame = [],

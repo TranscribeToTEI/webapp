@@ -25,10 +25,10 @@
                     <td>
                         <div>
                             <div class="float-right">
-                                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseComment-{{log.id}}" aria-expanded="false" aria-controls="collapseComment-{{log.id}}" title="Afficher le commentaire"><i class="fa fa-eye"></i></button>
+                                <button class="btn btn-primary" type="button" ng-click="read(log.id)" data-toggle="collapse" data-target="#collapseComment-{{log.id}}" aria-expanded="false" aria-controls="collapseComment-{{log.id}}" title="Afficher le commentaire"><i class="fa fa-eye"></i></button>
                             </div>
                             <div>
-                                Commentaire de <strong>{{ log.createUser.name }}</strong> sur <strong>CONTENU</strong>
+                                <span class="text-primary" ng-if="log.isReadByAdmin == false"><i class="fa fa-circle" data-toggle="tooltip" data-placement="top" title="Commentaire non lu"></i> </span>Commentaire de <strong>{{ log.createUser.name }}</strong> sur <strong>CONTENU</strong>
                             </div>
                         </div>
                         <div class="collapse" id="collapseComment-{{log.id}}">
@@ -36,12 +36,12 @@
                         </div>
                     </td>
                     <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fa fa-cog"></i>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-cog"></i> Actions
                             </button>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item">Marquer comme non lu</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button class="dropdown-item" ng-click="notRead(log.id)" ng-disabled="log.isReadByAdmin == false">Marquer comme non lu</button>
                             </div>
                         </div>
                     </td>

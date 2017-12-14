@@ -74,13 +74,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             encodeHTML: function(encodeLiveRender, tags, isMicroObject, teiInfo) {
                 $log.log(encodeLiveRender);
-                $log.log(tags);
+                console.log(tags);
 
                 for(let iT in tags) {
                     let tag = tags[iT];
 
                     let replace = "";
 
+                    $log.log(tag.xml);
                     if(tag.xml.unique === true) {
                         replace = "<"+tag.xml.name+"(.*?)/>";
                         let regExp = new RegExp(replace,"g");

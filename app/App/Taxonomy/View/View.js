@@ -41,33 +41,10 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
 
     .controller('AppTaxonomyViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
         $scope.entity = entity; $log.log($scope.entity);
-        $scope.entities = entities;
+        $scope.entities = entities; $log.log($scope.entities);
         $scope.bibliography = bibliographies;
         $scope.bibliographyEdit = false;
         $scope.entity.dataType = $transition$.params().type;
-
-        /* -- Place name management ---------------------------------------------------------- */
-        if($scope.entity.dataType === 'places') {
-            if($scope.entity.names.length > 0) {
-                $scope.entity.name = $scope.entity.names[0].name;
-                $log.log($scope.entity.name);
-            }
-
-            for(let iEntity in $scope.entities) {
-                if($scope.entities[iEntity].names.length > 0) {
-                    $scope.entities[iEntity].name = $scope.entities[iEntity].names[0].name;
-                }
-            }
-        }
-        if($scope.entity.dataType === 'testators') {
-            if($scope.entity.placeOfBirthNormalized !== null && $scope.entity.placeOfBirthNormalized.names.length > 0) {
-                $scope.entity.placeOfBirthNormalized.name = $scope.entity.placeOfBirthNormalized.names[0].name;
-            }
-            if($scope.entity.placeOfDeathNormalized.names.length > 0) {
-                $scope.entity.placeOfDeathNormalized.name = $scope.entity.placeOfDeathNormalized.names[0].name;
-            }
-        }
-        /* -- End : Place name management ---------------------------------------------------- */
 
         /* Entities sort management --------------------------------------------------------------------------------- */
         if($scope.entity.dataType === 'places') {

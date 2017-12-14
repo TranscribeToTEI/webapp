@@ -249,14 +249,6 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             }
         }
 
-        if($scope.entity.dataType === 'places') {
-            for(let iEntity in $scope.entities) {
-                if($scope.entities[iEntity].names.length > 0) {
-                    $scope.entities[iEntity].name = $scope.entities[iEntity].names[0].name;
-                }
-            }
-        }
-
         for(let iEntity in $scope.places) {
             if($scope.places[iEntity].names.length > 0) {
                 $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;

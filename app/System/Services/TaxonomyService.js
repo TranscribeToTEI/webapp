@@ -5,8 +5,13 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
     .service('TaxonomyService', function($log, $http, $rootScope, $filter) {
         return {
             getTaxonomyEntities: function(type, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/"+type+"&profile="+profile
+                    $rootScope.api+"/"+type+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {

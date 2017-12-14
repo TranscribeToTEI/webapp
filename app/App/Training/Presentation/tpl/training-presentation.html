@@ -1,6 +1,12 @@
-<div ng-if="trainingContent.exerciseStatus === 'todo'" ng-include="'App/Training/tpl/training-exercise-presentation.html'"></div>
-<div ng-if="trainingContent.exerciseStatus === 'inProgress'" ng-include="'App/Training/tpl/training-exercise-exercise.html'"></div>
-<div ng-if="trainingContent.exerciseStatus === 'correction'" ng-include="'App/Training/tpl/training-exercise-correction.html'"></div>
+<div ng-if="trainingContent.illustration != null" class="row">
+    <div class="col-md-7" ng-include="'App/Training/Presentation/tpl/training-mainContent.html'"></div>
+    <div class="col-md-5">
+        <img src="{{ trainingContent.illustration | imageRender }}" class="img-fluid" />
+    </div>
+</div>
+<div ng-if="trainingContent.illustration == null" class="row">
+    <div class="col-md-10 col-12" ng-include="'App/Training/Presentation/tpl/training-mainContent.html'"></div>
+</div>
 
 <hr />
 <div class="text-center">

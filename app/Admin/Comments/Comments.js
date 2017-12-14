@@ -27,8 +27,29 @@ angular.module('transcript.admin.comments', ['ui.router'])
             })
     }])
 
-    .controller('AdminCommentsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'CommentLogService', 'logs', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, CommentLogService, logs) {
+    .controller('AdminCommentsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'CommentLogService', 'logs', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, CommentLogService, logs) {
         $scope.logContainers = logs;
         $log.log($scope.logContainers);
+
+        $scope.read = function(id) {
+            patch(id, true);
+        };
+
+        $scope.notRead = function(id) {
+            patch(id, false);
+        };
+
+        function patch(id, read) {
+            return $http.patch(
+                $rootScope.api+"/comment-logs/"+id, {isReadByAdmin: read}
+            ).then(function(response) {
+                $filter('filter')($scope.logContainers, {id: id})[0].isReadByAdmin = read;
+                return response.data;
+            }, function errorCallback(response) {
+                $log.log(response);
+                return response;
+            });
+        }
+
     }])
 ;
