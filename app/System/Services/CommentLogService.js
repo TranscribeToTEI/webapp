@@ -20,7 +20,7 @@ angular.module('transcript.service.comment-log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },

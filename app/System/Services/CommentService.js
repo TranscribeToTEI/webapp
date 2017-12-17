@@ -7,16 +7,16 @@ angular.module('transcript.service.comment', ['ui.router'])
             getThread: function(id) {
                 let CS = this;
                 return $http.get($rootScope.api+"/threads/"+id+"/comments").then(function(response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     return response.data;
                 }, function errorCallback(response) {
                     if((response.status === 404 || response.status === 400) && $rootScope.user !== undefined) {
-                        $log.log(response);
+                        $log.debug(response);
                         return CS.postThread(id).then(function (data) {
                             return data;
                         });
                     } else {
-                        $log.log(response);
+                        $log.debug(response);
                         return null;
                     }
                 });
@@ -24,7 +24,7 @@ angular.module('transcript.service.comment', ['ui.router'])
             getThreadSharedByUsers: function(id1, id2) {
                 let CS = this;
                 return $http.get($rootScope.api+"/threads/users-"+id1+"-"+id2+"/comments").then(function(response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     return response.data;
                 }, function errorCallback(response) {
                     if((response.status === 404 || response.status === 400) && $rootScope.user !== undefined) {
@@ -32,21 +32,21 @@ angular.module('transcript.service.comment', ['ui.router'])
                             for(let comment in response.data.comments) {
                                 response.data.comments[comment] = JSON.parse(response.data.comments[comment]);
                             }
-                            $log.log(response.data);
+                            $log.debug(response.data);
                             return response.data;
                         }, function errorCallback(response) {
                             if((response.status === 404 || response.status === 400) && $rootScope.user !== undefined) {
-                                $log.log(response);
+                                $log.debug(response);
                                 return CS.postThread("users-"+id1+"-"+id2).then(function (data) {
                                     return data;
                                 });
                             } else {
-                                $log.log(response);
+                                $log.debug(response);
                                 return response;
                             }
                         });
                     } else {
-                        $log.log(response);
+                        $log.debug(response);
                         return response;
                     }
                 });
@@ -60,10 +60,10 @@ angular.module('transcript.service.comment', ['ui.router'])
             },
             getThreadsByUser: function(id) {
                 return $http.get($rootScope.api+"/override-threads?user="+id).then(function(response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -77,10 +77,10 @@ angular.module('transcript.service.comment', ['ui.router'])
                             }
                     }).
                 then(function(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                 });
             },
             postComment: function(id, content) {
@@ -92,10 +92,10 @@ angular.module('transcript.service.comment', ['ui.router'])
                             }
                     }).
                 then(function(response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

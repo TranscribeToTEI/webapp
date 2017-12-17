@@ -28,7 +28,7 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
 
     .controller('AdminEntityListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities) {
         $scope.entities = entities;
-        $log.log($scope.entities);
+        $log.debug($scope.entities);
         $scope.entitiesSorting = "willNumber";
         $scope.fieldSearch = null;
         $scope.valueSearch = null;
@@ -61,12 +61,12 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
                     arraySearch = {will: {willType: {name: $scope.valueSearch}}}
                 }
 
-                $log.log(arraySearch);
+                $log.debug(arraySearch);
                 $scope.results = $filter('filter')($scope.entities, arraySearch);
             } else {
                 $scope.results = $scope.entities;
             }
-            $log.log($scope.results);
+            $log.debug($scope.results);
         });
         /* ---------------------------------------------------------------------------------------------------------- */
 
@@ -84,7 +84,7 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
         };
 
         $scope.pageChanged = function() {
-            $log.log('Page changed to: ' + $scope.currentPage);
+            $log.debug('Page changed to: ' + $scope.currentPage);
         };
         /* ---------------------------------------------------------------------------------------------------------- */
     }])

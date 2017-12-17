@@ -42,11 +42,11 @@ angular.module('transcript.app.edition', ['ui.router'])
     }])
 
     .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', 'teiInfo', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource, teiInfo) {
-        $scope.entity = entity; $log.log($scope.entity);
-        $scope.resource = resource; $log.log($scope.resource);
+        $scope.entity = entity; $log.debug($scope.entity);
+        $scope.resource = resource; $log.debug($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
-        $scope.config = config; $log.log($scope.config);
-        $scope.teiInfo = teiInfo.data; $log.log($scope.teiInfo);
+        $scope.config = config; $log.debug($scope.config);
+        $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
         $scope.currentEdition = null;
         $scope.microObjects = {
             active: true,
@@ -59,7 +59,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         /* ---------------------------------------------------------------------------------------------------------- */
         $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
         $scope.microObjects.action = function () {
-            $log.log('test');
+            $log.debug('test');
             if($scope.microObjects.active === true) {
                 $scope.microObjects.active = false;
                 $scope.microObjects.activeClass = 'active';
@@ -75,7 +75,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
             $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
         }
-        $log.log($scope.currentEdition);
+        $log.debug($scope.currentEdition);
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
 
         /* -- Contributors management ------------------------------------------------------------------------------- */
@@ -131,7 +131,7 @@ angular.module('transcript.app.edition', ['ui.router'])
                         }
                     }
                     flash.error += "</ul>";
-                    $log.log(response);
+                    $log.debug(response);
                 }
             });
         };

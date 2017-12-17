@@ -1,11 +1,11 @@
 <ul id="listResults" class="grid row">
-    <li class="col-md-4 col-6" data-ng-repeat="entity in results|orderBy:search.resultsSorting">
+    <li class="col-md-4 col-6" data-ng-repeat="entity in results|orderBy:search.resultsSorting|limitTo:limitToResults">
         <span class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName }}</span>
         <a ui-sref="transcript.app.entity({ id: entity.id })"><img class="img-fluid" src="{{ imageService.getThumbnail(entity) }}"/></a>
         <span class="badge badge-secondary" title="Nombre de ressources à transcrire">{{ entity.resources.length }} page<span ng-if="entity.resources.length > 1">s</span></span>
         <div class="caption">
             <a  ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a>
-            Cote {{ entity.will.callNumber }}, testament du {{ entity.will.willWritingDate }}
+            Cote {{ entity.will.callNumber }}, testament du {{ entity.will.minuteDateString | sourceRender:'NOT' }}
         </div>
     </li>
 </ul>

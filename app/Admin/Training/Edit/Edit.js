@@ -71,7 +71,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
         $scope.users = users;
         $scope.config = config;
         if(trainingContent !== null) {
-            $log.log(trainingContent);
+            $log.debug(trainingContent);
             $scope.trainingContent = trainingContent;
             $scope.trainingContent.updateComment = "";
         } else {
@@ -163,14 +163,14 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 $scope.form.exerciseIsComplexFields = $scope.trainingContent.exercise.preferences.isComplexFields;
                 $scope.form.exerciseCorrectionTranscript = $scope.trainingContent.exercise.correction.transcript;
                 $scope.form.exerciseCorrectionErrorsToAvoid = $scope.trainingContent.exercise.correction.errorsToAvoid;
-                $log.log($scope.trainingContent.exercise.preferences.activeTags);
+                $log.debug($scope.trainingContent.exercise.preferences.activeTags);
             }
 
             if($scope.trainingContent.id === null || $scope.trainingContent.id === undefined) {
                 /* If trainingContent.id == null > The trainingContent doesn't exist, we post it */
                 $http.post($rootScope.api+'/training-contents', $scope.form).
                 then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     flash.success = "Vous allez être redirigé dans quelques instants ...";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
@@ -188,14 +188,14 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                         }
                         flash.error += "</ul>";
                     }
-                    $log.log(response);
+                    $log.debug(response);
                 });
             } else if($scope.trainingContent.id !== null && $scope.trainingContent.id !== undefined) {
                 /* If content.id != null > The trainingContent already exists, we just patch it */
 
                 $http.patch($rootScope.api+'/training-contents/'+$scope.trainingContent.id, $scope.form).
                 then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     flash.success = "Votre contenu a bien été mis à jour";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
@@ -216,7 +216,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
 
                     }
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };
@@ -233,7 +233,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 $state.go('transcript.admin.training.list');
             }, function errorCallback(response) {
                 $scope.validation.loading = false;
-                $log.log(response);
+                $log.debug(response);
             });
 
         };
@@ -265,7 +265,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 url: $rootScope.api+url,
                 data: {media: $scope.media.form.illustration}
             }).then(function (response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.media.submit.loading = false;
                 $scope.media.submit.success = true;
                 $timeout(function() {
@@ -278,7 +278,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                     $scope.trainingContent.illustration = response.data;
                 }
             }, function errorCallback(error) {
-                $log.log(error);
+                $log.debug(error);
                 $scope.media.submit.loading = false;
             });
         }

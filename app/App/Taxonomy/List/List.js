@@ -40,7 +40,7 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
             dataType: $transition$.params().type
         };
         $scope.entities = entities;
-        $log.log($scope.entities);
+        $log.debug($scope.entities);
 
         $scope.pluralType = $filter('taxonomyName')($scope.entity.dataType, 'plural');
 
@@ -95,12 +95,12 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
                     arraySearch = {geonamesId: $scope.valueSearch}
                 }
 
-                $log.log(arraySearch);
+                $log.debug(arraySearch);
                 $scope.results = $filter('filter')($scope.entities, arraySearch);
             } else {
                 $scope.results = $scope.entities;
             }
-            $log.log($scope.results);
+            $log.debug($scope.results);
         });
         /* ---------------------------------------------------------------------------------------------------------- */
 
@@ -118,7 +118,7 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
         };
 
         $scope.pageChanged = function() {
-            $log.log('Page changed to: ' + $scope.currentPage);
+            $log.debug('Page changed to: ' + $scope.currentPage);
         };
         /* ---------------------------------------------------------------------------------------------------------- */
     }])

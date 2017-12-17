@@ -27,7 +27,7 @@ angular.module('transcript.service.content', ['ui.router'])
                     }
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -38,7 +38,7 @@ angular.module('transcript.service.content', ['ui.router'])
                     if(encode === true) {response.data.content = $sce.trustAsHtml(response.data.content);}
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             }

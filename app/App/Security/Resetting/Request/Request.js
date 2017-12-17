@@ -44,7 +44,7 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                     flash.error = response;
                 });
             }

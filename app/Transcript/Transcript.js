@@ -36,7 +36,7 @@ angular.module('transcript', ['ui.router'])
             if($rootScope.user === undefined) {
                 $rootScope.user = user;
             }
-            $log.log($rootScope.user);
+            $log.debug($rootScope.user);
         }
         $rootScope.preferences = appPreference;
         tfMetaTags.setTitleSuffix(' | '+$rootScope.preferences.projectTitle+tfMetaTags.getTitleSuffix());

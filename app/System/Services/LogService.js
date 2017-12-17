@@ -10,7 +10,7 @@ angular.module('transcript.service.log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -20,7 +20,7 @@ angular.module('transcript.service.log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -30,7 +30,7 @@ angular.module('transcript.service.log', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -44,14 +44,14 @@ angular.module('transcript.service.log', ['ui.router'])
                         ).then(function(response) {
                             return response.data;
                         }, function errorCallback(response) {
-                            $log.log(response);
+                            $log.debug(response);
                             return response;
                         });
                     } else {
                         return null;
                     }
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             }

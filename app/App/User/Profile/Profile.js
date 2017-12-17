@@ -30,8 +30,8 @@ angular.module('transcript.app.user.profile', ['ui.router'])
     }])
 
     .controller('AppUserProfileCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'userEdit', 'EntityService', 'ImageService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, userEdit, EntityService, ImageService) {
-        $log.log($rootScope.user);
-        $log.log(userEdit);
+        $log.debug($rootScope.user);
+        $log.debug(userEdit);
 
         $scope.context = "view";
         $scope.iUser = userEdit;

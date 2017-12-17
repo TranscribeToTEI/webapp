@@ -28,6 +28,6 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
 
     .controller('AdminTranscriptValidationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'transcripts', function($log, $rootScope, $scope, $http, $sce, $state, transcripts) {
         $scope.transcripts = transcripts;
-        $log.log($scope.transcripts);
+        $log.debug($scope.transcripts);
     }])
 ;

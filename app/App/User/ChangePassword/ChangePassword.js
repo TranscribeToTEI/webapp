@@ -56,7 +56,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
                 return UserService.changePassword($scope.form.currentPassword, $scope.form.password.first, $scope.form.password.second).
                 then(function(response) {
                     if(response.status === 200 && response.data !== false) {
-                        $log.log(response);
+                        $log.debug(response);
                         $scope.submit.loading = false;
                         $scope.submit.success = true;
                         flash.success = "Votre mot de passe a bien été mis à jour, vous allez être redirigé dans quelques instants ...";
@@ -67,7 +67,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

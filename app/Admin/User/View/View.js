@@ -47,11 +47,11 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                 roles: $scope.iUser.roles,
                 action: "set"
             };
-            $log.log(form);
+            $log.debug(form);
 
             $http.post($rootScope.api+'/users/'+$scope.iUser.id+"/roles", form).
             then(function (response) {
-                $log.log(response.data);
+                $log.debug(response.data);
                 flash.success = "Les rôles ont bien été mis à jour";
                 $scope.roles.submit.loading = false;
                 $scope.roles.submit.success = true;
@@ -72,7 +72,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                $log.log(response);
+                $log.debug(response);
             });
         };
         /* End: Edit User Roles ------------------------------------------------------------------------------------- */
@@ -83,7 +83,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
 
             $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
             then(function (response) {
-                $log.log(response.data);
+                $log.debug(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";
                 $scope.remove.loading = false;
                 $scope.remove.success = true;
@@ -102,7 +102,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                $log.log(response);
+                $log.debug(response);
             });
         };
         /* End: Remove User ----------------------------------------------------------------------------------------- */

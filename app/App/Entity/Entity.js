@@ -47,7 +47,7 @@ angular.module('transcript.app.entity', ['ui.router'])
             loading: true
         };
         $scope.entity = entity;
-        $log.log(entity);
+        $log.debug(entity);
 
         /* -- Contributors management ---------------------------------------------------- */
         $scope.contributors = [];
@@ -88,13 +88,13 @@ angular.module('transcript.app.entity', ['ui.router'])
         $scope.admin.export.submit.action = function() {
             $scope.admin.export.submit.loading = true;
             EntityService.exportEntity(entity.id).then(function(response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.admin.export.submit.loading = false;
                 $scope.admin.export.submit.result = true;
                 $scope.admin.export.submit.content = response.link;
             }, function errorCallback(response) {
                 $scope.admin.export.submit.loading = false;
-                $log.log(response);
+                $log.debug(response);
             });
         };
         /* -- Admin management ----------------------------------------------------------- */

@@ -88,10 +88,10 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
             }
         }
 
-        $log.log($scope.logContainers);
-        $log.log('logContainer');
-        $log.log($scope.logContainer);
-        $log.log('logPreviousContainer');
-        $log.log($scope.logPreviousContainer);
+        $log.debug($scope.logContainers);
+        $log.debug('logContainer');
+        $log.debug($scope.logContainer);
+        $log.debug('logPreviousContainer');
+        $log.debug($scope.logPreviousContainer);
     }])
 ;

@@ -110,6 +110,7 @@ angular.module('transcriptApp', [
         'transcript.filter.imageRender',
         'transcript.filter.objectToId',
         'transcript.filter.resourceTypeName',
+        'transcript.filter.shuffle',
         'transcript.filter.taxonomyEntityNameConstruct',
         'transcript.filter.taxonomyName',
         'transcript.filter.trainingTypePageName',
@@ -149,7 +150,7 @@ angular.module('transcriptApp', [
         'transcript.service.will-type',
         'transcript.system.transcript'
     ]).
-    config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider) {
+    config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', '$logProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider, $logProvider) {
         $urlRouterProvider.otherwise('/');
         //$urlRouterProvider.deferIntercept();
         $qProvider.errorOnUnhandledRejections(false);
@@ -184,7 +185,7 @@ angular.module('transcriptApp', [
         /* ------------------------------------------------------ */
 
 
-
+        $logProvider.debugEnabled(true);
     }])
     .run(['$log', '$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($log, $rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
         /* -- Parameters management ------------------------------------------------------ */
@@ -243,7 +244,7 @@ angular.module('transcriptApp', [
                     return ($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN'));
                 } else {
                     return UserService.getCurrent().then(function() {
-                        $log.log(!!($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN')));
+                        $log.debug(!!($rootScope.user !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN')));
                         return ($rootScope.user !== undefined && $rootScope.user.roles !== undefined && $filter('contains')($rootScope.user.roles, 'ROLE_ADMIN'));
                     });
                 }
@@ -254,7 +255,7 @@ angular.module('transcriptApp', [
                     return ($rootScope.user !== undefined);
                 } else {
                     return UserService.getCurrent().then(function() {
-                        $log.log($rootScope.user);
+                        $log.debug($rootScope.user);
                         return ($rootScope.user !== undefined);
                     });
                 }

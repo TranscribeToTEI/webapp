@@ -50,7 +50,7 @@ angular.module('transcript.admin.taxonomy.access', ['ui.router'])
                     });
             }
             function setRole(access) {
-                $log.log(access.user);
+                $log.debug(access.user);
                 return UserService.setRole(access.user, ["ROLE_TAXONOMY_EDIT"], "promote").then(function(data) {
                     $state.reload();
                 });

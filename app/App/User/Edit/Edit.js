@@ -66,7 +66,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
                     flash.error += "</ul>";
                 }
             }, function errorCallback(response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.submit.loading = false;
             });
         };

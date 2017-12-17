@@ -1,59 +1,34 @@
 groups:
     renderingDifficulties:
-        type: "virtual"
         id: "renderingDifficulties"
-        idStrict: "renderingDifficulties"
         name: "Lisibilité"
         icon: "fa fa-puzzle-piece"
-        parent: "choice"
+        parent: "microPhenomena"
         order: 11
         separator_before: true
     microPhenomena:
-        type: "real"
-        id: "choice"
-        idStrict: "microPhenomena"
+        id: "microPhenomena"
+        name: "Particularité de l'écriture"
+        icon: "fa fa-adjust"
         parent: false
         order: 2
     semantic:
-        type: "virtual"
         name: "Sémantique"
         id: "semantic"
-        idStrict: "semantic"
         icon: "fa fa-bug"
         parent: false
         order: 3
     notes:
-        type: "virtual"
         name: "Notes éditoriales"
         id: "notes"
-        idStrict: "notes"
         icon: "fa fa-stack-overflow"
         parent: false
         order: 4
-    notesApp:
-        type: "virtual"
-        id: "notesApp"
-        idStrict: "notesApp"
-        name: "Apparat critique"
-        icon: ""
-        parent: "notes"
-        order: 1
-        separator_before: false
-    notesRef:
-        type: "virtual"
-        id: "notesRef"
-        idStrict: "notesRef"
-        name: "Référence biblio"
-        icon: ""
-        parent: "notes"
-        order: 2
-        separator_before: false
 tags:
     # Level 1 :
     head:
         btn:
             id: "head"
-            idStrict: "head"
             label: false
             title: "Marque un en-tête"
             label_forced: true
@@ -85,7 +60,6 @@ tags:
     dateline:
         btn:
             id: "dateline"
-            idStrict: "dateline"
             label: false
             title: "Ajouter une ligne de date"
             label_forced: true
@@ -117,7 +91,6 @@ tags:
     p:
         btn:
             id: "p"
-            idStrict: "p"
             label: false
             title: "Marque un paragraphe"
             label_forced: true
@@ -149,7 +122,6 @@ tags:
     list:
         btn:
             id: "list"
-            idStrict: "list"
             label: false
             title: "Marque une liste"
             label_forced: true
@@ -179,7 +151,6 @@ tags:
     signed:
         btn:
             id: "signed"
-            idStrict: "signed"
             label: false
             title: "Marque une signature"
             label_forced: true
@@ -209,7 +180,6 @@ tags:
     postscript:
         btn:
             id: "postscript"
-            idStrict: "postscript"
             label: false
             title: "Marque un post-scriptum"
             label_forced: true
@@ -239,7 +209,6 @@ tags:
     space:
         btn:
             id: "space"
-            idStrict: "space"
             label: false
             title: "Marque un espace"
             label_forced: true
@@ -271,7 +240,6 @@ tags:
     metamark:
         btn:
             id: "metamark"
-            idStrict: "metamark"
             label: false
             title: "Signaler une marque"
             label_forced: true
@@ -304,7 +272,6 @@ tags:
     hi:
         btn:
             id: "hi"
-            idStrict: "hi"
             label: "Mise en forme du texte"
             title: "Marquer le texte"
             label_forced: true
@@ -316,6 +283,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
+            choicesByAttr: "rend"
         order: 1
         caret:
             position: "prepend"
@@ -334,7 +302,6 @@ tags:
     item:
         btn:
             id: "item"
-            idStrict: "item"
             label: false
             title: "Item dans une liste"
             label_forced: false
@@ -362,7 +329,6 @@ tags:
     lb:
         btn:
             id: "lb"
-            idStrict: "lb"
             label: false
             title: "Changement de ligne"
             label_forced: false
@@ -391,25 +357,24 @@ tags:
             enable: false
     # Particularité de l'écriture :
     choice:
-        btn:
-            id: "choice"
-            idStrict: "choice"
-            label: "Particularité de l'écriture"
-            label_forced: true
-            title: "Consigner un micro-phénomène de l'écriture"
-            icon: "fa fa-adjust"
-            btn_class: ""
-            btn_group: false
-            btn_is_group: "microPhenomena"
-            allow_root: true
-            restrict_to_root: false
-            enabled: false
-            level: 2
-            separator_before: false
-            group_children: ["renderingDifficulties"]
-        order: false
-        caret:
-            position: "prepend"
+#        btn:
+#            id: "choice"
+#            label: "Particularité de l'écriture"
+#            label_forced: true
+#            title: "Consigner un micro-phénomène de l'écriture"
+#            icon: "fa fa-adjust"
+#            btn_class: ""
+#            btn_group: false
+#            btn_is_group: "microPhenomena"
+#            allow_root: true
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: false
+#            group_children: ["renderingDifficulties"]
+#        order: false
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -424,12 +389,11 @@ tags:
         complex_entry: 
             enable: true
             children: "(abbr&&expan)||(sic&&corr)||(orig&&reg)"
-    abbr:
+    choiceAbbr:
         btn:
-            id: "abbr"
-            idStrict: "abbr"
-            label: false
-            label_forced: false
+            id: "choiceAbbr"
+            label: "Marquer une abbréviation"
+            label_forced: true
             title: "Signaliser la présence d'une abbréviation"
             icon: "fa fa-compress"
             btn_class: ""
@@ -447,6 +411,41 @@ tags:
             name: "span"
             unique: false
             attributes:
+                class: "choice text-primary"
+            marker: true
+        xml:
+            name: "choice"
+            unique: false
+            contains:
+                abbr: "default"
+                expan: "emptyContent"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: true
+            children: ""
+    abbr:
+#        btn:
+#            id: "abbr"
+#            label: false
+#            label_forced: false
+#            title: "Signaliser la présence d'une abbréviation"
+#            icon: "fa fa-compress"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: false
+#        order: 1
+#        caret:
+#            position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
                 class: "abbr"
         xml:
             name: "abbr"
@@ -456,24 +455,23 @@ tags:
         complex_entry: 
             enable: false
     expan:
-        btn:
-            id: "expan"
-            idStrict: "expan"
-            label: false
-            label_forced: false
-            title: "Déplier une abbréviation"
-            icon: "fa fa-expand"
-            btn_class: ""
-            btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-            separator_before: false
-        order: 2
-        caret:
-            position: "prepend"
+#        btn:
+#            id: "expan"
+#            label: false
+#            label_forced: false
+#            title: "Déplier une abbréviation"
+#            icon: "fa fa-expand"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: false
+#        order: 2
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -487,13 +485,12 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    sic:
+    choiceSic:
         btn:
-            id: "sic"
-            idStrict: "sic"
-            label: false
-            label_forced: false
-            title: "Signaler une faute"
+            id: "choiceSic"
+            label: "Marquer une faute"
+            label_forced: true
+            title: "Signaliser une faute"
             icon: "fa fa-thumbs-down"
             btn_class: ""
             btn_group: "microPhenomena"
@@ -502,11 +499,46 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            separator_before: true
-            children: "surplus"
-        order: 3
+            separator_before: false
+        order: 1
         caret:
             position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "choice text-primary"
+            marker: true
+        xml:
+            name: "choice"
+            unique: false
+            contains:
+                sic: "default"
+                corr: "emptyContent"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: true
+            children: ""
+    sic:
+#        btn:
+#            id: "sic"
+#            label: false
+#            label_forced: false
+#            title: "Signaler une faute"
+#            icon: "fa fa-thumbs-down"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: true
+#            children: "surplus"
+#        order: 3
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -520,24 +552,23 @@ tags:
         complex_entry: 
             enable: false
     corr:
-        btn:
-            id: "corr"
-            idStrict: "corr"
-            label: false
-            label_forced: false
-            title: "Correction d'une faute"
-            icon: "fa fa-thumbs-up"
-            btn_class: ""
-            btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-            separator_before: false
-        order: 4
-        caret:
-            position: "prepend"
+#        btn:
+#            id: "corr"
+#            label: false
+#            label_forced: false
+#            title: "Correction d'une faute"
+#            icon: "fa fa-thumbs-up"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: false
+#        order: 4
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -551,13 +582,12 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    orig:
+    choiceOrig:
         btn:
-            id: "orig"
-            idStrict: "orig"
-            label: false
-            label_forced: false
-            title: "Marquer une forme ancienne"
+            id: "choiceOrig"
+            label: "Marquer une forme ancienne"
+            label_forced: true
+            title: "Signaliser une forme ancienne"
             icon: "fa fa-pagelines"
             btn_class: ""
             btn_group: "microPhenomena"
@@ -566,10 +596,45 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            separator_before: true
-        order: 5
+            separator_before: false
+        order: 1
         caret:
             position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "choice text-primary"
+            marker: true
+        xml:
+            name: "choice"
+            unique: false
+            contains:
+                orig: "default"
+                reg: "emptyContent"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: true
+            children: ""
+    orig:
+#        btn:
+#            id: "orig"
+#            label: false
+#            label_forced: false
+#            title: "Marquer une forme ancienne"
+#            icon: "fa fa-pagelines"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: true
+#        order: 5
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -583,24 +648,23 @@ tags:
         complex_entry: 
             enable: false
     reg:
-        btn:
-            id: "reg"
-            idStrict: "reg"
-            label: false
-            label_forced: false
-            title: "Préciser une forme correcte"
-            icon: "fa fa-leaf"
-            btn_class: ""
-            btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-            separator_before: false
-        order: 6
-        caret:
-            position: "prepend"
+#        btn:
+#            id: "reg"
+#            label: false
+#            label_forced: false
+#            title: "Préciser une forme correcte"
+#            icon: "fa fa-leaf"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#            separator_before: false
+#        order: 6
+#        caret:
+#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -617,7 +681,6 @@ tags:
     surplus:
         btn:
             id: "surplus"
-            idStrict: "surplus"
             label: false
             title: "Marquer le texte comme superflu"
             label_forced: false
@@ -630,7 +693,7 @@ tags:
             restrict_to_root: false
             enabled: false
             level: 2
-            separator_before: false
+            separator_before: true
         order: 7
         caret:
             position: "prepend"
@@ -649,7 +712,6 @@ tags:
     add:
         btn:
             id: "add"
-            idStrict: "add"
             label: false
             title: "Marquer le texte comme ajouté"
             label_forced: false
@@ -680,7 +742,6 @@ tags:
     del:
         btn:
             id: "del"
-            idStrict: "del"
             label: false
             title: "Marquer le texte comme supprimé"
             label_forced: false
@@ -709,7 +770,6 @@ tags:
     subst:
         btn:
             id: "subst"
-            idStrict: "subst"
             label: false
             title: "Marquer le texte comme remplacé"
             label_forced: false
@@ -738,42 +798,10 @@ tags:
         complex_entry: 
             enable: true
             children: "del&&add"
-    note:
-        btn:
-            id: "note"
-            idStrict: "note"
-            label: false
-            title: "Note du testateur"
-            label_forced: false
-            icon: "fa fa-stack-overflow"
-            btn_class: ""
-            btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-            separator_before: true
-        order: 12
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "note"
-        xml:
-            name: "note"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry: 
-            enable: false
     # Groupe renderingDifficulties
     damage:
         btn:
             id: "damage"
-            idStrict: "damage"
             label: false
             title: "Marquer le texte comme endommagé"
             label_forced: false
@@ -803,7 +831,6 @@ tags:
     supplied:
         btn:
             id: "supplied"
-            idStrict: "supplied"
             label: false
             title: "Texte restitué par le transcripteur"
             label_forced: false
@@ -834,7 +861,6 @@ tags:
     unclear:
         btn:
             id: "unclear"
-            idStrict: "unclear"
             label: false
             title: "Texte transcript incertain"
             label_forced: false
@@ -864,7 +890,6 @@ tags:
     gap:
         btn:
             id: "gap"
-            idStrict: "gap"
             label: false
             title: "Présence d'un manque dans la transcription"
             label_forced: false
@@ -897,7 +922,6 @@ tags:
     date:
         btn:
             id: "date"
-            idStrict: "date"
             label: false
             title: "Marquer une date"
             label_forced: false
@@ -929,7 +953,6 @@ tags:
     persName:
         btn:
             id: "persName"
-            idStrict: "persName"
             label: false
             title: "Marquer un nom de personne"
             label_forced: false
@@ -961,7 +984,6 @@ tags:
     surname:
         btn:
             id: "surname"
-            idStrict: "surname"
             label: false
             title: "Marquer un nom de famille"
             label_forced: false
@@ -993,7 +1015,6 @@ tags:
     placeName:
         btn:
             id: "placeName"
-            idStrict: "placeName"
             label: false
             title: "Marquer un nom de lieu"
             label_forced: false
@@ -1025,7 +1046,6 @@ tags:
     address:
         btn:
             id: "address"
-            idStrict: "address"
             label: false
             title: "Baliser une adresse"
             label_forced: true
@@ -1059,7 +1079,6 @@ tags:
     addrLine:
         btn:
             id: "addrLine"
-            idStrict: "addrLine"
             label: false
             title: "Baliser une ligne d'adresse postale dans le corps de la transcription"
             label_forced: true
@@ -1089,7 +1108,6 @@ tags:
     orgName:
         btn:
             id: "orgName"
-            idStrict: "orgName"
             label: false
             title: "Marquer un nom d'organisation"
             label_forced: false
@@ -1121,7 +1139,6 @@ tags:
     term:
         btn:
             id: "term"
-            idStrict: "term"
             label: false
             title: "Marquer un terme"
             label_forced: false
@@ -1153,7 +1170,6 @@ tags:
     foreign:
         btn:
             id: "foreign"
-            idStrict: "foreign"
             label: false
             title: "Marquer une langue autre que le français"
             label_forced: false
@@ -1185,7 +1201,6 @@ tags:
     seg:
         btn:
             id: "seg"
-            idStrict: "seg"
             label: false
             title: "Segment de texte"
             label_forced: false
@@ -1212,17 +1227,46 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
+    note:
+        btn:
+            id: "note"
+            label: false
+            title: "Note du testateur"
+            label_forced: false
+            icon: "fa fa-stack-overflow"
+            btn_class: ""
+            btn_group: "semantic"
+            btn_is_group: false
+            allow_root: false
+            restrict_to_root: false
+            enabled: false
+            level: 2
+            separator_before: true
+        order: 11
+        caret:
+            position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "note"
+        xml:
+            name: "note"
+            unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
     app:
         btn:
             id: "app"
-            idStrict: "app"
             label: false
             title: "Note d'apparat critique"
             label_forced: false
             icon: "fa fa-bookmark-o"
             btn_class: ""
-            btn_group: "notesApp"
+            btn_group: "notes"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
@@ -1250,13 +1294,12 @@ tags:
     ref:
         btn:
             id: "ref"
-            idStrict: "ref"
             label: false
             title: "Pointer vers une note sur le contenu"
             label_forced: false
             icon: "fa fa-tag"
             btn_class: ""
-            btn_group: "notesRef"
+            btn_group: "notes"
             btn_is_group: false
             allow_root: false
             restrict_to_root: false
@@ -1277,63 +1320,61 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    lem:
-        btn:
-            id: "lem"
-            idStrict: "lem"
-            label: false
-            title: "Leçon textuelle"
-            label_forced: false
-            icon: "fa fa-graduation-cap"
-            btn_class: ""
-            btn_group: "notesApp"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-        order: 2
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "lem"
-        xml:
-            name: "lem"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry: 
-            enable: false
-    bibl:
-        btn:
-            id: "bibl"
-            idStrict: "bibl"
-            label: false
-            title: "Référence bibliographique"
-            label_forced: false
-            icon: "fa fa-book"
-            btn_class: ""
-            btn_group: "notesRef"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            level: 2
-        order: 2
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "bibl"
-        xml:
-            name: "bibl"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry: 
-            enable: false
+#    lem:
+#        btn:
+#            id: "lem"
+#            label: false
+#            title: "Leçon textuelle"
+#            label_forced: false
+#            icon: "fa fa-graduation-cap"
+#            btn_class: ""
+#            btn_group: "notes"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#        order: 2
+#        caret:
+#            position: "prepend"
+#        html:
+#            name: "span"
+#            unique: false
+#            attributes:
+#                class: "lem"
+#        xml:
+#            name: "lem"
+#            unique: false
+#            replicateOnEnter: false
+#            replicateOnCtrlEnter: false
+#        complex_entry:
+#            enable: false
+#    bibl:
+#        btn:
+#            id: "bibl"
+#            label: false
+#            title: "Référence bibliographique"
+#            label_forced: false
+#            icon: "fa fa-book"
+#            btn_class: ""
+#            btn_group: "notesRef"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            level: 2
+#        order: 2
+#        caret:
+#            position: "prepend"
+#        html:
+#            name: "span"
+#            unique: false
+#            attributes:
+#                class: "bibl"
+#        xml:
+#            name: "bibl"
+#            unique: false
+#            replicateOnEnter: false
+#            replicateOnCtrlEnter: false
+#        complex_entry:
+#            enable: false

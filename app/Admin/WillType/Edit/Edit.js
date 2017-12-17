@@ -57,7 +57,7 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
         } else {
             $scope.willType = willType;
         }
-        $log.log($scope.willType);
+        $log.debug($scope.willType);
 
         $scope.submit = {
             loading: false,
@@ -78,22 +78,22 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
                 description: $scope.willType.description,
             };
 
-            $log.log(formEntity);
+            $log.debug(formEntity);
             if(willType === null) {
                 $http.post($rootScope.api + '/will-types', formEntity).
                 then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.admin.will-type.list');
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
-                        $log.log(response.data.errors.children);
-                        $log.log(field);
+                        $log.debug(response.data.errors.children);
+                        $log.debug(field);
                         for (let error in response.data.errors.children[field]) {
                             if (error === "errors") {
                                 flash.error += "<li><strong>" + field + "</strong> : " + response.data.errors.children[field][error] + "</li>";
@@ -105,18 +105,18 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
             } else {
                 $http.patch($rootScope.api + '/will-types/' + $scope.willType.id, formEntity).
                 then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.admin.will-type.list');
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
-                        $log.log(response.data.errors.children);
-                        $log.log(field);
+                        $log.debug(response.data.errors.children);
+                        $log.debug(field);
                         for (let error in response.data.errors.children[field]) {
                             if (error === "errors") {
                                 flash.error += "<li><strong>" + field + "</strong> : " + response.data.errors.children[field][error] + "</li>";
@@ -138,18 +138,18 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
             function removeWillType() {
                 $http.delete($rootScope.api + '/will-types/' + $scope.willType.id).
                 then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.admin.will-type.list');
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
-                        $log.log(response.data.errors.children);
-                        $log.log(field);
+                        $log.debug(response.data.errors.children);
+                        $log.debug(field);
                         for (let error in response.data.errors.children[field]) {
                             if (error === "errors") {
                                 flash.error += "<li><strong>" + field + "</strong> : " + response.data.errors.children[field][error] + "</li>";

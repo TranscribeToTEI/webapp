@@ -34,7 +34,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         $scope.iUser = $rootScope.user;
         /* -- End : breadcrumb management -------------------------------------------------- */
 
-        $log.log(userPreferences);
+        $log.debug(userPreferences);
         $scope.userPreferences = userPreferences;
         $scope.form = {
             transcriptionDeskPosition: $scope.userPreferences.transcriptionDeskPosition,
@@ -54,7 +54,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             return UserPreferenceService.patchPreferences(
                 $scope.form, $scope.iUser.id
             ).then(function (response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.submit.loading = false;
                 if(response.status === 200) {
                     $rootScope.user._embedded.preferences = response.data;
@@ -73,7 +73,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                     flash.error += '</ul>';
                 }
             }, function errorCallback(response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.submit.loading = false;
             });
         };
@@ -89,7 +89,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
 
             $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
             then(function (response) {
-                $log.log(response.data);
+                $log.debug(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";
                 $scope.remove.loading = false;
                 $scope.remove.success = true;
@@ -111,7 +111,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                     flash.error += "</ul>";
 
                 }
-                $log.log(response);
+                $log.debug(response);
             });
         };
         /* End: Remove User ----------------------------------------------------------------------------------------- */

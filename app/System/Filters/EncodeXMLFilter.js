@@ -4,7 +4,7 @@ angular.module('transcript.filter.encodeXML', ['ui.router'])
 
     .filter('encodeXML', ['$log', function($log) {
         return function (text) {
-            $log.log(text);
+            $log.debug(text);
             text = text.replace(/<gi>/g, "<code>").replace(/<\/gi>/g, "</code>")
                        .replace(/<list>/g, "<ul>").replace(/<\/list>/g, "</ul>")
                        .replace(/<item>/g, "<li>").replace(/<\/item>/g, "</li>")

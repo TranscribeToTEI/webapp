@@ -56,7 +56,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                 form = {isTaxonomyAccess: true, taxonomyRequest: null};
             }
 
-            $log.log(form);
+            $log.debug(form);
             return AccessService.patchAccess(form, $rootScope.user._embedded.accesses.id).then(function(data) {
                 if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
                     $scope.submit.loading = false;
@@ -83,7 +83,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                     }
                     flash.error += "</ul>";
                 }
-                $log.log(response);
+                $log.debug(response);
             });
         }
         function setRole() {

@@ -89,7 +89,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             function fillForm(data, type) {
                 return TaxonomyService.getFormType(data, type);
             }
-            $log.log($scope.form);
+            $log.debug($scope.form);
 
             function patchEntity() {
                 return TaxonomyService.patchTaxonomyEntity(dataType, entity.id, $scope.form)
@@ -112,14 +112,14 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         }
         function postEntityLoader(entity, dataType, action) {
             $scope.form = fillForm(entity, dataType);
             $scope.form.updateComment = "Creation of the entity";
-            $log.log($scope.form);
+            $log.debug($scope.form);
             postEntity();
 
             function fillForm(data, type) {
@@ -155,7 +155,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         }
@@ -234,7 +234,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                             }
                     }, function errorCallback(response) {
                         $scope.remove.loading = false;
-                        $log.log(response);
+                        $log.debug(response);
                     });
                 }
             };
@@ -245,7 +245,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         if($scope.entity.dataType === 'places' && $scope.entity.id !== undefined) {
             if($scope.entity.names.length > 0) {
                 $scope.entity.name = $scope.entity.names[0].name;
-                $log.log($scope.entity.name);
+                $log.debug($scope.entity.name);
             }
         }
 
@@ -272,7 +272,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             if($scope.entity.city !== undefined && $scope.entity.city !== null) {
                 $scope.entity.cities = [{name: $scope.entity.city, updateComment: "entity creation"}];
             } else {$scope.entity.city = null;}
-            $log.log($scope.entity);
+            $log.debug($scope.entity);
         }
         /* -- End : Place name management --------------------------------------------------------------------------- */
 
@@ -291,7 +291,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             $scope.submit.loading = true;
 
             if($scope.entity.dataType === "places") {parsePlaceNames();}
-            $log.log($scope.entity);
+            $log.debug($scope.entity);
 
             if(entity === null) {
                 postEntityLoader($scope.entity, $scope.entity.dataType, "redirect");
@@ -322,7 +322,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 return GeonamesService.search($scope.geonames.keywords)
                     .then(function(response) {
                         $scope.geonames.loading = false;
-                        $log.log(response);
+                        $log.debug(response);
                         if(response.status === 200) {
                             $scope.geonames.result = response.data;
                         } else if(response.data.code === 400) {
@@ -338,7 +338,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         }
                 }, function errorCallback(response) {
                     $scope.geonames.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };
@@ -376,7 +376,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 url: $rootScope.api+url,
                 data: {media: $scope.media.form.illustration}
             }).then(function (response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.media.submit.loading = false;
                 $scope.media.submit.success = true;
                 $timeout(function() {
@@ -389,7 +389,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     $scope.entity.picture = response.data;
                 }
             }, function errorCallback(error) {
-                $log.log(error);
+                $log.debug(error);
                 $scope.media.submit.loading = false;
             });
         }
@@ -483,10 +483,10 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     reference.authors = [reference.authorsEdit];
                 }
                 delete reference.authorsEdit;
-                $log.log(reference);
+                $log.debug(reference);
             } else if ($scope.bibliography.addForm.type === "manuscriptReference") {
                 reference = $scope.bibliography.addForm.manuscriptReference;
-                $log.log(reference);
+                $log.debug(reference);
             }
 
             if (method === 'post') {
@@ -541,7 +541,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         };
 
         $scope.pageChanged = function() {
-            $log.log('Page changed to: ' + $scope.currentPage);
+            $log.debug('Page changed to: ' + $scope.currentPage);
         };
         /* ---------------------------------------------------------------------------------------------------------- */
     }])

@@ -4,13 +4,18 @@ angular.module('transcript.service.entity', ['ui.router'])
 
     .service('EntityService', function($log, $http, $rootScope, ResourceService) {
         return {
-            getEntities: function() {
+            getEntities: function(profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/entities"
+                    $rootScope.api+"/entities"+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -21,7 +26,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -31,7 +36,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -41,7 +46,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -52,7 +57,7 @@ angular.module('transcript.service.entity', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },

@@ -40,8 +40,8 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
     }])
 
     .controller('AppTaxonomyViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
-        $scope.entity = entity; $log.log($scope.entity);
-        $scope.entities = entities; $log.log($scope.entities);
+        $scope.entity = entity; $log.debug($scope.entity);
+        $scope.entities = entities; $log.debug($scope.entities);
         $scope.bibliography = bibliographies;
         $scope.bibliographyEdit = false;
         $scope.entity.dataType = $transition$.params().type;
@@ -99,7 +99,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         };
 
         $scope.pageChanged = function() {
-            $log.log('Page changed to: ' + $scope.currentPage);
+            $log.debug('Page changed to: ' + $scope.currentPage);
         };
         /* ---------------------------------------------------------------------------------------------------------- */
     }])

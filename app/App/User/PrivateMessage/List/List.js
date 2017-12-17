@@ -31,7 +31,7 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
 
     .controller('AppUserPrivateMessageListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'UserService', 'threads', 'iUser', function($log, $rootScope, $scope, $http, $sce, $state, flash, UserService, threads, iUser) {
         $scope.threads = threads;
-        $log.log($scope.threads);
+        $log.debug($scope.threads);
         $scope.iUser = iUser;
         $scope.UserService = UserService;
 

@@ -44,18 +44,18 @@ angular.module('transcript.app.security.login', ['ui.router'])
             function login() {
                 return UserService.login($scope.form, "transcript.app.home").
                 then(function(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     if(response.status === 200) {
                         $scope.submit.success = true;
                         flash.success = "Vous allez être redirigé dans quelques instants ...";
                     } else if(response.status === 400) {
                         flash.error = response.data.error_description;
-                        $log.log(flash);
+                        $log.debug(flash);
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

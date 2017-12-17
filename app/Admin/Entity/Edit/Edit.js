@@ -107,7 +107,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             if($scope.entity.will.willWritingDateNormalized) {$scope.entity.will.willWritingDateNormalized = $filter('date')($scope.entity.will.willWritingDateNormalized, 'yyyy-MM-dd')}
             if($scope.entity.will.willWritingDateEndNormalized) {$scope.entity.will.willWritingDateEndNormalized = $filter('date')($scope.entity.will.willWritingDateEndNormalized, 'yyyy-MM-dd')}
         }
-        $log.log($scope.entity);
+        $log.debug($scope.entity);
         /* End: Entity management ----------------------------------------------------------------------------------- */
 
 
@@ -213,17 +213,17 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 }
                 formEntity.resources.push(content);
             }
-            $log.log(formEntity);
+            $log.debug(formEntity);
 
             if($scope.entity.id === undefined) {
                 $http.post($rootScope.api + '/entities', formEntity).then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.entity', {id: response.data.id});
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
@@ -237,13 +237,13 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 });
             } else {
                 $http.patch($rootScope.api + '/entities/' + $scope.entity.id, formEntity).then(function (response) {
-                    $log.log(response.data);
+                    $log.debug(response.data);
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.entity', {id: response.data.id});
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for (let field in response.data.errors.children) {
@@ -287,7 +287,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
 
                     }
                     $scope.remove.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

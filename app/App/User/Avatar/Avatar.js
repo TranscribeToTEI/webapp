@@ -51,7 +51,7 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
                 url: $rootScope.api+"/users-avatar?id="+$rootScope.user.id,
                 data: {picture: $scope.form.picture}
             }).then(function (response) {
-                $log.log(response);
+                $log.debug(response);
                 $scope.submit.loading = false;
                 $scope.submit.success = true;
                 flash.success = "Vous allez être redirigé dans quelques instants ...";

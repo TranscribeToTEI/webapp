@@ -1,13 +1,29 @@
 <ul id="listResults" class="list list-unstyled">
-    <li class="row" data-ng-repeat="entity in results|orderBy:search.resultsSorting">
+    <li class="row" data-ng-repeat="entity in results|orderBy:search.resultsSorting|limitTo:limitToResults">
         <div class="col-12"><div class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName }}</div></div>
         <div class="col-2"><a ui-sref="transcript.app.entity({ id: entity.id })"><img class="img-fluid" src="{{ imageService.getThumbnail(entity) }}"/></a></div>
         <div class="col-9">
             <a ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a><br/>
             <div class="desc">
-                {{ entity.will.testator.deathMention }} le {{ entity.will.testator.dateOfDeath }} <span class="text-danger">|</span> {{ entity.will.testator.placeOfDeathNormalized.names[0].name }}<span ng-if="entity.will.testator.placeOfDeathNormalized.countries != null">, {{ entity.will.testator.placeOfDeathNormalized.countries[0].name }}</span><br />
-                Testament rédigé le {{ entity.will.willWritingDate }} <span class="text-danger">|</span> {{ entity.will.willWritingPlace.names[0].name }}<span ng-if="entity.will.willWritingPlace.countries != null">, {{ entity.will.willWritingPlace.countries[0].name }}</span><br />
-                <div class="cote"> Cote aux {{ entity.will.hostingOrganization.name }} {{ entity.will.callNumber }}, minute du {{ entity.will.minuteDate }}</div>
+                {{ entity.will.testator.deathMention | ucFirstStrict }} le {{ entity.will.testator.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS' }}
+                <span ng-if="entity.will.testator.dateOfDeathString && (entity.will.testator.placeOfDeathString || entity.will.testator.placeOfDeathNormalized)" class="text-danger">|</span>
+                <a ng-if="entity.will.testator.placeOfDeathNormalized" ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.testator.placeOfDeathNormalized.id})">
+                    <span ng-if="entity.will.testator.placeOfDeathString" ng-bind="entity.will.testator.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS'"></span>
+                    <span ng-if="!entity.will.testator.placeOfDeathString" ng-bind="entity.will.testator.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
+                </a>
+                <span ng-if="!entity.will.testator.placeOfDeathNormalized && entity.will.testator.placeOfDeathString">{{ entity.will.testator.placeOfDeathString }}</span>
+                <span ng-if="entity.will.testator.placeOfDeathNormalized.countries.length > 0">, {{ entity.will.testator.placeOfDeathNormalized.countries[0].name }}</span><br />
+
+                Testament rédigé le {{ entity.will.willWritingDateString | sourceRender:'TES' }}
+                <span class="text-danger" ng-if="entity.will.willWritingDateString && (entity.will.willWritingPlaceString || entity.will.willWritingPlaceNormalized)">|</span>
+                <a ng-if="entity.will.willWritingPlaceNormalized" ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.willWritingPlaceNormalized.id})">
+                    <span ng-if="entity.will.willWritingPlaceString" ng-bind="entity.will.willWritingPlaceString | sourceRender:'TES'"></span>
+                    <span ng-if="!entity.will.willWritingPlaceString" ng-bind="entity.will.willWritingPlaceNormalized | taxonomyEntityNameConstruct:'places'"></span>
+                </a>
+                <span ng-if="!entity.will.willWritingPlaceNormalized && entity.will.willWritingPlaceString">{{ entity.will.willWritingPlaceString | sourceRender:'TES' }}</span>
+                <span ng-if="entity.will.willWritingPlaceNormalized.countries.length > 0">, {{ entity.will.willWritingPlaceNormalized.countries[0].name }}</span><br />
+
+                <div class="cote">Cote aux <a ui-sref="transcript.app.hosting-organization.view({id: entity.will.hostingOrganization.id})">{{ entity.will.hostingOrganization.name }}</a> <a href="{{ entity.will.minuteLink }}" target="_blank" class="big" ng-if="entity.will.minuteLink != null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT' }}</a><span ng-if="entity.will.minuteLink == null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT' }}</span><br /></div>
             </div>
         </div>
         <div class="col-md-12 pr-0 text-right align-self-end"><span class="badge badge-secondary" title="Nombre de ressources à transcrire">{{ entity.resources.length }} page<span ng-if="entity.resources.length > 1">s</span></span></div>

@@ -15,7 +15,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -26,7 +26,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -36,7 +36,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -46,7 +46,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },
@@ -56,7 +56,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     return response;
                 });
             },

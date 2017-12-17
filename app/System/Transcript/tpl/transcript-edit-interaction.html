@@ -7,10 +7,9 @@
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm {{ transcriptArea.interaction.live.microObjects.activeClass }}" title="Activer les micro-objets" ng-click="transcriptArea.interaction.live.microObjects.action()"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rendu</h3>
@@ -22,10 +21,9 @@
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Guides</h3>
@@ -38,10 +36,9 @@
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Documentation</h3>
@@ -53,9 +50,8 @@
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>
                     </div>
@@ -70,10 +66,9 @@
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm btn-danger active" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-eye-slash fa-lg"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Historique : version #{{ transcriptArea.interaction.version.id }}</h3>
@@ -88,25 +83,9 @@
                         <button class="btn btn-sm active" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rechercher un identifiant</h3>
-            </div>
-        </div>
-        <div ng-if="transcriptArea.interaction.status == 'bibliography' || transcriptArea.interaction.status == 'bibliographyForm'">
-            <div class="clearfix">
-                <div class="float-right">
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm active" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-                <h3 class="card-header bg-light d-block">Bibliographie</h3>
             </div>
         </div>
         <div ng-if="transcriptArea.interaction.status == 'historicalNotes' || transcriptArea.interaction.status == 'historicalNotesForm'">
@@ -115,10 +94,9 @@
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Notes historiques</h3>
@@ -130,10 +108,9 @@
                     <div class="btn-group" role="group">
                         <button class="btn btn-sm btn-danger active" title="Saisie complexe"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.help(preferences.helpInsideHomeContent, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>
-                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.bibliography.action()" title="Accéder à la bibliographie du testament"><i class="fa fa-book fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Saisie complexe</h3>
@@ -160,8 +137,6 @@
         </div>
         <div id="div-interaction-doc" ng-if="transcriptArea.interaction.status == 'doc'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-doc.html'"></div>
         <div id="div-interaction-info" ng-if="transcriptArea.interaction.status == 'info'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-info.html'"></div>
-        <div id="div-interaction-biblio" ng-if="transcriptArea.interaction.status == 'bibliography'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-biblio.html'"></div>
-        <div id="div-interaction-biblio-form" ng-if="transcriptArea.interaction.status == 'bibliographyForm'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-biblio-form.html'"></div>
         <div id="div-interaction-historical-notes" ng-if="transcriptArea.interaction.status == 'historicalNotes'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-notes.html'"></div>
         <div id="div-interaction-historical-notes-form" ng-if="transcriptArea.interaction.status == 'historicalNotesForm'" ng-include="'System/Transcript/tpl/transcript-edit-interaction-notes-form.html'"></div>
         <div id="div-interaction-version" ng-if="transcriptArea.interaction.status == 'version'" class="h-100" style="padding: 0;">

@@ -74,7 +74,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
                     }
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

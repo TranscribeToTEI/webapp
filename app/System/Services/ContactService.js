@@ -8,7 +8,7 @@ angular.module('transcript.service.contact', ['ui.router'])
                 return $http.post($rootScope.api+"/contact", form).then(function(response) {
                     return response;
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                 });
             }
         };

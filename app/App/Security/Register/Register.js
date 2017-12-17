@@ -63,7 +63,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
                     flash.success = "Votre compte a bien été créé. Vous allez être redirigé dans quelques instants...";
                     $state.go('transcript.app.security.check');
                 }, function errorCallback(response) {
-                    $log.log(response);
+                    $log.debug(response);
                     $scope.submit.loading = false;
                     flash.error = "<ul>";
                     for(let field in response.data.errors.children) {

@@ -50,7 +50,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
                     flash.success = "Votre mot de passe a bien été réinitialisé.";
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
-                    $log.log(response);
+                    $log.debug(response);
                     flash.error = response;
 
                 });
