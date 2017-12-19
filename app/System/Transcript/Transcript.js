@@ -204,103 +204,118 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Toolbar */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.functions.updateToolbar = function () {
+                // -----------------------------------------------------------------------------------------------------
+                //Starting by cleaning the different arrays of the temporary groups and tags:
+                $scope.transcriptArea.toolbar.level2.forEach(function(item, index, level2) {
+                    if(item.lType === "group" && item.proviGroup === true) {
+                        level2.splice(index, 1);
+                    } else if(item.lType === "btn" && item.btn.proviTag === true) {
+                        level2.splice(index, 1);
+                    }
+                });
                 for (let grp in $scope.transcriptArea.toolbar.groups) {
                     if($scope.transcriptArea.toolbar.groups[grp].proviGroup !== undefined) {
                         delete $scope.transcriptArea.toolbar.groups[grp];
                     }
                 }
-                for (let btn in $scope.transcriptArea.toolbar.tags) {
-                    if($scope.transcriptArea.toolbar.tags[btn].proviTag !== undefined) {
-                        delete $scope.transcriptArea.toolbar.tags[btn];
-                    }
-                }
+                // -----------------------------------------------------------------------------------------------------
+
 
                 for (let btn in $scope.transcriptArea.toolbar.tags) {
-                    // Reset every enabled buttons
                     if($scope.transcriptArea.toolbar.tags[btn].btn !== undefined) {
-                        let tag = $scope.transcriptArea.toolbar.tags[btn];
-                        tag.btn.enabled = false;
-                        delete tag.btn.view;
+                        if($scope.transcriptArea.toolbar.tags[btn].proviTag !== undefined) {
+                            // If this is a temporary btn, we remove it
+                            delete $scope.transcriptArea.toolbar.tags[btn];
+                        } else {
+                            let tag = $scope.transcriptArea.toolbar.tags[btn];
+                                tag.btn.enabled = false;
+                            delete tag.btn.view;
 
-                        if ($scope.transcriptArea.ace.currentTag === null && tag.btn.allow_root === true && tag.btn.level === 1) {
-                            // If the caret is at the root of the doc, we allow root items == true
-                            tag.btn.enabled = true;
-                        } else if($scope.transcriptArea.ace.currentTag !== null &&
-                            $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined &&
-                            $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content.indexOf(tag.xml.name) !== -1) {
-                            // Else, we allow items according to the parent tag
-                            tag.btn.enabled = true;
-                        }
+                            if ($scope.transcriptArea.ace.currentTag === null && tag.btn.allow_root === true && tag.btn.level === 1) {
+                                // If the caret is at the root of the doc, we allow root items == true
+                                tag.btn.enabled = true;
+                            } else if ($scope.transcriptArea.ace.currentTag !== null &&
+                                $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined &&
+                                $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content.indexOf(tag.xml.name) !== -1) {
+                                // Else, we allow items according to the parent tag
+                                tag.btn.enabled = true;
+                            }
 
+                            if (tag.btn.enabled === true && tag.btn.choicesByAttr !== undefined && $scope.teiInfo[tag.xml.name].attributes !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr] !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values !== undefined && $scope.transcriptArea.toolbar.groups[tag.btn.id] === undefined &&
+                                $filter('filter')($scope.transcriptArea.toolbar.level2, {
+                                    lType: "group",
+                                    id: tag.btn.id
+                                }).length === 0) {
+                                console.log('enterIn');
+                                tag.btn.view = false;
 
-                        if(tag.btn.enabled === true && tag.btn.choicesByAttr !== undefined && $scope.teiInfo[tag.xml.name].attributes !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr] !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values !== undefined && $scope.transcriptArea.toolbar.groups[tag.btn.id] === undefined) {
-                            //console.log($scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr]);
-                            //console.log(tag.btn.choicesByAttr);
-
-                            tag.btn.view = false;
-                            $scope.transcriptArea.toolbar.groups[tag.btn.id] = {
-                                name: tag.btn.label,
-                                id: tag.btn.id,
-                                icon: tag.btn.icon,
-                                parent: false,
-                                order: tag.order,
-                                lType: "group",
-                                proviGroup: true
-                            };
-                            $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[tag.btn.id]);
-
-                            let countNewButtons = 1;
-                            for(let iPB in $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values) {
-                                let value = $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values[iPB];
-
-                                $scope.transcriptArea.toolbar.tags[tag.btn.id+"-"+value.value] = {
-                                    btn: {
-                                        id: btn+"-"+value.value,
-                                        label: $filter('ucFirstStrict')(value.label),
-                                        label_forced: true,
-                                        title: $filter('ucFirstStrict')(value.label),
-                                        icon: "",
-                                        btn_class: "",
-                                        btn_group: tag.btn.id,
-                                        btn_is_group: false,
-                                        allow_root: false,
-                                        restrict_to_root: false,
-                                        enabled: false,
-                                        level: 2,
-                                        separator_before: false,
-                                        proviTag: true
-                                    },
-                                    order: countNewButtons,
-                                    caret: {
-                                        position: "prepend"
-                                    },
-                                    html: {
-                                        name: "span",
-                                        unique: false,
-                                        attributes: {
-                                            class: "hi"
-                                        }
-                                    },
-                                    xml: {
-                                        name: "hi",
-                                        attributes: {
-                                            rend: value.value
-                                        },
-                                        unique: false,
-                                        replicateOnEnter: false,
-                                        replicateOnCtrlEnter: false
-                                    },
-                                    complex_entry: {
-                                        enable: true,
-                                        children: ""
-                                    }
+                                $scope.transcriptArea.toolbar.groups[tag.btn.id] = {
+                                    name: tag.btn.label,
+                                    id: tag.btn.id,
+                                    icon: tag.btn.icon,
+                                    parent: false,
+                                    order: tag.order,
+                                    lType: "group",
+                                    proviGroup: true
                                 };
-                                countNewButtons += 1;
+
+                                $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[tag.btn.id]);
+
+                                let countNewButtons = 1;
+                                for (let iPB in $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values) {
+                                    let value = $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values[iPB];
+
+                                    $scope.transcriptArea.toolbar.tags[tag.btn.id + "-" + value.value] = {
+                                        btn: {
+                                            id: btn + "-" + value.value,
+                                            label: $filter('ucFirstStrict')(value.label),
+                                            label_forced: true,
+                                            title: $filter('ucFirstStrict')(value.label),
+                                            icon: "",
+                                            btn_class: "",
+                                            btn_group: tag.btn.id,
+                                            btn_is_group: false,
+                                            allow_root: false,
+                                            restrict_to_root: false,
+                                            enabled: false,
+                                            level: 2,
+                                            separator_before: false,
+                                            proviTag: true
+                                        },
+                                        order: countNewButtons,
+                                        lType: "btn",
+                                        caret: {
+                                            position: "prepend"
+                                        },
+                                        html: {
+                                            name: "span",
+                                            unique: false,
+                                            attributes: {
+                                                class: "hi"
+                                            }
+                                        },
+                                        xml: {
+                                            name: "hi",
+                                            attributes: {
+                                                rend: value.value
+                                            },
+                                            unique: false,
+                                            replicateOnEnter: false,
+                                            replicateOnCtrlEnter: false
+                                        },
+                                        complex_entry: {
+                                            enable: true,
+                                            children: ""
+                                        }
+                                    };
+                                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[tag.btn.id + "-" + value.value]);
+                                    countNewButtons += 1;
+                                }
                             }
                         }
                     }
                 }
-                console.log($scope.transcriptArea.toolbar.tags);
+                console.log($scope.transcriptArea.toolbar.level2);
             };
             /* Toolbar -------------------------------------------------------------------------------------------------- */
 
@@ -550,7 +565,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                  */
                 $scope.$watch('transcriptArea.ace.area', function () {
                     $scope.transcriptArea.interaction.live.encode();
-                    $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+                    //La ligne ci-dessous produit des currentTag à la volée, ce qui ralentit le script. Voir où elle est vraiment utile et chercher des méthodes de contournement
+                    //$scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                     $scope.transcriptArea.ace.lines = $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1);
                     $scope.functions.updateAlerts();
                 });
@@ -816,7 +832,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.transcriptArea.interaction.live.microObjects.activeClass = 'active bg-danger';
                 }
                 $scope.transcriptArea.interaction.live.encode();
-                $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
             };
             /* Live Management ------------------------------------------------------------------------------------------ */
 
@@ -1383,17 +1398,17 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Right menu Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcriptArea.ace.rightMenu.loadDocumentation = function () {
-                $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
-                $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag.name, "modelDoc", true);
-
-                $("#transcript-edit-editor-ace-area-rmenu").hide(100);
+                if($scope.transcriptArea.ace.currentTag !== null) {
+                    $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag.name, "modelDoc", true);
+                    $("#transcript-edit-editor-ace-area-rmenu").hide(100);
+                }
             };
 
             $scope.transcriptArea.ace.rightMenu.loadInformation = function () {
-                $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
-                $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag, "modelInfo", true);
-
-                $("#transcript-edit-editor-ace-area-rmenu").hide(100);
+                if($scope.transcriptArea.ace.currentTag !== null) {
+                    $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag, "modelInfo", true);
+                    $("#transcript-edit-editor-ace-area-rmenu").hide(100);
+                }
             };
             /* Right menu Management ------------------------------------------------------------------------------------ */
         }
