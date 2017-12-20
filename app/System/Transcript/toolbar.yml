@@ -39,6 +39,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 1
         caret:
@@ -70,6 +71,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 2
         caret:
@@ -101,6 +103,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 3
         caret:
@@ -132,6 +135,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 4
         caret:
@@ -161,6 +165,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 5
         caret:
@@ -190,6 +195,7 @@ tags:
             allow_root: true
             restrict_to_root: true
             enabled: false
+            view: false
             level: 1
         order: 6
         caret:
@@ -219,6 +225,7 @@ tags:
             allow_root: true
             restrict_to_root: false
             enabled: false
+            view: false
             level: 1
         order: 7
         caret:
@@ -250,6 +257,7 @@ tags:
             allow_root: true
             restrict_to_root: false
             enabled: false
+            view: false
             level: 1
         order: 8
         caret:
@@ -282,6 +290,7 @@ tags:
             allow_root: true
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             choicesByAttr: "rend"
         order: 1
@@ -312,6 +321,7 @@ tags:
             allow_root: true
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 5
         caret:
@@ -339,6 +349,7 @@ tags:
             allow_root: true
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 6
         caret:
@@ -369,6 +380,7 @@ tags:
 #            allow_root: true
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: false
 #            group_children: ["renderingDifficulties"]
@@ -402,6 +414,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: false
         order: 1
@@ -437,6 +450,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: false
 #        order: 1
@@ -467,6 +481,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: false
 #        order: 2
@@ -498,9 +513,10 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: false
-        order: 1
+        order: 2
         caret:
             position: "prepend"
         html:
@@ -533,6 +549,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: true
 #            children: "surplus"
@@ -564,6 +581,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: false
 #        order: 4
@@ -595,9 +613,10 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: false
-        order: 1
+        order: 3
         caret:
             position: "prepend"
         html:
@@ -630,6 +649,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: true
 #        order: 5
@@ -660,6 +680,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #            separator_before: false
 #        order: 6
@@ -692,6 +713,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: true
         order: 7
@@ -722,6 +744,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: true
         order: 8
@@ -752,6 +775,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: false
         order: 9
@@ -780,6 +804,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: false
         order: 10
@@ -812,6 +837,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 1
         caret:
@@ -841,6 +867,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 2
         caret:
@@ -871,6 +898,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 3
         caret:
@@ -900,6 +928,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 4
         caret:
@@ -932,6 +961,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 1
         caret:
@@ -963,6 +993,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 2
         caret:
@@ -994,6 +1025,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 3
         caret:
@@ -1025,6 +1057,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 4
         caret:
@@ -1056,6 +1089,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 5
         caret:
@@ -1089,6 +1123,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 6
         caret:
@@ -1118,6 +1153,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 7
         caret:
@@ -1149,6 +1185,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 8
         caret:
@@ -1180,6 +1217,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 9
         caret:
@@ -1211,6 +1249,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 10
         caret:
@@ -1240,6 +1279,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
             separator_before: true
         order: 11
@@ -1271,6 +1311,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 1
         caret:
@@ -1304,6 +1345,7 @@ tags:
             allow_root: false
             restrict_to_root: false
             enabled: false
+            view: false
             level: 2
         order: 1
         caret:
@@ -1333,6 +1375,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #        order: 2
 #        caret:
@@ -1362,6 +1405,7 @@ tags:
 #            allow_root: false
 #            restrict_to_root: false
 #            enabled: false
+#            view: false
 #            level: 2
 #        order: 2
 #        caret:

@@ -54,10 +54,6 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             $log.debug(content);
             $scope.content = content;
             $scope.content.updateComment = "";
-            if($scope.content.onHomepage === true) { $scope.content.onHomepage = 1; }
-            if($scope.content.onHomepage === false) { $scope.content.onHomepage = 0; }
-
-            if(content.tags !== null) {$scope.content.tags = content.tags.join(', ');}
         } else {
             $scope.content = {
                 id: null,
@@ -66,10 +62,10 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 content: null,
                 status: null,
                 type: null,
-                onHomepage: false,
+                staticCategory: null,
+                staticOrder: null,
                 enableComments: true,
                 updateComment: "Creation of the content",
-                tags: null,
                 illustration: null
             };
         }
@@ -143,25 +139,16 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
         $scope.submit.action = function() {
             $scope.submit.success = false;
             $scope.submit.loading = true;
-
-            let tagEncode = null;
-            if($scope.content.tags !== null) {
-                let tagEncode = $scope.content.tags.split(',');
-                if ($scope.content.tags.indexOf(',') !== -1) {
-                    tagEncode = [$scope.content.tags];
-                }
-            }
-
             let form = {
                 title: $scope.content.title,
                 abstract: $scope.content.abstract,
                 content: $scope.content.content,
                 type: $scope.content.type,
                 status: $scope.content.status,
-                onHomepage: $scope.content.onHomepage,
+                staticCategory: $scope.content.staticCategory,
+                staticOrder: $scope.content.staticOrder,
                 enableComments: $scope.content.enableComments,
                 updateComment: $scope.content.updateComment,
-                tags: tagEncode,
                 illustration: $scope.content.illustration
             };
             if($scope.content.id === null) {

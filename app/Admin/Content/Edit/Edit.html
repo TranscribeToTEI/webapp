@@ -21,15 +21,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="admin-content-edit-tags" class="col-md-2 col-form-label text-md-right">Tags</label>
-                <div class="col-md-10">
-                    <input id="admin-content-edit-tags" type="text" class="form-control form-control-sm" data-ng-model="content.tags" />
-                    <small class="form-text text-muted">Séparez vos tags par une virgule</small>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label for="admin-content-edit-type" class="col-md-2 col-form-label text-md-right">Type <span class="red-color">*</span></label>
-                <div class="col-md-5">
+                <div class="col-md-2">
                     <select id="admin-content-edit-type" name="admin-content-edit-type" class="custom-select" data-ng-model="content.type" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="blogContent">Article de blog</option>
@@ -37,19 +30,8 @@
                         <option value="staticContent">Page statique</option>
                     </select>
                 </div>
-                <div class="col-md-5">
-                    <div class="checkbox" data-ng-if="content.type == 'staticContent'">
-                        <label class="custom-control custom-checkbox">
-                            <input ng-model="content.onHomepage" class="custom-control-input" type="checkbox">
-                            <span class="custom-control-indicator"></span>
-                            <span class="custom-control-description">Publié en page d'accueil</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
                 <label for="admin-content-edit-status" class="col-md-2 col-form-label text-md-right">Statut <span class="red-color">*</span></label>
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <select id="admin-content-edit-status" name="admin-content-edit-status" class="custom-select" data-ng-model="content.status" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="draft">Brouillon</option>
@@ -58,7 +40,7 @@
                         <option value="notIndexed">Non indexé</option>
                     </select>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-3">
                     <div class="checkbox">
                         <label class="custom-control custom-checkbox">
                             <input ng-model="content.enableComments" class="custom-control-input" type="checkbox" checked="checked">
@@ -66,6 +48,25 @@
                             <span class="custom-control-description">Activer les commentaires</span>
                         </label>
                     </div>
+                </div>
+            </div>
+            <div class="form-group row" data-ng-if="content.type == 'staticContent'">
+                <label for="admin-content-edit-staticCategory" class="col-md-2 col-form-label text-md-right">Catégorie de contenu <span class="red-color">*</span></label>
+                <div class="col-md-3">
+                    <select id="admin-content-edit-staticCategory" name="admin-content-edit-staticCategory" class="custom-select" data-ng-model="content.staticCategory" required="required">
+                        <option value="" disabled>Sélectionnez ...</option>
+                        <option value="helpHome">Page d'accueil de l'aide</option>
+                        <option value="discover">Pages de découverte</option>
+                        <option value="about">Pages à propos</option>
+                        <option value="legalMentions">Mentions légales</option>
+                        <option value="credits">Crédits</option>
+                        <option value="userChart">Charte d'utilisation</option>
+                    </select>
+                </div>
+                <label for="admin-content-edit-staticOrder" class="col-md-2 col-form-label text-md-right">Ordre du contenu <span class="red-color">*</span></label>
+                <div class="col-md-5">
+                    <input id="admin-content-edit-staticOrder" type="number" class="form-control form-control-sm" data-ng-model="content.staticOrder" required="required" />
+                    <small class="form-text text-muted">Ordre d'affichage de votre contenu dans l'arborescence de la catégorie sélectionnée.</small>
                 </div>
             </div>
             <hr />

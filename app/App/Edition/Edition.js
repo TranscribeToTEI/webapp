@@ -57,7 +57,11 @@ angular.module('transcript.app.edition', ['ui.router'])
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Content Management */
         /* ---------------------------------------------------------------------------------------------------------- */
-        $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
+        if($scope.resource.transcript.content !== null) {
+            $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
+        } else {
+            $scope.encodedContent = null;
+        }
         $scope.microObjects.action = function () {
             $log.debug('test');
             if($scope.microObjects.active === true) {

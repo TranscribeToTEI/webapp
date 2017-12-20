@@ -220,7 +220,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 }
                 // -----------------------------------------------------------------------------------------------------
 
-
+                let toUnIndex = [];
                 for (let btn in $scope.transcriptArea.toolbar.tags) {
                     if($scope.transcriptArea.toolbar.tags[btn].btn !== undefined) {
                         if($scope.transcriptArea.toolbar.tags[btn].proviTag !== undefined) {
@@ -228,27 +228,28 @@ angular.module('transcript.system.transcript', ['ui.router'])
                             delete $scope.transcriptArea.toolbar.tags[btn];
                         } else {
                             let tag = $scope.transcriptArea.toolbar.tags[btn];
-                                tag.btn.enabled = false;
-                            delete tag.btn.view;
-
                             if ($scope.transcriptArea.ace.currentTag === null && tag.btn.allow_root === true && tag.btn.level === 1) {
                                 // If the caret is at the root of the doc, we allow root items == true
+                                tag.btn.view = true;
                                 tag.btn.enabled = true;
                             } else if ($scope.transcriptArea.ace.currentTag !== null &&
                                 $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined &&
                                 $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content.indexOf(tag.xml.name) !== -1) {
                                 // Else, we allow items according to the parent tag
+                                tag.btn.view = true;
                                 tag.btn.enabled = true;
                             }
 
+                            if(tag.btn.id === "hi") {
+                                console.log(tag.btn.enabled);
+                            }
                             if (tag.btn.enabled === true && tag.btn.choicesByAttr !== undefined && $scope.teiInfo[tag.xml.name].attributes !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr] !== undefined && $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values !== undefined && $scope.transcriptArea.toolbar.groups[tag.btn.id] === undefined &&
                                 $filter('filter')($scope.transcriptArea.toolbar.level2, {
                                     lType: "group",
                                     id: tag.btn.id
                                 }).length === 0) {
-                                console.log('enterIn');
+                                toUnIndex.push(tag.btn.id);
                                 tag.btn.view = false;
-
                                 $scope.transcriptArea.toolbar.groups[tag.btn.id] = {
                                     name: tag.btn.label,
                                     id: tag.btn.id,
@@ -315,6 +316,15 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         }
                     }
                 }
+
+                toUnIndex.forEach(function(id) {
+                    $scope.transcriptArea.toolbar.level2.forEach(function(item) {
+                        if(item.btn !== undefined && item.btn.id === id) {
+                            item.btn.view = false;
+                        }
+                    });
+                    $scope.transcriptArea.toolbar.tags[id].btn.view = false;
+                });
                 console.log($scope.transcriptArea.toolbar.level2);
             };
             /* Toolbar -------------------------------------------------------------------------------------------------- */
@@ -543,6 +553,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 let AceRange = $scope.aceEditor.getSelectionRange().constructor; //Doc -> https://stackoverflow.com/questions/28893954/how-to-get-range-when-using-angular-ui-ace#28894262
 
                 $scope.$watch('transcriptArea.ace.currentTag', function () {
+                    console.log($scope.transcriptArea.ace.currentTag);
                     $scope.functions.updateToolbar();
                     $scope.functions.updateAttributes();
 
