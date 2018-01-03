@@ -48,9 +48,10 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
 
         /* Entities sort management --------------------------------------------------------------------------------- */
         if($scope.entity.dataType === 'places') {
-            $scope.entities = $filter('orderBy')($scope.entities, 'name');
+            $scope.entity.name = $scope.entity.indexName;
+            $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
         } else if($scope.entity.dataType === 'testators') {
-            $scope.entities = $filter('orderBy')($scope.entities, 'surname');
+            $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
         } else if($scope.entity.dataType === 'military-units') {
             $scope.entities = $filter('orderBy')($scope.entities, 'name');
         }

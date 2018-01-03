@@ -108,6 +108,7 @@ angular.module('transcriptApp', [
         'transcript.filter.contentTypeName',
         'transcript.filter.encodeXML',
         'transcript.filter.imageRender',
+        'transcript.filter.prefixRender',
         'transcript.filter.objectToId',
         'transcript.filter.resourceTypeName',
         'transcript.filter.shuffle',

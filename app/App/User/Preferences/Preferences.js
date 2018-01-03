@@ -12,17 +12,20 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             },
             url: '/preferences/{id}',
             ncyBreadcrumb: {
-                parent: 'transcript.app.user.profile({id: user.id})',
+                parent: 'transcript.app.user.profile({id: iUser.id})',
                 label: 'Modification des préférences'
             },
             tfMetaTags: {
-                title: function(userEdit) {
-                    return 'Préférences | '+ userEdit.name +' | Profil utilisateur';
+                title: function(rootScope) {
+                    return 'Préférences | '+ rootScope.user.name +' | Profil utilisateur';
                 },
             },
             resolve: {
                 userPreferences: function(UserPreferenceService, $transition$) {
                     return UserPreferenceService.getPreferences($transition$.params().id);
+                },
+                rootScope: function($rootScope) {
+                    return $rootScope;
                 }
             }
         })

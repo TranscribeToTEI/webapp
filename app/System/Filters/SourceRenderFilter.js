@@ -3,7 +3,12 @@
 angular.module('transcript.filter.sourceRender', ['ui.router'])
 
     .filter('sourceRender', ['$log', '$filter', function($log, $filter) {
-        return function (sourceString, listSourceString, allList) {
+        return function (sourceString, listSourceString, allList, prefixRender) {
+            console.log(sourceString);
+            if(sourceString === "" || sourceString === null) {
+                return "";
+            }
+
             let sourcesValues = sourceString.split('|'),
                 sourcesType = listSourceString.split('|'),
                 sourcesTrame = [],
@@ -36,9 +41,14 @@ angular.module('transcript.filter.sourceRender', ['ui.router'])
 
             $filter('orderBy')(sourcesTrame, 'sourceOrder');
 
+            console.log(sourcesTrame);
             for(let iST in sourcesTrame) {
                 let sourceContainer = sourcesTrame[iST];
-                value += sourceContainer.content;
+                if(prefixRender !== undefined) {
+                    value += $filter('prefixRender')(sourceContainer.content, prefixRender);
+                } else {
+                    value += sourceContainer.content;
+                }
                 if(sourceContainer.sourceType !== null) {
                     value += " selon "+sourceTypeTitle[sourceContainer.sourceType].article+sourceTypeTitle[sourceContainer.sourceType].name;
                 }

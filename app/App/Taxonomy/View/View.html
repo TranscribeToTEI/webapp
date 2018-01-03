@@ -12,7 +12,7 @@
     <div class="row">
         <div class="col-sm-8">
             <nav>
-                <div class="float-right mt-3" ng-if="((user.roles | contains:'ROLE_TAXONOMY_EDIT') && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')) || preferences.taxonomyEditAccess == 'free'">
+                <div class="float-right mt-3" ng-if="((user.roles | contains:'ROLE_TAXONOMY_EDIT') && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')) || preferences.taxonomyEditAccess == 'free' || ((user.roles | contains:'ROLE_MODO') || (user.roles | contains:'ROLE_ADMIN') || (user.roles | contains:'ROLE_SUPER_ADMIN'))">
                     <a class="btn btn-light" ui-sref="transcript.app.taxonomy.edit({type: entity.dataType, id: entity.id})"><i class="fa fa-edit"></i> Modifier</a>
                 </div>
                 <h1 class="page-heading"><span ng-if="entity.dataType != 'places'">{{ entity.name }}</span><span ng-if="entity.dataType == 'places'">{{ entity | taxonomyEntityNameConstruct:'places' }}</span></h1>

@@ -18,24 +18,12 @@
             <a ng-if="iEntity.id != entity.id" ui-sref="transcript.app.taxonomy.view({type: entity.dataType, id: iEntity.id})" class="ng-binding ng-scope">
                 <span ng-if="entity.dataType == 'testators' || entity.dataType == 'places'">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType:'index' }}</span>
                 <span ng-if="entity.dataType == 'military-units'">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</span>
-                <span ng-if="entity.dataType == 'places' && (iEntity.frenchDepartements.length > 0 || iEntity.frenchRegions.length > 0 || iEntity.countries.length > 0)">
-                    (
-                        <span ng-if="iEntity.frenchDepartements.length > 0">{{ iEntity | taxonomyEntityNameConstruct:'places':'frenchDepartements' }}</span>
-                        <span ng-if="iEntity.frenchRegions.length > 0"><span ng-if="iEntity.frenchDepartements.length > 0">, </span>{{ iEntity | taxonomyEntityNameConstruct:'places':'frenchRegions' }}</span>
-                        <span ng-if="iEntity.countries.length > 0"><span ng-if="iEntity.frenchDepartements.length > 0 || iEntity.frenchRegions.length > 0">, </span>{{ iEntity | taxonomyEntityNameConstruct:'places':'countries' }}</span>
-                    )
-                </span>
+                <span ng-if="entity.dataType == 'places' && (iEntity.frenchDepartements.length > 0 || iEntity.frenchRegions.length > 0 || iEntity.countries.length > 0)"></span>
             </a>
             <span ng-if="iEntity.id == entity.id">
                 <span ng-if="entity.dataType == 'testators' || entity.dataType == 'places'">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType:'index' }}</span>
                 <span ng-if="entity.dataType == 'military-units'">{{ iEntity | taxonomyEntityNameConstruct:entity.dataType }}</span>
-                <span ng-if="entity.dataType == 'places' && (iEntity.frenchDepartements.length > 0 || iEntity.frenchRegions.length > 0 || iEntity.countries.length > 0)">
-                    (
-                        <span ng-if="iEntity.frenchDepartements.length > 0">{{ iEntity | taxonomyEntityNameConstruct:'places':'frenchDepartements' }}</span>
-                        <span ng-if="iEntity.frenchRegions.length > 0"><span ng-if="iEntity.frenchDepartements.length > 0">, </span>{{ iEntity | taxonomyEntityNameConstruct:'places':'frenchRegions' }}</span>
-                        <span ng-if="iEntity.countries.length > 0"><span ng-if="iEntity.frenchDepartements.length > 0 || entity.frenchRegions.length > 0">, </span>{{ iEntity | taxonomyEntityNameConstruct:'places':'countries' }}</span>
-                    )
-                </span>
+                <span ng-if="entity.dataType == 'places' && (iEntity.frenchDepartements.length > 0 || iEntity.frenchRegions.length > 0 || iEntity.countries.length > 0)"></span>
             </span>
         </li>
     </ul>

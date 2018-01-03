@@ -12,7 +12,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
             },
             url: '/edit/{id}',
             ncyBreadcrumb: {
-                parent: 'transcript.app.user.profile({id: user.id})',
+                parent: 'transcript.app.user.profile({id: iUser.id})',
                 label: 'Modification du profil'
             },
             tfMetaTags: {
@@ -52,6 +52,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
                 $scope.submit.loading = false;
                 if(response.status === 200) {
                     $scope.submit.success = true;
+                    $rootScope.user = response.data;
                     flash.success = "Votre profil a bien été modifié. Vous allez être redirigé dans quelques instants ...";
                     $state.go('transcript.app.user.profile', {id: userEdit.id});
                 } else if(response.data.code === 400) {

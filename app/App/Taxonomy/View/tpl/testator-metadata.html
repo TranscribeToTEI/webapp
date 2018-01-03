@@ -16,7 +16,7 @@
     <dd class="col-sm-8">{{ entity.firstnames | sourceRender:'NOT|TES|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Autres noms</dt>
-    <dd class="col-sm-8">{{ entity.otherNames | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
+    <dd class="col-sm-8">{{ entity.otherNames | sourceRender:'TES|NOT|EC|MDH|AS':true:{'A':'autre nom', 'P':'pseudo'} }}</dd>
 
     <dt class="col-sm-4">Profession</dt>
     <dd class="col-sm-8">{{ entity.profession | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
@@ -35,7 +35,7 @@
             <span class="text-danger" ng-if="entity.dateOfBirthString">|</span>
             <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfBirthNormalized.id})">
                 <span ng-if="entity.placeOfBirthString" ng-bind="entity.placeOfBirthString | sourceRender:'MDH|EC|TES|NOT|AS':true"></span>
-                <span ng-if="entity.placeOfBirthNormalized" ng-bind="entity.placeOfBirthNormalized | taxonomyEntityNameConstruct:'places'"></span>
+                <span ng-if="!entity.placeOfBirthString && entity.placeOfBirthNormalized" ng-bind="entity.placeOfBirthNormalized | taxonomyEntityNameConstruct:'places'"></span>
             </a>
         </span>
         <span ng-if="!entity.placeOfBirthNormalized && !!entity.placeOfBirthString">
@@ -51,7 +51,7 @@
             <span class="text-danger" ng-if="entity.dateOfDeathString">|</span>
             <a ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.placeOfDeathNormalized.id})">
                 <span ng-if="entity.placeOfDeathString" ng-bind="entity.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS':true"></span>
-                <span ng-if="entity.placeOfDeathNormalized" ng-bind="entity.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
+                <span ng-if="!entity.placeOfDeathString && entity.placeOfDeathNormalized" ng-bind="entity.placeOfDeathNormalized | taxonomyEntityNameConstruct:'places'"></span>
             </a>
         </span>
         <span ng-if="!entity.placeOfDeathNormalized && !!entity.placeOfDeathString">

@@ -79,7 +79,10 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
     }])
 
     .controller('AppTaxonomyEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
-        if(($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization')) || $rootScope.preferences.taxonomyEditAccess === 'forbidden') {$state.go('transcript.error.403');}
+        if(
+            ($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization'))
+            ||
+            ($rootScope.preferences.taxonomyEditAccess === 'forbidden' && ($filter('contains')($rootScope.user.roles, "ROLE_MODO") === false && $filter('contains')($rootScope.user.roles, "ROLE_ADMIN") === false && $filter('contains')($rootScope.user.roles, "ROLE_SUPER_ADMIN") === false))) {$state.go('transcript.error.403');}
 
         /* -- Functions Loader -------------------------------------------------------------------------------------- */
         function patchEntityLoader(entity, dataType) {
@@ -242,20 +245,6 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         }
 
         /* -- Place name management --------------------------------------------------------------------------------- */
-        if($scope.entity.dataType === 'places' && $scope.entity.id !== undefined) {
-            if($scope.entity.names.length > 0) {
-                $scope.entity.name = $scope.entity.names[0].name;
-                $log.debug($scope.entity.name);
-            }
-        }
-
-        for(let iEntity in $scope.places) {
-            if($scope.places[iEntity].names.length > 0) {
-                $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
-            }
-        }
-        $scope.places = $filter('orderBy')($scope.places, 'name');
-
         function parsePlaceNames() {
             if($scope.entity.name !== undefined && $scope.entity.name !== null) {
                 $scope.entity.names = [{name: $scope.entity.name, updateComment: "entity creation"}];
@@ -278,9 +267,10 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
 
         /* Entities sort management --------------------------------------------------------------------------------- */
         if($scope.entity.dataType === 'places') {
-            $scope.entities = $filter('orderBy')($scope.entities, 'name');
+            $scope.entity.name = $scope.entity.indexName;
+            $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
         } else if($scope.entity.dataType === 'testators') {
-            $scope.entities = $filter('orderBy')($scope.entities, 'surname');
+            $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
         } else if($scope.entity.dataType === 'military-units') {
             $scope.entities = $filter('orderBy')($scope.entities, 'name');
         }
