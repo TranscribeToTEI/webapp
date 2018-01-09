@@ -59,7 +59,7 @@
             <td><a ui-sref="transcript.app.entity({id: entity.id})">{{ entity.will.title }}</a></td>
             <td>{{ entity.will.willWritingDate }}</td>
             <td>{{ entity.will.testator.name }}</td>
-            <td><span class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName }}</span></td>
+            <td><span class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName:entity.isShown }}</span></td>
         </tr>
     </table>
     <ul uib-pagination items-per-page="itemsPerPage" boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>

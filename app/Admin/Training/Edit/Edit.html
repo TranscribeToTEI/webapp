@@ -45,9 +45,8 @@
                 <div class="form-group row">
                     <label for="admin-trainingContent-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsables éditoriaux <span class="red-color">*</span></label>
                     <div class="col-md-10">
-                        <select id="admin-trainingContent-edit-editorialResponsibility" name="admin-trainingContent-edit-editorialResponsibility" class="form-control" data-ng-model="trainingContent.editorialResponsibility" required="required" multiple>
+                        <select id="admin-trainingContent-edit-editorialResponsibility" name="admin-trainingContent-edit-editorialResponsibility" class="form-control" ng-model="trainingContent.editorialResponsibility" ng-options="user.id as user.name for user in users" required="required" multiple>
                             <option value="" disabled>Sélectionnez ...</option>
-                            <option ng-repeat="user in users" value="{{ user.id }}">{{ user.name }}</option>
                         </select>
                     </div>
                     <div class="col-md-10 offset-md-2">

@@ -107,7 +107,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             if($scope.entity.will.willWritingDateNormalized) {$scope.entity.will.willWritingDateNormalized = $filter('date')($scope.entity.will.willWritingDateNormalized, 'yyyy-MM-dd')}
             if($scope.entity.will.willWritingDateEndNormalized) {$scope.entity.will.willWritingDateEndNormalized = $filter('date')($scope.entity.will.willWritingDateEndNormalized, 'yyyy-MM-dd')}
         }
-        $log.debug($scope.entity);
+        console.log($scope.entity);
         /* End: Entity management ----------------------------------------------------------------------------------- */
 
 

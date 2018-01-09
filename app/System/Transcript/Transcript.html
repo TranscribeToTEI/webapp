@@ -1,8 +1,7 @@
-<div ng-include="'System/Transcript/tpl/transcript-header.html'"></div>
+<div ng-if="transcriptConfig.isHeader == true" ng-include="'System/Transcript/tpl/transcript-header.html'"></div>
 
 <div id="transcriptContainer">
     <div id="transcriptContainerFullScreen"  class="clearfix">
-
         <div class="row no-gutters">
             <div class="col-md-8">
                 <ul class="breadcrumb" id="ariane-toolbar">
@@ -24,21 +23,21 @@
         <div id="transcript-workarea" ng-include="'System/Transcript/tpl/transcript-edit.html'"></div>
     </div>
 
-    <div id="transcript-submit" class="clearfix" data-ng-include="'System/Transcript/tpl/transcript-submit.html'"></div>
+    <div ng-if="transcriptConfig.isValidation == true" id="transcript-submit" class="clearfix" data-ng-include="'System/Transcript/tpl/transcript-submit.html'"></div>
 </div>
 <div class="row">
     <div class="col-md-6 mt-3">
-        <div data-ng-include="'System/Transcript/tpl/transcript-versions.html'"></div>
+        <div ng-if="transcriptConfig.isVersioning == true" data-ng-include="'System/Transcript/tpl/transcript-versions.html'"></div>
     </div>
     <div class="col-md-6 mt-3">
-        <div ui-view="comment"></div>
+        <div ui-view="comment" ng-if="transcriptConfig.isComments == true" ></div>
     </div>
 </div>
 
 <div id="transcript-edit-editor-ace-area-rmenu">
     <ul>
-        <li><a ng-click="transcriptArea.ace.rightMenu.loadDocumentation()">Documentation</a></li>
-        <li><a ng-click="transcriptArea.ace.rightMenu.loadInformation()">Information</a></li>
+        <li><a ng-if="transcriptConfig.isExercise === false || transcriptConfig.isDocumentation === true" ng-click="transcriptArea.ace.rightMenu.loadDocumentation()">Documentation</a></li>
+        <li><a ng-if="transcriptConfig.isExercise === false || transcriptConfig.isDocumentation === true" ng-click="transcriptArea.ace.rightMenu.loadInformation()">Information</a></li>
         <li><a>Annuler</a></li>
         <li><a>Couper</a></li>
         <li><a>Copier</a></li>

@@ -1,3 +1,5 @@
-Exercice
+<div ui-view="transcript"></div>
 
-<button ng-click="trainingContent.exerciseStatus = 'correction'" class="btn btn-primary">Correction</button>
+<div ng-if="transcriptConfig.isValidation === false" class="alert alert-info">
+    <button ng-click="trainingContent.exerciseStatus = 'correction'" class="btn btn-primary">Afficher la correction</button>
+</div>

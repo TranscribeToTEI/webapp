@@ -57,7 +57,7 @@
                 <dd class="col-sm-8"><span ng-if="resource.createUser != null">Par {{ resource.createUser.name }}</span> le {{ resource.createDate | date:'dd/MM/yyyy à HH:mm' }}</dd>
 
                 <dt class="col-sm-4">Statut de transcription</dt>
-                <dd class="col-sm-8">{{ resource.transcript.status | transcriptionStatusName }}</dd>
+                <dd class="col-sm-8">{{ resource.transcript.status | transcriptionStatusName:entity.isShown }}</dd>
             </dl>
         </div>
     </div>

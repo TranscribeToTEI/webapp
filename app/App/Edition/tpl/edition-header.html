@@ -1,7 +1,7 @@
 <div class="row mb-5">
     <div class="col-auto mr-auto">
         <h1 class="page-heading mb-0"><i class="fa fa-edit" aria-hidden="true"></i> {{ entity.will.title }}</h1>
-        <span class="badge badge-status" ng-class="getStatusClassLabel(resource.transcript.status)">{{ resource.transcript.status | transcriptionStatusName }}</span>
+        <span class="badge badge-status" ng-class="getStatusClassLabel(resource.transcript.status)">{{ resource.transcript.status | transcriptionStatusName:entity.isShown }}</span>
     </div>
     <div class="col-auto justify-content-end">
         <nav class="mt-4">
@@ -19,7 +19,7 @@
                 </li>
                 <li class="nav-item dropdown" ng-if="role == 'validator'">
                     <a class="nav-link dropdown-toggle" role="button" id="dropdownMenuStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-gear fa-lg" ng-if="admin.status.loading == false" aria-hidden="true"></i><i class="fa fa-spin fa-circle-o-notch" ng-if="admin.status.loading == true"></i> Changer l'état
+                        <i class="fa fa-gear fa-lg" ng-if="admin.status.loading == false" aria-hidden="true"></i><i class="fa fa-spin fa-circle-o-notch" ng-if="admin.status.loading == true"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuStatus">
                         <li><a class="dropdown-item" ng-click="admin.status.action('todo')" ng-class="(resource.transcript.status == 'todo') ? 'bg-danger' : ''">À faire</a></li>

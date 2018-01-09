@@ -18,7 +18,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             },
             ncyBreadcrumb: {
-                parent: 'transcript.app.edition({idEntity: entity.id, idResource: resource.id})',
+                parent: 'transcript.app.edition({idEntity: idEntity, idResource: idResource})',
                 label: 'Transcription'
             },
             tfMetaTags: {
@@ -35,11 +35,11 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 transcript: function(TranscriptService, $transition$) {
                     return TranscriptService.getTranscript($transition$.params().idTranscript);
                 },
-                resource: function(ResourceService, $transition$) {
-                    return ResourceService.getResource($transition$.params().idResource);
+                idResource: function(ResourceService, $transition$) {
+                    return $transition$.params().idResource;
                 },
-                entity: function(EntityService, $transition$) {
-                    return EntityService.getEntity($transition$.params().idEntity);
+                idEntity: function(EntityService, $transition$) {
+                    return $transition$.params().idEntity;
                 },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread('transcript-'+$transition$.params().idTranscript);
@@ -49,6 +49,27 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 },
                 config: function() {
                     return YAML.load('System/Transcript/toolbar.yml');
+                },
+                transcriptConfig: function() {
+                    return {
+                        isHeader: true,
+                        isVersioning: true,
+                        isComments: true,
+                        isValidation: true,
+                        isExercise: true,
+                        isSmartTEI: null,
+                        isAttributesManagement: null,
+                        isLiveRender: null,
+                        isHelp: null,
+                        isDocumentation: null,
+                        isTaxonomy: null,
+                        isNotes: null,
+                        isComplexFields: null,
+                        correctionTranscript: null,
+                        correctionErrorsToAvoid: null,
+                        tagsList: null,
+                        exerciseImageToTranscribe: null
+                    }
                 }
             }
         })

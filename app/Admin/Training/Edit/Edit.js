@@ -66,7 +66,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             })
     }])
 
-    .controller('AdminTrainingEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'flash', 'Upload', 'trainingContent', 'trainingContents', 'users', 'config', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, flash, Upload, trainingContent, trainingContents, users, config) {
+    .controller('AdminTrainingEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', 'flash', 'Upload', 'trainingContent', 'trainingContents', 'users', 'config', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, flash, Upload, trainingContent, trainingContents, users, config) {
         $scope.trainingContents = trainingContents;
         $scope.users = users;
         $scope.config = config;
@@ -74,6 +74,10 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             $log.debug(trainingContent);
             $scope.trainingContent = trainingContent;
             $scope.trainingContent.updateComment = "";
+
+            for(let iER in $scope.trainingContent.editorialResponsibility) {
+                $scope.trainingContent.editorialResponsibility[iER] = $scope.trainingContent.editorialResponsibility[iER].id;
+            }
         } else {
             $scope.trainingContent = {
                 title: null,
@@ -86,30 +90,25 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 illustration: null,
                 videoContainer: null,
                 content: null,
-                exercise: {
-                    header: null,
-                    imageToTranscribe: null,
-                    preferences: {
-                        isSmartTEI: null,
-                        isAttributesManagement: null,
-                        activeTags: null,
-                        isLiveRender: null,
-                        isHelp: null,
-                        isDocumentation: null,
-                        isTaxonomy: null,
-                        isBibliography: null,
-                        isNotes: null,
-                        isVersioning: null,
-                        isComplexFields: null
-                    },
-                    correction: {
-                        transcript: null,
-                        errorsToAvoid: null
-                    }
-                }
-
+                exerciseHeader: null,
+                exerciseImageToTranscribe: null,
+                exerciseIsSmartTEI: null,
+                exerciseIsAttributesManagement: null,
+                exerciseTagsList: [],
+                exerciseIsLiveRender: null,
+                exerciseIsHelp: null,
+                exerciseIsDocumentation: null,
+                exerciseIsTaxonomy: null,
+                exerciseIsNotes: null,
+                exerciseIsVersioning: null,
+                exerciseIsComplexFields: null,
+                exerciseCorrectionTranscript: null,
+                exerciseCorrectionErrorsToAvoid: null
             };
             $scope.trainingContent.orderInTraining = trainingContents.length+1;
+            for(let tag in $scope.config.tags) {
+                $scope.trainingContent.exerciseTagsList.push(tag);
+            }
         }
 
         $scope.submit = {
@@ -145,26 +144,22 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 updateComment: $scope.trainingContent.updateComment,
                 illustration: $scope.trainingContent.illustration,
                 videoContainer: $scope.trainingContent.videoContainer,
-                content: $scope.trainingContent.content
+                content: $scope.trainingContent.content,
+                exerciseHeader: $scope.trainingContent.exerciseHeader,
+                exerciseImageToTranscribe: $scope.trainingContent.exerciseImageToTranscribe,
+                exerciseIsSmartTEI: $scope.trainingContent.exerciseIsSmartTEI,
+                exerciseIsAttributesManagement: $scope.trainingContent.exerciseIsAttributesManagement,
+                exerciseTagsList: $scope.trainingContent.exerciseTagsList,
+                exerciseIsLiveRender: $scope.trainingContent.exerciseIsLiveRender,
+                exerciseIsHelp: $scope.trainingContent.exerciseIsHelp,
+                exerciseIsDocumentation: $scope.trainingContent.exerciseIsDocumentation,
+                exerciseIsTaxonomy: $scope.trainingContent.exerciseIsTaxonomy,
+                exerciseIsNotes: $scope.trainingContent.exerciseIsNotes,
+                exerciseIsVersioning: $scope.trainingContent.exerciseIsVersioning,
+                exerciseIsComplexFields: $scope.trainingContent.exerciseIsComplexFields,
+                exerciseCorrectionTranscript: $scope.trainingContent.exerciseCorrectionTranscript,
+                exerciseCorrectionErrorsToAvoid: $scope.trainingContent.exerciseCorrectionErrorsToAvoid
             };
-            if($scope.trainingContent.exercise !== undefined && $scope.trainingContent.exercise !== null) {
-                $scope.form.exerciseHeader = $scope.trainingContent.exercise.header;
-                $scope.form.exerciseImageToTranscribe = $scope.trainingContent.exercise.imageToTranscribe;
-                $scope.form.exerciseIsSmartTEI = $scope.trainingContent.exercise.preferences.isSmartTEI;
-                $scope.form.exerciseIsAttributesManagement = $scope.trainingContent.exercise.preferences.isAttributesManagement;
-                $scope.form.exerciseTagsList = $scope.trainingContent.exercise.preferences.activeTags;
-                $scope.form.exerciseIsLiveRender = $scope.trainingContent.exercise.preferences.isLiveRender;
-                $scope.form.exerciseIsHelp = $scope.trainingContent.exercise.preferences.isHelp;
-                $scope.form.exerciseIsDocumentation = $scope.trainingContent.exercise.preferences.isDocumentation;
-                $scope.form.exerciseIsTaxonomy = $scope.trainingContent.exercise.preferences.isTaxonomy;
-                $scope.form.exerciseIsBibliography = $scope.trainingContent.exercise.preferences.isBibliography;
-                $scope.form.exerciseIsNotes = $scope.trainingContent.exercise.preferences.isNotes;
-                $scope.form.exerciseIsVersioning = $scope.trainingContent.exercise.preferences.isVersioning;
-                $scope.form.exerciseIsComplexFields = $scope.trainingContent.exercise.preferences.isComplexFields;
-                $scope.form.exerciseCorrectionTranscript = $scope.trainingContent.exercise.correction.transcript;
-                $scope.form.exerciseCorrectionErrorsToAvoid = $scope.trainingContent.exercise.correction.errorsToAvoid;
-                $log.debug($scope.trainingContent.exercise.preferences.activeTags);
-            }
 
             if($scope.trainingContent.id === null || $scope.trainingContent.id === undefined) {
                 /* If trainingContent.id == null > The trainingContent doesn't exist, we post it */
@@ -283,7 +278,5 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             });
         }
         /* End: Upload new media ------------------------------------------------------------------------------------ */
-
-
     }])
 ;

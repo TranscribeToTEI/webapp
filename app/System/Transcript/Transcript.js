@@ -2,27 +2,28 @@
 
 angular.module('transcript.system.transcript', ['ui.router'])
 
-    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'NoteService', 'TaxonomyService', 'transcript', 'entity', 'resource', 'teiInfo', 'config', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, NoteService, TaxonomyService, transcript, entity, resource, teiInfo, config) {
+    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'NoteService', 'TaxonomyService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, NoteService, TaxonomyService, transcript, teiInfo, config, transcriptConfig) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
-        else if(transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
+        else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
             $log.debug('Redirection to edition -> Already in edition');
-            $state.go('transcript.app.edition', {'idEntity': entity.id, 'idResource': resource.id});
+            $state.go('transcript.app.edition', {'idEntity': transcript._embedded.resource.entity.id, 'idResource': transcript._embedded.resource.id});
         } else {
             /* ---------------------------------------------------------------------------------------------------------- */
             /* $scope & variables */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcript = transcript; $log.debug(transcript);
-            $scope.resource = resource;
-            $scope.entity = entity;
+            $scope.resource = transcript._embedded.resource;
+            $scope.entity = $scope.resource.entity;
             $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
             $scope.config = config;
+            $scope.transcriptConfig = transcriptConfig; $log.debug($scope.transcriptConfig);
             $scope.taxonomy = {
                 testators: null,
                 places: null,
                 militaryUnits: null
             };
             $scope.functions = {};
-            $scope.smartTEI = $rootScope.user._embedded.preferences.smartTEI;
+            $scope.smartTEI = (transcriptConfig.isExercise === false) ? $rootScope.user._embedded.preferences.smartTEI : $scope.transcriptConfig.isSmartTEI;
             $scope.complexEntry = $rootScope.user._embedded.preferences.showComplexEntry;
 
             $scope.page = {
@@ -186,17 +187,21 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Updating Transcript Log */
             /* ---------------------------------------------------------------------------------------------------------- */
-            if ($scope.transcript._embedded.isCurrentlyEdited === false) {
-                $log.debug('creation of transcript log -> Transcript is now closed');
-                TranscriptLogService.postTranscriptLog({
-                    'isCurrentlyEdited': true,
-                    'transcript': $scope.transcript.id
-                }).then(function (data) {
-                    $log.debug(data);
-                    $scope.currentLog = data;
-                });
+            if($scope.transcriptConfig.isExercise === false) {
+                if ($scope.transcript._embedded.isCurrentlyEdited === false) {
+                    $log.debug('creation of transcript log -> Transcript is now closed');
+                    TranscriptLogService.postTranscriptLog({
+                        'isCurrentlyEdited': true,
+                        'transcript': $scope.transcript.id
+                    }).then(function (data) {
+                        $log.debug(data);
+                        $scope.currentLog = data;
+                    });
+                } else {
+                    $scope.currentLog = $filter('filter')($scope.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
+                }
             } else {
-                $scope.currentLog = $filter('filter')($scope.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
+                $scope.currentLog = null;
             }
             /* End: Updating Transcript Log ----------------------------------------------------------------------------- */
 
@@ -1308,8 +1313,10 @@ angular.module('transcript.system.transcript', ['ui.router'])
              */
             $transitions.onBefore({}, (trans) => {
                 if (($scope.transcript.content === null && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area) {
-                    $log.debug('get through onBefore');
-                    TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
+                    if($scope.transcriptConfig.isExercise === false) {
+                        $log.debug('get through onBefore');
+                        TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
+                    }
                 } else {
                     $log.debug('ask for leave');
                     $window.history.back();
