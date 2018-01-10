@@ -56,7 +56,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         isVersioning: true,
                         isComments: true,
                         isValidation: true,
-                        isExercise: true,
+                        isExercise: false,
                         isSmartTEI: null,
                         isAttributesManagement: null,
                         isLiveRender: null,

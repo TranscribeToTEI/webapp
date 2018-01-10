@@ -817,7 +817,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
             },
             getTeiInfo: function() {
                 return $http.get(
-                    $rootScope.api+"/model?elements=true&info=full"
+                    $rootScope.webapp.resources+"teiInfo.json"
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {

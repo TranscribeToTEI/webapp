@@ -12,7 +12,6 @@ angular.module('transcriptApp', [
         'angular-flash.service',
         'angular-flash.flash-alert-directive',
         'ui.bootstrap',
-        'ui.openseadragon',
         'ncy-angular-breadcrumb',
         'ngFileUpload',
         'angucomplete',
@@ -22,6 +21,7 @@ angular.module('transcriptApp', [
         'permission',
         'permission.ui',
         'angular-loading-bar',
+        'ui.openseadragon',
         'tf.metatags',
         'transcript',
         'transcript.admin',
@@ -84,6 +84,9 @@ angular.module('transcriptApp', [
         'transcript.app.taxonomy.view',
         'transcript.app.training',
         'transcript.app.training.exercise',
+        'transcript.app.training.exercise.correction',
+        'transcript.app.training.exercise.exercise',
+        'transcript.app.training.exercise.presentation',
         'transcript.app.training.presentation',
         'transcript.app.transcript',
         'transcript.app.user',
@@ -194,6 +197,7 @@ angular.module('transcriptApp', [
         $rootScope.version = parameters.version;
         $rootScope.api = parameters.api;
         $rootScope.api_web = parameters.api_web;
+        $rootScope.iiif = parameters.iiif;
         $rootScope.webapp = {
             strict: parameters.webapp.strict,
             resources: parameters.webapp.resources

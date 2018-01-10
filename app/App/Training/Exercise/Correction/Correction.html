@@ -1,0 +1,22 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+
+<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
+    <div ng-include="'App/Training/tpl/training-header.html'"></div>
+
+    Correction
+
+    <div ng-include="'App/Training/Exercise/tpl/training-exercise.html'"></div>
+
+    <hr />
+    <div ui-view="comment"></div>
+</main>
+<main class="container" role="main" ng-if="trainingContent.pageStatus != 'public'">
+    <div class="alert alert-warning">Oups ... Cette page n'est pas publique pour le moment</div>
+</main>

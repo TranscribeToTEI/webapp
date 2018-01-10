@@ -7,7 +7,7 @@ angular.module('transcript.service.image', ['ui.router'])
             getThumbnail: function(entity) {
                 let sendNoImage = false;
                 if(entity.resources.length > 0) {
-                    return $rootScope.api_web+'/images/data/testament_'+$filter('willNumberFormat')(entity.willNumber)+'/JPEG/FRAN_Poilus_t-'+$filter('willNumberFormat')(entity.willNumber)+'_'+entity.resources[0].images[0]+'_L.jpg';
+                    return $rootScope.iiif.server + '/testament_' + $filter('willNumberFormat')(entity.willNumber) + $rootScope.iiif.separator + 'JPEG' + $rootScope.iiif.separator + entity.resources[0].images[0] + $rootScope.iiif.extension + '.jpg/full/!150,150/0/default.jpg';
                 }
 
                 if(sendNoImage === true) {

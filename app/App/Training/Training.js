@@ -23,7 +23,7 @@ angular.module('transcript.app.training', ['ui.router'])
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
 
         if(trainingContent.pageType === 'exercise') {
-            $state.go('transcript.app.training.exercise', {order: trainingContent.orderInTraining});
+            $state.go('transcript.app.training.exercise.presentation', {order: trainingContent.orderInTraining});
         } else {
             $state.go('transcript.app.training.presentation', {order: trainingContent.orderInTraining});
         }

@@ -55,6 +55,19 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.tfMetaTagsName = $filter('ucFirstStrict')($filter('resourceTypeName')($scope.resource.type));
 
         /* ---------------------------------------------------------------------------------------------------------- */
+        /* Viewer Management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        let imageSource = [];
+        imageSource.push($rootScope.iiif.server+"/testament_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg");
+
+        console.log(imageSource);
+        $scope.openseadragon = {
+            prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
+            tileSources: imageSource
+        };
+        /* Viewer Management ---------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
         /* Content Management */
         /* ---------------------------------------------------------------------------------------------------------- */
         if($scope.resource.transcript.content !== null) {

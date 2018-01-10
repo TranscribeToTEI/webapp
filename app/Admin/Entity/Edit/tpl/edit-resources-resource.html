@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div class="thumbnail">
-                <img src="{{ api_web  }}/images/data/testament_{{ entity.willNumber | willNumberFormat }}/JPEG/FRAN_Poilus_t-{{ entity.willNumber | willNumberFormat }}_{{ resource.images[0] | willNumberFormat:2 }}_L.jpg" class="img-150px" />
+                <img src="{{ iiif.server  }}/testament_{{ entity.willNumber | willNumberFormat }}{{ iiif.separator }}JPEG{{ iiif.separator }}{{ resource.images[0] }}{{ iiif.extension }}.jpg/full/!150,150/0/default.jpg" class="img-150px" />
             </div>
             <dl class="row pr-3 ml-1">
                 <dt class="col-sm-4">Identifiant</dt>

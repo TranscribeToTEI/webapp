@@ -16,7 +16,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.entity = $scope.resource.entity;
             $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
             $scope.config = config;
-            $scope.transcriptConfig = transcriptConfig; $log.debug($scope.transcriptConfig);
+            $scope.transcriptConfig = transcriptConfig; console.debug($scope.transcriptConfig);
             $scope.taxonomy = {
                 testators: null,
                 places: null,
@@ -1219,26 +1219,18 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Viewer Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            /*
-                https://github.com/nfabre/deepzoom.php
-                https://openseadragon.github.io/docs/
-                $scope.openseadragon = {
+            let imageSource = [];
+            if($scope.transcriptConfig.isExercise === false) {
+                imageSource.push($rootScope.iiif.server + "/testament_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg");
+            } else {
+                imageSource.push($rootScope.iiif.server + "/exercise" + $rootScope.iiif.separator + $scope.transcriptConfig.exerciseImageToTranscribe);
+            }
 
-                prefixUrl: $rootScope.webapp.resources+"libraries/js/openseadragon/images/",
-                tileSources: {
-                    Image: {
-                        xmlns:    "http://schemas.microsoft.com/deepzoom/2008",
-                        Url:      $rootScope.api_web+"/images/data/testament_"+$scope.entity.will_number+"/JPEG/FRAN_Poilus_t-"+$scope.entity.will_number+"_"+$scope.resource.images[0],
-                        Format:   "jpg",
-                        Overlap:  "2",
-                        TileSize: "256",
-                        Size: {
-                            Height: "9221",
-                            Width:  "7026"
-                        }
-                    }
-                }
-            };*/
+            console.log(imageSource);
+            $scope.openseadragon = {
+                prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
+                tileSources: imageSource
+            };
             /* Viewer Management ---------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */

@@ -1,0 +1,4096 @@
+{
+  "data": {
+    "text": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient un seul texte quelconque, simple ou composite, par exemple un poème ou une pièce de théâtre, un recueil d’essais, un roman, un dictionnaire ou un échantillon de corpus."
+          }
+        ],
+        "projectDescription": "Si cet élément contient l'édition du testament, il possède obligatoirement un attribut xml:id qui donne un identifiant unique à l'édition. Il contient obligatoirement un élément body, qui englobe la transcription proprement dite et les notes d'apparat critique, et optionnellement un élément back, qui sert pour consigner les notes explicatives et commentaires divers associés à une partie de la transcription.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "texte"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><text xml:id=\"will-0001\"> <body><!-- ici, au moins une division de texte div --></body> </text></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "body",
+        "back"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "l'identifiant unique du testament dont le texte est édité",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "body": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient la totalité du corps d’un seul texte simple, à l’exclusion de toute partie pré- ou post-liminaire."
+          }
+        ],
+        "projectDescription": "Contient la totalité de la transcription du document, notes d'apparat critique incluses.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "corps du texte"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><body> <div type=\"will\"><!-- transcription du texte du testament proprement dit --></div> <div type=\"envelope\"><!-- transcription du texte de l'enveloppe lorsque celle-ci subsiste et porte des mentions de la main du testateur --></div> </body></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "interpGrp",
+        "listPerson",
+        "listOrg",
+        "listPlace",
+        "div"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "facsimile": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-11-16",
+            "content": "contient une représentation d'une source écrite quelconque sous la forme d'un ensemble d'images plutôt que sous la forme d'un texte transcrit ou encodé."
+          }
+        ],
+        "projectDescription": "La liste des images numériques d'un testament comprend uniquement des éléments surfaceou surfaceGrp. Pas d'attribut pour cet élément facsimile."
+      },
+      "content": [
+        "surface",
+        "surfaceGrp"
+      ],
+      "attributes": {
+        "xml:base": {
+          "id": "xml:base",
+          "label": null,
+          "usage": "opt",
+          "type": null,
+          "desc": "Permettra si nécessaire de stocker une URL de base pour les images numériques, le segment final de l'URI de chaque image étant donné par l'attribut url de graphic",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "surface": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-03-30",
+            "content": "définit une surface écrite comme un rectangle décrit par ses coordonnées spatiales, en regroupant éventuellement une ou plusieurs représentations graphiques de cet espace et des zones rectangulaires intéressantes à l'intérieur de celui-ci."
+          }
+        ],
+        "projectDescription": "L'élément surfaceconcerne une des surfaces physiques du testament (page, partie de page, recto ou verso d'une enveloppe). Il contient deux éléments graphic, un pour l'image au format JPEG, l'autre pour l'image au format TIFF, reproduisant cette surface. Il a obligatoirement deux attributs, type et n.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "surface"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><surface type=\"will-page\" n=\"01\"><graphic url=\"TIFF/FRAN_Poilus_t-0001_01.tif\" xml:id=\"testament-0001_vue-01_jpg\"/><graphic url=\"JPEG/FRAN_Poilus_t-0001_01.jpg\" xml:id=\"testament-0001_vue-01_tif\"/></surface></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><surfaceGrp type=\"will-page\" n=\"02\"><surface type=\"will-page-part\" n=\"02a\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02a.jpg\" xml:id=\"testament-0001_vue-02a_jpg\"> </graphic><graphic url=\"TIFF/FRAN_Poilus_t-1_02a.tif\" xml:id=\"testament-0001_vue-02a_tif\"/></surface><surface type=\"will-page-part\" n=\"02b\"><graphic url=\"JPEG/FRAN_Poilus_t-1_02b.jpg\" xml:id=\"testament-0001_vue-02b_jpg\"/><graphic url=\"TIFF/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"testament-0001_vue-02b_tif\"/></surface></surfaceGrp></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "graphic",
+        "graphic"
+      ],
+      "attributes": {
+        "n": {
+          "id": "n",
+          "label": "nombre",
+          "usage": "req",
+          "type": null,
+          "desc": "le numéro de la surface dans l'ordre de lecture logique du testament",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "enveloppe du testament : verso",
+          "usage": "req",
+          "type": "closed",
+          "desc": "Catégorise ici la surface reproduite par l'image numérique",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "will-page",
+              "label": "page du testament"
+            },
+            {
+              "value": "will-page-part",
+              "label": "partie d'une page du testament"
+            },
+            {
+              "value": "will-envelope-recto",
+              "label": "enveloppe du testament : recto"
+            },
+            {
+              "value": "will-envelope-verso",
+              "label": "enveloppe du testament : verso"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "surfaceGrp": {
+      "doc": {
+        "projectDescription": "L'élément surfaceGrp est utilisé lorsque la page du testament dont il sert à déclarer les reproductions numériques est en fait physiquement segmentée en deux parties du fait que le testament est cousu avec les autres pièces formant la minute notariale. On peut donc avoir dans ce cas deux (ou plus ?) surfaces différentes constituant, regroupées, une page. Ces deux surfaces sont numérisées isolément. Donc l'élément surfaceGrp contient au moins deux éléments surface. L'élément surfaceGrp porte obligatoirement un attribut type et un attribut n.",
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><surfaceGrp type=\"will-page\" n=\"02\"><surface type=\"will-page-part\" n=\"02a\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02a.jpg\" xml:id=\"t-0001_vue-02a_jpg\"> </graphic><graphic url=\"TIFF/FRAN_Poilus_t-0001_02a.tif\" xml:id=\"t-0001_vue-02a_tif\"/></surface><surface type=\"will-page-part\" n=\"02b\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"t-0001_vue-02b_jpg\"/><graphic url=\"TIFF/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"t-0001_vue-02b_tif\"/></surface></surfaceGrp></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "surface",
+        "surface"
+      ],
+      "attributes": {
+        "n": {
+          "id": "n",
+          "label": "nombre",
+          "usage": "req",
+          "type": null,
+          "desc": "le numéro de la surface dans l'ordre de lecture logique du testament",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "enveloppe du testament : verso",
+          "usage": "req",
+          "type": "closed",
+          "desc": "Catégorise ici le groupe de surfaces segmentées par la numérisation",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "will-page",
+              "label": "page du testament"
+            },
+            {
+              "value": "will-envelope-recto",
+              "label": "enveloppe du testament : recto"
+            },
+            {
+              "value": "will-envelope-verso",
+              "label": "enveloppe du testament : verso"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "graphic": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "indique l'emplacement d'une image, d'une illustration ou d'un schéma intégrés."
+          }
+        ],
+        "projectDescription": "Cet élément est utilisé, au sein d'un élément surface, pour consigner l'adresse relative et l'identifiant d'une image numérique reproduisant une surface physique d'un testament ou de son enveloppe. Doit obligatoirement avoir un attribut url et un attribut xml:id",
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><surface type=\"will-page\" n=\"01\"><graphic url=\"TIFF/FRAN_Poilus_t-0001_01.tif\" xml:id=\"t-0001_vue-01_jpg\"/><graphic url=\"JPEG/FRAN_Poilus_t-0001_01.jpg\" xml:id=\"t-0001_vue-01_tif\"/></surface></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "url": {
+          "id": "url",
+          "label": "adresse URL",
+          "usage": "req",
+          "type": null,
+          "desc": "L'adresse relative de l'image numérique",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "req",
+          "type": null,
+          "desc": "L'identifiant unique de l'image numérique (sera utilisé pour faire référence à cette image dans le corps de la transcription).",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "div": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient une subdivision dans le texte préliminaire, dans le corps d’un texte ou dans le texte postliminaire."
+          }
+        ],
+        "projectDescription": "Pour ce qui est de la transcription, l'élément div englobe soit le texte du testament, soit le texte d'une enveloppe. Il est aussi utilisé pour englober les notes explicatives et commentaires dans l'élément back.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "division du texte"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"will\"><pb/><!-- indication de la première page du testament --><dateline><!-- ligne de date--></dateline><head><!-- titre du testament--></head><p><!-- un paragraphe du testament--></p><p><!-- un paragraphe du testament--></p><pb/><!-- changement de page --><list><!-- une liste (souvent une liste de biens) --><item/><item/></list><p><!-- un paragraphe --></p><dateline><!-- ligne de date--></dateline><signed><!-- signature --></signed><postscript><!-- postscriptum --></postscript></div></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"notes\"><note/><note/></div></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "pb",
+        "note"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "notes",
+          "usage": "req",
+          "type": "closed",
+          "desc": "Permet de catégoriser la division de texte en indiquant quel est son contenu.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "will",
+              "label": "le texte du testament"
+            },
+            {
+              "value": "envelope",
+              "label": "le texte de l'enveloppe"
+            },
+            {
+              "value": "notes",
+              "label": "notes"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "head": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient tout type d'en-tête, par exemple le titre d'une section, ou l'intitulé d'une liste, d'un glossaire, d'une description de manuscrit, etc."
+          }
+        ],
+        "projectDescription": "L'élément head contient le titre du testament, lorsque le testateur en a écrit un en tête de celui-ci, avant ou après la mention de la date si elle existe, en le centrant en général sur la page. Le plus souvent ce titre est le suivant : \"Ceci est mon testament\", ou une expression ayant la même signification.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "en-tête"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><head>Ceci est mon testament<choice><reg>.</reg><orig> : </orig></choice></head></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "app",
+        "hi",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "seg",
+        "persName",
+        "placeName",
+        "orgName",
+        "date",
+        "ref",
+        "foreign"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "dateline": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient une brève description des lieux, date, heure, etc. concernant la production d’une lettre, d’un article de journal ou d’un autre texte qui, placée au début ou à la fin, lui est associée comme en-tête ou annonce de fin."
+          }
+        ],
+        "projectDescription": "Il y a normalement une mention de date, donc un élément dateline au moins dans le testament. Cette mention de date peut être placée au tout début du testament ou un peu plus bas. Elle est souvent répétée en fin de testament. En principe le testateur y consigne la date et le lieu de rédaction de son testament.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "mention de date"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline rend=\"centered\"><placeName>Paris</placeName><choice><orig/><reg>,</reg></choice> le <date><choice><orig>trente et un</orig><reg>trente-et-un</reg></choice><choice><reg> juillet</reg><orig> Juillet</orig></choice><lb/><choice><orig>mil</orig><reg>mille</reg></choice> neuf cent quatorze<lb/> (31 <choice><reg>juillet</reg><orig>Juillet</orig></choice> 1914)</date></dateline></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "persName",
+        "placeName",
+        "orgName",
+        "date",
+        "seg",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "p": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "marque les paragraphes dans un texte en prose."
+          }
+        ],
+        "projectDescription": "Le paragraphe est le principal composant du texte des testaments.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "paragraphe"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 1 (Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Avant de partir à la guerre dont<lb/> tant ne reviendront pas, je tiens à décider<lb/> ce qui suit<choice><orig> : </orig><reg>.</reg></choice></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "address",
+        "seg",
+        "term",
+        "ref",
+        "bibl",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "signed": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-10-02",
+            "content": "contient la dernière salutation, ajoutée à un avant-propos, à une dédicace ou à une autre division du texte."
+          }
+        ],
+        "projectDescription": "Ce segment de texte peut contenir, outre la signature proprement dite du testament ou de l'enveloppe, une salutation ou autre formule d'accompagnement, une adresse, une date, etc. On peut, à l'aide de l'attribut rend, en préciser la position sur la page.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "signature"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 8 (Lucien Dufriche, 1<hi rend=\"superscript\">er</hi> août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-008.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-008.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"right\"><seg type=\"signature\"><persName ref=\"#LDufriche\"><forename>L.</forename><surname>Dufriche</surname></persName></seg><lb/> 8 <choice><orig><hi rend=\"superscript-underlined\">bis</hi></orig><reg>bis</reg></choice> rue Sarrette </signed></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "postscript": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-03-30",
+            "content": "contient un post-scriptum, par exemple au bas d'une lettre."
+          }
+        ],
+        "projectDescription": "Un testament peut avoir plusieurs post-scripta successifs, parfois signés. Il peut donc y avoir zéro, un ou plusieurs éléments postscriptum dans la transcription.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "post-scriptum"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 74 (Louis Charles Eugène Le Conte, 16 novembre 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-074.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-074.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"right\"><seg type=\"signature\"><persName ref=\"#LeConte\">Louis <surname>Le Conte</surname></persName></seg></signed><space dim=\"vertical\" quantity=\"1\" unit=\"lines\"/><postscript><p>Pas de fleurs, ni de couronnes, un enterrement simple<lb/> mais beaucoup de messes, en particulier les 33 messes grégoriennes<lb/> <pb/> dites le plus tôt possible après mon décès<choice><orig/><reg>,</reg></choice> et des prières.<lb/> Je ne fais aucune recommandation spéciale par écrit, mon<lb/> vœu le plus cher est que mes enfants soient tous de <hi rend=\"underlined\">bons chrétiens</hi><lb/> <!-- [...] --> </p><signed rend=\"right\"><seg type=\"signature\"><persName ref=\"#LeConte\">Louis Charles Eugène <surname>Le Conte</surname></persName></seg></signed></postscript></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "p",
+        "list",
+        "signed"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "list": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient une suite d'items ordonnés dans une liste."
+          }
+        ],
+        "projectDescription": "Cet élément est le plus souvent utilisé pour encoder une liste de biens dans le corps d'un testament.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "liste"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 47 (Alexandre Victor Titard, 3 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-047.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-047.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><list><item>Créance Clémançon chez <choice><abbr>M<hi rend=\"superscript\">e</hi></abbr><expan>M<ex>aîtr</ex>e</expan></choice> Delafon 6 <choice><abbr>B<hi rend=\"superscript\">d</hi></abbr><expan>b<ex>oulevar</ex>d</expan></choice> de Strasbourg</item><item>Immeuble <choice><expan>S<ex>ain</ex>t-Fargeau</expan><abbr>St Fargeau</abbr></choice> chez <choice><abbr>M.</abbr><expan>M<ex>aître</ex></expan></choice> Cros notaire à Corbeil</item><!-- [...] --></list></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "item"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "item": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient un composant d'une liste."
+          }
+        ],
+        "projectDescription": "Cet élément est utilisé dans l'élément list, le plus souvent pour encoder la description d'un bien dans une liste de biens.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "composant de liste (item)"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 47 (Alexandre Victor Titard, 3 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-047.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-047.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><list><item>Créance Clémançon chez <choice><abbr>M<hi rend=\"superscript\">e</hi></abbr><expan>M<ex>aîtr</ex>e</expan></choice> Delafon 6 <choice><abbr>B<hi rend=\"superscript\">d</hi></abbr><expan>b<ex>oulevar</ex>d</expan></choice> de Strasbourg</item><item>Immeuble <choice><expan>S<ex>ain</ex>t-Fargeau</expan><abbr>St Fargeau</abbr></choice> chez <choice><abbr>M.</abbr><expan>M<ex>aître</ex></expan></choice> Cros notaire à Corbeil</item><!-- [...] --></list></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "persName",
+        "placeName",
+        "orgName",
+        "date",
+        "seg",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "seg": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-10-06",
+            "content": "contient une unité de texte quelconque de niveau segment."
+          }
+        ],
+        "projectDescription": "Cet élément est utilisé notamment pour encoder, dans signed ou directement dans un paragraphe ou un post-scriptum, une signature. Devrait normalement avoir un attribut type pour catégoriser le segment.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "segment quelconque (de texte)"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 8 (Lucien Dufriche, 1<hi rend=\"superscript\">er</hi> août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-008.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-008.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"right\"><seg type=\"signature\"><persName ref=\"#LDufriche\"><forename>L.</forename><surname>Dufriche</surname></persName></seg><lb/> 8 <choice><orig><hi rend=\"superscript-underlined\">bis</hi></orig><reg>bis</reg></choice> rue Sarrette </signed></egXML>"
+          },
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 33 (Henri Gé, 2 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-033.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-033.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><postscript><p>J’ai des titres en dépôt à la<lb/> Société <choice><reg>générale</reg><orig>Générale</orig></choice> sur lesquels<lb/> j’ai fait un emprunt ; il<lb/> serait préférable de le rembourser<lb/> et de vendre par la suite avec<lb/> bénéfice si possible.</p><p><seg type=\"signature\" rend=\"right\"><persName ref=\"#HGe\">H. <surname>Gé</surname></persName></seg></p></postscript></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "autre catégorie de segment",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Catégorise ici le segment textuel. Il est recommandé de l'utiliser.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "signature",
+              "label": "une signature proprement dite"
+            },
+            {
+              "value": "willAuthorVisionOfDeath",
+              "label": "expression de la vision de la mort par le testateur"
+            },
+            {
+              "value": "willAuthorStateOfMind",
+              "label": "expression de l'état d'esprit du testateur"
+            },
+            {
+              "value": "other",
+              "label": "autre catégorie de segment"
+            }
+          ]
+        },
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        },
+        "ana": {
+          "id": "ana",
+          "label": "analyse",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour relier le terme à l'entrée correspondante dans la grille d'analyse du vocabulaire employé par les testateurs.",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:lang": {
+          "id": "xml:lang",
+          "label": "langue",
+          "usage": "opt",
+          "type": null,
+          "desc": "Spécifier dans cet attribut le code de la langue du segment textuel balisé, lorsque ce n'est pas le français. Parmi les codes possibles pour les langues européennes : en (anglais), es (espagnol), it (italien).",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "addrLine": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une ligne d'adresse postale."
+          }
+        ],
+        "projectDescription": "L'élément addrLineest utilisé dans le corps de la transcription, le plus souvent lorsqu'on transcrit le texte d'une enveloppe, pour baliser une ligne d'adresse postale. Il est contenu dans un élément address.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "ligne d'adresse"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"envelope\"><pb/><p><address><addrLine>Monsieur Delafon<choice><orig/><reg>,</reg></choice> notaire<choice>v<reg>,</reg></choice></addrLine><addrLine>6 boulevard de Strasbourg<choice><orig/><reg>,</reg></choice></addrLine><addrLine>Paris</addrLine></address></p><!-- etc. --></div></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé ici pour spécifier à quel endroit, sur la page, se trouve l'élément concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        },
+        "xml:lang": {
+          "id": "xml:lang",
+          "label": "langue",
+          "usage": "opt",
+          "type": null,
+          "desc": "Spécifier dans cet attribut le code de la langue de la ligne d'adresse, lorsque ce n'est pas le français. Parmi les codes possibles pour les langues européennes : en (anglais), es (espagnol), it (italien).",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "choice": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "regroupe un certain nombre de balisages alternatifs possibles pour un même endroit dans un texte."
+          }
+        ],
+        "projectDescription": "Cet élément regroupe, soit un élément abbr et un élément expan (pour transcrire une abréviation telle quelle et la forme développée de l'expression abrégée), soit un élément sic et un élément corr (pour transcrire une faute de français et une proposition de correction de cette faute), soit un élément orig et un élément reg (pour transcrire une graphie ou une ponctuation ancienne et une proposition de graphie ou de ponctuation normalisée).",
+        "complexTagInfo": "<desc type=\"wills-ui-complexTag-info\"> L'élément <gi>choice</gi> doit contenir une des trois configurations suivantes : <list><item>un mot contenant une abréviation (dans l'élément <gi>abbr</gi>) et sa version développée (dans l'élément <gi>expan</gi>)</item><item>un mot ou une expression contenant une ou plusieurs faute(s) de français (dans l'élément <gi>sic</gi>) et sa version corrigée (dans l'élément <gi>corr</gi>)</item><item>un mot ou une expression dont la forme ne respecte pas les règles actuelles d'orthographe (dans l'élément <gi>orig</gi>) et sa version normalisée selon les règles d'orthographe actuelles (dans l'élément <gi>reg</gi>)</item></list> </desc>",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "choix"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Je lègue à mon cher frère <choice><abbr>M.</abbr><expan>M<ex>onsieur</ex></expan></choice> André<lb/> Victor Chatin <!-- [...] --></p></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p><choice><orig>A</orig><reg>À</reg></choice> défaut de l’un et de l’autre<lb/> des époux <!-- [...] --></p></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p><choice><orig>- A</orig><reg>À</reg></choice> la veille de partir à la guerre<choice><orig> - </orig><reg>,</reg></choice> voici mes dernières<lb/> <choice><sic>volonté</sic><corr>volontés</corr></choice> en cas de mort<choice><orig> - </orig><reg>.</reg></choice></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "abbr",
+        "expan",
+        "sic",
+        "corr",
+        "orig",
+        "reg"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "sic": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient du texte reproduit quoiqu'il est apparemment incorrect ou inexact"
+          }
+        ],
+        "projectDescription": "L'élément sic contient la transcription, telle quelle, d'une faute de français (orthographe ou syntaxe) dans le texte transcrit. Une proposition de correction de cette faute doit suivre dans l'élément corr.",
+        "gloss": [
+          {
+            "date": "2009-03-17",
+            "content": "sic, du latin ainsi"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Ceci est <choice><sic>mais dernières </sic><corr>ma dernière </corr></choice><lb/> volonté, en cas de décès.<!-- [...] --></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "damage",
+        "unclear",
+        "supplied",
+        "gap",
+        "foreign",
+        "seg",
+        "surplus"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "corr": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient la forme correcte d'un passage qui est considéré erroné dans la copie du texte."
+          }
+        ],
+        "projectDescription": "L'élément corr contient une proposition de correction d'une faute d'orthogaphe ou de syntaxe dans le texte transcrit. La faute doit au préalable avoir été encodée dans l'élément sic.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "correction"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Ceci est <choice><sic>mais dernières </sic><corr>ma dernière </corr></choice><lb/> volonté, en cas de décès.<!-- [...] --></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "foreign"
+      ],
+      "attributes": {
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "rec",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, en l'occurrence pour identifier la ou les auteurs de la proposition de correction.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament et en particulier, en l'occurrence, à la saisie de la forme corrigée, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "abbr": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une abréviation quelconque."
+          }
+        ],
+        "projectDescription": "L'élément abbr contient la transcription, telle quelle, d'un mot dont une ou plusieurs parties sont abrégées. Une proposition du mot dans sa forme développée doit suivre dans l'élément expan.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "abréviation"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "supplied",
+        "unclear",
+        "damage",
+        "hi",
+        "gap"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "géographique",
+          "usage": "rec",
+          "type": "open",
+          "desc": "Utiliser cet attribut est conseillé lorsqu'on est certain du type d'abréviation.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "suspension",
+              "label": "suspension"
+            },
+            {
+              "value": "contraction",
+              "label": "contraction"
+            },
+            {
+              "value": "brevigraph",
+              "label": "brévigraphe"
+            },
+            {
+              "value": "superscription",
+              "label": "exposant"
+            },
+            {
+              "value": "acronym",
+              "label": "acronyme"
+            },
+            {
+              "value": "title",
+              "label": "titre"
+            },
+            {
+              "value": "organization",
+              "label": "sigle"
+            },
+            {
+              "value": "geographic",
+              "label": "géographique"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "expan": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient l'expansion d'une abréviation."
+          }
+        ],
+        "projectDescription": "L'élément expan contient la forme développée du mot dont le testament donne une forme abrégée. La forme abrégée du mot doit précéder, dans l'élément abbr.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "expansion"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline rend=\"right\"><choice><abbr type=\"superscription\">S.<hi rend=\"superscript\">t</hi> Mandé</abbr><expan>S<ex>ain</ex>t-Mandé</expan></choice><choice><reg>,</reg><orig/></choice> le deux août 1914.</dateline></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "ex"
+      ],
+      "attributes": {
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "rec",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, en l'occurrence pour identifier la ou les auteurs du développement de l'abréviation.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament, et en particulier, en l'occurrence, à l'identification et à la saisie de la forme développée de l'abréviation, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "orig": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une partie notée comme étant fidèle à l'original et non pas normalisée ou corrigée."
+          }
+        ],
+        "projectDescription": "L'élément orig contient, tels quels, un mot, une expression ou une partie de phrase du testament dans une forme ancienne non conforme à la forme actuelle (ponctuation non conforme aux règles actuelles, emploi non normalisé des majuscules, absence de diacritiques ou présence non normative de diacritiques, graphie syntaxiquement correcte mais ancienne). Une proposition de forme normalisée du mot ou de l'expression concernés doit suivre dans l'élément reg.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "forme originale"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>La <choice><reg>boîte bleue</reg><orig>Boîte Bleue</orig></choice> se trouvant<lb/> dans le tiroir de droite de<lb/> mon <choice><reg>bureau</reg><orig>Bureau</orig></choice> en haut<choice><reg>,</reg><orig/></choice> ainsi<lb/> que le paquet de cartes enveloppées<lb/> d’un papier blanc seront<lb/> complètement brûlés<choice><reg>.</reg><orig> - </orig></choice> </p></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline><choice><orig>Lons le Saunier</orig><reg>Lons-le-Saunier</reg></choice><choice><orig/><reg>,</reg></choice> le 2 <choice><orig>Août</orig><reg>août</reg></choice> 1914</dateline></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "pc",
+        "hi",
+        "damage",
+        "unclear",
+        "supplied",
+        "gap",
+        "foreign",
+        "seg"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "reg": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une partie (de texte) qui a été régularisée ou normalisée de façon quelconque"
+          }
+        ],
+        "projectDescription": "L'élément reg contient la forme normalisée du mot dont le testament donne une forme ancienne ou non conforme aux règles du français contemporain. La forme du mot telle que trouvée dans le texte du testament doit précéder, dans l'élément orig.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "régularisation"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "foreign",
+        "seg"
+      ],
+      "attributes": {
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "rec",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, en l'occurrence pour identifier la ou les auteurs de la proposition de forme normalisée.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament et en particulier, en l'occurrence, à la saisie de la forme normalisée, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "damage": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "sert à encoder une zone qui a subi des dommages dans le manuscrit témoin du texte."
+          }
+        ],
+        "projectDescription": "L'élément damage est utilisé lorsque le support a subi des dégâts matériels (taches, traces de fumée, de frottements, déchirures...) qui rendent la lecture du texte plus ou moins incertaine, jusqu'à parfois le faire disparaître en tout ou en partie. Souvent, on utilise dans cet élément damage un élément unclear ou supplied, voire un élément gap.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "dommage"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Testament <damage agent=\"stain\"><unclear>de</unclear></damage> <choice><expan>M<ex>onsieur</ex></expan><abbr type=\"obsolete\">M<hi rend=\"superscript-underlined\">r</hi></abbr></choice> <persName ref=\"#EGrandjean\"> Emile Jean Léon<lb/> Grandjean</persName> <!-- [...] --></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "choice",
+        "seg",
+        "unclear",
+        "supplied",
+        "gap",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "unit": {
+          "id": "unit",
+          "label": "mots",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Cet attribut est utiisé, conjointement avec l'attribut quantity, pour spécifier une mesure de la partie du testament qui a subi un dommage. Il sert à indiquer l'unité de mesure.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cm",
+              "label": "cm"
+            },
+            {
+              "value": "chars",
+              "label": "caractères"
+            },
+            {
+              "value": "lines",
+              "label": "lignes"
+            },
+            {
+              "value": "words",
+              "label": "mots"
+            }
+          ]
+        },
+        "quantity": {
+          "id": "quantity",
+          "label": "quantité",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour spécifier le nombre de cm, de caractères, de mots ou de lignes, selon l'unité choisie et déclarée à l'aide de l'attribut unit, concernés par le dommage",
+          "valDesc": null,
+          "values": []
+        },
+        "agent": {
+          "id": "agent",
+          "label": "agent inconnu",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Caractérise la cause du dommage métariel subi par le testament, lorsqu'elle peut être identifiée à l'aide de l'image numérique.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "smoke",
+              "label": "traces de fumée"
+            },
+            {
+              "value": "rubbing",
+              "label": "frottements subis par le support"
+            },
+            {
+              "value": "stain",
+              "label": "tache"
+            },
+            {
+              "value": "tear",
+              "label": "déchirure"
+            },
+            {
+              "value": "dirt",
+              "label": "poussière"
+            },
+            {
+              "value": "other",
+              "label": "autre agent"
+            },
+            {
+              "value": "unknown",
+              "label": "agent inconnu"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "gap": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "indique une omission dans une transcription, soit pour des raisons éditoriales décrites dans l'en-tête TEI au cours d’un échantillonnage, soit parce que le matériau est illisible ou inaudible."
+          }
+        ],
+        "projectDescription": "L'élément gap est utilisé soit dans les cas rares où, un dommage matériel étant survenu, une partie du texte du testament est devenue totalement illisible ou est absente, soit dans le cas où la lecture du mot ou de l'expression est jugée impossible (fil de couture masquant les caractères, rature, écriture non déchiffrable...), ce sans qu'on puisse fournir une proposition de texte palliant la lacune. Dans le premier cas, l'élément gap sera utilisé dans l'élément damage. Pour mémoire, dans le cas où la lecture est possible mais incertaine, on utilise unclear. Si la lecture est impossible, mais qu'on peut proposer un texte comblant la lacune, on utilise l'élément supplied.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "omission"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "reason": {
+          "id": "reason",
+          "label": "masqué (par le fil de couture, par une tache...)",
+          "usage": "rec",
+          "type": "semi",
+          "desc": "Cet attribut sert à indiquer pourquoi il y a une lacune dans sa transcription.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cancelled",
+              "label": "biffé"
+            },
+            {
+              "value": "deleted",
+              "label": "détruit, absent"
+            },
+            {
+              "value": "illegible",
+              "label": "illisible"
+            },
+            {
+              "value": "hidden",
+              "label": "masqué (par le fil de couture, par une tache...)"
+            }
+          ]
+        },
+        "unit": {
+          "id": "unit",
+          "label": "mots",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Cet attribut est utiisé, conjointement avec l'attribut quantity, pour spécifier une mesure de la partie du texte du testament qui n'est pas transcrite. Il sert à indiquer l'unité de mesure.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cm",
+              "label": "cm"
+            },
+            {
+              "value": "chars",
+              "label": "caractères"
+            },
+            {
+              "value": "lines",
+              "label": "lignes"
+            },
+            {
+              "value": "words",
+              "label": "mots"
+            }
+          ]
+        },
+        "quantity": {
+          "id": "quantity",
+          "label": "quantité",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour spécifier le nombre de cm, de caractères, de mots ou de lignes, selon l'unité choisie et déclarée à l'aide de l'attribut unit, qui ne sont pas transcrits.",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "supplied": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-11-16",
+            "content": "permet d'encoder du texte restitué par l'auteur de la transcription ou par l'éditeur pour une raison quelconque, le plus souvent parce que le texte du document original ne peut être lu, par suite de dommages matériels ou de lacunes."
+          }
+        ],
+        "projectDescription": "L'élément supplied est utilisé soit dans les cas rares où, un dommage matériel étant survenu, une partie du texte du testament est devenue illisible ou est absente, soit dans le cas où la lecture du mot ou de l'expression est jugée impossible (fil de couture masquant les caractères, rature, écriture non déchiffrable...), dès lors qu'on peut fournir une proposition de texte palliant la lacune. Dans le premier cas, l'élément supplied sera utilisé dans l'élément damage. Pour mémoire, dans le cas où la lecture est possible mais incertaine, on utilise unclear. Si la lecture est impossible et qu'on ne peut restituer le texte, on utilise l'élément gap.",
+        "gloss": [
+          {
+            "date": "2009-11-16",
+            "content": "texte restitué"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Pour le reste de mes biens mon <damage agent=\"stain\"><supplied>frère</supplied></damage><lb/> André, dont je connais l’esprit de<lb/> sagesse et de bon sens, les reçoit en<lb/> pleine propriété. Puisse-t-il en<lb/> jouir longtemps et heureux !</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "seg",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "unit": {
+          "id": "unit",
+          "label": "mots",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Cet attribut est utiisé, conjointement avec l'attribut quantity, pour spécifier une mesure de la partie du texte du testament qui est restituée. Il sert à indiquer l'unité de mesure.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cm",
+              "label": "cm"
+            },
+            {
+              "value": "chars",
+              "label": "caractères"
+            },
+            {
+              "value": "lines",
+              "label": "lignes"
+            },
+            {
+              "value": "words",
+              "label": "mots"
+            }
+          ]
+        },
+        "quantity": {
+          "id": "quantity",
+          "label": "quantité",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour spécifier le nombre de cm, de caractères, de mots ou de lignes, selon l'unité choisie et déclarée à l'aide de l'attribut unit, qui sont restitués par le contributeur",
+          "valDesc": null,
+          "values": []
+        },
+        "reason": {
+          "id": "reason",
+          "label": "masqué (par le fil de couture, par une tache...)",
+          "usage": "rec",
+          "type": "semi",
+          "desc": "Cet attribut sert à indiquer pourquoi une partie du texte est restituée.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cancelled",
+              "label": "biffé"
+            },
+            {
+              "value": "deleted",
+              "label": "détruit, absent"
+            },
+            {
+              "value": "illegible",
+              "label": "illisible"
+            },
+            {
+              "value": "hidden",
+              "label": "masqué (par le fil de couture, par une tache...)"
+            }
+          ]
+        },
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "rec",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, en l'occurrence pour identifier la ou les auteurs de la proposition de texte restitué.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament (et en particulier, en l'occurrence, à la saisie d'une portion de texte restituée), telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "unclear": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient un mot, une expression ou bien un passage qui ne peut être transcrit avec certitude parce qu'il est illisible ou inaudible dans la source."
+          }
+        ],
+        "projectDescription": "L'élément unclear est utilisé lorsque la transcription proposée est incertaine, dans les cas rares où un dommage matériel est survenu, ou bien lorsque l'écriture est difficile à déchiffrer, ou encore si une rature ou un fil de couture masquent partiellement le texte. Dans le premier cas, l'élément unclear sera utilisé dans l'élément damage. Pour mémoire, dans le cas où la lecture est totalement impossible mais qu'on peut proposer une restitution du texte, on utilise supplied. Si la lecture est impossible et qu'on ne peut restituer le texte, on utilise l'élément gap.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "transcription incertaine"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Pour le reste de mes biens mon <damage agent=\"stain\"><supplied>frère</supplied></damage><lb/> André, dont je connais <unclear reason=\"quite-illegible\">l’esprit de</unclear><lb/> sagesse et de bon sens, les reçoit en<lb/> pleine propriété. Puisse-t-il en<lb/> jouir longtemps et heureux !</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "seg",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "reason": {
+          "id": "reason",
+          "label": "masqué (par le fil de couture, par une tache...)",
+          "usage": "rec",
+          "type": "semi",
+          "desc": "Cet attribut indique pourquoi il est difficile de transcrire le texte",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cancelled",
+              "label": "biffé"
+            },
+            {
+              "value": "quite-illegible",
+              "label": "difficile à déchiffrer"
+            },
+            {
+              "value": "hidden",
+              "label": "masqué (par le fil de couture, par une tache...)"
+            }
+          ]
+        },
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "rec",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, en l'occurrence pour identifier la ou les auteurs de cette partie incertaine de la transcription.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament (et en particulier, en l'occurrence, à la saisie d'une transcription incertaine), telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "surplus": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-11-16",
+            "content": "permet d'encoder une partie de texte présente dans la source lorsque l'éditeur la considère superflue ou redondante."
+          }
+        ],
+        "projectDescription": "L'élémnt surplus est utilisé à l'intérieur de l'élément sic uniquement, le plus souvent parce que le testateur a écrit deux fois le même mot ou la même expression.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "texte superflu"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Sain de corps et d’esprit, avant de partir <choice><reg/><sic><surplus>de<lb/>partir</surplus></sic><corr/></choice> pour la mobilisation française, j’écris sur<lb/> ce papier libre, faute d’avoir pu me procurer<lb/> un papier timbré, mon testament et mes<lb/> dernières volontés.</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "hi",
+        "foreign"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "add": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient des lettres, des mots ou des phrases insérés dans le texte par un auteur, un copiste, un annotateur ou un correcteur."
+          }
+        ],
+        "projectDescription": "L'élément add est utilisé pour baliser les parties de texte ajoutées au testament, lors d'une deuxième phase d'écriture, par le testateur (additions interlinéaires ou marginales). De tels cas sont rares. L'addition peut intervenir seule, ou pour remplacer une partie de texte raturée (dans ce dernier cas, l'élément add sera utilisé au sein de l'élément subst, après del). La position du texte ajouté par rapport à la phrase ou au paragraphe peut être précisée à l'aide de l'attribut place.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "ajout"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline rend=\"right\">Fait à Paris<choice><orig/><reg>,</reg></choice> en pleine <add place=\"inline\">connaissance</add><choice><orig/><reg>,</reg></choice><lb/> le <choice><orig>Dix Janvier</orig><reg>dix janvier</reg></choice> 1916.</dateline></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>En cas d’existence d’enfants ou de descendants d’eux<lb/> à l’époque dudit décès, cette <subst><del>dotation</del><add place=\"above\">donation</add></subst>, si la réduction<lb/> en est demandée, comprendra la plus forte quotité des<lb/> possibles entre époux tant en pleine propriété et en<lb/> usufruit desdits biens en y comprenant même tous<lb/> rapports.</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "note",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "place": {
+          "id": "place",
+          "label": null,
+          "usage": "rec",
+          "type": "closed",
+          "desc": "specifie où cet item se trouve.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "above",
+              "label": null
+            },
+            {
+              "value": "below",
+              "label": null
+            },
+            {
+              "value": "inline",
+              "label": null
+            },
+            {
+              "value": "marginLeft",
+              "label": null
+            },
+            {
+              "value": "marginRight",
+              "label": null
+            },
+            {
+              "value": "marginBottom",
+              "label": null
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "del": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient une lettre, un mot ou un passage supprimé, marqué comme supprimé, sinon indiqué comme superflu ou erroné dans le texte par un auteur, un copiste, un annotateur ou un correcteur."
+          }
+        ],
+        "projectDescription": "L'élément delest utilisé pour baliser les parties de texte supprimées (raturées) par le testateur. De tels cas sont rares. La suppression peut intervenir seule, ou être accompagnée d'un mot ou d'une expression qui remplacent le texte supprimé (dans ce dernier cas, l'élément del sera utilisé au sein de l'élément subst, avant add).",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "suppression"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Je <del>donne</del> désire que M. Lucien Rotgès,<lb/> demeurant à Orléans, 244 rue du Faubourg-Saint-Vincent<lb/> soit doté d’une rente mensuelle<lb/> et viagère de <del>2000 fr</del>200 francs.</p></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>En cas d’existence d’enfants ou de descendants d’eux<lb/> à l’époque dudit décès, cette <subst><del>dotation</del><add place=\"above\">donation</add></subst>, si la réduction<lb/> en est demandée, comprendra la plus forte quotité des<lb/> possibles entre époux tant en pleine propriété et en<lb/> usufruit desdits biens en y comprenant même tous<lb/> rapports.</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "subst": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-11-16",
+            "content": "regroupe une ou plusieurs parties de texte supprimées et une ou plusieurs parties de texte ajoutées, lorsque cette combinaison peut être considérée comme une intervention unique sur le texte."
+          }
+        ],
+        "projectDescription": "L'élément subst est utilisé pour regrouper un élément del et un élément add lorsque le texte ajouté se substitue au texte supprimé.",
+        "complexTagInfo": "<desc type=\"wills-ui-complexTag-info\"> L'élément <gi>subst</gi> doit avoir le contenu suivant : <list><item>un mot ou une expression biffés par le testateur (dans l'élément <gi>del</gi>)</item><item>un mot ou une expression inscrits par la suite par le testateur, et venant remplacer le mot biffé (dans l'élément <gi>add</gi>)</item></list> </desc>",
+        "gloss": [
+          {
+            "date": "2008-10-02",
+            "content": "substitution"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>En cas d’existence d’enfants ou de descendants d’eux<lb/> à l’époque dudit décès, cette <subst><del>dotation</del><add place=\"above\">donation</add></subst>, si la réduction<lb/> en est demandée, comprendra la plus forte quotité des<lb/> possibles entre époux tant en pleine propriété et en<lb/> usufruit desdits biens en y comprenant même tous<lb/> rapports.</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "del",
+        "add"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "hi": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "distingue un mot ou une expression comme graphiquement distincte du texte environnant, sans en donner la raison."
+          }
+        ],
+        "projectDescription": "L'élément hi est utilisé pour spécifier que le testateur a graphiquement mis en valeur un mot (ou une expression), le plus souvent en le soulignant ou en l'écrivant en majuscules. L'élément hi sert aussi pour baliser les lettres placées en exposant. Il doit avoir un attribut rend dont la valeur est à prendre dans une liste fermée.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "mis en évidence"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Quant à mes livres, tous les ouvrages<lb/> <hi rend=\"underlined\">de droit, exclusivement</hi>, seront, si mon<lb/> fils ne dirige pas ses études de ce côté,<lb/> mis à la disposition de l’ordre des avocats<lb/> de Paris <!-- [...] --></p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "ref",
+        "foreign"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "en lettres majuscules",
+          "usage": "req",
+          "type": "closed",
+          "desc": "Cet attribut permet de préciser quelle mise en forme a été appliquée à la partie du texte balisée à l'aide de l'élément hi.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "superscript",
+              "label": "en exposant"
+            },
+            {
+              "value": "underlined",
+              "label": "souligné"
+            },
+            {
+              "value": "double-underlined",
+              "label": "souligné deux fois"
+            },
+            {
+              "value": "superscript-underlined",
+              "label": "en exposant et souligné"
+            },
+            {
+              "value": "capital-letters",
+              "label": "en lettres majuscules"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "lb": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "marque le début d'une nouvelle ligne (typographique) dans une édition ou dans une version d'un texte."
+          }
+        ],
+        "projectDescription": "L'élément lb doit être utilisé pour indiquer un changement de ligne dans le corps d'un composant textuel de premier niveau du testament (un en-tête, une mention de date, un paragraphe, une liste de biens, un post-scriptum, une signature). Si le changement de ligne intervient à l'intérieur d'un mot, ne pas taper le tiret de césure, mais utiliser l'attribut break en lui donnant la valeur \"no\".",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "saut de ligne"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 16 (Jules Louis Legeay, 2 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-016.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-016.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p><!-- [...] -->Je pars demain 2<hi rend=\"superscript\">e</hi> jour ; pris à l’im<lb break=\"no\"/>proviste, je n’ai plus ni le temps ni<lb/>les moyens de faire une donation<lb/>en règle à ma femme bien aimée. </p></egXML>"
+          },
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 1 ( Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Avant de partir à la guerre dont<lb/> tant ne reviendront pas, je tiens à décider<lb/>ce qui suit <!-- [...]--></p></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "break": {
+          "id": "break",
+          "label": "non",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "indique si l'élément qui porte cet attribut peut être considéré comme une espace blanche indiquant la fin d'un mot orthographique.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "no",
+              "label": "non"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "pb": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "marque le début d'une page de texte dans un document paginé."
+          }
+        ],
+        "projectDescription": "L'élément pb est utilisé pour indiquer les changements de page dans le texte du testament. On l'utilise aussi pour indiquer la première page du testament. L'élément pb a obligatoirement un attribut facs qui renvoie, via son identifiant, à l'image numérique reproduisant la nouvelle page, telle que déclarée dans l'élément facsimile.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "saut de page"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 1 (Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-001.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><body> <div type=\"will\"> <pb facs=\"#testament-0001_vue-01_jpg\"/> <dateline rend=\"centered\">Paris<choice><orig/><reg>,</reg></choice> le <choice><orig>trente et un</orig><reg>trente-et-un</reg></choice> <choice><orig> Juillet</orig><reg> juillet</reg></choice><lb/> <choice><orig>mil</orig><reg>mille</reg></choice> neuf cent quatorze<lb/> (31 <choice><orig>Juillet</orig><reg>juillet</reg></choice> 1914)</dateline> <!-- [... etc. ] --> </div> </body></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "facs": {
+          "id": "facs",
+          "label": "fac-similé",
+          "usage": "req",
+          "type": null,
+          "desc": "Après le caractère dièse qui indique un pointeur interne, taper l'identifiant (la valeur de l'attribut xml:id de l'élément graphic) de l'image numérique reproduisant la page sur laquelle on se trouve après le changement de page.",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "space": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-11-16",
+            "content": "permet de situer un espace significatif dans le texte édité."
+          }
+        ],
+        "projectDescription": "L'élément space est utilisé lorsque dans le corps de son testament, le testateur a laissé blanc un espace significatif (le plus souvent une ou plusieurs lignes). Il devrait toujours avoir les attributs dim, quantity et unit. ",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "espace"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 6 (Joseph Bernel, 1<hi rend=\"superscript\">er</hi> août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-006.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-006.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline>Paris<choice><orig/><reg>,</reg></choice> le 1<hi rend=\"superscript-underlined\">er</hi> <choice><reg>août</reg><orig>Août</orig></choice> 1914</dateline><space dim=\"vertical\" quantity=\"4\" unit=\"lines\"/><p>Je soussigné <persName ref=\"#JBernel\">Joseph <surname>Bernel</surname></persName><lb/> déclare donner tout ce que je<lb/> possède à ma femme Madame<lb/> <!-- [...] --></p></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "dim": {
+          "id": "dim",
+          "label": null,
+          "usage": "req",
+          "type": "closed",
+          "desc": "indique si l'espace laissé blanc est vertical ou horizontal.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "horizontal",
+              "label": null
+            },
+            {
+              "value": "vertical",
+              "label": null
+            }
+          ]
+        },
+        "unit": {
+          "id": "unit",
+          "label": "lignes",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Cet attribut est utiisé, conjointement avec l'attribut quantity, pour spécifier une mesure de l'espace laissé blanc par le testateur. Il sert à indiquer l'unité de mesure.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "cm",
+              "label": "cm"
+            },
+            {
+              "value": "lines",
+              "label": "lignes"
+            }
+          ]
+        },
+        "quantity": {
+          "id": "quantity",
+          "label": "quantité",
+          "usage": "rec",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour spécifier le nombre de cm ou de lignes, selon l'unité choisie et déclarée à l'aide de l'attribut unit, sur lesquels s'étend laissé blanc par le testateur",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "metamark": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2017-07-27",
+            "content": "contient ou décrit tout type de signe graphique ou de caractère dans un document dont la fonction est de déterminer comment le document devrait être lu (ce signe ne fait donc pas partie du contenu proprement dit du document)."
+          }
+        ],
+        "projectDescription": "L'élément metamark est utilisé lorsqu'on souhaite spécifier que le testateur a inscrit un signe ou un dessin (le plus souvent une ligne ou une croix) ayant un rôle dans la lecture du testament (le plus souvent, cette marque a été posée pour mettre en évidence un passage ou pour séparer deux parties du testament). Cet élément devrait avoir les attributs function et rend.",
+        "gloss": [
+          {
+            "date": "2017-07-27",
+            "content": "métamarque"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 60 (Lucien Pierre Armand Debain, 12 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-060.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-060.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline rend=\"right\">Nevers, le 12 août 1914</dateline><metamark rend=\"horizontal-line\" function=\"separating\"/><p>Ceci est mon testament, écrit en<lb/> toute sérénité, la veille de mon<lb/> départ pour la guerre contre l’Allemagne.</p></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "function": {
+          "id": "function",
+          "label": null,
+          "usage": "rec",
+          "type": "closed",
+          "desc": "définit la fonction de la marque.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "separating",
+              "label": null
+            },
+            {
+              "value": "emphasis",
+              "label": null
+            },
+            {
+              "value": "other",
+              "label": null
+            }
+          ]
+        },
+        "rend": {
+          "id": "rend",
+          "label": "autre",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Cet attribut permet de spécifier la forme de la métamarque.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "horizontal-line",
+              "label": "trait horizontal"
+            },
+            {
+              "value": "horizontal-wavy-line",
+              "label": "trait horizontal ondulé"
+            },
+            {
+              "value": "cross",
+              "label": "croix"
+            },
+            {
+              "value": "other",
+              "label": "autre"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "date": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une date exprimée dans n'importe quel format."
+          }
+        ],
+        "projectDescription": "L'élément date peut être utilisé pour baliser une date importante dans le corps du testament (date de rédaction du testament le plus souvent). On l'utilise aussi dans les métadonnées du testament. Doit avoir un attribut when pour donner une forme normalisée, exploitable par machine, de la date. L'attribut type permettra en outre de dire de quelle date il s'agit (date de rédaction du testament, date de naissance du testateur, etc.).",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "date"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><dateline rend=\"right\">Pourville, <date when=\"1914-07-31\" type=\"willDate\">31 juillet 1914</date>.</dateline></egXML>"
+          },
+          {
+            "source": "<p>Un exemple d'utilisation de <gi>date</gi> dans les métadonnées du testament</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><msContents><summary><p><date when=\"1914-07-31\" type=\"willDate\">1914, 31 juillet</date>. <placeName type=\"willPlace\">Paris</placeName>.</p><p><index indexName=\"willTypes\"><term>testament olographe</term></index> de <persName ref=\"#FLChatin\"><forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename><surname>Chatin</surname></persName>, mort pour la France à <placeName ref=\"#pl-056\" type=\"willAuthorDeathPlace\">Maroeuil (Pas-de-Calais)</placeName>, le <date when=\"1915-01-10\" type=\"willAuthorDeathDate\">10 janvier 1915</date>.</p></summary></msContents></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "autre date",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Il est recommandé de spécifier de quel type de date il s'agit, afin de permettre, par la suite, des recherches par type de date.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "willDate",
+              "label": "date de rédaction du testament"
+            },
+            {
+              "value": "codicilDate",
+              "label": "date de rédaction du codicille"
+            },
+            {
+              "value": "willAuthorBirthDate",
+              "label": "date de naissance du testateur"
+            },
+            {
+              "value": "willAuthorDeathDate",
+              "label": "date de décès du testateur"
+            },
+            {
+              "value": "militaryEventDate",
+              "label": "date d'un événement militaire (bataille, offensive...)"
+            },
+            {
+              "value": "otherDate",
+              "label": "autre date"
+            }
+          ]
+        },
+        "when": {
+          "id": "when",
+          "label": "date exacte",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut contient, lorsque la date est une date exacte, la forme normalisée de cette date au format AAA-MM-JJ",
+          "valDesc": null,
+          "values": []
+        },
+        "notBefore": {
+          "id": "notBefore",
+          "label": "date la plus ancienne",
+          "usage": "opt",
+          "type": null,
+          "desc": "La forme normalisée de la date possible la plus ancienne",
+          "valDesc": null,
+          "values": []
+        },
+        "notAfter": {
+          "id": "notAfter",
+          "label": "date la plus récente",
+          "usage": "opt",
+          "type": null,
+          "desc": "La forme normalisée de la date possible la plus récente",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "persName": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient un nom propre ou une expression nominale se référant à une personne, pouvant inclure tout ou partie de ses prénoms, noms de famille, titres honorifiques, noms ajoutés, etc."
+          }
+        ],
+        "projectDescription": "L'élément persNamepeut être utilisé dans le corps de la transcription pour baliser un nom de personne, notamment lorsque la personne fait l'objet d'une notice. On l'utilise notamment dans la ou les mentions de signature du testament. Dans ce cas, il est recommandé de distinguer, dans la chaîne de caractères ainsi balisée, le nom de famille de la personne (afin que celui-ci, ultérieurement, puisse être mis en forme de manière spécifique dans l'édition de restitution), à l'aide de l'élément surname. L'élément persName sert aussi pour baliser les métadonnées du testament et dans les notices sur les testateurs ; dans ce dernier cas, on devra trouver dans cet élément les sous-éléments distinguant nom de famille et prénoms.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "nom de personne"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 2 (Émile Alexandre Gorand, 31 juillet 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-002.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-002.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Je soussigné <persName ref=\"#EAGorand\">Émile Gorand</persName><choice><orig/><reg>,</reg></choice><lb/> né le 4 <choice><orig>Août</orig><reg>août</reg></choice> 1883 à Paris 10<hi rend=\"superscript-underlined\">e</hi>, lègue à ma femme<lb/> chérie Émilie Gorand (née Bastien) tout ce que je possède<choice><orig/><reg>,</reg></choice><lb/> titres, bijoux, argent, meubles et immeubles, en cas<lb/> de décès dans cette guerre.</p></egXML>"
+          },
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 2 (Émile Alexandre Gorand, 31 juillet 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-002.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-002.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"right\"><seg type=\"signature\"><persName ref=\"#EAGorand\"><forename>E.</forename> <surname>Gorand</surname></persName></seg></signed></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><person xml:id=\"person-0001\" resp=\"#ML #JD #FC\"><persName type=\"fullProseForm\"> Fernand Lucien Jules Melchior Chatin</persName><persName type=\"fullIndexEntryForm\"><surname>Chatin</surname>, <forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename></persName><!-- etc. --></person></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "surname",
+        "forename",
+        "affiliation",
+        "ref"
+      ],
+      "attributes": {
+        "ref": {
+          "id": "ref",
+          "label": "référence",
+          "usage": "opt",
+          "type": null,
+          "desc": "L'attribut ref contient, le cas échéant, un renvoi vers la notice décrivant, au sein de la plate-forme de transcription, la personne dont le nom a été balisé.",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut sert, dans les métadonnées du fichier TEI de transcription, pour assigner un identifiant à chacun des contributeurs.",
+          "valDesc": null,
+          "values": []
+        },
+        "corresp": {
+          "id": "corresp",
+          "label": "correspond",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut sert, dans les métadonnées du fichier TEI de transcription, pour établir une correspondance entre le nom d'un contributeur et une autre occurrence du même nom, située plus haut dans le fichier et dotée d'un identifiant.",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "forme complète d'entrée d'index",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Utiliser cet attribut, lorsque le nom de personne est donné dans une notice sur la personne, pour spécifier si la forme du nom est saisie en langage naturel ou si elle est saisie comme une entrée d'index",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "fullProseForm",
+              "label": "forme complète en français (langage naturel)"
+            },
+            {
+              "value": "fullIndexEntryForm",
+              "label": "forme complète d'entrée d'index"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "orgName": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient le nom d'une organisation."
+          }
+        ],
+        "projectDescription": "L'élément orgName peut être utilisé dans le corps de la transcription, pour baliser un nom de régiment, notamment lorsque celui-ci fait l'objet d'une notice. L'élément orgName sert aussi dans les notices descriptives des régiments ; dans ce cas il aura un attribut type.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "nom d'organisation"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>Je soussigné <persName ref=\"#PFeugere\">Paul Louis <surname>Feugère</surname></persName><choice><orig/><reg>,</reg></choice><lb/> soldat au <orgName type=\"regiment\">150<hi rend=\"superscript\">e</hi> régiment <choice><orig>d’Infanterie</orig><reg>d’infanterie</reg></choice></orgName><lb/> en garnison à <choice><orig>Saint Mihiel</orig><reg>Saint-Mihiel</reg></choice> (Meuse)<!-- [...]--></p></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><org xml:id=\"o-0002\"><orgName type=\"fullIndexEntryForm\"><orgName>France</orgName>. <orgName>Armée de terre</orgName>. <orgName>Régiment de zouaves (<num>4</num>)</orgName></orgName><orgName type=\"proseForm\">4<hi rend=\"superscript\">e</hi> régiment de zouaves</orgName><orgName type=\"abbreviatedForm\">4<hi rend=\"superscript\">e</hi> RZ</orgName><note type=\"history\"><p/></note></org></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "orgName",
+        "ref",
+        "num"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "forme abrégée du nom de l'unité militaire",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Utiliser cet attribut, lorsque le nom de l'unité militaire est donné dans la notice sur l'unité militaire, pour spécifier si la forme du nom est saisie en langage naturel ou si elle est saisie comme une entrée d'index complète",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "proseForm",
+              "label": "forme en français (langage naturel)"
+            },
+            {
+              "value": "fullIndexEntryForm",
+              "label": "forme complète d'entrée d'index"
+            },
+            {
+              "value": "abbreviatedForm",
+              "label": "forme abrégée du nom de l'unité militaire"
+            }
+          ]
+        },
+        "ref": {
+          "id": "ref",
+          "label": "référence",
+          "usage": "opt",
+          "type": null,
+          "desc": "L'attribut ref contient, le cas échéant, un renvoi vers la notice décrivant, au sein de la plate-forme de transcription, l'unité militaire dont le nom a été balisé.",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut sert, dans les métadonnées du fichier TEI de transcription, pour assigner un identifiant à chacun des organismes contributeurs.",
+          "valDesc": null,
+          "values": []
+        },
+        "corresp": {
+          "id": "corresp",
+          "label": "correspond",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut sert, dans les métadonnées du fichier TEI de transcription, pour établir une correspondance entre le nom d'un organisme contributeur et une autre occurrence du même nom, située plus haut dans le fichier et dotée d'un identifiant.",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "placeName": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient un nom de lieu absolu ou relatif."
+          }
+        ],
+        "projectDescription": "L'élément placeNamepeut être utilisé dans le corps de la transcription pour baliser un nom de lieu, notamment lorsque le lieu fait l'objet d'une notice. Dans ce cas, l'attribut type permettra de dire de quel type de lieu il s'agit (lieu de rédaction du testament, lieu de naissance ou de décès du testateur, etc.). L'élément placeName sert aussi pour baliser les métadonnées du testament. Enfin, cet élément est aussi utilisé dans les notices sur les lieux, pour baliser soit le nom du lieu décrit, soit le nom d'une commune, d'une région ou autre circonscription administrative dans lequel le lieu décrit se situe. Si placeName sert à encoder le nom du lieu décrit, on trouvera dans cet élément les sous-éléments distinguant les composants du nom de lieu : nom de lieu habité, nom de lieu géographique. Toujours dans le cas de la notice sur un lieu, le nom de lieu pourra le cas échéant avoir un attribut when-iso pour spécifier les dates d'utilisation de ce nom de lieu.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "nom de lieu"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Un exemple d'utilisation de <gi>placeName</gi> dans les métadonnées du testament</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><msContents><summary><p><date when=\"1914-07-31\" type=\"willDate\">1914, 31 juillet</date>. <placeName type=\"willPlace\">Paris</placeName>.</p><p><index indexName=\"willTypes\"><term>testament olographe</term></index> de <persName ref=\"#FLChatin\"><forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename><surname>Chatin</surname></persName>, mort pour la France à <placeName ref=\"#pl-056\" type=\"willAuthorDeathPlace\">Maroeuil (Pas-de-Calais)</placeName>, le <date when=\"1915-01-10\" type=\"willAuthorDeathDate\">10 janvier 1915</date>.</p></summary></msContents></egXML>"
+          },
+          {
+            "source": "<p>Un exemple d'utilisation de <gi>placeName</gi> dans une notice descriptive de lieu</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pl-0009\" type=\"city\"><!-- une commune qui a changé de nom --><placeName when-iso=\"1793/1801\"><settlement type=\"city\">Bar sur Ornain</settlement></placeName><placeName when-iso=\"1801/\"><settlement type=\"city\">Bar-le-Duc</settlement></placeName><location><region type=\"FrenchDepartement\">Meuse</region><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>48.78333 5.16667</geo></location><idno type=\"GeonamesURI\">http://sws.geonames.org/3034911/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "geogName",
+        "geogFeat",
+        "settlement",
+        "ref"
+      ],
+      "attributes": {
+        "ref": {
+          "id": "ref",
+          "label": "référence",
+          "usage": "opt",
+          "type": null,
+          "desc": "L'attribut ref contient, le cas échéant, un renvoi vers la notice décrivant, au sein de la plate-forme de transcription, le lieu dont le nom a été balisé.",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "autre type de lieu",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Utiliser cet attribut, lorsque le nom de lieu est balisé dans le corps de la transcription, pour spécifier de quel type de date il s'agit, afin de permettre, par la suite, des recherches par type de lieu.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "willPlace",
+              "label": "lieu de rédaction du testament"
+            },
+            {
+              "value": "codicilPlace",
+              "label": "lieu de rédaction du codicille"
+            },
+            {
+              "value": "willAuthorBirthPlace",
+              "label": "lieu de naissance du testateur"
+            },
+            {
+              "value": "willAuthorDeathPlace",
+              "label": "lieu de décès du testateur"
+            },
+            {
+              "value": "willAuthorResidence",
+              "label": "domicile du testateur"
+            },
+            {
+              "value": "militaryEventPlace",
+              "label": "lieu d'un événement militaire (bataille, offensive...)"
+            },
+            {
+              "value": "otherPlace",
+              "label": "autre type de lieu"
+            }
+          ]
+        },
+        "when-iso": {
+          "id": "when-iso",
+          "label": "date exacte au format ISO 8601",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut contient le cas échéant la forme normalisée de la période pendant laquelle le nom de lieu a été utilisé (dans une notice sur un lieu)",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "term": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient un mot simple, un mot composé ou un symbole, qui est considéré comme un terme technique."
+          }
+        ],
+        "projectDescription": "L'élément term peut être utilisé dans le corps de la transcription, dans les notes historiques ou d'apparat critique, et dans les métadonnées du testament, pour baliser un mot ou une expression qu'on souhaite isoler, comme, par exemple, l'expression l'expression de l'idée d'une mort prochaine possible, ou d'un état d'esprit face à cette vision. Il devrait normalement avoir un attribut type. Dans le cas cité en exemple, l'élément term peut comporter un attribut ana qui renverra à une entrée de la grille d'analyse du vocabulaire employé par les testateurs.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "terme"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><msContents><summary><p><date when=\"1914-07-31\" type=\"willDate\">1914, 31 juillet</date>. <placeName type=\"willPlace\">Paris</placeName>.</p><p><term type=\"willType\">testament olographe</term> de <persName ref=\"#FLChatin\"><forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename><surname>Chatin</surname></persName>, mort pour la France à <placeName ref=\"#pl-056\" type=\"willAuthorDeathPlace\">Maroeuil (Pas-de-Calais)</placeName>, le <date when=\"1915-01-10\" type=\"willAuthorDeathDate\">10 janvier 1915</date>.</p></summary></msContents></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "ref"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "autre catégorie de terme",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Utiliser cet attribut pour spécifier la nature du terme balisé.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "willType",
+              "label": "type de testament (dans les métadonnées du testament)"
+            },
+            {
+              "value": "willAuthorVisionOfDeath",
+              "label": "expression de la vision de la mort par le testateur"
+            },
+            {
+              "value": "willAuthorStateOfMind",
+              "label": "expression de l'état d'esprit du testateur"
+            },
+            {
+              "value": "other",
+              "label": "autre catégorie de terme"
+            }
+          ]
+        },
+        "ana": {
+          "id": "ana",
+          "label": "analyse",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour relier le terme à l'entrée correspondante dans la grille d'analyse du vocabulaire employé par les testateurs.",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:lang": {
+          "id": "xml:lang",
+          "label": "langue",
+          "usage": "opt",
+          "type": null,
+          "desc": "Spécifier dans cet attribut le code de la langue du terme balisé, lorsque ce n'est pas le français. Parmi les codes possibles pour les langues européennes : en (anglais), es (espagnol), it (italien).",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "foreign": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "reconnaît un mot ou une expression comme appartenant à une langue différente de celle du contexte."
+          }
+        ],
+        "projectDescription": "L'élément foreign est à utiliser lorsqu'aucun autre élément de balisage (tel que term, seg, addrLine) n'est pertinent et disponible, pour encoder une expression ou un mot en langue étrangère dans le texte d'un testament. S'il est utilisé, il devrait porter un attribut xml:lang pour spécifier, via son code, de quelle langue il s'agit.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "étranger"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>[...]Les valeurs et argent se trouvent au<lb/> Crédit lyonnais, <foreign xml:lang=\"en\">Cockspur Street</foreign><choice><orig/><reg>,</reg></choice> Londres [...]</p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "ref"
+      ],
+      "attributes": {
+        "xml:lang": {
+          "id": "xml:lang",
+          "label": "langue",
+          "usage": "req",
+          "type": null,
+          "desc": "Spécifier dans cet attribut le code de la langue du texte balisé. Parmi les codes possibles pour les langues européennes : en (anglais), es (espagnol), it (italien).",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "ref": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "définit une référence vers un autre emplacement, la référence étant éventuellement modifiée ou complétée par un texte ou un commentaire."
+          }
+        ],
+        "projectDescription": "L'élément ref est utilisé pour créer un appel de note dans le corps de la transcription, dans le cas des notes historiques et commentaires explicatifs sur le contenu du testament ; dans ce cas l'élément est vide. Il est également utilisé, dans les notes elles-mêmes, et dans les notices sur les personnes, les lieux et les régiments, pour renvoyer à des ressources bibliographiques en ligne. Cet élément devrait toujours avoir un attribut target, sauf s'il possède un attribut type de valeur 'uri' et que l'URI constitue le contenu de l'élément.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "référence"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><item>3° <choice><orig>à</orig><reg>À</reg></choice> mon frère Paul Chatin de Chastaing <ref xml:id=\"will-001-001\" target=\"#will-001-footnote001\" type=\"internal\"/><lb/> une somme de cinq mille francs et<lb/> ma montre à sonnerie<choice><orig/><reg>.</reg></choice></item></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"notes\"><note xml:id=\"will-001-footnote001\" resp=\"#MDurand #FClavaud\">Sur Paul Chatin de Chastaing, voir <bibl>une référence biblio avec un <title>titre</title></bibl>, et consulter <ref target=\"http://www.bnf.fr\" type=\"external\">une page web</ref>.</note></div></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi"
+      ],
+      "attributes": {
+        "target": {
+          "id": "target",
+          "label": "la cible du renvoi",
+          "usage": "opt",
+          "type": null,
+          "desc": "L'attribut target contient l'identifiant de la ressource liée.",
+          "valDesc": null,
+          "values": []
+        },
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "fournit un identifiant unique pour l'élément qui porte l'attribut",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "renvoi à une ressource web externe quelconque",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Utiliser cet attribut pour spécifier la catégorie de renvoi.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "internal",
+              "label": "renvoi interne à l'édition du testament en cours"
+            },
+            {
+              "value": "uri",
+              "label": "renvoi à un URI externe"
+            },
+            {
+              "value": "external",
+              "label": "renvoi à une ressource web externe quelconque"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "note": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une note ou une annotation"
+          }
+        ],
+        "projectDescription": "L'élément note est utilisé par les éditeurs pour saisir les notes sur le contenu des testaments (dans ce cas, l'élément note est enregistré dans l'élément back) ou les notes d'apparat critique relatives à la forme de la transcription (dans ce cas l'élément note est enregistré dans l'élément app dans le corps de la transcription). Dans ces deux cas cet élément a obligatoirement un attribut resp qui désigne le ou les auteurs de la note. Dans de rares cas, l'élément note sert à encoder une note du testateur lui-même, ajoutée en marge, relative le plus souvent à un ou des mots qu'il a rayés dans le testament. Enfin, l'élément note est utilisé dans les notices sur les testateurs, les lieux et les unités militaires, pour saisir un historique de l'entité décrite.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "note"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Une note d'apparat critique</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><item>5° <choice><orig>à</orig><reg>À</reg></choice> mon vieil ami Morel mon fusil<lb/> calibre 12 percussion centrale <app><lem> (de Warn<supplied reason=\"hidden\" resp=\"#MDurand\">er</supplied>)</lem><note resp=\"#MDurand\">Tache d’encre à la fin du mot.</note></app> <choice><orig/><reg>.</reg></choice><lb/> Mon ami Morel habite 2 <choice><orig>Rue</orig><reg>rue</reg></choice> Lénac<lb/> à Marseille.</item></egXML>"
+          },
+          {
+            "source": "<p>Une note éditoriale sur le contenu du testament</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"notes\"><note xml:id=\"will-001-fnote001\" resp=\"#MDurand #FClavaud\">Sur Paul Chatin de Chastaing, voir <bibl>une référence biblio avec un <title>titre</title></bibl>, et consulter <ref target=\"http://www.bnf.fr\">une page web</ref>.</note></div></egXML>"
+          },
+          {
+            "source": "<p>Une note d'un testateur dans une addition marginale au testament, faisant suite à la suppression de deux mots. Cette note est accompagnée d'une note d'apparat critique de l'éditeur.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><p>En cas d’existence<lb/> d’enfants, <app><lem><choice><orig><del>je le</del><add place=\"marginLeft\"><note>rayé deux mots nuls J. V.</note></add></orig><reg/></choice></lem><note resp=\"#FClavaud\">\"rayé deux mots nuls J.V.\" inscrit dans la marge.</note></app> ce<lb/> legs sera réduit à la<lb/> plus forte quotité<lb/> disponible permise entre<lb/> époux tant en toute<lb/> propriété qu’en usufruit<lb/> et cette quotité disponible<lb/> sera calculée sur l’ensemble<lb/> de ma succession, y<lb/> compris les rapports. </p></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "ref",
+        "foreign",
+        "hi",
+        "ref",
+        "bibl",
+        "term",
+        "orgName",
+        "persName",
+        "placeName",
+        "foreign",
+        "p"
+      ],
+      "attributes": {
+        "resp": {
+          "id": "resp",
+          "label": "responsable",
+          "usage": "opt",
+          "type": null,
+          "desc": "Il est recommandé d'utiliser cet attribut, dans le cas d'une note d'apparat critique ou d'une note historique, pour identifier son ou ses auteurs.",
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à l'édition du testament et en particulier, en l'occurrence, à la saisie de la note historique ou d'apparat critique, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        },
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "identifiant unique de la note",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "historique de l'entité décrite",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "Utiliser cet attribut pour spécifier que la note contient un historique du testateur, du lieu ou de l'unité militaire en cours de description.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "history",
+              "label": "historique de l'entité décrite"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "app": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient une entrée dans un apparat critique, constituée d'un lemme facultatif et d'au moins une leçon."
+          }
+        ],
+        "projectDescription": "L'élément app est utilisé dans le corps de la transcription, lorsqu'on observe un micro-phénomène textuel (addition, suppression, abréviation, erreur de syntaxe, dommage matériel, texte superflu, etc.) que l'on souhaite commenter par une note d'apparat critique. Il contient obligatoirement un élément lem (englobant le texte transcrit) suivi d'un élément note.",
+        "complexTagInfo": "<desc type=\"wills-ui-complexTag-info\"> L'élément <gi>app</gi> sert à englober deux éléments, dans l'ordre ci-dessous : <list><item>l'élément <gi>lem</gi>, qui contient le mot ou l'expression du texte du testament sur lequel portera la note d'apparat critique. Exemple fictif : <egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><lem><choice><sic>je done à mon aipouze tout mes biens</sic><corr>je donne à mon épouse tous mes biens</corr></choice></lem></egXML></item><item>l'élément <gi>note</gi>, qui contient la note d'apparat critique que vous souhaitez créer pour commenter une particularité d'écriture présente dans ce mot ou cette expression. Exemple fictif (pour annoter l'élément <gi>lem</gi> donné en exemple ci-dessus) : <egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><note>il s'agit des seules fautes d'orthographe rencontrées dans ce testament par ailleurs très bien écrit</note></egXML></item></list> </desc>",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "entrée d'apparat critique"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><item>5° <choice><orig>à</orig><reg>À</reg></choice> mon vieil ami Morel mon fusil<lb/> calibre 12 percussion centrale <app><lem> (de Warn<supplied reason=\"hidden\" resp=\"#MDurand\">er</supplied>)</lem><note resp=\"#MDurand\">Tache d’encre à la fin du mot.</note></app> <!-- [...] --></item></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lem",
+        "note"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "fournit un identifiant unique pour l'élément qui porte l'attribut",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "lem": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient le lemme ou le texte de base d'une variante textuelle"
+          }
+        ],
+        "projectDescription": "Dans le cadre de ce projet, comme il n'existe qu'un seul témoin textuel pour un testament donné, l'élément lem est utilisé, au sein de l'entrée d'apparat critique app, pour saisir la transcription d'une partie du texte que l'on souhaite commenter par une note d'apparat critique.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "lemme (texte de base)"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": "<p>Extrait tiré de Nougaret (Christine), Clavaud (Florence) (dirs.), « Testament n° 56 (Lucien Jean Baptiste Brivois, 7 août 1914) », dans <title>Testaments de guerre de Poilus parisiens (1914-1918) : une édition critique</title>. Paris : École nationale des chartes, 2017-.... En ligne : <ref target=\" http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-056.html#transcription\"> http://elec.enc.sorbonne.fr/testaments-de-poilus/testaments/testament-056.html</ref>.</p>",
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><postscript><p><app><lem>Ayant fait de mauvaises affaires<choice><orig/><reg>,</reg></choice> ma fortune en<lb/> valeurs est presque disparue<choice><orig> - ma</orig><reg>. Ma</reg></choice> combinaison pour<lb/> mon coffre est le numéro 173.<lb/><seg type=\"signature\" rend=\"centered\"><persName ref=\"#LBrivois\">L.B.</persName></seg></lem><note resp=\"#SDurand\">Écrit perpendiculairement.</note></app></p></postscript></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "seg",
+        "term",
+        "foreign"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "listPerson": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient une liste d'éléments, chacun d'entre eux apportant des informations sur une personne précise ou sur un groupe de personnes, par exemple les participants à une interaction linguistique, ou les personnes citées dans une source historique."
+          },
+          {
+            "date": "2006-10-08",
+            "content": "contains a list of descriptions, each of which provides information about an identifiable person or a group of people, for example the participants in a language interaction, or the people referred to in a historical source."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des notices produites dans le cadre du projet pour décrire les testateurs. (CHECK : et autres personnes ? si oui, penser aux relations familiales ",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "liste de personnes"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><listPerson><person xml:id=\"p-0001\" resp=\"#ML #JD #FC\"/><person xml:id=\"p-0002\" resp=\"#FC\"/></listPerson></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "person"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "listPlace": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient une liste de lieux, qui peut être suivie d'une liste de relations définies entre les lieux (autres que la relation d'inclusion)."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des notices produites dans le cadre du projet pour décrire les lieux de naissance, de résidence et de décès des testateurs. (CHECK : autres cas ?)",
+        "gloss": [
+          {
+            "date": "",
+            "content": "liste de lieux"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pl-0001\"> </place><place xml:id=\"pl-0008\"> </place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "place"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "listOrg": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient une liste d'éléments, chacun d'eux fournissant des informations sur une organisation identifiable."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des notices produites dans le cadre du projet pour décrire les unites militaires (régiments, bataillons...) dans lesquelles les testateurs sont affectés au moment où ils rédigent leur testament. (CHECK : autres cas ?)",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "liste d'organisations"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><org xml:id=\"or-0001\" resp=\"#ML #JD #FC\"> </org><org xml:id=\"or-0002\" resp=\"#ML #JD\"> </org></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "org"
+      ],
+      "attributes": [],
+      "textAllowed": false
+    },
+    "person": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2005-12-14",
+            "content": "provides information about an identifiable individual, for example a participant in a language interaction, or a person referred to in a historical source."
+          },
+          {
+            "date": "2009-03-19",
+            "content": "fournit des informations sur un individu identifiable, par exemple un participant à une interaction linguistique, ou une personne citée dans une source historique."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des informations connues au moment de l'export de la notice, sur un testateur donné : au moins ses nom et prénoms, date et lieu de décès, mention de décès portée sur le testament, lien vers notice Mémoire des hommes ; optionnellement : date et lieu de naissance, lieu de résidence, profession, grade et unité d'affectation, éléments biographiques rédigés, références bibliographiques, identifiants uniques (URI) dans des systèmes d'information externes. Porte obligatoirement deux attributs : xml:id (identifiant unique de la personne) et resp (identifiants des contributeurs).",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "personne"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><person xml:id=\"pe-0001\" resp=\"#ML #JD #FC\"><persName type=\"fullProseName\"> Fernand Lucien Jules Melchior Chatin</persName><persName type=\"fullIndexedName\"><surname>Chatin</surname>, <forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename></persName><death>\"Mort au champ d’honneur, tué à l’ennemi\" le <date when-iso=\"1915-01-10\">10 janvier 1915</date>, à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0056\">Maroeuil (Pas-de-Calais)</placeName></death><bibl type=\"refMemoireDesHommes\"><author>Ministère de la défense, Secrétariat général pour l’administration, Direction de la mémoire, du patrimoine et des archives</author><title> Mémoire des hommes : notice relative à Fernand Lucien Jules Melchior Chatin </title><ref type=\"uri\">http://www.memoiredeshommes.sga.defense.gouv.fr/fr/ark:/40699/m005239deaa31041</ref></bibl></person></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "persName",
+        "birth",
+        "death",
+        "occupation",
+        "residence",
+        "affiliation",
+        "note",
+        "bibl",
+        "idno"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": null,
+          "usage": "req",
+          "type": null,
+          "desc": "l'identifiant unique de la personne dans le cadre du projet.",
+          "valDesc": null,
+          "values": []
+        },
+        "resp": {
+          "id": "resp",
+          "label": null,
+          "usage": "rec",
+          "type": null,
+          "desc": null,
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à la recherche et à la saisie des informations sur la personne, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "place": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient des informations sur un lieu."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des informations connues au moment de l'export de la notice, sur un lieu donné : au moins son nom à la date de rédaction du testament (et si son nom a changé depuis, son nom actuel), sa localisation dans un pays et pour la France dans un département ou une région ; optionnellement : ses coordonnées géographiques, des éléments historiques rédigés, un lien vers la base de données Geonames, des références bibliographiques, des identifiants uniques (URI) du lieu dans des systèmes d'information externes. Porte obligatoirement trois attributs : xml:id (identifiant unique du lieu), resp (identifiants des contributeurs) et type (pour spécifier à quelle catégorie de lieu on a affaire).",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "lieu"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"place-0001\" type=\"city\"><placeName><settlement>Ablain-Saint-Nazaire</settlement></placeName><location><region type=\"FrenchDepartement\">Pas-de-Calais</region><region type=\"FrenchRegion\">Nord-Pas-de-Calais-Picardie</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>50.3932 2.7088</geo></location><idno type=\"geonamesURI\">http://sws.geonames.org/3038763/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "placeName",
+        "location",
+        "note",
+        "bibl",
+        "idno"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": null,
+          "usage": "req",
+          "type": null,
+          "desc": "l'identifiant unique du lieu dans le cadre du projet.",
+          "valDesc": null,
+          "values": []
+        },
+        "resp": {
+          "id": "resp",
+          "label": null,
+          "usage": "rec",
+          "type": null,
+          "desc": null,
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à la recherche et à la saisie des informations sur le lieu, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "org": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "fournit des informations sur une organisation identifiable, telle qu'une entreprise, une tribu ou tout autre groupement de personnes."
+          }
+        ],
+        "projectDescription": "contient l'ensemble des informations connues au moment de l'export de la notice, sur une unité militaire donnée : au moins son nom en langage naturel à la date de rédaction du testament ; optionnellement : des éléments historiques rédigés, des références bibliographiques, les identifiants uniques (URI) de l'organisation dans des systèmes d'information externes. Porte obligatoirement deux attributs : xml:id (identifiant unique de l'organisation) et resp (identifiants des contributeurs).",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "organisation"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><org xml:id=\"org-0001\" resp=\"#ML #JD #FC\"><orgName type=\"fullIndexedName\"><orgName>France</orgName>. <orgName>Armée de terre</orgName>. <orgName type=\"unit\">Régiment d'infanterie (<num>68</num>)</orgName></orgName><orgName type=\"proseName\">68<hi rend=\"superscript\">e</hi> régiment d'infanterie</orgName><note type=\"history\"><p/><p/></note><bibl/></org></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "orgName",
+        "note",
+        "bibl",
+        "idno"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": null,
+          "usage": "req",
+          "type": null,
+          "desc": "l'identifiant unique de l'unité militaire dans le cadre du projet.",
+          "valDesc": null,
+          "values": []
+        },
+        "resp": {
+          "id": "resp",
+          "label": null,
+          "usage": "rec",
+          "type": null,
+          "desc": null,
+          "valDesc": "contient, séparés par des espaces, des pointeurs vers les identités des personnes qui ont contribué à la recherche et à la saisie des informations sur l'unité militaire, telles que déclarées dans un des éléments respStmt de teiHeader.",
+          "values": []
+        }
+      },
+      "textAllowed": false
+    },
+    "bibl": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une référence bibliographique faiblement structurée dans laquelle les sous-composants peuvent ou non être explicitement balisés."
+          }
+        ],
+        "projectDescription": "une référence bibliographique doit être saisie conformément à la norme française AFNOR en vigueur, ou à défaut aux conventions définies pour le projet. S'il s'agit de décrire une ressource imprimée, bibl doit obligatoirement contenir au moins un élément title. S'il s'agit de décrire une source manuscrite, bibl contient un élément msIdentifier. bibl peut aussi contenir un élémnt ref pour donner l'URI d'une ressource numérique ou à toute autre ressource web.",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "référence bibliographique"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><bibl><msIdentifier><institution>Archives départementales de la Dordogne</institution><collection>Registres paroissiaux et d’état civil du canton de Ribérac</collection><idno>5MI20908_004</idno><msName>Commune de Ribérac : naissances (1881)</msName></msIdentifier><ref type=\"external\">http://archives-num.dordogne.fr/pleade330/ead.html?id=Etat-civil-canton-Riberac&amp;c=Etat-civil-canton-Riberac_e0015184</ref></bibl></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><bibl>Article <title level=\"a\">23e régiment d'infanterie coloniale</title> de <title level=\"m\">Wikipédia en français</title>. Contenu soumis à la licence CC-BY-SA 3.0. <ref type=\"uri\">http://fr.wikipedia.org/wiki/23e_r%C3%A9giment_d%27infanterie_coloniale</ref></bibl></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "msIdentifier",
+        "ref",
+        "idno"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "référence à une notice dans la base Mémoire des hommes",
+          "usage": "opt",
+          "type": "closed",
+          "desc": null,
+          "valDesc": null,
+          "values": [
+            {
+              "value": "refMemoireDesHommes",
+              "label": "référence à une notice dans la base Mémoire des hommes"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "idno": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-05",
+            "content": "donne un numéro normalisé ou non qui peut être utilisé pour identifier une référence bibliographique."
+          }
+        ],
+        "projectDescription": "lorsque cet élément est utilisé dans la description d'un testament, il contient la référence de ce testament (ormalement composée de la cote de la liasse, de la date de la minute et de l'analyse du testament). Lorsque idno est utilisé dans la notice d'un testateur, d'un lieu ou d'une unité militaire, ou dans une référence bibliographique, il contient l'identifiant unique de cette entité dans d'autres systèmes d'information, comme les fichiers d'autorité de la BnF, la base de données Geonames ou DBPedia.",
+        "gloss": [
+          {
+            "date": "2009-01-05",
+            "content": "identifiant"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><msIdentifier><institution>Archives nationales</institution><collection>Minutier central des notaires de Paris</collection><idno>MC/ET/XLVIII/1820, minute du 20 janvier 1921 (dépôt du testament de Fernand Lucien Jules Melchior Chatin)</idno><msName>Testament de Fernand Lucien Jules Melchior Chatin (31 juillet 1914)</msName></msIdentifier></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><msIdentifier><institution>Archives départementales de la Dordogne</institution><collection>Registres paroissiaux et d’état civil du canton de Ribérac</collection><idno>5MI20908_004</idno><msName>Commune de Ribérac : naissances (1881)</msName></msIdentifier></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0008\"><placeName><settlement type=\"locality\">Baleycourt</settlement></placeName><location><placeName when-iso=\"1801/1970\"><settlement type=\"city\">Verdun-sur-Meuse</settlement></placeName><placeName when-iso=\"1970/\"><settlement type=\"city\">Verdun</settlement></placeName><region type=\"FrenchDepartement\">Meuse</region><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>49.1328 5.30437</geo></location><idno type=\"geonamesURI\">http://sws.geonames.org/3035245/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": null,
+          "usage": "opt",
+          "type": "semi",
+          "desc": "classe un numéro dans une catégorie, par exemple comme étant un numéro ISBN ou comme appartenant une autre série normalisée.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "GeonamesURI",
+              "label": "L'URI d'un lieu dans la base de données Geonames"
+            },
+            {
+              "value": "ISBN",
+              "label": null
+            },
+            {
+              "value": "ISSN",
+              "label": null
+            },
+            {
+              "value": "DOI",
+              "label": null
+            },
+            {
+              "value": "URI",
+              "label": null
+            },
+            {
+              "value": "VIAF",
+              "label": null
+            },
+            {
+              "value": "ESTC",
+              "label": null
+            },
+            {
+              "value": "OCLC",
+              "label": null
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "author": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "dans une référence bibliographique contient le nom de la (des) personne(s) physique(s) ou du collectif, auteur(s) d'une oeuvre ; par exemple dans la même forme que celle utilisée par une référence bibliographique reconnue."
+          }
+        ],
+        "projectDescription": "on pourra soit saisir directement du texte dans author, soit saisir un élément persName et ses sous-éléments, soit saisir un élément orgName et ses sous-éléments.",
+        "gloss": [
+          {
+            "date": "2011-11-26",
+            "content": "auteur"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><bibl><author>Nougaret (Christine)</author>, <author>Parinet (Élisabeth)</author>, <respStmt><persName>Clavaud Florence</persName><resp> (collab.)</resp></respStmt>, <title level=\"a\">L’édition critique des textes contemporains, XIXe-XXIe siècle</title>. Paris : École nationale des chartes, 2015.</bibl></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "persName",
+        "orgName"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "title": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "contient le titre complet d'une oeuvre quelconque"
+          }
+        ],
+        "projectDescription": "Cet élément sert soit pour donner un titre au fichier TEI (édition d'un testament, notices de testateurs...) soit dans les références bibliographiques pour saisir les titres d'ouvrages imprimés ou d'oeuvres numériques.",
+        "gloss": [
+          {
+            "date": "2007-06-12",
+            "content": "titre"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><bibl><author>Nougaret (Christine)</author>, <author>Parinet (Élisabeth)</author>, <respStmt><persName>Clavaud Florence</persName><resp> (collab.)</resp></respStmt>, <title level=\"a\">L’édition critique des textes contemporains, XIXe-XXIe siècle</title>. Paris : École nationale des chartes, 2015.</bibl></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi"
+      ],
+      "attributes": {
+        "level": {
+          "id": "level",
+          "label": "oeuvre non publiée",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "indique le niveau bibliographique d'un titre, c'est-à-dire si ce titre identifie un article, un livre, une revue, une collection, ou un document non publié",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "a",
+              "label": "analytique"
+            },
+            {
+              "value": "m",
+              "label": "monographique"
+            },
+            {
+              "value": "j",
+              "label": "revue"
+            },
+            {
+              "value": "s",
+              "label": "série"
+            },
+            {
+              "value": "u",
+              "label": "oeuvre non publiée"
+            }
+          ]
+        },
+        "type": {
+          "id": "type",
+          "label": "titre propre du fichier TEI (dans teiHeader/fileDesc/titleStmt)",
+          "usage": "opt",
+          "type": "open",
+          "desc": "caractérise le titre selon une typologie adaptée.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "corpusTitle",
+              "label": "titre du corpus TEI (dans teiHeader/fileDesc/titleStmt)"
+            },
+            {
+              "value": "fileTitle",
+              "label": "titre propre du fichier TEI (dans teiHeader/fileDesc/titleStmt)"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "birth": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient des informations sur la naissance d'une personne, comme la date et le lieu"
+          }
+        ],
+        "projectDescription": "si ces informations sont connues, cet élément contient, au sein d'une phrase, la date (dans l'élément date) et le lieu de naissance (dans l'élément placeName) du testateur. S'il existe une notice sur le lieu de naissance, l'élément placeName devrait logiquement avoir un attribut ref renvoyant à cette notice.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "naissance"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><birth>Né <date when=\"1878-11-23\">le 13 novembre 1878</date> à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName></birth></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi",
+        "date",
+        "placeName"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "death": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient des informations sur le décès d'une personne, comme la date et le lieu."
+          }
+        ],
+        "projectDescription": "si ces informations sont connues (ce qui devrait normalement être le cas), cet élément contient, au sein d'une phrase, la transcription de la mention de décès telle que trouvée sur la minute, la date précise ou approximative (dans l'élément date) et le lieu de décès (dans l'élément placeName) du testateur. S'il existe une notice sur le lieu de décès, l'élément placeName devrait logiquement avoir un attribut ref renvoyant à cette notice.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "décès"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><death>\"Mort au champ d’honneur, tué à l’ennemi\" le <date when=\"1915-01-10\">10 janvier 1915</date>, à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0056\">Maroeuil (Pas-de-Calais)</placeName></death></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><death>\"Mort pour la France\" le <date notBefore=\"1914-09-06\" notAfter=\"1914-09-08\">6, 7 ou 8 septembre 1914</date> à <placeName>Barcy (Seine-et-Marne)</placeName></death></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi",
+        "date",
+        "placeName"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "residence": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "décrit les lieux de résidence présents ou passés d'une personne."
+          }
+        ],
+        "projectDescription": "si le lieu de résidence du testateur au moment de son décès est connu, cet élément contient, au sein d'une phrase, les informations sur ce lieu de résidence : le plus souvent, un nom de lieu (élément placeName) au moins, et le cas échéant une adresse (élément address). S'il existe une notice sur le lieu de résidence, l'élément placeName devrait logiquement avoir un attribut ref renvoyant à cette notice.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "résidence"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><residence>Domicilié à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName>, <address><street>174 boulevard Saint-Germain</street><district>6<hi rend=\"superscript\">e</hi></district></address>.</residence></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi",
+        "placeName",
+        "address"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "occupation": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient une description non formalisée de l'activité, de la profession ou de l'occupation d'une personne."
+          }
+        ],
+        "projectDescription": "si la profession du testateur est connue, cet élément permet de consigner cette profession, sous la forme d'un mot-clé nom commun simple ou composé, comme \"garçon de café\", \"employé de bureau\", \"artisan\", \"ouvrier\".",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "activité"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><occupation>maçon</occupation></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "affiliation": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient une description non formalisée portant sur l'affiliation présente ou passée d'une personne à une organisation, par exemple un employeur ou un sponsor."
+          }
+        ],
+        "projectDescription": "cet élément est utilisé dans les notices sur les testateurs pour consigner les informations recueillies sur leur grade et leur unité militaire d'affectation (dans l'élément orgName). S'il existe une notice sur l'unité militaire, l'élément orgName devrait logiquement avoir un attribut ref renvoyant à cette notice.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "affiliation"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><affiliation>Soldat de 2<hi rend=\"superscript\">e</hi> classe au <orgName ref=\"FirstWorldWarWills-ListOfMilitaryUnit#o-0005\">27<hi rend=\"superscript\">e</hi> régiment d’infanterie territoriale</orgName>.</affiliation></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi",
+        "orgName"
+      ],
+      "attributes": {
+        "xml:id": {
+          "id": "xml:id",
+          "label": "identifiant",
+          "usage": "opt",
+          "type": null,
+          "desc": "l'identifiant unique de l'affiliation. A utiliser uniquement si l'affiliation qui est spécifiée est exclusive d'une autre affiliation pour la même personne (pour mémoire, dans ce cas, les éléments affiliation concernés devraient aussi avoir les attributs excl et source ",
+          "valDesc": null,
+          "values": []
+        },
+        "source": {
+          "id": "source",
+          "label": "source",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut est utilisé pour pointer vers une ou plusieurs sources (références bibliographiques, sources archivistiques en ligne...) qui permettent d'établir l'affiliation.",
+          "valDesc": null,
+          "values": []
+        },
+        "exclude": {
+          "id": "exclude",
+          "label": "exclusif (de)",
+          "usage": "opt",
+          "type": null,
+          "desc": "Cet attribut donne les identifiants des éléments affiliation qui constituent une alternative exclusive à l'affiliation spécifiée. Peut éventuellement servir dans le cas où une ou plusieurs sources indiquent plusieurs affiliations différentes pour le Poilu au même moment. Si cet attribut est présent, les attributs xml:id et source devraient l'être aussi.",
+          "valDesc": null,
+          "values": []
+        }
+      },
+      "textAllowed": true
+    },
+    "address": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient une adresse postale ou d'un autre type, par exemple l'adresse d'un éditeur, d'un organisme ou d'une personne."
+          }
+        ],
+        "projectDescription": "L'élément address est utilisé, d'une part dans la transcription des testaments, pour baliser une adresse, le plus souvent comme texte écrit sur une enveloppe (dans ce cas il contient une série d'éléments addrLine- ligne d'adresse), d'autre part dans les notices descriptives des testateurs, au sein de l'élément residence (résidence) (dans ce cas il contient un élément street (rue), optionnellement un élément district (arrondissement)).",
+        "gloss": [
+          {
+            "date": "",
+            "content": "adresse"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><div type=\"envelope\"><pb/><p><address><addrLine>Monsieur Delafon<choice><orig/><reg>,</reg></choice> notaire<choice>v<reg>,</reg></choice></addrLine><addrLine>6 boulevard de Strasbourg<choice><orig/><reg>,</reg></choice></addrLine><addrLine>Paris</addrLine></address></p><!-- etc. --></div></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><residence>Domicilié à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName>, <address><street><num>174</num> boulevard Saint-Germain</street><district>6<hi rend=\"superscript\">e</hi></district></address></residence></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "addrLine",
+        "street",
+        "district"
+      ],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé ici pour spécifier à quel endroit, sur la page, se trouve l'adresse.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "street": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "adresse complète d'une rue comprenant un nom ou un numéro identifiant un bâtiment ainsi que le nom de la rue ou du chemin sur laquelle il est situé."
+          }
+        ],
+        "projectDescription": "utilisé dans les notices descriptives des testateurs, pour encoder, au sein de l'élément address (adresse), lui-même dans residence (résidence), le nom de la voie (rue, route, allée, chemin...) et le cas échéant, dans cette voie, le numéro d'identification de l'immeuble dans lequel le testateur est domicilié.",
+        "gloss": [
+          {
+            "date": "",
+            "content": "rue"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><residence>Domicilié à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName>, <address><street><num>174</num> boulevard Saint-Germain</street><district>6<hi rend=\"superscript\">e</hi></district></address></residence></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "num"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "num": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-06",
+            "content": "contient un nombre écrit sous une forme quelconque."
+          }
+        ],
+        "projectDescription": "sert dans les notices descriptives des testateurs pour baliser le numéro de l'immeuble dans lequel est domicilié le testateur (dans l'élément street (rue), lui-même dans address (adresse). Sert aussi, dans les notices sur les unités militaires, pour baliser le numéro de l'unité militaire dans laquelle le testateur est incorporé (dans l'élément orgName (nom d'organisation).",
+        "gloss": [
+          {
+            "date": "2009-01-06",
+            "content": "nombre"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><residence>Domicilié à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName>, <address><street><num>174</num> boulevard Saint-Germain</street><district>6<hi rend=\"superscript\">e</hi></district></address></residence></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><org xml:id=\"org-0002\" resp=\"#ML #JD\"><orgName type=\"fullIndexEntryForm\"><orgName>France</orgName>. <orgName>Armée de terre</orgName>. <orgName>Régiment de zouaves (<num>4</num>)</orgName></orgName><orgName type=\"proseForm\">4<hi rend=\"superscript\">e</hi> régiment de zouaves</orgName><note type=\"history\"><p/></note></org></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "district": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient le nom d'une subdivision quelconque d'une ville, comme une paroisse, une circonscription électorale ou toute autre unité administrative ou géographique."
+          }
+        ],
+        "projectDescription": "cet élément est utilisé dans les notices descriptives des testateurs, au sein de l'élément address (adresse), lorsque l'adresse du testateur inclut la mention d'un arrondissement urbain.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "district"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><residence>Domicilié à <placeName ref=\"FirstWorldWarWills-ListOfPlaces#pl-0071\">Paris</placeName>, <address><street><num>174</num> boulevard Saint-Germain</street><district>6<hi rend=\"superscript\">e</hi></district></address></residence></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "settlement": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient le nom d'un lieu de peuplement comme une cité, une ville ou un village, identifié comme une unité géo-politique ou administrative unique."
+          }
+        ],
+        "projectDescription": "utilisé dans les notices descriptives des lieux, au sein de l'élément placeName, pour baliser le nom de la ville ou de la localité décrites. Sert aussi, toujours dans les notices descriptives des lieux, pour baliser le cas échéant, à l'intérieur de l'élément location, le nom de la commune dans laquelle se trouve le lieu géographique ou la localité décrits. Dans ce cas, on trouvera au moins un sous-élément placeName dans settlement.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "lieu de peuplement"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0009\" type=\"city\"><!-- une commune qui a changé de nom --><placeName when-iso=\"1793/1801\"><settlement type=\"city\">Bar sur Ornain</settlement></placeName><placeName when-iso=\"1801/\"><settlement type=\"city\">Bar-le-Duc</settlement></placeName><location><region type=\"FrenchDepartement\">Meuse</region><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>48.78333 5.16667</geo></location><idno type=\"GeonamesURI\">http://sws.geonames.org/3034911/</idno></place></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"place-0008\" type=\"locality\"><placeName><settlement type=\"locality\">Baleycourt</settlement></placeName><location><!-- un lieu-dit dont la commune de rattachement a changé de nom --><settlement type=\"city\"><placeName when-iso=\"1801/1970\">Verdun-sur-Meuse</placeName><placeName when-iso=\"1970/\">Verdun</placeName></settlement><region type=\"FrenchDepartement\">Meuse</region><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>49.1328 5.30437</geo></location><idno type=\"geonamesURI\">http://sws.geonames.org/3035245/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "placeName"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": null,
+          "usage": "req",
+          "type": "closed",
+          "desc": null,
+          "valDesc": null,
+          "values": [
+            {
+              "value": "city",
+              "label": "ville"
+            },
+            {
+              "value": "locality",
+              "label": "localité"
+            },
+            {
+              "value": "other",
+              "label": null
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "geogName": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "un nom associé à une caractéristique géographique comme Windrush Valley ou le Mont Sinaï."
+          }
+        ],
+        "projectDescription": "utilisé dans les notices descriptives des lieux, au sein de l'élément placeName, pour baliser le nom d'un lieu géographique (bois, forêt, ...). Cet élément contient parfois l'élément geogFeat (catégorie de lieu géographique). Il devrait porter un attribut type.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "nom de lieu géographique"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><placeName><geogName type=\"forest\">Gruerie, <geogFeat>bois</geogFeat> de la</geogName></placeName></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><placeName><geogName type=\"forest\">Bois-de-la-Grille</geogName></placeName></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "geogFeat"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": null,
+          "usage": "req",
+          "type": "closed",
+          "desc": null,
+          "valDesc": null,
+          "values": [
+            {
+              "value": "mountain",
+              "label": "mont"
+            },
+            {
+              "value": "forest",
+              "label": "forêt, bois"
+            },
+            {
+              "value": "other",
+              "label": null
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "geogFeat": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient un nom commun identifiant une caractéristique géographique contenue dans un nom de lieu, comme vallée, mont, etc."
+          }
+        ],
+        "projectDescription": "utilisé dans les notices descriptives des lieux, au sein de l'élément geogName, pour baliser, le cas échéant, le nom commun désignant un type de lieu géographique (bois, mont, ...).",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "nom de caractéristique géographique"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><placeName><geogName type=\"forest\">Gruerie, <geogFeat>bois</geogFeat> de la</geogName></placeName></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "location": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "définit l'emplacement d'un lieu par des coordonnées géographiques, en termes d'entités nommées dites géopolitiques, ou par une adresse."
+          }
+        ],
+        "projectDescription": "utilisé dans les notices descriptives des lieux, pour localiser le lieu décrit, soit en déclarant les subdivisions administratives et géopolitiques auxquelles il appartient (il est alors obligatoire de spécifier au moins le pays actuel), soit via ses coordonnées géographiques. Dans le cas d'une localisation administrative, l'élément location pourra le cas échéant avoir un attribut when-iso pour spécifier les dates pendant lesquelles cette localisation a été effective.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "localisation"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0015\" type=\"forest\"><placeName><geogName type=\"forest\">Bois-de-la-Grille</geogName></placeName><location><settlement type=\"city\"><placeName when-iso=\"1793/1950\"> Moronvilliers </placeName><placeName when-iso=\"1950/\">Pontfaverger-Moronvilliers </placeName></settlement><region type=\"FrenchDepartement\">Marne</region><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>49.29702 4.31657</geo></location><idno type=\"GeonamesURI\">http://sws.geonames.org/2986186/</idno></place></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0061\" type=\"city\"><placeName when-iso=\"1793/\"><settlement type=\"city\">Metzeral</settlement></placeName><location when-iso=\"1871/1919-06-27\"><region>Alsace</region><country>Empire d’Allemagne</country></location><location when-iso=\"1919-06-28/\"><region type=\"FrenchRegion\">Alsace-Champagne-Ardenne-Lorraine</region><region type=\"FrenchDepartement\">Haut-Rhin</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>48.01044 7.07088</geo></location><idno type=\"geonamesURI\">http://sws.geonames.org/2994157/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "settlement",
+        "region",
+        "country",
+        "geo"
+      ],
+      "attributes": {
+        "when-iso": {
+          "id": "when-iso",
+          "label": null,
+          "usage": "opt",
+          "type": null,
+          "desc": "la forme normalisée de la période pendant laquelle le lieu décrit dans la notice a été localisé dans les subdivisions administratives indiquées",
+          "valDesc": null,
+          "values": []
+        },
+        "type": {
+          "id": "type",
+          "label": "coordonnées géographiques",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "le type de localisation",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "geographicalCoordinates",
+              "label": "coordonnées géographiques"
+            }
+          ]
+        }
+      },
+      "textAllowed": false
+    },
+    "country": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2008-12-09",
+            "content": "contient le nom d'une unité géo-politique, comme une nation, un pays, une colonie ou une communauté, plus grande ou administrativement supérieure à une région et plus petite qu'un bloc."
+          }
+        ],
+        "projectDescription": "dans les notices descriptives des lieux, cet élément est obligatoire au sein de l'élément location servant à localiser le lieu dans un contexte géopolitique, pour spécifier dans quel pays se trouve le lieu.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "pays"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0070\" type=\"city\"><placeName><settlement type=\"city\">Parchim</settlement></placeName><location><region>Mecklembourg-Poméranie-Occidentale</region><country>Allemagne</country></location><location type=\"geographicalCoordinates\"><geo>53.38153 10.72375</geo></location><idno type=\"GeonamesURI\">http://sws.geonames.org/2946821/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "region": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-05",
+            "content": "contient le nom d'une unité administrative comme un état, une province ou un comté, plus grande qu'un lieu de peuplement, mais plus petite qu'un pays."
+          }
+        ],
+        "projectDescription": "dans les notices descriptives des lieux, region est utilisé pour encoder les noms des départements et régions administratives français (afin de localiser le lieu s'il est en France), et le nom des provinces, régions ou états étrangers lorsque le lieu est localisé dans un pays étranger et que l'on connaît ces informations. Dans le cas d'un lieu situé en France, l'élément region a un attribut type.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "région"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"pla-0056\" type=\"city\"><placeName when-iso=\"1793/\"><settlement type=\"city\">Maroeuil</settlement></placeName><location><region type=\"FrenchDepartement\">Pas-de-Calais</region><region type=\"FrenchRegion\">Nord-Pas-de-Calais-Picardie</region><country>France</country></location><location type=\"geographicalCoordinates\"><geo>50.32519 2.70504</geo></location><idno type=\"GeonamesURI\">http://sws.geonames.org/2995586/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "hi"
+      ],
+      "attributes": {
+        "type": {
+          "id": "type",
+          "label": "département français",
+          "usage": "opt",
+          "type": "closed",
+          "desc": "le type de région",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "FrenchRegion",
+              "label": "région administrative française"
+            },
+            {
+              "value": "FrenchDepartement",
+              "label": "département français"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
+    },
+    "geo": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient toute expression, dans un système de notation, d'un ensemble de coordonnées géographiques représentant un point, une ligne ou une zone sur la surface de la Terre."
+          }
+        ],
+        "projectDescription": "cet élément est utilisé dans les notices descriptives des lieux, pour donner la latitude et la longitude du lieu décrit, selon le Système géodésique mondial (WGS84). La latitude et la longitude sont séparées par une espace. On peut les trouver en consultant, par ex., la base Geonames.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "coordonnées géographiques"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><place xml:id=\"place-0010\" type=\"city\"><placeName><!-- optionnellement : @when-iso ; dans ce cas, 2e placeName avec @when-iso --><settlement type=\"city\">Ablain-Saint-Nazaire</settlement><!-- valeurs possibles de @type pour settlement : locality (= lieu-dit), city (= commune)--><!-- valeurs possibles de @type pour geogName : mountain, forest, + cote?--><!-- si geogName, placeName peut alors aussi contenir geogFeat --></placeName><location><!--cas classique d'une commune en France : country, region (avec un possible attr. type si country = France --><region type=\"FrenchDepartement\">Pas-de-Calais</region><region type=\"FrenchRegion\">Nord-Pas-de-Calais-Picardie</region><country>France</country></location><location type=\"geographicalCoordinates\"><!-- latitude + longitude --><geo>50.3932 2.7088</geo></location><note type=\"history\"><p/></note><bibl><title/></bibl><idno type=\"geonamesURI\">http://sws.geonames.org/3038763/</idno></place></egXML>"
+          }
+        ]
+      },
+      "content": [],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "surname": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-01-05",
+            "content": "contient un nom de famille (hérité) par opposition à un nom donné, nom de baptême ou surnom."
+          }
+        ],
+        "projectDescription": "L'élément surname est utilisé au sein de l'élément persName (nom de personne), pour baliser par ex. le nom de famille dans une signature dans le corps de la transcription. Il est surtout employé dans les notices descriptives des testateurs, au sein de l'élément persName qui sert à enregistrer la forme complète, normalisée et segmentée, du nom de la personne.",
+        "gloss": [
+          {
+            "date": "2009-03-19",
+            "content": "nom de famille"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"centered\"><seg type=\"signature\"><persName ref=\"FirstWorldWarWills-ListOfPersons.xml#p-0001\"><forename>Fernand</forename> <surname>Chatin</surname></persName></seg></signed></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><persName type=\"fullIndexEntryForm\"><surname>Chatin</surname><forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename></persName></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "ref"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    },
+    "forename": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2009-03-19",
+            "content": "contient un prénom, qu'il soit donné ou un nom de baptême."
+          }
+        ],
+        "projectDescription": "L'élément forename est utilisé au sein de l'élément persName (nom de personne), pour baliser par ex. chacun des prénoms dans une signature dans le corps de la transcription. Il est surtout employé dans les notices descriptives des testateurs, au sein de l'élément persName qui sert à enregistrer la forme complète, normalisée et segmentée, du nom de la personne.",
+        "gloss": [
+          {
+            "date": "2008-12-09",
+            "content": "prénom"
+          }
+        ],
+        "exemplum": [
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><signed rend=\"centered\"><seg type=\"signature\"><persName ref=\"FirstWorldWarWills-ListOfPersons.xml#p-0001\"><forename>Fernand</forename> <surname>Chatin</surname></persName></seg></signed></egXML>"
+          },
+          {
+            "source": null,
+            "example": "<egXML xmlns=\"http://www.tei-c.org/ns/Examples\"><persName type=\"fullIndexEntryForm\"><surname>Chatin</surname><forename>Fernand</forename><forename>Lucien</forename><forename>Jules</forename><forename>Melchior</forename></persName></egXML>"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "pb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "ref"
+      ],
+      "attributes": [],
+      "textAllowed": true
+    }
+  }
+}

@@ -1,6 +1,10 @@
 version:        "0-1"
 api:            "http://localhost:8888/TestamentsDePoilus/api/web/app_dev.php"
 api_web:        "http://localhost:8888/TestamentsDePoilus/api/web/"
+iiif:
+    server: "https://testaments-de-poilus.huma-num.fr/iiif/2"
+    separator: "K"
+    extension: "_L"
 webapp:
     strict:     "http://localhost:8888/TestamentsDePoilus/webapp/app/#!/"
     resources:  "http://localhost:8888/TestamentsDePoilus/webapp/app/web/"
