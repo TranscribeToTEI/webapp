@@ -10,22 +10,26 @@ angular.module('transcript.app.training', ['ui.router'])
                     controller: 'AppTrainingCtrl'
                 }
             },
-            url: '/training/:order',
+            url: '/training',
             resolve: {
-                trainingContent: function(TrainingContentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true);
+                trainingContents: function(TrainingContentService) {
+                    return TrainingContentService.getTrainingContents(null, null);
                 }
             }
         })
     }])
 
-    .controller('AppTrainingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', 'trainingContent', function($log, $rootScope, $scope, $http, $sce, $state, tfMetaTags, trainingContent) {
+    .controller('AppTrainingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, tfMetaTags) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
 
-        if(trainingContent.pageType === 'exercise') {
-            $state.go('transcript.app.training.exercise.presentation', {order: trainingContent.orderInTraining});
-        } else {
-            $state.go('transcript.app.training.presentation', {order: trainingContent.orderInTraining});
-        }
+        /* End Training action -------------------------------------------------------------------------------------- */
+        $scope.endTraining = function() {
+            UserPreferenceService.patchPreferences({'tutorialStatus': 'done', 'tutorialProgress': null}, $rootScope.user.id).then(function() {
+                $rootScope.user._embedded.preferences.tutorialStatus = 'done';
+                $rootScope.user._embedded.preferences.tutorialProgress = null;
+            });
+            $state.go('transcript.app.search');
+        };
+        /* End: End Training action --------------------------------------------------------------------------------- */
     }])
 ;

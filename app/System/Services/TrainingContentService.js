@@ -53,7 +53,8 @@ angular.module('transcript.service.training-content', ['ui.router'])
                     $log.debug(response);
                     return response;
                 });
-            }
+            },
+            resultsOfExercises: []
         };
     })
 

@@ -1,0 +1,17 @@
+<div id="transcript-edit" class="h-100">
+    <div id="transcript-content-heading">
+        <h3 class="card-header bg-light d-block">Votre transcription</h3>
+    </div>
+    <div class="h-100">
+        <div id="transcript-edit-editor" style="height: calc(100% - 22px);">
+            <div id="transcript-edit-editor-ace" class="h-100">
+                <div ui-ace="{
+                    mode: 'xml',
+                    onLoad: aceLoaded,
+                    onChange: aceChanged,
+                    useWrapMode: true
+                    }" id="transcript-edit-editor-ace-area" class="h-100"  data-ng-model="exerciceResult.content"></div>
+            </div>
+        </div>
+    </div>
+</div>

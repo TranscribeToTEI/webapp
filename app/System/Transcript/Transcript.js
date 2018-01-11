@@ -2,7 +2,7 @@
 
 angular.module('transcript.system.transcript', ['ui.router'])
 
-    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'TranscriptService', 'TranscriptLogService', 'ContentService', 'SearchService', 'NoteService', 'TaxonomyService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, TranscriptService, TranscriptLogService, ContentService, SearchService, NoteService, TaxonomyService, transcript, teiInfo, config, transcriptConfig) {
+    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
             $log.debug('Redirection to edition -> Already in edition');
@@ -585,6 +585,19 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     //$scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                     $scope.transcriptArea.ace.lines = $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1);
                     $scope.functions.updateAlerts();
+
+                    /* Exercise Management -------------------------------------------------------------------------- */
+                    if($scope.transcriptConfig.isExercise === true) {
+                        if($filter('filter')(TrainingContentService.resultsOfExercises, {id: $scope.transcriptConfig.exerciseId}).length > 0) {
+                            $filter('filter')(TrainingContentService.resultsOfExercises, {id: $scope.transcriptConfig.exerciseId})[0].content = $scope.transcriptArea.ace.area;
+                        } else {
+                            TrainingContentService.resultsOfExercises.push({
+                                id: $scope.transcriptConfig.exerciseId,
+                                content: $scope.transcriptArea.ace.area
+                            });
+                        }
+                    }
+                    /* Exercise Management -------------------------------------------------------------------------- */
                 });
             };
 
@@ -1304,7 +1317,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * Change page alert management & transcript log management
              */
             $transitions.onBefore({}, (trans) => {
-                if (($scope.transcript.content === null && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area) {
+                if (($scope.transcript.content === null && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
                     if($scope.transcriptConfig.isExercise === false) {
                         $log.debug('get through onBefore');
                         TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);

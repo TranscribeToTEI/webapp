@@ -1,46 +1,47 @@
 'use strict';
 
-angular.module('transcript.app.training.presentation', ['ui.router'])
+angular.module('transcript.app.training.content.exercise.correction', ['ui.router'])
 
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('transcript.app.training.presentation', {
+        $stateProvider.state('transcript.app.training.content.exercise.correction', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Training/Presentation/Presentation.html',
-                    controller: 'AppTrainingPresentationCtrl'
+                    templateUrl: 'App/Training/Content/Exercise/Correction/Correction.html',
+                    controller: 'AppTrainingContentExerciseCorrectionCtrl'
                 },
-                "comment@transcript.app.training.presentation" : {
+                "comment@transcript.app.training.content.exercise.correction" : {
                     templateUrl: 'System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },
-            url: '/presentation',
+            url: '/correction',
             ncyBreadcrumb: {
-                parent: 'transcript.app.home',
-                label: '{{ trainingContent.title }}'
+                parent: 'transcript.app.training.content.exercise.exercise',
+                label: 'Correction'
             },
             tfMetaTags: {
                 title: '{{ trainingContent.title }}',
             },
             resolve: {
-                trainingContent: function(TrainingContentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true);
-                },
-                trainingContents: function(TrainingContentService) {
-                    return TrainingContentService.getTrainingContents(null, null);
-                },
-                thread: function(TrainingContentService, CommentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(trainingContent) {
-                        return CommentService.getThread('trainingContent-'+trainingContent.id);
+                exerciseResult: function($http, $rootScope, TrainingContentService, $transition$) {
+                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(data) {
+                        return $http.get($rootScope.api + "/training-results?user="+$rootScope.user.id+"&trainingContent="+data.id);
                     });
                 }
             }
         })
     }])
 
-    .controller('AppTrainingPresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
+    .controller('AppTrainingContentExerciseCorrectionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'UserPreferenceService', 'trainingContent', 'trainingContents', 'exerciseResult', function($log, $rootScope, $scope, $http, $sce, $state, $filter, UserPreferenceService, trainingContent, trainingContents, exerciseResult) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
+
+        $scope.exerciseResults = exerciseResult.data; console.log($scope.exerciseResults);
+        if($scope.exerciseResults.length > 0) {
+            $scope.exerciceResult = $scope.exerciseResults[0];
+        } else {
+            $scope.exerciceResult = null;
+        }
 
         /* Updating user's preferences ------------------------------------------------------------------------------ */
         if($rootScope.user._embedded.preferences.tutorialStatus === 'todo' || $rootScope.user._embedded.preferences.tutorialStatus === 'inProgress') {
@@ -73,10 +74,18 @@ angular.module('transcript.app.training.presentation', ['ui.router'])
         }
         /* End: Compute next content & training end ----------------------------------------------------------------- */
 
-        /* Exercise status management ------------------------------------------------------------------------------- */
-        if($scope.trainingContent.pageType === 'exercise') {
-            $scope.trainingContent.exerciseStatus = 'todo';
-        }
-        /* End: Exercise status management -------------------------------------------------------------------------- */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Viewer Management */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        let imageSource = [];
+        imageSource.push($rootScope.iiif.server + "/exercise" + $rootScope.iiif.separator + $scope.trainingContent.exerciseImageToTranscribe);
+
+        console.log(imageSource);
+        $scope.openseadragon = {
+            prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
+            tileSources: imageSource
+        };
+        /* Viewer Management ---------------------------------------------------------------------------------------- */
+
     }])
 ;

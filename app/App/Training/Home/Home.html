@@ -1,0 +1,33 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+
+<main class="container" role="main">
+    <h1 class="card-header bg-dark">Module d'entrainement</h1>
+    <nav ng-if="user.roles | contains:'ROLE_ADMIN'">
+        <ul class="nav nav-pills justify-content-end">
+            <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.preference"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Modifier cette page</a></li>
+        </ul>
+    </nav>
+    <div class="row mt-4">
+        <div class="col-md-8 order-md-2">
+            <div class="text-justify mt-2 pr-md-3" ng-bind-html="preferences.trainingHomeContent | trustAsHtml"></div>
+            <div class="alert alert-primary text-center">
+                <a ui-sref="transcript.app.training.content({order: 1})">Commencer le tutoriel</a>
+            </div>
+        </div>
+        <div class="col-md-4 order-md-1">
+            <div class="card">
+                <ul class="list-group list-group-flush mb-5 mt-5">
+                    <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">
+                        <a ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</a>
+                    </li>
+                </ul>
+            </div>
+    </div>
+</main>

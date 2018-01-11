@@ -76,7 +76,7 @@
     <div class="col-md-4">
         <h3>Image à transcrire</h3>
         <div ng-if="trainingContent.exerciseImageToTranscribe != null">
-            <img class="img-fluid" src="{{ trainingContent.exerciseImageToTranscribe | imageRender }}"/>
+            <img class="img-fluid" src="{{ iiif.server  }}/exercise{{ iiif.separator }}{{ trainingContent.exerciseImageToTranscribe }}/full/!150,150/0/default.jpg"/>
         </div>
         <div ng-if="trainingContent.exerciseImageToTranscribe == null">
             <form class="mt-2 mb-2">

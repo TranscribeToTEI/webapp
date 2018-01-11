@@ -148,11 +148,13 @@
     <script type="text/javascript" src="App/Taxonomy/List/List.js"></script>
     <script type="text/javascript" src="App/Taxonomy/View/View.js"></script>
     <script type="text/javascript" src="App/Training/Training.js"></script>
-    <script type="text/javascript" src="App/Training/Exercise/Exercise.js"></script>
-    <script type="text/javascript" src="App/Training/Exercise/Correction/Correction.js"></script>
-    <script type="text/javascript" src="App/Training/Exercise/Exercise/Exercise.js"></script>
-    <script type="text/javascript" src="App/Training/Exercise/Presentation/Presentation.js"></script>
-    <script type="text/javascript" src="App/Training/Presentation/Presentation.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Content.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Exercise/Exercise.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Exercise/Correction/Correction.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Exercise/Exercise/Exercise.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Exercise/Presentation/Presentation.js"></script>
+    <script type="text/javascript" src="App/Training/Content/Presentation/Presentation.js"></script>
+    <script type="text/javascript" src="App/Training/Home/Home.js"></script>
     <script type="text/javascript" src="App/Transcript/Transcript.js"></script>
     <script type="text/javascript" src="App/User/User.js"></script>
     <script type="text/javascript" src="App/User/Avatar/Avatar.js"></script>
@@ -218,5 +220,21 @@
     <script type="text/javascript" src="System/Services/WillService.js"></script>
     <script type="text/javascript" src="System/Services/WillTypeService.js"></script>
     <script type="text/javascript" src="System/Transcript/Transcript.js"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//piwik.huma-num.fr/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '161']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <noscript><p><img src="//piwik.huma-num.fr/piwik.php?idsite=161&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
 </body>
 </html>

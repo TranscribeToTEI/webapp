@@ -7,8 +7,8 @@
     <div class="card bg-primary" data-ng-if="user != null && (user._embedded.preferences.tutorialStatus == 'todo' || user._embedded.preferences.tutorialStatus == 'inProgress')">
         <div class="card-body">
             <h2 class="card-title">Entrainement à TEI</h2>
-            <a ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training({order: '1'})" class="card-link">Cliquez ici pour commencer la formation à TEI.</a>
-            <a ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ui-sref="transcript.app.training({order: user._embedded.preferences.tutorialProgress})" class="card-link">Cliquez ici pour continuer la formation à TEI.</a>
+            <a ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '1'})" class="card-link">Cliquez ici pour commencer la formation à TEI.</a>
+            <a ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="card-link">Cliquez ici pour continuer la formation à TEI.</a>
         </div>
     </div>
 </div>

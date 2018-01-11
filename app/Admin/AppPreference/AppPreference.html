@@ -12,7 +12,7 @@
 
     <form>
         <div class="row">
-            <div class="col-sm-6 pr-5">
+            <div class="col-sm-12 pr-5">
                 <fieldset>
                     <label class="big">Paramètres généraux</label>
                     <div class="form-group">
@@ -90,8 +90,6 @@
                         </div>
                     </div>
                 </fieldset>
-            </div>
-            <div class="col-sm-6 pr-5">
                 <fieldset>
                     <label class="big">Contenus</label>
 
@@ -174,6 +172,15 @@
                     </div>
                 </fieldset>
 
+                <fieldset>
+                    <label class="big">Module d'entrainement</label>
+
+                    <div class="form-group">
+                        <label for="admin-app-preference-trainingHomeContent">Contenu de la page d'accueil du module d'entrainement</label>
+                        <div id="admin-app-preference-trainingHomeContent" ckeditor="options" data-ng-model="preferences.trainingHomeContent"></div>
+                        <small class="form-text text-muted">Ce texte sera affiché sur la page d'accueil du module d'entrainement.</small>
+                    </div>
+                </fieldset>
             </div>
         </div>
 

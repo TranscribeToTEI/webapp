@@ -8,22 +8,22 @@
 </div>
 
 <main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
-    <div ng-include="'App/Training/tpl/training-header.html'"></div>
+    <div ng-include="'App/Training/Content/tpl/content-header.html'"></div>
 
     <div ng-if="trainingContent.illustration != null" class="row">
-        <div class="col-md-7" ng-include="'App/Training/Presentation/tpl/training-mainContent.html'"></div>
+        <div class="col-md-7" ng-include="'App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
         <div class="col-md-5">
             <img src="{{ trainingContent.illustration | imageRender }}" class="img-fluid" />
         </div>
     </div>
     <div ng-if="trainingContent.illustration == null" class="row">
-        <div class="col-md-12 col-12" ng-include="'App/Training/Presentation/tpl/training-mainContent.html'"></div>
+        <div class="col-md-12 col-12" ng-include="'App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
     </div>
     <div class="text-center alert alert-info">
-        <a ui-sref="transcript.app.training.exercise.exercise">Commencer l'exercise</a>
+        <a ui-sref="transcript.app.training.content.exercise.exercise">Commencer l'exercise</a>
     </div>
 
-    <div ng-include="'App/Training/Exercise/tpl/training-exercise.html'"></div>
+    <div ng-include="'App/Training/Content/Exercise/tpl/training-exercise.html'"></div>
 
     <hr />
     <div ui-view="comment"></div>

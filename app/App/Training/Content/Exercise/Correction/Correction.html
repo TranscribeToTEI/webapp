@@ -1,0 +1,48 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+
+<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
+    <div ng-include="'App/Training/Content/tpl/content-header.html'"></div>
+
+    <div class="card-group h-100 no-gutters" ng-if="user._embedded.preferences.transcriptionDeskPosition == 'leftRead-centerHelp-rightImage'">
+        <div class="card bg-container" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-proposal.html'"></div>
+        <div class="card bg-container" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-response.html'"></div>
+        <div class="card viewer bg-dark" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-viewer.html'"></div>
+    </div>
+    <div class="card-group h-100 no-gutters" ng-if="user._embedded.preferences.transcriptionDeskPosition == 'leftHelp-centerRead-rightImage'">
+        <div class="card bg-container"  ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-response.html'"></div>
+        <div class="card bg-container h-100" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-proposal.html'"></div>
+        <div class="card viewer bg-dark" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-viewer.html'"></div>
+    </div>
+    <div class="card-group h-100 no-gutters" ng-if="user._embedded.preferences.transcriptionDeskPosition == 'leftImage-centerHelp-rightRead'">
+        <div class="card viewer bg-dark" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-viewer.html'"></div>
+        <div class="card bg-container"  ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-response.html'"></div>
+        <div class="card bg-container h-100" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-proposal.html'"></div>
+    </div>
+    <div class="card-group h-100 no-gutters" ng-if="user._embedded.preferences.transcriptionDeskPosition == 'leftImage-centerRead-rightHelp'">
+        <div class="card viewer bg-dark" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-viewer.html'"></div>
+        <div class="card bg-container h-100" ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-proposal.html'"></div>
+        <div class="card bg-container"  ng-include="'App/Training/Content/Exercise/Correction/tpl/correction-response.html'"></div>
+    </div>
+
+    <div class="card bg-body">
+        <div class="card-header bg-light">
+            <i class="fa fa-info-circle"></i> Éléments de correction
+        </div>
+        <div class="card-body" ng-bind-html="trainingContent.exerciseCorrectionErrorsToAvoid | trustAsHtml"></div>
+    </div>
+
+    <div ng-include="'App/Training/Content/Exercise/tpl/training-exercise.html'"></div>
+
+    <hr />
+    <div ui-view="comment"></div>
+</main>
+<main class="container" role="main" ng-if="trainingContent.pageStatus != 'public'">
+    <div class="alert alert-warning">Oups ... Cette page n'est pas publique pour le moment</div>
+</main>

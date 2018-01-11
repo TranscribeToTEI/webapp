@@ -68,7 +68,8 @@ angular.module('transcript.app.transcript', ['ui.router'])
                         correctionTranscript: null,
                         correctionErrorsToAvoid: null,
                         tagsList: null,
-                        exerciseImageToTranscribe: null
+                        exerciseImageToTranscribe: null,
+                        exerciseId: null,
                     }
                 }
             }

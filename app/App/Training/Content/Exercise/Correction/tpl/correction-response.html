@@ -1,0 +1,17 @@
+<div id="transcript-interaction" class="h-100">
+    <div id="transcript-interaction-heading">
+        <h3 class="card-header bg-light d-block">Transcription correcte</h3>
+    </div>
+    <div class="h-100">
+        <div id="transcript-interaction-editor" style="height: calc(100% - 22px);">
+            <div id="transcript-interaction-editor-ace" class="h-100">
+                <div ui-ace="{
+                    mode: 'xml',
+                    onLoad: aceLoaded,
+                    onChange: aceChanged,
+                    useWrapMode: true
+                    }" id="transcript-interaction-editor-ace-area" class="h-100"  data-ng-model="trainingContent.exerciseCorrectionTranscript"></div>
+            </div>
+        </div>
+    </div>
+</div>

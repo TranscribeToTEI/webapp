@@ -1,44 +1,31 @@
 'use strict';
 
-angular.module('transcript.app.training.exercise.presentation', ['ui.router'])
+angular.module('transcript.app.training.content.exercise.presentation', ['ui.router'])
 
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('transcript.app.training.exercise.presentation', {
+        $stateProvider.state('transcript.app.training.content.exercise.presentation', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Training/Exercise/Presentation/Presentation.html',
-                    controller: 'AppTrainingExercisePresentationCtrl'
+                    templateUrl: 'App/Training/Content/Exercise/Presentation/Presentation.html',
+                    controller: 'AppTrainingContentExercisePresentationCtrl'
                 },
-                "comment@transcript.app.training.exercise.presentation" : {
+                "comment@transcript.app.training.content.exercise.presentation" : {
                     templateUrl: 'System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },
             url: '/presentation',
             ncyBreadcrumb: {
-                parent: 'transcript.app.home',
+                parent: 'transcript.app.training.home',
                 label: '{{ trainingContent.title }}'
             },
             tfMetaTags: {
                 title: '{{ trainingContent.title }}',
-            },
-            resolve: {
-                trainingContent: function(TrainingContentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true);
-                },
-                trainingContents: function(TrainingContentService) {
-                    return TrainingContentService.getTrainingContents(null, null);
-                },
-                thread: function(TrainingContentService, CommentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(trainingContent) {
-                        return CommentService.getThread('trainingContent-'+trainingContent.id);
-                    });
-                }
             }
         })
     }])
 
-    .controller('AppTrainingExercisePresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
+    .controller('AppTrainingContentExercisePresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
 

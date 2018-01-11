@@ -8,11 +8,9 @@
 </div>
 
 <main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
-    <div ng-include="'App/Training/tpl/training-header.html'"></div>
+    <div ng-include="'App/Training/Content/tpl/content-header.html'"></div>
 
-    Correction
-
-    <div ng-include="'App/Training/Exercise/tpl/training-exercise.html'"></div>
+    <div ng-include="'App/Training/Content/Presentation/tpl/training-presentation.html'"></div>
 
     <hr />
     <div ui-view="comment"></div>

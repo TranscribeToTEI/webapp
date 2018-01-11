@@ -1,43 +1,32 @@
 'use strict';
 
-angular.module('transcript.app.training.exercise.exercise', ['ui.router'])
+angular.module('transcript.app.training.content.exercise.exercise', ['ui.router'])
 
     .config(['$stateProvider', function($stateProvider) {
-        $stateProvider.state('transcript.app.training.exercise.exercise', {
+        $stateProvider.state('transcript.app.training.content.exercise.exercise', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Training/Exercise/Exercise/Exercise.html',
-                    controller: 'AppTrainingExerciseExerciseCtrl'
+                    templateUrl: 'App/Training/Content/Exercise/Exercise/Exercise.html',
+                    controller: 'AppTrainingContentExerciseExerciseCtrl'
                 },
-                "comment@transcript.app.training.exercise.exercise" : {
+                "comment@transcript.app.training.content.exercise.exercise" : {
                     templateUrl: 'System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 },
-                "transcript@transcript.app.training.exercise.exercise" : {
+                "transcript@transcript.app.training.content.exercise.exercise" : {
                     templateUrl: 'System/Transcript/Transcript.html',
                     controller: 'SystemTranscriptCtrl'
                 }
             },
             url: '/on',
             ncyBreadcrumb: {
-                parent: 'transcript.app.home',
-                label: '{{ trainingContent.title }}'
+                parent: 'transcript.app.training.content.exercise.presentation',
+                label: 'Exercice'
             },
             tfMetaTags: {
                 title: '{{ trainingContent.title }}',
             },
             resolve: {
-                trainingContent: function(TrainingContentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true);
-                },
-                trainingContents: function(TrainingContentService) {
-                    return TrainingContentService.getTrainingContents(null, null);
-                },
-                thread: function(TrainingContentService, CommentService, $transition$) {
-                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(trainingContent) {
-                        return CommentService.getThread('trainingContent-'+trainingContent.id);
-                    });
-                },
                 transcript: function() {
                     return {
                         "content": null,
@@ -107,7 +96,8 @@ angular.module('transcript.app.training.exercise.exercise', ['ui.router'])
                             correctionTranscript: response.exerciseCorrectionTranscript,
                             correctionErrorsToAvoid: response.exerciseCorrectionErrorsToAvoid,
                             tagsList: response.exerciseTagsList,
-                            exerciseImageToTranscribe: response.exerciseImageToTranscribe
+                            exerciseImageToTranscribe: response.exerciseImageToTranscribe,
+                            exerciseId: response.id
                         }
                     });
                 }
@@ -115,7 +105,7 @@ angular.module('transcript.app.training.exercise.exercise', ['ui.router'])
         })
     }])
 
-    .controller('AppTrainingExerciseExerciseCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService, transcriptConfig) {
+    .controller('AppTrainingContentExerciseExerciseCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'TrainingContentService', 'UserPreferenceService', 'trainingContent', 'trainingContents', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $filter, TrainingContentService, UserPreferenceService, trainingContent, trainingContents, transcriptConfig) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
         $scope.transcriptConfig = transcriptConfig;
@@ -151,10 +141,21 @@ angular.module('transcript.app.training.exercise.exercise', ['ui.router'])
         }
         /* End: Compute next content & training end ----------------------------------------------------------------- */
 
-        /* Exercise status management ------------------------------------------------------------------------------- */
-        if($scope.trainingContent.pageType === 'exercise') {
-            $scope.trainingContent.exerciseStatus = 'todo';
+        $scope.goToValidation = function() {
+            if($filter('filter')(TrainingContentService.resultsOfExercises, {id: $scope.transcriptConfig.exerciseId}).length > 0) {
+                return $http.post(
+                    $rootScope.api + "/training-results",
+                    {
+                        content: $filter('filter')(TrainingContentService.resultsOfExercises, {id: $scope.transcriptConfig.exerciseId})[0].content,
+                        trainingContent: $filter('filter')(TrainingContentService.resultsOfExercises, {id: $scope.transcriptConfig.exerciseId})[0].id
+                    }
+                ).then(function (response) {
+                    $state.go('transcript.app.training.content.exercise.correction');
+                }, function errorCallback(response) {
+                    $log.debug(response);
+                    return response;
+                });
+            }
         }
-        /* End: Exercise status management -------------------------------------------------------------------------- */
     }])
 ;
