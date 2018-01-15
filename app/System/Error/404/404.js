@@ -5,7 +5,7 @@ angular.module('transcript.system.error.404', ['ui.router'])
         $stateProvider.state('transcript.error.404', {
             views: {
                 "page" : {
-                    templateUrl: 'System/Error/404/404.html',
+                    templateUrl: '/webapp/app/System/Error/404/404.html',
                     controller: 'SystemError404Ctrl'
                 }
             },

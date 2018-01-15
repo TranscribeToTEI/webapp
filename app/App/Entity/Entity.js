@@ -6,11 +6,11 @@ angular.module('transcript.app.entity', ['ui.router'])
         $stateProvider.state('transcript.app.entity', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Entity/Entity.html',
+                    templateUrl: '/webapp/app/App/Entity/Entity.html',
                     controller: 'AppEntityCtrl'
                 },
                 "comment@transcript.app.entity" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },

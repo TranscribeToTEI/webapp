@@ -7,7 +7,7 @@ angular.module('transcript.admin.comments', ['ui.router'])
             .state('transcript.admin.comments', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Comments/Comments.html',
+                        templateUrl: '/webapp/app/Admin/Comments/Comments.html',
                         controller: 'AdminCommentsCtrl'
                     }
                 },

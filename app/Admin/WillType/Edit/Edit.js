@@ -7,7 +7,7 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
             .state('transcript.admin.will-type.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/WillType/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/WillType/Edit/Edit.html',
                         controller: 'AdminWillTypeEditCtrl'
                     }
                 },
@@ -28,7 +28,7 @@ angular.module('transcript.admin.will-type.edit', ['ui.router'])
             .state('transcript.admin.will-type.new', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/WillType/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/WillType/Edit/Edit.html',
                         controller: 'AdminWillTypeEditCtrl'
                     }
                 },

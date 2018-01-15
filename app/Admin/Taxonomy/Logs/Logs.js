@@ -16,7 +16,7 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
             .state('transcript.admin.taxonomy.logs.view', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Taxonomy/Logs/Logs.html',
+                        templateUrl: '/webapp/app/Admin/Taxonomy/Logs/Logs.html',
                         controller: 'AdminTaxonomyLogsCtrl'
                     }
                 },
@@ -43,7 +43,7 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
             .state('transcript.admin.taxonomy.logs.list', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Taxonomy/Logs/Logs.html',
+                        templateUrl: '/webapp/app/Admin/Taxonomy/Logs/Logs.html',
                         controller: 'AdminTaxonomyLogsCtrl'
                     }
                 },

@@ -6,7 +6,7 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
         $stateProvider.state('transcript.app.taxonomy.list', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Taxonomy/List/List.html',
+                    templateUrl: '/webapp/app/App/Taxonomy/List/List.html',
                     controller: 'AppTaxonomyListCtrl'
                 }
             },

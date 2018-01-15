@@ -6,7 +6,7 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
         $stateProvider.state('transcript.app.taxonomy.ask', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Taxonomy/Ask/Ask.html',
+                    templateUrl: '/webapp/app/App/Taxonomy/Ask/Ask.html',
                     controller: 'AppTaxonomyAskCtrl'
                 }
             },
@@ -61,11 +61,11 @@ angular.module('transcript.app.taxonomy.ask', ['ui.router'])
                 if($rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
+                    $rootScope.user._embedded.accesses.taxonomyRequest = $scope.form.taxonomyRequest;
                     $timeout(function() {
                         $scope.submit.success = false;
-                    }, 5000);
-                    $scope.context = "sent";
-                    $state.reload();
+                        $scope.context = "sent";
+                    }, 3000);
                 } else if($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization') {
                     $rootScope.user._embedded.accesses = data;
                     setRole();

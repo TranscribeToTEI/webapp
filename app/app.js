@@ -156,7 +156,8 @@ angular.module('transcriptApp', [
         'transcript.service.will-type',
         'transcript.system.transcript'
     ]).
-    config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', '$logProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider, $logProvider) {
+    config(['$stateProvider','$httpProvider', '$urlRouterProvider', '$qProvider', '$injector', 'flashProvider', 'tfMetaTagsProvider', 'OAuthTokenProvider', '$logProvider', '$locationProvider', function($stateProvider, $httpProvider, $urlRouterProvider, $qProvider, $injector, flashProvider, tfMetaTagsProvider, OAuthTokenProvider, $logProvider, $locationProvider) {
+        //$locationProvider.html5Mode(true);
         $urlRouterProvider.otherwise('/');
         //$urlRouterProvider.deferIntercept();
         $qProvider.errorOnUnhandledRejections(false);
@@ -195,7 +196,7 @@ angular.module('transcriptApp', [
     }])
     .run(['$log', '$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($log, $rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
         /* -- Parameters management ------------------------------------------------------ */
-        let parameters = YAML.load('parameters.yml');
+        let parameters = YAML.load('/webapp/app/parameters.yml');
         $rootScope.version = parameters.version;
         $rootScope.api = parameters.api;
         $rootScope.api_web = parameters.api_web;

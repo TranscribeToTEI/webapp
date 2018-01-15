@@ -7,16 +7,16 @@
     </div>
 </div>
 <main class="container" role="main">
-    <div data-ng-include="'App/Entity/tpl/entity-header.html'"></div>
-    <div data-ng-include="'App/Entity/tpl/entity-info.html'"></div>
-    <div data-ng-include="'App/Entity/tpl/entity-resources.html'"></div>
+    <div data-ng-include="'/webapp/app/App/Entity/tpl/entity-header.html'"></div>
+    <div data-ng-include="'/webapp/app/App/Entity/tpl/entity-info.html'"></div>
+    <div data-ng-include="'/webapp/app/App/Entity/tpl/entity-resources.html'"></div>
     <div class="row">
         <div class="col-sm-6">
             <div ui-view="comment"></div>
         </div>
         <div class="col-sm-6">
-            <div data-ng-include="'App/Entity/tpl/entity-contributors.html'"></div>
-            <div ng-if="user.roles | contains:'ROLE_ADMIN'" data-ng-include="'App/Entity/tpl/entity-admin.html'"></div>
+            <div data-ng-include="'/webapp/app/App/Entity/tpl/entity-contributors.html'"></div>
+            <div ng-if="user.roles | contains:'ROLE_ADMIN'" data-ng-include="'/webapp/app/App/Entity/tpl/entity-admin.html'"></div>
         </div>
     </div>
 </main>

@@ -15,12 +15,12 @@
     <div class="row">
         <div class="col-sm-12">
             <form class="col-12">
-                <div ng-if="entity.id !== undefined" data-ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></div>
+                <div ng-if="entity.id !== undefined" ng-include="'Admin/Entity/Edit/tpl/edit-info-will.html'" class="card bg-body"></div>
                 <div ng-if="entity.id !== undefined" class="card text-white bg-danger mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">
                         <p>En cliquant ci-dessous, vous supprimerez définitivement cette entité.</p>
-                        <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer cette entité ?">Supprimer cette entité <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                        <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer cette entité ?">Supprimer cette entité <i ng-if="remove.loading == false" class="fa fa-remove"></i><i ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
                     </div>
                 </div>
 
@@ -39,8 +39,8 @@
                         </div>
                     </div>
                 </div>
-                <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-will.html'"></fieldset>
-                <fieldset data-ng-include="'Admin/Entity/Edit/tpl/edit-resources.html'"></fieldset>
+                <fieldset ng-include="'/webapp/app/Admin/Entity/Edit/tpl/edit-will.html'"></fieldset>
+                <fieldset ng-include="'/webapp/app/Admin/Entity/Edit/tpl/edit-resources.html'"></fieldset>
                 <div class="text-right">
                     <button class="btn btn-sm" type="button"
                             ng-disabled="!(
@@ -61,4 +61,4 @@
     </div>
 </main>
 
-<div ng-include="'App/tpl/modal-helpSource.html'"></div>
+<div ng-include="'/webapp/app/App/tpl/modal-helpSource.html'"></div>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="fr" ng-app="transcriptApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="fr" ng-app="transcriptApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="fr" ng-app="transcriptApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="fr" ng-app="transcriptApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title ng-bind="tfMetaTags.title"></title>
+    <meta ng-repeat="(key, value) in tfMetaTags.properties" name="{{key}}" content="{{value}}" >
+    <link rel="icon" type="image/png" href="web/images/FaviconTdP.png" />
+    <link rel="apple-touch-icon" href="web/images/FaviconTdP.png" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <!--    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+    <link rel="stylesheet" href="/webapp/app/web/libraries/css/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/webapp/app/web/libraries/angular/bootstrap-gh-pages/ui-bootstrap-2.5.0-csp.css"  type="text/css" />
+    <link rel="stylesheet" href="/webapp/app/web/libraries/js/bootstrap-fileinput/css/fileinput.min.css"  type="text/css" />
+    <link rel="stylesheet" href="/webapp/app/web/libraries/js/viewerjs/dist/viewer.css"  type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,500i,700,700i|PT+Sans:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="/webapp/app/web/custom/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="/webapp/app/web/libraries/js/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css">
+    <link rel="stylesheet" href="/webapp/app/web/libraries/angular/angucomplete/angucomplete.css" type="text/css" />
+    <link rel='stylesheet' href='/webapp/app/web/libraries/angular/angular-loading-bar/build/loading-bar.min.css' type='text/css' media='all' />
+    <link rel="stylesheet" href="//unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+
+    <!--
+    <link rel="stylesheet" href="web/libraries/js/jQuery-File-Upload/css/jquery.fileupload.css" />
+    <link rel="stylesheet" href="web/libraries/js/jQuery-File-Upload/css/jquery.fileupload-ui.css" />
+    -->
+
+    <link rel="stylesheet" href="/webapp/app/System/Transcript/Transcript.css" type="text/css" />
+    <link rel="stylesheet" href="/webapp/app/System/Comment/Comment.css" type="text/css" />
+</head>
+
+<body>
+    <header ui-view="navbar" class="container" role="navigation"></header>
+
+    <div ui-view="page" id="pageContainer" ></div>
+
+    <footer ui-view="footer"></footer>
+
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-animate.js"></script>
+    <script type="text/javascript" src="//unpkg.com/@uirouter/angularjs@1.0.7/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/bootstrap-gh-pages/ui-bootstrap-2.5.0.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/bootstrap-gh-pages/ui-bootstrap-tpls-2.5.0.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/yaml-js/dist/yaml.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-breadcrumb/dist/angular-breadcrumb.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angucomplete/angucomplete.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-filter/dist/angular-filter.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-pretty-xml/src/angular-pretty-xml.js"></script>
+    <script type='text/javascript' src='/webapp/app/web/libraries/angular/angular-loading-bar/build/loading-bar.min.js'></script>
+    <script type='text/javascript' src='/webapp/app/web/libraries/angular/tf-metatags/release/tf-metatags.js'></script>
+    <script type='text/javascript' src="/webapp/app/web/libraries/angular/angular-http-auth/dist/http-auth-interceptor.js"></script>
+    <script type='text/javascript' src="/webapp/app/web/libraries/angular/angular-flash/dist/angular-flash.min.js"></script>
+    <script type='text/javascript' src="/webapp/bower_components/query-string/query-string.js"></script>
+    <script type='text/javascript' src="/webapp/bower_components/angular-oauth2/dist/angular-oauth2.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-permission/dist/angular-permission.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-permission/dist/angular-permission-ui.js"></script>
+    <script type="text/javascript" src="/webapp/bower_components/ng-file-upload-shim/ng-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="/webapp/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+
+
+    <script type='text/javascript' src="//unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/angular/angular-leaflet-directive/dist/angular-leaflet-directive.min.js"></script>
+
+    <script type="text/javascript" src="/webapp/app/web/libraries/js/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/js/moment/locale/fr.js"></script>
+    <script type="text/javascript" src="/webapp/app/web/libraries/js/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="/webapp/app/web/libraries/js/ace/src/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/webapp/app/web/libraries/js/ace/src/mode-xml.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/webapp/app/web/libraries/angular/ui-ace/ui-ace.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/webapp/node_modules/ace-diff/dist/ace-diff.min.js" type="text/javascript" ></script>
+
+    <script src="//cdn.ckeditor.com/4.7.1/full/ckeditor.js"></script>
+    <script src="/webapp/app/web/libraries/angular/angular-ckeditor/angular-ckeditor.js"></script>
+    <script src="/webapp/app/web/libraries/js/openseadragon/openseadragon.min.js"></script>
+    <script src="/webapp/app/web/libraries/angular/angular-openseadragon/src/angular-openseadragon.js"></script>
+
+    <script type="text/javascript" src="/webapp/app/app.js"></script>
+    <script type="text/javascript" src="/webapp/app/Transcript/Transcript.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Admin.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/AppPreference/AppPreference.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Comments/Comments.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Content/Content.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Content/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Content/History/History.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Content/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Entity/Entity.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Entity/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Entity/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/HostingOrganization/HostingOrganization.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/HostingOrganization/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/HostingOrganization/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Home/Home.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Taxonomy/Taxonomy.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Taxonomy/Access/Access.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Taxonomy/Logs/Logs.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Training/Training.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Training/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Training/Home/Home.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Training/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Training/View/View.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Transcript/Transcript.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Transcript/Export/Export.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/Transcript/Validation/Validation.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/User/User.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/User/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/User/View/View.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/WillType/WillType.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/WillType/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/Admin/WillType/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/App.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Blog/Blog.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Contact/Contact.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Content/Content.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Edition/Edition.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Entity/Entity.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Home/Home.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/HostingOrganization/HostingOrganization.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/HostingOrganization/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/HostingOrganization/View/View.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Search/Search.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Security.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Check/Check.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Confirm/Confirm.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Login/Login.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Logout/Logout.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Register/Register.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Resetting/Resetting.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Resetting/Check/Check.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Resetting/Request/Request.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Security/Resetting/Reset/Reset.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/Taxonomy.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/Ask/Ask.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/Home/Home.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Taxonomy/View/View.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Training.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Content.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Exercise/Exercise.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Exercise/Correction/Correction.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Exercise/Exercise/Exercise.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Exercise/Presentation/Presentation.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Content/Presentation/Presentation.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Training/Home/Home.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/Transcript/Transcript.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/User.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/Avatar/Avatar.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/ChangePassword/ChangePassword.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/Edit/Edit.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/Preferences/Preferences.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/PrivateMessage/PrivateMessage.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/PrivateMessage/List/List.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/PrivateMessage/Thread/Thread.js"></script>
+    <script type="text/javascript" src="/webapp/app/App/User/Profile/Profile.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Comment/Comment.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Error/Error.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Error/403/403.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Error/404/404.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Directives/CompileDirective.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Directives/MwConfirmClickDirective.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Directives/TooltipDirective.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ArrayRenderFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/BooleanRenderFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ClassicDateFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ContentTypeNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/EncodeXMLFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ImageRenderFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/PrefixRenderFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ObjectToIdFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ResourceTypeNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/TaxonomyEntityNameConstructFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/TaxonomyNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/TrainingTypePageNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/TranscriptionStatusNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/TrustAsHtmlFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/RoleNameFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/ShuffleFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/SourceRenderFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/StatusFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/StringToArrayFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/StringToDateFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/UcFirstStrictFilter.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/UserIDFromName.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Filters/WillNumberFormat.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/AccessService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/AppService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/BibliographyService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/CommentService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/CommentLogService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/ContactService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/ContentService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/DataInterfaceService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/EntityService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/GeonamesService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/HostingOrganizationService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/ImageService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/LogService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/NoteService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/ResourceService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/SearchService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/TaxonomyService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/TrainingContentService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/TranscriptService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/TranscriptLogService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/UserService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/UserPreferenceService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/WillService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Services/WillTypeService.js"></script>
+    <script type="text/javascript" src="/webapp/app/System/Transcript/Transcript.js"></script>
+
+    <!-- Piwik -->
+    <script type="text/javascript">
+        var _paq = _paq || [];
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="//piwik.huma-num.fr/";
+            _paq.push(['setTrackerUrl', u+'piwik.php']);
+            _paq.push(['setSiteId', '161']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <noscript><p><img src="//piwik.huma-num.fr/piwik.php?idsite=161&rec=1" style="border:0;" alt="" /></p></noscript>
+    <!-- End Piwik Code -->
+</body>
+</html>

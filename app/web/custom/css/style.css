@@ -1071,7 +1071,7 @@ ul.grid a{
 
 /* @group Transcription */
 #transcript-workarea {
-	padding-bottom: 60px;
+	/*padding-bottom: 60px;*/
 }
 
 /* @group Boutons/Icônes transcription */
@@ -1958,6 +1958,7 @@ i[class="fa fa-angle-right"]
 /* @group Bloc demande de validation */
 .transcript-submit {
 	font-size: 0.8rem;
+	width: 100%;
 }
 .transcript-submit .card{
 	margin-bottom: 0px!important;

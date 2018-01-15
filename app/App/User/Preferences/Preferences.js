@@ -6,7 +6,7 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         $stateProvider.state('transcript.app.user.preferences', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/Preferences/Preferences.html',
+                    templateUrl: '/webapp/app/App/User/Preferences/Preferences.html',
                     controller: 'AppUserPreferencesCtrl'
                 }
             },

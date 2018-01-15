@@ -7,7 +7,7 @@ angular.module('transcript.admin.preference', ['ui.router'])
             .state('transcript.admin.preference', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/AppPreference/AppPreference.html',
+                        templateUrl: '/webapp/app/Admin/AppPreference/AppPreference.html',
                         controller: 'AdminAppPreferenceCtrl'
                     }
                 },

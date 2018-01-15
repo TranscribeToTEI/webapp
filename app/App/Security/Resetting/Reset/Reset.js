@@ -6,7 +6,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
         $stateProvider.state('transcript.app.security.resetting.reset', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Resetting/Reset/Reset.html',
+                    templateUrl: '/webapp/app/App/Security/Resetting/Reset/Reset.html',
                         controller: 'AppSecurityResettingResetCtrl'
                 }
             },
@@ -48,6 +48,7 @@ angular.module('transcript.app.security.resetting.reset', ['ui.router'])
                     $scope.submit.loading = false;
                     $scope.submit.success = true;
                     flash.success = "Votre mot de passe a bien été réinitialisé.";
+                    $state.go("transcript.app.security.login");
                 }, function errorCallback(response) {
                     $scope.submit.loading = false;
                     $log.debug(response);

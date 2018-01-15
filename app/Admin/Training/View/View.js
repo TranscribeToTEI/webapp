@@ -7,11 +7,11 @@ angular.module('transcript.admin.training.view', ['ui.router'])
             .state('transcript.admin.training.view', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Training/View/View.html',
+                        templateUrl: '/webapp/app/Admin/Training/View/View.html',
                         controller: 'AdminTrainingViewCtrl'
                     },
                     "comment@transcript.admin.training.view" : {
-                        templateUrl: 'System/Comment/tpl/Thread.html',
+                        templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                         controller: 'SystemCommentCtrl'
                     }
                 },

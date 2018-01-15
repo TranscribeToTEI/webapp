@@ -6,7 +6,7 @@ angular.module('transcript.app.user.change-password', ['ui.router'])
         $stateProvider.state('transcript.app.user.changePassword', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/ChangePassword/ChangePassword.html',
+                    templateUrl: '/webapp/app/App/User/ChangePassword/ChangePassword.html',
                     controller: 'AppUserChangePasswordCtrl'
                 }
             },

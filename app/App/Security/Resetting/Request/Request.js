@@ -6,7 +6,7 @@ angular.module('transcript.app.security.resetting.request', ['ui.router'])
         $stateProvider.state('transcript.app.security.resetting.request', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Resetting/Request/Request.html',
+                    templateUrl: '/webapp/app/App/Security/Resetting/Request/Request.html',
                         controller: 'AppSecurityResettingRequestCtrl'
                 }
             },

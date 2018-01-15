@@ -5,15 +5,15 @@ angular.module('transcript.app.transcript', ['ui.router'])
         $stateProvider.state('transcript.app.transcript', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Transcript/Transcript.html',
+                    templateUrl: '/webapp/app/App/Transcript/Transcript.html',
                     controller: 'AppTranscriptCtrl'
                 },
                 "comment@transcript.app.transcript" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 },
                 "transcript@transcript.app.transcript" : {
-                    templateUrl: 'System/Transcript/Transcript.html',
+                    templateUrl: '/webapp/app/System/Transcript/Transcript.html',
                     controller: 'SystemTranscriptCtrl'
                 }
             },

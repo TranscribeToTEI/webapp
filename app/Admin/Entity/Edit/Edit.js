@@ -7,7 +7,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             .state('transcript.admin.entity.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Entity/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Entity/Edit/Edit.html',
                         controller: 'AdminEntityEditCtrl'
                     }
                 },
@@ -40,7 +40,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
             .state('transcript.admin.entity.import', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Entity/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Entity/Edit/Edit.html',
                         controller: 'AdminEntityEditCtrl'
                     }
                 },
@@ -208,7 +208,7 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 if(resource.id === undefined) {
                     content['transcript'] = {
                         status: 'todo',
-                        updateComment: 'Creation of the transcript'
+                        updateComment: 'Création du fichier de transcription'
                     };
                 }
                 formEntity.resources.push(content);

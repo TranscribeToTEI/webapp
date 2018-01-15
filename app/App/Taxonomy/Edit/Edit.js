@@ -7,7 +7,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             .state('transcript.app.taxonomy.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'App/Taxonomy/Edit/Edit.html',
+                        templateUrl: '/webapp/app/App/Taxonomy/Edit/Edit.html',
                         controller: 'AppTaxonomyEditCtrl'
                     }
                 },
@@ -43,7 +43,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             .state('transcript.app.taxonomy.create', {
                 views: {
                     "page" : {
-                        templateUrl: 'App/Taxonomy/Edit/Edit.html',
+                        templateUrl: '/webapp/app/App/Taxonomy/Edit/Edit.html',
                         controller: 'AppTaxonomyEditCtrl'
                     }
                 },
@@ -121,7 +121,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         }
         function postEntityLoader(entity, dataType, action) {
             $scope.form = fillForm(entity, dataType);
-            $scope.form.updateComment = "Creation of the entity";
+            $scope.form.updateComment = "Création de l'entité";
             $log.debug($scope.form);
             postEntity();
 
@@ -480,7 +480,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             }
 
             if (method === 'post') {
-                reference.updateComment = 'Creation of the reference';
+                reference.updateComment = 'Création de la référence';
 
                 return BibliographyService.postBibliography($scope.entity.dataType, $scope.entity, reference, $scope.bibliography.addForm.type)
                     .then(function (response) {

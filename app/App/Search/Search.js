@@ -6,7 +6,7 @@ angular.module('transcript.app.search', ['ui.router'])
         $stateProvider.state('transcript.app.search', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Search/Search.html',
+                    templateUrl: '/webapp/app/App/Search/Search.html',
                     controller: 'AppSearchCtrl'
                 }
             },

@@ -7,7 +7,7 @@ angular.module('transcript.app.hosting-organization.view', ['ui.router'])
             .state('transcript.app.hosting-organization.view', {
                 views: {
                     "page" : {
-                        templateUrl: 'App/HostingOrganization/View/View.html',
+                        templateUrl: '/webapp/app/App/HostingOrganization/View/View.html',
                         controller: 'AppHostingOrganizationViewCtrl'
                     }
                 },

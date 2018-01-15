@@ -7,7 +7,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
             .state('transcript.admin.content.new', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Content/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Content/Edit/Edit.html',
                         controller: 'AdminContentEditCtrl'
                     }
                 },
@@ -22,13 +22,16 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 resolve: {
                     content: function() {
                         return null;
+                    },
+                    users: function(UserService) {
+                        return UserService.getUsers('short');
                     }
                 }
             })
             .state('transcript.admin.content.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Content/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Content/Edit/Edit.html',
                         controller: 'AdminContentEditCtrl'
                     }
                 },
@@ -43,17 +46,26 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 resolve: {
                     content: function(ContentService, $transition$) {
                         return ContentService.getContent($transition$.params().id, false);
+                    },
+                    users: function(UserService) {
+                        return UserService.getUsers('short');
                     }
                 }
             })
     }])
 
-    .controller('AdminContentEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'content', 'CommentService', 'flash', 'Upload', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, content, CommentService, flash, Upload) {
+    .controller('AdminContentEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'CommentService', 'flash', 'Upload', 'content', 'users', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, CommentService, flash, Upload, content, users) {
+        $scope.users = users;
+
         /* Scope management ----------------------------------------------------------------------------------------- */
         if(content !== null) {
             $log.debug(content);
             $scope.content = content;
             $scope.content.updateComment = "";
+
+            for(let iER in $scope.content.editorialResponsibility) {
+                $scope.content.editorialResponsibility[iER] = $scope.content.editorialResponsibility[iER].id;
+            }
         } else {
             $scope.content = {
                 id: null,
@@ -65,8 +77,9 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 staticCategory: null,
                 staticOrder: null,
                 enableComments: true,
-                updateComment: "Creation of the content",
-                illustration: null
+                updateComment: "Création du contenu",
+                illustration: null,
+                editorialResponsibility: []
             };
         }
 
@@ -149,7 +162,8 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 staticOrder: $scope.content.staticOrder,
                 enableComments: $scope.content.enableComments,
                 updateComment: $scope.content.updateComment,
-                illustration: $scope.content.illustration
+                illustration: $scope.content.illustration,
+                editorialResponsibility: $scope.content.editorialResponsibility
             };
             if($scope.content.id === null) {
                 /* If content.id == null > The content doesn't exist, we post it */

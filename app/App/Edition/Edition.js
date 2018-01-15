@@ -5,11 +5,11 @@ angular.module('transcript.app.edition', ['ui.router'])
         $stateProvider.state('transcript.app.edition', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Edition/Edition.html',
+                    templateUrl: '/webapp/app/App/Edition/Edition.html',
                     controller: 'AppEditionCtrl'
                 },
                 "comment@transcript.app.edition" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },
@@ -58,7 +58,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         /* Viewer Management */
         /* ---------------------------------------------------------------------------------------------------------- */
         let imageSource = [];
-        imageSource.push($rootScope.iiif.server+"/testament_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg");
+        imageSource.push($rootScope.iiif.server+"/testament_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg/info.json");
 
         console.log(imageSource);
         $scope.openseadragon = {
@@ -132,7 +132,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.admin.status.action = function(state) {
             $scope.admin.status.loading = true;
 
-            return TranscriptService.patchTranscript({status: state, updateComment: "Changing status to "+state}, $scope.resource.transcript.id)
+            return TranscriptService.patchTranscript({status: state, updateComment: "Changement de statut pour : "+state}, $scope.resource.transcript.id)
             .then(function(response) {
                 $scope.admin.status.loading = false;
                 if(response.status === 200) {

@@ -6,7 +6,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
         $stateProvider.state('transcript.app.security.register', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Register/Register.html',
+                    templateUrl: '/webapp/app/App/Security/Register/Register.html',
                         controller: 'AppSecurityRegisterCtrl'
                 }
             },

@@ -6,7 +6,7 @@ angular.module('transcript.app.user.edit', ['ui.router'])
         $stateProvider.state('transcript.app.user.edit', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/Edit/Edit.html',
+                    templateUrl: '/webapp/app/App/User/Edit/Edit.html',
                     controller: 'AppUserEditCtrl'
                 }
             },

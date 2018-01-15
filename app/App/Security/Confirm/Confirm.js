@@ -6,7 +6,7 @@ angular.module('transcript.app.security.confirm', ['ui.router'])
         $stateProvider.state('transcript.app.security.confirm', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Confirm/Confirm.html',
+                    templateUrl: '/webapp/app/App/Security/Confirm/Confirm.html',
                         controller: 'AppSecurityConfirmCtrl'
                 }
             },

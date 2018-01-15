@@ -6,7 +6,7 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
         $stateProvider.state('transcript.admin.transcript.validation', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/Transcript/Validation/Validation.html',
+                    templateUrl: '/webapp/app/Admin/Transcript/Validation/Validation.html',
                     controller: 'AdminTranscriptValidationCtrl'
                 }
             },

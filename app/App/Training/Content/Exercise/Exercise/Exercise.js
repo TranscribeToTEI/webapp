@@ -6,15 +6,15 @@ angular.module('transcript.app.training.content.exercise.exercise', ['ui.router'
         $stateProvider.state('transcript.app.training.content.exercise.exercise', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Training/Content/Exercise/Exercise/Exercise.html',
+                    templateUrl: '/webapp/app/App/Training/Content/Exercise/Exercise/Exercise.html',
                     controller: 'AppTrainingContentExerciseExerciseCtrl'
                 },
                 "comment@transcript.app.training.content.exercise.exercise" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 },
                 "transcript@transcript.app.training.content.exercise.exercise" : {
-                    templateUrl: 'System/Transcript/Transcript.html',
+                    templateUrl: '/webapp/app/System/Transcript/Transcript.html',
                     controller: 'SystemTranscriptCtrl'
                 }
             },
@@ -37,7 +37,7 @@ angular.module('transcript.app.training.content.exercise.exercise', ['ui.router'
                         "createDate": null,
                         "updateUser": null,
                         "updateDate": null,
-                        "updateComment": "Creation of the transcript",
+                        "updateComment": "Création du fichier de transcription",
                         "_embedded": {
                             "version": [],
                             "resource": {

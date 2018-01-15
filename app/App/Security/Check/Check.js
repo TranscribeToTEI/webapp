@@ -6,7 +6,7 @@ angular.module('transcript.app.security.check', ['ui.router'])
         $stateProvider.state('transcript.app.security.check', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Check/Check.html',
+                    templateUrl: '/webapp/app/App/Security/Check/Check.html',
                         controller: 'AppSecurityCheckCtrl'
                 }
             },

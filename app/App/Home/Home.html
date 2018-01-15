@@ -5,10 +5,17 @@
         <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
     <div class="card bg-primary" data-ng-if="user != null && (user._embedded.preferences.tutorialStatus == 'todo' || user._embedded.preferences.tutorialStatus == 'inProgress')">
+        <h2 class="card-header bg-dark">Tutoriel d'introduction</h2>
         <div class="card-body">
-            <h2 class="card-title">Entrainement à TEI</h2>
-            <a ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '1'})" class="card-link">Cliquez ici pour commencer la formation à TEI.</a>
-            <a ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="card-link">Cliquez ici pour continuer la formation à TEI.</a>
+            <p>
+                Chère contributrice, cher contributeur, <br />
+                <br />
+                Avant de commencer à transcrire notre corpus, <strong>nous vous invitons à suivre notre tutoriel d'introduction</strong>. Vous y découvrirez le <strong>fonctionnement de notre plateforme</strong>, nos règles de transcription et une initiation à l'encodage à la TEI.
+            </p>
+            <div class="text-center">
+                <button ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '1'})" class="btn btn-secondary">Cliquez ici pour commencer la formation à TEI.</button>
+                <button ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="btn btn-secondary">Cliquez ici pour continuer la formation à TEI.</button>
+            </div>
         </div>
     </div>
 </div>
@@ -62,7 +69,7 @@
             </div>
         </div>
         <div class="col-lg-8 col-md-12">
-            <div ng-include="'App/Home/tpl/home-search.html'"></div>
+            <div ng-include="'/webapp/app/App/Home/tpl/home-search.html'"></div>
             <div class="row">
                 <div class="col-12">
                     <div class="card bg-none">

@@ -6,7 +6,7 @@ angular.module('transcript.app.hosting-organization.list', ['ui.router'])
         $stateProvider.state('transcript.app.hosting-organization.list', {
             views: {
                 "page" : {
-                    templateUrl: 'App/HostingOrganization/List/List.html',
+                    templateUrl: '/webapp/app/App/HostingOrganization/List/List.html',
                     controller: 'AppHostingOrganizationListCtrl'
                 }
             },

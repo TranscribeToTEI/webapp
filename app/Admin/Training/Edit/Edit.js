@@ -7,7 +7,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             .state('transcript.admin.training.new', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Training/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Training/Edit/Edit.html',
                         controller: 'AdminTrainingEditCtrl'
                     }
                 },
@@ -37,7 +37,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
             .state('transcript.admin.training.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Training/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/Training/Edit/Edit.html',
                         controller: 'AdminTrainingEditCtrl'
                     }
                 },
@@ -86,7 +86,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                 orderInTraining: null,
                 pageStatus: null,
                 pageType: null,
-                updateComment: "Creation of the content",
+                updateComment: "Création du contenu d'entrainement",
                 illustration: null,
                 videoContainer: null,
                 content: null,

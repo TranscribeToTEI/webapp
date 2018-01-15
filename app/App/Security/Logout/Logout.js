@@ -6,7 +6,7 @@ angular.module('transcript.app.security.logout', ['ui.router'])
         $stateProvider.state('transcript.app.security.logout', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Logout/Logout.html',
+                    templateUrl: '/webapp/app/App/Security/Logout/Logout.html',
                         controller: 'AppSecurityLogoutCtrl'
                 }
             },

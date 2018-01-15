@@ -6,7 +6,7 @@ angular.module('transcript.app.blog', ['ui.router'])
         $stateProvider.state('transcript.app.blog', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Blog/Blog.html',
+                    templateUrl: '/webapp/app/App/Blog/Blog.html',
                     controller: 'AppBlogCtrl'
                 }
             },

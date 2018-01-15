@@ -23,16 +23,16 @@
 
             <h2>Modification</h2>
             <div class="row">
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Place'" ng-include="'Admin/Taxonomy/Logs/tpl/place-metadata.html'"></div>
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'" ng-include="'Admin/Taxonomy/Logs/tpl/testator-metadata.html'"></div>
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'" ng-include="'Admin/Taxonomy/Logs/tpl/military-unit-metadata.html'"></div>
-                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\Place'"><h2>Version précédente</h2><div ng-include="'Admin/Taxonomy/Logs/tpl/place-previous-metadata.html'"></div></div>
-                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'"><h2>Version précédente</h2><div ng-include="'Admin/Taxonomy/Logs/tpl/testator-previous-metadata.html'"></div></div>
-                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'"><h2>Version précédente</h2><div ng-include="'Admin/Taxonomy/Logs/tpl/military-unit-previous-metadata.html'"></div></div>
-                <div class="col-md-12" ng-if="logContainer.log.version === 1" ng-include="'Admin/Taxonomy/Logs/tpl/no-previous.html'"></div>
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Place'"><h2>Version actuelle</h2><div ng-include="'App/Taxonomy/View/tpl/place-metadata.html'"></div></div>
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'"><h2>Version actuelle</h2><div ng-include="'App/Taxonomy/View/tpl/testator-metadata.html'"></div></div>
-                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'"><h2>Version actuelle</h2><div ng-include="'App/Taxonomy/View/tpl/military-unit-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Place'" ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/place-metadata.html'"></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'" ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/testator-metadata.html'"></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'" ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/military-unit-metadata.html'"></div>
+                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\Place'"><h2>Version précédente</h2><div ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/place-previous-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'"><h2>Version précédente</h2><div ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/testator-previous-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.version > 1 && logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'"><h2>Version précédente</h2><div ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/military-unit-previous-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.version === 1" ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/no-previous.html'"></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Place'"><h2>Version actuelle</h2><div ng-include="'/webapp/app/App/Taxonomy/View/tpl/place-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\Testator'"><h2>Version actuelle</h2><div ng-include="'/webapp/app/App/Taxonomy/View/tpl/testator-metadata.html'"></div></div>
+                <div class="col-md-12" ng-if="logContainer.log.objectClass === 'AppBundle\\Entity\\MilitaryUnit'"><h2>Version actuelle</h2><div ng-include="'/webapp/app/App/Taxonomy/View/tpl/military-unit-metadata.html'"></div></div>
             </div>
         </div>
         <div class="col-sm-8" ng-if="logContainer === null">
@@ -40,6 +40,6 @@
                 <h2>Sélectionnez votre entrée dans la liste</h2>
             </div>
         </div>
-        <div class="col-sm-4 pl-0 pr-0 bg-white" data-ng-include="'Admin/Taxonomy/Logs/tpl/list.html'"></div>
+        <div class="col-sm-4 pl-0 pr-0 bg-white" data-ng-include="'/webapp/app/Admin/Taxonomy/Logs/tpl/list.html'"></div>
     </div>
 </main>

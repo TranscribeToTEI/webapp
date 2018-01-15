@@ -5,7 +5,7 @@
         <button type="button" class="close" ng-click="hide()">&times;</button>
         <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
     </div>
-    <div ng-if="(user.roles | contains:'ROLE_TAXONOMY_EDIT') == false && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')" ng-include="'App/Taxonomy/tpl/ask-edit-access.html'"></div>
+    <div ng-if="(user.roles | contains:'ROLE_TAXONOMY_EDIT') == false && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')" ng-include="'/webapp/app/App/Taxonomy/tpl/ask-edit-access.html'"></div>
 </div>
 
 <main class="container" role="main">
@@ -23,9 +23,9 @@
                 <br />
             </div>
             <div>
-                <div ng-if="entity.dataType == 'testators'" ng-include="'App/Taxonomy/View/tpl/testator-metadata.html'"></div>
-                <div ng-if="entity.dataType == 'places'" ng-include="'App/Taxonomy/View/tpl/place-metadata.html'"></div>
-                <div ng-if="entity.dataType == 'military-units'" ng-include="'App/Taxonomy/View/tpl/military-unit-metadata.html'"></div>
+                <div ng-if="entity.dataType == 'testators'" ng-include="'/webapp/app/App/Taxonomy/View/tpl/testator-metadata.html'"></div>
+                <div ng-if="entity.dataType == 'places'" ng-include="'/webapp/app/App/Taxonomy/View/tpl/place-metadata.html'"></div>
+                <div ng-if="entity.dataType == 'military-units'" ng-include="'/webapp/app/App/Taxonomy/View/tpl/military-unit-metadata.html'"></div>
             </div>
             <div class="mt-4 mb-4 ml-2" ng-if="entity.description != '' && entity.description != null">
                 <h4 ng-if="entity.dataType == 'testators'" class="mb-1"><strong>Biographie</strong></h4>
@@ -35,8 +35,8 @@
                 <h4 class="mb-1"><strong>Bibliographie</strong></h4>
                 <div class="list-group" ng-repeat="item in bibliography">
                     <div class="list-group-item">
-                        <div ng-if="item.manuscriptReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-manuscriptElement.html'" class="card mb-0 bg-body"></div>
-                        <div ng-if="item.printedReference != null" ng-include="'App/Taxonomy/tpl/list-bibliography-printedElement.html'" class="card mb-0 bg-body"></div>
+                        <div ng-if="item.manuscriptReference != null" ng-include="'/webapp/app/App/Taxonomy/tpl/list-bibliography-manuscriptElement.html'" class="card mb-0 bg-body"></div>
+                        <div ng-if="item.printedReference != null" ng-include="'/webapp/app/App/Taxonomy/tpl/list-bibliography-printedElement.html'" class="card mb-0 bg-body"></div>
                     </div>
                 </div>
             </div>
@@ -44,6 +44,6 @@
             <hr />
             <div ui-view="comment"></div>
         </div>
-        <div class="col-sm-4 pl-0 pr-0 pb-2 bg-white" ng-include="'App/Taxonomy/tpl/entities.html'"></div>
+        <div class="col-sm-4 pl-0 pr-0 pb-2 bg-white" ng-include="'/webapp/app/App/Taxonomy/tpl/entities.html'"></div>
     </div>
 </main>

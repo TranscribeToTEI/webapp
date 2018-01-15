@@ -45,15 +45,15 @@
             </div>
             <form>
                 <div>
-                    <div ng-if="entity.dataType == 'testators'" ng-include="'App/Taxonomy/tpl/form-testator.html'"></div>
-                    <div ng-if="entity.dataType == 'places'" ng-include="'App/Taxonomy/tpl/form-place.html'"></div>
-                    <div ng-if="entity.dataType == 'military-units'" ng-include="'App/Taxonomy/tpl/form-military-unit.html'"></div>
-                    <div ng-include="'App/Taxonomy/tpl/list-bibliography.html'"></div>
-                    <div ng-include="'App/Taxonomy/tpl/form-submit.html'"></div>
+                    <div ng-if="entity.dataType == 'testators'" ng-include="'/webapp/app/App/Taxonomy/tpl/form-testator.html'"></div>
+                    <div ng-if="entity.dataType == 'places'" ng-include="'/webapp/app/App/Taxonomy/tpl/form-place.html'"></div>
+                    <div ng-if="entity.dataType == 'military-units'" ng-include="'/webapp/app/App/Taxonomy/tpl/form-military-unit.html'"></div>
+                    <div ng-include="'/webapp/app/App/Taxonomy/tpl/list-bibliography.html'"></div>
+                    <div ng-include="'/webapp/app/App/Taxonomy/tpl/form-submit.html'"></div>
                     <div class="clearfix"></div>
                 </div>
             </form>
-            <div ng-include="'App/Taxonomy/tpl/form-bibliography.html'"></div>
+            <div ng-include="'/webapp/app/App/Taxonomy/tpl/form-bibliography.html'"></div>
             <div class="card text-white bg-danger mb-3 mt-4" ng-if="entity.id != null && (user.roles | contains:'ROLE_ADMIN')">
                 <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                 <div class="card-body">
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-4 pl-0 pr-0 bg-white" ng-include="'App/Taxonomy/tpl/entities.html'"></div>
+        <div class="col-sm-4 pl-0 pr-0 bg-white" ng-include="'/webapp/app/App/Taxonomy/tpl/entities.html'"></div>
     </div>
 </main>
-<div ng-include="'App/tpl/modal-helpSource.html'"></div>
+<div ng-include="'/webapp/app/App/tpl/modal-helpSource.html'"></div>

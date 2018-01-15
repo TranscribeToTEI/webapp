@@ -6,7 +6,7 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
         $stateProvider.state('transcript.app.user.private-message.list', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/PrivateMessage/List/List.html',
+                    templateUrl: '/webapp/app/App/User/PrivateMessage/List/List.html',
                     controller: 'AppUserPrivateMessageListCtrl'
                 }
             },

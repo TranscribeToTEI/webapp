@@ -6,7 +6,7 @@ angular.module('transcript.admin.transcript.export', ['ui.router'])
         $stateProvider.state('transcript.admin.transcript.export', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/Transcript/Export/Export.html',
+                    templateUrl: '/webapp/app/Admin/Transcript/Export/Export.html',
                     controller: 'AdminTranscriptExportCtrl'
                 }
             },

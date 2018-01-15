@@ -89,7 +89,7 @@ angular.module('transcript.service.bibliography', ['ui.router'])
 
             postBibliography: function(entityType, entity, reference, type) {
                 let item = {
-                    updateComment: 'Creation of the item'
+                    updateComment: 'Création de l\'item'
                 };
                 switch (entityType) {
                     case "entity":

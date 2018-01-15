@@ -6,7 +6,7 @@ angular.module('transcript.app.home', ['ui.router'])
         $stateProvider.state('transcript.app.home', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Home/Home.html',
+                    templateUrl: '/webapp/app/App/Home/Home.html',
                     controller: 'AppHomeCtrl'
                 }
             },

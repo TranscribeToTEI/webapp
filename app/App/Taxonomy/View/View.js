@@ -6,11 +6,11 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         $stateProvider.state('transcript.app.taxonomy.view', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Taxonomy/View/View.html',
+                    templateUrl: '/webapp/app/App/Taxonomy/View/View.html',
                     controller: 'AppTaxonomyViewCtrl'
                 },
                 "comment@transcript.app.taxonomy.view" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },

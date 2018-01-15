@@ -7,7 +7,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
             .state('transcript.admin.hosting-organization.new', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/HostingOrganization/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/HostingOrganization/Edit/Edit.html',
                         controller: 'AdminHostingOrganizationEditCtrl'
                     }
                 },
@@ -28,7 +28,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
             .state('transcript.admin.hosting-organization.edit', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/HostingOrganization/Edit/Edit.html',
+                        templateUrl: '/webapp/app/Admin/HostingOrganization/Edit/Edit.html',
                         controller: 'AdminHostingOrganizationEditCtrl'
                     }
                 },
@@ -59,7 +59,7 @@ angular.module('transcript.admin.hosting-organization.edit', ['ui.router'])
                 id: null,
                 name: null,
                 code: null,
-                updateComment: "Creation of the organization",
+                updateComment: "Création de l'organisation",
             };
         }
 

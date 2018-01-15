@@ -6,7 +6,7 @@ angular.module('transcript.app.contact', ['ui.router'])
         $stateProvider.state('transcript.app.contact', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Contact/Contact.html',
+                    templateUrl: '/webapp/app/App/Contact/Contact.html',
                     controller: 'AppContactCtrl'
                 }
             },

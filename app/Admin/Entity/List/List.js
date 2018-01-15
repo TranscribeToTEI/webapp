@@ -6,7 +6,7 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
         $stateProvider.state('transcript.admin.entity.list', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/Entity/List/List.html',
+                    templateUrl: '/webapp/app/Admin/Entity/List/List.html',
                     controller: 'AdminEntityListCtrl'
                 }
             },

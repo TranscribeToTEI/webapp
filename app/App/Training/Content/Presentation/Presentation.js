@@ -6,11 +6,11 @@ angular.module('transcript.app.training.content.presentation', ['ui.router'])
         $stateProvider.state('transcript.app.training.content.presentation', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Training/Content/Presentation/Presentation.html',
+                    templateUrl: '/webapp/app/App/Training/Content/Presentation/Presentation.html',
                     controller: 'AppTrainingContentPresentationCtrl'
                 },
                 "comment@transcript.app.training.content.presentation" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },

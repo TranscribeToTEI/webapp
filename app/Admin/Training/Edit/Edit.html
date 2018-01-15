@@ -76,10 +76,10 @@
 
             <fieldset data-ng-if="trainingContent.pageType == 'presentation'">
                 <label>Page de présentation</label>
-                <div ng-include="'Admin/Training/Edit/tpl/edit-presentation.html'"></div>
+                <div ng-include="'/webapp/app/Admin/Training/Edit/tpl/edit-presentation.html'"></div>
             </fieldset>
 
-            <fieldset data-ng-if="trainingContent.pageType == 'exercise'" ng-include="'Admin/Training/Edit/tpl/edit-exercise.html'"></fieldset>
+            <fieldset data-ng-if="trainingContent.pageType == 'exercise'" ng-include="'/webapp/app/Admin/Training/Edit/tpl/edit-exercise.html'"></fieldset>
 
             <div class="text-right mt-2" data-ng-if="trainingContent.id == null || trainingContent.id === undefined">
                 <button class="btn btn-sm" type="button" ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}" ng-click="submit.action()">

@@ -33,6 +33,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             };
             $scope.transcriptArea = {
                 interaction: {
+                    documentation: {},
                     status: "live",
                     live: {
                         content: "",
@@ -97,8 +98,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     modal: {
                         content: "",
                         variables: {}
-                    },
-                    rightMenu: {}
+                    }
                 },
                 toolbar: {
                     tags: $scope.config.tags,
@@ -125,9 +125,10 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     isEncoded: "a4"
                 },
                 state: {
-                    icon: "fa-thumbs-o-up",
-                    bg: "bg-success",
-                    btn: "btn-success"
+                    alert: "alert-success",
+                    btnClass: "btn-success",
+                    btnValue: "sauvegarder",
+                    message: "Pour sauvegarder votre travail, cliquer sur le bouton ci-dessous",
                 }
             };
             $scope.admin = {
@@ -1101,7 +1102,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 let noteData = $scope.transcriptArea.interaction.historicalNotes.addForm.form;
                 if (method === 'post') {
                     noteData.transcript = $scope.transcript.id;
-                    noteData.updateComment = 'Creation of the note';
+                    noteData.updateComment = 'Création de la note';
 
                     return NoteService.postNote(noteData)
                         .then(function (response) {
@@ -1247,6 +1248,40 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Viewer Management ---------------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
+            /* Validation status */
+            /* ---------------------------------------------------------------------------------------------------------- */
+            $scope.$watchGroup(["transcriptArea.ace.area", "submit.form.isEnded", "submit.form.comment"], function(newValues, oldValues){
+                if(!(!!$scope.transcriptArea.ace.area)) {
+                    $scope.submit.state.alert = "alert-danger";
+                    $scope.submit.state.btnClass = "btn-danger disabled";
+                    $scope.submit.state.message = "Votre transcription est vide";
+                } else if($scope.submit.form.isEnded === true && !!$scope.transcriptArea.ace.area) {
+                    if(!(!!$scope.submit.form.comment)) {
+                        $scope.submit.state.btnClass = "btn-warning";
+                        $scope.submit.state.alert = "alert-warning";
+                        $scope.submit.state.message = "Pensez à décrire votre contribution avant de la soumettre";
+                    } else {
+                        $scope.submit.state.btnClass = "btn-primary";
+                        $scope.submit.state.alert = "alert-primary";
+                        $scope.submit.state.message = "Pour soumettre à validation votre transcription, cliquez sur le bouton ci-dessous";
+                    }
+                    $scope.submit.state.btnValue = "soummettre";
+                } else {
+                    if(!(!!$scope.submit.form.comment)) {
+                        $scope.submit.state.btnClass = "btn-warning";
+                        $scope.submit.state.alert = "alert-warning";
+                        $scope.submit.state.message = "Pensez à décrire votre contribution avant de la sauvegarder";
+                    } else {
+                        $scope.submit.state.btnClass = "btn-success";
+                        $scope.submit.state.alert = "alert-success";
+                        $scope.submit.state.message = "Pour sauvegarder votre travail, cliquez sur le bouton ci-dessous";
+                    }
+                    $scope.submit.state.btnValue = "sauvegarder";
+                }
+            });
+            /* Validation status ---------------------------------------------------------------------------------------- */
+
+            /* ---------------------------------------------------------------------------------------------------------- */
             /* Submit Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.submit.action = function (action) {
@@ -1254,7 +1289,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     // Updating status value in case of first edition
                     $scope.transcript.status = "transcription";
                 }
-                if ($scope.transcript.content !== $scope.transcriptArea.ace.area) {
+                if ($scope.transcript.content !== $scope.transcriptArea.ace.area || ($scope.submit.form.isEnded === true && !!$scope.transcriptArea.ace.area)) {
                     $scope.submit.loading = true;
                     if ($scope.submit.form.isEnded === true) {
                         $scope.transcript.status = "validation";
@@ -1339,7 +1374,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                 return TranscriptService.patchTranscript({
                     status: state,
-                    updateComment: "Changing status to " + state
+                    updateComment: "Changement de statut pour : " + state
                 }, $scope.transcript.id).then(function (data) {
                     $scope.transcript = data;
                     $scope.admin.status.loading = false;
@@ -1354,7 +1389,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 return TranscriptService.patchTranscript(
                     {
                         "content": $scope.transcriptArea.ace.area,
-                        "updateComment": "Accept validation",
+                        "updateComment": "Validation de la transcription",
                         "status": "validated"
                     }, $scope.transcript.id
                 ).then(function (response) {
@@ -1418,16 +1453,16 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Full screen Management ----------------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
-            /* Right menu Management */
+            /* Documentation Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.transcriptArea.ace.rightMenu.loadDocumentation = function () {
+            $scope.transcriptArea.interaction.documentation.loadDocumentation = function () {
                 if($scope.transcriptArea.ace.currentTag !== null) {
                     $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag.name, "modelDoc", true);
                     $("#transcript-edit-editor-ace-area-rmenu").hide(100);
                 }
             };
 
-            $scope.transcriptArea.ace.rightMenu.loadInformation = function () {
+            $scope.transcriptArea.interaction.documentation.loadInformation = function () {
                 if($scope.transcriptArea.ace.currentTag !== null) {
                     $scope.transcriptArea.interaction.help($scope.transcriptArea.ace.currentTag, "modelInfo", true);
                     $("#transcript-edit-editor-ace-area-rmenu").hide(100);

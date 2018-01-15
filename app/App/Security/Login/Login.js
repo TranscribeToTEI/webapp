@@ -6,7 +6,7 @@ angular.module('transcript.app.security.login', ['ui.router'])
         $stateProvider.state('transcript.app.security.login', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Login/Login.html',
+                    templateUrl: '/webapp/app/App/Security/Login/Login.html',
                     controller: 'AppSecurityLoginCtrl'
                 }
             },

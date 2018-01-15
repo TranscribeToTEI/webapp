@@ -6,7 +6,7 @@ angular.module('transcript.admin.taxonomy.access', ['ui.router'])
         $stateProvider.state('transcript.admin.taxonomy.access', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/Taxonomy/Access/Access.html',
+                    templateUrl: '/webapp/app/Admin/Taxonomy/Access/Access.html',
                     controller: 'AdminTaxonomyAccessCtrl'
                 }
             },

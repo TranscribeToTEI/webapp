@@ -69,6 +69,17 @@
                     <small class="form-text text-muted">Ordre d'affichage de votre contenu dans l'arborescence de la catégorie sélectionnée.</small>
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="admin-content-edit-editorialResponsibility" class="col-md-2 col-form-label text-md-right">Responsables éditoriaux <span class="red-color">*</span></label>
+                <div class="col-md-10">
+                    <select id="admin-content-edit-editorialResponsibility" name="admin-content-edit-editorialResponsibility" class="form-control" ng-model="content.editorialResponsibility" ng-options="user.id as user.name for user in users" required="required" multiple>
+                        <option value="" disabled>Sélectionnez ...</option>
+                    </select>
+                </div>
+                <div class="col-md-10 offset-md-2">
+                    <small class="form-text text-muted">Le nom et la qualité de ces personnes seront ajoutés en haut de la page d'entrainement, en tant que personne référente.</small>
+                </div>
+            </div>
             <hr />
             <div class="form-group row">
                 <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
@@ -129,7 +140,7 @@
                         </div>
                         <div class="text-right col-md-2 align-self-end">
                             <button class="btn btn-sm" type="button"
-                                    ng-disabled="!(!!content.title && !!content.content && !!content.abstract && !!content.status && !!content.type && !!content.updateComment)"
+                                    ng-disabled="!(!!content.title && !!content.editorialResponsibility && !!content.content && !!content.abstract && !!content.status && !!content.type && !!content.updateComment)"
                                     ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
                                     ng-click="submit.action()">
                                 <span ng-if="submit.success == false && submit.loading == false">Soumettre</span>

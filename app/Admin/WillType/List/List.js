@@ -6,7 +6,7 @@ angular.module('transcript.admin.will-type.list', ['ui.router'])
         $stateProvider.state('transcript.admin.will-type.list', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/WillType/List/List.html',
+                    templateUrl: '/webapp/app/Admin/WillType/List/List.html',
                     controller: 'AdminWillTypeListCtrl'
                 }
             },

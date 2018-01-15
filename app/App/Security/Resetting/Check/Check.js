@@ -6,11 +6,15 @@ angular.module('transcript.app.security.resetting.check', ['ui.router'])
         $stateProvider.state('transcript.app.security.resetting.check', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Security/Resetting/Check/Check.html',
+                    templateUrl: '/webapp/app/App/Security/Resetting/Check/Check.html',
                         controller: 'AppSecurityResettingCheckCtrl'
                 }
             },
             url: '/check',
+            ncyBreadcrumb: {
+                parent: 'transcript.app.security.resetting.request',
+                label: 'Vérification'
+            },
             tfMetaTags: {
                 title: 'Vérification | Réinitialisation du mot de passe',
             }

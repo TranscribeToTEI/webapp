@@ -6,11 +6,11 @@ angular.module('transcript.app.user.private-message.thread', ['ui.router'])
         $stateProvider.state('transcript.app.user.private-message.thread', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/PrivateMessage/Thread/Thread.html',
+                    templateUrl: '/webapp/app/App/User/PrivateMessage/Thread/Thread.html',
                     controller: 'AppUserPrivateMessageThreadCtrl'
                 },
                 "comment@transcript.app.user.private-message.thread" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },

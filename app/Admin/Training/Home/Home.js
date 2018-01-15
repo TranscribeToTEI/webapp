@@ -7,7 +7,7 @@ angular.module('transcript.admin.training.home', ['ui.router'])
             .state('transcript.admin.training.home', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Training/Home/Home.html',
+                        templateUrl: '/webapp/app/Admin/Training/Home/Home.html',
                         controller: 'AdminTrainingHomeCtrl'
                     }
                 },

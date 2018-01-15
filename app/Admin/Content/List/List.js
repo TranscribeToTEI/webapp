@@ -6,7 +6,7 @@ angular.module('transcript.admin.content.list', ['ui.router'])
         $stateProvider.state('transcript.admin.content.list', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/Content/List/List.html',
+                    templateUrl: '/webapp/app/Admin/Content/List/List.html',
                     controller: 'AdminContentListCtrl'
                 }
             },

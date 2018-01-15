@@ -8,7 +8,7 @@
 </div>
 
 <main class="container" role="main">
-    <div ng-include="'Admin/Training/View/tpl/view-header.html'"></div>
+    <div ng-include="'/webapp/app/Admin/Training/View/tpl/view-header.html'"></div>
 
     <div class="row">
         <div class="col-xl-12 col-12">
@@ -41,8 +41,8 @@
     </dl>
     <hr />
 
-    <div ng-if="trainingContent.pageType == 'presentation'" ng-include="'Admin/Training/View/tpl/view-presentation.html'"></div>
-    <div ng-if="trainingContent.pageType == 'exercise'" ng-include="'Admin/Training/View/tpl/view-exercise.html'"></div>
+    <div ng-if="trainingContent.pageType == 'presentation'" ng-include="'/webapp/app/Admin/Training/View/tpl/view-presentation.html'"></div>
+    <div ng-if="trainingContent.pageType == 'exercise'" ng-include="'/webapp/app/Admin/Training/View/tpl/view-exercise.html'"></div>
 
     <hr />
     <h2>Fil de discussion associé</h2>

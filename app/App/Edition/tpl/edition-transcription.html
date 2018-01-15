@@ -11,7 +11,7 @@
     <div class="card-body">
         <div ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
             Cette transcription n'est pas commencée.
-            <div ng-include="'App/Edition/tpl/edition-header-editButton.html'"></div>
+            <div ng-include="'/webapp/app/App/Edition/tpl/edition-header-editButton.html'"></div>
         </div>
         <div ng-bind-html="encodedContent | trustAsHtml"></div>
     </div>

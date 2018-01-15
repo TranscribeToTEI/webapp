@@ -6,7 +6,7 @@ angular.module('transcript.admin.user.list', ['ui.router'])
         $stateProvider.state('transcript.admin.user.list', {
             views: {
                 "page" : {
-                    templateUrl: 'Admin/User/List/List.html',
+                    templateUrl: '/webapp/app/Admin/User/List/List.html',
                     controller: 'AdminUserListCtrl'
                 }
             },

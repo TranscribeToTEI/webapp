@@ -7,7 +7,7 @@ angular.module('transcript.app.user.profile', ['ui.router'])
             .state('transcript.app.user.profile', {
                 views: {
                     "page" : {
-                        templateUrl: 'App/User/Profile/Profile.html',
+                        templateUrl: '/webapp/app/App/User/Profile/Profile.html',
                         controller: 'AppUserProfileCtrl'
                     }
                 },

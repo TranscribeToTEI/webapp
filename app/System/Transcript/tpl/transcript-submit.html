@@ -1,30 +1,20 @@
 <div class="row no-gutters">
     <div class="transcript-submit bg-lighter">
         <div class="card-deck no-gutters">
-            <div class="card col-md-2">
+            <div class="card col-md-10">
                 <h3 class="card-header bg-secondary">Demande de validation</h3>
-                <ul>
-                    <!--Ajouter la class "disabled" sur chaque élément <li> sauf pour état actuel-->
-                    <li class="badge badge-status bg-danger disabled">à faire</li>
-                    <li class="badge badge-status bg-warning disabled">en cours</li>
-                    <li class="badge badge-status bg-info disabled">en validation</li>
-                    <li class="badge badge-status bg-success">validé</li>
-                </ul>
-            </div>
-
-            <div class="card col-md-10 ml-0">
-                <div class="card-body">
+                <div class="card-body ml-4">
                     <form>
                         <div id="app-transcript-edit-submit-continueBefore-group" class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" data-ng-model="submit.form.continueBefore" id="app-transcript-edit-submit-continueBefore" name="app-transcript-edit-submit-continueBefore" type="checkbox" value="1">
+                                <input class="custom-control-input" ng-model="submit.form.continueBefore" id="app-transcript-edit-submit-continueBefore" name="app-transcript-edit-submit-continueBefore" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Cochez cette case si le paragraphe du début de page commençait sur la page précédente.</span>
                             </label>
                         </div>
                         <div id="app-transcript-edit-submit-continueAfter-group" class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" data-ng-model="submit.form.continueAfter" id="app-transcript-edit-submit-continueAfter" name="app-transcript-edit-submit-continueAfter" type="checkbox" value="1">
+                                <input class="custom-control-input" ng-model="submit.form.continueAfter" id="app-transcript-edit-submit-continueAfter" name="app-transcript-edit-submit-continueAfter" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Cochez cette case si le paragraphe de fin de page continue sur la page suivante.</span>
                             </label>
@@ -32,35 +22,30 @@
                         <label><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ user.name }}</label>
                         <p for="app-transcript-edit-submit-comment" class="sr-only">Description de votre contribution</p>
                         <div id="app-transcript-edit-submit-comment-group" class="form-group">
-                            <input data-ng-model="submit.form.comment" type="text" class="form-control form-control-sm" id="app-transcript-edit-submit-comment" name="app-transcript-edit-submit-comment" placeholder="Pouvez-vous décrire votre contribution en quelques mots ?" maxlength="250" />
+                            <input ng-model="submit.form.comment" type="text" class="form-control form-control-sm" id="app-transcript-edit-submit-comment" name="app-transcript-edit-submit-comment" placeholder="Pouvez-vous décrire votre contribution en quelques mots ?" maxlength="250" />
                         </div>
                         <div id="app-transcript-edit-submit-isEnded-group" class="form-group">
                             <label class="custom-control custom-checkbox">
-                                <input class="custom-control-input" data-ng-model="submit.form.isEnded" id="app-transcript-edit-submit-isEnded" name="app-transcript-edit-submit-isEnded" type="checkbox" value="1">
+                                <input class="custom-control-input" ng-model="submit.form.isEnded" id="app-transcript-edit-submit-isEnded" name="app-transcript-edit-submit-isEnded" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">Cochez cette case si vous estimez que la transcription est <strong>totalement</strong> achevée.</span>
                             </label>
                         </div>
-                        <div id="transcript-check" data-ng-if="submit.form.isEnded == true" data-ng-include="'System/Transcript/tpl/transcript-check.html'"></div>
+                        <div id="transcript-check" ng-if="submit.form.isEnded == true" ng-include="'/webapp/app/System/Transcript/tpl/transcript-check.html'"></div>
                     </form>
                 </div>
-                <div class="card-footer text-dark">
+                <div class="card-footer text-dark text-right">
                     <p><small>En enregistrant votre contribution, vous acceptez de la placer irrévocablement sous <a href="https://creativecommons.org/licenses/by/2.0/fr/" target="_blank">licence CC-By</a>. Voir les <a href="#">conditions d’utilisation</a>.</small></p>
                 </div>
 
             </div>
-            <div class="card col-md-2 alert-success"><!--Modifier la class "alert-xx" selon l'état actuel (danger/warning/info/success)
-	   								À faire 		=> danger
-			   						En cours 		=> warning
-			   						En validation 	=> info
-			   						Validé 			=> success
-	   								-->
-                <div class="alert card-body"><strong>Pour sauvegarder votre travail, cliquer sur Soumettre</strong></div>
+            <div class="card col-md-2 {{ submit.state.alert }}">
+                <div class="alert card-body"><strong>{{ submit.state.message }}</strong></div>
                 <div class="card-footer">
-                    <a role="button" data-ng-click="submit.action()" class="btn btn-xx">   <!--Modifier la class "btn-xx" selon l'état actuel  (danger/warning/info/success)-->
-                        <span data-ng-if="submit.loading == false && submit.success == false">soumettre<i class="fa fa-check-square-o" aria-hidden="true"></i></span>
-                        <span data-ng-if="submit.loading == true && submit.success == false">enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
-                        <span data-ng-if="submit.loading == false && submit.success == true">enregistré <i class="fa fa-check"></i></span>
+                    <a role="button" ng-click="submit.action()" class="btn {{ submit.state.btnClass }}">
+                        <span ng-if="submit.loading == false && submit.success == false">{{ submit.state.btnValue }}<i class="fa fa-check-square-o" aria-hidden="true"></i></span>
+                        <span ng-if="submit.loading == true && submit.success == false">enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                        <span ng-if="submit.loading == false && submit.success == true">enregistré <i class="fa fa-check"></i></span>
                     </a>
                 </div>
             </div>

@@ -6,11 +6,11 @@ angular.module('transcript.app.content', ['ui.router'])
         $stateProvider.state('transcript.app.content', {
             views: {
                 "page" : {
-                    templateUrl: 'App/Content/Content.html',
+                    templateUrl: '/webapp/app/App/Content/Content.html',
                     controller: 'AppContentCtrl'
                 },
                 "comment@transcript.app.content" : {
-                    templateUrl: 'System/Comment/tpl/Thread.html',
+                    templateUrl: '/webapp/app/System/Comment/tpl/Thread.html',
                     controller: 'SystemCommentCtrl'
                 }
             },
@@ -42,8 +42,19 @@ angular.module('transcript.app.content', ['ui.router'])
                 content: function(ContentService, $transition$) {
                     return ContentService.getContent($transition$.params().id, true);
                 },
-                contents: function(ContentService) {
-                    return ContentService.getContents("blogContent", "public", "DESC", 5);
+                contents: function(ContentService, $transition$) {
+                    return ContentService.getContent($transition$.params().id, true).then(function(data) {
+                        let numberResults = null,
+                            categoryResults = data.type;
+                        if(data.type === 'blogContent') {numberResults = 5;}
+                        if(data.type === 'staticContent') {
+                            if(data.staticCategory === 'helpHome') {
+                                categoryResults = 'helpContent';
+                            }
+                        }
+                        return ContentService.getContents(categoryResults, "public", "DESC", numberResults);
+                    });
+
                 },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread('content-'+$transition$.params().id);
@@ -55,6 +66,6 @@ angular.module('transcript.app.content', ['ui.router'])
     .controller('AppContentCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'content', 'contents', function($log, $rootScope, $scope, $http, $sce, $state, content, contents) {
         $scope.content = content;
         $scope.contents = contents;
-        $log.debug($scope.content);
+        console.log($scope.content);
     }])
 ;

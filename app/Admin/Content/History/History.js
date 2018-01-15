@@ -7,7 +7,7 @@ angular.module('transcript.admin.content.history', ['ui.router'])
             .state('transcript.admin.content.history', {
                 views: {
                     "page" : {
-                        templateUrl: 'Admin/Content/History/History.html',
+                        templateUrl: '/webapp/app/Admin/Content/History/History.html',
                         controller: 'AdminContentHistoryCtrl'
                     }
                 },

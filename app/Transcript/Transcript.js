@@ -7,15 +7,15 @@ angular.module('transcript', ['ui.router'])
             abstract: true,
             views: {
                 "navbar" : {
-                    templateUrl: 'System/Navbar/Navbar.html',
+                    templateUrl: '/webapp/app/System/Navbar/Navbar.html',
                     //controller: 'TranscriptCtrl'
                 },
                 "page" : {
-                    templateUrl: 'Transcript/Transcript.html',
+                    templateUrl: '/webapp/app/Transcript/Transcript.html',
                     controller: 'TranscriptCtrl'
                 },
                 "footer" : {
-                    templateUrl: 'System/Footer/Footer.html',
+                    templateUrl: '/webapp/app/System/Footer/Footer.html',
                     //controller: 'TranscriptCtrl'
                 }
             },

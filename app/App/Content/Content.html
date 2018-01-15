@@ -7,7 +7,12 @@
     </div>
 </div>
 <main class="container content pb-3" role="container">
-    <h2 class="card-header bg-dark">{{ content.type | contentTypeName}}</h2>
+    <h2 class="card-header bg-dark">
+        <span ng-if="content.type === 'blogContent'">Article</span>
+        <span ng-if="content.type === 'helpContent'">Page d'aide</span>
+        <span ng-if="content.type === 'staticContent' && content.staticCategory === 'discover'">Découvrir</span>
+        <span ng-if="content.type === 'staticContent' && content.staticCategory !== 'discover'">Page</span>
+    </h2>
     <nav ng-if="user.roles | contains:'ROLE_ADMIN'">
         <ul class="nav nav-pills justify-content-end">
             <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.content.history({id: content.id})" title="Accéder à l'historique des modifications"><i class="fa fa-history fa-lg" aria-hidden="true"></i></a></li>
@@ -18,7 +23,16 @@
         <div class="col-md-8 order-md-2">
             <h1 class="mb-3">{{ content.title }}</h1>
             <div class="row bg-body post-meta">
-                <div class="col-auto mr-auto"><strong><a ui-sref="transcript.app.user.profile({id: content.userName.id})">{{ content.createUser.name }}</a></strong><br ng-if="content.createUser.biography !== null" /><span ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></span></div>
+                <div class="col-auto mr-auto">
+                    <div ng-if="content.editorialResponsibility.length > 0" ng-repeat="user in content.editorialResponsibility">
+                        <strong><a ui-sref="transcript.app.user.profile({id: user.id})">{{ user.name }}</a></strong>
+                        <br ng-if="user.biography !== null" /><span ng-if="user.biography !== null" ng-bind="user.biography"></span>
+                    </div>
+                    <div ng-if="content.editorialResponsibility.length == 0">
+                        <strong><a ui-sref="transcript.app.user.profile({id: content.userName.id})">{{ content.createUser.name }}</a></strong>
+                        <br ng-if="content.createUser.biography !== null" /><span ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></span>
+                    </div>
+                </div>
                 <div class="col-auto">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
             </div>
             <div class="text-justify mt-2 pr-md-3" ng-bind-html="content.content"></div>
@@ -37,6 +51,14 @@
             <div class="card" ng-if="content.type == 'staticContent' && content.staticCategory === 'discover'">
                 <ul class="list-group list-group-flush mb-5 mt-5">
                     <li class="list-group-item" ng-repeat="iContent in contents | filter:{type: 'staticContent', staticCategory: content.staticCategory} | orderBy: 'staticOrder'" ng-class="{'list-group-item active': content.id === iContent.id}">
+                        <a ui-sref="transcript.app.content({ id: iContent.id })" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
+                        <span ng-if="content.id === iContent.id">{{ iContent.title }}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="card" ng-if="content.type == 'helpContent' || (content.type == 'staticContent' && content.staticCategory === 'helpHome')">
+                <ul class="list-group list-group-flush mb-5 mt-5">
+                    <li class="list-group-item" ng-repeat="iContent in contents" ng-class="{'list-group-item active': content.id === iContent.id}">
                         <a ui-sref="transcript.app.content({ id: iContent.id })" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
                         <span ng-if="content.id === iContent.id">{{ iContent.title }}</span>
                     </li>

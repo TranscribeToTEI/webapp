@@ -6,7 +6,7 @@ angular.module('transcript.app.user.avatar', ['ui.router'])
         $stateProvider.state('transcript.app.user.avatar', {
             views: {
                 "page" : {
-                    templateUrl: 'App/User/Avatar/Avatar.html',
+                    templateUrl: '/webapp/app/App/User/Avatar/Avatar.html',
                     controller: 'AppUserAvatarCtrl'
                 }
             },
