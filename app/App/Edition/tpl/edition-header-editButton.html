@@ -1,24 +1,4 @@
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'readOnly' && (resource.transcript.status != 'validation' || resource.transcript.status != 'validated')" data-toggle="modal" data-target="#loginModal" class="nav-link bg-primary">
-    <i class="fa fa-edit"></i> Participer à la transcription
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && (role == 'editor' || role == 'validator') && resource.transcript.status == 'todo'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
-    <i class="fa fa-edit"></i> Commencer cette transcription
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && (role == 'editor' || role == 'validator') && resource.transcript.status == 'transcription'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-primary">
-    <i class="fa fa-edit"></i> Modifier cette transcription
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role != 'validator' && resource.transcript.status == 'validation'" class="nav-link bg-info disabled">
-    <i class="fa fa-check-square-o"></i> En cours de validation
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'validator' && resource.transcript.status == 'validation'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-info">
-    <i class="fa fa-check-square-o"></i> En cours de validation
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role != 'validator' && resource.transcript.status == 'validated'" class="nav-link bg-success disabled">
-    <i class="fa fa-check"></i> Cette transcription est terminée
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === false && role == 'validator' && resource.transcript.status == 'validated'" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="nav-link bg-success">
-    <i class="fa fa-check"></i> Cette transcription est terminée
-</a>
-<a data-ng-if="resource.transcript._embedded.isCurrentlyEdited === true" class="nav-link bg-warning text-white">
-    <i class="fa fa-pencil-square-o"></i> En cours d'édition par {{ currentEdition.createUser.name }}
-</a>
+<a ng-if="buttonTranscript.modal !== null && buttonTranscript.enable === false" data-toggle="modal" data-target="#{{ buttonTranscript.modal }}" class="{{ buttonTranscript.class }}" ng-bind-html="buttonTranscript.label | trustAsHtml"></a>
+<a ng-if="buttonTranscript.modal === null && buttonTranscript.enable === false" class="{{ buttonTranscript.class }}" ng-bind-html="buttonTranscript.label | trustAsHtml"></a>
+<a ng-if="buttonTranscript.modal !== null && buttonTranscript.enable === true" data-toggle="modal" data-target="#{{ buttonTranscript.modal }}" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="{{ buttonTranscript.class }}" ng-bind-html="buttonTranscript.label | trustAsHtml"></a>
+<a ng-if="buttonTranscript.modal === null && buttonTranscript.enable === true" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})" class="{{ buttonTranscript.class }}" ng-bind-html="buttonTranscript.label | trustAsHtml"></a>

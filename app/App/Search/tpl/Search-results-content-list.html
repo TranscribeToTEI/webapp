@@ -5,7 +5,7 @@
         <div class="col-9">
             <a ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a><br/>
             <div class="desc">
-                {{ entity.will.testator.deathMention | ucFirstStrict }} le {{ entity.will.testator.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS' }}
+                {{ entity.will.testator.deathMention | ucFirstStrict }} <span ng-if="entity.will.testator.dateOfDeathString">le {{ entity.will.testator.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS' }}</span>
                 <span ng-if="entity.will.testator.dateOfDeathString && (entity.will.testator.placeOfDeathString || entity.will.testator.placeOfDeathNormalized)" class="text-danger">|</span>
                 <a ng-if="entity.will.testator.placeOfDeathNormalized" ui-sref="transcript.app.taxonomy.view({type: 'places', id: entity.will.testator.placeOfDeathNormalized.id})">
                     <span ng-if="entity.will.testator.placeOfDeathString" ng-bind="entity.will.testator.placeOfDeathString | sourceRender:'NOT|MDH|EC|AS'"></span>

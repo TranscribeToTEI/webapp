@@ -13,7 +13,7 @@
                 Avant de commencer à transcrire notre corpus, <strong>nous vous invitons à suivre notre tutoriel d'introduction</strong>. Vous y découvrirez le <strong>fonctionnement de notre plateforme</strong>, nos règles de transcription et une initiation à l'encodage à la TEI.
             </p>
             <div class="text-center">
-                <button ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '1'})" class="btn btn-secondary">Cliquez ici pour commencer la formation à TEI.</button>
+                <button ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '0'})" class="btn btn-secondary">Cliquez ici pour commencer la formation à TEI.</button>
                 <button ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="btn btn-secondary">Cliquez ici pour continuer la formation à TEI.</button>
             </div>
         </div>

@@ -50,3 +50,24 @@
         </div>
     </div>
 </div>
+
+<div id="edition-training-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-dialog modal-transcribe" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Souhaitez-vous suivre notre tutoriel ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Vous allez accéder à notre interface de transcription. Pourtant, vous n'avez pas encore suivi notre tutoriel explicitant le fonctionnement de l'interface de transcription et nos règles de transcription.</p>
+            </div>
+            <div class="modal-footer">
+                <button ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '0'})" ng-click="$('#edition-training-modal').modal('hide');" class="btn btn-warning">Suivre le tutoriel</button>
+                <button ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ng-click="$('#edition-training-modal').modal('hide');" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="btn btn-warning">Suivre le tutoriel</button>
+                <button class="btn btn-secondary" ng-click="$('#edition-training-modal').modal('hide');" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})">Transcrire immédiatement</button>
+            </div>
+        </div>
+    </div>
+</div>

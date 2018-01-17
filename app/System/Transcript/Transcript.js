@@ -1235,7 +1235,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             let imageSource = [];
             if($scope.transcriptConfig.isExercise === false) {
-                imageSource.push($rootScope.iiif.server + "/testament_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg");
+                imageSource.push($rootScope.iiif.server + "/testament_" + $scope.entity.will.hostingOrganization.code + "_" + $filter('willNumberFormat')($scope.entity.willNumber, 4) + $rootScope.iiif.separator + "JPEG" + $rootScope.iiif.separator + $scope.resource.images[0] + $rootScope.iiif.extension + ".jpg");
             } else {
                 imageSource.push($rootScope.iiif.server + "/exercise" + $rootScope.iiif.separator + $scope.transcriptConfig.exerciseImageToTranscribe);
             }
