@@ -45,9 +45,9 @@ angular.module('transcript.app.home', ['ui.router'])
                 $scope.entities[iEntity].will.testator.placeOfBirthNormalized = {name: null};
             }
             $log.debug($scope.entities[iEntity].will.testator);
-            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized !== null && $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names.length > 0) {
+            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfDeathNormalized !== null && $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names.length > 0) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
-            } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
+            } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
             }
         }
@@ -177,12 +177,24 @@ angular.module('transcript.app.home', ['ui.router'])
                 if(entity.will.testator.placeOfDeathNormalized !== undefined && entity.will.testator.placeOfDeathNormalized.geographicalCoordinates !== undefined) {
                     let coord = entity.will.testator.placeOfDeathNormalized.geographicalCoordinates.split('+');
                     let id = "maker"+entity.will.testator.id;
+                    let iconMarker = "marker-icon";
+
+                    if(entity._embedded.status === "todo") {iconMarker = "marker-icon-danger";}
+                    else if(entity._embedded.status === "transcription") {iconMarker = "marker-icon-warning";}
+                    else if(entity._embedded.status === "validation") {iconMarker = "marker-icon-primary";}
+                    else if(entity._embedded.status === "validated") {iconMarker = "marker-icon-success";}
+
                     let marker = {
                         lat: parseFloat(coord[0]),
                         lng: parseFloat(coord[1]),
                         message: entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name,
                         focus: false,
-                        draggable: false
+                        draggable: false,
+                        icon: {
+                            iconUrl: '/webapp/app/web/images/markers/'+iconMarker+'.png',
+                            iconAnchor: [12, 41],
+                            popupAnchor: [0, -40],
+                        }
                     };
                     markers[id] = marker;
                 }

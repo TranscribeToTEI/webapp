@@ -4,7 +4,6 @@ angular.module('transcript.filter.sourceRender', ['ui.router'])
 
     .filter('sourceRender', ['$log', '$filter', function($log, $filter) {
         return function (sourceString, listSourceString, allList, prefixRender) {
-            console.log(sourceString);
             if(sourceString === "" || sourceString === null) {
                 return "";
             }
@@ -24,33 +23,39 @@ angular.module('transcript.filter.sourceRender', ['ui.router'])
             for(let iSV in sourcesValues) {
                 let source = sourcesValues[iSV];
                 let sourceContainer = {
-                    content: source.replace('/([^\[\]\|]+?)\s*\[(.+?)\]/', '$1'),
-                    sourceType: source.replace('/([^\[\]\|]+?)\s*\[(.+?)\]/', '$2'),
-                    sourceOrder: sourcesType.indexOf(sourcesType)
+                    content: source.replace(/(.+?)(\s*)(\[(TES|NOT|MDH|EC|AS)\])/g, '$1').trim(),
+                    sourceType: source.replace(/(.+?)(\s*)(\[(TES|NOT|MDH|EC|AS)\])/g, '$4').trim(),
+                    sourceOrder: sourcesType.indexOf(source.replace(/(.+?)(\s*)(\[(TES|NOT|MDH|EC|AS)\])/g, '$4').trim())
                 };
 
-                if(sourceContainer.sourceOrder === -1) {
+                if(sourceContainer.sourceOrder === -1 && sourcesValues.length > 1) {
                     sourceContainer.sourceType = null;
                     sourceContainer.sourceOrder = null;
-                }
-
-                if(sourcesType.indexOf(sourceContainer.sourceType) !== -1 || (sourcesValues.length === 1 && sourceContainer.sourceType === null)) {
+                } else {
                     sourcesTrame.push(sourceContainer);
                 }
             }
 
             $filter('orderBy')(sourcesTrame, 'sourceOrder');
-
-            console.log(sourcesTrame);
             for(let iST in sourcesTrame) {
-                let sourceContainer = sourcesTrame[iST];
-                if(prefixRender !== undefined) {
-                    value += $filter('prefixRender')(sourceContainer.content, prefixRender);
-                } else {
-                    value += sourceContainer.content;
-                }
-                if(sourceContainer.sourceType !== null) {
-                    value += " selon "+sourceTypeTitle[sourceContainer.sourceType].article+sourceTypeTitle[sourceContainer.sourceType].name;
+                if((allList === false && parseInt(iST) === 0) || allList === true || allList === undefined) {
+                    let sourceContainer = sourcesTrame[iST];
+
+                    if(parseInt(iST) > 0 && iST < sourcesTrame.length) {
+                        value += ", ";
+                    } else if(parseInt(iST) > 0 && iST === sourcesTrame.length) {
+                        value += " ou "
+                    }
+
+                    if (prefixRender !== undefined) {
+                        value += $filter('prefixRender')(sourceContainer.content, prefixRender);
+                    } else {
+                        value += sourceContainer.content;
+                    }
+
+                    if (sourceContainer.sourceType !== null && sourcesType.indexOf(sourceContainer.sourceType) !== -1) {
+                        value += " selon " + sourceTypeTitle[sourceContainer.sourceType].article + sourceTypeTitle[sourceContainer.sourceType].name;
+                    }
                 }
             }
 

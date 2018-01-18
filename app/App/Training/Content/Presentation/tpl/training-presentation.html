@@ -7,14 +7,3 @@
 <div ng-if="trainingContent.illustration == null" class="row">
     <div class="col-md-10 col-12" ng-include="'/webapp/app/App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
 </div>
-
-<hr />
-<div class="text-center">
-    <div class="float-right">
-        {{ trainingContent.orderInTraining }} / {{ trainingContents.length }} pages
-    </div>
-    <a ng-if="trainingContent.orderInTraining-1 > 0" class="btn btn-primary" ui-sref="transcript.app.training.content({order: trainingContent.orderInTraining-1})"><i class="fa fa-arrow-left"></i> Page précédente</a>
-    <a class="btn btn-primary" ui-sref="transcript.app.home"><i class="fa fa-home"></i> Accueil</a>
-    <a ng-if="nextContent !== null" class="btn btn-primary" ui-sref="transcript.app.training.content({order: trainingContent.orderInTraining+1})"><i class="fa fa-arrow-right"></i> Page suivante</a>
-    <button ng-if="nextContent === null" class="btn btn-primary" ng-click="endTraining()">Trouver un testament</button>
-</div>

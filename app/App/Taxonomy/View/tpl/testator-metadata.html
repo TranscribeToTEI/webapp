@@ -67,7 +67,7 @@
     <dd class="col-sm-8">
         {{ entity.rank | sourceRender:'MDH|NOT|TES|EC|AS':true }}
         <span class="text-danger" ng-if="entity.rank && (entity.militaryUnitString || entity.militaryUnitNormalized)">|</span>
-        <a ng-if="entity.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnit.id})">
+        <a ng-if="entity.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnitNormalized.id})">
             <span ng-if="entity.militaryUnitString" ng-bind="entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true"></span>
             <span ng-if="!entity.militaryUnitString" ng-bind="entity.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
         </a>

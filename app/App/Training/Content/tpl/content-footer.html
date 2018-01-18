@@ -1,0 +1,28 @@
+<hr />
+<div class="text-center">
+    <div class="float-left">
+        <a class="btn btn-sm btn-primary" ui-sref="transcript.app.home"><i class="fa fa-home"></i> Accueil</a>
+        <a class="btn btn-sm btn-primary" ui-sref="transcript.app.home"><i class="fa fa-list"></i> Sommaire</a>
+    </div>
+    <div class="float-right">
+        {{ trainingContent.orderInTraining }} / {{ trainingContents.length }} pages
+    </div>
+
+
+    <div ng-if="trainingContent.pageType === 'exercise'" class="d-inline">
+        <a ng-if="$transition$._targetState._definition.name === 'transcript.app.training.content.exercise.exercise'" class="btn btn-sm btn-primary" ui-sref="transcript.app.training.content.exercise.presentation"><i class="fa fa-chevron-left"></i> Page précédente</a>
+        <button ng-if="$transition$._targetState._definition.name === 'transcript.app.training.content.exercise.correction'" class="btn btn-sm btn-primary" ui-sref="transcript.app.training.content.exercise.exercise"><i class="fa fa-chevron-left"></i> Page précédente</button>
+    </div>
+    <div ng-if="trainingContent.pageType !== 'exercise' || $transition$._targetState._definition.name === 'transcript.app.training.content.exercise.presentation'" class="d-inline" >
+        <a ng-if="trainingContent.orderInTraining-1 > 0" class="btn btn-sm btn-primary" ui-sref="transcript.app.training.content({order: trainingContent.orderInTraining-1})"><i class="fa fa-chevron-left"></i> Page précédente</a>
+    </div>
+
+    <div ng-if="trainingContent.pageType === 'exercise'" class="d-inline">
+        <a ng-if="$transition$._targetState._definition.name === 'transcript.app.training.content.exercise.presentation'" class="btn btn-sm btn-secondary" ui-sref="transcript.app.training.content.exercise.exercise"><i class="fa fa-play"></i> Commencer l'exercice</a>
+        <button ng-if="$transition$._targetState._definition.name === 'transcript.app.training.content.exercise.exercise'" class="btn btn-sm btn-secondary" ng-click="goToValidation()"><i class="fa fa-check"></i> Afficher la correction</button>
+    </div>
+    <div ng-if="trainingContent.pageType !== 'exercise' || $transition$._targetState._definition.name === 'transcript.app.training.content.exercise.correction'" class="d-inline" >
+        <a ng-if="nextContent !== null" class="btn btn-sm btn-primary" ui-sref="transcript.app.training.content({order: trainingContent.orderInTraining+1})"><i class="fa fa-chevron-right"></i> Page suivante</a>
+        <button ng-if="nextContent === null" class="btn btn-sm btn-secondary" ng-click="endTraining()"><i class="fa fa-search"></i> Trouver un testament</button>
+    </div>
+</div>

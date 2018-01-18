@@ -32,9 +32,10 @@ angular.module('transcript.app.training.content.exercise.correction', ['ui.route
         })
     }])
 
-    .controller('AppTrainingContentExerciseCorrectionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'UserPreferenceService', 'trainingContent', 'trainingContents', 'exerciseResult', function($log, $rootScope, $scope, $http, $sce, $state, $filter, UserPreferenceService, trainingContent, trainingContents, exerciseResult) {
+    .controller('AppTrainingContentExerciseCorrectionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'UserPreferenceService', 'trainingContent', 'trainingContents', 'exerciseResult', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, UserPreferenceService, trainingContent, trainingContents, exerciseResult) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
+        $scope.$transition$ = $transition$;
 
         $scope.exerciseResults = exerciseResult.data; console.log($scope.exerciseResults);
         if($scope.exerciseResults.length > 0) {

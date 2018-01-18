@@ -12,11 +12,7 @@
 
     <div ui-view="transcript"></div>
 
-    <div ng-if="transcriptConfig.isValidation === false" class="alert alert-info">
-        <button class="btn btn-primary" ng-click="goToValidation()">Afficher la correction</button>
-    </div>
-
-    <div ng-include="'/webapp/app/App/Training/Content/Exercise/tpl/training-exercise.html'"></div>
+    <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 
     <hr />
     <div ui-view="comment"></div>

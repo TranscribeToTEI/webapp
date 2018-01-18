@@ -25,9 +25,10 @@ angular.module('transcript.app.training.content.exercise.presentation', ['ui.rou
         })
     }])
 
-    .controller('AppTrainingContentExercisePresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
+    .controller('AppTrainingContentExercisePresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, trainingContent, trainingContents, UserPreferenceService) {
         $scope.trainingContent = trainingContent;
         $scope.trainingContents = trainingContents;
+        $scope.$transition$ = $transition$;
 
         /* Updating user's preferences ------------------------------------------------------------------------------ */
         if($rootScope.user._embedded.preferences.tutorialStatus === 'todo' || $rootScope.user._embedded.preferences.tutorialStatus === 'inProgress') {

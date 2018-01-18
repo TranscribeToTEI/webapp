@@ -2,9 +2,9 @@
     <h3 class="card-header bg-light"><i class="fa fa-user red-color" aria-hidden="true"></i> Contributeurs</h3>
     <div class="card-body">
         <div class="row contributeurs">
-            <li class="col-lg-4 col-12" ng-repeat="contributor in contributors">
+            <li class="col-lg-4 col-12" ng-repeat="contributor in resource._embedded.contributors">
                 <a ui-sref="transcript.app.user.profile({id: contributor.user.id})"><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ contributor.user.name }}</a>
-                {{ contributor.contributionsNumber }} contributions
+                {{ contributor.contributions }} <span ng-if="contributor.contributions > 1">contributions</span><span ng-if="contributor.contributions <= 1">contribution</span>
             </li>
         </div>
     </div>

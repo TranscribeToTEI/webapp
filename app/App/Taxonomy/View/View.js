@@ -40,7 +40,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
     }])
 
     .controller('AppTaxonomyViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'entity', 'entities', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, entity, entities, bibliographies) {
-        $scope.entity = entity; $log.debug($scope.entity);
+        $scope.entity = entity; console.log($scope.entity);
         $scope.entities = entities; $log.debug($scope.entities);
         $scope.bibliography = bibliographies;
         $scope.bibliographyEdit = false;
@@ -72,7 +72,12 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                         lat: parseFloat(coord[0]),
                         lng: parseFloat(coord[1]),
                         focus: true,
-                        draggable: false
+                        draggable: false,
+                        icon: {
+                            iconUrl: '/webapp/app/web/images/markers/marker-icon.png',
+                            iconAnchor: [12, 41],
+                            popupAnchor: [0, -40],
+                        }
                     }
                 },
                 tiles: {

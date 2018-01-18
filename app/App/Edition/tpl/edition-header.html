@@ -1,6 +1,6 @@
 <div class="row mb-5">
     <div class="col-auto mr-auto">
-        <h1 class="page-heading mb-0"><i class="fa fa-edit" aria-hidden="true"></i> {{ entity.will.title }}</h1>
+        <h1 class="page-heading mb-0"><i class="fa fa-edit" aria-hidden="true"></i> {{ entity.will.title }} - {{ resource.type | resourceTypeName | ucfirst }} {{resource.orderInWill}}</h1>
         <span class="badge badge-status" ng-class="getStatusClassLabel(resource.transcript.status)">{{ resource.transcript.status | transcriptionStatusName:entity.isShown }}</span>
     </div>
     <div class="col-auto justify-content-end">

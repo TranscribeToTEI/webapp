@@ -64,9 +64,8 @@
                 <p>Vous allez accéder à notre interface de transcription. Pourtant, vous n'avez pas encore suivi notre tutoriel explicitant le fonctionnement de l'interface de transcription et nos règles de transcription.</p>
             </div>
             <div class="modal-footer">
-                <button ng-if="user._embedded.preferences.tutorialStatus == 'todo'" ui-sref="transcript.app.training.content({order: '0'})" ng-click="$('#edition-training-modal').modal('hide');" class="btn btn-warning">Suivre le tutoriel</button>
-                <button ng-if="user._embedded.preferences.tutorialStatus == 'inProgress' && user._embedded.preferences.tutorialProgress !== null" ng-click="$('#edition-training-modal').modal('hide');" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" class="btn btn-warning">Suivre le tutoriel</button>
-                <button class="btn btn-secondary" ng-click="$('#edition-training-modal').modal('hide');" ui-sref="transcript.app.transcript({idEntity: entity.id, idResource: resource.id, idTranscript: resource.transcript.id})">Transcrire immédiatement</button>
+                <button class="btn btn-warning" ng-click="loadTrainingContent()" >Suivre le tutoriel</button>
+                <button class="btn btn-secondary" ng-click="loadTranscriptInterface()">Transcrire immédiatement</button>
             </div>
         </div>
     </div>

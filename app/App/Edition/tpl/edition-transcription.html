@@ -2,7 +2,7 @@
     <div class="clearfix">
         <div class="float-right">
             <div class="btn-group" role="group">
-                <span class="btn btn-sm bg-dark text-white">{{ resource.type | ucfirst }} {{resource.orderInWill}}</span>
+                <span class="btn btn-sm bg-dark text-white">{{ resource.type | resourceTypeName | ucfirst }} {{resource.orderInWill}}</span>
                 <button class="btn btn-sm {{ microObjects.activeClass }}" title="Activer les micro-objets" ng-click="microObjects.action()"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></button>
             </div>
         </div>

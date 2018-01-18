@@ -19,11 +19,8 @@
     <div ng-if="trainingContent.illustration == null" class="row">
         <div class="col-md-12 col-12" ng-include="'/webapp/app/App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
     </div>
-    <div class="text-center alert alert-info">
-        <a ui-sref="transcript.app.training.content.exercise.exercise">Commencer l'exercise</a>
-    </div>
 
-    <div ng-include="'/webapp/app/App/Training/Content/Exercise/tpl/training-exercise.html'"></div>
+    <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 
     <hr />
     <div ui-view="comment"></div>

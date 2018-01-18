@@ -25,8 +25,9 @@ angular.module('transcript.app.training.content.presentation', ['ui.router'])
         })
     }])
 
-    .controller('AppTrainingContentPresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContent, trainingContents, UserPreferenceService) {
+    .controller('AppTrainingContentPresentationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'trainingContent', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, trainingContent, trainingContents, UserPreferenceService) {
         $scope.trainingContent = trainingContent;
+        $scope.$transition$ = $transition$;
 
         /* Updating user's preferences ------------------------------------------------------------------------------ */
         if($rootScope.user._embedded.preferences.tutorialStatus === 'todo' || $rootScope.user._embedded.preferences.tutorialStatus === 'inProgress') {

@@ -24,7 +24,7 @@ angular.module('transcript.app.entity', ['ui.router'])
             url: '/entity/{id}',
             resolve: {
                 entity: function(EntityService, $transition$) {
-                    return EntityService.getEntity($transition$.params().id);
+                    return EntityService.getEntity($transition$.params().id, 'pageEntity,infoWill,id');
                 },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread('entity-'+$transition$.params().id);
@@ -48,14 +48,6 @@ angular.module('transcript.app.entity', ['ui.router'])
         };
         $scope.entity = entity;
         $log.debug(entity);
-
-        /* -- Contributors management ---------------------------------------------------- */
-        $scope.contributors = [];
-        let contributors = EntityService.getContributors($scope.entity);
-        for(let id in contributors) {
-            getUser(contributors[id]);
-        }
-        /* -- Contributors management ---------------------------------------------------- */
 
         /* -- Admin management ----------------------------------------------------------- */
         $scope.admin = {

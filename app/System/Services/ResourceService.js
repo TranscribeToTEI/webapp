@@ -4,8 +4,13 @@ angular.module('transcript.service.resource', ['ui.router'])
 
     .service('ResourceService', function($log, $http, $rootScope, $filter) {
         return {
-            getResource: function(id_resource) {
-                return $http.get($rootScope.api+"/resources/"+id_resource
+            getResource: function(id_resource, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
+                return $http.get($rootScope.api+"/resources/"+id_resource+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {

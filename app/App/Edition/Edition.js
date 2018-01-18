@@ -23,10 +23,10 @@ angular.module('transcript.app.edition', ['ui.router'])
             url: '/edition/:idEntity/:idResource',
             resolve: {
                 entity: function(EntityService, $transition$) {
-                    return EntityService.getEntity($transition$.params().idEntity);
+                    return EntityService.getEntity($transition$.params().idEntity, 'infoWill,pageEdition,id');
                 },
                 resource: function(ResourceService, $transition$) {
-                    return ResourceService.getResource($transition$.params().idResource);
+                    return ResourceService.getResource($transition$.params().idResource, 'pageEdition,id');
                 },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread('transcript-'+$transition$.params().idResource);
@@ -109,6 +109,19 @@ angular.module('transcript.app.edition', ['ui.router'])
         if($rootScope.user !== undefined && $rootScope.user._embedded.preferences.tutorialStatus === 'todo') {
             $scope.buttonTranscript.modal = "edition-training-modal";
         }
+
+        $scope.loadTranscriptInterface = function() {
+            $('#edition-training-modal').modal('hide');
+            $state.go('transcript.app.transcript', ({idEntity: $scope.entity.id, idResource: $scope.resource.id, idTranscript: $scope.resource.transcript.id}))
+        };
+        $scope.loadTrainingContent = function() {
+            $('#edition-training-modal').modal('hide');
+            if($rootScope.user._embedded.preferences.tutorialStatus === 'todo') {
+                $state.go('transcript.app.training.content', {order: '0'});
+            } else if($rootScope.user._embedded.preferences.tutorialStatus === 'inProgress' && $rootScope.user._embedded.preferences.tutorialProgress !== null) {
+                $state.go('transcript.app.training.content', {order: $rootScope.user._embedded.preferences.tutorialProgress});
+            }
+        };
         /* Transcription button status ------------------------------------------------------------------------------ */
 
         /* ---------------------------------------------------------------------------------------------------------- */
@@ -151,23 +164,6 @@ angular.module('transcript.app.edition', ['ui.router'])
         }
         $log.debug($scope.currentEdition);
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
-
-        /* -- Contributors management ------------------------------------------------------------------------------- */
-        function getUser(username) {
-            return UserService.getUserByUsername(username).then(function(data) {
-                $scope.contributors.push({
-                    user: data,
-                    contributionsNumber: ResourceService.getContributionsNumberByUser($scope.resource, data)
-                });
-            });
-        }
-
-        $scope.contributors = [];
-        let contributors = ResourceService.getContributors($scope.resource);
-        for(let id in contributors) {
-            getUser(contributors[id]);
-        }
-        /* -- Contributors management ------------------------------------------------------------------------------- */
 
         /* -- Modal Login management -------------------------------------------------------------------------------- */
         $scope.goRegister = function() {

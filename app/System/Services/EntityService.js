@@ -20,9 +20,14 @@ angular.module('transcript.service.entity', ['ui.router'])
                 });
             },
 
-            getEntity: function(id) {
+            getEntity: function(id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/entities/"+id
+                    $rootScope.api+"/entities/"+id+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
