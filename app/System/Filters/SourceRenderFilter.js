@@ -4,7 +4,7 @@ angular.module('transcript.filter.sourceRender', ['ui.router'])
 
     .filter('sourceRender', ['$log', '$filter', function($log, $filter) {
         return function (sourceString, listSourceString, allList, prefixRender) {
-            if(sourceString === "" || sourceString === null) {
+            if(sourceString === undefined || sourceString === "" || sourceString === null) {
                 return "";
             }
 

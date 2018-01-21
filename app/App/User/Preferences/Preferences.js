@@ -21,8 +21,12 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                 },
             },
             resolve: {
-                userPreferences: function(UserPreferenceService, $transition$) {
-                    return UserPreferenceService.getPreferences($transition$.params().id);
+                userPreferences: function(UserPreferenceService, $transition$, $rootScope) {
+                    if($rootScope.user.id !== $transition$.params().id) {
+                        return UserService.getUser($transition$.params().id, 'id,userProfile,userEmail,preferences');
+                    } else {
+                        return $rootScope.user;
+                    }
                 },
                 rootScope: function($rootScope) {
                     return $rootScope;

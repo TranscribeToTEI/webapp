@@ -21,7 +21,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 },
                 resolve: {
                     entity: function(TaxonomyService, $transition$) {
-                        return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id);
+                        return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id, 'id,index,taxonomyView,taxonomyLinks,iiif');
                     },
                     entities: function(TaxonomyService, $transition$) {
                         return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
@@ -30,13 +30,13 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
                     },
                     testators: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('testators');
+                        return TaxonomyService.getTaxonomyEntities('testators', 'index');
                     },
                     places: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('places');
+                        return TaxonomyService.getTaxonomyEntities('places', 'index');
                     },
                     militaryUnits: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('military-units');
+                        return TaxonomyService.getTaxonomyEntities('military-units', 'index');
                     }
                 }
             })

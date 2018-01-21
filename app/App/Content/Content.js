@@ -40,10 +40,10 @@ angular.module('transcript.app.content', ['ui.router'])
             },
             resolve: {
                 content: function(ContentService, $transition$) {
-                    return ContentService.getContent($transition$.params().id, true);
+                    return ContentService.getContent($transition$.params().id);
                 },
                 contents: function(ContentService, $transition$) {
-                    return ContentService.getContent($transition$.params().id, true).then(function(data) {
+                    return ContentService.getContent($transition$.params().id, 'id,content').then(function(data) {
                         let numberResults = null,
                             categoryResults = data.type;
                         if(data.type === 'blogContent') {numberResults = 5;}

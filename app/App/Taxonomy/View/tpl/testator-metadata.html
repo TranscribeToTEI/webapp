@@ -1,8 +1,8 @@
 <div class="row mb-4" >
     <div class="col-md-4"></div>
     <div class="col-md-2">
-        <img class="img-fluid" src="{{ entity.picture | imageRender }}" alt="Photographie du testateur" title="Photographie du testateur" ng-if="entity.picture !== null" />
-        <img class="img-fluid" src="./web/images/default-testator.png" alt="icône générique testateur" ng-if="entity.picture === null" />
+        <img class="img-fluid" src="{{ entity.picture | imageRender }}" alt="Photographie du testateur" title="Photographie du testateur" ng-if="entity.picture !== undefined && entity.picture !== null && entity.picture !== ''" />
+        <img class="img-fluid" src="/webapp/app/web/images/default-testator.png" alt="icône générique testateur" ng-if="entity.picture === undefined || entity.picture === null || entity.picture === ''" />
     </div>
 </div>
 <dl class="row pr-3 ml-1">
@@ -79,5 +79,12 @@
     <div class="col-md-12 ml-2">
         <h4 class="mb-1"><strong>Mémoire des hommes</strong></h4>
         <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 1">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12 ml-2">
+        <h4 class="mb-1"><strong>Testaments</strong></h4>
+        <div ng-repeat="will in entity._embedded.wills"><i class="fa fa-angle-right" aria-hidden="true"></i> <a ui-sref="transcript.app.entity({ id: will.entity.id })">{{ will.title }}</a></div>
     </div>
 </div>

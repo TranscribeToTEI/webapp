@@ -192,7 +192,7 @@ angular.module('transcriptApp', [
         /* ------------------------------------------------------ */
 
 
-        $logProvider.debugEnabled(true);
+        $logProvider.debugEnabled(false);
     }])
     .run(['$log', '$rootScope', '$http', '$injector', '$location', 'authService', '$state', '$cookies', '$filter', '$window', 'PermRoleStore', 'PermPermissionStore', 'UserService', 'OAuth', 'OAuthToken', function($log, $rootScope, $http, $injector, $location, authService, $state, $cookies, $filter, $window, PermRoleStore, PermPermissionStore, UserService, OAuth, OAuthToken) {
         /* -- Parameters management ------------------------------------------------------ */

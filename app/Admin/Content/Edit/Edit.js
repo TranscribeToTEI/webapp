@@ -45,7 +45,7 @@ angular.module('transcript.admin.content.edit', ['ui.router'])
                 },
                 resolve: {
                     content: function(ContentService, $transition$) {
-                        return ContentService.getContent($transition$.params().id, false);
+                        return ContentService.getContent($transition$.params().id);
                     },
                     users: function(UserService) {
                         return UserService.getUsers('short');

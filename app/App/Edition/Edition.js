@@ -133,14 +133,15 @@ angular.module('transcript.app.edition', ['ui.router'])
         console.log(imageSource);
         $scope.openseadragon = {
             prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
-            tileSources: imageSource
+            tileSources: imageSource,
+            showRotationControl: true,
         };
         /* Viewer Management ---------------------------------------------------------------------------------------- */
 
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Content Management */
         /* ---------------------------------------------------------------------------------------------------------- */
-        if($scope.resource.transcript.content !== null) {
+        if($scope.resource.transcript.content !== undefined && $scope.resource.transcript.content !== null) {
             $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
         } else {
             $scope.encodedContent = null;

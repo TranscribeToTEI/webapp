@@ -21,8 +21,12 @@ angular.module('transcript.app.user.edit', ['ui.router'])
                 },
             },
             resolve: {
-                userEdit: function(UserService, $transition$) {
-                    return UserService.getUser($transition$.params().id);
+                userEdit: function(UserService, $transition$, $rootScope) {
+                    if($rootScope.user.id !== $transition$.params().id) {
+                        return UserService.getUser($transition$.params().id, 'id,userProfile,userEmail');
+                    } else {
+                        return $rootScope.user;
+                    }
                 }
             }
         })

@@ -23,7 +23,7 @@ angular.module('transcript.app.user.profile', ['ui.router'])
                 },
                 resolve: {
                     userEdit: function(UserService, $transition$) {
-                        return UserService.getUser($transition$.params().id, "full");
+                        return UserService.getUser($transition$.params().id, "userProfile,search,id");
                     }
                 }
             })

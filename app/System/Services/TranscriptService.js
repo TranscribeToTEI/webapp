@@ -4,9 +4,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
     .service('TranscriptService', function($log, $http, $rootScope, $filter) {
         let functions = {
-            getTranscripts: function() {
+            getTranscripts: function(profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/transcripts"
+                    $rootScope.api+"/transcripts"+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
@@ -14,9 +19,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     return response;
                 });
             },
-            getTranscriptsByStatus: function(status) {
+            getTranscriptsByStatus: function(status, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "&profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/transcripts?status="+status
+                    $rootScope.api+"/transcripts?status="+status+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
@@ -24,9 +34,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     return response;
                 });
             },
-            getTranscript: function(id) {
+            getTranscript: function(id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/transcripts/"+id
+                    $rootScope.api+"/transcripts/"+id+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {
@@ -34,9 +49,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     return response;
                 });
             },
-            patchTranscript: function(form, id) {
+            patchTranscript: function(form, id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.patch(
-                    $rootScope.api+"/transcripts/"+id,
+                    $rootScope.api+"/transcripts/"+id+profileStr,
                     form
                 ).then(function(response) {
                     $log.debug(response);

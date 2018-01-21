@@ -20,9 +20,14 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                 });
             },
 
-            getTaxonomyEntity: function(type, id) {
+            getTaxonomyEntity: function(type, id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/"+type+"/"+id
+                    $rootScope.api+"/"+type+"/"+id+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {

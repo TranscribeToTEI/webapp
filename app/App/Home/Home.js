@@ -32,7 +32,7 @@ angular.module('transcript.app.home', ['ui.router'])
     }])
 
     .controller('AppHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', 'contents', 'staticContents', 'SearchService', 'EntityService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities, contents, staticContents, SearchService, EntityService) {
-        $scope.entities = entities; $log.debug($scope.entities);
+        $scope.entities = entities; //$log.debug($scope.entities);
         $scope.contents = contents;
         $scope.staticContents = staticContents;
         $scope.limitToResults = 50;
@@ -187,7 +187,7 @@ angular.module('transcript.app.home', ['ui.router'])
                     let marker = {
                         lat: parseFloat(coord[0]),
                         lng: parseFloat(coord[1]),
-                        message: entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name,
+                        message: '<a href="#!/entity/'+entity.id+'">'+entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name+'</a>',
                         focus: false,
                         draggable: false,
                         icon: {

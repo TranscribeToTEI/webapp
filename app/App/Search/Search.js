@@ -247,7 +247,7 @@ angular.module('transcript.app.search', ['ui.router'])
                     let marker = {
                         lat: parseFloat(coord[0]),
                         lng: parseFloat(coord[1]),
-                        message: entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name,
+                        message: '<a href="#!/entity/'+entity.id+'">'+entity.will.testator.name+' décédé à '+entity.will.testator.placeOfDeathNormalized.name+'</a>',
                         focus: false,
                         draggable: false,
                         icon: {

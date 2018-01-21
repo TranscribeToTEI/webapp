@@ -84,7 +84,8 @@ angular.module('transcript.app.training.content.exercise.correction', ['ui.route
         console.log(imageSource);
         $scope.openseadragon = {
             prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
-            tileSources: imageSource
+            tileSources: imageSource,
+            showRotationControl: true
         };
         /* Viewer Management ---------------------------------------------------------------------------------------- */
 

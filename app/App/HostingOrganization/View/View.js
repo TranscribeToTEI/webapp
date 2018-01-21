@@ -21,13 +21,14 @@ angular.module('transcript.app.hosting-organization.view', ['ui.router'])
                 },
                 resolve: {
                     organization: function(HostingOrganizationService, $transition$) {
-                        return HostingOrganizationService.getOrganization($transition$.params().id);
+                        return HostingOrganizationService.getOrganization($transition$.params().id, 'id,search,pageInstitution');
                     }
                 }
             })
     }])
 
-    .controller('AppHostingOrganizationViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'organization', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, organization) {
+    .controller('AppHostingOrganizationViewCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'organization', 'ImageService', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, organization, ImageService) {
         $scope.organization = organization;
+        $scope.imageService = ImageService;
     }])
 ;

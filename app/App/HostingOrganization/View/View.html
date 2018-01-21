@@ -20,6 +20,17 @@
             <p><a href="{{ organization.website }}" target="_blank" ng-if="!!organization.website">Accéder au site web</a></p>
 
             <h2>Liste des testaments</h2>
+            <ul id="listResults" class="grid row">
+                <li class="col-md-2 col-4" data-ng-repeat="entity in organization._embedded.entities">
+                    <span class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName:entity.isShown }}</span>
+                    <a ui-sref="transcript.app.entity({ id: entity.id })"><img class="img-fluid" src="{{ imageService.getThumbnail(entity, organization) }}"/></a>
+                    <span class="badge badge-secondary" title="Nombre de ressources à transcrire">{{ entity.resources.length }} page<span ng-if="entity.resources.length > 1">s</span></span>
+                    <div class="caption">
+                        <a  ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a>
+                        Cote {{ entity.will.callNumber }}, testament du {{ entity.will.minuteDateString | sourceRender:'NOT' }}
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </main>

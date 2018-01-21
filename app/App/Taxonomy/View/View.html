@@ -29,7 +29,7 @@
             </div>
             <div class="mt-4 mb-4 ml-2" ng-if="entity.description != '' && entity.description != null">
                 <h4 ng-if="entity.dataType == 'testators'" class="mb-1"><strong>Biographie</strong></h4>
-                {{ entity.description }}
+                {{ entity.description | sourceRender:'MDH|NOT|TES|EC|AS':false }}
             </div>
             <div class="mt-4 mb-4 ml-2" ng-if="bibliography.length > 0">
                 <h4 class="mb-1"><strong>Bibliographie</strong></h4>

@@ -972,7 +972,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * @param resetBreadcrumb boolean
              */
             $scope.functions.loadHelpData = function (file, resetBreadcrumb) {
-                return ContentService.getContent(file).then(function (data) {
+                return ContentService.getContent(file, 'id,content').then(function (data) {
                     let doc = document.createElement('div');
                     doc.innerHTML = data.content;
 
@@ -1047,8 +1047,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 $scope.transcriptArea.interaction.version.id = id;
                 $scope.transcriptArea.interaction.status = 'version';
 
-                for (let versionId in $scope.transcript._embedded.version) {
-                    let version = $scope.transcript._embedded.version[versionId];
+                for (let versionId in $scope.transcript._embedded.versions) {
+                    let version = $scope.transcript._embedded.versions[versionId];
                     if (version.id === id) {
                         $scope.transcriptArea.interaction.version.content = version.data.content;
                     }
@@ -1148,9 +1148,17 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.transcriptArea.interaction.taxonomy.loadEntities = function() {
                 TaxonomyService.getTaxonomyEntities("testators", "index").then(function(response) {
                     $scope.taxonomy.testators = response;
+
+                    for(let iT in $scope.taxonomy.testators) {
+                        $scope.taxonomy.testators[iT]['name'] = $scope.taxonomy.testators[iT]['indexName']
+                    }
                 });
                 TaxonomyService.getTaxonomyEntities("places", "index").then(function(response) {
                     $scope.taxonomy.places = response;
+
+                    for(let iT in $scope.taxonomy.places) {
+                        $scope.taxonomy.places[iT]['name'] = $scope.taxonomy.places[iT]['indexName']
+                    }
                 });
                 TaxonomyService.getTaxonomyEntities("military-units", "index").then(function(response) {
                     $scope.taxonomy.militaryUnits = response;
@@ -1243,7 +1251,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
             console.log(imageSource);
             $scope.openseadragon = {
                 prefixUrl: "/webapp/app/web/libraries/js/openseadragon/images/",
-                tileSources: imageSource
+                tileSources: imageSource,
+                showRotationControl: true
             };
             /* Viewer Management ---------------------------------------------------------------------------------------- */
 
@@ -1265,7 +1274,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         $scope.submit.state.alert = "alert-primary";
                         $scope.submit.state.message = "Pour soumettre à validation votre transcription, cliquez sur le bouton ci-dessous";
                     }
-                    $scope.submit.state.btnValue = "soummettre";
+                    $scope.submit.state.btnValue = "soumettre";
                 } else {
                     if(!(!!$scope.submit.form.comment)) {
                         $scope.submit.state.btnClass = "btn-warning";
@@ -1291,10 +1300,12 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 }
                 if ($scope.transcript.content !== $scope.transcriptArea.ace.area || ($scope.submit.form.isEnded === true && !!$scope.transcriptArea.ace.area)) {
                     $scope.submit.loading = true;
+                    //console.log($scope.aceEditor);
+                    //$scope.aceEditor.setReadonly = true;
                     if ($scope.submit.form.isEnded === true) {
                         $scope.transcript.status = "validation";
                     }
-                    $http.patch($rootScope.api + '/transcripts/' + $scope.transcript.id,
+                    $http.patch($rootScope.api + '/transcripts/' + $scope.transcript.id + '?profile=id,pageTranscript,versioning',
                         {
                             "content": $scope.transcriptArea.ace.area,
                             "updateComment": $scope.submit.form.comment,
@@ -1305,9 +1316,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     ).then(function (response) {
                         $log.debug(response.data);
                         $scope.transcript = response.data;
+                        $scope.transcriptArea.ace.area = $scope.transcript.content;
                         $scope.submit.loading = false;
                         $scope.submit.form.isEnded = false;
                         $scope.submit.form.comment = "";
+                        //$scope.aceEditor.setReadonly = false;
 
                         if (action === 'load-read' || $scope.transcript.status === "validation") {
                             $('#transcript-edit-modal').modal('hide');
@@ -1323,7 +1336,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         }
                     });
                 } else {
-                    alert('It seems you didn\'t edit anything.')
+                    alert('Impossible de sauvegarder : aucune nouvelle modification.');
                 }
             };
 
@@ -1352,7 +1365,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * Change page alert management & transcript log management
              */
             $transitions.onBefore({}, (trans) => {
-                if (($scope.transcript.content === null && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
+                if ((($scope.transcript.content === null || $scope.transcript.content === '') && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
                     if($scope.transcriptConfig.isExercise === false) {
                         $log.debug('get through onBefore');
                         TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
@@ -1375,7 +1388,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 return TranscriptService.patchTranscript({
                     status: state,
                     updateComment: "Changement de statut pour : " + state
-                }, $scope.transcript.id).then(function (data) {
+                }, $scope.transcript.id, "id,pageTranscript,versioning").then(function (data) {
                     $scope.transcript = data;
                     $scope.admin.status.loading = false;
                 });
@@ -1391,7 +1404,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         "content": $scope.transcriptArea.ace.area,
                         "updateComment": "Validation de la transcription",
                         "status": "validated"
-                    }, $scope.transcript.id
+                    }, $scope.transcript.id, "id,pageTranscript,versioning"
                 ).then(function (response) {
                     $log.debug(response);
                     $scope.transcript = response;
@@ -1410,7 +1423,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         "content": $scope.transcriptArea.ace.area,
                         "updateComment": "Refuse validation",
                         "status": "transcription"
-                    }, $scope.transcript.id
+                    }, $scope.transcript.id, "id,pageTranscript,versioning"
                 ).then(function (response) {
                     $log.debug(response);
                     $scope.transcript = response;

@@ -24,7 +24,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
             },
             resolve: {
                 entity: function(TaxonomyService, $transition$) {
-                    return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id);
+                    return TaxonomyService.getTaxonomyEntity($transition$.params().type, $transition$.params().id, 'id,index,taxonomyView,taxonomyLinks,iiif');
                 },
                 entities: function(TaxonomyService, $transition$) {
                     return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');

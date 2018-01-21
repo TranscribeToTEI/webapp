@@ -29,8 +29,13 @@ angular.module('transcript.service.user', ['ui.router'])
                     });
             },
             getUser: function(id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                        $rootScope.api+"/users/"+id+"?profile="+profile
+                        $rootScope.api+"/users/"+id+profileStr
                     ).then(function(response) {
                         return response.data;
                     }, function errorCallback(response) {

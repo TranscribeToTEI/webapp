@@ -31,11 +31,15 @@ angular.module('transcript.service.content', ['ui.router'])
                     return response;
                 });
             },
-            getContent: function(id, encode) {
+            getContent: function(id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "?profile="+profile;
+                }
+
                 return $http.get(
-                    $rootScope.api+"/contents/"+id
+                    $rootScope.api+"/contents/"+id+profileStr
                 ).then(function(response) {
-                    if(encode === true) {response.data.content = $sce.trustAsHtml(response.data.content);}
                     return response.data;
                 }, function errorCallback(response) {
                     $log.debug(response);

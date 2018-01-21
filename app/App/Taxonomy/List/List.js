@@ -28,7 +28,7 @@ angular.module('transcript.app.taxonomy.list', ['ui.router'])
                     return $filter;
                 },
                 entities: function(TaxonomyService, $transition$) {
-                    return TaxonomyService.getTaxonomyEntities($transition$.params().type);
+                    return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                 }
             }
         })

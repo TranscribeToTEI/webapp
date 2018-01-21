@@ -33,7 +33,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
             },
             resolve: {
                 transcript: function(TranscriptService, $transition$) {
-                    return TranscriptService.getTranscript($transition$.params().idTranscript);
+                    return TranscriptService.getTranscript($transition$.params().idTranscript, 'id,pageTranscript,versioning');
                 },
                 idResource: function(ResourceService, $transition$) {
                     return $transition$.params().idResource;
