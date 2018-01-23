@@ -8,26 +8,66 @@
 </div>
 <main class="container" role="main">
     <div class="row">
-        <div class="col-lg-10 col-12">
+        <div class="col-lg-12 col-12">
             <h1 class="page-heading">Mes messages</h1>
+
+            <div class="float-right">
+                <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#list-users-modal">Nouveau message</a>
+            </div>
+
             <table class="table table-bordered">
                 <thead>
                 <tr>
-                    <th>#</th>
                     <th>Correspondant</th>
                     <th>Dernier message</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="thread in threads">
-                    <td>{{ $index+1 }}</td>
+                <tr ng-repeat="thread in threads" ng-if="thread.lastCommentAt !== null">
                     <td>
-                        <a ui-sref="transcript.app.user.profile({id: thread.recipient})" title="Accéder au profil de {{ thread.recipient }}">{{ thread.recipient }}</a>
+                        <a ui-sref="transcript.app.user.profile({id: thread.recipient.id})" title="Accéder au profil de {{ thread.recipient.name }}"><span class="red-color"><i class="fa fa-user-circle-o"></i></span> {{ thread.recipient.name }}</a>
                     </td>
-                    <td><a ui-sref="transcript.app.user.private-message.thread({idUser: iUser.id, idRecipient: thread.recipient})" title="Accéder au fil de discussion">{{ thread.lastCommentAt | date:'dd-MM-yyyy à HH:mm' }}</a></td>
+                    <td>
+                        <a ui-sref="transcript.app.user.private-message.thread({idUser: iUser.id, idRecipient: thread.recipient.id})" title="Accéder au fil de discussion" ng-if="thread.lastCommentAt !== null" ng-class="{'font-weight-bold': (thread.logs[0].isReadByRecipient === false && thread.logs[0].createUser.id !== iUser.id)}">
+                            <span class="red-color"><i class="fa fa-comments"></i></span> Dernier message le {{ thread.lastCommentAt | date:'dd-MM-yyyy à HH:mm' }}
+                            <span ng-if="thread.logs[0].isReadByRecipient === false && thread.logs[0].createUser.id !== iUser.id" class="red-color" title="Dernier message non lu"><i class="fa fa-circle"></i></span>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-if="threads.length === 0">
+                    <td colspan="2" class="bg-warning text-center">Vous n'avez pour le moment échangé aucun message avec d'autres utilisateurs.</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </main>
+<div id="list-users-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-dialog modal-transcribe" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nouveau message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-control-label">Destinataire</label>
+                    <angucomplete id="list-users"
+                                  placeholder=""
+                                  pause="100"
+                                  selectedobject="recipient"
+                                  localdata="users"
+                                  searchfields="name"
+                                  titlefield="name"
+                                  minlength="1"
+                                  inputclass="form-control form-control-sm"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-disabled="recipient == null" ng-click="goToThread()">Nouveau message</button>
+            </div>
+        </div>
+    </div>
+</div>

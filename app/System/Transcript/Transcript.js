@@ -188,14 +188,15 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Updating Transcript Log */
             /* ---------------------------------------------------------------------------------------------------------- */
+            console.log($transitions);
             if($scope.transcriptConfig.isExercise === false) {
                 if ($scope.transcript._embedded.isCurrentlyEdited === false) {
-                    $log.debug('creation of transcript log -> Transcript is now closed');
+                    console.log('creation of transcript log -> Transcript is now closed');
                     TranscriptLogService.postTranscriptLog({
                         'isCurrentlyEdited': true,
                         'transcript': $scope.transcript.id
                     }).then(function (data) {
-                        $log.debug(data);
+                        console.log(data);
                         $scope.currentLog = data;
                     });
                 } else {
@@ -1365,16 +1366,18 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * Change page alert management & transcript log management
              */
             $transitions.onBefore({}, (trans) => {
-                if ((($scope.transcript.content === null || $scope.transcript.content === '') && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
-                    if($scope.transcriptConfig.isExercise === false) {
-                        $log.debug('get through onBefore');
-                        TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
+                if(trans.to().name !== "transcript.app.transcript") {
+                    if ((($scope.transcript.content === null || $scope.transcript.content === '') && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
+                        if ($scope.transcriptConfig.isExercise === false) {
+                            console.log('get through onBefore');
+                            TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
+                        }
+                    } else {
+                        $log.debug('ask for leave');
+                        $window.history.back();
+                        $('#transcript-edit-modal').modal('show');
+                        return false;
                     }
-                } else {
-                    $log.debug('ask for leave');
-                    $window.history.back();
-                    $('#transcript-edit-modal').modal('show');
-                    return false;
                 }
             });
             /* Submit Management ---------------------------------------------------------------------------------------- */

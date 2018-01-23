@@ -21,9 +21,9 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
                 },
             },
             resolve: {
-                userPreferences: function(UserPreferenceService, $transition$, $rootScope) {
+                user: function(UserService, $transition$, $rootScope) {
                     if($rootScope.user.id !== $transition$.params().id) {
-                        return UserService.getUser($transition$.params().id, 'id,userProfile,userEmail,preferences');
+                        return UserService.getUser($transition$.params().id, 'id,userProfile,userEmail,userPreferences');
                     } else {
                         return $rootScope.user;
                     }
@@ -35,14 +35,13 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
         })
     }])
 
-    .controller('AppUserPreferencesCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$cookies', 'UserPreferenceService', 'userPreferences', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, $cookies, UserPreferenceService, userPreferences, flash) {
+    .controller('AppUserPreferencesCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$cookies', 'UserPreferenceService', 'user', 'flash', function($log, $rootScope, $scope, $http, $sce, $state, $cookies, UserPreferenceService, user, flash) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         /* -- Breadcrumb management -------------------------------------------------------- */
-        $scope.iUser = $rootScope.user;
+        $scope.iUser = user;
         /* -- End : breadcrumb management -------------------------------------------------- */
 
-        $log.debug(userPreferences);
-        $scope.userPreferences = userPreferences;
+        $scope.userPreferences = $scope.iUser._embedded.preferences;
         $scope.form = {
             transcriptionDeskPosition: $scope.userPreferences.transcriptionDeskPosition,
             smartTEI: $scope.userPreferences.smartTEI,
@@ -98,12 +97,12 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             then(function (response) {
                 $log.debug(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";
-                $scope.remove.loading = false;
-                $scope.remove.success = true;
                 delete $rootScope.oauth;
                 delete $rootScope.user;
                 $cookies.remove('transcript_security_token_access');
                 $state.go('transcript.app.home');
+                $scope.remove.loading = false;
+                $scope.remove.success = true;
             }, function errorCallback(response) {
                 $scope.remove.loading = false;
                 if(response.data.code === 400) {

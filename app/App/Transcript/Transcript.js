@@ -18,7 +18,9 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             },
             ncyBreadcrumb: {
-                parent: 'transcript.app.edition({idEntity: idEntity, idResource: idResource})',
+                parent: function($scope) {
+                    return 'transcript.app.edition({idEntity: '+$scope.idEntity+', idResource: '+$scope.idResource+'})';
+                },
                 label: 'Transcription'
             },
             tfMetaTags: {
@@ -35,10 +37,10 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 transcript: function(TranscriptService, $transition$) {
                     return TranscriptService.getTranscript($transition$.params().idTranscript, 'id,pageTranscript,versioning');
                 },
-                idResource: function(ResourceService, $transition$) {
+                idResource: function($transition$) {
                     return $transition$.params().idResource;
                 },
-                idEntity: function(EntityService, $transition$) {
+                idEntity: function($transition$) {
                     return $transition$.params().idEntity;
                 },
                 thread: function(CommentService, $transition$) {
@@ -76,7 +78,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
         })
     }])
 
-    .controller('AppTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window) {
+    .controller('AppTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'idResource', 'idEntity', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, idResource, idEntity) {
 
     }])
 ;

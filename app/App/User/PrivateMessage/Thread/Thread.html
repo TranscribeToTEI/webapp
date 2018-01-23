@@ -9,18 +9,18 @@
 <main class="container" role="main">
     <div class="row">
         <div class="col-sm-10">
-            <h1 class="page-heading">Conversation avec {{ recipientUser.name }}</h1>
+            <h1 class="page-heading">Nouveau message</h1>
             <div ui-view="comment"></div>
         </div>
         <div class="col-sm-2">
             <div class=" text-center">
                 <div class="m-4">
                     <i ng-if="recipientUser.picture == null || recipientUser.picture == ''" class="text-light fa fa-user-circle  fa-5x" aria-hidden="true"></i>
-                    <img ng-if="recipientUser.picture != null && recipientUser.picture != ''" class="img-fluid img-rounded" src="{{ recipientUser.picture }}" />
+                    <img ng-if="recipientUser.picture != null && recipientUser.picture != ''" class="img-fluid img-rounded" src="{{ recipientUser.picture | imageRender }}" />
                 </div>
                 <div>
                     <h3><a class="text-dark" ui-sref="transcript.app.user.profile({id: recipientUser.id})">{{ recipientUser.name }}</a></h3>
-                    <span ng-repeat="role in recipientUser.roles" class="badge badge-pill badge-primary">{{ role }}</span>
+                    <span ng-repeat="role in recipientUser.roles" class="badge badge-pill badge-primary">{{ role | roleName }}</span>
                 </div>
             </div>
         </div>

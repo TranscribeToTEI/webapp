@@ -4,14 +4,17 @@ angular.module('transcript.service.comment-log', ['ui.router'])
 
     .service('CommentLogService', function($log, $http, $rootScope, $sce, $filter) {
         return {
-            getLogs: function(readByAdmin, count) {
+            getLogs: function(readByAdmin, count, privateId) {
                 let extra = [];
                 let extraStr = "";
-                if(readByAdmin !== undefined) {
+                if(readByAdmin !== undefined && readByAdmin != null && readByAdmin !== '') {
                     extra.push("readByAdmin="+readByAdmin);
                 }
-                if(count !== undefined) {
+                if(count !== undefined && count != null && count !== '') {
                     extra.push("count="+count);
+                }
+                if(privateId !== undefined && privateId != null && privateId !== '') {
+                    extra.push("private="+privateId);
                 }
                 if(extra.length > 0) {extraStr += "?"+extra.join('&');}
 

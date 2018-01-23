@@ -22,18 +22,35 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
                 threads: function(CommentService) {
                     return CommentService.getThreadsBySelfUser();
                 },
-                iUser: function(UserService, $transition$) {
-                    return UserService.getUser($transition$.params().id, "full");
+                iUser: function(UserService, $transition$, $rootScope) {
+                    if($rootScope.user.id !== $transition$.params().id) {
+                        return UserService.getUser($transition$.params().id, 'id,userProfile,userEmail,privateMessages');
+                    } else {
+                        return $rootScope.user;
+                    }
+                },
+                users: function(UserService) {
+                    return UserService.getUsers('id,name');
+                },
+                logs: function(CommentLogService, $transition$) {
+                    return CommentLogService.getLogs(null, null, $transition$.params().id);
                 }
             }
         })
     }])
 
-    .controller('AppUserPrivateMessageListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'flash', 'UserService', 'threads', 'iUser', function($log, $rootScope, $scope, $http, $sce, $state, flash, UserService, threads, iUser) {
+    .controller('AppUserPrivateMessageListCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'flash', 'UserService', 'threads', 'iUser', 'users', 'logs', function($log, $rootScope, $scope, $http, $sce, $state, $filter, flash, UserService, threads, iUser, users, logs) {
         $scope.threads = threads;
-        $log.debug($scope.threads);
-        $scope.iUser = iUser;
+        $scope.iUser = iUser;console.log($scope.iUser);
         $scope.UserService = UserService;
+        $scope.users = users; console.log($scope.users);
+        $scope.logs = logs;
+        $scope.recipient = null;
+
+        $scope.goToThread = function() {
+            $('#list-users-modal').modal('hide');
+            $state.go("transcript.app.user.private-message.thread", {idUser: $scope.iUser.id, idRecipient: $scope.recipient.originalObject.id});
+        };
 
         for(let idThread in $scope.threads) {
             let thread = $scope.threads[idThread];
@@ -41,14 +58,17 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
             if(parseInt(info[1]) === $scope.iUser.id) {
                 thread.iUser = info[1];
             } else {
-                thread.recipient = info[1];
+                thread.recipient = $filter('filter')($scope.users, {id: info[1]})[0];
             }
 
             if(parseInt(info[2]) === $scope.iUser.id) {
                 thread.iUser = info[2];
             } else {
-                thread.recipient = info[2];
+                thread.recipient = $filter('filter')($scope.users, {id: info[2]})[0];
             }
+
+            thread.logs = $filter('filter')($scope.logs, {thread: {id: thread.id}})
         }
+        console.log($scope.threads);
     }])
 ;

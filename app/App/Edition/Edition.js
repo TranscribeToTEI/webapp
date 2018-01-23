@@ -60,6 +60,12 @@ angular.module('transcript.app.edition', ['ui.router'])
             modal: false
         };
 
+        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
+        if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
+            $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
+        }
+        $log.debug($scope.currentEdition);
+        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
 
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Transcription button status */
@@ -101,8 +107,8 @@ angular.module('transcript.app.edition', ['ui.router'])
             $scope.buttonTranscript.modal = false;
         } else if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
             $scope.buttonTranscript.label = "<i class=\"fa fa-pencil-square-o\"></i> En cours d'édition par "+ $scope.currentEdition.createUser.name;
-            $scope.buttonTranscript.enable = true;
-            $scope.buttonTranscript.class = "nav-link bg-warning text-white";
+            $scope.buttonTranscript.enable = false;
+            $scope.buttonTranscript.class = "nav-link bg-warning text-white disabled";
             $scope.buttonTranscript.modal = false;
         }
 
@@ -158,13 +164,6 @@ angular.module('transcript.app.edition', ['ui.router'])
             $scope.encodedContent = TranscriptService.encodeHTML($scope.resource.transcript.content, $scope.config.tags, $scope.microObjects.active, $scope.teiInfo);
         };
         /* Content Management --------------------------------------------------------------------------------------- */
-
-        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
-        if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
-            $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
-        }
-        $log.debug($scope.currentEdition);
-        /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
 
         /* -- Modal Login management -------------------------------------------------------------------------------- */
         $scope.goRegister = function() {
