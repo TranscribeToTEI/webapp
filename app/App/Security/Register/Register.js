@@ -35,6 +35,7 @@ angular.module('transcript.app.security.register', ['ui.router'])
                 plain: null,
                 confirmation: null
             },
+            hasAcceptedConditions: false,
             errors: []
         };
         $scope.submit = {
@@ -54,7 +55,8 @@ angular.module('transcript.app.security.register', ['ui.router'])
                         'plainPassword': {
                             'first': $scope.form.password.plain,
                             'second': $scope.form.password.confirmation
-                        }
+                        },
+                        'hasAcceptedConditions': $scope.form.hasAcceptedConditions
                     }
                 })
                 .then(function (response) {

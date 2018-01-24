@@ -19,10 +19,16 @@ angular.module('transcript.admin.home', ['ui.router'])
                 title: 'Accueil | Administration',
             },
             resolve: {
-                accesses: function(AccessService) {
-                    return AccessService.getAccesses().then(function(data){
-                        return data;
-                    });
+                accesses: function(AccessService, AppService, $rootScope) {
+                    if($rootScope.preferences === undefined) {
+                        $rootScope.preferences = AppService.getPreference();
+                    }
+
+                    if($rootScope.preferences !== undefined && $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization') {
+                        return AccessService.getAccesses();
+                    } else {
+                        return null;
+                    }
                 },
                 transcriptsToValidate: function(TranscriptService) {
                     return TranscriptService.getTranscriptsByStatus('validation').then(function(data){

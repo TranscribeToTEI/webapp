@@ -66,13 +66,13 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         return null;
                     },
                     testators: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('testators');
+                        return TaxonomyService.getTaxonomyEntities('testators', 'index');
                     },
                     places: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('places');
+                        return TaxonomyService.getTaxonomyEntities('places', 'index');
                     },
                     militaryUnits: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('military-units');
+                        return TaxonomyService.getTaxonomyEntities('military-units', 'index');
                     }
                 }
             })
@@ -165,8 +165,8 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         /* -- End : Functions Loader -------------------------------------------------------------------------------- */
 
         /* -- Scope management -------------------------------------------------------------------------------------- */
-        $scope.testators = $filter('orderBy')(testators, 'surname');
-        $scope.places = places;
+        $scope.testators = $filter('orderBy')(testators, 'indexName');
+        $scope.places = $filter('orderBy')(places, 'indexName');
         $scope.militaryUnits = $filter('orderBy')(militaryUnits, 'name');
         $scope.entities = entities;
 

@@ -15,7 +15,7 @@
                 <div class="float-right mt-3" ng-if="((user.roles | contains:'ROLE_TAXONOMY_EDIT') && (preferences.taxonomyEditAccess == 'selfAuthorization' || preferences.taxonomyEditAccess == 'controlledAuthorization')) || preferences.taxonomyEditAccess == 'free' || ((user.roles | contains:'ROLE_MODO') || (user.roles | contains:'ROLE_ADMIN') || (user.roles | contains:'ROLE_SUPER_ADMIN'))">
                     <a class="btn btn-light" ui-sref="transcript.app.taxonomy.edit({type: entity.dataType, id: entity.id})"><i class="fa fa-edit"></i> Modifier</a>
                 </div>
-                <h1 class="page-heading"><span ng-if="entity.dataType != 'places'">{{ entity.name }}</span><span ng-if="entity.dataType == 'places'">{{ entity | taxonomyEntityNameConstruct:'places' }}</span></h1>
+                <h1 class="page-heading"><span ng-if="entity.dataType != 'places'">{{ entity.name }}</span><span ng-if="entity.dataType == 'places'">{{ entity | taxonomyEntityNameConstruct:'places':'index' }}</span></h1>
             </nav>
 
             <div ng-if="entity.dataType == 'places' && entity.geographicalCoordinates != null">
@@ -42,6 +42,9 @@
             </div>
 
             <hr />
+            <div class="alert alert-info">
+                <p>Vous en savez plus sur <span ng-if="entity.dataType != 'places'">{{ entity.name }}</span><span ng-if="entity.dataType == 'places'">{{ entity | taxonomyEntityNameConstruct:'places':'index' }}</span> ? <a ui-sref="transcript.app.contact">Vous pouvez nous écrire en utilisant le formulaire prévu à cet effet</a>.<br />Ou discutez ci-dessous avec le reste de la communauté.</p>
+            </div>
             <div ui-view="comment"></div>
         </div>
         <div class="col-sm-4 pl-0 pr-0 pb-2 bg-white" ng-include="'/webapp/app/App/Taxonomy/tpl/entities.html'"></div>

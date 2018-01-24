@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-auto">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
             </div>
-            <div class="text-justify mt-2 pr-md-3" ng-bind-html="content.content"></div>
+            <div class="text-justify mt-2 pr-md-3" ng-bind-html="content.content | trustAsHtml"></div>
             <div ng-if="content.enableComments == true" ui-view="comment"></div>
         </div>
         <div class="col-md-4 order-md-1">
@@ -63,6 +63,17 @@
                         <span ng-if="content.id === iContent.id">{{ iContent.title }}</span>
                     </li>
                 </ul>
+            </div>
+
+            <div class="card bg-primary" ng-if="(content.type == 'helpContent' || (content.type == 'staticContent' && content.staticCategory === 'helpHome')) && (user !== undefined && user !== null)">
+                <h2 class="card-header bg-dark text-white">Tutoriel de formation</h2>
+                <div class="card-content p-1">
+                    <p>Suivez notre tutoriel de formation pour vous entrainer avant de transcrire.</p>
+                    <p class="text-center">
+                        <a class="btn btn-secondary text-white" ui-sref="transcript.app.training.content({order: '0'})" ng-if="user._embedded.preferences.tutorialStatus == 'todo' || user._embedded.preferences.tutorialStatus == 'done' || user._embedded.preferences.tutorialStatus == 'notInterested'">Accéder au tutoriel</a>
+                        <a class="btn btn-secondary text-white" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" ng-if="user._embedded.preferences.tutorialStatus == 'inProgress'">Accéder au tutoriel</a>
+                    </p>
+                </div>
             </div>
         </div>
     </div>

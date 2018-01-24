@@ -1,4 +1,4 @@
-<div>
+<div ng-if="user !== undefined && user !== null">
     <h4 class="sr-only">Participez à la discussion</h4>
     <form id="comment-thread-contribute-form">
         <div class="form-group comment-post-form-group">
@@ -7,7 +7,7 @@
         </div>
         <div id="comment-thread-contribute-form-footer">
             <button class="btn btn-sm" type="button"
-                    ng-class="{'btn-success': comment.action.success == true, 'btn-primary': comment.action.success != true}"
+                    ng-class="{'btn-success': comment.action.success == true, 'btn-primary': comment.action.success != true, 'disabled': (user === undefined || user === null)}"
                     ng-click="comment.action.post()">
                 <span ng-if="comment.action.success == false && comment.action.loading == false">Soumettre</span>
                 <span ng-if="comment.action.success == false && comment.action.loading == true">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>

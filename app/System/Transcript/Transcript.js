@@ -2,7 +2,7 @@
 
 angular.module('transcript.system.transcript', ['ui.router'])
 
-    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
+    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', '$cookies', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, $cookies, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
             $log.debug('Redirection to edition -> Already in edition');
@@ -188,7 +188,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Updating Transcript Log */
             /* ---------------------------------------------------------------------------------------------------------- */
-            console.log($transitions);
             if($scope.transcriptConfig.isExercise === false) {
                 if ($scope.transcript._embedded.isCurrentlyEdited === false) {
                     console.log('creation of transcript log -> Transcript is now closed');
@@ -205,6 +204,22 @@ angular.module('transcript.system.transcript', ['ui.router'])
             } else {
                 $scope.currentLog = null;
             }
+
+            // In case of closing window:
+            $scope.exitOAuth = JSON.parse($cookies.get('transcript_security_token_access'))['access_token'];
+            $scope.onExit = function() {
+                if ($scope.transcriptConfig.isExercise === false) {
+                    let data = angular.toJson({isCurrentlyEdited: false});
+                    // We use an XMLHttpRequest to override the asynchronous request of $http, in order to patch before closing tab
+                    let xmlhttp = new XMLHttpRequest();
+                    xmlhttp.open("PATCH", $rootScope.api+"/transcript-logs/"+$scope.currentLog.id, false);//the false is for making the call synchronous
+                    xmlhttp.setRequestHeader("Content-type", "application/json");
+                    xmlhttp.setRequestHeader("Authorization", "Bearer "+$scope.exitOAuth);
+                    xmlhttp.send(data);
+                    console.log('ok');
+                }
+            };
+            $window.onbeforeunload =  $scope.onExit;
             /* End: Updating Transcript Log ----------------------------------------------------------------------------- */
 
             /* ---------------------------------------------------------------------------------------------------------- */
@@ -523,7 +538,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     }
                     return false;
                 }, false);
-                $scope.aceEditor.container.addEventListener("click", function (e) {
+                /*$scope.aceEditor.container.addEventListener("click", function (e) {
                     e.preventDefault();
 
                     // -- Right click management:
@@ -534,11 +549,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     }
 
                     $scope.$apply(function () {
-                        /* Computing of current tag value */
+                        // Computing of current tag value
                         $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                     });
                     return false;
-                }, false);
+                }, false);*/
                 $scope.aceEditor.container.addEventListener("contextmenu", function (e) {
                     e.preventDefault();
 
@@ -1366,18 +1381,16 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * Change page alert management & transcript log management
              */
             $transitions.onBefore({}, (trans) => {
-                if(trans.to().name !== "transcript.app.transcript") {
-                    if ((($scope.transcript.content === null || $scope.transcript.content === '') && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
-                        if ($scope.transcriptConfig.isExercise === false) {
-                            console.log('get through onBefore');
-                            TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
-                        }
-                    } else {
-                        $log.debug('ask for leave');
-                        $window.history.back();
-                        $('#transcript-edit-modal').modal('show');
-                        return false;
+                if ((($scope.transcript.content === null || $scope.transcript.content === '') && ($scope.transcriptArea.ace.area === null || $scope.transcriptArea.ace.area === '')) || $scope.transcript.content === $scope.transcriptArea.ace.area || $scope.transcriptConfig.isExercise === true) {
+                    if ($scope.transcriptConfig.isExercise === false) {
+                        console.log('get through onBefore');
+                        TranscriptLogService.patchTranscriptLog({isCurrentlyEdited: false}, $scope.currentLog.id);
                     }
+                } else {
+                    $log.debug('ask for leave');
+                    $window.history.back();
+                    $('#transcript-edit-modal').modal('show');
+                    return false;
                 }
             });
             /* Submit Management ---------------------------------------------------------------------------------------- */

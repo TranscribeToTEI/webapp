@@ -58,7 +58,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
         /* End: Entities sort management ---------------------------------------------------------------------------- */
 
         /* -- Place's map management -------------------------------------------------------------------------------- */
-        if($scope.entity.dataType === 'places' && $scope.entity.geographicalCoordinates !== null) {
+        if($scope.entity.dataType === 'places' && $scope.entity.geographicalCoordinates !== undefined && $scope.entity.geographicalCoordinates !== null) {
             // Doc is here: http://tombatossals.github.io/angular-leaflet-directive/#!/examples/center
             let coord = $scope.entity.geographicalCoordinates.split('+');
             angular.extend($scope, {

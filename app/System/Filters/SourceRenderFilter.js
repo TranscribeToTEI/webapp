@@ -14,7 +14,7 @@ angular.module('transcript.filter.sourceRender', ['ui.router'])
                 value = "",
                 sourceTypeTitle = {
                     "TES": {name: "testateur", article: "le "},
-                    "NOT": {name: "notaire", article: "le "},
+                    "NOT": {name: "minute notariale", article: "la "},
                     "MDH": {name: "mémoire des Hommes", article: ""},
                     "EC": {name: "état civil", article: "l'"},
                     "AS": {name: "autre source", article: "une "}

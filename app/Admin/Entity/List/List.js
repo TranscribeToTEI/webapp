@@ -20,7 +20,7 @@ angular.module('transcript.admin.entity.list', ['ui.router'])
             },
             resolve: {
                 entities: function(EntityService) {
-                    return EntityService.getEntities();
+                    return EntityService.getEntities('listEntities,id');
                 }
             }
         })

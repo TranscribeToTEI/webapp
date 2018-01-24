@@ -13,7 +13,6 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuNavResources">
                         <li ng-repeat="iResource in entity.resources">
                             <a class="dropdown-item" ng-if="iResource.id != resource.id" ui-sref="transcript.app.edition({idEntity: entity.id, idResource: iResource.id})">{{ iResource.type | ucFirstStrict }} {{ iResource.orderInWill }}</a>
-                            <span class="dropdown-item" ng-if="iResource.id == resource.id">{{ iResource.type | ucFirstStrict }} {{ iResource.orderInWill }}</span>
                         </li>
                     </ul>
                 </li>

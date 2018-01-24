@@ -1,4 +1,4 @@
-<div id="transcript-edit" class="h-100">
+<div id="transcript-edit" class="mh-100">
     <div id="transcript-content-heading">
         <div class="float-right">
             <div class="btn-group" role="group">
@@ -8,15 +8,15 @@
         </div>
         <h3 class="card-header bg-light d-block">Transcription TEI</h3>
     </div>
-    <div class="h-100">
-        <div id="transcript-edit-editor" style="height: calc(100% - 22px);">
-            <div id="transcript-edit-editor-ace" class="h-100">
+    <div class="mh-100">
+        <div id="transcript-edit-editor" style="max-height: calc(100% - 22px);">
+            <div id="transcript-edit-editor-ace" class="mh-100">
                 <div ui-ace="{
                     mode: 'xml',
                     onLoad: aceLoaded,
                     onChange: aceChanged,
                     useWrapMode: true
-                    }" id="transcript-edit-editor-ace-area" class="h-100"  data-ng-model="transcriptArea.ace.area"></div>
+                    }" id="transcript-edit-editor-ace-area" class="mh-100"  data-ng-model="transcriptArea.ace.area"></div>
             </div>
         </div>
         <div id="transcript-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-title">

@@ -41,7 +41,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         })
     }])
 
-    .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', 'teiInfo', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, ResourceService, UserService, TranscriptService, flash, entity, config, resource, teiInfo) {
+    .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', '$window', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', 'teiInfo', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, $window, ResourceService, UserService, TranscriptService, flash, entity, config, resource, teiInfo) {
         $scope.entity = entity; $log.debug($scope.entity);
         $scope.resource = resource; $log.debug($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
@@ -59,6 +59,7 @@ angular.module('transcript.app.edition', ['ui.router'])
             class: "",
             modal: false
         };
+        $scope.screenWidth = $window.innerWidth;
 
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
         if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
@@ -70,7 +71,12 @@ angular.module('transcript.app.edition', ['ui.router'])
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Transcription button status */
         /* ---------------------------------------------------------------------------------------------------------- */
-        if($scope.resource.transcript._embedded.isCurrentlyEdited === false && $scope.role === 'readOnly' && ($scope.resource.transcript.status !== 'validation' || $scope.resource.transcript.status !== 'validated')) {
+        if($scope.screenWidth < 992) {
+            $scope.buttonTranscript.label = "<i class=\"fa fa-compress\"></i> Ecran trop petit";
+            $scope.buttonTranscript.enable = false;
+            $scope.buttonTranscript.class = "nav-link bg-primary disabled";
+            $scope.buttonTranscript.modal = "edition-size-modal";
+        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && $scope.role === 'readOnly' && ($scope.resource.transcript.status !== 'validation' || $scope.resource.transcript.status !== 'validated')) {
             $scope.buttonTranscript.label = "<i class=\"fa fa-edit\"></i> Participer à la transcription";
             $scope.buttonTranscript.enable = false;
             $scope.buttonTranscript.class = "nav-link bg-primary";

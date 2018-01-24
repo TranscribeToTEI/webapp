@@ -47,7 +47,7 @@
                     <div class="col-md-8">
                         <div class="checkbox">
                             <label class="custom-control custom-checkbox">
-                                <input ng-model="acceptCGU" class="custom-control-input" type="checkbox">
+                                <input ng-model="form.hasAcceptedConditions" class="custom-control-input" type="checkbox">
                                 <span class="custom-control-indicator"></span>
                                 <span class="custom-control-description">En m'inscrivant, j'accepte la <a href="#">charte d'utilisation du site et ses mentions légales</a>.</span>
                             </label>
@@ -57,7 +57,7 @@
                 <div class="row text-right">
                     <div class="col-12">
                         <button class="btn btn-sm" type="button"
-                                ng-disabled="!(!!form.name && !!form.email && !!form.password.plain && !!form.password.confirmation && (form.password.plain === form.password.confirmation) && acceptCGU == true)"
+                                ng-disabled="!(!!form.name && !!form.email && !!form.password.plain && !!form.password.confirmation && (form.password.plain === form.password.confirmation) && form.hasAcceptedConditions == true)"
                                 ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
                                 ng-click="submit.action()">
                             <span ng-if="submit.success == false && submit.loading == false">Créer mon compte</span>
