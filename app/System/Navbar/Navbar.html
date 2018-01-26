@@ -1,4 +1,21 @@
 <div class="row align-items-end header">
+    <div class="col-10 p-0"></div>
+    <div class="col-2 user-nav p-0">
+        <div class="header-user">
+            <a ng-if="user != null" ui-sref="transcript.app.user.profile({id: user.id})">
+                <i ng-if="user.picture == null || user.picture == ''" class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                <img ng-if="user.picture != null && user.picture != ''" class="img-fluid rounded-circle" src="{{ user.picture | imageRender }}" />
+                {{ user.name }}
+            </a>
+            <div ng-if="user == null">
+                <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                Espace utilisateur
+            </div>
+        </div>
+	</div>
+</div>
+
+<div class="row">
     <div class="col main-nav p-0">
         <nav role="navigation" id="main-nav" class="navbar navbar-expand-lg navbar-light">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,27 +42,9 @@
                         </div>
                     </li>
                     <li class="nav-item" ng-if="preferences.aboutContent != null"><a class="nav-link" ui-sref="transcript.app.content({id: preferences.aboutContent})">a propos</a></li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="col-2 user-nav p-0">
-        <div class="header-user">
-            <a ng-if="user != null" ui-sref="transcript.app.user.profile({id: user.id})">
-                <i ng-if="user.picture == null || user.picture == ''" class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-                <img ng-if="user.picture != null && user.picture != ''" class="img-fluid rounded-circle" src="{{ user.picture | imageRender }}" />
-                {{ user.name }}
-            </a>
-            <div ng-if="user == null">
-                <i class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
-                Espace utilisateur
-            </div>
-        </div>
 
-        <nav id="user-nav">
-            <ul class="navbar-nav">
                 <li ng-if="user == null" class="unlogged">
-                    <a class="nav-link" ui-sref="transcript.app.security.register">s'inscrire</a> <span>|</span> <a  class="nav-link" ui-sref="transcript.app.security.login">se connecter</a>
+                    <div class="nav-link"><a class="d-inline-block" ui-sref="transcript.app.security.register">s'inscrire</a> <span>|</span> <a  class="d-inline-block" ui-sref="transcript.app.security.login">se connecter</a></div>
                 </li>
                 <li ng-if="user != null" id="user-menu" class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">tableau de bord <span class="badge badge-danger" ng-if="user._embedded.unreadMessages > 0">{{ user._embedded.unreadMessages }}</span></a>

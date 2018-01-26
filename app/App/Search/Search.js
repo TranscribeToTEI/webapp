@@ -252,8 +252,8 @@ angular.module('transcript.app.search', ['ui.router'])
                         draggable: false,
                         icon: {
                             iconUrl: '/webapp/app/web/images/markers/'+iconMarker+'.png',
-                            iconAnchor: [12, 41],
-                            popupAnchor: [0, -40],
+                            iconAnchor: [8, 23],
+                            popupAnchor: [0, -22],
                         }
                     };
                     markers[id] = marker;

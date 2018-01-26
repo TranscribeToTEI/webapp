@@ -113,6 +113,7 @@ angular.module('transcriptApp', [
         'transcript.filter.contentTypeName',
         'transcript.filter.encodeXML',
         'transcript.filter.imageRender',
+        'transcript.filter.internalAttributesRender',
         'transcript.filter.prefixRender',
         'transcript.filter.objectToId',
         'transcript.filter.resourceTypeName',
@@ -293,7 +294,9 @@ angular.module('transcriptApp', [
         };
         /* -- End : Resource label management -------------------------------------------- */
 
-        $('[data-toggle="tooltip"]').tooltip();
-        $('.tooltip').tooltip();
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+            $('.tooltip').tooltip();
+        })
     }])
 ;

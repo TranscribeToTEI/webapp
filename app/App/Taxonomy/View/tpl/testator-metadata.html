@@ -66,10 +66,12 @@
     <dt class="col-sm-4">Incorporation</dt>
     <dd class="col-sm-8">
         {{ entity.rank | sourceRender:'MDH|NOT|TES|EC|AS':true }}
-        <span class="text-danger" ng-if="entity.rank && (entity.militaryUnitString || entity.militaryUnitNormalized)">|</span>
+        <span class="text-danger" ng-if="entity.rank && entity.militaryUnitDeploymentString">|</span>
+        {{ entity.militaryUnitDeploymentString | sourceRender:'MDH|NOT|TES|EC|AS':true }}
+        <span class="text-danger">|</span>
         <a ng-if="entity.militaryUnitNormalized" ui-sref="transcript.app.taxonomy.view({type: 'military-units', id: entity.militaryUnitNormalized.id})">
-            <span ng-if="entity.militaryUnitString" ng-bind="entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true"></span>
-            <span ng-if="!entity.militaryUnitString" ng-bind="entity.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
+            <span ng-if="!entity.militaryUnitNormalized" ng-bind="entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true"></span>
+            <span ng-if="entity.militaryUnitNormalized" ng-bind="entity.militaryUnitNormalized | taxonomyEntityNameConstruct:'military-units'"></span>
         </a>
         <span ng-if="entity.militaryUnitString && !entity.militaryUnitNormalized">{{ entity.militaryUnitString | sourceRender:'MDH|NOT|TES|EC|AS':true }}</span>
     </dd>
@@ -78,7 +80,8 @@
 <div class="row mt-4">
     <div class="col-md-12 ml-2">
         <h4 class="mb-1"><strong>Mémoire des hommes</strong></h4>
-        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 1">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
+        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes" ng-if="memoireDesHommes.includes('http://')"><i class="fa fa-angle-right" aria-hidden="true"></i> <a href="{{ memoireDesHommes }}" target="_blank">Voir la fiche <span ng-if="entity.memoireDesHommes.length > 1">n°{{$index+1}}</span> sur Mémoire des hommes</a></div>
+        <div ng-repeat="memoireDesHommes in entity.memoireDesHommes" ng-if="!memoireDesHommes.includes('http://')"><i class="fa fa-angle-right" aria-hidden="true"></i> Aucune fiche trouvée sur Mémoire des Hommes</div>
     </div>
 </div>
 

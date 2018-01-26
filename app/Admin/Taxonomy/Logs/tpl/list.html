@@ -11,9 +11,9 @@
 
 <div class="tab-content">
     <ul  class="tab-content" data-ng-if="logContainers.length > 0">
-        <li data-ng-repeat="iLogContainer in logContainers | orderBy:'log.loggedAt':'DESC'">
-            <a data-ng-if="iLogContainer.log.id !== logContainer.log.id" ui-sref="transcript.admin.taxonomy.logs.view({types: dataType, id: iLogContainer.log.id})">{{ iLogContainer.log.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.title }}</a>
-            <span data-ng-if="iLogContainer.log.id === logContainer.log.id">{{ iLogContainer.log.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.title }}</span>
+        <li data-ng-repeat="iLogContainer in logContainers | orderBy:'loggedAt':'DESC'">
+            <a data-ng-if="iLogContainer.logId !== logContainer.log.id" ui-sref="transcript.admin.taxonomy.logs.view({types: dataType, id: iLogContainer.logId})">{{ iLogContainer.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.title }}</a>
+            <span data-ng-if="iLogContainer.logId === logContainer.log.id">{{ iLogContainer.loggedAt|date:'dd-MM-yyyy à HH:mm:ss' }}: {{ iLogContainer.title }}</span>
         </li>
     </ul>
 </div>

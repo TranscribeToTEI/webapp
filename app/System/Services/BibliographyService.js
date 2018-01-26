@@ -62,13 +62,18 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                 });
             },
 
-            getBibliographiesBy: function(type, id) {
+            getBibliographiesBy: function(type, id, profile) {
+                let profileStr = "";
+                if(profile !== undefined) {
+                    profileStr = "&profile="+profile;
+                }
+
                 if(type === 'entities') {type = 'entity';}
                 else if(type === 'places') {type = 'place';}
                 else if(type === 'testators') {type = 'testator';}
                 else if(type === 'military-units') {type = 'military-unit';}
 
-                return $http.get($rootScope.api+"/reference-items?"+type+"="+id
+                return $http.get($rootScope.api+"/reference-items?"+type+"="+id+profileStr
                 ).then(function(response) {
                     return response.data;
                 }, function errorCallback(response) {

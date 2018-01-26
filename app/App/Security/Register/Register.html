@@ -48,9 +48,11 @@
                         <div class="checkbox">
                             <label class="custom-control custom-checkbox">
                                 <input ng-model="form.hasAcceptedConditions" class="custom-control-input" type="checkbox">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">En m'inscrivant, j'accepte la <a href="#">charte d'utilisation du site et ses mentions légales</a>.</span>
+                                <span class="custom-control-label">En m'inscrivant, j'accepte la <a href="#">charte d'utilisation du site et ses mentions légales</a>.</span>
                             </label>
+                        </div>
+                        <div class="alert alert-primary" ng-if="form.hasAcceptedConditions === true">
+                            En acceptant, vous vous engagez notamment à <strong>ce que vos contributions soient libres de droit</strong> et à <strong>respecter les règles de courtoisie et de transcription</strong> du projet.
                         </div>
                     </div>
                 </div>

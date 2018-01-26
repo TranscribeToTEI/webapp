@@ -21,13 +21,13 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
                 },
                 resolve: {
                     entity: function(EntityService, $transition$) {
-                        return EntityService.getEntity($transition$.params().id);
+                        return EntityService.getEntity($transition$.params().id, 'id,adminEntity');
                     },
                     places: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('places');
+                        return TaxonomyService.getTaxonomyEntities('places', 'index');
                     },
                     testators: function(TaxonomyService) {
-                        return TaxonomyService.getTaxonomyEntities('testators');
+                        return TaxonomyService.getTaxonomyEntities('testators', 'index');
                     },
                     organizations: function(HostingOrganizationService) {
                         return HostingOrganizationService.getOrganizations();
@@ -114,18 +114,10 @@ angular.module('transcript.admin.entity.edit', ['ui.router'])
         /* ---------------------------------------------------------------------------------------------------------- */
         /* Taxonomy management */
         /* ---------------------------------------------------------------------------------------------------------- */
-        $scope.testators = $filter('orderBy')(testators, 'surname');
+        $scope.testators = $filter('orderBy')(testators, 'indexName');
         $scope.organizations = $filter('orderBy')(organizations, 'name');
         $scope.willTypes = $filter('orderBy')(willTypes, 'name');
-        /* Place names management ----------------------------------------------------------------------------------- */
-        $scope.places = places;
-        for(let iEntity in $scope.places) {
-            if($scope.places[iEntity].names.length > 0) {
-                $scope.places[iEntity].name = $scope.places[iEntity].names[0].name;
-            }
-        }
-        $scope.places = $filter('orderBy')($scope.places, 'name');
-        /* End: Place names management ------------------------------------------------------------------------------ */
+        $scope.places = $filter('orderBy')(places, 'indexName');
         /* End: Taxonomy management --------------------------------------------------------------------------------- */
 
         /* ---------------------------------------------------------------------------------------------------------- */

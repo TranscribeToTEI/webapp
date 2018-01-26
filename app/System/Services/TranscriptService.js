@@ -269,9 +269,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                 if(extraTooltip !== null) {
                     if(extraTooltip.type === 'tooltip') {
-                        attributesHtml += ' data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" tooltip';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip(\'show\')"';
                     } else if(extraTooltip.type === 'popover') {
-                        attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" ';
                     }
                 }
                 /* End: Attributes management ----------------------------------------------------------------------- */
@@ -602,6 +602,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
+                console.log('getTEIElementInformation');
                 if(!leftOfCursor || !rightOfCursor) { return null; }
                 // $log.debug(leftOfCursor);
                 // $log.debug(rightOfCursor);
@@ -903,8 +904,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             htmlToReturn += '<li class="dropdown-divider"></li>';
                         }
 
-                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
-                                        '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', '+null+')" title="'+ button.btn.title +'" class="'+btnClass+'" ng-class="{\'disabled\': button.btn.enabled == false}">' +
+                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null" ng-if="(transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:button.btn.id))">' +
+                                        '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', \''+ $filter('internalAttributesRender')(button.xml.attributes) +'\')" title="'+ button.btn.title +'" class="'+btnClass+'" ng-class="{\'disabled\': button.btn.enabled == false}">' +
                                         '       <i class="'+ button.btn.icon +'"></i> ' +
                                                 $filter('ucFirstStrict')(btnContent) +
                                         '   </a>' +
@@ -937,7 +938,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     circleColor += "red-color";
                                 }
                                 htmlToReturn += '       <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
-                                                '           <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', ' + null + ')" title="' + subButton.btn.title + '" class="' + btnClass + '"  ng-class="{\'disabled\': button.btn.enabled == false}">' +
+                                                '           <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', \'' + $filter('internalAttributesRender')(subButton.xml.attributes) + '\')" title="' + subButton.btn.title + '" class="' + btnClass + '"  ng-class="{\'disabled\': button.btn.enabled == false}">' +
                                                 '               <i class="' + subButton.btn.icon + '"></i> ' +
                                                                 $filter('ucFirstStrict')(btnContent) +
                                                 '           </a>' +

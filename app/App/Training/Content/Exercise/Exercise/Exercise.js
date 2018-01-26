@@ -27,49 +27,51 @@ angular.module('transcript.app.training.content.exercise.exercise', ['ui.router'
                 title: '{{ trainingContent.title }}',
             },
             resolve: {
-                transcript: function() {
-                    return {
-                        "content": null,
-                        "status": "todo",
-                        "continueBefore": false,
-                        "continueAfter": false,
-                        "createUser": null,
-                        "createDate": null,
-                        "updateUser": null,
-                        "updateDate": null,
-                        "updateComment": "Création du fichier de transcription",
-                        "_embedded": {
-                            "version": [],
-                            "resource": {
-                                "entity": {
-                                    "willNumber": null,
-                                    "will": null,
-                                    "resources": [],
-                                    "isShown": true,
+                transcript: function(TrainingContentService, $transition$) {
+                    return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(response) {
+                        return {
+                            "content": response.exercisePreloadText,
+                            "status": "todo",
+                            "continueBefore": false,
+                            "continueAfter": false,
+                            "createUser": null,
+                            "createDate": null,
+                            "updateUser": null,
+                            "updateDate": null,
+                            "updateComment": "Création du fichier de transcription",
+                            "_embedded": {
+                                "version": [],
+                                "resource": {
+                                    "entity": {
+                                        "willNumber": null,
+                                        "will": null,
+                                        "resources": [],
+                                        "isShown": true,
+                                        "createUser": null,
+                                        "createDate": null,
+                                        "updateUser": null,
+                                        "updateDate": null,
+                                        "_embedded": {
+                                            "status": "todo"
+                                        }
+                                    },
+                                    "type": "page",
+                                    "orderInWill": 1,
+                                    "images": [
+                                        "FRAN_Poilus_t-0001_01"
+                                    ],
+                                    "notes": null,
+                                    "transcript": null,
                                     "createUser": null,
                                     "createDate": null,
                                     "updateUser": null,
                                     "updateDate": null,
-                                    "_embedded": {
-                                        "status": "todo"
-                                    }
                                 },
-                                "type": "page",
-                                "orderInWill": 1,
-                                "images": [
-                                    "FRAN_Poilus_t-0001_01"
-                                ],
-                                "notes": null,
-                                "transcript": null,
-                                "createUser": null,
-                                "createDate": null,
-                                "updateUser": null,
-                                "updateDate": null,
-                            },
-                            "isCurrentlyEdited": false,
-                            "logs": []
-                        }
-                    };
+                                "isCurrentlyEdited": false,
+                                "logs": []
+                            }
+                        };
+                    });
                 },
                 teiInfo: function(TranscriptService) {
                     return TranscriptService.getTeiInfo();

@@ -8,27 +8,26 @@
                         <div id="app-transcript-edit-submit-continueBefore-group" class="form-group">
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" ng-model="submit.form.continueBefore" id="app-transcript-edit-submit-continueBefore" name="app-transcript-edit-submit-continueBefore" type="checkbox" value="1">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Cochez cette case si le paragraphe du début de page commençait sur la page précédente.</span>
+                                <span class="custom-control-label">Cochez cette case si le paragraphe du début de page commençait sur la page précédente.</span>
                             </label>
                         </div>
                         <div id="app-transcript-edit-submit-continueAfter-group" class="form-group">
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" ng-model="submit.form.continueAfter" id="app-transcript-edit-submit-continueAfter" name="app-transcript-edit-submit-continueAfter" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Cochez cette case si le paragraphe de fin de page continue sur la page suivante.</span>
+                                <span class="custom-control-label">Cochez cette case si le paragraphe de fin de page continue sur la page suivante.</span>
                             </label>
                         </div>
-                        <label><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ user.name }}</label>
+                        <label class="mt-2"><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ user.name }}</label>
                         <p for="app-transcript-edit-submit-comment" class="sr-only">Description de votre contribution</p>
                         <div id="app-transcript-edit-submit-comment-group" class="form-group">
                             <input ng-model="submit.form.comment" type="text" class="form-control form-control-sm" id="app-transcript-edit-submit-comment" name="app-transcript-edit-submit-comment" placeholder="Pouvez-vous décrire votre contribution en quelques mots ?" maxlength="250" />
                         </div>
-                        <div id="app-transcript-edit-submit-isEnded-group" class="form-group">
+                        <div id="app-transcript-edit-submit-isEnded-group" class="mt-4 form-group">
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" ng-model="submit.form.isEnded" id="app-transcript-edit-submit-isEnded" name="app-transcript-edit-submit-isEnded" type="checkbox" value="1">
                                 <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description">Cochez cette case si vous estimez que la transcription est <strong>totalement</strong> achevée.</span>
+                                <span class="custom-control-label">Cochez cette case si vous estimez que la transcription est <strong>totalement</strong> achevée.</span>
                             </label>
                         </div>
                         <div id="transcript-check" ng-if="submit.form.isEnded == true" ng-include="'/webapp/app/System/Transcript/tpl/transcript-check.html'"></div>

@@ -30,7 +30,7 @@ angular.module('transcript.app.taxonomy.view', ['ui.router'])
                     return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                 },
                 bibliographies: function(BibliographyService, $transition$) {
-                    return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
+                    return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id, "id,bibliography");
                 },
                 thread: function(CommentService, $transition$) {
                     return CommentService.getThread($transition$.params().type+'-'+$transition$.params().id);

@@ -1,11 +1,13 @@
-<div class="row mb-5">
-    <div class="col-auto mr-auto">
+<div class="row">
+	<div class="col-12">
         <h1 class="page-heading mb-0"><i class="fa fa-edit" aria-hidden="true"></i> {{ entity.will.title }} - {{ resource.type | ucfirst }} {{resource.orderInWill}}</h1>
         <span class="badge badge-status" data-ng-class="getStatusClassLabel(transcript.status)">{{ transcript.status | transcriptionStatusName:entity.isShown }}</span>
     </div>
-    <div class="col-auto  justify-content-end">
-        <nav class="mt-4">
-            <ul class="nav nav-pills">
+ </div> 
+ <div class="row justify-content-end my-3">
+	<div class="col-md-6 offset-md-6">
+		<nav>
+			<ul class="nav nav-pills float-right">
                 <li class="nav-item" data-ng-if="transcript.status == 'validation'">
                     <a data-ng-click="admin.validation.accept.action()" class="nav-link bg-success">
                         <span data-ng-if="admin.validation.accept.loading == false">Valider <i class="fa fa-check"></i></span>

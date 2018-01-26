@@ -34,7 +34,9 @@
                         <td><a ui-sref="transcript.admin.training.view({id: trainingContent.id})">{{ trainingContent.title }}</a></td>
                         <td>{{ trainingContent.pageType | trainingTypePageName }}</td>
                         <td>{{ trainingContent.pageStatus | status | ucFirstStrict }}</td>
-                        <td>{{ trainingContent.editorialResponsibility.name }}</td>
+                        <td>
+                            <span ng-repeat="er in trainingContent.editorialResponsibility"><span ng-if="$index > 0">, </span>{{ er.name }}</span>
+                        </td>
                         <td data-ng-bind="trainingContent.updateDate | date:'dd-MM-yyyy à HH:mm'"></td>
                     </tr>
                     <tr ng-if="trainingContents.length == 0">

@@ -41,7 +41,7 @@
         <div class="col-sm-4 mb-5">
             <h2>Notices descriptives</h2>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item" ng-if="preferences.taxonomyEditAccess == 'controlledAuthorization'"><a ui-sref="transcript.admin.taxonomy.access">Demandes d'accès <span class="badge bg-info" ng-bind="(accesses|filterTaxonomyAsk).length"></span></a></li>
+                <li class="list-group-item" ng-if="preferences.taxonomyEditAccess == 'controlledAuthorization'"><a ui-sref="transcript.admin.taxonomy.access">Demandes d'accès <span class="badge bg-info text-white" ng-bind="(accesses|filterTaxonomyAsk).length"></span></a></li>
                 <li class="list-group-item"><a ui-sref="transcript.admin.taxonomy.logs.list({types: 'Place,Testator,MilitaryUnit'})">Historique des modifications</a></li>
             </ul>
         </div>
@@ -54,13 +54,13 @@
         <div class="col-sm-4 mb-5">
             <h2>Transcription</h2>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a ui-sref="transcript.admin.transcript.validation">Transcriptions à valider <span class="badge bg-info" ng-bind="transcriptsToValidate.length"></span></a></li>
+                <li class="list-group-item"><a ui-sref="transcript.admin.transcript.validation">Transcriptions à valider <span class="badge bg-info text-white" ng-bind="transcriptsToValidate.length"></span></a></li>
             </ul>
         </div>
         <div class="col-sm-4 mb-5">
             <h2>Commentaires</h2>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><a ui-sref="transcript.admin.comments">Liste des derniers commentaires <span class="badge bg-info" ng-bind="unReadComments"></span></a></li>
+                <li class="list-group-item"><a ui-sref="transcript.admin.comments">Liste des derniers commentaires <span class="badge bg-info text-white" ng-bind="unReadComments"></span></a></li>
             </ul>
         </div>
     </div>

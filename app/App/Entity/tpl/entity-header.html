@@ -1,15 +1,15 @@
-<div class="row mb-5">
-    <div class="col-auto mr-auto">
-        <h1 class="page-heading mb-0"><i class="fa fa-folder-open" aria-hidden="true"></i> {{ entity.will.title }}</h1>
-    </div>
-    <div class="col-auto justify-content-end">
-        <nav class="mt-4">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a class="nav-link" ui-sref="transcript.app.search"><i class="fa fa-search fa-lg" aria-hidden="true"></i> Autres testaments</a></li>
-                <li class="nav-item" data-ng-if="user.roles | contains:'ROLE_ADMIN'">
-                    <a class="nav-link" ui-sref="transcript.admin.entity.edit({id: entity.id})"><i class="fa fa-edit fa-lg"></i> Modifier</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<div class="row">
+	<div class="col-12">
+		<h1 class="page-heading mb-0"><i class="fa fa-folder-open" aria-hidden="true"></i> {{ entity.will.title }}</h1>
+	</div>
+</div>
+<div class="row my-3">
+	<div class="col-md-6 offset-md-6">
+		<ul class="nav nav-pills float-right">
+			<li class="nav-item"><a class="nav-link" ui-sref="transcript.app.search"><i class="fa fa-search fa-lg" aria-hidden="true"></i> Autres testaments</a></li>
+			<li class="nav-item" data-ng-if="user.roles | contains:'ROLE_ADMIN'">
+				<a class="nav-link" ui-sref="transcript.admin.entity.edit({id: entity.id})"><i class="fa fa-edit fa-lg"></i> Modifier</a>
+			</li>
+		</ul>
+	</div>
 </div>

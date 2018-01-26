@@ -19,20 +19,25 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="admin-trainingContent-edit-exercise-preload-text" class="col-md-2 col-form-label text-md-right">Contenu initial de la transcription</label>
+        <div class="col-md-10">
+            <textarea id="admin-trainingContent-edit-exercise-preload-text" class="form-control form-control-sm" data-ng-model="trainingContent.exercisePreloadText"></textarea>
+            <small class="form-text text-muted">Ce texte sera préchargé dans l'interface de transcription. Vous pouvez y placer un texte que l'utilisateur n'aura pas à transcrire.</small>
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="col-md-2 col-form-label text-md-right">Préférences de transcription</label>
         <div class="col-md-10">
             <div class="checkbox">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsSmartTEI" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer SmartTEI</span>
+                    <span class="custom-control-label">Activer SmartTEI</span>
                 </label>
             </div>
             <div class="checkbox">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsAttributesManagement" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer la gestion d'attributs</span>
+                    <span class="custom-control-label">Activer la gestion d'attributs</span>
                 </label>
             </div>
         </div>
@@ -40,7 +45,7 @@
     <div class="form-group row">
         <label for="admin-trainingContent-edit-exercise-tagsList" class="col-md-2 col-form-label text-md-right">Balises TEI actives</label>
         <div class="col-md-10">
-            <select id="admin-trainingContent-edit-exercise-tagsList" name="admin-trainingContent-edit-exercise-tagsList" data-ng-model="trainingContent.exerciseTagsList" multiple  class="form-control form-control-sm">
+            <select id="admin-trainingContent-edit-exercise-tagsList" name="admin-trainingContent-edit-exercise-tagsList" data-ng-model="trainingContent.exerciseTagsList" multiple size="45" class="form-control form-control-sm">
                 <option ng-repeat="tag in config.tags" value="{{ tag.btn.id }}">&lt;{{ tag.xml.name }}&gt;</option>
             </select>
         </div>
@@ -48,53 +53,46 @@
     <div class="form-group row">
         <label class="col-md-2 col-form-label text-md-right">Préférences de colonne centrale</label>
         <div class="col-md-10">
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsLiveRender" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer le rendu en direct</span>
+                    <span class="custom-control-label">Activer le rendu en direct</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsHelp" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer l'aide générale</span>
+                    <span class="custom-control-label">Activer l'aide générale</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsDocumentation" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer la documentation</span>
+                    <span class="custom-control-label">Activer la documentation</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsTaxonomy" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer les notices descriptives</span>
+                    <span class="custom-control-label">Activer les notices descriptives</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsNotes" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer les notes</span>
+                    <span class="custom-control-label">Activer les notes</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
                     <input ng-model="trainingContent.exerciseIsVersioning" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Activer l'historique</span>
+                    <span class="custom-control-label">Activer l'historique</span>
                 </label>
             </div>
-            <div class="checkbox">
+            <div class="form-group">
                 <label class="custom-control custom-checkbox">
-                    <input ng-model="trainingContent.exerciseIsComplexFields" class="custom-control-input" type="checkbox">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Afficher l'aide à la saisie pour d'entrées complexes</span>
+                    <input class="custom-control-input" ng-model="trainingContent.exerciseIsComplexFields" type="checkbox">
+                    <span class="custom-control-label">Afficher l'aide à la saisie pour d'entrées complexes</span>
                 </label>
             </div>
         </div>

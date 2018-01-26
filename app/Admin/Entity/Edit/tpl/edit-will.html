@@ -86,7 +86,7 @@
     </div>
     <label for="admin-entity-edit-will-willWritingPlaceNormalized" class="col-md-2 col-form-label text-md-right">Commune</label>
     <div class="col-md-3">
-        <select class="custom-select col-md-6" id="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-model="entity.will.willWritingPlaceNormalized" name="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-options="place.id as place.name for place in places"><option value=""></option></select>
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-model="entity.will.willWritingPlaceNormalized" name="admin-entity-edit-will-willWritingPlaceNormalized" data-ng-options="place.id as place.indexName for place in places"><option value=""></option></select>
     </div>
     <small class="col-md-7 form-text text-muted text-right">Tel qu'écrit sur les sources - <a data-toggle="modal" data-target="#helpModal">En savoir plus sur la saisie des champs libres</a></small>
     <small class="col-md-5 form-text text-muted text-right"><a ui-sref="transcript.app.taxonomy.create({type: 'places'})" target="_blank">Ajouter une commune</a> - <a ng-click="reload.action('places')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.places === true"></i></a></small>
@@ -96,7 +96,7 @@
 <div class="form-group row">
     <label for="admin-entity-edit-will-testator" class="col-md-4 col-form-label text-md-right">Testateur <span class="red-color">*</span></label>
     <div class="col-md-8">
-        <select class="custom-select col-md-6" id="admin-entity-edit-will-testator" data-ng-model="entity.will.testator" name="admin-entity-edit-will-testator" data-ng-options="testator.id as (testator | taxonomyEntityNameConstruct:'testators') for testator in testators" required="required"><option value=""></option></select>
+        <select class="custom-select col-md-6" id="admin-entity-edit-will-testator" data-ng-model="entity.will.testator" name="admin-entity-edit-will-testator" data-ng-options="testator.id as testator.indexName for testator in testators" required="required"><option value=""></option></select>
         <small class="form-text text-muted"><a ui-sref="transcript.app.taxonomy.create({type: 'testators'})" target="_blank">Ajouter une personne</a> - <a ng-click="reload.action('testators')">Recharger la liste <i class="fa fa-spin fa-circle-o-notch" ng-if="reload.testators === true"></i></a></small>
     </div>
 </div>

@@ -22,6 +22,6 @@
 
         Cote aux <a ui-sref="transcript.app.hosting-organization.view({id: entity.will.hostingOrganization.id})">{{ entity.will.hostingOrganization.name }}</a> <a href="{{ entity.will.minuteLink }}" target="_blank" class="big" ng-if="entity.will.minuteLink != null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT':false }}</a><span ng-if="entity.will.minuteLink == null">{{ entity.will.callNumber }}, minute du {{ entity.will.minuteDateString | sourceRender:'NOT':false }}</span><br />
 
-        <span ng-if="entity.will.pagePhysDescSupport != null">{{ entity.will.pagePhysDescSupport }},</span> <span ng-if="entity.will.pagePhysDescHand != null">{{ entity.will.pagePhysDescHand }},</span> <span ng-if="entity.will.pagePhysDescHeight != null && entity.will.pagePhysDescWidth != null">{{ entity.will.pagePhysDescHeight }}cm x {{ entity.will.pagePhysDescWidth }}cm,</span> <span ng-if="entity.will.pagePhysDescNumber">{{ entity.will.pagePhysDescNumber }} pages</span>
+        <span ng-if="entity.will.pagePhysDescSupport != null">{{ entity.will.pagePhysDescSupport }},</span> <span ng-if="entity.will.pagePhysDescHand != null">{{ entity.will.pagePhysDescHand }},</span> <span ng-if="entity.will.pagePhysDescHeight != null && entity.will.pagePhysDescWidth != null">{{ entity.will.pagePhysDescHeight }}cm x {{ entity.will.pagePhysDescWidth }}cm</span> <span ng-if="entity.will.pagePhysDescNumber">, {{ entity.will.pagePhysDescNumber }} pages</span>
     </p>
 </div>
