@@ -19,11 +19,11 @@
             <form id="search-form">
                 <div class="row">
                     <div class="form-group col-md-12 row">
-                        <label class="col-md-4 text-right">
+                        <label class="col-lg-3 offset-lg-1 col-12">
                             Rechercher dans la liste
                         </label>
-                        <div class="col-md-4 text-right">
-                            <select ng-model="fieldSearch" class="custom-select" title="Critère de recherche">
+                        <div class="col-lg-4 col-md-6">
+                            <select ng-model="fieldSearch" class="form-control form-control-sm custom-select" title="Critère de recherche">
                                 <option value="" disabled>Sélectionnez le champ</option>
                                 <option ng-if="entity.dataType === 'testators'" value="yearOfDeath">Année de décès</option>
                                 <option ng-if="entity.dataType === 'testators'" value="placeOfDeathNormalized">Lieu de décès</option>
@@ -37,7 +37,7 @@
                                 <option ng-if="entity.dataType === 'places'" value="geonamesId">Identifiant Geonames</option>
                             </select>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-lg-4 col-md-6">
                             <input class="form-control form-control-sm" ng-model="valueSearch" placeholder="Rechercher une valeur" />
                         </div>
                     </div>

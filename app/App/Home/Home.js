@@ -22,19 +22,15 @@ angular.module('transcript.app.home', ['ui.router'])
                     return EntityService.getEntities("search");
                 },
                 contents: function(ContentService) {
-                    return ContentService.getContents("blogContent", "public", "DESC", 10, 0);
-                },
-                staticContents: function(ContentService) {
-                    return ContentService.getContents("staticContent", "public", "DESC", 10, 1);
+                    return ContentService.getContents("blogContent", "public", "DESC", 10, null, 'id,summary');
                 },
             }
         })
     }])
 
-    .controller('AppHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', 'contents', 'staticContents', 'SearchService', 'EntityService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities, contents, staticContents, SearchService, EntityService) {
+    .controller('AppHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', 'contents', 'SearchService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities, contents, SearchService) {
         $scope.entities = entities; //$log.debug($scope.entities);
         $scope.contents = contents;
-        $scope.staticContents = staticContents;
         $scope.limitToResults = 50;
 
         for(let iEntity in $scope.entities) {

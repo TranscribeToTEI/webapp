@@ -2,7 +2,7 @@
 
 angular.module('transcript.system.transcript', ['ui.router'])
 
-    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', '$cookies', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, $cookies, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
+    .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', '$cookies', 'Fullscreen', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, $cookies, Fullscreen, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
         else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
             $log.debug('Redirection to edition -> Already in edition');
@@ -21,7 +21,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.functions = {};
             $scope.smartTEI = (transcriptConfig.isExercise === false) ? $rootScope.user._embedded.preferences.smartTEI : $scope.transcriptConfig.isSmartTEI;
             $scope.complexEntry = $rootScope.user._embedded.preferences.showComplexEntry;
-            $scope.page = { fullscreen: { status: false } };
             $scope.transcriptArea = {
                 interaction: {
                     documentation: {},
@@ -124,7 +123,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 }
             }
             for (let iT in $scope.transcriptArea.toolbar.tags) {
-                if ($scope.transcriptArea.toolbar.tags[iT].order !== undefined && $scope.transcriptArea.toolbar.tags[iT].order !== false) {
+                if ($scope.transcriptArea.toolbar.tags[iT].order !== undefined && $scope.transcriptArea.toolbar.tags[iT].order !== false && $scope.transcriptArea.toolbar.tags[iT].btn.level === 2) {
                     $scope.transcriptArea.toolbar.tags[iT].lType = "btn";
                     $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[iT]);
                 }
@@ -176,7 +175,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     if(item.lType === "group" && item.proviGroup === true) {
                         level2.splice(index, 1);
                     } else if(item.lType === "btn" && item.btn.proviTag === true) {
-                        console.log(item);
+                        //console.log(item);
                         level2.splice(index, 1);
                     }
                 });
@@ -195,11 +194,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
                             delete $scope.transcriptArea.toolbar.tags[btn];
                         } else {
                             let tag = $scope.transcriptArea.toolbar.tags[btn];
-                            if ($scope.transcriptArea.ace.currentTag === null && tag.btn.allow_root === true && tag.btn.level === 1) {
+                            tag.btn.enabled = false; // Default state, especially for level1 btn
+                            tag.btn.view = true; // Default state, especially for level2 btn
+
+                            if (($scope.transcriptArea.ace.currentTag === undefined || $scope.transcriptArea.ace.currentTag === null) && tag.btn.allow_root === true && tag.btn.level === 1) {
                                 // If the caret is at the root of the doc, we allow root items == true
                                 tag.btn.view = true;
                                 tag.btn.enabled = true;
-                            } else if ($scope.transcriptArea.ace.currentTag !== null &&
+                            } else if ($scope.transcriptArea.ace.currentTag !== undefined && $scope.transcriptArea.ace.currentTag !== null &&
                                 $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name] !== undefined && $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content !== undefined &&
                                 $scope.teiInfo[$scope.transcriptArea.ace.currentTag.name].content.indexOf(tag.xml.name) !== -1) {
                                 // Else, we allow items according to the parent tag
@@ -300,7 +302,22 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     });
                     $scope.transcriptArea.toolbar.tags[id].btn.view = false;
                 });
-                //console.log($scope.transcriptArea.toolbar.level2);
+
+                // We update the enable status of groups of level2
+                $scope.transcriptArea.toolbar.level2.forEach(function(item) {
+                    if(item.lType === 'group') {
+                        item.enable = false;
+                    }
+                });
+                $scope.transcriptArea.toolbar.level2.forEach(function(item) {
+                    if(item.lType === 'btn' && item.btn.enabled === true) {
+                        $scope.transcriptArea.toolbar.level2.forEach(function(group) {
+                            if(group.lType === 'group' && group.id === item.btn.btn_group) {
+                                group.enable = true;
+                            }
+                        });
+                    }
+                });
             };
             /* Toolbar -------------------------------------------------------------------------------------------------- */
 
@@ -380,7 +397,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                          * Conditions: if the tag has replicateOnCtrlEnter: true in the config, and the tag is empty and smartTEI is available
                          * Result: remove the tag and jump to the end of the parent tag
                          */
-                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
+                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
                             $scope.aceSession.getDocument().remove(new AceRange($scope.transcriptArea.ace.currentTag.startTag.start.row, $scope.transcriptArea.ace.currentTag.startTag.start.column - 1, $scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1));
                             $scope.$apply(function () {
                                 $scope.updateTEIElementInformation();
@@ -641,18 +658,18 @@ angular.module('transcript.system.transcript', ['ui.router'])
              * @param attributes
              * @returns {string}
              */
-            $scope.functions.constructTag = function (tag, action, parent, attributes) {
+            $scope.functions.constructTag = function(tag, action, parent, attributes) {
                 let tagInsert = "",
                     requiredAttributes = "";
                 if(attributes === undefined) {attributes = {};}
 
                 /* Required attributes management ------------------------------------------------------------------- */
-                for (let iAttribute in $scope.teiInfo[tag.xml.name].attributes) {
+                /*for (let iAttribute in $scope.teiInfo[tag.xml.name].attributes) {
                     let attribute = $scope.teiInfo[tag.xml.name].attributes[iAttribute];
                     if (attribute.usage === "req" && $filter('filter')(attributes, {id: attribute.id}).length === 0) {
                         requiredAttributes += $scope.functions.constructAttribute(attribute.id, null);
                     }
-                }
+                }*/
                 if(attributes !== undefined && attributes !== null && attributes.length > 0) {
                     for(let iAttribute in attributes) {
                         requiredAttributes += $scope.functions.constructAttribute(attributes[iAttribute].id, attributes[iAttribute].value);
@@ -679,7 +696,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     } else {
                         tagInsert = "<" + tag.xml.name + requiredAttributes + ">";
                         for (let subTag in tag.xml.contains) {
-                            tagInsert += $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[subTag], tag.xml.contains[subTag], tag);
+                            console.log(subTag);
+                            tagInsert += $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[subTag], tag.xml.contains[subTag], tag, null);
                         }
                         tagInsert += "</" + tag.xml.name + ">";
                     }
@@ -690,8 +708,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
             };
 
             $scope.transcriptArea.ace.addTag = function(tagId, attributes) {
+                if(attributes === "null") {attributes = null;}
                 attributes = $scope.decodeAttributes(attributes);
-                console.log(attributes);
                 let tag = $scope.transcriptArea.toolbar.tags[tagId],
                     defaultAddChar = 2;
 
@@ -789,7 +807,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             };
 
             $scope.functions.resetContentZone = function () {
-                $scope.transcriptArea.interaction.content.text = '<p class="text-center" style="margin-top: 20px;"><i class="fa fa-5x fa-spin fa-circle-o-notch"></i></p>';
+                $scope.transcriptArea.interaction.content.text = '<p class="text-center text-primary" style="margin-top: 20px;"><i class="fa fa-5x fa-spin fa-circle-o-notch"></i></p>';
             };
 
             $scope.functions.resetTaxonomySearchZone = function () {
@@ -910,13 +928,12 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Help Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            /**
-             * Help management
-             * @param element string|object
-             * @param context
-             * @param resetBreadcrumb
-             */
+            // This function roots to the correct function to load help contents, according to the help content's type
             $scope.transcriptArea.interaction.help = function (element, context, resetBreadcrumb) {
+                $scope.transcriptArea.interaction.content.title = null;
+                $scope.transcriptArea.interaction.content.text = null;
+                $scope.functions.resetContentZone();
+
                 if (context === "helpContent") {
                     if (resetBreadcrumb === true) {
                         $scope.functions.resetContentZone();
@@ -930,32 +947,36 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 }
             };
 
-            /**
-             * Loading contents of type helpContent
-             * @param file
-             * @param resetBreadcrumb boolean
-             */
-            $scope.functions.loadHelpData = function (file, resetBreadcrumb) {
-                return ContentService.getContent(file, 'id,content').then(function (data) {
-                    let doc = document.createElement('div');
-                    doc.innerHTML = data.content;
-
-                    // -- Encoding internal links to be clickable
-                    let links = doc.getElementsByTagName("a");
-                    for (let oldLink of links) {
-                        if (oldLink.getAttribute("class").indexOf("internalHelpLink") !== -1) {
-                            let newLink = document.createElement("a");
-                            newLink.setAttribute('data-ng-click', 'transcriptArea.interaction.help(\'' + oldLink.getAttribute('href') + '\', \'helpContent\', false)');
-                            newLink.innerHTML = oldLink.innerHTML;
-                            oldLink.parentNode.insertBefore(newLink, oldLink);
-                            oldLink.parentNode.removeChild(oldLink);
+            // This function loads a help content
+            $scope.functions.loadHelpData = function (id, resetBreadcrumb) {
+                if(id === true) {
+                    // In case of true, the system asks for the ToC
+                    return ContentService.getContents('helpContent', 'public', null, 'ASC', null, 'id,summary').then(function (contents) {
+                        $scope.transcriptArea.interaction.content.title = "Guides de Testaments de Poilus";
+                        if($rootScope.preferences.helpInsideHomeContent !== undefined && $rootScope.preferences.helpInsideHomeContent !== null) {
+                            $scope.transcriptArea.interaction.content.text = $filter('internalLinksRender')($rootScope.preferences.helpInsideHomeContent).innerHTML;
                         }
-                    }
 
-                    $scope.transcriptArea.interaction.content.text = doc.innerHTML;
-                    $scope.transcriptArea.interaction.content.title = data.title;
-                    $scope.functions.breadcrumbManagement(data, resetBreadcrumb);
-                });
+                        if(contents.length > 0) {
+                            $scope.transcriptArea.interaction.content.text += '<strong>Pages d\'aide</strong>';
+                            $scope.transcriptArea.interaction.content.text += '<ul>';
+                            for(let iC in contents) {
+                                let content = contents[iC];
+                                $scope.transcriptArea.interaction.content.text += '<li><a ng-click="transcriptArea.interaction.help('+content.id+', \'helpContent\', false)">'+content.title+'</a></li>';
+                            }
+                            $scope.transcriptArea.interaction.content.text += '</ul>';
+                        }
+                        $scope.functions.breadcrumbManagement({title: "Aide", id: true}, resetBreadcrumb);
+                    });
+                } else {
+                    // Else, we ask for a specific content
+                    return ContentService.getContent(id, 'id,content').then(function (content) {
+                        $scope.transcriptArea.interaction.content.text = $filter('internalLinksRender')(content.content).innerHTML;
+                        $scope.transcriptArea.interaction.content.title = content.title;
+                        console.log($scope.transcriptArea.interaction.content.text);
+                        $scope.functions.breadcrumbManagement(content, resetBreadcrumb);
+                    });
+                }
             };
 
             /**
@@ -1398,33 +1419,9 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Full screen Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            let fullscreenDiv = document.getElementById("transcriptContainerFullScreen");
-            let fullscreenFunc = fullscreenDiv.requestFullscreen;
-            if (!fullscreenFunc) {
-                ['mozRequestFullScreen',
-                    'msRequestFullscreen',
-                    'webkitRequestFullScreen'].forEach(function (req) {
-                    fullscreenFunc = fullscreenFunc || fullscreenDiv[req];
-                });
-            }
-
-            $scope.page.fullscreen.open = function () {
-                $log.debug('fullscreen');
-                fullscreenFunc.call(fullscreenDiv);
-                $scope.page.fullscreen.status = true;
-            };
-
-            // Doc here > https://stackoverflow.com/questions/7836204/chrome-fullscreen-api#7934009
-            $scope.page.fullscreen.close = function () {
-                if (document.exitFullscreen)
-                    document.exitFullscreen();
-                else if (document.msExitFullscreen)
-                    document.msExitFullscreen();
-                else if (document.mozCancelFullScreen)
-                    document.mozCancelFullScreen();
-                else if (document.webkitExitFullscreen)
-                    document.webkitExitFullscreen();
-                $scope.page.fullscreen.status = false;
+            $scope.isFullscreen = false;
+            $scope.toggleFullScreen = function() {
+                $scope.isFullscreen = !$scope.isFullscreen;
             };
             /* Full screen Management ----------------------------------------------------------------------------------- */
 

@@ -96,3 +96,6 @@
     padding: 0 5px;
 }
 
+#div-interaction-help-content img {
+    max-width: 100%;
+}

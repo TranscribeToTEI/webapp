@@ -1,10 +1,10 @@
 <div class="card bg-body">
-    <div data-ng-if="resource.id" class="card-body row">
+    <div class="card-body row">
         <div class="col-md-7">
             <div class="form-group row">
                 <label for="admin-entity-edit-resource-type" class="col-md-4 col-form-label text-md-right">Type de ressource <span class="red-color">*</span></label>
                 <div class="col-md-8">
-                    <select id="admin-entity-edit-resource-type" name="admin-entity-edit-resource-type" class="custom-select" data-ng-model="resource.type" required="required">
+                    <select id="admin-entity-edit-resource-type" name="admin-entity-edit-resource-type" class="custom-select" ng-model="resource.type" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="page">Page</option>
                         <option value="envelop">Enveloppe</option>
@@ -15,7 +15,7 @@
             <div class="form-group row">
                 <label for="admin-entity-edit-resource-orderInWill" class="col-md-4 col-form-label text-md-right">Index de la ressource dans le testament <span class="red-color">*</span></label>
                 <div class="col-sm-3">
-                    <input type="number" id="admin-entity-edit-resource-orderInWill" class="form-control form-control-sm" data-ng-model="resource.orderInWill" required="required" />
+                    <input type="number" id="admin-entity-edit-resource-orderInWill" class="form-control form-control-sm" ng-model="resource.orderInWill" required="required" />
                 </div>
                 <div class="col-sm-1">
                     <p class="form-control-static">/</p>
@@ -27,14 +27,14 @@
             <div class="form-group row">
                 <label for="admin-entity-edit-resource-images" class="col-md-4 col-form-label text-md-right">Identifiants des images <span class="red-color">*</span></label>
                 <div class="col-md-8">
-                    <input id="admin-entity-edit-resource-images" class="form-control form-control-sm" data-ng-model="resource.images" required="required" />
+                    <input id="admin-entity-edit-resource-images" class="form-control form-control-sm" ng-model="resource.images" required="required" />
                     <small  class="form-text text-muted">Identifiants des images de la ressource, séparés par des virgules. Ex: 02a, 02b, 02c</small>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="admin-entity-edit-resource-notes" class="col-md-4 col-form-label text-md-right">Notes (de numérisation ou autre)</label>
                 <div class="col-md-8">
-                    <input id="admin-entity-edit-resource-notes" class="form-control form-control-sm" data-ng-model="resource.notes" />
+                    <input id="admin-entity-edit-resource-notes" class="form-control form-control-sm" ng-model="resource.notes" />
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="thumbnail">
                 <img src="{{ iiif.server  }}/testament_{{ entity.will.hostingOrganization.code }}_{{ entity.willNumber | willNumberFormat }}{{ iiif.separator }}JPEG{{ iiif.separator }}{{ resource.images[0] }}{{ iiif.extension }}.jpg/full/!150,150/0/default.jpg" class="img-150px" />
             </div>
-            <dl class="row pr-3 ml-1">
+            <dl class="row pr-3 ml-1" ng-if="resource.id">
                 <dt class="col-sm-4">Identifiant</dt>
                 <dd class="col-sm-8">{{ resource.id }}</dd>
 

@@ -20,7 +20,7 @@ angular.module('transcript.admin.content.list', ['ui.router'])
             },
             resolve: {
                 contents: function(ContentService) {
-                    return ContentService.getContents(null, null, "DESC", 100);
+                    return ContentService.getContents(null, null, "DESC", null, 100, 'id,summary');
                 }
             }
         })

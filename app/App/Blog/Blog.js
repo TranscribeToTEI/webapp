@@ -20,7 +20,7 @@ angular.module('transcript.app.blog', ['ui.router'])
             },
             resolve: {
                 contents: function(ContentService) {
-                    return ContentService.getContents("blogContent", "public", "DESC", 30);
+                    return ContentService.getContents("blogContent", "public", "DESC", null, 100, 'id,summary');
                 }
             }
         })
@@ -28,5 +28,23 @@ angular.module('transcript.app.blog', ['ui.router'])
 
     .controller('AppBlogCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'contents', function($log, $rootScope, $scope, $http, $sce, $state, contents) {
        $scope.contents = contents;
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.itemsPerPage = 100;
+        $scope.$watch('contents', function() {
+            $scope.totalItems = $scope.contents.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.debug('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

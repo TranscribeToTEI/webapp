@@ -1,7 +1,7 @@
 <div ng-if="transcriptConfig.isHeader == true" ng-include="'/webapp/app/System/Transcript/tpl/transcript-header.html'"></div>
 
 <div id="transcriptContainer">
-    <div id="transcriptContainerFullScreen"  class="clearfix">
+    <div fullscreen="isFullscreen" id="transcriptContainerFullScreen"  class="w-100 clearfix">
         <div class="row no-gutters">
             <div class="col-md-8">
                 <ul class="breadcrumb" id="ariane-toolbar">
@@ -12,15 +12,15 @@
             <div class="col-md-4 other-tools">
                 <div class="text-right">
                     <div class="float-right clearfix btn-group pt-2"  role="group">
-                        <a ng-if="page.fullscreen.status == false" ng-click="page.fullscreen.open()" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Mode plein-écran"><i class="fa fa-arrows-alt"></i> Mode plein écran</a>
-                        <a ng-if="page.fullscreen.status == true" ng-click="page.fullscreen.close()" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Quitter le mode plein-écran"><i class="fa fa-close fa-lg"></i> Quitter le plein écran</a>
-                        <a ng-if="page.fullscreen.status == false && transcriptConfig.isExercise === false" ui-sref="transcript.app.edition({ idEntity: entity.id, idResource: resource.id })" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Quitter la transcription"><i class="fa fa-sign-out fa-lg"></i> Quitter la transcription</a>
+                        <a ng-if="!isFullscreen" ng-click="toggleFullScreen()" id="full_screen_btn" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Mode plein-écran"><i class="fa fa-arrows-alt"></i> Mode plein écran</a>
+                        <a ng-if="isFullscreen" ng-click="toggleFullScreen()" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Quitter le mode plein-écran"><i class="fa fa-close fa-lg"></i> Quitter le plein écran</a>
+                        <a ng-if="!isFullscreen && transcriptConfig.isExercise === false" ui-sref="transcript.app.edition({ idEntity: entity.id, idResource: resource.id })" class="btn btn-sm" data-toggle="tooltip" data-placement="top" title="Quitter la transcription"><i class="fa fa-sign-out fa-lg"></i> Quitter la transcription</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="transcript-workarea" ng-include="'/webapp/app/System/Transcript/tpl/transcript-edit.html'"></div>
+        <div id="transcript-workarea"  class="w-100" ng-include="'/webapp/app/System/Transcript/tpl/transcript-edit.html'"></div>
     </div>
 
     <div ng-if="transcriptConfig.isValidation == true" id="transcript-submit" class="clearfix" ng-include="'/webapp/app/System/Transcript/tpl/transcript-submit.html'"></div>

@@ -36,12 +36,12 @@ angular.module('transcript.app.user.edit', ['ui.router'])
         if($rootScope.user === undefined && $rootScope.user !== userEdit) {$state.go('transcript.app.security.login');}
 
         /* -- Breadcrumb management -------------------------------------------------------- */
-        $scope.iUser = $rootScope.user;
+        $scope.iUser = userEdit;
         /* -- End : breadcrumb management -------------------------------------------------- */
 
         $scope.form = {
-            name: $rootScope.user.name,
-            biography: $rootScope.user.biography
+            name: $scope.iUser.name,
+            biography: $scope.iUser.biography
         };
         $scope.submit = {
             loading: false,
@@ -51,12 +51,15 @@ angular.module('transcript.app.user.edit', ['ui.router'])
         /* Submit data */
         $scope.submit.action = function() {
             $scope.submit.loading = true;
-            $http.patch($rootScope.api+"/users/"+$rootScope.user.id, $scope.form)
+            $http.patch($rootScope.api+"/users/"+$scope.iUser.id, $scope.form)
             .then(function (response) {
                 $scope.submit.loading = false;
                 if(response.status === 200) {
                     $scope.submit.success = true;
-                    $rootScope.user = response.data;
+                    $scope.iUser = response.data;
+                    if($rootScope.user.id === $scope.iUser.id) {
+                        $rootScope.user = response.data;
+                    }
                     flash.success = "Votre profil a bien été modifié. Vous allez être redirigé dans quelques instants ...";
                     $state.go('transcript.app.user.profile', {id: userEdit.id});
                 } else if(response.data.code === 400) {

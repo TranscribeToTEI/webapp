@@ -31,7 +31,7 @@
         <div class="card bg-container"  ng-include="'/webapp/app/App/Training/Content/Exercise/Correction/tpl/correction-response.html'"></div>
     </div>
 
-    <div class="card bg-body">
+    <div class="card bg-body mt-5">
         <div class="card-header bg-light">
             <i class="fa fa-info-circle"></i> Éléments de correction
         </div>
@@ -41,7 +41,7 @@
     <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 
     <hr />
-    <div ui-view="comment"></div>
+    <div class="mt-4" ui-view="comment"></div>
 </main>
 <main class="container" role="main" ng-if="trainingContent.pageStatus != 'public'">
     <div class="alert alert-warning">Oups ... Cette page n'est pas publique pour le moment</div>

@@ -69,7 +69,7 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
             })
     }])
 
-    .controller('AdminTaxonomyLogsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', 'logs', 'log', 'logPrevious', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, logs, log, logPrevious) {
+    .controller('AdminTaxonomyLogsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'logs', 'log', 'logPrevious', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, logs, log, logPrevious) {
         $scope.logContainers = logs;
         $scope.logContainer = log;
         $scope.logPreviousContainer = logPrevious;
@@ -88,10 +88,35 @@ angular.module('transcript.admin.taxonomy.logs', ['ui.router'])
             }
         }
 
-        $log.debug($scope.logContainers);
-        $log.debug('logContainer');
-        $log.debug($scope.logContainer);
-        $log.debug('logPreviousContainer');
-        $log.debug($scope.logPreviousContainer);
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Facets system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.$watch('search', function(newValue, oldValue){
+            if($scope.search) {
+                $scope.results = $filter('filter')($scope.logContainers, {title: $scope.search});
+            } else {
+                $scope.results = $scope.logContainers;
+            }
+            console.log($scope.results);
+        });
+        /* ---------------------------------------------------------------------------------------------------------- */
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.itemsPerPage = 100;
+        $scope.$watch('results', function() {
+            $scope.totalItems = $scope.results.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.debug('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
     }])
 ;

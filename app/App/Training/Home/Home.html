@@ -23,11 +23,13 @@
         </div>
         <div class="col-md-4 order-md-1">
             <div class="card">
-                <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">
-                        <a ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</a>
+                <ul class="list-group list-group-flush mb-5">
+                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">
+                        <a ng-if="content.id != trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</a>
+                        <span class="active" ng-if="content.id === trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</span>
                     </li>
                 </ul>
             </div>
+		</div> 
     </div>
 </main>

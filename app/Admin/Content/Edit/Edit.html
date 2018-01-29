@@ -8,22 +8,22 @@
 </div>
 
 <main class="container" role="main">
-    <h1 class="page-heading" data-ng-if="content.title != null && content.title != ''">{{ content.title }}</h1>
-    <h1 class="page-heading" data-ng-if="content.title == null || content.title == ''">Nouveau contenu</h1>
+    <h1 class="page-heading" ng-if="content.title != null && content.title != ''">{{ content.title }}</h1>
+    <h1 class="page-heading" ng-if="content.title == null || content.title == ''">Nouveau contenu</h1>
 
     <form>
         <div class="col-xl-10 col-12">
             <div class="form-group row">
                 <label for="admin-content-edit-title" class="col-md-2 col-form-label text-md-right">Titre <span class="red-color">*</span></label>
                 <div class="col-md-10">
-                    <input id="admin-content-edit-title" type="text" class="form-control" data-ng-model="content.title" required="required" />
+                    <input id="admin-content-edit-title" type="text" class="form-control" ng-model="content.title" required="required" />
                     <small class="form-text text-muted">Optez pour un titre clair, décrivant précisément votre contenu et comportant des mots-clés signifiant si vous publiez un article.</small>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="admin-content-edit-type" class="col-md-2 col-form-label text-md-right">Type <span class="red-color">*</span></label>
                 <div class="col-md-2">
-                    <select id="admin-content-edit-type" name="admin-content-edit-type" class="custom-select" data-ng-model="content.type" required="required">
+                    <select id="admin-content-edit-type" name="admin-content-edit-type" class="custom-select" ng-model="content.type" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="blogContent">Article de blog</option>
                         <option value="helpContent">Page d'aide</option>
@@ -32,7 +32,7 @@
                 </div>
                 <label for="admin-content-edit-status" class="col-md-2 col-form-label text-md-right">Statut <span class="red-color">*</span></label>
                 <div class="col-md-3">
-                    <select id="admin-content-edit-status" name="admin-content-edit-status" class="custom-select" data-ng-model="content.status" required="required">
+                    <select id="admin-content-edit-status" name="admin-content-edit-status" class="custom-select" ng-model="content.status" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="draft">Brouillon</option>
                         <option value="public">Public</option>
@@ -49,10 +49,10 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row" data-ng-if="content.type == 'staticContent'">
-                <label for="admin-content-edit-staticCategory" class="col-md-2 col-form-label text-md-right">Catégorie de contenu <span class="red-color">*</span></label>
-                <div class="col-md-3">
-                    <select id="admin-content-edit-staticCategory" name="admin-content-edit-staticCategory" class="custom-select" data-ng-model="content.staticCategory" required="required">
+            <div class="form-group row" ng-if="content.type == 'staticContent' || content.type == 'helpContent'">
+                <label ng-if="content.type == 'staticContent'" for="admin-content-edit-staticCategory" class="col-md-2 col-form-label text-md-right">Catégorie de contenu <span class="red-color">*</span></label>
+                <div ng-if="content.type == 'staticContent'" class="col-md-3">
+                    <select id="admin-content-edit-staticCategory" name="admin-content-edit-staticCategory" class="custom-select" ng-model="content.staticCategory" required="required">
                         <option value="" disabled>Sélectionnez ...</option>
                         <option value="helpHome">Page d'accueil de l'aide</option>
                         <option value="discover">Pages de découverte</option>
@@ -64,7 +64,7 @@
                 </div>
                 <label for="admin-content-edit-staticOrder" class="col-md-2 col-form-label text-md-right">Ordre du contenu <span class="red-color">*</span></label>
                 <div class="col-md-5">
-                    <input id="admin-content-edit-staticOrder" type="number" class="form-control form-control-sm" data-ng-model="content.staticOrder" required="required" />
+                    <input id="admin-content-edit-staticOrder" type="number" class="form-control form-control-sm" ng-model="content.staticOrder" required="required" />
                     <small class="form-text text-muted">Ordre d'affichage de votre contenu dans l'arborescence de la catégorie sélectionnée.</small>
                 </div>
             </div>
@@ -83,7 +83,7 @@
             <div class="form-group row">
                 <label for="admin-content-edit-image" class="col-md-2 col-form-label text-md-right">Image d'illustration</label>
                 <div class="col-md-5">
-                    <input id="admin-content-edit-image" class="form-control form-control-sm" data-ng-model="content.illustration" />
+                    <input id="admin-content-edit-image" class="form-control form-control-sm" ng-model="content.illustration" />
                     <small class="form-text text-muted">Spécifiez l'URL de votre image ou uploadez une image ci-contre</small>
                     <div ng-if="content.illustration != null"><img src="{{ content.illustration | imageRender }}" class="img-150px" alt="Prévisualisation de votre image" title="Prévisualisation de votre image" /></div>
                 </div>
@@ -93,9 +93,9 @@
                     <i ng-show="myForm.file.$error.maxSize">File too large {{errorFile.size / 1000000|number:1}}MB: max 2M</i>
                     <img ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb" />
                     <button ng-click="picFile = null" ng-show="picFile">Remove</button>
-                    <button data-ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" data-ng-click="media.submit.action()">Soumettre</button>
-                    <button data-ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
-                    <button data-ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
+                    <button ng-if="media.submit.success == false && media.submit.loading == false" class="btn btn-sm btn-primary" type="button" ng-click="media.submit.action()">Soumettre</button>
+                    <button ng-if="media.submit.success == false && media.submit.loading == true" class="btn btn-sm btn-primary" type="button">Enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></button>
+                    <button ng-if="media.submit.success == true" class="btn btn-sm btn-success" type="button">Succès !</button>
                 </div>
             </div>
             <hr />
@@ -103,24 +103,24 @@
                 <h2 class="card-header bg-dark text-white">Information</h2>
                 <div class="card-body">
                     <h3>Insérer un lien interne à la documentation</h3>
-                    <p>Pour insérer un lien menant à un autre article de la documentation, insérez un lien tel que pour accéder à une page web normale et modifier</p>
+                    <p>Pour insérer un lien menant à un autre article de la documentation, insérez un lien tel que pour accéder à une page web normale. L'url doit être la section d'URL de Testaments de Poilus venant après le nom de domaine (la partie qui commence par "!#/content/"). Definissez ensuite le type de lien vers "autre".</p>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="admin-content-edit-abstract"  class="col-md-2 col-form-label text-md-right">Résumé <span class="red-color">*</span></label>
                 <div class="col-md-10">
-                    <div id="admin-content-edit-abstract" ckeditor="options" data-ng-model="content.abstract"></div>
+                    <div id="admin-content-edit-abstract" ckeditor="options" ng-model="content.abstract"></div>
                     <small class="form-text text-muted">Ce texte apparaitra sur la page d'accueil et la page du blog. Merci de ne pas dépasser les 500 caractères.</small>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="admin-content-edit-content"  class="col-md-2 col-form-label text-md-right">Contenu <span class="red-color">*</span></label>
                 <div class="col-md-10">
-                    <div id="admin-content-edit-content" ckeditor="options" data-ng-model="content.content"></div>
+                    <div id="admin-content-edit-content" ckeditor="options" ng-model="content.content"></div>
                 </div>
             </div>
 
-            <div class="text-right mt-2" data-ng-if="content.id == null">
+            <div class="text-right mt-2" ng-if="content.id == null">
                 <button class="btn btn-sm" type="button"
                         ng-disabled="!(!!content.title && !!content.content && !!content.abstract && !!content.status && !!content.type)"
                         ng-class="{'btn-success': submit.success == true, 'btn-primary': submit.success != true}"
@@ -130,12 +130,12 @@
                     <span ng-if="submit.success == true">Succès !</span>
                 </button>
             </div>
-            <div class="card text-white bg-light mb-3 mt-4" data-ng-if="content.id != null">
+            <div class="card text-white bg-light mb-3 mt-4" ng-if="content.id != null">
                 <div class="card-body">
                     <div class="form-row bg-default">
                         <div class="form-group col-md-10 align-self-end">
                             <label for="admin-content-edit-updateComment" class="form-control-label">Commentaire d'édition <span class="red-color">*</span></label>
-                            <textarea id="admin-content-edit-updateComment" class="form-control form-control-sm" data-ng-model="content.updateComment" placeholder="Merci de décrire votre modification avant de la soumettre" required="required"></textarea>
+                            <textarea id="admin-content-edit-updateComment" class="form-control form-control-sm" ng-model="content.updateComment" placeholder="Merci de décrire votre modification avant de la soumettre" required="required"></textarea>
                         </div>
                         <div class="text-right col-md-2 align-self-end">
                             <button class="btn btn-sm" type="button"
@@ -151,8 +151,8 @@
                 </div>
             </div>
 
-            <hr data-ng-if="content.id != null" />
-            <div class="card-deck mt-5" data-ng-if="content.id !== null" >
+            <hr ng-if="content.id != null" />
+            <div class="card-deck mt-5" ng-if="content.id !== null" >
                 <div class="card text-white bg-info mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Informations</h2>
                     <div class="card-body">
@@ -164,7 +164,7 @@
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">
                         <p>En cliquant ci-dessous, vous supprimerez définitivement ce contenu.</p>
-                        <button class="btn btn-sm btn-primary" type="button" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce contenu ?">Supprimer <i data-ng-if="remove.loading == false" class="fa fa-remove"></i><i data-ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
+                        <button class="btn btn-sm btn-primary" type="button" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce contenu ?">Supprimer <i ng-if="remove.loading == false" class="fa fa-remove"></i><i ng-if="remove.loading == true" class="fa fa-spin fa-circle-o-notch"></i></button>
                     </div>
                 </div>
             </div>

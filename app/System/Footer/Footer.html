@@ -12,9 +12,9 @@
         <div class="col-lg-2 col-6 p-0">
             <nav class="nav flex-column bg-secondary">
                 <a class="nav-link" ng-if="preferences.enableContact == true" ui-sref="transcript.app.contact">Contact</a>
-                <a class="nav-link" ng-if="preferences.aboutContent != null" ui-sref="transcript.app.content({id: preferences.aboutContent})">À propos</a>
                 <a class="nav-link" ng-if="preferences.legalNoticesContent != null" ui-sref="transcript.app.content({id: preferences.legalNoticesContent})">Mentions légales</a>
                 <a class="nav-link" ng-if="preferences.creditsContent != null" ui-sref="transcript.app.content({id: preferences.creditsContent})">Crédits</a>
+                <a class="nav-link" ng-if="preferences.charteContent != null" ui-sref="transcript.app.content({id: preferences.charteContent})">Charte d'utilisation</a>
                 <div class="nav-link bg-white">
                     <a href="https://www.facebook.com/{{ preferences.facebookPageId }}" target="_blank"><i class="fa fa-facebook-official fa-lg" aria-hidden="true"></i></a>
                     <a href="https://twitter.com/{{ preferences.twitterId }}" target="_blank"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>

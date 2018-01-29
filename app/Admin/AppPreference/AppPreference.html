@@ -96,15 +96,6 @@
                             <input id="admin-app-preference-help-home-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.helpHomeContent" />
                             <small class="form-text text-muted">Cette page correspond à la page accessible dans le menu "Aide"</small>
                         </div>
-
-                    </div>
-                    <div class="form-group row">
-                        <label for="admin-app-preference-help-inside-home-content" class="col-form-label col-sm-6">Page d'accueil de l'aide interne</label>
-                        <div class="col-sm-6">
-                            <input id="admin-app-preference-help-inside-home-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.helpInsideHomeContent" />
-                            <small class="form-text text-muted">Cette page correspond à la page d'accueil de l'aide du module de transcription</small>
-                        </div>
-
                     </div>
                     <div class="form-group row">
                         <label for="admin-app-preference-discover-home-content" class="col-form-label col-sm-6">Page d'accueil de la découverte</label>
@@ -119,9 +110,15 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label for="admin-app-preference-charte-content" class="col-form-label col-sm-6">Page "Charte de contribution"</label>
+                        <div class="col-sm-6">
+                            <input id="admin-app-preference-charte-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.charteContent" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="admin-app-preference-legal-notices-content" class="col-form-label col-sm-6">Page "Mentions légales"</label>
                         <div class="col-sm-6">
-                            <input id="admin-app-preference-legal-notices-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.legalMentionsContent" />
+                            <input id="admin-app-preference-legal-notices-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.legalNoticesContent" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -129,6 +126,11 @@
                         <div class="col-sm-6">
                             <input id="admin-app-preference-credits-content" type="number" class="form-control form-control-sm" data-ng-model="preferences.creditsContent" />
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-app-preference-inside-home-content">Introduction à l'aide à la transcription</label>
+                        <div id="admin-app-preference-inside-home-content" ckeditor="options" data-ng-model="preferences.helpInsideHomeContent"></div>
+                        <small class="form-text text-muted">Ce texte sera affiché au-dessus de la table des matières dans l'aide du module de transcription</small>
                     </div>
                 </fieldset>
 

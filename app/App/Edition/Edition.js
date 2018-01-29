@@ -191,11 +191,11 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.admin.status.action = function(state) {
             $scope.admin.status.loading = true;
 
-            return TranscriptService.patchTranscript({status: state, updateComment: "Changement de statut pour : "+state}, $scope.resource.transcript.id)
+            return TranscriptService.patchTranscript({status: state, updateComment: "Changement de statut pour : "+state}, $scope.resource.transcript.id, 'id')
             .then(function(response) {
                 $scope.admin.status.loading = false;
                 if(response.status === 200) {
-                    $scope.resource.transcript.status = response.data.status;
+                    $scope.resource.transcript.status = state;
                     flash.success = "Le status de la transcription a bien été mis à jour";
                 } else if(response.status === 400) {
                     flash.error = "<ul>";

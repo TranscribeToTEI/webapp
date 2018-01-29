@@ -8,7 +8,7 @@
 </div>
 <main class="container blog" role="container">
     <h1 class="page-heading">Actualités</h1>
-    <div class="row" ng-repeat="article in contents">
+    <div class="row" ng-repeat="article in contents|limitTo:itemsPerPage:(currentPage*itemsPerPage-itemsPerPage)">
         <div class="col-md-3 mb-3"><img src="{{ article.illustration | imageRender }}" ng-if="article.illustration != null" class="img-fluid"/></div>
         <div class="col-lg-7 col-md-9">
             <h2><a ui-sref="transcript.app.content({ id: article.id })">{{ article.title }}</a></h2>
@@ -17,4 +17,5 @@
             <div class="text-right mt-1"><a ui-sref="transcript.app.content({ id: article.id })" class="btn btn-sm btn-primary">Lire</a></div>
         </div>
     </div>
+    <nav><ul uib-pagination items-per-page="itemsPerPage" boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination pagination-sm justify-content-center" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul></nav>
 </main>

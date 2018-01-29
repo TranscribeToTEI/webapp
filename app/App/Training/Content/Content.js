@@ -21,7 +21,7 @@ angular.module('transcript.app.training.content', ['ui.router'])
                 },
                 thread: function(TrainingContentService, CommentService, $transition$) {
                     if($transition$.params().order !== "0") {
-                        console.log($transition$.params().order);
+                        //console.log($transition$.params().order);
                         return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function (trainingContent) {
                             return CommentService.getThread('trainingContent-' + trainingContent.id);
                         });

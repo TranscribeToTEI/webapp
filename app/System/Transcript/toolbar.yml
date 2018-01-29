@@ -171,8 +171,10 @@ tags:
         caret:
             position: "prepend"
         html:
-            name: "signed"
+            name: "div"
             unique: false
+            attributes:
+                class: "signed"
             icon:
                 position: "prepend"
         xml:
@@ -201,8 +203,10 @@ tags:
         caret:
             position: "prepend"
         html:
-            name: "postscript"
+            name: "div"
             unique: false
+            attributes:
+                class: "postscript"
             icon:
                 position: "prepend"
         xml:
@@ -392,7 +396,7 @@ tags:
             unique: false
             attributes:
                 class: "choice text-primary"
-            marker: true
+            marker: "[--]"
         xml:
             name: "choice"
             unique: false
@@ -404,9 +408,9 @@ tags:
     choiceAbbr:
         btn:
             id: "choiceAbbr"
-            label: "Marquer une abbréviation"
+            label: "Marquer une abréviation"
             label_forced: true
-            title: "Signaliser la présence d'une abbréviation"
+            title: "Signaler la présence d'une abréviation"
             icon: "fa fa-compress"
             btn_class: ""
             btn_group: "microPhenomena"
@@ -425,7 +429,9 @@ tags:
             unique: false
             attributes:
                 class: "choice text-primary"
-            marker: true
+            marker: "[--]"
+            bgColor: "text-info"
+            bgColorText: true
         xml:
             name: "choice"
             unique: false
@@ -524,7 +530,9 @@ tags:
             unique: false
             attributes:
                 class: "choice text-primary"
-            marker: true
+            marker: "[--]"
+            bgColor: "text-info"
+            bgColorText: true
         xml:
             name: "choice"
             unique: false
@@ -600,43 +608,43 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    choiceOrig:
-        btn:
-            id: "choiceOrig"
-            label: "Marquer une forme ancienne"
-            label_forced: true
-            title: "Signaliser une forme ancienne"
-            icon: "fa fa-pagelines"
-            btn_class: ""
-            btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            view: false
-            level: 2
-            separator_before: false
-        order: 3
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "choice text-primary"
-            marker: true
-        xml:
-            name: "choice"
-            unique: false
-            contains:
-                orig: "default"
-                reg: "emptyContent"
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry:
-            enable: true
-            children: ""
-    orig:
+#    choiceOrig:
+#        btn:
+#            id: "choiceOrig"
+#            label: "Marquer une forme ancienne"
+#            label_forced: true
+#            title: "Signaliser une forme ancienne"
+#            icon: "fa fa-pagelines"
+#            btn_class: ""
+#            btn_group: "microPhenomena"
+#            btn_is_group: false
+#            allow_root: false
+#            restrict_to_root: false
+#            enabled: false
+#            view: false
+#            level: 2
+#            separator_before: false
+#        order: 3
+#        caret:
+#            position: "prepend"
+#        html:
+#            name: "span"
+#            unique: false
+#            attributes:
+#                class: "choice text-primary"
+#            marker: "[--]"
+#        xml:
+#            name: "choice"
+#            unique: false
+#            contains:
+#                orig: "default"
+#                reg: "emptyContent"
+#            replicateOnEnter: false
+#            replicateOnCtrlEnter: false
+#        complex_entry:
+#            enable: true
+#            children: ""
+#    orig:
 #        btn:
 #            id: "orig"
 #            label: false
@@ -655,19 +663,19 @@ tags:
 #        order: 5
 #        caret:
 #            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "orig"
-        xml:
-            name: "orig"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry: 
-            enable: false
-    reg:
+#        html:
+#            name: "span"
+#            unique: false
+#            attributes:
+#                class: "orig"
+#        xml:
+#            name: "orig"
+#            unique: false
+#            replicateOnEnter: false
+#            replicateOnCtrlEnter: false
+#        complex_entry:
+#            enable: false
+#    reg:
 #        btn:
 #            id: "reg"
 #            label: false
@@ -686,19 +694,19 @@ tags:
 #        order: 6
 #        caret:
 #            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "reg"
-                hidden: "hidden"
-        xml:
-            name: "reg"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry: 
-            enable: false
+#        html:
+#            name: "span"
+#            unique: false
+#            attributes:
+#                class: "reg"
+#                hidden: "hidden"
+#        xml:
+#            name: "reg"
+#            unique: false
+#            replicateOnEnter: false
+#            replicateOnCtrlEnter: false
+#        complex_entry:
+#            enable: false
     surplus:
         btn:
             id: "surplus"
@@ -724,6 +732,12 @@ tags:
             unique: false
             attributes:
                 class: "surplus"
+            icon:
+                position: "prepend"
+            marker: "+--+"
+            bgColor: "text-info"
+            bgColorText: true
+            extra: "tooltip"
         xml:
             name: "surplus"
             unique: false
@@ -755,6 +769,7 @@ tags:
             unique: false
             attributes:
                 class: "add"
+            extra: "tooltip"
         xml:
             name: "add"
             unique: false
@@ -820,6 +835,9 @@ tags:
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
+            contains:
+                del: "default"
+                add: "emptyContent"
         complex_entry: 
             enable: true
             children: "del&&add"
@@ -828,7 +846,7 @@ tags:
         btn:
             id: "damage"
             label: false
-            title: "Marquer le texte comme endommagé"
+            title: "Le texte est endommagé"
             label_forced: false
             icon: "fa fa-yelp"
             btn_class: ""
@@ -847,6 +865,10 @@ tags:
             unique: false
             attributes:
                 class: "damage"
+            marker: "|--|"
+            extra: "tooltip"
+            bgColor: "text-warning"
+            bgColorText: true
         xml:
             name: "damage"
             unique: false
@@ -877,7 +899,10 @@ tags:
             unique: false
             attributes:
                 class: "supplied"
-                hidden: "hidden"
+            extra: "tooltip"
+            marker: "{--}"
+            bgColor: "text-warning"
+            bgColorText: true
         xml:
             name: "supplied"
             unique: false
@@ -889,7 +914,7 @@ tags:
         btn:
             id: "unclear"
             label: false
-            title: "Texte transcript incertain"
+            title: "Texte transcrit incertain"
             label_forced: false
             icon: "fa fa-star-half"
             btn_class: ""
@@ -908,6 +933,10 @@ tags:
             unique: false
             attributes:
                 class: "unclear"
+            extra: "tooltip"
+            marker: "|--|"
+            bgColor: "text-warning"
+            bgColorText: true
         xml:
             name: "unclear"
             unique: false
@@ -938,7 +967,11 @@ tags:
             unique: false
             attributes:
                 class: "gap"
-                style: "background-color: #000; min-width: 10px;"
+            icon:
+                position: "prepend"
+            extra: "tooltip"
+            bgColor: "text-warning"
+            bgColorText: true
         xml:
             name: "gap"
             unique: true
@@ -1266,37 +1299,7 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    note:
-        btn:
-            id: "note"
-            label: false
-            title: "Note du testateur"
-            label_forced: false
-            icon: "fa fa-stack-overflow"
-            btn_class: ""
-            btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
-            enabled: false
-            view: false
-            level: 2
-            separator_before: true
-        order: 11
-        caret:
-            position: "prepend"
-        html:
-            name: "span"
-            unique: false
-            attributes:
-                class: "note"
-        xml:
-            name: "note"
-            unique: false
-            replicateOnEnter: false
-            replicateOnCtrlEnter: false
-        complex_entry:
-            enable: false
+
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
     app:
         btn:
@@ -1320,7 +1323,10 @@ tags:
             name: "span"
             unique: false
             attributes:
-                class: "app"
+                class: "app text-primary"
+            marker: "{--}"
+            icon:
+                position: "prepend"
         xml:
             name: "app"
             unique: false
@@ -1362,7 +1368,7 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-#    lem:
+    lem:
 #        btn:
 #            id: "lem"
 #            label: false
@@ -1378,20 +1384,52 @@ tags:
 #            view: false
 #            level: 2
 #        order: 2
-#        caret:
-#            position: "prepend"
-#        html:
-#            name: "span"
-#            unique: false
-#            attributes:
-#                class: "lem"
-#        xml:
-#            name: "lem"
-#            unique: false
-#            replicateOnEnter: false
-#            replicateOnCtrlEnter: false
-#        complex_entry:
-#            enable: false
+        caret:
+            position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "lem"
+        xml:
+            name: "lem"
+            unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
+    note:
+    # Note est volontairement au dessous pour permettre l'encodage de app
+        btn:
+            id: "note"
+            label: false
+            title: "Note du testateur"
+            label_forced: false
+            icon: "fa fa-stack-overflow"
+            btn_class: ""
+            btn_group: "semantic"
+            btn_is_group: false
+            allow_root: false
+            restrict_to_root: false
+            enabled: false
+            view: false
+            level: 2
+            separator_before: true
+        order: 11
+        caret:
+            position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "note"
+        xml:
+            name: "note"
+            unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
 #    bibl:
 #        btn:
 #            id: "bibl"

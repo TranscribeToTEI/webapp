@@ -26,17 +26,19 @@
 <div class="row mt-5">
     <div class="col-md-12 ml-2">
         <h3 class="mb-2"><strong>Testateurs en lien avec ce lieu</strong></h3>
-        <div class="row mt-4" ng-repeat="testatorContainer in entity._embedded.testators">
-            <div class="col-md-1 pr-0">
-                <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
-                    <img src="/webapp/app/web/images/default-testator.png" class="img-fluid" />
-                </a>
-            </div>
-            <div class="col-md-10">
-                <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testatorContainer.testator.id })">{{ testatorContainer.testator.name }}</a>
-                <p ng-if="testatorContainer.reason === 'bornHere'">Originaire de {{ entity.name }}</p>
-                <p ng-if="testatorContainer.reason === 'diedHere'">Décédé à {{ entity.name }}</p>
-                <p ng-if="testatorContainer.reason === 'livedHere'">A vécu à {{ entity.name }}</p>
+        <div class="row">
+            <div class="col-md-3 mt-4" ng-repeat="testatorContainer in entity._embedded.testators">
+                <div class="pr-0">
+                    <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
+                        <img src="/webapp/app/web/images/default-testator.png" class="img-fluid" />
+                    </a>
+                </div>
+                <div class="">
+                    <a class="nomTestataire" ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testatorContainer.testator.id })">{{ testatorContainer.testator.name }}</a>
+                    <p ng-if="testatorContainer.reason === 'bornHere'">Originaire de {{ entity.name }}</p>
+                    <p ng-if="testatorContainer.reason === 'diedHere'">Décédé à {{ entity.name }}</p>
+                    <p ng-if="testatorContainer.reason === 'livedHere'">A vécu à {{ entity.name }}</p>
+                </div>
             </div>
         </div>
     </div>

@@ -75,7 +75,6 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                             updateComment = entity.updateComment;
                         }
 
-
                         form = {
                             name: entity.name,
                             surname: entity.surname,
@@ -104,6 +103,7 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                             memoireDesHommes: $filter('stringToArray')(entity.memoireDesHommes),
                             militaryUnitString: entity.militaryUnitString,
                             militaryUnitNormalized: entity.militaryUnitNormalized,
+                            militaryUnitDeploymentString: entity.militaryUnitDeploymentString,
                             rank: entity.rank,
                             description: entity.description,
                             updateComment: updateComment,

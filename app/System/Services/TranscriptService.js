@@ -140,6 +140,28 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     content: content,
                                     prefix: prefix
                                 }
+                            } else if (tag.xml.name === "app") {
+                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
+                                    content = "";
+
+                                for(let iC in TEIElement.children) {
+                                    let child = TEIElement.children[iC];
+                                    if(child.name === "note") {
+                                        content = child.content;
+                                    }
+                                }
+
+                                extraTooltip = {
+                                    type: "popover",
+                                    content: content,
+                                    title: "Note d'apparat critique"
+                                }
+                            } else if (tag.xml.name === "app") {
+                                //Pas sur que ça marche ça
+                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false);
+                                if(TEIElement.parent !== undefined && TEIElement.parent !== null && TEIElement.parent.name === "app") {
+                                    attributesString += "class: \"hidden\"";
+                                }
                             }
                             /* End: Computing tooltip --------------------------------------------------------------- */
 
@@ -251,8 +273,33 @@ angular.module('transcript.service.transcript', ['ui.router'])
             tagConstruction: function(tag, type, xmlAttributes, extraTooltip, isMicroObject) {
                 /* Attributes management ---------------------------------------------------------------------------- */
                 let attributesHtml = "",
-                    attributes = functions.convertXMLAttributes(xmlAttributes);
+                    attributes = functions.convertXMLAttributes(xmlAttributes),
+                    construction = '',
+                    bgColor = '';
 
+                // bgColor management --------
+                if(tag.html.bgColor !== undefined) {
+                    bgColor = tag.html.bgColor;
+                } else if(tag.btn !== undefined && tag.btn.level === 1) {
+                    bgColor = 'text-info';
+                } else {
+                    bgColor = 'text-primary';
+                }
+
+                // attributes management -------
+                if(tag.html.bgColor !== undefined && tag.html.bgColorText !== undefined && tag.html.bgColorText === true) {
+                    if(tag.html.attributes['class'] !== undefined) {
+                        tag.html.attributes['class'] += " "+ tag.html.bgColor;
+                    } else {
+                        tag.html.attributes['class'] = tag.html.bgColor;
+                    }
+                }
+                if(tag.btn !== undefined && tag.btn.id === "note") {
+                    // If the tag is "note" and it is in a app context
+                    if(tag.html.attributes['hidden'] === undefined) {
+                        tag.html.attributes['hidden'] = "hidden";
+                    }
+                }
                 if(tag.html.attributes !== undefined) {
                     for(let attribute in tag.html.attributes) {
                         if(attributes[attribute] !== undefined) {
@@ -271,18 +318,14 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     if(extraTooltip.type === 'tooltip') {
                         attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip(\'show\')"';
                     } else if(extraTooltip.type === 'popover') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" ';
+                        attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" onmouseenter="$(this).popover(\'show\')" ';
+                    }
+                } else if(tag.html.extra !== undefined) {
+                    if(tag.html.extra === 'tooltip') {
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip(\'show\')"';
                     }
                 }
                 /* End: Attributes management ----------------------------------------------------------------------- */
-
-                let construction = '',
-                    bgColor = '';
-                if(tag.btn !== undefined && tag.btn.level === 1) {
-                    bgColor = 'text-info';
-                } else {
-                    bgColor = 'text-primary';
-                }
 
                 /* Icon content ------------------------------------------------------------------------------------- */
                 if(isMicroObject === true && tag.html.icon !== undefined && tag.html.icon.position === "before" && (type === "startTag" || type === "singleTag")) {
@@ -293,10 +336,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
                 /* Icon content ------------------------------------------------------------------------------------- */
 
-                if(tag.html.marker === true && type === "endTag") {
-                    if(tag.xml.name === 'choice') {
-                        construction += ']';
-                    }
+                if(tag.html.marker !== undefined && type === "endTag") {
+                    construction += tag.html.marker.split('--')[1];
                 }
 
                 /* Tag content -------------------------------------------------------------------------------------- */
@@ -305,22 +346,20 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 } else if(type === "startTag") {
                     construction +=  "<"+tag.html.name+attributesHtml+">";
                 } else if(type === "singleTag") {
-                    if(tag.html.unique === true) {
+                    if(tag.html.unique === true && tag.html.icon === undefined) {
                         construction +=  "<"+tag.html.name+attributesHtml+" />";
                     } else {
                         construction +=  "<"+tag.html.name+attributesHtml+">";
                         if(isMicroObject === true && tag.html.icon !== undefined && (tag.html.icon.position === "prepend" || tag.html.icon.position === "append")) {
-                            construction += ' <span class="'+bgColor+'"><i class="'+tag.btn.icon+'" title="'+tag.btn.title+'"></i></span> ';
+                            construction += ' <span class="'+bgColor+'" title="'+tag.btn.title+'"><i class="'+tag.btn.icon+'"></i></span> ';
                         }
                         construction += "</"+tag.html.name+">";
                     }
                 }
                 /* Tag content -------------------------------------------------------------------------------------- */
 
-                if(tag.html.marker === true && type === "startTag") {
-                    if(tag.xml.name === 'choice') {
-                        construction += '[';
-                    }
+                if(tag.html.marker !== undefined && type === "startTag") {
+                    construction += tag.html.marker.split('--')[0];
                 }
 
                 /* Icon content ------------------------------------------------------------------------------------- */
@@ -602,7 +641,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
-                console.log('getTEIElementInformation');
+                //console.log('getTEIElementInformation');
                 if(!leftOfCursor || !rightOfCursor) { return null; }
                 // $log.debug(leftOfCursor);
                 // $log.debug(rightOfCursor);
@@ -826,7 +865,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                     /* ---------------------------------------------------------------------------------------------- */
                 }
-                $log.debug(teiElement);
+                //console.log(teiElement);
                 return teiElement;
             },
             getTEIElementParents(teiElement, parents) {
@@ -846,7 +885,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     return response;
                 });
             },
-            buildListTagToolbar: function(transcriptArea, teiInfo, item) {
+            buildListTagToolbar: function(transcriptArea, teiInfo, item, transcriptConfig) {
                 let htmlToReturn = "";
 
                 /* -------------------------------------------------------------------------------------------------- */
@@ -857,7 +896,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 for (let iT in transcriptArea.toolbar.tags) {
                     let button = transcriptArea.toolbar.tags[iT];
 
-                    if(button.btn && button.btn.btn_group === item.id) {
+                    if(button.btn && button.btn.btn_group === item.id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.btn.id)))) {
                         listTags.push(button);
                     }
                 }
@@ -869,7 +908,15 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 } else if(transcriptArea.toolbar.groups[item.id] !== undefined) {
                     for (let iG in transcriptArea.toolbar.groups) {
                         if(transcriptArea.toolbar.groups[iG].parent === item.id) {
+                            //We add the group
                             listTags.push(transcriptArea.toolbar.groups[iG]);
+                            //We add the tags of the group
+                            for (let iT in transcriptArea.toolbar.tags) {
+                                let button = transcriptArea.toolbar.tags[iT];
+                                if(button.btn && button.btn.btn_group === transcriptArea.toolbar.groups[iG].id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.btn.id)))) {
+                                    listTags.push(button);
+                                }
+                            }
                         }
                     }
                 }
@@ -883,7 +930,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 for (let iT in listTags) {
                     let button = listTags[iT];
 
-                    if(button.btn !== undefined) {
+                    if(button.btn !== undefined && button.btn.btn_group === item.id) {
                         let btnClass = "", btnContent = "", circleColor = "";
 
                         if(button.btn.enabled === false) {
@@ -900,11 +947,11 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             circleColor += "red-color";
                         }
 
-                        if(button.btn.separator_before === true) {
+                        if(button.btn.separator_before === true && htmlToReturn !== "") {
                             htmlToReturn += '<li class="dropdown-divider"></li>';
                         }
 
-                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null" ng-if="(transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:button.btn.id))">' +
+                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null" ng-if="(transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:\''+button.btn.id+'\'))">' +
                                         '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', \''+ $filter('internalAttributesRender')(button.xml.attributes) +'\')" title="'+ button.btn.title +'" class="'+btnClass+'" ng-class="{\'disabled\': button.btn.enabled == false}">' +
                                         '       <i class="'+ button.btn.icon +'"></i> ' +
                                                 $filter('ucFirstStrict')(btnContent) +
@@ -912,16 +959,11 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                         '</li>';
                     } else {
                         let subGroup = button;
-                        if(subGroup.separator_before === true) {
-                            htmlToReturn += '<li class="dropdown-divider"></li>';
-                        }
+                        let subGroupHtmlToReturn = "";
 
-                        htmlToReturn += '<li class="dropdown-submenu" id="'+subGroup.id+'">' +
-                                        '   <a class="dropdown-item" tabindex="-1">' + subGroup.name + '</a>' +
-                                        '   <ul class="dropdown-menu">';
                         for (let iB in transcriptArea.toolbar.tags) {
                             let subButton = transcriptArea.toolbar.tags[iB];
-                            if (subButton.btn && subButton.btn.btn_group === subGroup.id) {
+                            if (subButton.btn && subButton.btn.btn_group === subGroup.id && $filter('filter')(listTags, {btn: {id: subButton.btn.id}}).length > 0) {
                                 let btnClass = "", btnContent = "", circleColor = "";
 
                                 if (subButton.btn.enabled === false) {
@@ -937,22 +979,30 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                 if (subButton.btn.enabled === true) {
                                     circleColor += "red-color";
                                 }
-                                htmlToReturn += '       <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
-                                                '           <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', \'' + $filter('internalAttributesRender')(subButton.xml.attributes) + '\')" title="' + subButton.btn.title + '" class="' + btnClass + '"  ng-class="{\'disabled\': button.btn.enabled == false}">' +
-                                                '               <i class="' + subButton.btn.icon + '"></i> ' +
-                                                                $filter('ucFirstStrict')(btnContent) +
-                                                '           </a>' +
-                                                '       </li>';
+                                subGroupHtmlToReturn += '   <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
+                                                '               <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', \'' + $filter('internalAttributesRender')(subButton.xml.attributes) + '\')" title="' + subButton.btn.title + '" class="' + btnClass + '"  ng-class="{\'disabled\': button.btn.enabled == false}">' +
+                                                '                   <i class="' + subButton.btn.icon + '"></i> ' +
+                                                                    $filter('ucFirstStrict')(btnContent) +
+                                                '               </a>' +
+                                                '           </li>';
                             }
                         }
-                        htmlToReturn += '   </ul>' +
-                                        '</li>';
+
+                        if(subGroupHtmlToReturn !== "") {
+                            if(subGroup.separator_before === true && htmlToReturn !== "") {
+                                htmlToReturn += '<li class="dropdown-divider"></li>';
+                            }
+                            htmlToReturn += '<li class="dropdown-submenu" id="' + subGroup.id + '">' +
+                                '   <a class="dropdown-item" tabindex="-1">' + subGroup.name + '</a>' +
+                                '   <ul class="dropdown-menu">' +
+                                    subGroupHtmlToReturn +
+                                '   </ul>' +
+                                '</li>';
+                        }
                     }
                 }
-
                 return htmlToReturn;
                 /* End: Creation of the DOM ------------------------------------------------------------------------- */
-
             }
         };
         return functions;

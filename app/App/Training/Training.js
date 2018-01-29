@@ -19,7 +19,7 @@ angular.module('transcript.app.training', ['ui.router'])
         })
     }])
 
-    .controller('AppTrainingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, tfMetaTags) {
+    .controller('AppTrainingCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'tfMetaTags', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, tfMetaTags, UserPreferenceService) {
         tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
 
         /* End Training action -------------------------------------------------------------------------------------- */

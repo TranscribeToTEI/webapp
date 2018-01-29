@@ -88,6 +88,6 @@
 <div class="row mt-4">
     <div class="col-md-12 ml-2">
         <h4 class="mb-1"><strong>Testaments</strong></h4>
-        <div ng-repeat="will in entity._embedded.wills"><i class="fa fa-angle-right" aria-hidden="true"></i> <a ui-sref="transcript.app.entity({ id: will.entity.id })">{{ will.title }}</a></div>
+        <div ng-repeat="will in entity._embedded.wills"><i class="fa fa-angle-right" aria-hidden="true"></i> <a ui-sref="transcript.app.entity({ id: will.entity.id })">{{ will.title }}, testament du {{ will.willWritingDateString }}</a></div>
     </div>
 </div>

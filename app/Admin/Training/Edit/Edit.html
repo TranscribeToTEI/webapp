@@ -111,6 +111,13 @@
 
             <hr data-ng-if="trainingContent.id != null && trainingContent.id !== undefined" />
             <div class="card-deck mt-5" data-ng-if="trainingContent.id !== null && trainingContent.id !== undefined" >
+                <div class="card text-white bg-info mb-3 mt-4">
+                    <h2 class="card-header bg-dark text-white">Informations</h2>
+                    <div class="card-body">
+                        <h3>Contenu en ligne</h3>
+                        <a class="btn btn-sm btn-secondary" ui-sref="transcript.app.training.content({order: trainingContent.orderInTraining})">Voir</a>
+                    </div>
+                </div>
                 <div class="card text-white bg-danger mb-3 mt-4">
                     <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                     <div class="card-body">

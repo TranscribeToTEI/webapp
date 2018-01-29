@@ -11,6 +11,8 @@
                 <div class="list-group-item">
                     <div ng-if="item.manuscriptReference != null" ng-include="'/webapp/app/App/Taxonomy/tpl/list-bibliography-manuscriptElement.html'" class="card mb-0 bg-body"></div>
                     <div ng-if="item.printedReference != null" ng-include="'/webapp/app/App/Taxonomy/tpl/list-bibliography-printedElement.html'" class="card mb-0 bg-body"></div>
+                    <div ng-if="item.freeReference != null && item.freeReference.includes('http://')"><a href="{{ item.freeReference}}" target="_blank">Lien</a></div>
+                    <div ng-if="item.freeReference != null && !item.freeReference.includes('http://')" ng-bind="item.freeReference"></div>
                 </div>
             </div>
         </div>

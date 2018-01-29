@@ -52,7 +52,7 @@ angular.module('transcript.app.content', ['ui.router'])
                                 categoryResults = 'helpContent';
                             }
                         }
-                        return ContentService.getContents(categoryResults, "public", "DESC", numberResults);
+                        return ContentService.getContents(categoryResults, "public", "DESC", null, numberResults, 'id,summary');
                     });
 
                 },

@@ -27,7 +27,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         return TaxonomyService.getTaxonomyEntities($transition$.params().type, 'index');
                     },
                     bibliographies: function(BibliographyService, $transition$) {
-                        return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id);
+                        return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id, "id,bibliography");
                     },
                     testators: function(TaxonomyService) {
                         return TaxonomyService.getTaxonomyEntities('testators', 'index');
@@ -397,6 +397,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 }
             }
         };
+        console.log($scope.bibliography);
         $scope.bibliographyEdit = true;
         $scope.bibliography.initForm = function() {
             $scope.bibliography.addForm = {
@@ -513,6 +514,10 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         });
                     });
             }
+        };
+
+        $scope.bibliography.remove = function(id) {
+            //TODO
         };
         /* Bibliography Management ---------------------------------------------------------------------------------- */
 
