@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-print-none">
     <div ncy-breadcrumb></div>
     <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
@@ -11,16 +11,16 @@
     <div ng-include="'/webapp/app/App/Training/Content/tpl/content-header.html'"></div>
 
     <div class="row mt-4">
-		<div class="col-md-8 order-md-2">
-		    <div class="col-12" ng-include="'/webapp/app/App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
-		    <div ng-if="trainingContent.illustration != null" class="col-12">
+		<div class="col order-md-2">
+		    <div ng-include="'/webapp/app/App/Training/Content/Presentation/tpl/training-mainContent.html'"></div>
+		    <div ng-if="trainingContent.illustration != null">
 		            <img src="{{ trainingContent.illustration | imageRender }}" class="img-fluid" />
 		    </div>
 		    <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 		    <hr />
-		    <div class="mt-4" ui-view="comment"></div>
+		    <div class="mt-4 d-print-none" ui-view="comment"></div>
 		</div> 
-		<div class="col-md-4 order-md-1">
+		<div class="col-md-4 order-md-1 d-print-none">
 			<div class="card">
 				<ul class="list-group list-group-flush mb-5">
                       <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">

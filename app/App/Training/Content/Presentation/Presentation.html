@@ -12,16 +12,16 @@
 	<div ng-include="'/webapp/app/App/Training/Content/tpl/content-header.html'"></div>
 
     <div class="row mt-4">
-		<div class="col-md-8 order-md-2">
+		<div class="col order-md-2">
 		
 		    <div ng-include="'/webapp/app/App/Training/Content/Presentation/tpl/training-presentation.html'"></div>
 		
-		    <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
+		    <div class="d-print-none" ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 		
 		    <hr />
 		    <div class="mt-4" ui-view="comment"></div>
 		</div>
-  		<div class="col-md-4 order-md-1">
+  		<div class="col-md-4 order-md-1 d-print-none">
             <div class="card">
                 <ul class="list-group list-group-flush mb-5">
                      <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">

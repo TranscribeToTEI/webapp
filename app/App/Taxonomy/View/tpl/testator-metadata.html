@@ -7,29 +7,29 @@
 </div>
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Nom complet</dt>
-    <dd class="col-sm-8">{{ entity.name }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.name }}</dd>
 
     <dt class="col-sm-4">Nom de famille</dt>
-    <dd class="col-sm-8">{{ entity.surname | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.surname | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Prénoms</dt>
-    <dd class="col-sm-8">{{ entity.firstnames | sourceRender:'NOT|TES|EC|MDH|AS':true }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.firstnames | sourceRender:'NOT|TES|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Autres noms</dt>
-    <dd class="col-sm-8">{{ entity.otherNames | sourceRender:'TES|NOT|EC|MDH|AS':true:{'A':'autre nom', 'P':'pseudo'} }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.otherNames | sourceRender:'TES|NOT|EC|MDH|AS':true:{'A':'autre nom', 'P':'pseudo'} }}</dd>
 
     <dt class="col-sm-4">Profession</dt>
-    <dd class="col-sm-8">{{ entity.profession | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.profession | sourceRender:'TES|NOT|EC|MDH|AS':true }}</dd>
 
     <dt class="col-sm-4">Adresse</dt>
-    <dd class="col-sm-8">
+    <dd class="col-sm-8 mb-2 mb-sm-0">
         <span ng-if="(!!entity.addressString && !!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressString | sourceRender:'NOT|TES|EC|AS':true }}</a></span>
         <span ng-if="(!!entity.addressString) && !entity.addressCity">{{ entity.addressString | sourceRender:'NOT|TES|EC|AS':true }}</span>
         <span ng-if="!entity.addressString && (!!entity.addressCity)"><a ui-sref="transcript.app.taxonomy.view({type:'places', id: entity.addressCity.id})">{{ entity.addressCity | taxonomyEntityNameConstruct:'places' }}</a></span>
     </dd>
 
     <dt class="col-sm-4">Naissance</dt>
-    <dd class="col-sm-8">
+    <dd class="col-sm-8 mb-2 mb-sm-0">
         {{ entity.dateOfBirthString | sourceRender:'MDH|EC|TES|NOT|AS':true }}
         <span ng-if="entity.placeOfBirthNormalized">
             <span class="text-danger" ng-if="entity.dateOfBirthString">|</span>
@@ -45,7 +45,7 @@
     </dd>
 
     <dt class="col-sm-4">Décès</dt>
-    <dd class="col-sm-8">
+    <dd class="col-sm-8 mb-2 mb-sm-0">
         {{ entity.dateOfDeathString | sourceRender:'NOT|EC|MDH|AS':true }}
         <span ng-if="entity.placeOfDeathNormalized">
             <span class="text-danger" ng-if="entity.dateOfDeathString">|</span>
@@ -61,10 +61,10 @@
     </dd>
 
     <dt class="col-sm-4">Mention de décès</dt>
-    <dd class="col-sm-8">{{ entity.deathMention }}</dd>
+    <dd class="col-sm-8 mb-2 mb-sm-0">{{ entity.deathMention }}</dd>
 
     <dt class="col-sm-4">Incorporation</dt>
-    <dd class="col-sm-8">
+    <dd class="col-sm-8 mb-2 mb-sm-0">
         {{ entity.rank | sourceRender:'MDH|NOT|TES|EC|AS':true }}
         <span class="text-danger" ng-if="entity.rank && entity.militaryUnitDeploymentString">|</span>
         {{ entity.militaryUnitDeploymentString | sourceRender:'MDH|NOT|TES|EC|AS':true }}

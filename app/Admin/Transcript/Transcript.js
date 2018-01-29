@@ -15,7 +15,6 @@ angular.module('transcript.admin.transcript', ['ui.router'])
         })
     }])
 
-    .controller('AdminTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', 'tfMetaTags', function($log, $rootScope, $scope, $http, $sce, $state, tfMetaTags) {
-        tfMetaTags.setTitleSuffix(tfMetaTags.getTitleSuffix());
+    .controller('AdminTranscriptCtrl', ['$rootScope','$scope', '$http', '$sce', '$state', function($log, $rootScope, $scope, $http, $sce, $state) {
     }])
 ;

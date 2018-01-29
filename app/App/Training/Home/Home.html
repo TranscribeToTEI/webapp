@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-print-none">
     <div ncy-breadcrumb></div>
     <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
@@ -9,7 +9,7 @@
 
 <main class="container" role="main">
     <h1 class="card-header bg-dark">Module d'entrainement</h1>
-    <nav ng-if="user.roles | contains:'ROLE_ADMIN'">
+    <nav class="d-print-none" ng-if="user.roles | contains:'ROLE_ADMIN'">
         <ul class="nav nav-pills justify-content-end">
             <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.preference"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Modifier cette page</a></li>
         </ul>

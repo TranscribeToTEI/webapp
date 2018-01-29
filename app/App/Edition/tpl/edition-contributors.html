@@ -1,7 +1,7 @@
 <div class="card bg-body" >
     <h3 class="card-header bg-light"><i class="fa fa-user red-color" aria-hidden="true"></i> Contributeurs</h3>
     <div class="row contributeurs mx-2 py-3">
-            <div class="col-lg-4 col-md-6 mb-3" ng-repeat="contributor in resource._embedded.contributors">
+            <div class="col-xl-4 col-lg-6 mb-3" ng-repeat="contributor in resource._embedded.contributors">
                 <div><a ui-sref="transcript.app.user.profile({id: contributor.user.id})"><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ contributor.user.name }}</a></div>
                 <div>{{ contributor.contributions }} <span ng-if="contributor.contributions > 1">contributions</span><span ng-if="contributor.contributions <= 1">contribution</span></div>
             </div>

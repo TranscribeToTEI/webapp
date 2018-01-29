@@ -418,7 +418,8 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                     collectionName: null,
                     documentNumber: null,
                     url: null
-                }
+                },
+                freeReference: null
             };
         };
         $scope.bibliography.initForm();
@@ -448,6 +449,9 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 } else if (elementToEdit.manuscriptReference !== null) {
                     $scope.bibliography.addForm.type = 'manuscriptReference';
                     $scope.bibliography.addForm.manuscriptReference = elementToEdit.manuscriptReference;
+                } else {
+                    $scope.bibliography.addForm.type = 'freeReference';
+                    $scope.bibliography.addForm.freeReference = elementToEdit.freeReference;
                 }
             } else {
                 $scope.bibliography.initForm();

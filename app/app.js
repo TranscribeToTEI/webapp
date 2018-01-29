@@ -125,6 +125,7 @@ angular.module('transcriptApp', [
         'transcript.filter.trainingTypePageName',
         'transcript.filter.transcriptionStatusName',
         'transcript.filter.trustAsHtml',
+        'transcript.filter.reverse',
         'transcript.filter.roleName',
         'transcript.filter.sourceRender',
         'transcript.filter.status',

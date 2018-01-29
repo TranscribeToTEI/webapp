@@ -20,7 +20,7 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
             },
             resolve: {
                 transcripts: function(TranscriptService) {
-                    return TranscriptService.getTranscriptsByStatus("validation");
+                    return TranscriptService.getTranscriptsByStatus("validation", "id,adminValidation");
                 }
             }
         })

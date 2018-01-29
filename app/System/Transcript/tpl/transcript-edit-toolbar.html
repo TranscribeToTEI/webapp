@@ -13,7 +13,7 @@
                 <i class="{{ button.btn.icon }}" ng-if="button.btn.icon != ''"></i>
                 <span ng-if="(button.btn.icon != '' && button.btn.label_forced == true) || button.btn.icon == ''"><span ng-if="button.btn.label == false">{{ teiInfo[button.btn.id].doc.gloss[0].content | ucFirstStrict }}</span><span ng-if="button.btn.label != false">{{ button.btn.label }}</span></span>
             </button>
-             <div class="ml-auto bg-danger text-white">
+             <div class="ml-auto bg-danger text-white d-none d-xl-block">
              	<small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl1 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl1.xml.name }}&gt;</small>
              </div>
         </div>
@@ -46,7 +46,7 @@
                     <span ng-if="item.btn.icon == ''">{{ item.btn.label }}</span>
                 </button>
             </div>
-            <div class="ml-auto bg-danger text-white">
+            <div class="ml-auto bg-danger text-white d-none d-xl-block">
             	<small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl2 !== null">&lt;{{ transcriptArea.toolbar.mouseOverLvl2 }}&gt;</small>
             </div>
         </div>
@@ -54,7 +54,7 @@
 
     <!-- Attributes management Level 3-->
     <div class="clearfix level level-3">
-        <div class="float-right bg-danger text-white" style="height: 100%;" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isAttributesManagement === true">
+        <div class="float-right bg-danger text-white d-none d-xl-block" style="height: 100%;" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isAttributesManagement === true">
             <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value !== null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}="{{ transcriptArea.toolbar.mouseOverLvl3.value.value }}"</small>
             <small class="toolbarLeftTooltip" ng-if="transcriptArea.toolbar.mouseOverLvl3 !== null && transcriptArea.toolbar.mouseOverLvl3.value === null">{{ transcriptArea.toolbar.mouseOverLvl3.attribute.id }}=""</small>
         </div>

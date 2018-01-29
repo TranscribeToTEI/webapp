@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-print-none">
     <div ncy-breadcrumb></div>
     <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
@@ -11,10 +11,10 @@
     <div ng-include="'/webapp/app/App/Training/Content/tpl/content-header.html'"></div>
 
     <div class="row mt-4">
-        <div class="col-md-8 order-md-2">
+        <div class="col order-md-2">
     		<div ng-bind-html="trainingContent.exerciseHeader | trustAsHtml"></div>
  		</div>
-        <div class="col-md-4 order-md-1">
+        <div class="col-md-4 order-md-1 d-print-none">
             <div class="card">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">
@@ -29,10 +29,10 @@
     		
     <div ui-view="transcript"></div>
 
-    <div ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
+    <div class="d-print-none" ng-include="'/webapp/app/App/Training/Content/tpl/content-footer.html'"></div>
 
     <hr />
-    <div class="mt-4" ui-view="comment"></div>
+    <div class="mt-4 d-print-none" ui-view="comment"></div>
 </main>
 <main class="container" role="main" ng-if="trainingContent.pageStatus != 'public'">
     <div class="alert alert-warning">Oups ... Cette page n'est pas publique pour le moment</div>

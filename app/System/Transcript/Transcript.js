@@ -56,7 +56,10 @@ angular.module('transcript.system.transcript', ['ui.router'])
                      * a4 = no info
                      */
                     isTranscribed: "a4",
-                    isEncoded: "a4"
+                    isStructured: "a4",
+                    isLayouted: "a4",
+                    isChoice: "a4",
+                    isEntity: "a4"
                 },
                 state: { alert: "alert-success", btnClass: "btn-success", btnValue: "sauvegarder", message: "Pour sauvegarder votre travail, cliquer sur le bouton ci-dessous",}
             };
@@ -387,6 +390,17 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     }
                 });
                 $scope.aceEditor.commands.addCommand({
+                    name: 'space',
+                    bindKey: {win: 'space', mac: 'space'},
+                    exec: function (editor) {
+                        $scope.$apply(function () {
+                            /* Computing of current tag value */
+                            $scope.updateTEIElementInformation();
+                        });
+                        return false;
+                    }
+                });
+                $scope.aceEditor.commands.addCommand({
                     name: 'enter',
                     bindKey: {win: 'Enter', mac: 'Enter'},
                     exec: function (editor) {
@@ -567,7 +581,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                     $scope.transcriptArea.interaction.live.encode();
                     $scope.transcriptArea.ace.lines = $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1);
-                    $scope.functions.updateAlerts();
+                    //$scope.functions.updateAlerts();
 
                     /* Exercise Management -------------------------------------------------------------------------- */
                     if($scope.transcriptConfig.isExercise === true) {
@@ -870,7 +884,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.transcriptArea.interaction.complexEntry.action = function () {
                 for(let iA in $scope.transcriptArea.interaction.complexEntry.arrayListTags) {
                     if($scope.transcriptArea.interaction.complexEntry.arrayListTags[iA].list.indexOf($scope.transcriptArea.ace.currentTag.name) !== -1) {
-                        $scope.transcriptArea.interaction.complexEntry.name = $scope.transcriptArea.interaction.complexEntry.arrayListTags[iA].element.btn.id;
+                        $scope.transcriptArea.interaction.complexEntry.name = $scope.transcriptArea.interaction.complexEntry.arrayListTags[iA].element.xml.name;
                         $scope.transcriptArea.interaction.complexEntry.computeFieldAnalyzed();
                     }
                 }
@@ -1208,7 +1222,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Alert Zone Management */
             /* ---------------------------------------------------------------------------------------------------------- */
-            $scope.$watch('transcriptArea.interaction.alertZone.alerts', function () {
+            /*$scope.$watch('transcriptArea.interaction.alertZone.alerts', function () {
                 $log.debug($scope.transcriptArea.interaction.alertZone.alerts);
             });
 
@@ -1220,7 +1234,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         $scope.transcriptArea.interaction.alertZone.alerts.push({content: $sce.trustAsHtml("La ligne " + (kLine + 1) + " semble longue. N'auriez-vous pas oublié un saut de ligne ?")});
                     }
                 }
-            };
+            };*/
             /* Alert Zone Management ------------------------------------------------------------------------------------ */
 
             /* ---------------------------------------------------------------------------------------------------------- */

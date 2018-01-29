@@ -1,6 +1,8 @@
-#transcript-edit-editor-ace-area {
+#transcript-edit-editor-ace-area,
+#transcript-edit-interaction-version-ace-area {
     min-height: 400px;
 }
+
 
 /* Editing page */
 #transcriptContainer #transcript-workarea #transcript-edit {
@@ -38,10 +40,10 @@
     font-size: 105%;
     font-weight: 500;
 }
-#div-container-encode div.dateline {
+/*#div-container-encode div.dateline {
     font-style: italic;
     text-align: right;
-}
+}*/
 #div-container-encode span.underlined {
     text-decoration: underline;
 }

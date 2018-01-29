@@ -3,7 +3,7 @@
         <h1 class="page-heading mb-0"><i class="fa fa-graduation-cap" aria-hidden="true"></i> {{ trainingContent.title }}</h1>
     </div>
 </div>
-<div class="row my-3 justify-content-end">
+<div class="row my-3 justify-content-end d-print-none">
 	<div class="col-md-6 offset-md-6">
 		<ul class="nav nav-pills float-right">
 			<li class="nav-item" ng-if="user.roles | contains:'ROLE_ADMIN'">
@@ -15,12 +15,15 @@
 
 
 
-<div class="row justify-content-end post-meta mt-2 ">
-	<div class="col-md-8 offset-md-4 bg-body d-flex justify-content-start">
-	    <div ng-repeat="user in trainingContent.editorialResponsibility" ng-if="trainingContent.editorialResponsibility != null">
-	        <strong><a ui-sref="transcript.app.user.profile({id: user.id})">{{ user.name }}</a></strong>
-	        <div ng-if="user.biography != null" ng-bind="user.biography"></div>
+<div class="row post-meta mt-2">
+	<div class="col-md-4 d-print-none"></div>
+	<div class="col">
+		<div class="row bg-body py-2 mx-0">
+		    <div class="col-md-8 col-12" ng-repeat="user in trainingContent.editorialResponsibility" ng-if="trainingContent.editorialResponsibility != null">
+		        <strong><a ui-sref="transcript.app.user.profile({id: user.id})">{{ user.name }}</a></strong>
+		        <div class="mt-1" ng-if="user.biography != null" ng-bind="user.biography"></div>
+		    </div>
+		    <div class="col ml-auto text-md-right mt-2 mt-md-0" style="white-space: nowrap;">Publié le <span ng-bind="trainingContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></div>
 	    </div>
-	    <div class="ml-auto">Publié le <span ng-bind="trainingContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
 	</div>	    
 </div>

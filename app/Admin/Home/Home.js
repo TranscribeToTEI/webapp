@@ -31,7 +31,7 @@ angular.module('transcript.admin.home', ['ui.router'])
                     }
                 },
                 transcriptsToValidate: function(TranscriptService) {
-                    return TranscriptService.getTranscriptsByStatus('validation').then(function(data){
+                    return TranscriptService.getTranscriptsByStatus('validation', 'id').then(function(data){
                         return data;
                     });
                 },

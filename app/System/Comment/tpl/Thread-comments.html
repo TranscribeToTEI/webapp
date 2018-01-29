@@ -2,7 +2,7 @@
     <div class="comment-comment-header" ng-if="commentContainer.comment.state == 0">
         <span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> <a ng-if="commentContainer.comment.author != null" ui-sref="transcript.app.user.profile({id: commentContainer.comment.author.id})" ng-bind="commentContainer.comment.author.name"></a> <span ng-if="commentContainer.comment.author == null" >Anonyme</span>&nbsp;
         <span ng-if="user.roles | contains:'ROLE_ADMIN'">&nbsp;<a class="badge badge-pill badge-primary" ng-click="comment.edit.load(commentContainer.comment.id)">Edit</a>&nbsp;<a class="badge badge-pill badge-danger" ng-click="admin.remove(commentContainer.comment.id)" ng-if="commentContainer.editAction != true" >Remove</a></span> <a ng-if="commentContainer.editAction == true" ng-click="commentContainer.editAction = false"><i class="fa fa-close"></i></a>
-        <div class="date">Écrit le <span ng-bind="commentContainer.comment.createdAt | date:'MM/dd/yyyy'"></span> à <span ng-bind="commentContainer.comment.createdAt | date:'H:mm'"></span></div>
+        <div class="date">Écrit le <span ng-bind="commentContainer.comment.createdAt | date:'dd/MM/yyyy'"></span> à <span ng-bind="commentContainer.comment.createdAt | date:'H:mm'"></span></div>
     </div>
     <blockquote ng-bind-html="commentContainer.comment.body | trustAsHtml" ng-if="commentContainer.comment.state == 0 && commentContainer.editAction != true"></blockquote>
     <form ng-if="commentContainer.comment.state == 0 && commentContainer.editAction == true">
@@ -17,7 +17,7 @@
 
     <div class="comment-comment-header" ng-if="commentContainer.comment.state == 1">
         <span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> Anonyme
-        <div class="date">Écrit le <span ng-bind="commentContainer.comment.createdAt | date:'MM/dd/yyyy'"></span> à <span ng-bind="commentContainer.comment.createdAt | date:'H:mm'"></span></div>
+        <div class="date">Écrit le <span ng-bind="commentContainer.comment.createdAt | date:'dd/MM/yyyy'"></span> à <span ng-bind="commentContainer.comment.createdAt | date:'H:mm'"></span></div>
     </div>
     <p ng-if="commentContainer.comment.state == 1" class="alert alert-warning">Ce commentaire a été supprimé par un modérateur.</p>
 </div>

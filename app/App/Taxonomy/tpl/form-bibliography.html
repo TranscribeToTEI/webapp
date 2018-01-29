@@ -20,9 +20,13 @@
                             <input class="custom-control-input" type="radio" name="app-transcript-interaction-form-biblio-add-type" id="app-transcript-interaction-form-biblio-add-type-2" ng-model="bibliography.addForm.type" value="manuscriptReference">
                             <span class="custom-control-label">Référence manuscrite</span>
                         </label>
+                        <label class="custom-control custom-radio">
+                            <input class="custom-control-input" type="radio" name="app-transcript-interaction-form-biblio-add-type" id="app-transcript-interaction-form-biblio-add-type-3" ng-model="bibliography.addForm.type" value="freeReference">
+                            <span class="custom-control-label">Référence libre</span>
+                        </label>
                     </div>
 
-                    <div ng-if="bibliography.addForm.type == 'printedReference'">
+                    <div ng-if="bibliography.addForm.type === 'printedReference'">
                         <div class="float-right">
                             <button class="btn btn-sm btn-primary" ng-click="bibliography.action()">Retour</button>
                         </div>
@@ -64,7 +68,7 @@
                             </div>
                         </fieldset>
                     </div>
-                    <div ng-if="bibliography.addForm.type == 'manuscriptReference'">
+                    <div ng-if="bibliography.addForm.type === 'manuscriptReference'">
                         <div class="float-right">
                             <button class="btn btn-sm btn-primary" ng-click="bibliography.action()">Retour</button>
                         </div>
@@ -91,6 +95,15 @@
                         <div class="form-group">
                             <label for="transcriptArea-interaction-bibliography-addForm-manuscriptReference-url" class="form-control-label">URL</label>
                             <input id="transcriptArea-interaction-bibliography-addForm-manuscriptReference-url" class="form-control form-control-sm" ng-model="bibliography.addForm.manuscriptReference.url" />
+                        </div>
+                    </div>
+                    <div ng-if="bibliography.addForm.type === 'freeReference'">
+                        <div class="float-right">
+                            <button class="btn btn-sm btn-primary" ng-click="bibliography.action()">Retour</button>
+                        </div>
+                        <div class="form-group">
+                            <label for="transcriptArea-interaction-bibliography-addForm-freeReference" class="form-control-label">Informations sur la référence</label>
+                            <input id="transcriptArea-interaction-bibliography-addForm-freeReference" class="form-control form-control-sm" ng-model="bibliography.addForm.freeReference" />
                         </div>
                     </div>
                 </form>

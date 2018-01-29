@@ -316,13 +316,13 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                 if(extraTooltip !== null) {
                     if(extraTooltip.type === 'tooltip') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip(\'show\')"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
                     } else if(extraTooltip.type === 'popover') {
-                        attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" onmouseenter="$(this).popover(\'show\')" ';
+                        attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" onmouseenter="$(this).popover({container:\'#transcriptContainerFullScreen\'})" ';
                     }
                 } else if(tag.html.extra !== undefined) {
                     if(tag.html.extra === 'tooltip') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip(\'show\')"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
                     }
                 }
                 /* End: Attributes management ----------------------------------------------------------------------- */

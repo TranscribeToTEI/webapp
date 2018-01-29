@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container d-print-none">
     <div ncy-breadcrumb></div>
     <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
         <!-- Manually hide the alert with `hide()` -->
@@ -7,38 +7,39 @@
     </div>
 </div>
 <main class="container content pb-3" role="container">
-    <h2 class="card-header bg-dark">
+    <h2 class="card-header bg-dark d-print-none">
         <span ng-if="content.type === 'blogContent'">Article</span>
         <span ng-if="content.type === 'helpContent'">Page d'aide</span>
         <span ng-if="content.type === 'staticContent' && content.staticCategory === 'discover'">Découvrir</span>
-        <span ng-if="content.type === 'staticContent' && content.staticCategory !== 'discover'">Page</span>
+        <span ng-if="content.type === 'staticContent' && content.staticCategory === 'about'">À propos</span>
+        <span ng-if="content.type === 'staticContent' && (content.staticCategory !== 'discover' && content.staticCategory !== 'about')">Page</span>
     </h2>
-    <nav ng-if="user.roles | contains:'ROLE_ADMIN'">
+    <nav class="d-print-none" ng-if="user.roles | contains:'ROLE_ADMIN'">
         <ul class="nav nav-pills justify-content-end">
             <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.content.history({id: content.id})" title="Accéder à l'historique des modifications"><i class="fa fa-history fa-lg" aria-hidden="true"></i></a></li>
             <li class="nav-item"><a class="nav-link" ui-sref="transcript.admin.content.edit({id: content.id})"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i> Modifier cette page</a></li>
         </ul>
     </nav>
     <div class="row mt-4">
-        <div class="col-md-8 order-md-2">
+        <div class="col order-md-2">
             <h1 class="mb-3">{{ content.title }}</h1>
-            <div class="row bg-body post-meta">
-                <div class="col-auto mr-auto">
+            <div class="row bg-body post-meta py-2 mx-0">
+                <div class="col-md-8 col pl-2">
                     <div ng-if="content.editorialResponsibility.length > 0" ng-repeat="user in content.editorialResponsibility">
                         <strong><a ui-sref="transcript.app.user.profile({id: user.id})">{{ user.name }}</a></strong>
                         <br ng-if="user.biography !== null" /><span ng-if="user.biography !== null" ng-bind="user.biography"></span>
                     </div>
                     <div ng-if="content.editorialResponsibility.length == 0">
-                        <strong><a ui-sref="transcript.app.user.profile({id: content.userName.id})">{{ content.createUser.name }}</a></strong>
-                        <br ng-if="content.createUser.biography !== null" /><span ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></span>
+                        <strong><a ui-sref="transcript.app.user.profile({id: content.createUser.id})">{{ content.createUser.name }}</a></strong>
+                        <div class="mt-1" ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></div>
                     </div>
                 </div>
-                <div class="col-auto">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></div>
+                <div class="col text-md-right px-2 mt-2 mt-md-0">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></div>
             </div>
             <div class="text-justify my-2 pr-md-3" ng-bind-html="content.content | trustAsHtml"></div>
             <div class="mt-5" ng-if="content.enableComments == true" ui-view="comment"></div>
         </div>
-        <div class="col-md-4 order-md-1">
+        <div class="col-md-4 order-md-1 d-print-none">
             <img src="{{ content.illustration | imageRender }}" class="img-fluid" alt="Illustration de {{ content.title }}" title="{{ content.title }}" ng-if="content.illustration != '' && content.illustration != null" />
             <div class="card" ng-if="content.type == 'blogContent'">
                 <ul class="list-group list-group-flush mb-5 mt-5">
@@ -58,7 +59,7 @@
             </div>
             <div class="card" ng-if="content.type == 'helpContent' || (content.type == 'staticContent' && content.staticCategory === 'helpHome')">
                 <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="iContent in contents" >
+                    <li class="list-group-item" ng-repeat="iContent in contents | orderBy:'staticOrder'" >
                         <a ui-sref="transcript.app.content({ id: iContent.id })" ng-class="{'active': content.id === iContent.id}" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
                         <span ng-class="{'active': content.id === iContent.id}" ng-if="content.id === iContent.id">{{ iContent.title }}</span>
                     </li>

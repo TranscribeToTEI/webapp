@@ -11,7 +11,7 @@
         <div class="col-md-5">
             <h1 class="page-heading mb-3">{{ iUser.name }}</h1>
             <div><span ng-repeat="role in iUser.roles" ng-if="role != 'ROLE_USER'"><span ng-if="$index > 0"> </span><span class="badge badge-pill badge-primary">{{ role | roleName }}</span></span></div>
-            <p ng-if="iUser.biography != null" ng-bind="iUser.biography"></p>
+            <p class="mt-1" ng-if="iUser.biography != null" ng-bind="iUser.biography"></p>
         </div>
         <div class="col-md-2 mt-3 text-center">
             <i ng-if="iUser.picture == null || iUser.picture == ''" class="fa fa-user-circle fa-5x text-light" aria-hidden="true"></i>

@@ -3,7 +3,7 @@
         <p><strong ng-bind="transcriptArea.interaction.complexEntry.name"></strong></p>
         <div ng-bind-html="teiInfo[transcriptArea.interaction.complexEntry.name].doc.complexTagInfo | encodeXML | trustAsHtml"></div>
         <p ng-if="teiInfo[transcriptArea.interaction.complexEntry.name].doc.complexTagInfo == null" class="alert alert-warning text-center">Cette balise ne possède pas de description.</p>
-        <div class="mt-3" ng-if="transcriptArea.interaction.complexEntry.name == 'choice'">
+        <!--<div class="mt-3" ng-if="transcriptArea.interaction.complexEntry.name == 'choice'">
             <div>
                 <p><strong>Situation actuelle :</strong></p>
                 <p ng-if="!(!!transcriptArea.ace.currentTag.content)" class="text-warning">Votre balise est vide pour le moment</p>
@@ -11,7 +11,7 @@
                     <p>Votre balise contient les éléments <code>&lt;orig&gt;</code> et <code>&lt;reg&gt;</code>. <span class="text-success">Tout est en ordre.</span></p>
                 </div>
             </div>
-        </div>
+        </div>-->
     </div>
 </div>
 

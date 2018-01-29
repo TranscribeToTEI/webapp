@@ -31,40 +31,133 @@
    			</div>
 
             <p data-ng-if="submit.checkList.isTranscribed == 'a1'" class="text-success">Très bien !</p>
-            <p data-ng-if="submit.checkList.isTranscribed == 'a2'" class="text-danger">Il s'agit d'un point fondamental pour nous, veillez à ce que toutes les parties olographes soient transcrites.</p>
-            <p data-ng-if="submit.checkList.isTranscribed == 'a3'" class="text-warning">Besoin d'aide pour identifier les parties olographes du testament ?</p>
+            <p data-ng-if="submit.checkList.isTranscribed == 'a2'" class="text-danger">Il s'agit d'un point fondamental pour nous, veillez à ce que toutes les parties olographes soient transcrites. <a ui-sref="transcript.app.content({id: 5})" target="_blank">Plus d'info ici</a></p>
+			<p data-ng-if="submit.checkList.isTranscribed == 'a3'" class="text-warning">Besoin d'aide pour identifier les parties olographes du testament ? Nous vous conseillons <a ui-sref="transcript.app.content({id: 5})" target="_blank">la lecture de cet article</a>.</p>
 
         </div>
 
         <div class="form-group">
-            <label class="custom-control pl-0">La transcription est-elle encodée ?</label>
+            <label class="custom-control pl-0">La structure du texte est-elle marquée ?</label>
 			<div class="form-check form-check-inline">
 	            <label class="custom-control custom-radio mr-2">
-	                <input class="custom-control-input" type="radio" name="isEncodedOptions" data-ng-model="submit.checkList.isEncoded" id="isEncoded1" value="a1">
+	                <input class="custom-control-input" type="radio" name="isStructuredOptions" data-ng-model="submit.checkList.isStructured" id="isStructured1" value="a1">
 	                <span class="custom-control-indicator"></span>
 	                <span class="custom-control-label">Oui</span>
 	            </label>
             </div>
            <div class="form-check form-check-inline">
 	            <label class="custom-control custom-radio mr-2">
-	                <input class="custom-control-input" type="radio" name="isEncodedOptions" data-ng-model="submit.checkList.isEncoded" id="isEncoded2" value="a2">
+	                <input class="custom-control-input" type="radio" name="isStructuredOptions" data-ng-model="submit.checkList.isStructured" id="isStructured2" value="a2">
 	                <span class="custom-control-indicator"></span>
 	                <span class="custom-control-label">Non</span>
 	            </label>
              </div>
              <div class="form-check form-check-inline">
 	            <label class="custom-control custom-radio">
-	                <input class="custom-control-input" type="radio" name="isEncodedOptions" data-ng-model="submit.checkList.isEncoded" id="isEncoded3" value="a3">
+	                <input class="custom-control-input" type="radio" name="isStructuredOptions" data-ng-model="submit.checkList.isStructured" id="isStructured3" value="a3">
 	                <span class="custom-control-indicator"></span>
 	                <span class="custom-control-label">Je ne sais pas</span>
 	            </label>
 	          </div>
 
 
-            <p data-ng-if="submit.checkList.isEncoded == 'a1'" class="text-success">Très bien !</p>
-            <p data-ng-if="submit.checkList.isEncoded == 'a2'" class="text-danger">Il s'agit d'un point fondamental pour nous, veillez à ce que l'intégralité du testament soit encodée.</p>
-            <p data-ng-if="submit.checkList.isEncoded == 'a3'" class="text-warning">Besoin d'aide pour encoder le testament ?</p>
+            <p data-ng-if="submit.checkList.isStructured == 'a1'" class="text-success">Très bien !</p>
+            <p data-ng-if="submit.checkList.isStructured == 'a2'" class="text-danger">Il est important que la structure soit exacte pour que le balisage fin puisse être fait. <a ui-sref="transcript.app.training.content({order: 4})" target="_blank">Plus d'info ici</a></p>
+            <p data-ng-if="submit.checkList.isStructured == 'a3'" class="text-warning">Besoin d'aide pour identifier la structure du texte ? Nous vous conseillons de consulter <a ui-sref="transcript.app.training.content({order: 4})" target="_blank">l'étape 1 de notre tutoriel d'initiation</a>.</p>
 
         </div>
+
+		<div class="form-group">
+			<label class="custom-control pl-0">Les caractéristiques de la mise en page sont-elles représentées ?</label>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isLayouteddOptions" data-ng-model="submit.checkList.isLayouted" id="isLayouted1" value="a1">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Oui</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isLayoutedOptions" data-ng-model="submit.checkList.isLayouted" id="isLayouted2" value="a2">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Non</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio">
+					<input class="custom-control-input" type="radio" name="isLayoutedOptions" data-ng-model="submit.checkList.isLayouted" id="isLayouted3" value="a3">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Je ne sais pas</span>
+				</label>
+			</div>
+
+
+			<p data-ng-if="submit.checkList.isLayouted == 'a1'" class="text-success">Très bien !</p>
+			<p data-ng-if="submit.checkList.isLayouted == 'a2'" class="text-danger">C'est ce qui nous permettra de pouvoir visuellement rendre l'affichage du testament, c'est un élément important. <a ui-sref="transcript.app.training.content({order: 5})" target="_blank">Plus d'info ici</a></p>
+			<p data-ng-if="submit.checkList.isLayouted == 'a3'" class="text-warning">C'est ce qui nous permettra de pouvoir visuellement rendre l'affichage du testament, c'est un élément important. <a ui-sref="transcript.app.training.content({order: 5})" target="_blank">Plus d'info ici</a></p>
+
+		</div>
+
+		<div class="form-group">
+			<label class="custom-control pl-0">Les particularités de l'écriture (fautes, ratures...) sont-elles marquées ?</label>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isChoiceOptions" data-ng-model="submit.checkList.isChoice" id="isChoice1" value="a1">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Oui</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isChoiceOptions" data-ng-model="submit.checkList.isChoice" id="isChoice2" value="a2">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Non</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio">
+					<input class="custom-control-input" type="radio" name="isChoiceOptions" data-ng-model="submit.checkList.isChoice" id="isChoice3" value="a3">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Je ne sais pas</span>
+				</label>
+			</div>
+
+
+			<p data-ng-if="submit.checkList.isChoice == 'a1'" class="text-success">Très bien !</p>
+			<p data-ng-if="submit.checkList.isChoice == 'a2'" class="text-danger">Nous vous invitons à le faire ou à laisser quelqu'un finir cette transcription. <a ui-sref="transcript.app.training.content({order: 6})" target="_blank">Plus d'info ici</a></p>
+			<p data-ng-if="submit.checkList.isChoice == 'a3'" class="text-warning">Avez-vous identifier toutes les fautes, ratures, ajouts, passages difficiles à lire, lettres ou mots manquants ? <a ui-sref="transcript.app.training.content({order: 5})" target="_blank">Plus d'info ici</a></p>
+
+		</div>
+
+		<div class="form-group">
+			<label class="custom-control pl-0">Les entités nommées (testateurs, lieux) sont-elles marquées ?</label>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isEntityOptions" data-ng-model="submit.checkList.isEntity" id="isEntity1" value="a1">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Oui</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio mr-2">
+					<input class="custom-control-input" type="radio" name="isEntityOptions" data-ng-model="submit.checkList.isEntity" id="isEntity2" value="a2">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Non</span>
+				</label>
+			</div>
+			<div class="form-check form-check-inline">
+				<label class="custom-control custom-radio">
+					<input class="custom-control-input" type="radio" name="isEntityOptions" data-ng-model="submit.checkList.isEntity" id="isEntity3" value="a3">
+					<span class="custom-control-indicator"></span>
+					<span class="custom-control-label">Je ne sais pas</span>
+				</label>
+			</div>
+
+
+			<p data-ng-if="submit.checkList.isEntity == 'a1'" class="text-success">Très bien !</p>
+			<p data-ng-if="submit.checkList.isEntity == 'a2'" class="text-danger">Nous vous invitons à le faire ou à laisser quelqu'un finir cette transcription. <a ui-sref="transcript.app.training.content({order: 7})" target="_blank">Plus d'info ici</a></p>
+			<p data-ng-if="submit.checkList.isEntity == 'a3'" class="text-warning">Avez-vous marquer tous les testateurs, lieux et unités militaires présents dans le texte ? Nous vous invitons à le faire ou à laisser quelqu'un finir cette transcription. <a ui-sref="transcript.app.training.content({order: 7})" target="_blank">Rendez-vous sur notre tutoriel pour en savoir plus</a></p>
+
+		</div>
     </form>
 </div>

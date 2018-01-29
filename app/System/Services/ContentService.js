@@ -4,26 +4,25 @@ angular.module('transcript.service.content', ['ui.router'])
 
     .service('ContentService', function($log, $http, $rootScope, $sce) {
         return {
-            getContents: function(type, status, date, order, limit, profile) {
+            getContents: function(type, status, date, limit) {
                 let typeContainer = "",
                     statusContainer = "",
                     dateContainer = "",
-                    orderContainer = "",
                     limitContainer = "",
-                    profileContainer = "",
                     arrayContainer = [];
 
                 if(type !== null) {typeContainer = "type="+type; arrayContainer.push(typeContainer);}
                 if(status !== null) {statusContainer = "status="+status; arrayContainer.push(statusContainer);}
                 if(date !== null) {dateContainer = "date="+date; arrayContainer.push(dateContainer);}
-                if(order !== null) {orderContainer = "order="+order; arrayContainer.push(orderContainer);}
                 if(limit !== null) {limitContainer = "limit="+limit; arrayContainer.push(limitContainer);}
-                if(profile !== null) {profileContainer = "profile="+profile; arrayContainer.push(profileContainer);}
                 let query = arrayContainer.join("&");
 
                 return $http.get(
                     $rootScope.api+"/contents?"+query
                 ).then(function(response) {
+                    for(let id in response.data) {
+                        response.data[id].content = $sce.trustAsHtml(response.data[id].content);
+                    }
                     return response.data;
                 }, function errorCallback(response) {
                     $log.debug(response);

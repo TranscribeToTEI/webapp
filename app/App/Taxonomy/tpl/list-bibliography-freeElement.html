@@ -1,0 +1,11 @@
+<h4 class="card-header bg-dark text-white">Référence libre</h4>
+<div class="card-body">
+    <div>
+        <div class="float-right" ng-if="bibliographyEdit === true">
+            <button type="button" class="btn btn-sm btn-primary" title="Modifier cette référence" ng-click="bibliography.form.action(item.id)" data-toggle="modal" data-target="#addBibliographicElementModal"><i class="fa fa-edit"></i> Modifier</button>
+        </div>
+        <h3>Référence libre</h3>
+    </div>
+    <div ng-if="item.freeReference.includes('http://')"><a href="{{ item.freeReference}}" target="_blank">Lien</a></div>
+    <div ng-if="!item.freeReference.includes('http://')" ng-bind="item.freeReference"></div>
+</div>
