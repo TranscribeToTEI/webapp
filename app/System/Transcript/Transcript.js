@@ -327,6 +327,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             /* Complex Entry Management */
             /* ---------------------------------------------------------------------------------------------------------- */
+
             for(let iTag in $scope.transcriptArea.toolbar.tags) {
                 let tag = $scope.transcriptArea.toolbar.tags[iTag];
                 if(tag.complex_entry.enable === true) {

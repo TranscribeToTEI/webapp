@@ -14,7 +14,7 @@
                     <div class="nbPage">{{ resource.type | resourceTypeName | ucFirstStrict }} {{ resource.orderInWill }}</div>
                     <span title="État de la transcription" class="badge badge-status d-table" ng-class="getStatusClassLabel(resource.transcript.status)">{{ getStatusLabel(resource.transcript.status) }}</span>
                     <a ui-sref="transcript.app.edition({ idEntity: entity.id, idResource: resource.id })" ng-class="{'locked': resource.transcript._embedded.isCurrentlyEdited == true}">
-                        <img class="img-fluid" src="{{ iiif.server }}/testament_{{ entity.will.hostingOrganization.code }}_{{ entity.willNumber | willNumberFormat }}{{ iiif.separator }}JPEG{{ iiif.separator }}{{ resource.images[0] }}{{ iiif.extension }}.jpg/full/!150,150/0/default.jpg"/>
+                        <img class="img-fluid" src="{{ iiif.server }}/testament_{{ entity.will.hostingOrganization.code }}_{{ entity.willNumber | willNumberFormat }}{{ iiif.separator }}JPEG{{ iiif.separator }}{{ resource.images[0] }}{{ iiif.extension }}.jpg/full/!150,150/0/default.jpg" onerror="if (this.src != '/webapp/app/web/images/no-images.png') this.src = '/webapp/app/web/images/no-images.png';" />
                         <span ng-if="resource.transcript._embedded.isCurrentlyEdited == true" class="badge d-block" title="En cours d'édition">en cours d'édition</span>
                     </a>
                 </li>

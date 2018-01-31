@@ -50,7 +50,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                     return TranscriptService.getTeiInfo();
                 },
                 config: function() {
-                    return YAML.load('System/Transcript/toolbar.yml');
+                    return YAML.load('/webapp/app/System/Transcript/toolbar.yml');
                 },
                 transcriptConfig: function() {
                     return {

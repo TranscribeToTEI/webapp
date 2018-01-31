@@ -32,7 +32,7 @@ angular.module('transcript.app.edition', ['ui.router'])
                     return CommentService.getThread('transcript-'+$transition$.params().idResource);
                 },
                 config: function() {
-                    return YAML.load('System/Transcript/toolbar.yml');
+                    return YAML.load('/webapp/app/System/Transcript/toolbar.yml');
                 },
                 teiInfo: function(TranscriptService) {
                     return TranscriptService.getTeiInfo();

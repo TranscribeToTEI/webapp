@@ -1,7 +1,7 @@
 <ul id="listResults" class="grid row">
     <li class="col-md-4 col-6 mb-4" data-ng-repeat="entity in results|orderBy:search.resultsSorting|limitTo:limitToResults">
 	    <div class="badge badge-status" data-ng-class="getStatusClassLabel(entity._embedded.status)">{{ entity._embedded.status | transcriptionStatusName:entity.isShown }}</div>
-	    <a ui-sref="transcript.app.entity({ id: entity.id })" class="d-block"><img class="img-fluid" src="{{ imageService.getThumbnail(entity) }}"/></a>
+	    <a ui-sref="transcript.app.entity({ id: entity.id })" class="d-block"><img class="img-fluid" src="{{ imageService.getThumbnail(entity) }}" onerror="if (this.src != '/webapp/app/web/images/no-images.png') this.src = '/webapp/app/web/images/no-images.png';" /></a>
         <div class="caption">
             <a  ui-sref="transcript.app.entity({ id: entity.id })" class="nomTestataire">{{ entity.will.testator.name }}</a>
             Cote {{ entity.will.callNumber }}, testament du {{ entity.will.minuteDateString | sourceRender:'NOT' }}

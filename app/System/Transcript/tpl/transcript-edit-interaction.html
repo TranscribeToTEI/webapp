@@ -4,7 +4,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm {{ transcriptArea.interaction.live.microObjects.activeClass }}" title="Activer les micro-objets" ng-click="transcriptArea.interaction.live.microObjects.action()"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
@@ -20,7 +20,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
@@ -35,7 +35,7 @@
            <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
@@ -50,7 +50,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
@@ -66,7 +66,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm btn-danger active" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-eye-slash fa-lg"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
@@ -82,7 +82,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
@@ -97,7 +97,7 @@
             <div class="clearfix">
                 <div class="float-right">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || transcriptConfig.isComplexFields === true)" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" title="Saisie complexe" ng-if="transcriptArea.interaction.complexEntry.available === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.isComplexFields === true))" ng-click="transcriptArea.interaction.complexEntry.action()"><i class="fa fa-warning fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>

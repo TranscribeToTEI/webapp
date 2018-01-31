@@ -77,7 +77,7 @@ angular.module('transcript.app.training.content.exercise.exercise', ['ui.router'
                     return TranscriptService.getTeiInfo();
                 },
                 config: function() {
-                    return YAML.load('System/Transcript/toolbar.yml');
+                    return YAML.load('/webapp/app/System/Transcript/toolbar.yml');
                 },
                 transcriptConfig: function(TrainingContentService, $transition$) {
                     return TrainingContentService.getTrainingContentByOrder($transition$.params().order, true).then(function(response) {
