@@ -10,20 +10,20 @@
     <h1 class="page-heading">Liste des utilisateurs</h1>
     <table class="table table-bordered">
         <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Role</th>
-            </tr>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
         </thead>
         <tbody>
-            <tr data-ng-repeat="user in users">
-                <td>{{ $index+1 }}</td>
-                <td><a ui-sref="transcript.admin.user.view({id: user.id})">{{ user.name }}</a></td>
-                <td>{{ user.email }}</td>
-                <td><span data-ng-repeat="role in user.roles"><span data-ng-if="$first == false">, </span>{{ role }}</span></td>
-            </tr>
+        <tr data-ng-repeat="user in users">
+            <td>{{ $index+1 }}</td>
+            <td><a ui-sref="transcript.admin.user.view({id: user.id})">{{ user.name }}</a></td>
+            <td>{{ user.email }}</td>
+            <td><span data-ng-repeat="role in user.roles"><span data-ng-if="$first == false">, </span>{{ role }}</span></td>
+        </tr>
         </tbody>
     </table>
 </main>

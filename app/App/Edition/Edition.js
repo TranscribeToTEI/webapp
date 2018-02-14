@@ -43,7 +43,7 @@ angular.module('transcript.app.edition', ['ui.router'])
 
     .controller('AppEditionCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', '$window', 'ResourceService', 'UserService', 'TranscriptService', 'flash', 'entity', 'config', 'resource', 'teiInfo', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, $window, ResourceService, UserService, TranscriptService, flash, entity, config, resource, teiInfo) {
         $scope.entity = entity; $log.debug($scope.entity);
-        $scope.resource = resource; $log.debug($scope.resource);
+        $scope.resource = resource; console.log($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
         $scope.config = config; $log.debug($scope.config);
         $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
@@ -61,11 +61,23 @@ angular.module('transcript.app.edition', ['ui.router'])
         };
         $scope.screenWidth = $window.innerWidth;
 
+        /* -- Context management ------------------------------------------------------------------------------------ */
+        $scope.context = 'encoded';
+        $scope.getCode = function() {
+            if($scope.context === 'encoded') {
+                $scope.context = 'code';
+            } else  if($scope.context === 'code') {
+                $scope.context = 'encoded';
+            }
+        };
+        /* -- Context management ------------------------------------------------------------------------------------ */
+
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
+        console.log($scope.resource.transcript._embedded);
         if($scope.resource.transcript._embedded.isCurrentlyEdited === true) {
             $scope.currentEdition = $filter('filter')($scope.resource.transcript._embedded.logs, {isCurrentlyEdited: true})[0];
         }
-        $log.debug($scope.currentEdition);
+        console.log($scope.currentEdition);
         /* -- TranscriptLogs management ----------------------------------------------------------------------------- */
 
         /* ---------------------------------------------------------------------------------------------------------- */

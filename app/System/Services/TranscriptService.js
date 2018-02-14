@@ -98,7 +98,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                 for(let iT in tags) {
                     let tag = tags[iT];
-
                     let replace = "";
 
                     //$log.debug(tag.xml);
@@ -106,7 +105,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         replace = "<"+tag.xml.name+"(.*?)/>";
                         let regExp = new RegExp(replace,"g");
                         encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, index, original) {
-                            return functions.tagConstruction(tags[tag.btn.id], "singleTag", functions.extractAttributes(attributesString), null, isMicroObject);
+                            return functions.tagConstruction(tag, "singleTag", functions.extractAttributes(attributesString), null, isMicroObject);
                         });
                     } else if(tag.xml.unique === false) {
                         replace = "<"+tag.xml.name+"(.*?)>(.*?)</"+tag.xml.name+">";
@@ -114,58 +113,59 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                         encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, content, index, original) {
                             /* Computing tooltip for special tags (like Choice) ------------------------------------- */
-                            let extraTooltip = null;
-                            if(tag.xml.name === "choice") {
-                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
-                                    content = "",
-                                    prefix = "";
-                                //$log.debug(TEIElement);
+                            let extraTooltip = null,
+                                TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false);
 
-                                for(let iC in TEIElement.children) {
-                                    let child = TEIElement.children[iC];
-                                    if(child.name === "corr") {
-                                        content = child.content;
-                                        prefix = "Forme correcte : ";
-                                    } else if(child.name === "reg") {
-                                        content = child.content;
-                                        prefix = "Forme régulière : ";
-                                    } else if(child.name === "expan") {
-                                        content = child.content;
-                                        prefix = "Forme complète : ";
+                            if(TEIElement !== null) {
+                                if(tag.xml.name === "choice") {
+                                    let content = "",
+                                        prefix = "";
+                                    //$log.debug(TEIElement);
+
+                                    for(let iC in TEIElement.children) {
+                                        let child = TEIElement.children[iC];
+                                        if(child.name === "corr") {
+                                            content = child.content;
+                                            prefix = "Forme correcte : ";
+                                        } else if(child.name === "reg") {
+                                            content = child.content;
+                                            prefix = "Forme régulière : ";
+                                        } else if(child.name === "expan") {
+                                            content = child.content;
+                                            prefix = "Forme complète : ";
+                                        }
                                     }
-                                }
 
-                                extraTooltip = {
-                                    type: "tooltip",
-                                    content: content,
-                                    prefix: prefix
-                                }
-                            } else if (tag.xml.name === "app") {
-                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false),
-                                    content = "";
-
-                                for(let iC in TEIElement.children) {
-                                    let child = TEIElement.children[iC];
-                                    if(child.name === "note") {
-                                        content = child.content;
+                                    extraTooltip = {
+                                        type: "tooltip",
+                                        content: content,
+                                        prefix: prefix
                                     }
-                                }
+                                } else if (tag.xml.name === "app") {
+                                    let content = "";
 
-                                extraTooltip = {
-                                    type: "popover",
-                                    content: content,
-                                    title: "Note d'apparat critique"
-                                }
-                            } else if (tag.xml.name === "app") {
-                                //Pas sur que ça marche ça
-                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false);
-                                if(TEIElement.parent !== undefined && TEIElement.parent !== null && TEIElement.parent.name === "app") {
-                                    attributesString += "class: \"hidden\"";
+                                    for(let iC in TEIElement.children) {
+                                        let child = TEIElement.children[iC];
+                                        if(child.name === "note") {
+                                            content = child.content;
+                                        }
+                                    }
+
+                                    extraTooltip = {
+                                        type: "popover",
+                                        content: content,
+                                        title: "Note d'apparat critique"
+                                    }
+                                } else if (tag.xml.name === "app") {
+                                    //Pas sur que ça marche ça
+                                    if(TEIElement.parent !== undefined && TEIElement.parent !== null && TEIElement.parent.name === "app") {
+                                        attributesString += "class: \"hidden\"";
+                                    }
                                 }
                             }
                             /* End: Computing tooltip --------------------------------------------------------------- */
 
-                            return functions.tagConstruction(tags[tag.xml.name], "startTag", functions.extractAttributes(attributesString), extraTooltip, isMicroObject)+content+functions.tagConstruction(tags[tag.xml.name], "endTag", functions.extractAttributes(attributesString), null, isMicroObject);
+                            return functions.tagConstruction(tag, "startTag", functions.extractAttributes(attributesString), extraTooltip, isMicroObject)+content+functions.tagConstruction(tag, "endTag", functions.extractAttributes(attributesString), null, isMicroObject);
                         });
                     }
                 }
@@ -182,7 +182,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 let attributes = [];
                 if(attributesString) {
                     let matchListAttributes = attributesString.match(/[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))/g);
-                    //$log.debug(matchListAttributes);
                     if(matchListAttributes && matchListAttributes.length > 0) {
                         for(let iA in matchListAttributes) {
                             attributes.push({
@@ -191,8 +190,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             });
                         }
                     }
-
-                    //$log.debug(attributes);
                 }
 
                 return attributes;
@@ -294,7 +291,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         tag.html.attributes['class'] = tag.html.bgColor;
                     }
                 }
-                if(tag.btn !== undefined && tag.btn.id === "note") {
+                if(tag.btn !== undefined && tag.id === "note") {
                     // If the tag is "note" and it is in a app context
                     if(tag.html.attributes['hidden'] === undefined) {
                         tag.html.attributes['hidden'] = "hidden";
@@ -493,7 +490,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromEndTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // $log.debug('computeFromEndTag');
+                // console.log('computeFromEndTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
                 teiElement.type                 = "standard";
@@ -533,7 +530,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromStartTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // $log.debug('computeFromStartTag');
+                // console.log('computeFromStartTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
                 teiElement.type                 = "standard";
@@ -571,7 +568,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             computeFromSingleTag: function(teiElement, leftOfCursor, rightOfCursor, content) {
-                // $log.debug('computeFromSingleTag');
+                console.log('computeFromSingleTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
                 teiElement.type                 = "single";
@@ -608,9 +605,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 let newChild = functions.computeChild(teiElement, content, lines, tags, teiInfo, previousChild);
                 array.push(newChild);
 
-                //$log.debug(newChild.endTag.end.index+1);
-                //$log.debug(teiElement.endTag.start.index);
-                if(newChild.endTag.end.index+1 !== teiElement.endTag.start.index) {
+                if(newChild !== null && newChild.endTag.end.index+1 !== teiElement.endTag.start.index) {
                     functions.computeChildStructure(teiElement, content, lines, tags, teiInfo, newChild, array);
                 }
 
@@ -623,7 +618,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 } else {
                     let endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
                     childrenLeftOfCursor = endPreviousChild+content.substring(endPreviousChild.length, endPreviousChild.length+2);
-                    //$log.debug(childrenLeftOfCursor);
                 }
                 let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
 
@@ -641,10 +635,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @returns object
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
-                //console.log('getTEIElementInformation');
                 if(!leftOfCursor || !rightOfCursor) { return null; }
-                // $log.debug(leftOfCursor);
-                // $log.debug(rightOfCursor);
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -712,7 +703,6 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
 
                 } else if (leftOfCursor.indexOf("<") !== -1) {
-                    $log.debug('inside tag');
                     // The caret is outside a tag, but there is at least one tag before -> we use this nearest tag as current teiElement
                     /*
                      * <\/?\w+((\s+\w+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))?)+\s*|\s*)\/?>/g
@@ -751,8 +741,10 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                     if(teiElement.name === null) {
                         teiElement = null;
+                    } else if($filter('filter')(tags, {id: teiElement.name}, true).length === 0) {
+                        teiElement = null;
                     } else {
-                        let startContentFull        = content.substring(leftOfCursor.lastIndexOf("<"+teiElement.name), content.length);
+                        let startContentFull        = content.substring(this.getTagPos(leftOfCursor, teiElement, 'DESC'), content.length);
                         teiElement.startTag.content = startContentFull.substring(0, startContentFull.indexOf(">")+1);
                         teiElement                  = functions.computeFromStartTag(teiElement, leftOfCursor, rightOfCursor, content);
                     }
@@ -837,15 +829,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      * This part compiles the parents of the tag
                      ------------------------------------------------------------------------------------------------ */
                     // If TEI Element can have parents, we compute the parents
-                    if (tags[teiElement.name] !== undefined && tags[teiElement.name].btn !== undefined && tags[teiElement.name].btn.restrict_to_root === true) {
+                    if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0] !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.restrict_to_root === true) {
                         teiElement.parent = null;
                         teiElement.parents = [];
                     } else if (computeParent === true) {
+                        console.log('computeParent');
                         teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true);
                         teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
                         teiElement.parents.push(teiElement.parent);
 
-                        if (tags[teiElement.name].btn !== undefined && tags[teiElement.name].btn.allow_root === true && teiElement.parent === null) {
+                        if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.allow_root === true && teiElement.parent === null) {
                             teiElement.parent = null;
                             teiElement.parents = [];
                         }
@@ -896,7 +889,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 for (let iT in transcriptArea.toolbar.tags) {
                     let button = transcriptArea.toolbar.tags[iT];
 
-                    if(button.btn && button.btn.btn_group === item.id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.btn.id)))) {
+                    if(button.btn && button.btn.btn_group === item.id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.id)))) {
                         listTags.push(button);
                     }
                 }
@@ -913,7 +906,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             //We add the tags of the group
                             for (let iT in transcriptArea.toolbar.tags) {
                                 let button = transcriptArea.toolbar.tags[iT];
-                                if(button.btn && button.btn.btn_group === transcriptArea.toolbar.groups[iG].id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.btn.id)))) {
+                                if(button.btn && button.btn.btn_group === transcriptArea.toolbar.groups[iG].id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.id)))) {
                                     listTags.push(button);
                                 }
                             }
@@ -951,8 +944,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             htmlToReturn += '<li class="dropdown-divider"></li>';
                         }
 
-                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null" ng-if="(transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:\''+button.btn.id+'\'))">' +
-                                        '   <a ng-click="transcriptArea.ace.addTag(\''+button.btn.id+'\', \''+ $filter('internalAttributesRender')(button.xml.attributes) +'\')" title="'+ button.btn.title +'" class="'+btnClass+'" ng-class="{\'disabled\': button.btn.enabled == false}">' +
+                        htmlToReturn += '<li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \''+ button.xml.name +'\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null" ng-if="(transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:\''+button.id+'\'))">' +
+                                        '   <a ng-click="transcriptArea.ace.addTag(\''+button.id+'\', \''+ $filter('internalAttributesRender')(button.xml.attributes) +'\')" title="'+ button.btn.title +'" class="'+btnClass+'" ng-class="{\'disabled\': button.btn.enabled == false}" style="width: 100%;">' +
                                         '       <i class="'+ button.btn.icon +'"></i> ' +
                                                 $filter('ucFirstStrict')(btnContent) +
                                         '   </a>' +
@@ -963,7 +956,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                         for (let iB in transcriptArea.toolbar.tags) {
                             let subButton = transcriptArea.toolbar.tags[iB];
-                            if (subButton.btn && subButton.btn.btn_group === subGroup.id && $filter('filter')(listTags, {btn: {id: subButton.btn.id}}).length > 0) {
+                            if (subButton.btn && subButton.btn.btn_group === subGroup.id && $filter('filter')(listTags, {id: subButton.id}).length > 0) {
                                 let btnClass = "", btnContent = "", circleColor = "";
 
                                 if (subButton.btn.enabled === false) {
@@ -971,7 +964,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                 }
 
                                 if (subButton.btn.label === false) {
-                                    btnContent += teiInfo[subButton.btn.id].doc.gloss[0].content;
+                                    btnContent += teiInfo[subButton.id].doc.gloss[0].content;
                                 } else if (subButton.btn.label !== false) {
                                     btnContent += subButton.btn.label;
                                 }
@@ -980,7 +973,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     circleColor += "red-color";
                                 }
                                 subGroupHtmlToReturn += '   <li class="dropdown-item" ng-mouseenter="transcriptArea.toolbar.mouseOverLvl2 = \'' + subButton.xml.name + '\'" ng-mouseleave="transcriptArea.toolbar.mouseOverLvl2 = null">' +
-                                                '               <a ng-click="transcriptArea.ace.addTag(\'' + subButton.btn.id + '\', \'' + $filter('internalAttributesRender')(subButton.xml.attributes) + '\')" title="' + subButton.btn.title + '" class="' + btnClass + '"  ng-class="{\'disabled\': button.btn.enabled == false}">' +
+                                                '               <a ng-click="transcriptArea.ace.addTag(\'' + subButton.id + '\', \'' + $filter('internalAttributesRender')(subButton.xml.attributes) + '\')" title="' + subButton.btn.title + '" class="' + btnClass + '" ng-class="{\'disabled\': button.btn.enabled == false}">' +
                                                 '                   <i class="' + subButton.btn.icon + '"></i> ' +
                                                                     $filter('ucFirstStrict')(btnContent) +
                                                 '               </a>' +

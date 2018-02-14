@@ -33,6 +33,12 @@ angular.module('transcript.app.home', ['ui.router'])
         $scope.contents = contents;
         $scope.limitToResults = 50;
 
+        $scope.count = {
+            todo: 0,
+            validation: 0,
+            validated: 0
+        };
+
         for(let iEntity in $scope.entities) {
             if($scope.entities[iEntity].will.testator.placeOfBirthNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names.length > 0) {
                 $scope.entities[iEntity].will.testator.placeOfBirthNormalized.name = $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names[0].name;
@@ -45,6 +51,14 @@ angular.module('transcript.app.home', ['ui.router'])
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
             } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
+            }
+
+            if($scope.entities[iEntity]._embedded.status === 'todo' || $scope.entities[iEntity]._embedded.status === 'transcription') {
+                $scope.count.todo = ++$scope.count.todo;
+            } else if($scope.entities[iEntity]._embedded.status === 'validation') {
+                $scope.count.validation = ++$scope.count.validation;
+            } else if($scope.entities[iEntity]._embedded.status === 'validated') {
+                $scope.count.validated = ++$scope.count.validated;
             }
         }
 

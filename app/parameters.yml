@@ -6,6 +6,7 @@ iiif:
     separator: "K"
     extension: "_L"
 webapp:
+    prefix:     "/TestamentsDePoilus"
     strict:     "http://localhost:8888/TestamentsDePoilus/webapp/app/#!/"
     resources:  "http://localhost:8888/TestamentsDePoilus/webapp/app/web/"
 siteURL:        "http://testament-de-poilus.huma-num.fr"

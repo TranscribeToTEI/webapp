@@ -14,16 +14,24 @@
         <thead>
             <tr>
                 <th>#</th>
+                <th><a ng-click="sorting = '_embedded.resource.entity.willNumber'" title="Trier par numéro d'identification du testament">ID <i class="fa fa-caret-down"></i></a></th>
                 <th>Testament</th>
+                <th><a ng-click="sorting = '_embedded.resource.entity.will.testator.indexName'" title="Trier par nom de testateur">Testateur <i class="fa fa-caret-down"></i></a></th>
                 <th>Page</th>
+                <th><a ng-click="sorting = 'updateDate'" title="Trier par date de modification">Modifié le <i class="fa fa-caret-down"></i></a></th>
+                <th><a ng-click="sorting = 'updateUser.name'" title="Trier par contributeur">Par <i class="fa fa-caret-down"></i></a></th>
                 <th>Lien</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="transcript in transcripts">
+            <tr ng-repeat="transcript in transcripts | orderBy:sorting">
                 <td>{{ $index+1 }}</td>
+                <td>{{ transcript._embedded.resource.entity.willNumber | willNumberFormat:4 }}</td>
                 <td>{{ transcript._embedded.resource.entity.will.title }}</td>
+                <td>{{ transcript._embedded.resource.entity.will.testator.indexName }}</td>
                 <td>{{ transcript._embedded.resource.type | resourceTypeName }} {{ transcript._embedded.resource.orderInWill }}</td>
+                <td>{{ transcript.updateDate | date:"Le dd MMMM yyyy à HH:mm" }}</td>
+                <td>{{ transcript.updateUser.name }}</td>
                 <td><a ui-sref="transcript.app.transcript({idEntity: transcript._embedded.resource.entity.id, idResource: transcript._embedded.resource.id, idTranscript: transcript.id})">Accès</a></td>
             </tr>
             <tr ng-if="transcripts.length === 0">

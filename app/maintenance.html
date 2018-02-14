@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title></title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="/webapp/app/web/libraries/css/font-awesome/css/font-awesome.min.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,500i,700,700i|PT+Sans:400,700" rel="stylesheet" />
+    <link rel="stylesheet" href="/webapp/app/web/custom/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="//unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+</head>
+
+<body>
+<header ui-view="navbar" class="container" role="navigation">
+    <div class="row align-items-end header">
+        <div class="col main-nav p-2 bg-white">
+            <p class="h6 p-0 m-0 text-center"><strong>UN GESTE POUR LA MÉMOIRE ET POUR L'HISTOIRE : TRANSCRIRE LES TESTAMENTS DE GUERRE DES POILUS</strong></p>
+        </div>
+        <div class="col-2 user-nav p-0">
+            <div class="header-user">
+                <div class="h4 p-3 m-0">MISE À JOUR</div>
+            </div>
+            <nav id="user-nav">
+                <ul class="navbar-nav">
+                    <li class="h6 nav-link m-0 text-center">EN COURS</li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div ui-view="page" id="pageContainer">
+    <div class="container">
+        <div ncy-breadcrumb></div>
+        <div flash-alert data-active-class="in alert" class="fade" data-duration="10000">
+            <!-- Manually hide the alert with `hide()` -->
+            <button type="button" class="close" ng-click="hide()">&times;</button>
+            <span class="alert-message" data-ng-bind-html="flash.message"></span>
+        </div>
+        <div class="alert alert-info">La plateforme <strong>Testaments de Poilus</strong> est en cours de mise à jour. Nous vous invitons à revenir d'ici quelques minutes.</div>
+    </div>
+</div>
+
+<footer ui-view="footer">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 text-center">
+                <div class="text-center" style="margin-bottom: 20px;">
+                    <a href="http://www.archives-nationales.culture.gouv.fr/" target="_blank"><img class="img-fluid" src="web/images/logos/archives-nationales.png" style="max-height: 50px; margin: 15px; max-width: 100px;"/></a>
+                    <a href="http://www.sciences-patrimoine.org/" target="_blank"><img class="img-fluid" src="web/images/logos/fondation-sciences-patrimoine.png" style="max-height: 50px; margin: 15px;"/></a>
+                    <a href="http://centenaire.org/fr" target="_blank"><img class="img-fluid" src="web/images/logos/centenaire.jpg" style="max-height: 50px; margin: 15px;"/></a>
+                    <a href="https://www.u-cergy.fr/fr/index.html" target="_blank"><img class="img-fluid" src="web/images/logos/cergy.png" style="max-height: 50px; margin: 15px;"/></a>
+                    <a href="http://www.archives.yvelines.fr/" target="_blank"><img class="img-fluid" src="web/images/logos/ad78.jpg" style="max-height: 50px; margin: 15px; max-width: 90px;"/></a>
+                    <a href="http://www.enc-sorbonne.fr/" target="_blank"><img class="img-fluid" src="web/images/logos/enc.png" style="max-height: 50px; margin: 15px;"/></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -4,15 +4,24 @@
             <div class="btn-group" role="group">
                 <span class="btn btn-sm bg-dark text-white">{{ resource.type | resourceTypeName | ucfirst }} {{resource.orderInWill}}</span>
                 <button class="btn btn-sm {{ microObjects.activeClass }}" title="Activer les micro-objets" ng-click="microObjects.action()"><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></button>
+                <button class="btn btn-sm btn-primary" title="Voir le code" ng-if="resource.transcript.status === 'validated'"  ng-click="getCode()"><i class="fa fa-code fa-lg" aria-hidden="true"></i></button>
             </div>
         </div>
         <h3 class="card-header bg-light d-block"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Transcription</h3>
     </div>
-    <div class="card-body">
+    <div ng-if="context === 'encoded'" class="card-body">
         <div ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
             Cette transcription n'est pas commencée.
-            <div ng-if="$scope.resource.transcript._embedded.isCurrentlyEdited === false" ng-include="'/webapp/app/App/Edition/tpl/edition-header-editButton.html'"></div>
         </div>
         <div ng-bind-html="encodedContent | trustAsHtml"></div>
+    </div>
+    <div ng-if="context === 'code'">
+        <div ui-ace="{
+                mode: 'xml',
+                onLoad: aceLoaded,
+                onChange: aceChanged,
+                useWrapMode: true
+                }"  style="height: 400px;" ng-model="resource.transcript.content">
+        </div>
     </div>
 </div>

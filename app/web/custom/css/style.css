@@ -876,8 +876,10 @@ header + main{
 #search .row{
 	background: white;
 }
-#search #search-results{
+#search #search-info{
 	padding-top: 30px;
+}
+#search #search-results{
 	padding-bottom: 20px;
 	margin-bottom: 45px;
 }

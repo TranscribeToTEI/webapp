@@ -18,7 +18,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Ctext xml:id=\u0022will-0001\u0022\u003E \u003Cbody\u003E\u003C!-- ici, au moins une division de texte div --\u003E\u003C\/body\u003E \u003C\/text\u003E\u003C\/egXML\u003E"
+            "example": "\u003Ctext xml:id=\u0022will-0001\u0022\u003E \u003Cbody\u003E\u003C!-- ici, au moins une division de texte div --\u003E\u003C\/body\u003E \u003C\/text\u003E"
           }
         ]
       },
@@ -57,7 +57,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbody\u003E \u003Cdiv type=\u0022will\u0022\u003E\u003C!-- transcription du texte du testament proprement dit --\u003E\u003C\/div\u003E \u003Cdiv type=\u0022envelope\u0022\u003E\u003C!-- transcription du texte de l\u0027enveloppe lorsque celle-ci subsiste et porte des mentions de la main du testateur --\u003E\u003C\/div\u003E \u003C\/body\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbody\u003E \u003Cdiv type=\u0022will\u0022\u003E\u003C!-- transcription du texte du testament proprement dit --\u003E\u003C\/div\u003E \u003Cdiv type=\u0022envelope\u0022\u003E\u003C!-- transcription du texte de l\u0027enveloppe lorsque celle-ci subsiste et porte des mentions de la main du testateur --\u003E\u003C\/div\u003E \u003C\/body\u003E"
           }
         ]
       },
@@ -116,11 +116,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csurface type=\u0022will-page\u0022 n=\u002201\u0022\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_01.tif\u0022 xml:id=\u0022testament-0001_vue-01_jpg\u0022 \/\u003E--\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_01.jpg\u0022 xml:id=\u0022testament-0001_vue-01_tif\u0022\/\u003E\u003C\/surface\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csurface type=\u0022will-page\u0022 n=\u002201\u0022\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_01.tif\u0022 xml:id=\u0022testament-0001_vue-01_jpg\u0022 \/\u003E--\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_01.jpg\u0022 xml:id=\u0022testament-0001_vue-01_tif\u0022\/\u003E\u003C\/surface\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CsurfaceGrp type=\u0022will-page\u0022 n=\u002202\u0022\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202a\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02a.jpg\u0022 xml:id=\u0022testament-0001_vue-02a_jpg\u0022\u003E \u003C\/graphic\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-1_02a.tif\u0022 xml:id=\u0022testament-0001_vue-02a_tif\u0022\/\u003E--\u003E\u003C\/surface\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202b\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-1_02b.jpg\u0022 xml:id=\u0022testament-0001_vue-02b_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022testament-0001_vue-02b_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E\u003C\/surfaceGrp\u003E\u003C\/egXML\u003E"
+            "example": "\u003CsurfaceGrp type=\u0022will-page\u0022 n=\u002202\u0022\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202a\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02a.jpg\u0022 xml:id=\u0022testament-0001_vue-02a_jpg\u0022\u003E \u003C\/graphic\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-1_02a.tif\u0022 xml:id=\u0022testament-0001_vue-02a_tif\u0022\/\u003E--\u003E\u003C\/surface\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202b\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-1_02b.jpg\u0022 xml:id=\u0022testament-0001_vue-02b_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022testament-0001_vue-02b_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E\u003C\/surfaceGrp\u003E"
           }
         ]
       },
@@ -172,7 +172,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CsurfaceGrp type=\u0022will-page\u0022 n=\u002202\u0022\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202a\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02a.jpg\u0022 xml:id=\u0022t-0001_vue-02a_jpg\u0022\u003E \u003C\/graphic\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02a.tif\u0022 xml:id=\u0022t-0001_vue-02a_tif\u0022\/\u003E--\u003E\u003C\/surface\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202b\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022t-0001_vue-02b_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022t-0001_vue-02b_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E\u003C\/surfaceGrp\u003E\u003C\/egXML\u003E"
+            "example": "\u003CsurfaceGrp type=\u0022will-page\u0022 n=\u002202\u0022\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202a\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02a.jpg\u0022 xml:id=\u0022t-0001_vue-02a_jpg\u0022\u003E \u003C\/graphic\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02a.tif\u0022 xml:id=\u0022t-0001_vue-02a_tif\u0022\/\u003E--\u003E\u003C\/surface\u003E\u003Csurface type=\u0022will-page-part\u0022 n=\u002202b\u0022\u003E\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022t-0001_vue-02b_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_02b.jpg\u0022 xml:id=\u0022t-0001_vue-02b_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E\u003C\/surfaceGrp\u003E"
           }
         ]
       },
@@ -227,7 +227,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csurface type=\u0022will-page\u0022 n=\u002201\u0022\u003E\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_01.tif\u0022 xml:id=\u0022t-0001_vue-01_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_01.jpg\u0022 xml:id=\u0022t-0001_vue-01_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csurface type=\u0022will-page\u0022 n=\u002201\u0022\u003E\u003Cgraphic url=\u0022TIFF\/FRAN_Poilus_t-0001_01.tif\u0022 xml:id=\u0022t-0001_vue-01_jpg\u0022\/\u003E\u003C!--\u003Cgraphic url=\u0022JPEG\/FRAN_Poilus_t-0001_01.jpg\u0022 xml:id=\u0022t-0001_vue-01_tif\u0022 \/\u003E--\u003E\u003C\/surface\u003E"
           }
         ]
       },
@@ -272,11 +272,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022will\u0022\u003E\u003Cpb\/\u003E\u003C!-- indication de la premi\u00e8re page du testament --\u003E\u003Cdateline\u003E\u003C!-- ligne de date--\u003E\u003C\/dateline\u003E\u003Chead\u003E\u003C!-- titre du testament--\u003E\u003C\/head\u003E\u003Cp\u003E\u003C!-- un paragraphe du testament--\u003E\u003C\/p\u003E\u003Cp\u003E\u003C!-- un paragraphe du testament--\u003E\u003C\/p\u003E\u003Cpb\/\u003E\u003C!-- changement de page --\u003E\u003Clist\u003E\u003C!-- une liste (souvent une liste de biens) --\u003E\u003Citem\/\u003E\u003Citem\/\u003E\u003C\/list\u003E\u003Cp\u003E\u003C!-- un paragraphe --\u003E\u003C\/p\u003E\u003Cdateline\u003E\u003C!-- ligne de date--\u003E\u003C\/dateline\u003E\u003Csigned\u003E\u003C!-- signature --\u003E\u003C\/signed\u003E\u003Cpostscript\u003E\u003C!-- postscriptum --\u003E\u003C\/postscript\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022will\u0022\u003E\u003Cpb\/\u003E\u003C!-- indication de la premi\u00e8re page du testament --\u003E\u003Cdateline\u003E\u003C!-- ligne de date--\u003E\u003C\/dateline\u003E\u003Chead\u003E\u003C!-- titre du testament--\u003E\u003C\/head\u003E\u003Cp\u003E\u003C!-- un paragraphe du testament--\u003E\u003C\/p\u003E\u003Cp\u003E\u003C!-- un paragraphe du testament--\u003E\u003C\/p\u003E\u003Cpb\/\u003E\u003C!-- changement de page --\u003E\u003Clist\u003E\u003C!-- une liste (souvent une liste de biens) --\u003E\u003Citem\/\u003E\u003Citem\/\u003E\u003C\/list\u003E\u003Cp\u003E\u003C!-- un paragraphe --\u003E\u003C\/p\u003E\u003Cdateline\u003E\u003C!-- ligne de date--\u003E\u003C\/dateline\u003E\u003Csigned\u003E\u003C!-- signature --\u003E\u003C\/signed\u003E\u003Cpostscript\u003E\u003C!-- postscriptum --\u003E\u003C\/postscript\u003E\u003C\/div\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote\/\u003E\u003Cnote\/\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote\/\u003E\u003Cnote\/\u003E\u003C\/div\u003E"
           }
         ]
       },
@@ -328,7 +328,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Chead\u003ECeci est mon testament\u003Cchoice\u003E\u003Csic\u003E.\u003C\/sic\u003E\u003Ccorr\u003E : \u003C\/corr\u003E\u003C\/choice\u003E\u003C\/head\u003E\u003C\/egXML\u003E"
+            "example": "\u003Chead\u003ECeci est mon testament\u003Cchoice\u003E\u003Csic\u003E.\u003C\/sic\u003E\u003Ccorr\u003E : \u003C\/corr\u003E\u003C\/choice\u003E\u003C\/head\u003E"
           }
         ]
       },
@@ -374,7 +374,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline rend=\u0022centered\u0022\u003E\u003CplaceName\u003EParis\u003C\/placeName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le \u003Cdate\u003E\u003Cchoice\u003E\u003Csic\u003Etrente et un\u003C\/sic\u003E\u003Ccorr\u003Etrente-et-un\u003C\/corr\u003E\u003C\/choice\u003E\u003Cchoice\u003E\u003Csic\u003E Juillet\u003C\/sic\u003E\u003Ccorr\u003E juillet\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E\u003Cchoice\u003E\u003Csic\u003Emil\u003C\/sic\u003E\u003Ccorr\u003Emille\u003C\/corr\u003E\u003C\/choice\u003E neuf cent quatorze\u003Clb\/\u003E (31 \u003Cchoice\u003E\u003Csic\u003EJuillet\u003C\/sic\u003E\u003Ccorr\u003Ejuillet\u003C\/corr\u003E\u003C\/choice\u003E 1914)\u003C\/date\u003E\u003C\/dateline\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline rend=\u0022centered\u0022\u003E\u003CplaceName\u003EParis\u003C\/placeName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le \u003Cdate\u003E\u003Cchoice\u003E\u003Csic\u003Etrente et un\u003C\/sic\u003E\u003Ccorr\u003Etrente-et-un\u003C\/corr\u003E\u003C\/choice\u003E\u003Cchoice\u003E\u003Csic\u003E Juillet\u003C\/sic\u003E\u003Ccorr\u003E juillet\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E\u003Cchoice\u003E\u003Csic\u003Emil\u003C\/sic\u003E\u003Ccorr\u003Emille\u003C\/corr\u003E\u003C\/choice\u003E neuf cent quatorze\u003Clb\/\u003E (31 \u003Cchoice\u003E\u003Csic\u003EJuillet\u003C\/sic\u003E\u003Ccorr\u003Ejuillet\u003C\/corr\u003E\u003C\/choice\u003E 1914)\u003C\/date\u003E\u003C\/dateline\u003E"
           }
         ]
       },
@@ -444,7 +444,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 1 (Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EAvant de partir \u00e0 la guerre dont\u003Clb\/\u003E tant ne reviendront pas, je tiens \u00e0 d\u00e9cider\u003Clb\/\u003E ce qui suit\u003Cchoice\u003E\u003Csic\u003E : \u003C\/sic\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EAvant de partir \u00e0 la guerre dont\u003Clb\/\u003E tant ne reviendront pas, je tiens \u00e0 d\u00e9cider\u003Clb\/\u003E ce qui suit\u003Cchoice\u003E\u003Csic\u003E : \u003C\/sic\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -516,7 +516,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 8 (Lucien Dufriche, 1\u003Chi rend=\u0022superscript\u0022\u003Eer\u003C\/hi\u003E ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-008.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-008.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LDufriche\u0022\u003E\u003Cforename\u003EL.\u003C\/forename\u003E\u003Csurname\u003EDufriche\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003Clb\/\u003E 8 \u003Cchoice\u003E\u003Csic\u003E\u003Chi rend=\u0022superscript-underlined\u0022\u003Ebis\u003C\/hi\u003E\u003C\/sic\u003E\u003Ccorr\u003Ebis\u003C\/corr\u003E\u003C\/choice\u003E rue Sarrette \u003C\/signed\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LDufriche\u0022\u003E\u003Cforename\u003EL.\u003C\/forename\u003E\u003Csurname\u003EDufriche\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003Clb\/\u003E 8 \u003Cchoice\u003E\u003Csic\u003E\u003Chi rend=\u0022superscript-underlined\u0022\u003Ebis\u003C\/hi\u003E\u003C\/sic\u003E\u003Ccorr\u003Ebis\u003C\/corr\u003E\u003C\/choice\u003E rue Sarrette \u003C\/signed\u003E"
           }
         ]
       },
@@ -586,7 +586,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 74 (Louis Charles Eug\u00e8ne Le Conte, 16 novembre 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-074.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-074.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LeConte\u0022\u003ELouis \u003Csurname\u003ELe Conte\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003Cspace dim=\u0022vertical\u0022 quantity=\u00221\u0022 unit=\u0022lines\u0022\/\u003E\u003Cpostscript\u003E\u003Cp\u003EPas de fleurs, ni de couronnes, un enterrement simple\u003Clb\/\u003E mais beaucoup de messes, en particulier les 33 messes gr\u00e9goriennes\u003Clb\/\u003E \u003Cpb\/\u003E dites le plus t\u00f4t possible apr\u00e8s mon d\u00e9c\u00e8s\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E et des pri\u00e8res.\u003Clb\/\u003E Je ne fais aucune recommandation sp\u00e9ciale par \u00e9crit, mon\u003Clb\/\u003E v\u0153u le plus cher est que mes enfants soient tous de \u003Chi rend=\u0022underlined\u0022\u003Ebons chr\u00e9tiens\u003C\/hi\u003E\u003Clb\/\u003E \u003C!-- [...] --\u003E \u003C\/p\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LeConte\u0022\u003ELouis Charles Eug\u00e8ne \u003Csurname\u003ELe Conte\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003C\/postscript\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LeConte\u0022\u003ELouis \u003Csurname\u003ELe Conte\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003Cspace dim=\u0022vertical\u0022 quantity=\u00221\u0022 unit=\u0022lines\u0022\/\u003E\u003Cpostscript\u003E\u003Cp\u003EPas de fleurs, ni de couronnes, un enterrement simple\u003Clb\/\u003E mais beaucoup de messes, en particulier les 33 messes gr\u00e9goriennes\u003Clb\/\u003E \u003Cpb\/\u003E dites le plus t\u00f4t possible apr\u00e8s mon d\u00e9c\u00e8s\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E et des pri\u00e8res.\u003Clb\/\u003E Je ne fais aucune recommandation sp\u00e9ciale par \u00e9crit, mon\u003Clb\/\u003E v\u0153u le plus cher est que mes enfants soient tous de \u003Chi rend=\u0022underlined\u0022\u003Ebons chr\u00e9tiens\u003C\/hi\u003E\u003Clb\/\u003E \u003C!-- [...] --\u003E \u003C\/p\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LeConte\u0022\u003ELouis Charles Eug\u00e8ne \u003Csurname\u003ELe Conte\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003C\/postscript\u003E"
           }
         ]
       },
@@ -639,7 +639,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 47 (Alexandre Victor Titard, 3 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-047.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-047.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Clist\u003E\u003Citem\u003ECr\u00e9ance Cl\u00e9man\u00e7on chez \u003Cchoice\u003E\u003Cabbr\u003EM\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetr\u003C\/ex\u003Ee\u003C\/expan\u003E\u003C\/choice\u003E Delafon 6 \u003Cchoice\u003E\u003Cabbr\u003EB\u003Chi rend=\u0022superscript\u0022\u003Ed\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003Eb\u003Cex\u003Eoulevar\u003C\/ex\u003Ed\u003C\/expan\u003E\u003C\/choice\u003E de Strasbourg\u003C\/item\u003E\u003Citem\u003EImmeuble \u003Cchoice\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Fargeau\u003C\/expan\u003E\u003Cabbr\u003ESt Fargeau\u003C\/abbr\u003E\u003C\/choice\u003E chez \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetre\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Cros notaire \u00e0 Corbeil\u003C\/item\u003E\u003C!-- [...] --\u003E\u003C\/list\u003E\u003C\/egXML\u003E"
+            "example": "\u003Clist\u003E\u003Citem\u003ECr\u00e9ance Cl\u00e9man\u00e7on chez \u003Cchoice\u003E\u003Cabbr\u003EM\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetr\u003C\/ex\u003Ee\u003C\/expan\u003E\u003C\/choice\u003E Delafon 6 \u003Cchoice\u003E\u003Cabbr\u003EB\u003Chi rend=\u0022superscript\u0022\u003Ed\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003Eb\u003Cex\u003Eoulevar\u003C\/ex\u003Ed\u003C\/expan\u003E\u003C\/choice\u003E de Strasbourg\u003C\/item\u003E\u003Citem\u003EImmeuble \u003Cchoice\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Fargeau\u003C\/expan\u003E\u003Cabbr\u003ESt Fargeau\u003C\/abbr\u003E\u003C\/choice\u003E chez \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetre\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Cros notaire \u00e0 Corbeil\u003C\/item\u003E\u003C!-- [...] --\u003E\u003C\/list\u003E"
           }
         ]
       },
@@ -690,7 +690,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 47 (Alexandre Victor Titard, 3 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-047.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-047.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Clist\u003E\u003Citem\u003ECr\u00e9ance Cl\u00e9man\u00e7on chez \u003Cchoice\u003E\u003Cabbr\u003EM\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetr\u003C\/ex\u003Ee\u003C\/expan\u003E\u003C\/choice\u003E Delafon 6 \u003Cchoice\u003E\u003Cabbr\u003EB\u003Chi rend=\u0022superscript\u0022\u003Ed\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003Eb\u003Cex\u003Eoulevar\u003C\/ex\u003Ed\u003C\/expan\u003E\u003C\/choice\u003E de Strasbourg\u003C\/item\u003E\u003Citem\u003EImmeuble \u003Cchoice\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Fargeau\u003C\/expan\u003E\u003Cabbr\u003ESt Fargeau\u003C\/abbr\u003E\u003C\/choice\u003E chez \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetre\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Cros notaire \u00e0 Corbeil\u003C\/item\u003E\u003C!-- [...] --\u003E\u003C\/list\u003E\u003C\/egXML\u003E"
+            "example": "\u003Clist\u003E\u003Citem\u003ECr\u00e9ance Cl\u00e9man\u00e7on chez \u003Cchoice\u003E\u003Cabbr\u003EM\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetr\u003C\/ex\u003Ee\u003C\/expan\u003E\u003C\/choice\u003E Delafon 6 \u003Cchoice\u003E\u003Cabbr\u003EB\u003Chi rend=\u0022superscript\u0022\u003Ed\u003C\/hi\u003E\u003C\/abbr\u003E\u003Cexpan\u003Eb\u003Cex\u003Eoulevar\u003C\/ex\u003Ed\u003C\/expan\u003E\u003C\/choice\u003E de Strasbourg\u003C\/item\u003E\u003Citem\u003EImmeuble \u003Cchoice\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Fargeau\u003C\/expan\u003E\u003Cabbr\u003ESt Fargeau\u003C\/abbr\u003E\u003C\/choice\u003E chez \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Ea\u00eetre\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Cros notaire \u00e0 Corbeil\u003C\/item\u003E\u003C!-- [...] --\u003E\u003C\/list\u003E"
           }
         ]
       },
@@ -760,11 +760,11 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 8 (Lucien Dufriche, 1\u003Chi rend=\u0022superscript\u0022\u003Eer\u003C\/hi\u003E ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-008.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-008.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LDufriche\u0022\u003E\u003Cforename\u003EL.\u003C\/forename\u003E\u003Csurname\u003EDufriche\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003Clb\/\u003E 8 \u003Cchoice\u003E\u003Csic\u003E\u003Chi rend=\u0022superscript-underlined\u0022\u003Ebis\u003C\/hi\u003E\u003C\/sic\u003E\u003Ccorr\u003Ebis\u003C\/corr\u003E\u003C\/choice\u003E rue Sarrette \u003C\/signed\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#LDufriche\u0022\u003E\u003Cforename\u003EL.\u003C\/forename\u003E\u003Csurname\u003EDufriche\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003Clb\/\u003E 8 \u003Cchoice\u003E\u003Csic\u003E\u003Chi rend=\u0022superscript-underlined\u0022\u003Ebis\u003C\/hi\u003E\u003C\/sic\u003E\u003Ccorr\u003Ebis\u003C\/corr\u003E\u003C\/choice\u003E rue Sarrette \u003C\/signed\u003E"
           },
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 33 (Henri G\u00e9, 2 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-033.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-033.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cpostscript\u003E\u003Cp\u003EJ\u2019ai des titres en d\u00e9p\u00f4t \u00e0 la\u003Clb\/\u003E Soci\u00e9t\u00e9 \u003Cchoice\u003E\u003Csic\u003EG\u00e9n\u00e9rale\u003C\/sic\u003E\u003Ccorr\u003Eg\u00e9n\u00e9rale\u003C\/corr\u003E\u003C\/choice\u003E sur lesquels\u003Clb\/\u003E j\u2019ai fait un emprunt ; il\u003Clb\/\u003E serait pr\u00e9f\u00e9rable de le rembourser\u003Clb\/\u003E et de vendre par la suite avec\u003Clb\/\u003E b\u00e9n\u00e9fice si possible.\u003C\/p\u003E\u003Cp\u003E\u003Cseg type=\u0022signature\u0022 rend=\u0022right\u0022\u003E\u003CpersName ref=\u0022#HGe\u0022\u003EH. \u003Csurname\u003EG\u00e9\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/p\u003E\u003C\/postscript\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cpostscript\u003E\u003Cp\u003EJ\u2019ai des titres en d\u00e9p\u00f4t \u00e0 la\u003Clb\/\u003E Soci\u00e9t\u00e9 \u003Cchoice\u003E\u003Csic\u003EG\u00e9n\u00e9rale\u003C\/sic\u003E\u003Ccorr\u003Eg\u00e9n\u00e9rale\u003C\/corr\u003E\u003C\/choice\u003E sur lesquels\u003Clb\/\u003E j\u2019ai fait un emprunt ; il\u003Clb\/\u003E serait pr\u00e9f\u00e9rable de le rembourser\u003Clb\/\u003E et de vendre par la suite avec\u003Clb\/\u003E b\u00e9n\u00e9fice si possible.\u003C\/p\u003E\u003Cp\u003E\u003Cseg type=\u0022signature\u0022 rend=\u0022right\u0022\u003E\u003CpersName ref=\u0022#HGe\u0022\u003EH. \u003Csurname\u003EG\u00e9\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/p\u003E\u003C\/postscript\u003E"
           }
         ]
       },
@@ -876,7 +876,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022envelope\u0022\u003E\u003Cpb\/\u003E\u003Cp\u003E\u003Caddress\u003E\u003CaddrLine\u003EMonsieur Delafon\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E notaire\u003Cchoice\u003E\u003Csic\/\u003E\u003Creg\u003E,\u003C\/reg\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003E6 boulevard de Strasbourg\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003EParis\u003C\/addrLine\u003E\u003C\/address\u003E\u003C\/p\u003E\u003C!-- etc. --\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022envelope\u0022\u003E\u003Cpb\/\u003E\u003Cp\u003E\u003Caddress\u003E\u003CaddrLine\u003EMonsieur Delafon\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E notaire\u003Cchoice\u003E\u003Csic\/\u003E\u003Creg\u003E,\u003C\/reg\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003E6 boulevard de Strasbourg\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003EParis\u003C\/addrLine\u003E\u003C\/address\u003E\u003C\/p\u003E\u003C!-- etc. --\u003E\u003C\/div\u003E"
           }
         ]
       },
@@ -954,15 +954,15 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EJe l\u00e8gue \u00e0 mon cher fr\u00e8re \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Eonsieur\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Andr\u00e9\u003Clb\/\u003E Victor Chatin \u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EJe l\u00e8gue \u00e0 mon cher fr\u00e8re \u003Cchoice\u003E\u003Cabbr\u003EM.\u003C\/abbr\u003E\u003Cexpan\u003EM\u003Cex\u003Eonsieur\u003C\/ex\u003E\u003C\/expan\u003E\u003C\/choice\u003E Andr\u00e9\u003Clb\/\u003E Victor Chatin \u003C!-- [...] --\u003E\u003C\/p\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003E\u003Cchoice\u003E\u003Csic\u003EA\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E d\u00e9faut de l\u2019un et de l\u2019autre\u003Clb\/\u003E des \u00e9poux \u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003E\u003Cchoice\u003E\u003Csic\u003EA\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E d\u00e9faut de l\u2019un et de l\u2019autre\u003Clb\/\u003E des \u00e9poux \u003C!-- [...] --\u003E\u003C\/p\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003E\u003Cchoice\u003E\u003Csic\u003E- A\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E la veille de partir \u00e0 la guerre\u003Cchoice\u003E\u003Csic\u003E - \u003C\/sic\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E voici mes derni\u00e8res\u003Clb\/\u003E \u003Cchoice\u003E\u003Csic\u003Evolont\u00e9\u003C\/sic\u003E\u003Ccorr\u003Evolont\u00e9s\u003C\/corr\u003E\u003C\/choice\u003E en cas de mort\u003Cchoice\u003E\u003Csic\u003E - \u003C\/sic\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003E\u003Cchoice\u003E\u003Csic\u003E- A\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E la veille de partir \u00e0 la guerre\u003Cchoice\u003E\u003Csic\u003E - \u003C\/sic\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E voici mes derni\u00e8res\u003Clb\/\u003E \u003Cchoice\u003E\u003Csic\u003Evolont\u00e9\u003C\/sic\u003E\u003Ccorr\u003Evolont\u00e9s\u003C\/corr\u003E\u003C\/choice\u003E en cas de mort\u003Cchoice\u003E\u003Csic\u003E - \u003C\/sic\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -993,7 +993,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003ECeci est \u003Cchoice\u003E\u003Csic\u003Emais derni\u00e8res \u003C\/sic\u003E\u003Ccorr\u003Ema derni\u00e8re \u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E volont\u00e9, en cas de d\u00e9c\u00e8s.\u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003ECeci est \u003Cchoice\u003E\u003Csic\u003Emais derni\u00e8res \u003C\/sic\u003E\u003Ccorr\u003Ema derni\u00e8re \u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E volont\u00e9, en cas de d\u00e9c\u00e8s.\u003C!-- [...] --\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1030,7 +1030,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003ECeci est \u003Cchoice\u003E\u003Csic\u003Emais derni\u00e8res \u003C\/sic\u003E\u003Ccorr\u003Ema derni\u00e8re \u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E volont\u00e9, en cas de d\u00e9c\u00e8s.\u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003ECeci est \u003Cchoice\u003E\u003Csic\u003Emais derni\u00e8res \u003C\/sic\u003E\u003Ccorr\u003Ema derni\u00e8re \u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E volont\u00e9, en cas de d\u00e9c\u00e8s.\u003C!-- [...] --\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1142,7 +1142,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline rend=\u0022right\u0022\u003E\u003Cchoice\u003E\u003Cabbr type=\u0022superscription\u0022\u003ES.\u003Chi rend=\u0022superscript\u0022\u003Et\u003C\/hi\u003E Mand\u00e9\u003C\/abbr\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Mand\u00e9\u003C\/expan\u003E\u003C\/choice\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le deux ao\u00fbt 1914.\u003C\/dateline\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline rend=\u0022right\u0022\u003E\u003Cchoice\u003E\u003Cabbr type=\u0022superscription\u0022\u003ES.\u003Chi rend=\u0022superscript\u0022\u003Et\u003C\/hi\u003E Mand\u00e9\u003C\/abbr\u003E\u003Cexpan\u003ES\u003Cex\u003Eain\u003C\/ex\u003Et-Mand\u00e9\u003C\/expan\u003E\u003C\/choice\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le deux ao\u00fbt 1914.\u003C\/dateline\u003E"
           }
         ]
       },
@@ -1183,7 +1183,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003ETestament \u003Cdamage agent=\u0022stain\u0022\u003E\u003Cunclear\u003Ede\u003C\/unclear\u003E\u003C\/damage\u003E \u003Cchoice\u003E\u003Cexpan\u003EM\u003Cex\u003Eonsieur\u003C\/ex\u003E\u003C\/expan\u003E\u003Cabbr type=\u0022obsolete\u0022\u003EM\u003Chi rend=\u0022superscript-underlined\u0022\u003Er\u003C\/hi\u003E\u003C\/abbr\u003E\u003C\/choice\u003E \u003CpersName ref=\u0022#EGrandjean\u0022\u003E Emile Jean L\u00e9on\u003Clb\/\u003E Grandjean\u003C\/persName\u003E \u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003ETestament \u003Cdamage agent=\u0022stain\u0022\u003E\u003Cunclear\u003Ede\u003C\/unclear\u003E\u003C\/damage\u003E \u003Cchoice\u003E\u003Cexpan\u003EM\u003Cex\u003Eonsieur\u003C\/ex\u003E\u003C\/expan\u003E\u003Cabbr type=\u0022obsolete\u0022\u003EM\u003Chi rend=\u0022superscript-underlined\u0022\u003Er\u003C\/hi\u003E\u003C\/abbr\u003E\u003C\/choice\u003E \u003CpersName ref=\u0022#EGrandjean\u0022\u003E Emile Jean L\u00e9on\u003Clb\/\u003E Grandjean\u003C\/persName\u003E \u003C!-- [...] --\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1376,7 +1376,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EPour le reste de mes biens mon \u003Cdamage agent=\u0022stain\u0022\u003E\u003Csupplied\u003Efr\u00e8re\u003C\/supplied\u003E\u003C\/damage\u003E\u003Clb\/\u003E Andr\u00e9, dont je connais l\u2019esprit de\u003Clb\/\u003E sagesse et de bon sens, les re\u00e7oit en\u003Clb\/\u003E pleine propri\u00e9t\u00e9. Puisse-t-il en\u003Clb\/\u003E jouir longtemps et heureux !\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EPour le reste de mes biens mon \u003Cdamage agent=\u0022stain\u0022\u003E\u003Csupplied\u003Efr\u00e8re\u003C\/supplied\u003E\u003C\/damage\u003E\u003Clb\/\u003E Andr\u00e9, dont je connais l\u2019esprit de\u003Clb\/\u003E sagesse et de bon sens, les re\u00e7oit en\u003Clb\/\u003E pleine propri\u00e9t\u00e9. Puisse-t-il en\u003Clb\/\u003E jouir longtemps et heureux !\u003C\/p\u003E"
           }
         ]
       },
@@ -1485,7 +1485,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EPour le reste de mes biens mon \u003Cdamage agent=\u0022stain\u0022\u003E\u003Csupplied\u003Efr\u00e8re\u003C\/supplied\u003E\u003C\/damage\u003E\u003Clb\/\u003E Andr\u00e9, dont je connais \u003Cunclear reason=\u0022quite-illegible\u0022\u003El\u2019esprit de\u003C\/unclear\u003E\u003Clb\/\u003E sagesse et de bon sens, les re\u00e7oit en\u003Clb\/\u003E pleine propri\u00e9t\u00e9. Puisse-t-il en\u003Clb\/\u003E jouir longtemps et heureux !\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EPour le reste de mes biens mon \u003Cdamage agent=\u0022stain\u0022\u003E\u003Csupplied\u003Efr\u00e8re\u003C\/supplied\u003E\u003C\/damage\u003E\u003Clb\/\u003E Andr\u00e9, dont je connais \u003Cunclear reason=\u0022quite-illegible\u0022\u003El\u2019esprit de\u003C\/unclear\u003E\u003Clb\/\u003E sagesse et de bon sens, les re\u00e7oit en\u003Clb\/\u003E pleine propri\u00e9t\u00e9. Puisse-t-il en\u003Clb\/\u003E jouir longtemps et heureux !\u003C\/p\u003E"
           }
         ]
       },
@@ -1555,7 +1555,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003ESain de corps et d\u2019esprit, avant de partir \u003Cchoice\u003E\u003Creg\/\u003E\u003Csic\u003E\u003Csurplus\u003Ede\u003Clb\/\u003Epartir\u003C\/surplus\u003E\u003C\/sic\u003E\u003Ccorr\/\u003E\u003C\/choice\u003E pour la mobilisation fran\u00e7aise, j\u2019\u00e9cris sur\u003Clb\/\u003E ce papier libre, faute d\u2019avoir pu me procurer\u003Clb\/\u003E un papier timbr\u00e9, mon testament et mes\u003Clb\/\u003E derni\u00e8res volont\u00e9s.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003ESain de corps et d\u2019esprit, avant de partir \u003Cchoice\u003E\u003Creg\/\u003E\u003Csic\u003E\u003Csurplus\u003Ede\u003Clb\/\u003Epartir\u003C\/surplus\u003E\u003C\/sic\u003E\u003Ccorr\/\u003E\u003C\/choice\u003E pour la mobilisation fran\u00e7aise, j\u2019\u00e9cris sur\u003Clb\/\u003E ce papier libre, faute d\u2019avoir pu me procurer\u003Clb\/\u003E un papier timbr\u00e9, mon testament et mes\u003Clb\/\u003E derni\u00e8res volont\u00e9s.\u003C\/p\u003E"
           }
         ]
       },
@@ -1586,11 +1586,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline rend=\u0022right\u0022\u003EFait \u00e0 Paris\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E en pleine \u003Cadd place=\u0022inline\u0022\u003Econnaissance\u003C\/add\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E le \u003Cchoice\u003E\u003Csic\u003EDix Janvier\u003C\/sic\u003E\u003Ccorr\u003Edix janvier\u003C\/corr\u003E\u003C\/choice\u003E 1916.\u003C\/dateline\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline rend=\u0022right\u0022\u003EFait \u00e0 Paris\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E en pleine \u003Cadd place=\u0022inline\u0022\u003Econnaissance\u003C\/add\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E le \u003Cchoice\u003E\u003Csic\u003EDix Janvier\u003C\/sic\u003E\u003Ccorr\u003Edix janvier\u003C\/corr\u003E\u003C\/choice\u003E 1916.\u003C\/dateline\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E"
           }
         ]
       },
@@ -1669,11 +1669,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EJe \u003Cdel\u003Edonne\u003C\/del\u003E d\u00e9sire que M. Lucien Rotg\u00e8s,\u003Clb\/\u003E demeurant \u00e0 Orl\u00e9ans, 244 rue du Faubourg-Saint-Vincent\u003Clb\/\u003E soit dot\u00e9 d\u2019une rente mensuelle\u003Clb\/\u003E et viag\u00e8re de \u003Cdel\u003E2000 fr\u003C\/del\u003E200 francs.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EJe \u003Cdel\u003Edonne\u003C\/del\u003E d\u00e9sire que M. Lucien Rotg\u00e8s,\u003Clb\/\u003E demeurant \u00e0 Orl\u00e9ans, 244 rue du Faubourg-Saint-Vincent\u003Clb\/\u003E soit dot\u00e9 d\u2019une rente mensuelle\u003Clb\/\u003E et viag\u00e8re de \u003Cdel\u003E2000 fr\u003C\/del\u003E200 francs.\u003C\/p\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E"
           }
         ]
       },
@@ -1716,7 +1716,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EEn cas d\u2019existence d\u2019enfants ou de descendants d\u2019eux\u003Clb\/\u003E \u00e0 l\u2019\u00e9poque dudit d\u00e9c\u00e8s, cette \u003Csubst\u003E\u003Cdel\u003Edotation\u003C\/del\u003E\u003Cadd place=\u0022above\u0022\u003Edonation\u003C\/add\u003E\u003C\/subst\u003E, si la r\u00e9duction\u003Clb\/\u003E en est demand\u00e9e, comprendra la plus forte quotit\u00e9 des\u003Clb\/\u003E possibles entre \u00e9poux tant en pleine propri\u00e9t\u00e9 et en\u003Clb\/\u003E usufruit desdits biens en y comprenant m\u00eame tous\u003Clb\/\u003E rapports.\u003C\/p\u003E"
           }
         ]
       },
@@ -1745,7 +1745,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EQuant \u00e0 mes livres, tous les ouvrages\u003Clb\/\u003E \u003Chi rend=\u0022underlined\u0022\u003Ede droit, exclusivement\u003C\/hi\u003E, seront, si mon\u003Clb\/\u003E fils ne dirige pas ses \u00e9tudes de ce c\u00f4t\u00e9,\u003Clb\/\u003E mis \u00e0 la disposition de l\u2019ordre des avocats\u003Clb\/\u003E de Paris \u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EQuant \u00e0 mes livres, tous les ouvrages\u003Clb\/\u003E \u003Chi rend=\u0022underlined\u0022\u003Ede droit, exclusivement\u003C\/hi\u003E, seront, si mon\u003Clb\/\u003E fils ne dirige pas ses \u00e9tudes de ce c\u00f4t\u00e9,\u003Clb\/\u003E mis \u00e0 la disposition de l\u2019ordre des avocats\u003Clb\/\u003E de Paris \u003C!-- [...] --\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1822,11 +1822,11 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 16 (Jules Louis Legeay, 2 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-016.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-016.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003E\u003C!-- [...] --\u003EJe pars demain 2\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E jour ; pris \u00e0 l\u2019im\u003Clb break=\u0022no\u0022\/\u003Eproviste, je n\u2019ai plus ni le temps ni\u003Clb\/\u003Eles moyens de faire une donation\u003Clb\/\u003Een r\u00e8gle \u00e0 ma femme bien aim\u00e9e. \u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003E\u003C!-- [...] --\u003EJe pars demain 2\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E jour ; pris \u00e0 l\u2019im\u003Clb break=\u0022no\u0022\/\u003Eproviste, je n\u2019ai plus ni le temps ni\u003Clb\/\u003Eles moyens de faire une donation\u003Clb\/\u003Een r\u00e8gle \u00e0 ma femme bien aim\u00e9e. \u003C\/p\u003E"
           },
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 1 ( Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EAvant de partir \u00e0 la guerre dont\u003Clb\/\u003E tant ne reviendront pas, je tiens \u00e0 d\u00e9cider\u003Clb\/\u003Ece qui suit \u003C!-- [...]--\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EAvant de partir \u00e0 la guerre dont\u003Clb\/\u003E tant ne reviendront pas, je tiens \u00e0 d\u00e9cider\u003Clb\/\u003Ece qui suit \u003C!-- [...]--\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1867,7 +1867,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 1 (Fernand Lucien Jules Melchior Chatin, 31 juillet 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-001.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbody\u003E \u003Cdiv type=\u0022will\u0022\u003E \u003Cpb facs=\u0022#testament-0001_vue-01_jpg\u0022\/\u003E \u003Cdateline rend=\u0022centered\u0022\u003EParis\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le \u003Cchoice\u003E\u003Csic\u003Etrente et un\u003C\/sic\u003E\u003Ccorr\u003Etrente-et-un\u003C\/corr\u003E\u003C\/choice\u003E \u003Cchoice\u003E\u003Csic\u003E Juillet\u003C\/sic\u003E\u003Ccorr\u003E juillet\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E \u003Cchoice\u003E\u003Csic\u003Emil\u003C\/sic\u003E\u003Ccorr\u003Emille\u003C\/corr\u003E\u003C\/choice\u003E neuf cent quatorze\u003Clb\/\u003E (31 \u003Cchoice\u003E\u003Csic\u003EJuillet\u003C\/sic\u003E\u003Ccorr\u003Ejuillet\u003C\/corr\u003E\u003C\/choice\u003E 1914)\u003C\/dateline\u003E \u003C!-- [... etc. ] --\u003E \u003C\/div\u003E \u003C\/body\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbody\u003E \u003Cdiv type=\u0022will\u0022\u003E \u003Cpb facs=\u0022#testament-0001_vue-01_jpg\u0022\/\u003E \u003Cdateline rend=\u0022centered\u0022\u003EParis\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le \u003Cchoice\u003E\u003Csic\u003Etrente et un\u003C\/sic\u003E\u003Ccorr\u003Etrente-et-un\u003C\/corr\u003E\u003C\/choice\u003E \u003Cchoice\u003E\u003Csic\u003E Juillet\u003C\/sic\u003E\u003Ccorr\u003E juillet\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E \u003Cchoice\u003E\u003Csic\u003Emil\u003C\/sic\u003E\u003Ccorr\u003Emille\u003C\/corr\u003E\u003C\/choice\u003E neuf cent quatorze\u003Clb\/\u003E (31 \u003Cchoice\u003E\u003Csic\u003EJuillet\u003C\/sic\u003E\u003Ccorr\u003Ejuillet\u003C\/corr\u003E\u003C\/choice\u003E 1914)\u003C\/dateline\u003E \u003C!-- [... etc. ] --\u003E \u003C\/div\u003E \u003C\/body\u003E"
           }
         ]
       },
@@ -1903,7 +1903,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 6 (Joseph Bernel, 1\u003Chi rend=\u0022superscript\u0022\u003Eer\u003C\/hi\u003E ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-006.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-006.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline\u003EParis\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le 1\u003Chi rend=\u0022superscript-underlined\u0022\u003Eer\u003C\/hi\u003E \u003Cchoice\u003E\u003Csic\u003Eao\u00fbt\u003C\/sic\u003E\u003Ccorr\u003EAo\u00fbt\u003C\/corr\u003E\u003C\/choice\u003E 1914\u003C\/dateline\u003E\u003Cspace dim=\u0022vertical\u0022 quantity=\u00224\u0022 unit=\u0022lines\u0022\/\u003E\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#JBernel\u0022\u003EJoseph \u003Csurname\u003EBernel\u003C\/surname\u003E\u003C\/persName\u003E\u003Clb\/\u003E d\u00e9clare donner tout ce que je\u003Clb\/\u003E poss\u00e8de \u00e0 ma femme Madame\u003Clb\/\u003E \u003C!-- [...] --\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline\u003EParis\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E le 1\u003Chi rend=\u0022superscript-underlined\u0022\u003Eer\u003C\/hi\u003E \u003Cchoice\u003E\u003Csic\u003Eao\u00fbt\u003C\/sic\u003E\u003Ccorr\u003EAo\u00fbt\u003C\/corr\u003E\u003C\/choice\u003E 1914\u003C\/dateline\u003E\u003Cspace dim=\u0022vertical\u0022 quantity=\u00224\u0022 unit=\u0022lines\u0022\/\u003E\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#JBernel\u0022\u003EJoseph \u003Csurname\u003EBernel\u003C\/surname\u003E\u003C\/persName\u003E\u003Clb\/\u003E d\u00e9clare donner tout ce que je\u003Clb\/\u003E poss\u00e8de \u00e0 ma femme Madame\u003Clb\/\u003E \u003C!-- [...] --\u003E\u003C\/p\u003E"
           }
         ]
       },
@@ -1975,7 +1975,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 60 (Lucien Pierre Armand Debain, 12 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-060.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-060.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline rend=\u0022right\u0022\u003ENevers, le 12 ao\u00fbt 1914\u003C\/dateline\u003E\u003Cmetamark rend=\u0022horizontal-line\u0022 function=\u0022separating\u0022\/\u003E\u003Cp\u003ECeci est mon testament, \u00e9crit en\u003Clb\/\u003E toute s\u00e9r\u00e9nit\u00e9, la veille de mon\u003Clb\/\u003E d\u00e9part pour la guerre contre l\u2019Allemagne.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline rend=\u0022right\u0022\u003ENevers, le 12 ao\u00fbt 1914\u003C\/dateline\u003E\u003Cmetamark rend=\u0022horizontal-line\u0022 function=\u0022separating\u0022\/\u003E\u003Cp\u003ECeci est mon testament, \u00e9crit en\u003Clb\/\u003E toute s\u00e9r\u00e9nit\u00e9, la veille de mon\u003Clb\/\u003E d\u00e9part pour la guerre contre l\u2019Allemagne.\u003C\/p\u003E"
           }
         ]
       },
@@ -2050,11 +2050,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdateline rend=\u0022right\u0022\u003EPourville, \u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E31 juillet 1914\u003C\/date\u003E.\u003C\/dateline\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdateline rend=\u0022right\u0022\u003EPourville, \u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E31 juillet 1914\u003C\/date\u003E.\u003C\/dateline\u003E"
           },
           {
             "source": "\u003Cp\u003EUn exemple d\u0027utilisation de \u003Cgi\u003Edate\u003C\/gi\u003E dans les m\u00e9tadonn\u00e9es du testament\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cindex indexName=\u0022willTypes\u0022\u003E\u003Cterm\u003Etestament olographe\u003C\/term\u003E\u003C\/index\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E\u003C\/egXML\u003E"
+            "example": "\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cindex indexName=\u0022willTypes\u0022\u003E\u003Cterm\u003Etestament olographe\u003C\/term\u003E\u003C\/index\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E"
           }
         ]
       },
@@ -2155,15 +2155,15 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 2 (\u00c9mile Alexandre Gorand, 31 juillet 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-002.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-002.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#EAGorand\u0022\u003E\u00c9mile Gorand\u003C\/persName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E n\u00e9 le 4 \u003Cchoice\u003E\u003Csic\u003EAo\u00fbt\u003C\/sic\u003E\u003Ccorr\u003Eao\u00fbt\u003C\/corr\u003E\u003C\/choice\u003E 1883 \u00e0 Paris 10\u003Chi rend=\u0022superscript-underlined\u0022\u003Ee\u003C\/hi\u003E, l\u00e8gue \u00e0 ma femme\u003Clb\/\u003E ch\u00e9rie \u00c9milie Gorand (n\u00e9e Bastien) tout ce que je poss\u00e8de\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E titres, bijoux, argent, meubles et immeubles, en cas\u003Clb\/\u003E de d\u00e9c\u00e8s dans cette guerre.\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#EAGorand\u0022\u003E\u00c9mile Gorand\u003C\/persName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E n\u00e9 le 4 \u003Cchoice\u003E\u003Csic\u003EAo\u00fbt\u003C\/sic\u003E\u003Ccorr\u003Eao\u00fbt\u003C\/corr\u003E\u003C\/choice\u003E 1883 \u00e0 Paris 10\u003Chi rend=\u0022superscript-underlined\u0022\u003Ee\u003C\/hi\u003E, l\u00e8gue \u00e0 ma femme\u003Clb\/\u003E ch\u00e9rie \u00c9milie Gorand (n\u00e9e Bastien) tout ce que je poss\u00e8de\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E titres, bijoux, argent, meubles et immeubles, en cas\u003Clb\/\u003E de d\u00e9c\u00e8s dans cette guerre.\u003C\/p\u003E"
           },
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 2 (\u00c9mile Alexandre Gorand, 31 juillet 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-002.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-002.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#EAGorand\u0022\u003E\u003Cforename\u003EE.\u003C\/forename\u003E\u00a0\u003Csurname\u003EGorand\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022right\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022#EAGorand\u0022\u003E\u003Cforename\u003EE.\u003C\/forename\u003E\u00a0\u003Csurname\u003EGorand\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cperson xml:id=\u0022person-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CpersName type=\u0022fullProseForm\u0022\u003E Fernand Lucien Jules Melchior Chatin\u003C\/persName\u003E\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E, \u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003C!-- etc. --\u003E\u003C\/person\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cperson xml:id=\u0022person-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CpersName type=\u0022fullProseForm\u0022\u003E Fernand Lucien Jules Melchior Chatin\u003C\/persName\u003E\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E, \u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003C!-- etc. --\u003E\u003C\/person\u003E"
           }
         ]
       },
@@ -2216,11 +2216,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#PFeugere\u0022\u003EPaul Louis \u003Csurname\u003EFeug\u00e8re\u003C\/surname\u003E\u003C\/persName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E soldat au \u003CorgName type=\u0022regiment\u0022\u003E150\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment \u003Cchoice\u003E\u003Csic\u003Ed\u2019Infanterie\u003C\/sic\u003E\u003Ccorr\u003Ed\u2019infanterie\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/orgName\u003E\u003Clb\/\u003E en garnison \u00e0 \u003Cchoice\u003E\u003Csic\u003ESaint Mihiel\u003C\/sic\u003E\u003Ccorr\u003ESaint-Mihiel\u003C\/corr\u003E\u003C\/choice\u003E (Meuse)\u003C!-- [...]--\u003E\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EJe soussign\u00e9 \u003CpersName ref=\u0022#PFeugere\u0022\u003EPaul Louis \u003Csurname\u003EFeug\u00e8re\u003C\/surname\u003E\u003C\/persName\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E soldat au \u003CorgName type=\u0022regiment\u0022\u003E150\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment \u003Cchoice\u003E\u003Csic\u003Ed\u2019Infanterie\u003C\/sic\u003E\u003Ccorr\u003Ed\u2019infanterie\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/orgName\u003E\u003Clb\/\u003E en garnison \u00e0 \u003Cchoice\u003E\u003Csic\u003ESaint Mihiel\u003C\/sic\u003E\u003Ccorr\u003ESaint-Mihiel\u003C\/corr\u003E\u003C\/choice\u003E (Meuse)\u003C!-- [...]--\u003E\u003C\/p\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Corg xml:id=\u0022o-0002\u0022\u003E\u003CorgName type=\u0022fullIndexEntryForm\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName\u003ER\u00e9giment de zouaves (\u003Cnum\u003E4\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment de zouaves\u003C\/orgName\u003E\u003CorgName type=\u0022abbreviatedForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E RZ\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003C\/org\u003E\u003C\/egXML\u003E"
+            "example": "\u003Corg xml:id=\u0022o-0002\u0022\u003E\u003CorgName type=\u0022fullIndexEntryForm\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName\u003ER\u00e9giment de zouaves (\u003Cnum\u003E4\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment de zouaves\u003C\/orgName\u003E\u003CorgName type=\u0022abbreviatedForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E RZ\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003C\/org\u003E"
           }
         ]
       },
@@ -2273,11 +2273,11 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EUn exemple d\u0027utilisation de \u003Cgi\u003EplaceName\u003C\/gi\u003E dans les m\u00e9tadonn\u00e9es du testament\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cindex indexName=\u0022willTypes\u0022\u003E\u003Cterm\u003Etestament olographe\u003C\/term\u003E\u003C\/index\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E\u003C\/egXML\u003E"
+            "example": "\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cindex indexName=\u0022willTypes\u0022\u003E\u003Cterm\u003Etestament olographe\u003C\/term\u003E\u003C\/index\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E"
           },
           {
             "source": "\u003Cp\u003EUn exemple d\u0027utilisation de \u003Cgi\u003EplaceName\u003C\/gi\u003E dans une notice descriptive de lieu\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pl-0009\u0022 type=\u0022city\u0022\u003E\u003C!-- une commune qui a chang\u00e9 de nom --\u003E\u003CplaceName when-iso=\u00221793\/1801\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar sur Ornain\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221801\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar-le-Duc\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.78333 5.16667\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3034911\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pl-0009\u0022 type=\u0022city\u0022\u003E\u003C!-- une commune qui a chang\u00e9 de nom --\u003E\u003CplaceName when-iso=\u00221793\/1801\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar sur Ornain\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221801\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar-le-Duc\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.78333 5.16667\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3034911\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -2368,7 +2368,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cterm type=\u0022willType\u0022\u003Etestament olographe\u003C\/term\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E\u003C\/egXML\u003E"
+            "example": "\u003CmsContents\u003E\u003Csummary\u003E\u003Cp\u003E\u003Cdate when=\u00221914-07-31\u0022 type=\u0022willDate\u0022\u003E1914, 31 juillet\u003C\/date\u003E. \u003CplaceName type=\u0022willPlace\u0022\u003EParis\u003C\/placeName\u003E.\u003C\/p\u003E\u003Cp\u003E\u003Cterm type=\u0022willType\u0022\u003Etestament olographe\u003C\/term\u003E de \u003CpersName ref=\u0022#FLChatin\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E, mort pour la France \u00e0 \u003CplaceName ref=\u0022#pl-056\u0022 type=\u0022willAuthorDeathPlace\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E, le \u003Cdate when=\u00221915-01-10\u0022 type=\u0022willAuthorDeathDate\u0022\u003E10 janvier 1915\u003C\/date\u003E.\u003C\/p\u003E\u003C\/summary\u003E\u003C\/msContents\u003E"
           }
         ]
       },
@@ -2458,7 +2458,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003E[...]Les valeurs et argent se trouvent au\u003Clb\/\u003E Cr\u00e9dit lyonnais, \u003Cforeign xml:lang=\u0022en\u0022\u003ECockspur Street\u003C\/foreign\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E Londres [...]\u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003E[...]Les valeurs et argent se trouvent au\u003Clb\/\u003E Cr\u00e9dit lyonnais, \u003Cforeign xml:lang=\u0022en\u0022\u003ECockspur Street\u003C\/foreign\u003E\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E Londres [...]\u003C\/p\u003E"
           }
         ]
       },
@@ -2513,11 +2513,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Citem\u003E3\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon fr\u00e8re Paul Chatin de Chastaing \u003Cref xml:id=\u0022will-001-001\u0022 target=\u0022#will-001-footnote001\u0022 type=\u0022internal\u0022\/\u003E\u003Clb\/\u003E une somme de cinq mille francs et\u003Clb\/\u003E ma montre \u00e0 sonnerie\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/item\u003E\u003C\/egXML\u003E"
+            "example": "\u003Citem\u003E3\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon fr\u00e8re Paul Chatin de Chastaing \u003Cref xml:id=\u0022will-001-001\u0022 target=\u0022#will-001-footnote001\u0022 type=\u0022internal\u0022\/\u003E\u003Clb\/\u003E une somme de cinq mille francs et\u003Clb\/\u003E ma montre \u00e0 sonnerie\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/item\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote xml:id=\u0022will-001-footnote001\u0022 resp=\u0022#MDurand #FClavaud\u0022\u003ESur Paul Chatin de Chastaing, voir \u003Cbibl\u003Eune r\u00e9f\u00e9rence biblio avec un \u003Ctitle\u003Etitre\u003C\/title\u003E\u003C\/bibl\u003E, et consulter \u003Cref target=\u0022http:\/\/www.bnf.fr\u0022 type=\u0022external\u0022\u003Eune page web\u003C\/ref\u003E.\u003C\/note\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote xml:id=\u0022will-001-footnote001\u0022 resp=\u0022#MDurand #FClavaud\u0022\u003ESur Paul Chatin de Chastaing, voir \u003Cbibl\u003Eune r\u00e9f\u00e9rence biblio avec un \u003Ctitle\u003Etitre\u003C\/title\u003E\u003C\/bibl\u003E, et consulter \u003Cref target=\u0022http:\/\/www.bnf.fr\u0022 type=\u0022external\u0022\u003Eune page web\u003C\/ref\u003E.\u003C\/note\u003E\u003C\/div\u003E"
           }
         ]
       },
@@ -2586,15 +2586,15 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EUne note d\u0027apparat critique\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Citem\u003E5\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon vieil ami Morel mon fusil\u003Clb\/\u003E calibre 12 percussion centrale \u003Capp\u003E\u003Clem\u003E (de Warn\u003Csupplied reason=\u0022hidden\u0022 resp=\u0022#MDurand\u0022\u003Eer\u003C\/supplied\u003E)\u003C\/lem\u003E\u003Cnote resp=\u0022#MDurand\u0022\u003ETache d\u2019encre \u00e0 la fin du mot.\u003C\/note\u003E\u003C\/app\u003E \u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E Mon ami Morel habite 2 \u003Cchoice\u003E\u003Csic\u003ERue\u003C\/sic\u003E\u003Ccorr\u003Erue\u003C\/corr\u003E\u003C\/choice\u003E L\u00e9nac\u003Clb\/\u003E \u00e0 Marseille.\u003C\/item\u003E\u003C\/egXML\u003E"
+            "example": "\u003Citem\u003E5\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon vieil ami Morel mon fusil\u003Clb\/\u003E calibre 12 percussion centrale \u003Capp\u003E\u003Clem\u003E (de Warn\u003Csupplied reason=\u0022hidden\u0022 resp=\u0022#MDurand\u0022\u003Eer\u003C\/supplied\u003E)\u003C\/lem\u003E\u003Cnote resp=\u0022#MDurand\u0022\u003ETache d\u2019encre \u00e0 la fin du mot.\u003C\/note\u003E\u003C\/app\u003E \u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E.\u003C\/corr\u003E\u003C\/choice\u003E\u003Clb\/\u003E Mon ami Morel habite 2 \u003Cchoice\u003E\u003Csic\u003ERue\u003C\/sic\u003E\u003Ccorr\u003Erue\u003C\/corr\u003E\u003C\/choice\u003E L\u00e9nac\u003Clb\/\u003E \u00e0 Marseille.\u003C\/item\u003E"
           },
           {
             "source": "\u003Cp\u003EUne note \u00e9ditoriale sur le contenu du testament\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote xml:id=\u0022will-001-fnote001\u0022 resp=\u0022#MDurand #FClavaud\u0022\u003ESur Paul Chatin de Chastaing, voir \u003Cbibl\u003Eune r\u00e9f\u00e9rence biblio avec un \u003Ctitle\u003Etitre\u003C\/title\u003E\u003C\/bibl\u003E, et consulter \u003Cref target=\u0022http:\/\/www.bnf.fr\u0022\u003Eune page web\u003C\/ref\u003E.\u003C\/note\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022notes\u0022\u003E\u003Cnote xml:id=\u0022will-001-fnote001\u0022 resp=\u0022#MDurand #FClavaud\u0022\u003ESur Paul Chatin de Chastaing, voir \u003Cbibl\u003Eune r\u00e9f\u00e9rence biblio avec un \u003Ctitle\u003Etitre\u003C\/title\u003E\u003C\/bibl\u003E, et consulter \u003Cref target=\u0022http:\/\/www.bnf.fr\u0022\u003Eune page web\u003C\/ref\u003E.\u003C\/note\u003E\u003C\/div\u003E"
           },
           {
             "source": "\u003Cp\u003EUne note d\u0027un testateur dans une addition marginale au testament, faisant suite \u00e0 la suppression de deux mots. Cette note est accompagn\u00e9e d\u0027une note d\u0027apparat critique de l\u0027\u00e9diteur.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cp\u003EEn cas d\u2019existence\u003Clb\/\u003E d\u2019enfants, \u003Capp\u003E\u003Clem\u003E\u003Cchoice\u003E\u003Csic\u003E\u003Cdel\u003Eje le\u003C\/del\u003E\u003Cadd place=\u0022marginLeft\u0022\u003E\u003Cnote\u003Eray\u00e9 deux mots nuls J. V.\u003C\/note\u003E\u003C\/add\u003E\u003C\/sic\u003E\u003Ccorr\/\u003E\u003C\/choice\u003E\u003C\/lem\u003E\u003Cnote resp=\u0022#FClavaud\u0022\u003E\u0022ray\u00e9 deux mots nuls J.V.\u0022 inscrit dans la marge.\u003C\/note\u003E\u003C\/app\u003E ce\u003Clb\/\u003E legs sera r\u00e9duit \u00e0 la\u003Clb\/\u003E plus forte quotit\u00e9\u003Clb\/\u003E disponible permise entre\u003Clb\/\u003E \u00e9poux tant en toute\u003Clb\/\u003E propri\u00e9t\u00e9 qu\u2019en usufruit\u003Clb\/\u003E et cette quotit\u00e9 disponible\u003Clb\/\u003E sera calcul\u00e9e sur l\u2019ensemble\u003Clb\/\u003E de ma succession, y\u003Clb\/\u003E compris les rapports. \u003C\/p\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cp\u003EEn cas d\u2019existence\u003Clb\/\u003E d\u2019enfants, \u003Capp\u003E\u003Clem\u003E\u003Cchoice\u003E\u003Csic\u003E\u003Cdel\u003Eje le\u003C\/del\u003E\u003Cadd place=\u0022marginLeft\u0022\u003E\u003Cnote\u003Eray\u00e9 deux mots nuls J. V.\u003C\/note\u003E\u003C\/add\u003E\u003C\/sic\u003E\u003Ccorr\/\u003E\u003C\/choice\u003E\u003C\/lem\u003E\u003Cnote resp=\u0022#FClavaud\u0022\u003E\u0022ray\u00e9 deux mots nuls J.V.\u0022 inscrit dans la marge.\u003C\/note\u003E\u003C\/app\u003E ce\u003Clb\/\u003E legs sera r\u00e9duit \u00e0 la\u003Clb\/\u003E plus forte quotit\u00e9\u003Clb\/\u003E disponible permise entre\u003Clb\/\u003E \u00e9poux tant en toute\u003Clb\/\u003E propri\u00e9t\u00e9 qu\u2019en usufruit\u003Clb\/\u003E et cette quotit\u00e9 disponible\u003Clb\/\u003E sera calcul\u00e9e sur l\u2019ensemble\u003Clb\/\u003E de ma succession, y\u003Clb\/\u003E compris les rapports. \u003C\/p\u003E"
           }
         ]
       },
@@ -2673,7 +2673,7 @@
           }
         ],
         "projectDescription": "L\u0027\u00e9l\u00e9ment app est utilis\u00e9 dans le corps de la transcription, lorsqu\u0027on observe un micro-ph\u00e9nom\u00e8ne textuel (addition, suppression, abr\u00e9viation, erreur de syntaxe, dommage mat\u00e9riel, texte superflu, etc.) que l\u0027on souhaite commenter par une note d\u0027apparat critique. Il contient obligatoirement un \u00e9l\u00e9ment lem (englobant le texte transcrit) suivi d\u0027un \u00e9l\u00e9ment note.",
-        "complexTagInfo": "\u003Cdesc type=\u0022wills-ui-complexTag-info\u0022\u003E L\u0027\u00e9l\u00e9ment \u003Cgi\u003Eapp\u003C\/gi\u003E sert \u00e0 englober deux \u00e9l\u00e9ments, dans l\u0027ordre ci-dessous : \u003Clist\u003E\u003Citem\u003El\u0027\u00e9l\u00e9ment \u003Cgi\u003Elem\u003C\/gi\u003E, qui contient le mot ou l\u0027expression du texte du testament sur lequel portera la note d\u0027apparat critique. Exemple fictif : \u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Clem\u003E\u003Cchoice\u003E\u003Csic\u003Eje done \u00e0 mon aipouze tout mes biens\u003C\/sic\u003E\u003Ccorr\u003Eje donne \u00e0 mon \u00e9pouse tous mes biens\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/lem\u003E\u003C\/egXML\u003E\u003C\/item\u003E\u003Citem\u003El\u0027\u00e9l\u00e9ment \u003Cgi\u003Enote\u003C\/gi\u003E, qui contient la note d\u0027apparat critique que vous souhaitez cr\u00e9er pour commenter une particularit\u00e9 d\u0027\u00e9criture pr\u00e9sente dans ce mot ou cette expression. Exemple fictif (pour annoter l\u0027\u00e9l\u00e9ment \u003Cgi\u003Elem\u003C\/gi\u003E donn\u00e9 en exemple ci-dessus) : \u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cnote\u003Eil s\u0027agit des seules fautes d\u0027orthographe rencontr\u00e9es dans ce testament par ailleurs tr\u00e8s bien \u00e9crit\u003C\/note\u003E\u003C\/egXML\u003E\u003C\/item\u003E\u003C\/list\u003E \u003C\/desc\u003E",
+        "complexTagInfo": "\u003Cdesc type=\u0022wills-ui-complexTag-info\u0022\u003E L\u0027\u00e9l\u00e9ment \u003Cgi\u003Eapp\u003C\/gi\u003E sert \u00e0 englober deux \u00e9l\u00e9ments, dans l\u0027ordre ci-dessous : \u003Clist\u003E\u003Citem\u003El\u0027\u00e9l\u00e9ment \u003Cgi\u003Elem\u003C\/gi\u003E, qui contient le mot ou l\u0027expression du texte du testament sur lequel portera la note d\u0027apparat critique. Exemple fictif : \u003Clem\u003E\u003Cchoice\u003E\u003Csic\u003Eje done \u00e0 mon aipouze tout mes biens\u003C\/sic\u003E\u003Ccorr\u003Eje donne \u00e0 mon \u00e9pouse tous mes biens\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/lem\u003E\u003C\/item\u003E\u003Citem\u003El\u0027\u00e9l\u00e9ment \u003Cgi\u003Enote\u003C\/gi\u003E, qui contient la note d\u0027apparat critique que vous souhaitez cr\u00e9er pour commenter une particularit\u00e9 d\u0027\u00e9criture pr\u00e9sente dans ce mot ou cette expression. Exemple fictif (pour annoter l\u0027\u00e9l\u00e9ment \u003Cgi\u003Elem\u003C\/gi\u003E donn\u00e9 en exemple ci-dessus) : \u003Cnote\u003Eil s\u0027agit des seules fautes d\u0027orthographe rencontr\u00e9es dans ce testament par ailleurs tr\u00e8s bien \u00e9crit\u003C\/note\u003E\u003C\/item\u003E\u003C\/list\u003E \u003C\/desc\u003E",
         "gloss": [
           {
             "date": "2007-06-12",
@@ -2683,7 +2683,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Citem\u003E5\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon vieil ami Morel mon fusil\u003Clb\/\u003E calibre 12 percussion centrale \u003Capp\u003E\u003Clem\u003E (de Warn\u003Csupplied reason=\u0022hidden\u0022 resp=\u0022#MDurand\u0022\u003Eer\u003C\/supplied\u003E)\u003C\/lem\u003E\u003Cnote resp=\u0022#MDurand\u0022\u003ETache d\u2019encre \u00e0 la fin du mot.\u003C\/note\u003E\u003C\/app\u003E \u003C!-- [...] --\u003E\u003C\/item\u003E\u003C\/egXML\u003E"
+            "example": "\u003Citem\u003E5\u00b0 \u003Cchoice\u003E\u003Csic\u003E\u00e0\u003C\/sic\u003E\u003Ccorr\u003E\u00c0\u003C\/corr\u003E\u003C\/choice\u003E mon vieil ami Morel mon fusil\u003Clb\/\u003E calibre 12 percussion centrale \u003Capp\u003E\u003Clem\u003E (de Warn\u003Csupplied reason=\u0022hidden\u0022 resp=\u0022#MDurand\u0022\u003Eer\u003C\/supplied\u003E)\u003C\/lem\u003E\u003Cnote resp=\u0022#MDurand\u0022\u003ETache d\u2019encre \u00e0 la fin du mot.\u003C\/note\u003E\u003C\/app\u003E \u003C!-- [...] --\u003E\u003C\/item\u003E"
           }
         ]
       },
@@ -2722,7 +2722,7 @@
         "exemplum": [
           {
             "source": "\u003Cp\u003EExtrait tir\u00e9 de Nougaret (Christine), Clavaud (Florence) (dirs.), \u00ab Testament n\u00b0 56 (Lucien Jean Baptiste Brivois, 7 ao\u00fbt 1914) \u00bb, dans \u003Ctitle\u003ETestaments de guerre de Poilus parisiens (1914-1918) : une \u00e9dition critique\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2017-.... En ligne : \u003Cref target=\u0022 http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-056.html#transcription\u0022\u003E http:\/\/elec.enc.sorbonne.fr\/testaments-de-poilus\/testaments\/testament-056.html\u003C\/ref\u003E.\u003C\/p\u003E",
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cpostscript\u003E\u003Cp\u003E\u003Capp\u003E\u003Clem\u003EAyant fait de mauvaises affaires\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E ma fortune en\u003Clb\/\u003E valeurs est presque disparue\u003Cchoice\u003E\u003Csic\u003E - ma\u003C\/sic\u003E\u003Ccorr\u003E. Ma\u003C\/corr\u003E\u003C\/choice\u003E combinaison pour\u003Clb\/\u003E mon coffre est le num\u00e9ro 173.\u003Clb\/\u003E\u003Cseg type=\u0022signature\u0022 rend=\u0022centered\u0022\u003E\u003CpersName ref=\u0022#LBrivois\u0022\u003EL.B.\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/lem\u003E\u003Cnote resp=\u0022#SDurand\u0022\u003E\u00c9crit perpendiculairement.\u003C\/note\u003E\u003C\/app\u003E\u003C\/p\u003E\u003C\/postscript\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cpostscript\u003E\u003Cp\u003E\u003Capp\u003E\u003Clem\u003EAyant fait de mauvaises affaires\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E ma fortune en\u003Clb\/\u003E valeurs est presque disparue\u003Cchoice\u003E\u003Csic\u003E - ma\u003C\/sic\u003E\u003Ccorr\u003E. Ma\u003C\/corr\u003E\u003C\/choice\u003E combinaison pour\u003Clb\/\u003E mon coffre est le num\u00e9ro 173.\u003Clb\/\u003E\u003Cseg type=\u0022signature\u0022 rend=\u0022centered\u0022\u003E\u003CpersName ref=\u0022#LBrivois\u0022\u003EL.B.\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/lem\u003E\u003Cnote resp=\u0022#SDurand\u0022\u003E\u00c9crit perpendiculairement.\u003C\/note\u003E\u003C\/app\u003E\u003C\/p\u003E\u003C\/postscript\u003E"
           }
         ]
       },
@@ -2771,7 +2771,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003ClistPerson\u003E\u003Cperson xml:id=\u0022p-0001\u0022 resp=\u0022#ML #JD #FC\u0022\/\u003E\u003Cperson xml:id=\u0022p-0002\u0022 resp=\u0022#FC\u0022\/\u003E\u003C\/listPerson\u003E\u003C\/egXML\u003E"
+            "example": "\u003ClistPerson\u003E\u003Cperson xml:id=\u0022p-0001\u0022 resp=\u0022#ML #JD #FC\u0022\/\u003E\u003Cperson xml:id=\u0022p-0002\u0022 resp=\u0022#FC\u0022\/\u003E\u003C\/listPerson\u003E"
           }
         ]
       },
@@ -2799,7 +2799,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pl-0001\u0022\u003E \u003C\/place\u003E\u003Cplace xml:id=\u0022pl-0008\u0022\u003E \u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pl-0001\u0022\u003E \u003C\/place\u003E\u003Cplace xml:id=\u0022pl-0008\u0022\u003E \u003C\/place\u003E"
           }
         ]
       },
@@ -2827,7 +2827,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Corg xml:id=\u0022or-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E \u003C\/org\u003E\u003Corg xml:id=\u0022or-0002\u0022 resp=\u0022#ML #JD\u0022\u003E \u003C\/org\u003E\u003C\/egXML\u003E"
+            "example": "\u003Corg xml:id=\u0022or-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E \u003C\/org\u003E\u003Corg xml:id=\u0022or-0002\u0022 resp=\u0022#ML #JD\u0022\u003E \u003C\/org\u003E"
           }
         ]
       },
@@ -2859,7 +2859,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cperson xml:id=\u0022pe-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CpersName type=\u0022fullProseName\u0022\u003E Fernand Lucien Jules Melchior Chatin\u003C\/persName\u003E\u003CpersName type=\u0022fullIndexedName\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E, \u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003Cdeath\u003E\u0022Mort au champ d\u2019honneur, tu\u00e9 \u00e0 l\u2019ennemi\u0022 le \u003Cdate when-iso=\u00221915-01-10\u0022\u003E10 janvier 1915\u003C\/date\u003E, \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0056\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E\u003C\/death\u003E\u003Cbibl type=\u0022refMemoireDesHommes\u0022\u003E\u003Cauthor\u003EMinist\u00e8re de la d\u00e9fense, Secr\u00e9tariat g\u00e9n\u00e9ral pour l\u2019administration, Direction de la m\u00e9moire, du patrimoine et des archives\u003C\/author\u003E\u003Ctitle\u003E M\u00e9moire des hommes : notice relative \u00e0 Fernand Lucien Jules Melchior Chatin \u003C\/title\u003E\u003Cref type=\u0022uri\u0022\u003Ehttp:\/\/www.memoiredeshommes.sga.defense.gouv.fr\/fr\/ark:\/40699\/m005239deaa31041\u003C\/ref\u003E\u003C\/bibl\u003E\u003C\/person\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cperson xml:id=\u0022pe-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CpersName type=\u0022fullProseName\u0022\u003E Fernand Lucien Jules Melchior Chatin\u003C\/persName\u003E\u003CpersName type=\u0022fullIndexedName\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E, \u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003Cdeath\u003E\u0022Mort au champ d\u2019honneur, tu\u00e9 \u00e0 l\u2019ennemi\u0022 le \u003Cdate when-iso=\u00221915-01-10\u0022\u003E10 janvier 1915\u003C\/date\u003E, \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0056\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E\u003C\/death\u003E\u003Cbibl type=\u0022refMemoireDesHommes\u0022\u003E\u003Cauthor\u003EMinist\u00e8re de la d\u00e9fense, Secr\u00e9tariat g\u00e9n\u00e9ral pour l\u2019administration, Direction de la m\u00e9moire, du patrimoine et des archives\u003C\/author\u003E\u003Ctitle\u003E M\u00e9moire des hommes : notice relative \u00e0 Fernand Lucien Jules Melchior Chatin \u003C\/title\u003E\u003Cref type=\u0022uri\u0022\u003Ehttp:\/\/www.memoiredeshommes.sga.defense.gouv.fr\/fr\/ark:\/40699\/m005239deaa31041\u003C\/ref\u003E\u003C\/bibl\u003E\u003C\/person\u003E"
           }
         ]
       },
@@ -2914,7 +2914,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022place-0001\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003Csettlement\u003EAblain-Saint-Nazaire\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E50.3932 2.7088\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3038763\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022place-0001\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003Csettlement\u003EAblain-Saint-Nazaire\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E50.3932 2.7088\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3038763\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -2965,7 +2965,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Corg xml:id=\u0022org-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CorgName type=\u0022fullIndexedName\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName type=\u0022unit\u0022\u003ER\u00e9giment d\u0027infanterie (\u003Cnum\u003E68\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseName\u0022\u003E68\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment d\u0027infanterie\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003Cbibl\/\u003E\u003C\/org\u003E\u003C\/egXML\u003E"
+            "example": "\u003Corg xml:id=\u0022org-0001\u0022 resp=\u0022#ML #JD #FC\u0022\u003E\u003CorgName type=\u0022fullIndexedName\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName type=\u0022unit\u0022\u003ER\u00e9giment d\u0027infanterie (\u003Cnum\u003E68\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseName\u0022\u003E68\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment d\u0027infanterie\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003Cbibl\/\u003E\u003C\/org\u003E"
           }
         ]
       },
@@ -3015,11 +3015,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbibl\u003E\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives d\u00e9partementales de la Dordogne\u003C\/institution\u003E\u003Ccollection\u003ERegistres paroissiaux et d\u2019\u00e9tat civil du canton de Rib\u00e9rac\u003C\/collection\u003E\u003Cidno\u003E5MI20908_004\u003C\/idno\u003E\u003CmsName\u003ECommune de Rib\u00e9rac : naissances (1881)\u003C\/msName\u003E\u003C\/msIdentifier\u003E\u003Cref type=\u0022external\u0022\u003Ehttp:\/\/archives-num.dordogne.fr\/pleade330\/ead.html?id=Etat-civil-canton-Riberac\u0026amp;c=Etat-civil-canton-Riberac_e0015184\u003C\/ref\u003E\u003C\/bibl\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbibl\u003E\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives d\u00e9partementales de la Dordogne\u003C\/institution\u003E\u003Ccollection\u003ERegistres paroissiaux et d\u2019\u00e9tat civil du canton de Rib\u00e9rac\u003C\/collection\u003E\u003Cidno\u003E5MI20908_004\u003C\/idno\u003E\u003CmsName\u003ECommune de Rib\u00e9rac : naissances (1881)\u003C\/msName\u003E\u003C\/msIdentifier\u003E\u003Cref type=\u0022external\u0022\u003Ehttp:\/\/archives-num.dordogne.fr\/pleade330\/ead.html?id=Etat-civil-canton-Riberac\u0026amp;c=Etat-civil-canton-Riberac_e0015184\u003C\/ref\u003E\u003C\/bibl\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbibl\u003EArticle \u003Ctitle level=\u0022a\u0022\u003E23e r\u00e9giment d\u0027infanterie coloniale\u003C\/title\u003E de \u003Ctitle level=\u0022m\u0022\u003EWikip\u00e9dia en fran\u00e7ais\u003C\/title\u003E. Contenu soumis \u00e0 la licence CC-BY-SA 3.0. \u003Cref type=\u0022uri\u0022\u003Ehttp:\/\/fr.wikipedia.org\/wiki\/23e_r%C3%A9giment_d%27infanterie_coloniale\u003C\/ref\u003E\u003C\/bibl\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbibl\u003EArticle \u003Ctitle level=\u0022a\u0022\u003E23e r\u00e9giment d\u0027infanterie coloniale\u003C\/title\u003E de \u003Ctitle level=\u0022m\u0022\u003EWikip\u00e9dia en fran\u00e7ais\u003C\/title\u003E. Contenu soumis \u00e0 la licence CC-BY-SA 3.0. \u003Cref type=\u0022uri\u0022\u003Ehttp:\/\/fr.wikipedia.org\/wiki\/23e_r%C3%A9giment_d%27infanterie_coloniale\u003C\/ref\u003E\u003C\/bibl\u003E"
           }
         ]
       },
@@ -3064,15 +3064,15 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives nationales\u003C\/institution\u003E\u003Ccollection\u003EMinutier central des notaires de Paris\u003C\/collection\u003E\u003Cidno\u003EMC\/ET\/XLVIII\/1820, minute du 20 janvier 1921 (d\u00e9p\u00f4t du testament de Fernand Lucien Jules Melchior Chatin)\u003C\/idno\u003E\u003CmsName\u003ETestament de Fernand Lucien Jules Melchior Chatin (31 juillet 1914)\u003C\/msName\u003E\u003C\/msIdentifier\u003E\u003C\/egXML\u003E"
+            "example": "\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives nationales\u003C\/institution\u003E\u003Ccollection\u003EMinutier central des notaires de Paris\u003C\/collection\u003E\u003Cidno\u003EMC\/ET\/XLVIII\/1820, minute du 20 janvier 1921 (d\u00e9p\u00f4t du testament de Fernand Lucien Jules Melchior Chatin)\u003C\/idno\u003E\u003CmsName\u003ETestament de Fernand Lucien Jules Melchior Chatin (31 juillet 1914)\u003C\/msName\u003E\u003C\/msIdentifier\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives d\u00e9partementales de la Dordogne\u003C\/institution\u003E\u003Ccollection\u003ERegistres paroissiaux et d\u2019\u00e9tat civil du canton de Rib\u00e9rac\u003C\/collection\u003E\u003Cidno\u003E5MI20908_004\u003C\/idno\u003E\u003CmsName\u003ECommune de Rib\u00e9rac : naissances (1881)\u003C\/msName\u003E\u003C\/msIdentifier\u003E\u003C\/egXML\u003E"
+            "example": "\u003CmsIdentifier\u003E\u003Cinstitution\u003EArchives d\u00e9partementales de la Dordogne\u003C\/institution\u003E\u003Ccollection\u003ERegistres paroissiaux et d\u2019\u00e9tat civil du canton de Rib\u00e9rac\u003C\/collection\u003E\u003Cidno\u003E5MI20908_004\u003C\/idno\u003E\u003CmsName\u003ECommune de Rib\u00e9rac : naissances (1881)\u003C\/msName\u003E\u003C\/msIdentifier\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0008\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022locality\u0022\u003EBaleycourt\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003CplaceName when-iso=\u00221801\/1970\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EVerdun-sur-Meuse\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221970\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EVerdun\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.1328 5.30437\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3035245\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0008\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022locality\u0022\u003EBaleycourt\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003CplaceName when-iso=\u00221801\/1970\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EVerdun-sur-Meuse\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221970\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EVerdun\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.1328 5.30437\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3035245\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3141,7 +3141,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbibl\u003E\u003Cauthor\u003ENougaret (Christine)\u003C\/author\u003E, \u003Cauthor\u003EParinet (\u00c9lisabeth)\u003C\/author\u003E, \u003CrespStmt\u003E\u003CpersName\u003EClavaud Florence\u003C\/persName\u003E\u003Cresp\u003E (collab.)\u003C\/resp\u003E\u003C\/respStmt\u003E, \u003Ctitle level=\u0022a\u0022\u003EL\u2019\u00e9dition critique des textes contemporains, XIXe-XXIe si\u00e8cle\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2015.\u003C\/bibl\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbibl\u003E\u003Cauthor\u003ENougaret (Christine)\u003C\/author\u003E, \u003Cauthor\u003EParinet (\u00c9lisabeth)\u003C\/author\u003E, \u003CrespStmt\u003E\u003CpersName\u003EClavaud Florence\u003C\/persName\u003E\u003Cresp\u003E (collab.)\u003C\/resp\u003E\u003C\/respStmt\u003E, \u003Ctitle level=\u0022a\u0022\u003EL\u2019\u00e9dition critique des textes contemporains, XIXe-XXIe si\u00e8cle\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2015.\u003C\/bibl\u003E"
           }
         ]
       },
@@ -3170,7 +3170,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbibl\u003E\u003Cauthor\u003ENougaret (Christine)\u003C\/author\u003E, \u003Cauthor\u003EParinet (\u00c9lisabeth)\u003C\/author\u003E, \u003CrespStmt\u003E\u003CpersName\u003EClavaud Florence\u003C\/persName\u003E\u003Cresp\u003E (collab.)\u003C\/resp\u003E\u003C\/respStmt\u003E, \u003Ctitle level=\u0022a\u0022\u003EL\u2019\u00e9dition critique des textes contemporains, XIXe-XXIe si\u00e8cle\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2015.\u003C\/bibl\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbibl\u003E\u003Cauthor\u003ENougaret (Christine)\u003C\/author\u003E, \u003Cauthor\u003EParinet (\u00c9lisabeth)\u003C\/author\u003E, \u003CrespStmt\u003E\u003CpersName\u003EClavaud Florence\u003C\/persName\u003E\u003Cresp\u003E (collab.)\u003C\/resp\u003E\u003C\/respStmt\u003E, \u003Ctitle level=\u0022a\u0022\u003EL\u2019\u00e9dition critique des textes contemporains, XIXe-XXIe si\u00e8cle\u003C\/title\u003E. Paris : \u00c9cole nationale des chartes, 2015.\u003C\/bibl\u003E"
           }
         ]
       },
@@ -3247,7 +3247,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cbirth\u003EN\u00e9 \u003Cdate when=\u00221878-11-23\u0022\u003Ele 13 novembre 1878\u003C\/date\u003E \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E\u003C\/birth\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cbirth\u003EN\u00e9 \u003Cdate when=\u00221878-11-23\u0022\u003Ele 13 novembre 1878\u003C\/date\u003E \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E\u003C\/birth\u003E"
           }
         ]
       },
@@ -3277,11 +3277,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdeath\u003E\u0022Mort au champ d\u2019honneur, tu\u00e9 \u00e0 l\u2019ennemi\u0022 le \u003Cdate when=\u00221915-01-10\u0022\u003E10 janvier 1915\u003C\/date\u003E, \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0056\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E\u003C\/death\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdeath\u003E\u0022Mort au champ d\u2019honneur, tu\u00e9 \u00e0 l\u2019ennemi\u0022 le \u003Cdate when=\u00221915-01-10\u0022\u003E10 janvier 1915\u003C\/date\u003E, \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0056\u0022\u003EMaroeuil (Pas-de-Calais)\u003C\/placeName\u003E\u003C\/death\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdeath\u003E\u0022Mort pour la France\u0022 le \u003Cdate notBefore=\u00221914-09-06\u0022 notAfter=\u00221914-09-08\u0022\u003E6, 7 ou 8 septembre 1914\u003C\/date\u003E \u00e0 \u003CplaceName\u003EBarcy (Seine-et-Marne)\u003C\/placeName\u003E\u003C\/death\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdeath\u003E\u0022Mort pour la France\u0022 le \u003Cdate notBefore=\u00221914-09-06\u0022 notAfter=\u00221914-09-08\u0022\u003E6, 7 ou 8 septembre 1914\u003C\/date\u003E \u00e0 \u003CplaceName\u003EBarcy (Seine-et-Marne)\u003C\/placeName\u003E\u003C\/death\u003E"
           }
         ]
       },
@@ -3311,7 +3311,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E174 boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E.\u003C\/residence\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E174 boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E.\u003C\/residence\u003E"
           }
         ]
       },
@@ -3341,7 +3341,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Coccupation\u003Ema\u00e7on\u003C\/occupation\u003E\u003C\/egXML\u003E"
+            "example": "\u003Coccupation\u003Ema\u00e7on\u003C\/occupation\u003E"
           }
         ]
       },
@@ -3367,7 +3367,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Caffiliation\u003ESoldat de 2\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E classe au \u003CorgName ref=\u0022FirstWorldWarWills-ListOfMilitaryUnit#o-0005\u0022\u003E27\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment d\u2019infanterie territoriale\u003C\/orgName\u003E.\u003C\/affiliation\u003E\u003C\/egXML\u003E"
+            "example": "\u003Caffiliation\u003ESoldat de 2\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E classe au \u003CorgName ref=\u0022FirstWorldWarWills-ListOfMilitaryUnit#o-0005\u0022\u003E27\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment d\u2019infanterie territoriale\u003C\/orgName\u003E.\u003C\/affiliation\u003E"
           }
         ]
       },
@@ -3424,11 +3424,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cdiv type=\u0022envelope\u0022\u003E\u003Cpb\/\u003E\u003Cp\u003E\u003Caddress\u003E\u003CaddrLine\u003EMonsieur Delafon\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E notaire\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003E6 boulevard de Strasbourg\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003EParis\u003C\/addrLine\u003E\u003C\/address\u003E\u003C\/p\u003E\u003C!-- etc. --\u003E\u003C\/div\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cdiv type=\u0022envelope\u0022\u003E\u003Cpb\/\u003E\u003Cp\u003E\u003Caddress\u003E\u003CaddrLine\u003EMonsieur Delafon\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E notaire\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003E6 boulevard de Strasbourg\u003Cchoice\u003E\u003Csic\/\u003E\u003Ccorr\u003E,\u003C\/corr\u003E\u003C\/choice\u003E\u003C\/addrLine\u003E\u003CaddrLine\u003EParis\u003C\/addrLine\u003E\u003C\/address\u003E\u003C\/p\u003E\u003C!-- etc. --\u003E\u003C\/div\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E"
           }
         ]
       },
@@ -3481,7 +3481,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E"
           }
         ]
       },
@@ -3509,11 +3509,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Corg xml:id=\u0022org-0002\u0022 resp=\u0022#ML #JD\u0022\u003E\u003CorgName type=\u0022fullIndexEntryForm\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName\u003ER\u00e9giment de zouaves (\u003Cnum\u003E4\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment de zouaves\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003C\/org\u003E\u003C\/egXML\u003E"
+            "example": "\u003Corg xml:id=\u0022org-0002\u0022 resp=\u0022#ML #JD\u0022\u003E\u003CorgName type=\u0022fullIndexEntryForm\u0022\u003E\u003CorgName\u003EFrance\u003C\/orgName\u003E. \u003CorgName\u003EArm\u00e9e de terre\u003C\/orgName\u003E. \u003CorgName\u003ER\u00e9giment de zouaves (\u003Cnum\u003E4\u003C\/num\u003E)\u003C\/orgName\u003E\u003C\/orgName\u003E\u003CorgName type=\u0022proseForm\u0022\u003E4\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E r\u00e9giment de zouaves\u003C\/orgName\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003C\/org\u003E"
           }
         ]
       },
@@ -3539,7 +3539,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cresidence\u003EDomicili\u00e9 \u00e0 \u003CplaceName ref=\u0022FirstWorldWarWills-ListOfPlaces#pl-0071\u0022\u003EParis\u003C\/placeName\u003E, \u003Caddress\u003E\u003Cstreet\u003E\u003Cnum\u003E174\u003C\/num\u003E boulevard Saint-Germain\u003C\/street\u003E\u003Cdistrict\u003E6\u003Chi rend=\u0022superscript\u0022\u003Ee\u003C\/hi\u003E\u003C\/district\u003E\u003C\/address\u003E\u003C\/residence\u003E"
           }
         ]
       },
@@ -3567,11 +3567,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0009\u0022 type=\u0022city\u0022\u003E\u003C!-- une commune qui a chang\u00e9 de nom --\u003E\u003CplaceName when-iso=\u00221793\/1801\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar sur Ornain\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221801\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar-le-Duc\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.78333 5.16667\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3034911\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0009\u0022 type=\u0022city\u0022\u003E\u003C!-- une commune qui a chang\u00e9 de nom --\u003E\u003CplaceName when-iso=\u00221793\/1801\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar sur Ornain\u003C\/settlement\u003E\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221801\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EBar-le-Duc\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.78333 5.16667\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3034911\/\u003C\/idno\u003E\u003C\/place\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022place-0008\u0022 type=\u0022locality\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022locality\u0022\u003EBaleycourt\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003C!-- un lieu-dit dont la commune de rattachement a chang\u00e9 de nom --\u003E\u003Csettlement type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221801\/1970\u0022\u003EVerdun-sur-Meuse\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221970\/\u0022\u003EVerdun\u003C\/placeName\u003E\u003C\/settlement\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.1328 5.30437\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3035245\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022place-0008\u0022 type=\u0022locality\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022locality\u0022\u003EBaleycourt\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003C!-- un lieu-dit dont la commune de rattachement a chang\u00e9 de nom --\u003E\u003Csettlement type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221801\/1970\u0022\u003EVerdun-sur-Meuse\u003C\/placeName\u003E\u003CplaceName when-iso=\u00221970\/\u0022\u003EVerdun\u003C\/placeName\u003E\u003C\/settlement\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMeuse\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.1328 5.30437\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3035245\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3622,11 +3622,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EGruerie, \u003CgeogFeat\u003Ebois\u003C\/geogFeat\u003E de la\u003C\/geogName\u003E\u003C\/placeName\u003E\u003C\/egXML\u003E"
+            "example": "\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EGruerie, \u003CgeogFeat\u003Ebois\u003C\/geogFeat\u003E de la\u003C\/geogName\u003E\u003C\/placeName\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EBois-de-la-Grille\u003C\/geogName\u003E\u003C\/placeName\u003E\u003C\/egXML\u003E"
+            "example": "\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EBois-de-la-Grille\u003C\/geogName\u003E\u003C\/placeName\u003E"
           }
         ]
       },
@@ -3677,7 +3677,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EGruerie, \u003CgeogFeat\u003Ebois\u003C\/geogFeat\u003E de la\u003C\/geogName\u003E\u003C\/placeName\u003E\u003C\/egXML\u003E"
+            "example": "\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EGruerie, \u003CgeogFeat\u003Ebois\u003C\/geogFeat\u003E de la\u003C\/geogName\u003E\u003C\/placeName\u003E"
           }
         ]
       },
@@ -3703,11 +3703,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0015\u0022 type=\u0022forest\u0022\u003E\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EBois-de-la-Grille\u003C\/geogName\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Csettlement type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/1950\u0022\u003E Moronvilliers \u003C\/placeName\u003E\u003CplaceName when-iso=\u00221950\/\u0022\u003EPontfaverger-Moronvilliers \u003C\/placeName\u003E\u003C\/settlement\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMarne\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.29702 4.31657\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2986186\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0015\u0022 type=\u0022forest\u0022\u003E\u003CplaceName\u003E\u003CgeogName type=\u0022forest\u0022\u003EBois-de-la-Grille\u003C\/geogName\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Csettlement type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/1950\u0022\u003E Moronvilliers \u003C\/placeName\u003E\u003CplaceName when-iso=\u00221950\/\u0022\u003EPontfaverger-Moronvilliers \u003C\/placeName\u003E\u003C\/settlement\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EMarne\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E49.29702 4.31657\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2986186\/\u003C\/idno\u003E\u003C\/place\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0061\u0022 type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EMetzeral\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation when-iso=\u00221871\/1919-06-27\u0022\u003E\u003Cregion\u003EAlsace\u003C\/region\u003E\u003Ccountry\u003EEmpire d\u2019Allemagne\u003C\/country\u003E\u003C\/location\u003E\u003Clocation when-iso=\u00221919-06-28\/\u0022\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EHaut-Rhin\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.01044 7.07088\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2994157\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0061\u0022 type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EMetzeral\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation when-iso=\u00221871\/1919-06-27\u0022\u003E\u003Cregion\u003EAlsace\u003C\/region\u003E\u003Ccountry\u003EEmpire d\u2019Allemagne\u003C\/country\u003E\u003C\/location\u003E\u003Clocation when-iso=\u00221919-06-28\/\u0022\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003EAlsace-Champagne-Ardenne-Lorraine\u003C\/region\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EHaut-Rhin\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E48.01044 7.07088\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2994157\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3762,7 +3762,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0070\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022city\u0022\u003EParchim\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion\u003EMecklembourg-Pom\u00e9ranie-Occidentale\u003C\/region\u003E\u003Ccountry\u003EAllemagne\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E53.38153 10.72375\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2946821\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0070\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003Csettlement type=\u0022city\u0022\u003EParchim\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion\u003EMecklembourg-Pom\u00e9ranie-Occidentale\u003C\/region\u003E\u003Ccountry\u003EAllemagne\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E53.38153 10.72375\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2946821\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3788,7 +3788,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022pla-0056\u0022 type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EMaroeuil\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E50.32519 2.70504\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2995586\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022pla-0056\u0022 type=\u0022city\u0022\u003E\u003CplaceName when-iso=\u00221793\/\u0022\u003E\u003Csettlement type=\u0022city\u0022\u003EMaroeuil\u003C\/settlement\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003Cgeo\u003E50.32519 2.70504\u003C\/geo\u003E\u003C\/location\u003E\u003Cidno type=\u0022GeonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/2995586\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3835,7 +3835,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Cplace xml:id=\u0022place-0010\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003C!-- optionnellement : @when-iso ; dans ce cas, 2e placeName avec @when-iso --\u003E\u003Csettlement type=\u0022city\u0022\u003EAblain-Saint-Nazaire\u003C\/settlement\u003E\u003C!-- valeurs possibles de @type pour settlement : locality (= lieu-dit), city (= commune)--\u003E\u003C!-- valeurs possibles de @type pour geogName : mountain, forest, + cote?--\u003E\u003C!-- si geogName, placeName peut alors aussi contenir geogFeat --\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003C!--cas classique d\u0027une commune en France : country, region (avec un possible attr. type si country = France --\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003C!-- latitude + longitude --\u003E\u003Cgeo\u003E50.3932 2.7088\u003C\/geo\u003E\u003C\/location\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003Cbibl\u003E\u003Ctitle\/\u003E\u003C\/bibl\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3038763\/\u003C\/idno\u003E\u003C\/place\u003E\u003C\/egXML\u003E"
+            "example": "\u003Cplace xml:id=\u0022place-0010\u0022 type=\u0022city\u0022\u003E\u003CplaceName\u003E\u003C!-- optionnellement : @when-iso ; dans ce cas, 2e placeName avec @when-iso --\u003E\u003Csettlement type=\u0022city\u0022\u003EAblain-Saint-Nazaire\u003C\/settlement\u003E\u003C!-- valeurs possibles de @type pour settlement : locality (= lieu-dit), city (= commune)--\u003E\u003C!-- valeurs possibles de @type pour geogName : mountain, forest, + cote?--\u003E\u003C!-- si geogName, placeName peut alors aussi contenir geogFeat --\u003E\u003C\/placeName\u003E\u003Clocation\u003E\u003C!--cas classique d\u0027une commune en France : country, region (avec un possible attr. type si country = France --\u003E\u003Cregion type=\u0022FrenchDepartement\u0022\u003EPas-de-Calais\u003C\/region\u003E\u003Cregion type=\u0022FrenchRegion\u0022\u003ENord-Pas-de-Calais-Picardie\u003C\/region\u003E\u003Ccountry\u003EFrance\u003C\/country\u003E\u003C\/location\u003E\u003Clocation type=\u0022geographicalCoordinates\u0022\u003E\u003C!-- latitude + longitude --\u003E\u003Cgeo\u003E50.3932 2.7088\u003C\/geo\u003E\u003C\/location\u003E\u003Cnote type=\u0022history\u0022\u003E\u003Cp\/\u003E\u003C\/note\u003E\u003Cbibl\u003E\u003Ctitle\/\u003E\u003C\/bibl\u003E\u003Cidno type=\u0022geonamesURI\u0022\u003Ehttp:\/\/sws.geonames.org\/3038763\/\u003C\/idno\u003E\u003C\/place\u003E"
           }
         ]
       },
@@ -3861,11 +3861,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022centered\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022FirstWorldWarWills-ListOfPersons.xml#p-0001\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u00a0\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022centered\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022FirstWorldWarWills-ListOfPersons.xml#p-0001\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u00a0\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003C\/egXML\u003E"
+            "example": "\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E"
           }
         ]
       },
@@ -3903,11 +3903,11 @@
         "exemplum": [
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003Csigned rend=\u0022centered\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022FirstWorldWarWills-ListOfPersons.xml#p-0001\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u00a0\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E\u003C\/egXML\u003E"
+            "example": "\u003Csigned rend=\u0022centered\u0022\u003E\u003Cseg type=\u0022signature\u0022\u003E\u003CpersName ref=\u0022FirstWorldWarWills-ListOfPersons.xml#p-0001\u0022\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u00a0\u003Csurname\u003EChatin\u003C\/surname\u003E\u003C\/persName\u003E\u003C\/seg\u003E\u003C\/signed\u003E"
           },
           {
             "source": null,
-            "example": "\u003CegXML xmlns=\u0022http:\/\/www.tei-c.org\/ns\/Examples\u0022\u003E\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E\u003C\/egXML\u003E"
+            "example": "\u003CpersName type=\u0022fullIndexEntryForm\u0022\u003E\u003Csurname\u003EChatin\u003C\/surname\u003E\u003Cforename\u003EFernand\u003C\/forename\u003E\u003Cforename\u003ELucien\u003C\/forename\u003E\u003Cforename\u003EJules\u003C\/forename\u003E\u003Cforename\u003EMelchior\u003C\/forename\u003E\u003C\/persName\u003E"
           }
         ]
       },

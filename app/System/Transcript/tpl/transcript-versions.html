@@ -8,6 +8,7 @@
             <th>Utilisateur</th>
             <th>Date</th>
             <th>Vue</th>
+            <th ng-if="user.roles | contains:'ROLE_ADMIN'">ID</th>
         </tr>
         </thead>
         <tbody>
@@ -20,6 +21,7 @@
                 <span ng-if="$index == 0"><i class="fa fa-eye-slash"></i></span>
                 <a ng-if="$index != 0" title="Comparer" ng-click="transcriptArea.interaction.version.action(iVersion.id)"><i class="fa fa-file-o"></i></a>
             </td>
+            <th ng-if="user.roles | contains:'ROLE_ADMIN'">{{ iVersion.id }}</th>
         </tr>
         </tbody>
     </table>

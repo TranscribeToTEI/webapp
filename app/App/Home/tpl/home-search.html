@@ -6,5 +6,13 @@
         </div>
         <div class="col-lg-8 pr-lg-0" data-ng-include="'/webapp/app/App/Home/tpl/home-search-map.html'"></div>
     </div>
+    <div id="search-info" class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-secondary">
+                <strong>Dans notre corpus :</strong><br />
+                <strong>{{ count.todo }}</strong> testaments sont <span class="text-warning">à transcrire</span> <span class="text-danger">|</span> <strong>{{ count.validation }}</strong> sont <span class="text-secondary">en validation</span> <span class="text-danger">|</span> <strong>{{ count.validated }}</strong> ont d'ores et déjà été <span class="text-success">transcrits</span>
+            </div>
+        </div>
+    </div>
     <div data-ng-include="'/webapp/app/App/Home/tpl/home-search-results.html'"></div>
 </section>

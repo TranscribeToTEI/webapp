@@ -20,14 +20,14 @@ angular.module('transcript.admin.transcript.validation', ['ui.router'])
             },
             resolve: {
                 transcripts: function(TranscriptService) {
-                    return TranscriptService.getTranscriptsByStatus("validation", "id,adminValidation");
+                    return TranscriptService.getTranscriptsByStatus("validation", "id,adminValidation,name");
                 }
             }
         })
     }])
 
-    .controller('AdminTranscriptValidationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'transcripts', function($log, $rootScope, $scope, $http, $sce, $state, transcripts) {
+    .controller('AdminTranscriptValidationCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'transcripts', function($log, $rootScope, $scope, $http, $sce, $state, $filter, transcripts) {
         $scope.transcripts = transcripts;
-        $log.debug($scope.transcripts);
+        $scope.sorting = "updateDate";
     }])
 ;

@@ -71,7 +71,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.submit.form.continueBefore = $scope.transcript.continueBefore;
             $scope.submit.form.continueAfter = $scope.transcript.continueAfter;
             $scope.TranscriptService = TranscriptService;
-            $scope.updateTEIElementInformation = function() {
+            $scope.updateTEIElementInformation = function(context) {
+                console.log(context);
                 $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
                 $scope.functions.updateToolbar();
                 $scope.functions.updateAttributes();
@@ -218,26 +219,26 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                 $scope.teiInfo[tag.xml.name].attributes !== undefined &&
                                 $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr] !== undefined &&
                                 $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values !== undefined &&
-                                $scope.transcriptArea.toolbar.groups[tag.btn.id] === undefined &&
+                                $scope.transcriptArea.toolbar.groups[tag.id] === undefined &&
                                 $filter('filter')($scope.transcriptArea.toolbar.level2, {
                                     lType: "group",
-                                    id: tag.btn.id
+                                    id: tag.id
                                 }).length === 0)
                             {
-                                toUnIndex.push(tag.btn.id);
+                                toUnIndex.push(tag.id);
                                 tag.btn.view = false;
 
                                 /* Creation of a virtual group ------------------------------------------------------ */
-                                $scope.transcriptArea.toolbar.groups[tag.btn.id] = {
+                                $scope.transcriptArea.toolbar.groups[tag.id] = {
                                     name: tag.btn.label,
-                                    id: tag.btn.id,
+                                    id: tag.id,
                                     icon: tag.btn.icon,
                                     parent: false,
                                     order: tag.order,
                                     lType: "group",
                                     proviGroup: true
                                 };
-                                $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[tag.btn.id]);
+                                $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.groups[tag.id]);
                                 /* End: Creation of a virtual group ------------------------------------------------- */
 
                                 /* Creation of the attribute buttons ------------------------------------------------ */
@@ -245,7 +246,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                 for (let iPB in $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values) {
                                     let value = $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values[iPB];
 
-                                    $scope.transcriptArea.toolbar.tags[tag.btn.id + "-" + value.value] = {
+                                    $scope.transcriptArea.toolbar.tags[tag.id + "-" + value.value] = {
                                         btn: {
                                             id: btn + "-" + value.value,
                                             label: $filter('ucFirstStrict')(value.label),
@@ -253,7 +254,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                             title: $filter('ucFirstStrict')(value.label),
                                             icon: "",
                                             btn_class: "",
-                                            btn_group: tag.btn.id,
+                                            btn_group: tag.id,
                                             btn_is_group: false,
                                             allow_root: false,
                                             restrict_to_root: false,
@@ -288,7 +289,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                             children: ""
                                         }
                                     };
-                                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[tag.btn.id + "-" + value.value]);
+                                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[tag.id + "-" + value.value]);
                                     countNewButtons += 1;
                                     /* End: Creation of the attribute buttons --------------------------------------- */
                                 }
@@ -299,11 +300,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                 toUnIndex.forEach(function(id) {
                     $scope.transcriptArea.toolbar.level2.forEach(function(item) {
-                        if(item.btn !== undefined && item.btn.id === id) {
+                        if(item.btn !== undefined && item.id === id) {
                             item.btn.view = false;
                         }
                     });
-                    $scope.transcriptArea.toolbar.tags[id].btn.view = false;
+                    $filter('filter')($scope.transcriptArea.toolbar.tags, {id: id}, true)[0].btn.view = false;
                 });
 
                 // We update the enable status of groups of level2
@@ -374,7 +375,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function (editor) {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation('<');
                         });
                         return false;
                     }
@@ -385,7 +386,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function (editor) {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation('>');
                         });
                         return false;
                     }
@@ -396,7 +397,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function (editor) {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation('space');
                         });
                         return false;
                     }
@@ -415,7 +416,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
                             $scope.aceSession.getDocument().remove(new AceRange($scope.transcriptArea.ace.currentTag.startTag.start.row, $scope.transcriptArea.ace.currentTag.startTag.start.column - 1, $scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1));
                             $scope.$apply(function () {
-                                $scope.updateTEIElementInformation();
+                                $scope.updateTEIElementInformation('Enter');
                             });
                             $scope.aceEditor.getSelection().moveCursorTo($scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1);
                             $scope.aceEditor.focus();
@@ -433,7 +434,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation('EnterBis');
                         });
                     }
                 });
@@ -443,7 +444,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function (editor) {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation("Ctrl-Enter");
                         });
 
                         /* *replicateOnCtrlEnter insert:*
@@ -456,13 +457,13 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                             $scope.aceSession.insert(
                                 {row: row, column: column + 1},
-                                "\n" + $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name], "default")
+                                "\n" + $scope.functions.constructTag($filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0], "default")
                             );
                             $scope.aceEditor.getSelection().moveCursorTo(row + 1, 2 + $scope.transcriptArea.ace.currentTag.name.length);
                             $scope.aceEditor.focus();
                             $scope.$apply(function () {
                                 /* Computing of current tag value */
-                                $scope.updateTEIElementInformation();
+                                $scope.updateTEIElementInformation("Ctrl-EnterBis");
                             });
                         } else {
                             return false;
@@ -479,7 +480,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function () {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation("Left");
                         });
                         return false;
                     }
@@ -493,7 +494,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function () {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation("Right");
                         });
                         return false;
                     }
@@ -507,7 +508,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function () {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation("Up");
                         });
                         return false;
                     }
@@ -521,7 +522,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     exec: function () {
                         $scope.$apply(function () {
                             /* Computing of current tag value */
-                            $scope.updateTEIElementInformation();
+                            $scope.updateTEIElementInformation("Down");
                         });
                         return false;
                     }
@@ -556,7 +557,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                     $scope.$apply(function () {
                         // Computing of current tag value
-                        $scope.updateTEIElementInformation();
+                        $scope.updateTEIElementInformation("click");
                     });
                     return false;
                 }, false);
@@ -598,6 +599,13 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     /* Exercise Management -------------------------------------------------------------------------- */
                 });
             };
+
+            $scope.$watch('aceEditor.getSelectedText', function () {
+                if($scope.aceEditor.getSelectedText() !== null && $scope.aceEditor.getSelectedText() !== '') {
+                    $scope.updateTEIElementInformation("selection");
+                }
+                /* Exercise Management -------------------------------------------------------------------------- */
+            });
 
             /**
              * Undo management
@@ -657,7 +665,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 });
                 $scope.aceEditor.clearSelection();
                 $scope.aceEditor.focus();
-                $scope.updateTEIElementInformation();
+                $scope.updateTEIElementInformation("goToParent");
             };
             /* XML TEI breadcrumb Management ---------------------------------------------------------------------------- */
 
@@ -711,8 +719,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     } else {
                         tagInsert = "<" + tag.xml.name + requiredAttributes + ">";
                         for (let subTag in tag.xml.contains) {
-                            console.log(subTag);
-                            tagInsert += $scope.functions.constructTag($scope.transcriptArea.toolbar.tags[subTag], tag.xml.contains[subTag], tag, null);
+                            tagInsert += $scope.functions.constructTag($filter('filter')($scope.transcriptArea.toolbar.tags, {id: subTag}, true)[0], tag.xml.contains[subTag], tag, null);
                         }
                         tagInsert += "</" + tag.xml.name + ">";
                     }
@@ -722,10 +729,10 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 return tagInsert;
             };
 
-            $scope.transcriptArea.ace.addTag = function(tagId, attributes) {
+            $scope.transcriptArea.ace.addTag = function(tagName, attributes) {
                 if(attributes === "null") {attributes = null;}
                 attributes = $scope.decodeAttributes(attributes);
-                let tag = $scope.transcriptArea.toolbar.tags[tagId],
+                let tag = $filter('filter')($scope.transcriptArea.toolbar.tags, {id: tagName}, true)[0],
                     defaultAddChar = 2;
 
                 let tagInsert = $scope.functions.constructTag(tag, "default", null, attributes),
@@ -735,10 +742,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 $scope.aceEditor.insert(tagInsert);
                 $scope.aceEditor.getSelection().moveCursorTo(lineNumber, column);
                 $scope.aceEditor.focus();
-                $scope.updateTEIElementInformation();
+                $scope.updateTEIElementInformation("addTag");
 
                 // If this is a level 1 tag, we split the line to indent the code
-                if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].btn !== undefined && $scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].btn.level === 1) {
+                let currentTagToolbar = $filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0];
+                if (currentTagToolbar !== undefined && currentTagToolbar.btn !== undefined && currentTagToolbar.btn.level === 1) {
                     $scope.aceEditor.splitLine();
                     $scope.aceEditor.getSelection().moveCursorTo(lineNumber + 1, 4);
                     $scope.aceEditor.focus();
@@ -799,7 +807,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         column: $scope.transcriptArea.ace.currentTag.startTag.end.column - 1
                     }, attributeInsert);
                     $scope.aceEditor.focus();
-                    $scope.updateTEIElementInformation();
+                    $scope.updateTEIElementInformation("addAttribute");
                 }
             };
             /* End : Attributes Management ------------------------------------------------------------------------------ */
@@ -1150,14 +1158,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.taxonomy.testators = response;
 
                     for(let iT in $scope.taxonomy.testators) {
-                        $scope.taxonomy.testators[iT]['name'] = $scope.taxonomy.testators[iT]['indexName']
+                        $scope.taxonomy.testators[iT]['name'] = $scope.taxonomy.testators[iT]['indexName'];
                     }
                 });
                 TaxonomyService.getTaxonomyEntities("places", "index").then(function(response) {
                     $scope.taxonomy.places = response;
 
                     for(let iT in $scope.taxonomy.places) {
-                        $scope.taxonomy.places[iT]['name'] = $scope.taxonomy.places[iT]['indexName']
+                        $scope.taxonomy.places[iT]['name'] = $scope.taxonomy.places[iT]['indexName'];
                     }
                 });
                 TaxonomyService.getTaxonomyEntities("military-units", "index").then(function(response) {
@@ -1183,11 +1191,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                             break;
                         case "places":
                             $log.debug("places");
-                            for (let iEntity in $scope.taxonomy.places) {
-                                if ($scope.taxonomy.places[iEntity].names.length > 0) {
-                                    $scope.taxonomy.places[iEntity].name = $scope.taxonomy.places[iEntity].names[0].name;
-                                }
-                            }
                             $scope.transcriptArea.interaction.taxonomy.entities = $scope.taxonomy.places;
                             $scope.transcriptArea.interaction.taxonomy.values = SearchService.dataset($scope.taxonomy.places, "name", "string");
                             $scope.transcriptArea.interaction.taxonomy.dataType = "places";
@@ -1388,7 +1391,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     status: state,
                     updateComment: "Changement de statut pour : " + state
                 }, $scope.transcript.id, "id,pageTranscript,versioning").then(function (data) {
-                    $scope.transcript = data;
+                    $scope.transcript.status = state;
                     $scope.admin.status.loading = false;
                 });
             };
@@ -1398,6 +1401,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
              */
             $scope.admin.validation.accept.action = function () {
                 $scope.admin.validation.accept.loading = true;
+                $scope.transcript.content = $scope.transcriptArea.ace.area;
                 return TranscriptService.patchTranscript(
                     {
                         "content": $scope.transcriptArea.ace.area,
@@ -1406,7 +1410,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     }, $scope.transcript.id, "id,pageTranscript,versioning"
                 ).then(function (response) {
                     $log.debug(response);
-                    $scope.transcript = response;
+                    $scope.transcript.status = "validated";
                     $scope.admin.validation.accept.loading = false;
                     $state.go('transcript.app.edition', {idEntity: $scope.entity.id, idResource: $scope.resource.id});
                 });
@@ -1420,13 +1424,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 return TranscriptService.patchTranscript(
                     {
                         "content": $scope.transcriptArea.ace.area,
-                        "updateComment": "Refuse validation",
+                        "updateComment": "Validation refusée: transcription rouverte à contribution",
                         "status": "transcription"
                     }, $scope.transcript.id, "id,pageTranscript,versioning"
                 ).then(function (response) {
                     $log.debug(response);
-                    $scope.transcript = response;
+                    $scope.transcript.status = "transcription";
                     $scope.admin.validation.refuse.loading = false;
+                    $state.go('transcript.app.edition', {idEntity: $scope.entity.id, idResource: $scope.resource.id});
                 });
             };
             /* Admin Management ----------------------------------------------------------------------------------------- */

@@ -1,0 +1,20 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+<main class="container" role="main">
+    <h1 class="page-heading">Liste des emails</h1>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <label for="textarea" class="form-control-label">Liste des emails</label>
+                <textarea id="textarea" class="form-control" rows="40">{{ emails }}</textarea>
+            </form>
+        </div>
+    </div>
+</main>

@@ -3,7 +3,7 @@
 angular.module('transcript.system.comment', ['ui.router'])
     .controller('SystemCommentCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', 'CommentService', 'thread',  function($log, $rootScope, $scope, $http, $sce, $state, $timeout, CommentService, thread) {
         $scope.threadContainer = thread;
-        $log.debug($scope.threadContainer);
+        console.log($scope.threadContainer);
 
         $scope.comment = {
             action: {

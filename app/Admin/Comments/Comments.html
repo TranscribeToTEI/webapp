@@ -28,7 +28,7 @@
                                 <button class="btn btn-primary" type="button" ng-click="read(log.id)" data-toggle="collapse" data-target="#collapseComment-{{log.id}}" aria-expanded="false" aria-controls="collapseComment-{{log.id}}" title="Afficher le commentaire"><i class="fa fa-eye"></i></button>
                             </div>
                             <div>
-                                <span class="text-primary" ng-if="log.isReadByAdmin == false"><i class="fa fa-circle" data-toggle="tooltip" data-placement="top" title="Commentaire non lu"></i> </span>Commentaire de <strong>{{ log.createUser.name }}</strong> sur <strong>CONTENU</strong>
+                                <span class="text-primary" ng-if="log.isReadByAdmin == false"><i class="fa fa-circle" data-toggle="tooltip" data-placement="top" title="Commentaire non lu"></i> </span>Commentaire de <strong>{{ log.createUser.name }}</strong> - <a ng-click="getLink(log)">Accéder au contenu</a>
                             </div>
                         </div>
                         <div class="collapse" id="collapseComment-{{log.id}}">

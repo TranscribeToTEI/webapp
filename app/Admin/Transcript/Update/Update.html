@@ -1,0 +1,86 @@
+<div class="container">
+    <div ncy-breadcrumb></div>
+    <div flash-alert data-active-class="show alert" class="fade" data-duration="10000">
+        <!-- Manually hide the alert with `hide()` -->
+        <button type="button" class="close" ng-click="hide()">&times;</button>
+        <span class="alert-message" ng-bind-html="flash.message | trustAsHtml"></span>
+    </div>
+</div>
+<main class="container" role="main">
+    <h1 class="page-heading">Modification XML des transcriptions</h1>
+
+    <div class="alert alert-danger">
+        Cette page est à utiliser lorsque un problème suvient avec l'interface de transcription et qu'elle est inutilisable à cause du contenu de la transcription. <br />
+        Vous pouvez alors éditer la transcription en la demandant par son identifiant unique (dernière séquence de chiffres de l'URL de la page d'édition ou de transcription).<br />
+        Puis vérifiez que le XML est bien formé avant de le ressoumettre.
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="alert alert-info">
+                <form class="row form-inline">
+                    <label class="col-lg-4">
+                        Rechercher dans la liste :
+                    </label>
+                    <div class="col-lg-8">
+                        <div class="input-group">
+                            <input class="form-control form-control-sm" ng-model="search.value" placeholder="Rechercher une valeur" />
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-secondary" type="button" ng-click="search.submit()">Rechercher</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-12" ng-if="context === 'edit'">
+            <div class="row" style="height: 500px;">
+                <div class="col-md-6">
+                    <div ui-ace="{
+                        mode: 'xml',
+                        onLoad: aceLoaded,
+                        onChange: aceChanged,
+                        useWrapMode: true
+                        }"  style="height: 500px;" ng-model="edition.transcript.content">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card viewer bg-dark" style="height: 500px;">
+                        <div class="h-100">
+                            <seadragon options="openseadragon" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="transcript-submit bg-lighter">
+                    <div class="card-deck no-gutters">
+                        <div class="card col-md-10">
+                            <h3 class="card-header bg-secondary">Validation</h3>
+                            <div class="card-body ml-4">
+                                <form>
+                                    <label class="mt-2"><span class="red-color"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span> {{ user.name }}</label>
+                                    <p for="app-transcript-edit-submit-comment" class="sr-only">Description de votre contribution</p>
+                                    <div id="app-transcript-edit-submit-comment-group" class="form-group">
+                                        <input ng-model="transcript.submit.comment" type="text" class="form-control form-control-sm" id="app-transcript-edit-submit-comment" name="app-transcript-edit-submit-comment" placeholder="Pouvez-vous décrire votre contribution en quelques mots ?" maxlength="250" />
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card col-md-2 alert-primary">
+                            <div class="card-footer">
+                                <a role="button" ng-click="transcript.action()" class="btn btn-primary">
+                                    <span ng-if="transcript.submit.loading == false && transcript.submit.success == false">enregistrer <i class="fa fa-check-square-o" aria-hidden="true"></i></span>
+                                    <span ng-if="transcript.submit.loading == true && transcript.submit.success == false">enregistrement <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                                    <span ng-if="transcript.submit.loading == false && transcript.submit.success == true">enregistré <i class="fa fa-check"></i></span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

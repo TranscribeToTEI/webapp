@@ -26,9 +26,9 @@ groups:
         order: 4
 tags:
     # Level 1 :
-    head:
+    -
+        id: "head"
         btn:
-            id: "head"
             label: false
             title: "Marque un en-tête"
             label_forced: true
@@ -58,9 +58,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    dateline:
+    -
+        id: "dateline"
         btn:
-            id: "dateline"
             label: false
             title: "Ajouter une ligne de date"
             label_forced: true
@@ -90,9 +90,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    p:
+    -
+        id: "p"
         btn:
-            id: "p"
             label: false
             title: "Marque un paragraphe"
             label_forced: true
@@ -122,9 +122,9 @@ tags:
             replicateOnCtrlEnter: true
         complex_entry: 
             enable: false
-    list:
+    -
+        id: "list"
         btn:
-            id: "list"
             label: false
             title: "Marque une liste"
             label_forced: true
@@ -152,9 +152,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    signed:
+    -
+        id: "signed"
         btn:
-            id: "signed"
             label: false
             title: "Marque une signature"
             label_forced: true
@@ -184,9 +184,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    postscript:
+    -
+        id: "postscript"
         btn:
-            id: "postscript"
             label: false
             title: "Marque un post-scriptum"
             label_forced: true
@@ -216,9 +216,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    space:
+    -
+        id: "space"
         btn:
-            id: "space"
             label: false
             title: "Marque un espace"
             label_forced: true
@@ -248,9 +248,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    metamark:
+    -
+        id: "metamark"
         btn:
-            id: "metamark"
             label: false
             title: "Signaler une marque"
             label_forced: true
@@ -281,9 +281,9 @@ tags:
         complex_entry: 
             enable: false
     # Lvl2
-    hi:
+    -
+        id: "hi"
         btn:
-            id: "hi"
             label: "Mise en forme du texte"
             title: "Marquer le texte"
             label_forced: true
@@ -312,9 +312,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    item:
+    -
+        id: "item"
         btn:
-            id: "item"
             label: false
             title: "Item dans une liste"
             label_forced: false
@@ -340,9 +340,9 @@ tags:
             replicateOnCtrlEnter: true
         complex_entry: 
             enable: false
-    lb:
+    -
+        id: "lb"
         btn:
-            id: "lb"
             label: false
             title: "Changement de ligne"
             label_forced: false
@@ -371,9 +371,9 @@ tags:
         complex_entry: 
             enable: false
     # Particularité de l'écriture :
-    choice:
+    -
+        id: "choice"
 #        btn:
-#            id: "choice"
 #            label: "Particularité de l'écriture"
 #            label_forced: true
 #            title: "Consigner un micro-phénomène de l'écriture"
@@ -405,9 +405,9 @@ tags:
         complex_entry: 
             enable: true
             children: "(abbr&&expan)||(sic&&corr)||(orig&&reg)"
-    choiceAbbr:
+    -
+        id: "choiceAbbr"
         btn:
-            id: "choiceAbbr"
             label: "Marquer une abréviation"
             label_forced: true
             title: "Signaler la présence d'une abréviation"
@@ -443,9 +443,9 @@ tags:
         complex_entry:
             enable: true
             children: ""
-    abbr:
+    -
+        id: "abbr"
 #        btn:
-#            id: "abbr"
 #            label: false
 #            label_forced: false
 #            title: "Signaliser la présence d'une abbréviation"
@@ -474,9 +474,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    expan:
+    -
+        id: "expan"
 #        btn:
-#            id: "expan"
 #            label: false
 #            label_forced: false
 #            title: "Déplier une abbréviation"
@@ -506,9 +506,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    choiceSic:
+    -
+        id: "choiceSic"
         btn:
-            id: "choiceSic"
             label: "Marquer une faute"
             label_forced: true
             title: "Signaliser une faute"
@@ -544,9 +544,9 @@ tags:
         complex_entry:
             enable: true
             children: ""
-    sic:
+    -
+        id: "sic"
 #        btn:
-#            id: "sic"
 #            label: false
 #            label_forced: false
 #            title: "Signaler une faute"
@@ -576,9 +576,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    corr:
+    -
+        id: "corr"
 #        btn:
-#            id: "corr"
 #            label: false
 #            label_forced: false
 #            title: "Correction d'une faute"
@@ -608,9 +608,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-#    choiceOrig:
+#   -
+#        id: "choiceOrig"
 #        btn:
-#            id: "choiceOrig"
 #            label: "Marquer une forme ancienne"
 #            label_forced: true
 #            title: "Signaliser une forme ancienne"
@@ -644,9 +644,9 @@ tags:
 #        complex_entry:
 #            enable: true
 #            children: ""
-#    orig:
+#    -
+#        id: "orig"
 #        btn:
-#            id: "orig"
 #            label: false
 #            label_forced: false
 #            title: "Marquer une forme ancienne"
@@ -675,9 +675,9 @@ tags:
 #            replicateOnCtrlEnter: false
 #        complex_entry:
 #            enable: false
-#    reg:
+#    -
+#        id: "reg"
 #        btn:
-#            id: "reg"
 #            label: false
 #            label_forced: false
 #            title: "Préciser une forme correcte"
@@ -707,9 +707,9 @@ tags:
 #            replicateOnCtrlEnter: false
 #        complex_entry:
 #            enable: false
-    surplus:
+    -
+        id: "surplus"
         btn:
-            id: "surplus"
             label: false
             title: "Marquer le texte comme superflu"
             label_forced: false
@@ -745,9 +745,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    add:
+    -
+        id: "add"
         btn:
-            id: "add"
             label: false
             title: "Marquer le texte comme ajouté"
             label_forced: false
@@ -777,9 +777,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    del:
+    -
+        id: "del"
         btn:
-            id: "del"
             label: false
             title: "Marquer le texte comme supprimé"
             label_forced: false
@@ -806,9 +806,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    subst:
+    -
+        id: "subst"
         btn:
-            id: "subst"
             label: false
             title: "Marquer le texte comme remplacé"
             label_forced: false
@@ -842,9 +842,9 @@ tags:
             enable: true
             children: "del&&add"
     # Groupe renderingDifficulties
-    damage:
+    -
+        id: "damage"
         btn:
-            id: "damage"
             label: false
             title: "Le texte est endommagé"
             label_forced: false
@@ -876,9 +876,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    supplied:
+    -
+        id: "supplied"
         btn:
-            id: "supplied"
             label: false
             title: "Texte restitué par le transcripteur"
             label_forced: false
@@ -910,9 +910,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    unclear:
+    -
+        id: "unclear"
         btn:
-            id: "unclear"
             label: false
             title: "Texte transcrit incertain"
             label_forced: false
@@ -944,9 +944,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    gap:
+    -
+        id: "gap"
         btn:
-            id: "gap"
             label: false
             title: "Présence d'un manque dans la transcription"
             label_forced: false
@@ -981,9 +981,9 @@ tags:
             enable: false
 
     # sémantique :
-    date:
+    -
+        id: "date"
         btn:
-            id: "date"
             label: false
             title: "Marquer une date"
             label_forced: false
@@ -1013,9 +1013,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    persName:
+    -
+        id: "persName"
         btn:
-            id: "persName"
             label: false
             title: "Marquer un nom de personne"
             label_forced: false
@@ -1045,9 +1045,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    surname:
+    -
+        id: "surname"
         btn:
-            id: "surname"
             label: false
             title: "Marquer un nom de famille"
             label_forced: false
@@ -1077,9 +1077,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    placeName:
+    -
+        id: "placeName"
         btn:
-            id: "placeName"
             label: false
             title: "Marquer un nom de lieu"
             label_forced: false
@@ -1109,9 +1109,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    address:
+    -
+        id: "address"
         btn:
-            id: "address"
             label: false
             title: "Baliser une adresse"
             label_forced: true
@@ -1143,9 +1143,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    addrLine:
+    -
+        id: "addrLine"
         btn:
-            id: "addrLine"
             label: false
             title: "Baliser une ligne d'adresse postale dans le corps de la transcription"
             label_forced: true
@@ -1173,9 +1173,9 @@ tags:
             replicateOnCtrlEnter: true
         complex_entry: 
             enable: false
-    orgName:
+    -
+        id: "orgName"
         btn:
-            id: "orgName"
             label: false
             title: "Marquer un nom d'organisation"
             label_forced: false
@@ -1205,9 +1205,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    term:
+    -
+        id: "term"
         btn:
-            id: "term"
             label: false
             title: "Marquer un terme"
             label_forced: false
@@ -1237,9 +1237,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    foreign:
+    -
+        id: "foreign"
         btn:
-            id: "foreign"
             label: false
             title: "Marquer une langue autre que le français"
             label_forced: false
@@ -1269,9 +1269,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    seg:
+    -
+        id: "seg"
         btn:
-            id: "seg"
             label: false
             title: "Segment de texte"
             label_forced: false
@@ -1301,9 +1301,9 @@ tags:
             enable: false
 
     # éléments pour les notes d'apparat critique ou les notes sur le contenu du testament :
-    app:
+    -
+        id: "app"
         btn:
-            id: "app"
             label: false
             title: "Note d'apparat critique"
             label_forced: false
@@ -1338,9 +1338,9 @@ tags:
         complex_entry: 
             enable: true
             children: "lem&&note"
-    ref:
+    -
+        id: "ref"
         btn:
-            id: "ref"
             label: false
             title: "Pointer vers une note sur le contenu"
             label_forced: false
@@ -1368,9 +1368,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
-    lem:
+    -
+        id: "lem"
 #        btn:
-#            id: "lem"
 #            label: false
 #            title: "Leçon textuelle"
 #            label_forced: false
@@ -1398,10 +1398,10 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry:
             enable: false
-    note:
+    -
     # Note est volontairement au dessous pour permettre l'encodage de app
+        id: "note"
         btn:
-            id: "note"
             label: false
             title: "Note du testateur"
             label_forced: false
@@ -1430,9 +1430,9 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry:
             enable: false
-#    bibl:
+#    -
+#        id: "bibl"
 #        btn:
-#            id: "bibl"
 #            label: false
 #            title: "Référence bibliographique"
 #            label_forced: false
