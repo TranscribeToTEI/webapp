@@ -13,7 +13,8 @@
         <div class="col-lg-7 col-md-9">
             <h2><a ui-sref="transcript.app.content({ id: article.id })">{{ article.title }}</a></h2>
             <div ng-bind-html="article.abstract | trustAsHtml"></div>
-            <small class="text-muted">Publié le <span ng-bind="article.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></small>
+            <small class="text-muted" ng-if="article.createDate === article.updateDate">Publié le <span ng-bind="article.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></small>
+            <small class="text-muted" ng-if="article.createDate !== article.updateDate">Mis à jour le <span ng-bind="article.updateDate |  date:'dd/MM/yyyy à HH:mm'"></span></span></small>
             <div class="text-right mt-1"><a ui-sref="transcript.app.content({ id: article.id })" class="btn btn-sm btn-primary">Lire</a></div>
         </div>
     </div>

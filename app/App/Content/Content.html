@@ -34,7 +34,10 @@
                         <div class="mt-1" ng-if="content.createUser.biography !== null" ng-bind="content.createUser.biography"></div>
                     </div>
                 </div>
-                <div class="col text-md-right px-2 mt-2 mt-md-0">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></div>
+                <div class="col text-md-right px-2 mt-2 mt-md-0">
+                    <span ng-if="content.createDate === content.updateDate">Publié le <span ng-bind="content.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span>
+                    <span ng-if="content.createDate !== content.updateDate">Mis à jour le <span ng-bind="content.updateDate |  date:'dd/MM/yyyy à HH:mm'"></span></span>
+                </div>
             </div>
             <div class="text-justify my-2 pr-md-3" ng-bind-html="content.content | trustAsHtml"></div>
             <div class="mt-5" ng-if="content.enableComments == true" ui-view="comment"></div>
@@ -43,7 +46,7 @@
             <img src="{{ content.illustration | imageRender }}" class="img-fluid" alt="Illustration de {{ content.title }}" title="{{ content.title }}" ng-if="content.illustration != '' && content.illustration != null" />
             <div class="card" ng-if="content.type == 'blogContent'">
                 <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="iContent in contents | filter:{type: 'blogContent'}" ng-if="iContent.type == 'blogContent'">
+                    <li class="list-group-item" ng-repeat="iContent in contents">
                         <a ui-sref="transcript.app.content({ id: iContent.id })" ng-class="{'active': content.id === iContent.id}" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
                         <span ng-if="content.id === iContent.id">{{ iContent.title }}</span>
                     </li>

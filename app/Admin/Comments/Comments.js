@@ -22,32 +22,39 @@ angular.module('transcript.admin.comments', ['ui.router'])
                 resolve: {
                     logs: function(CommentLogService) {
                         return CommentLogService.getLogs();
+                    },
+                    notRead: function(CommentLogService) {
+                        return CommentLogService.getLogs(false, true);
                     }
                 }
             })
     }])
 
-    .controller('AdminCommentsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'CommentLogService', 'logs', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, CommentLogService, logs) {
+    .controller('AdminCommentsCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', '$transition$', 'CommentLogService', 'logs', 'notRead', function($log, $rootScope, $scope, $http, $sce, $state, $filter, $transition$, CommentLogService, logs, notRead) {
         $scope.logContainers = logs;
+        $scope.notReadCounter = notRead;
         console.log($scope.logContainers);
 
         $scope.getLink = function(log) {
             console.log(log._embedded.content.type);
+            let url = "";
             if(log._embedded.content.type === "content") {
-                $state.go('transcript.app.content', {id: log._embedded.content.id});
+                url = $state.href('transcript.app.content', {id: log._embedded.content.id});
             } else if(log._embedded.content.type === "edition") {
-                $state.go('transcript.app.edition', {idResource: log._embedded.content.id, idEntity: log._embedded.content.entity});
+                url = $state.href('transcript.app.edition', {idResource: log._embedded.content.id, idEntity: log._embedded.content.entity});
             } else if(log._embedded.content.type === "entity") {
-                $state.go('transcript.app.entity', {id: log._embedded.content.id});
+                url = $state.href('transcript.app.entity', {id: log._embedded.content.id});
             } else if(log._embedded.content.type === "military-unit") {
-                $state.go('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "military-units"});
+                url = $state.href('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "military-units"});
             } else if(log._embedded.content.type === "place") {
-                $state.go('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "places"});
+                url = $state.href('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "places"});
             } else if(log._embedded.content.type === "testator") {
-                $state.go('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "testators"});
+                url = $state.href('transcript.app.taxonomy.view', {id: log._embedded.content.id, type: "testators"});
             } else if(log._embedded.content.type === "trainingContent") {
-                $state.go('transcript.admin.training.view', {id: log._embedded.content.id});
+                url = $state.href('transcript.admin.training.view', {id: log._embedded.content.id});
             }
+
+            window.open(url,'_blank');
         };
 
         $scope.read = function(id) {
@@ -69,6 +76,24 @@ angular.module('transcript.admin.comments', ['ui.router'])
                 return response;
             });
         }
+
+        /* ---------------------------------------------------------------------------------------------------------- */
+        /* Pagination system */
+        /* ---------------------------------------------------------------------------------------------------------- */
+        $scope.itemsPerPage = 100;
+        $scope.$watch('logContainers', function() {
+            $scope.totalItems = $scope.logContainers.length;
+            $scope.currentPage = 1;
+        });
+
+        $scope.setPage = function (pageNo) {
+            $scope.currentPage = pageNo;
+        };
+
+        $scope.pageChanged = function() {
+            $log.debug('Page changed to: ' + $scope.currentPage);
+        };
+        /* ---------------------------------------------------------------------------------------------------------- */
 
     }])
 ;

@@ -34,7 +34,7 @@
                                 <span class="custom-control-label">Activer SmartTEI</span>
                             </label>
                         </div>
-                        <small class="form-text text-muted">SmartTEI améliore votre expérience utilisateur en automatisant certaines tâches d'encodage de vos transcriptions en TEI comme l'ajout de balise <code>&lt;lb /&gt;</code> lorsque vous faites un retour à la ligne.</small>
+                        <small class="form-text text-muted">SmartTEI améliore votre expérience utilisateur en automatisant certaines tâches d'encodage de vos transcriptions en TEI comme l'ajout de balise <code>&lt;lb/&gt;</code> lorsque vous faites un retour à la ligne.</small>
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
@@ -53,6 +53,15 @@
                             </label>
                         </div>
                         <small class="form-text text-muted">Lorsque vous insérez une balise dont nous considérons la structure complexe, l'interface charge une page d'aide afin de vous orienter.</small>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label class="custom-control custom-checkbox">
+                                <input ng-model="form.notificationTranscription" class="custom-control-input" type="checkbox">
+                                <span class="custom-control-label">Recevoir une notification par email lorsque l'une de mes transcriptions est acceptée ou refusée.</span>
+                            </label>
+                        </div>
+                        <small class="form-text text-muted">Si vous ne souhaitez pas recevoir d'email à ce propos, vous recevrez une notification en message privé directement sur la plateforme.</small>
                     </div>
                     <div class="text-right">
                         <a ui-sref="transcript.app.user.profile({id: user.id})" class="btn btn-sm btn-primary">Retour au profil</a>

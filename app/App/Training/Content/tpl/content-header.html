@@ -23,7 +23,10 @@
 		        <strong><a ui-sref="transcript.app.user.profile({id: user.id})">{{ user.name }}</a></strong>
 		        <div class="mt-1" ng-if="user.biography != null" ng-bind="user.biography"></div>
 		    </div>
-		    <div class="col ml-auto text-md-right mt-2 mt-md-0" style="white-space: nowrap;">Publié le <span ng-bind="trainingContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></div>
+		    <div class="col ml-auto text-md-right mt-2 mt-md-0" style="white-space: nowrap;">
+				<span ng-if="trainingContent.createDate === trainingContent.updateDate">Publié le <span ng-bind="trainingContent.createDate |  date:'dd/MM/yyyy à HH:mm'"></span></span>
+				<span ng-if="trainingContent.createDate !== trainingContent.updateDate">Mis à jour le <span ng-bind="trainingContent.updateDate |  date:'dd/MM/yyyy à HH:mm'"></span></span>
+			</div>
 	    </div>
 	</div>	    
 </div>

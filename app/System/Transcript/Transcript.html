@@ -30,6 +30,7 @@
         <div ng-if="transcriptConfig.isVersioning == true" ng-include="'/webapp/app/System/Transcript/tpl/transcript-versions.html'"></div>
     </div>
     <div class="col-md-6 mt-3">
+        <div ng-if="(user.roles | contains:'ROLE_ADMIN') && transcript.status === 'validation'" ng-include="'/webapp/app/System/Transcript/tpl/transcript-validation.html'"></div>
         <div ui-view="comment" ng-if="transcriptConfig.isComments == true" ></div>
     </div>
 </div>

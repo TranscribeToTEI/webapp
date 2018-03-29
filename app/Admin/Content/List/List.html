@@ -21,6 +21,7 @@
                     <th>Status</th>
                     <th>Author</th>
                     <th>Date</th>
+                    <th>MàJ</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                     <td>{{ content.status }}</td>
                     <td>{{ content.author.name }}</td>
                     <td data-ng-bind="content.createDate | date:'dd-MM-yyyy HH:mm'"></td>
+                    <td data-ng-bind="content.updateDate | date:'dd-MM-yyyy HH:mm'"></td>
                 </tr>
                 </tbody>
             </table>

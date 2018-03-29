@@ -8,19 +8,6 @@
 	<div class="col-md-6 offset-md-6">
 		<nav>
 			<ul class="nav nav-pills float-right">
-                <li class="nav-item" data-ng-if="transcript.status == 'validation'">
-                    <a data-ng-click="admin.validation.accept.action()" class="nav-link bg-success">
-                        <span data-ng-if="admin.validation.accept.loading == false">Valider <i class="fa fa-check"></i></span>
-                        <span data-ng-if="admin.validation.accept.loading == true">Valider <i class="fa fa-spin fa-circle-o-notch"></i></span>
-                    </a>
-                </li>
-                <li class="nav-item" data-ng-if="transcript.status == 'validation'">
-                    <a data-ng-click="admin.validation.refuse.action()" class="nav-link bg-danger">
-                        <span data-ng-if="admin.validation.refuse.loading == false">Refuser <i class="fa fa-remove"></i></span>
-                        <span data-ng-if="admin.validation.refuse.loading == true">Refuser <i class="fa fa-spin fa-circle-o-notch"></i></span>
-                    </a>
-                </li>
-
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle"  role="button" id="resources-list-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i> Autres pages</a>
                     <ul class="dropdown-menu" aria-labelledby="resources-list-menu">

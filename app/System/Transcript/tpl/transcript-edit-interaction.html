@@ -129,8 +129,9 @@
         <div id="div-interaction-live" ng-if="transcriptArea.interaction.status == 'live'">
             <div id="div-container-encode">
                 <div class="card">
-                    <div class="card-body" ng-if="(transcriptConfig.isExercise === false || transcriptConfig.isLiveRender === true) && (transcriptArea.interaction.live.content !== '' && transcriptArea.interaction.live.content !== null)" compile="transcriptArea.interaction.live.content"></div>
-                    <div class="card-body" ng-if="(transcriptConfig.isExercise === false || transcriptConfig.isLiveRender === true) && (transcriptArea.interaction.live.content === '' || transcriptArea.interaction.live.content === null)"><div class="alert alert-primary">Commencez à transcrire ci-contre pour visualiser votre travail.</div></div>
+                    <div class="card-body" ng-if="(transcriptConfig.isExercise === false || transcriptConfig.isLiveRender === true) && (transcriptArea.interaction.live.content !== '' && transcriptArea.interaction.live.content !== null)  && transcriptArea.interaction.live.content !== false" compile="transcriptArea.interaction.live.content"></div>
+                    <div class="card-body" ng-if="(transcriptConfig.isExercise === false || transcriptConfig.isLiveRender === true) && (transcriptArea.interaction.live.content === '' || transcriptArea.interaction.live.content === null)  && transcriptArea.interaction.live.content !== false"><div class="alert alert-primary">Commencez à transcrire ci-contre pour visualiser votre travail.</div></div>
+                    <div class="card-body" ng-if="transcriptArea.interaction.live.content === false"><div class="alert alert-danger"><i class="fa fa-warning"></i><br />Votre transcription contient probablement des erreurs d'encodage.<br />Nous ne sommes pas en mesure de l'afficher.</div></div>
                     <div class="card-body" ng-if="transcriptConfig.isExercise === true && transcriptConfig.isLiveRender === false">
                         <div class="alert alert-info">Le rendu est désactivé.</div>
                     </div>

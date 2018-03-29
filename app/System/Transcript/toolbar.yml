@@ -475,6 +475,20 @@ tags:
         complex_entry: 
             enable: false
     -
+        id: "abbrShort"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "abbr"
+        xml:
+            name: "abbr"
+            unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
+    -
         id: "expan"
 #        btn:
 #            label: false
@@ -577,6 +591,20 @@ tags:
         complex_entry: 
             enable: false
     -
+        id: "sicShort"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "sic"
+        xml:
+            name: "sic"
+            unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
+    -
         id: "corr"
 #        btn:
 #            label: false
@@ -607,6 +635,21 @@ tags:
             replicateOnEnter: false
             replicateOnCtrlEnter: false
         complex_entry: 
+            enable: false
+    -
+        id: "corrShort"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "corr"
+                hidden: "hidden"
+        xml:
+            name: "corr"
+            unique: true
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
             enable: false
 #   -
 #        id: "choiceOrig"

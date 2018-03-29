@@ -46,7 +46,8 @@ angular.module('transcript.app.user.preferences', ['ui.router'])
             transcriptionDeskPosition: $scope.userPreferences.transcriptionDeskPosition,
             smartTEI: $scope.userPreferences.smartTEI,
             showComplexEntry: $scope.userPreferences.showComplexEntry,
-            creditActions: $scope.userPreferences.creditActions
+            creditActions: $scope.userPreferences.creditActions,
+            notificationTranscription: $scope.userPreferences.notificationTranscription
         };
         $scope.submit = {
             loading: false,

@@ -22,7 +22,7 @@ angular.module('transcript.app.security.confirm', ['ui.router'])
         })
     }])
 
-    .controller('AppSecurityConfirmCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', 'confirmation', function($log, $rootScope, $scope, $http, $sce, confirmation) {
+    .controller('AppSecurityConfirmCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', 'confirmation', function($log, $rootScope, $scope, $http, $sce, $state, confirmation) {
         $scope.status = confirmation.code;
 
         if($rootScope.user !== undefined && $rootScope.user !== null) {

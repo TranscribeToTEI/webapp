@@ -4,7 +4,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
     .controller('SystemTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', '$cookies', 'Fullscreen', 'ContentService', 'NoteService', 'SearchService', 'TaxonomyService', 'TrainingContentService', 'TranscriptService', 'TranscriptLogService', 'transcript', 'teiInfo', 'config', 'transcriptConfig', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, $cookies, Fullscreen, ContentService, NoteService, SearchService, TaxonomyService, TrainingContentService, TranscriptService, TranscriptLogService, transcript, teiInfo, config, transcriptConfig) {
         if($rootScope.user === undefined) {$state.go('transcript.app.security.login');}
-        else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true})[0].createUser.id !== $rootScope.user.id) {
+        else if(transcriptConfig.isExercise === false && transcript._embedded.isCurrentlyEdited === true && $filter('filter')(transcript._embedded.logs, {isCurrentlyEdited: true}).length > 0) {
             $log.debug('Redirection to edition -> Already in edition');
             $state.go('transcript.app.edition', {'idEntity': transcript._embedded.resource.entity.id, 'idResource': transcript._embedded.resource.id});
         } else {
@@ -63,17 +63,28 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 },
                 state: { alert: "alert-success", btnClass: "btn-success", btnValue: "sauvegarder", message: "Pour sauvegarder votre travail, cliquer sur le bouton ci-dessous",}
             };
-            $scope.admin = { status: { loading: false }, validation: { accept: { loading: false }, refuse: { loading: false }}};
+            $scope.admin = { status: { loading: false }, validation: { accept: { loading: false }, refuse: { loading: false }, content: ""}};
             $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
 
             if ($scope.transcript.content === null) {$scope.transcriptArea.ace.area = "";}
 
             $scope.submit.form.continueBefore = $scope.transcript.continueBefore;
             $scope.submit.form.continueAfter = $scope.transcript.continueAfter;
+            $scope.submit.form.submitUser = $scope.transcript.submitUser;
             $scope.TranscriptService = TranscriptService;
             $scope.updateTEIElementInformation = function(context) {
-                console.log(context);
-                $scope.transcriptArea.ace.currentTag = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+                // console.log(context);
+                let transcriptServiceReturn = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+
+                if(transcriptServiceReturn === null) {
+                    $scope.transcriptArea.ace.currentTag = null;
+                } else if(transcriptServiceReturn.type !== "comment") {
+                    $scope.transcriptArea.ace.currentTag = transcriptServiceReturn;
+                } else if(transcriptServiceReturn.type === "comment" && transcriptServiceReturn.parent !== null) {
+                    $scope.transcriptArea.ace.currentTag = transcriptServiceReturn.parent;
+                } else {
+                    $scope.transcriptArea.ace.currentTag = null;
+                }
                 $scope.functions.updateToolbar();
                 $scope.functions.updateAttributes();
 
@@ -617,6 +628,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 } else if (direction === "next" === true) {
                     $scope.aceEditor.redo();
                 }
+                $scope.updateTEIElementInformation("undo");
             };
             /* Ace editor ----------------------------------------------------------------------------------------------- */
 
@@ -746,7 +758,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
                 // If this is a level 1 tag, we split the line to indent the code
                 let currentTagToolbar = $filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0];
-                if (currentTagToolbar !== undefined && currentTagToolbar.btn !== undefined && currentTagToolbar.btn.level === 1) {
+                if (currentTagToolbar !== undefined && currentTagToolbar.btn !== undefined && currentTagToolbar.btn.level === 1 && currentTagToolbar.xml.unique === false) {
                     $scope.aceEditor.splitLine();
                     $scope.aceEditor.getSelection().moveCursorTo(lineNumber + 1, 4);
                     $scope.aceEditor.focus();
@@ -1300,12 +1312,15 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     // Updating status value in case of first edition
                     $scope.transcript.status = "transcription";
                 }
+
                 if ($scope.transcript.content !== $scope.transcriptArea.ace.area || ($scope.submit.form.isEnded === true && !!$scope.transcriptArea.ace.area)) {
                     $scope.submit.loading = true;
                     //console.log($scope.aceEditor);
                     //$scope.aceEditor.setReadonly = true;
                     if ($scope.submit.form.isEnded === true) {
                         $scope.transcript.status = "validation";
+                        console.log($rootScope.user.id);
+                        $scope.submit.form.submitUser = $rootScope.user.id;
                     }
                     $http.patch($rootScope.api + '/transcripts/' + $scope.transcript.id + '?profile=id,pageTranscript,versioning',
                         {
@@ -1313,7 +1328,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                             "updateComment": $scope.submit.form.comment,
                             "status": $scope.transcript.status,
                             "continueBefore": $scope.submit.form.continueBefore,
-                            "continueAfter": $scope.submit.form.continueAfter
+                            "continueAfter": $scope.submit.form.continueAfter,
+                            "submitUser": $scope.submit.form.submitUser
                         }
                     ).then(function (response) {
                         $log.debug(response.data);
@@ -1406,7 +1422,9 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     {
                         "content": $scope.transcriptArea.ace.area,
                         "updateComment": "Validation de la transcription",
-                        "status": "validated"
+                        "status": "validated",
+                        "validationText": $scope.admin.validation.content,
+                        "sendNotification": true
                     }, $scope.transcript.id, "id,pageTranscript,versioning"
                 ).then(function (response) {
                     $log.debug(response);
@@ -1425,14 +1443,28 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     {
                         "content": $scope.transcriptArea.ace.area,
                         "updateComment": "Validation refusée: transcription rouverte à contribution",
-                        "status": "transcription"
-                    }, $scope.transcript.id, "id,pageTranscript,versioning"
+                        "status": "transcription",
+                        "validationText": $scope.admin.validation.content,
+                        "sendNotification": true
+                    }, $scope.transcript.id, "id,pageTranscript,versioning",
                 ).then(function (response) {
                     $log.debug(response);
                     $scope.transcript.status = "transcription";
                     $scope.admin.validation.refuse.loading = false;
                     $state.go('transcript.app.edition', {idEntity: $scope.entity.id, idResource: $scope.resource.id});
                 });
+            };
+
+            $scope.options = {
+                language: 'fr',
+                allowedContent: true,
+                entities: false,
+                height: '140px',
+                removePlugins: 'elementspath',
+                resize_enabled: false,
+                toolbar: [
+                    ['Bold','Italic','Underline','StrikeThrough','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','Link','-','Undo','Redo']
+                ]
             };
             /* Admin Management ----------------------------------------------------------------------------------------- */
 

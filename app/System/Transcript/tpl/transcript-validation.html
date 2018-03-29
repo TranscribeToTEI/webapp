@@ -1,0 +1,22 @@
+<div class="card bg-body d-print-none">
+    <div><h3 class="card-header bg-light"><i class="fa fa-check" aria-hidden="true"></i> Validation</h3></div>
+    <div class="card-body">
+        <form>
+            <div class="form-group comment-post-form-group">
+                <label for="comment-validation" class="form-control-label">Commentaire à propos de la validation :</label>
+                <div id="comment-validation" ckeditor="options" data-ng-model="admin.validation.content"></div>
+                <span class="text-muted">Ce commentaire est publié dans le fil de commentaire ci-dessous et envoyé par notification à la personne ayant soumis la transcription à validation.</span>
+            </div>
+            <div>
+                <button class="btn btn-sm bg-success" type="button" data-ng-click="admin.validation.accept.action()">
+                    <span data-ng-if="admin.validation.accept.loading == false">Valider <i class="fa fa-check"></i></span>
+                    <span data-ng-if="admin.validation.accept.loading == true">Valider <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                </button>
+                <button class="btn btn-sm bg-danger" type="button" data-ng-click="admin.validation.refuse.action()">
+                    <span data-ng-if="admin.validation.refuse.loading == false">Refuser <i class="fa fa-remove"></i></span>
+                    <span data-ng-if="admin.validation.refuse.loading == true">Refuser <i class="fa fa-spin fa-circle-o-notch"></i></span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

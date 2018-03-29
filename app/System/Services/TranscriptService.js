@@ -96,6 +96,11 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 //$log.debug(encodeLiveRender);
                 //$log.debug(tags);
 
+                let oParser = new DOMParser();
+                let oDOM = oParser.parseFromString("<div>"+encodeLiveRender+"</div>", "text/xml");
+                console.log(oDOM);
+                if(oDOM.documentElement.nodeName === "parsererror") {return false;}
+
                 for(let iT in tags) {
                     let tag = tags[iT];
                     let replace = "";
@@ -181,6 +186,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
             extractAttributes: function(attributesString) {
                 let attributes = [];
                 if(attributesString) {
+                    //console.log(attributesString);
                     let matchListAttributes = attributesString.match(/[a-zA-Z0-9:_]+(\s*=\s*(?:".*?"|'.*?'|[\^'">\s]+))/g);
                     if(matchListAttributes && matchListAttributes.length > 0) {
                         for(let iA in matchListAttributes) {
@@ -493,7 +499,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 // console.log('computeFromEndTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<\/([a-zA-Z]+)>/g, '$1');
-                teiElement.type                 = "standard";
+                if(teiElement.type === null) {
+                    teiElement.type             = "standard";
+                }
 
                 teiElement.endTag.start.index   = leftOfCursor.lastIndexOf("<");
                 let endContentFull              = content.substring(teiElement.endTag.start.index, content.length);
@@ -533,7 +541,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 // console.log('computeFromStartTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*>/g, '$1');
-                teiElement.type                 = "standard";
+                if(teiElement.type === null) {
+                    teiElement.type             = "standard";
+                }
 
                 teiElement.startTag.start.index = functions.getTagPos(leftOfCursor+rightOfCursor.substring(0, rightOfCursor.indexOf('<')), teiElement, "DESC");
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
@@ -571,7 +581,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 console.log('computeFromSingleTag');
 
                 teiElement.name                 = teiElement.startTag.content.replace(/<([a-zA-Z]+).*\/>/g, '$1');
-                teiElement.type                 = "single";
+                if(teiElement.type === null) {
+                    teiElement.type             = "single";
+                }
 
                 teiElement.startTag.start.index = leftOfCursor.lastIndexOf('<');
                 let startContentFull            = content.substring(teiElement.startTag.start.index, content.length);
@@ -616,7 +628,12 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 if(previousChild === null) {
                     childrenLeftOfCursor = teiElement.parentLeftOfCursor+teiElement.startTag.content+teiElement.content.substring(0, teiElement.content.indexOf('<')+2);
                 } else {
-                    let endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
+                    let endPreviousChild = "";
+                    if(previousChild.type === "normal") {
+                        endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content+previousChild.content+previousChild.endTag.content;
+                    } else if(previousChild.type === "single") {
+                        endPreviousChild = previousChild.parentLeftOfCursor+previousChild.startTag.content;
+                    }
                     childrenLeftOfCursor = endPreviousChild+content.substring(endPreviousChild.length, endPreviousChild.length+2);
                 }
                 let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
@@ -636,6 +653,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
              */
             getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
                 if(!leftOfCursor || !rightOfCursor) { return null; }
+
+
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -681,10 +700,16 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     },
                     startExtraCounter = 0;
 
+
                 /* -------------------------------------------------------------------------------------------------- */
                 /* -- This part computes the teiElement name: -- */
                 /* -------------------------------------------------------------------------------------------------- */
-                if(leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
+                if(leftOfCursor.lastIndexOf("<!--") > leftOfCursor.lastIndexOf("-->") && rightOfCursor.indexOf("-->") !== -1) {
+                    // Manage cases where we are inside a comment -> we assume that if a comment has been open but not close, it will
+                    teiElement.startTag.content = leftOfCursor.substring(leftOfCursor.lastIndexOf("<"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
+                    teiElement = functions.computeFromSingleTag(teiElement, leftOfCursor, rightOfCursor, content);
+                    teiElement.type = "comment";
+                } else if(leftOfCursor.lastIndexOf("</") > leftOfCursor.lastIndexOf(">")) {
                     // The caret is inside an end tag > we use this tag as current tag
                     teiElement.startTag.content = leftOfCursor.substring(leftOfCursor.lastIndexOf("</"), leftOfCursor.length)+rightOfCursor.substring(0, rightOfCursor.indexOf(">")+1);
                     teiElement = functions.computeFromEndTag(teiElement, leftOfCursor, rightOfCursor, content);
@@ -763,7 +788,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     if(lines !== null) {
                         if (teiElement.type === "standard") {
                             startExtraCounter = 1;
-                        } else if (teiElement.type === "single") {
+                        } else if (teiElement.type === "single" || teiElement.type === "comment") {
                             startExtraCounter = 0;
                         }
                         let tagPosStart = teiElement.startTag.start.index;
@@ -815,21 +840,29 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     /* -------------------------------------------------------------------------------------------------
                      * This part computes the start tag's attributes
                      ------------------------------------------------------------------------------------------------ */
-                    let attributesList = teiElement.startTag.content.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
-                    for (let kAttribute in attributesList) {
-                        let attributeFull = attributesList[kAttribute];
-                        let attribute = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$1');
-                        let value = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$2');
-                        teiElement.attributes.push({attribute: attribute, value: value});
+                    if (teiElement.type !== "comment") {
+                        let attributesList = teiElement.startTag.content.match(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g);
+                        for (let kAttribute in attributesList) {
+                            let attributeFull = attributesList[kAttribute];
+                            let attribute = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$1');
+                            let value = attributeFull.replace(/(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/g, '$2');
+                            teiElement.attributes.push({attribute: attribute, value: value});
+                        }
+                        teiElement.attributes = functions.extractAttributes(teiElement.startTag.content);
                     }
-                    teiElement.attributes = functions.extractAttributes(teiElement.startTag.content);
                     /* ---------------------------------------------------------------------------------------------- */
 
                     /* -------------------------------------------------------------------------------------------------
                      * This part compiles the parents of the tag
                      ------------------------------------------------------------------------------------------------ */
                     // If TEI Element can have parents, we compute the parents
-                    if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0] !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.restrict_to_root === true) {
+                    if(teiElement.type === "comment") {
+                        console.log('computeParentForComment');
+                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true);
+                        teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
+                        teiElement.parents.push(teiElement.parent);
+                    } else if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0] !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.restrict_to_root === true) {
+                        // If this is a level1 tag, it can't have parent
                         teiElement.parent = null;
                         teiElement.parents = [];
                     } else if (computeParent === true) {
@@ -850,7 +883,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                      ------------------------------------------------------------------------------------------------ */
                     if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === false) {
                         //$log.debug(teiElement.content);
-                        teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
+                        //teiElement.children = functions.computeChildren(teiElement, content, lines, tags, teiInfo);
+                        teiElement.children = null;
                     } else if (teiElement.content && !!teiInfo[teiElement.name] && teiInfo[teiElement.name]["textAllowed"] === true) {
                         teiElement.children = null;
                     } else {
@@ -858,7 +892,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                     /* ---------------------------------------------------------------------------------------------- */
                 }
-                //console.log(teiElement);
+                console.log(teiElement);
                 return teiElement;
             },
             getTEIElementParents(teiElement, parents) {
