@@ -35,7 +35,9 @@ angular.module('transcript.app.user.private-message.thread', ['ui.router'])
                         }
                     },
                     recipientUser: function(UserService, $transition$, $rootScope) {
-                        if($rootScope.user.id !== $transition$.params().idRecipient) {
+                        if(parseInt($transition$.params().idRecipient) === 0) {
+                            return {"name": "Testaments de Poilus", "picture": "https://testaments-de-poilus.huma-num.fr/api/web/favicon.ico"};
+                        } else if($rootScope.user.id !== $transition$.params().idRecipient) {
                             return UserService.getUser($transition$.params().idRecipient, 'id,userProfile,userEmail');
                         } else {
                             return $rootScope.user;

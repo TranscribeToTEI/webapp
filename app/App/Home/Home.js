@@ -53,7 +53,7 @@ angular.module('transcript.app.home', ['ui.router'])
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
             }
 
-            if($scope.entities[iEntity]._embedded.status === 'todo' || $scope.entities[iEntity]._embedded.status === 'transcription') {
+            if(($scope.entities[iEntity]._embedded.status === 'todo' || $scope.entities[iEntity]._embedded.status === 'transcription') && $scope.entities[iEntity].isShown === true) {
                 $scope.count.todo = ++$scope.count.todo;
             } else if($scope.entities[iEntity]._embedded.status === 'validation') {
                 $scope.count.validation = ++$scope.count.validation;

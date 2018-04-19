@@ -187,10 +187,7 @@ angular.module('transcriptApp', [
         /* Meta tag management */
         /* ------------------------------------------------------ */
         tfMetaTagsProvider.setDefaults({
-            title: 'Testaments de Poilus',
-            properties: {
-                keywords: 'keyword1, keyword2'
-            }
+            title: 'Testaments de Poilus'
         });
         tfMetaTagsProvider.setTitleSuffix('');
         tfMetaTagsProvider.setTitlePrefix('');
@@ -301,6 +298,29 @@ angular.module('transcriptApp', [
         $(function () {
             $('[data-toggle="tooltip"]').tooltip();
             $('.tooltip').tooltip();
-        })
+        });
+
+        document.onkeydown = function (event) {
+
+            if (!event) { /* This will happen in IE */
+                event = window.event;
+            }
+
+            let keyCode = event.keyCode;
+
+            if (keyCode === 8 &&
+                ((event.target || event.srcElement).tagName !== "TEXTAREA") &&
+                ((event.target || event.srcElement).tagName !== "INPUT")) {
+
+                if (navigator.userAgent.toLowerCase().indexOf("msie") === -1) {
+                    event.stopPropagation();
+                } else {
+                    alert("prevented");
+                    event.returnValue = false;
+                }
+
+                return false;
+            }
+        };
     }])
 ;

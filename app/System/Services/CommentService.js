@@ -54,7 +54,7 @@ angular.module('transcript.service.comment', ['ui.router'])
                 }
             },
             getThreadsByUser: function(id) {
-                return $http.get($rootScope.api+"/override-threads?user="+id).then(function(response) {
+                    return $http.get($rootScope.api+"/override-threads?user="+id).then(function(response) {
                     $log.debug(response.data);
                     return response.data;
                 }, function errorCallback(response) {

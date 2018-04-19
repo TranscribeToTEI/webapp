@@ -35,6 +35,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
             }
         };
         $scope.remove = {
+            silent: false,
             loading: false,
             success: false
         };
@@ -81,7 +82,7 @@ angular.module('transcript.admin.user.view', ['ui.router'])
         $scope.remove.action = function() {
             $scope.remove.loading = true;
 
-            $http.delete($rootScope.api+'/users/'+$scope.iUser.id).
+            $http.delete($rootScope.api+'/users/'+$scope.iUser.id+'?silent='+$scope.remove.silent).
             then(function (response) {
                 $log.debug(response.data);
                 flash.success = "Vous allez être redirigé dans quelques instants ...";

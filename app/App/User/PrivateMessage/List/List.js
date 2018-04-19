@@ -63,6 +63,11 @@ angular.module('transcript.app.user.private-message.list', ['ui.router'])
 
             if(parseInt(info[2]) === $scope.iUser.id) {
                 thread.iUser = info[2];
+            } else if(parseInt(info[2]) === 0) {
+                thread.recipient = {
+                    id: 0,
+                    name: 'Testaments de Poilus'
+                };
             } else {
                 thread.recipient = $filter('filter')($scope.users, {id: info[2]})[0];
             }

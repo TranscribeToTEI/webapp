@@ -42,43 +42,6 @@
             <div class="text-justify my-2 pr-md-3" ng-bind-html="content.content | trustAsHtml"></div>
             <div class="mt-5" ng-if="content.enableComments == true" ui-view="comment"></div>
         </div>
-        <div class="col-md-4 order-md-1 d-print-none">
-            <img src="{{ content.illustration | imageRender }}" class="img-fluid" alt="Illustration de {{ content.title }}" title="{{ content.title }}" ng-if="content.illustration != '' && content.illustration != null" />
-            <div class="card" ng-if="content.type == 'blogContent'">
-                <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="iContent in contents">
-                        <a ui-sref="transcript.app.content({ id: iContent.id })" ng-class="{'active': content.id === iContent.id}" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
-                        <span ng-if="content.id === iContent.id">{{ iContent.title }}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card" ng-if="content.type == 'staticContent' && content.staticCategory === 'discover'">
-                <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="iContent in contents | filter:{type: 'staticContent', staticCategory: content.staticCategory} | orderBy: 'staticOrder'">
-                        <a ui-sref="transcript.app.content({ id: iContent.id })" ng-class="{'active': content.id === iContent.id}" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
-                        <span ng-class="{'active': content.id === iContent.id}" ng-if="content.id === iContent.id">{{ iContent.title }}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card" ng-if="content.type == 'helpContent' || (content.type == 'staticContent' && content.staticCategory === 'helpHome')">
-                <ul class="list-group list-group-flush mb-5 mt-5">
-                    <li class="list-group-item" ng-repeat="iContent in contents | orderBy:'staticOrder'" >
-                        <a ui-sref="transcript.app.content({ id: iContent.id })" ng-class="{'active': content.id === iContent.id}" ng-if="content.id !== iContent.id">{{ iContent.title }}</a>
-                        <span ng-class="{'active': content.id === iContent.id}" ng-if="content.id === iContent.id">{{ iContent.title }}</span>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="card bg-primary" ng-if="(content.type == 'helpContent' || (content.type == 'staticContent' && content.staticCategory === 'helpHome')) && (user !== undefined && user !== null)">
-                <h3 class="card-header bg-dark text-white">Tutoriel de formation</h3>
-                <div class="card-body">
-                    <p>Suivez notre tutoriel de formation pour vous entrainer avant de transcrire.</p>
-                    <p class="text-center">
-                        <a class="btn btn-secondary text-white" ui-sref="transcript.app.training.content({order: '0'})" ng-if="user._embedded.preferences.tutorialStatus == 'todo' || user._embedded.preferences.tutorialStatus == 'done' || user._embedded.preferences.tutorialStatus == 'notInterested'">Accéder au tutoriel</a>
-                        <a class="btn btn-secondary text-white" ui-sref="transcript.app.training.content({order: user._embedded.preferences.tutorialProgress})" ng-if="user._embedded.preferences.tutorialStatus == 'inProgress'">Accéder au tutoriel</a>
-                    </p>
-                </div>
-            </div>
-        </div>
+        <div class="col-md-4 order-md-1 d-print-none" ng-include="'/webapp/app/App/Content/tpl/content-aside.html'"></div>
     </div>
 </main>

@@ -13,7 +13,10 @@
         <div ng-if="resource.transcript.content == '' || resource.transcript.content == null" class="alert alert-info text-center">
             Cette transcription n'est pas commencée.
         </div>
-        <div ng-bind-html="encodedContent | trustAsHtml"></div>
+        <div ng-if="encodedContent !== false" ng-bind-html="encodedContent | trustAsHtml"></div>
+        <div ng-if="encodedContent === false">
+            <div class="alert alert-danger"><i class="fa fa-warning"></i><br />Cette transcription contient probablement des erreurs d'encodage.<br />Nous ne sommes pas en mesure de l'afficher.<br />N'hésitez pas à contribuer à notre projet en la corrigeant.</div>
+        </div>
     </div>
     <div ng-if="context === 'code'">
         <div ui-ace="{

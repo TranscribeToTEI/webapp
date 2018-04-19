@@ -70,7 +70,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
 
             $scope.submit.form.continueBefore = $scope.transcript.continueBefore;
             $scope.submit.form.continueAfter = $scope.transcript.continueAfter;
-            $scope.submit.form.submitUser = $scope.transcript.submitUser;
+            if($scope.transcript.submitUser !== undefined) {
+                $scope.submit.form.submitUser = $scope.transcript.submitUser.id;
+            } else {
+                $scope.submit.form.submitUser = null;
+            }
             $scope.TranscriptService = TranscriptService;
             $scope.updateTEIElementInformation = function(context) {
                 // console.log(context);

@@ -27,7 +27,7 @@ angular.module('transcript.app.search', ['ui.router'])
     }])
 
     .controller('AppSearchCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'flash', 'EntityService', 'SearchService', 'ImageService', 'entities', function($log, $rootScope, $scope, $http, $sce, $state, $filter, flash, EntityService, SearchService, ImageService, entities) {
-        $scope.entities = entities; $log.debug($scope.entities);
+        $scope.entities = entities;
         for(let iEntity in $scope.entities) {
             if($scope.entities[iEntity].will.hostingOrganization === undefined) {
                 $scope.entities[iEntity].will.hostingOrganization = {name: null};
@@ -41,6 +41,10 @@ angular.module('transcript.app.search', ['ui.router'])
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
             } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
+            }
+
+            if($scope.entities[iEntity].isShown === false) {
+                $scope.entities[iEntity]._embedded.status = 'off';
             }
         }
         $log.debug($scope.entities);

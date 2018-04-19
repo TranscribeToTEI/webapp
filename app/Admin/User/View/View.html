@@ -38,6 +38,14 @@
                 <h2 class="card-header bg-dark text-white">Zone dangereuse</h2>
                 <div class="card-body">
                     <p>En cliquant ci-dessous, vous supprimerez définitivement cet utilisateur.</p>
+                    <div class="form-group">
+                        <div class="checkbox">
+                            <label class="custom-control custom-checkbox">
+                                <input ng-model="remove.silent" class="custom-control-input" type="checkbox">
+                                <span class="custom-control-label">Silent deletion</span>
+                            </label>
+                        </div>
+                    </div>
                     <button class="btn btn-sm btn-primary" data-mw-confirm-click="remove.action()" data-mw-confirm-click-message="Êtes-vous sûr de vouloir supprimer ce compte utilisateur ?">Supprimer ce compte <i class="fa fa-remove" ng-if="remove.loading == false"></i><i class="fa fa-spin fa-circle-o-notch" ng-if="remove.loading == true"></i></button>
                 </div>
             </div>

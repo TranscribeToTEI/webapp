@@ -96,10 +96,23 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 //$log.debug(encodeLiveRender);
                 //$log.debug(tags);
 
+                function isParseError(parsedDocument) {
+                    // parser and parsererrorNS could be cached on startup for efficiency
+                    let parser = new DOMParser(),
+                        errorneousParse = parser.parseFromString('<', 'text/xml'),
+                        parsererrorNS = errorneousParse.getElementsByTagName("parsererror")[0].namespaceURI;
+
+                    if (parsererrorNS === 'http://www.w3.org/1999/xhtml') {
+                        // In PhantomJS the parseerror element doesn't seem to have a special namespace, so we are just guessing here :(
+                        return parsedDocument.getElementsByTagName("parsererror").length > 0;
+                    }
+
+                    return parsedDocument.getElementsByTagNameNS(parsererrorNS, 'parsererror').length > 0;
+                }
+
                 let oParser = new DOMParser();
                 let oDOM = oParser.parseFromString("<div>"+encodeLiveRender+"</div>", "text/xml");
-                console.log(oDOM);
-                if(oDOM.documentElement.nodeName === "parsererror") {return false;}
+                if(oDOM.documentElement.nodeName === "parsererror") {return false;} else if(isParseError(oDOM)) {return false;}
 
                 for(let iT in tags) {
                     let tag = tags[iT];
@@ -107,64 +120,66 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                     //$log.debug(tag.xml);
                     if(tag.xml.unique === true) {
-                        replace = "<"+tag.xml.name+"(.*?)/>";
+                        replace = "<"+tag.xml.name+"(\/>|\s+(.*?)\/>)";
                         let regExp = new RegExp(replace,"g");
                         encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, index, original) {
                             return functions.tagConstruction(tag, "singleTag", functions.extractAttributes(attributesString), null, isMicroObject);
                         });
                     } else if(tag.xml.unique === false) {
-                        replace = "<"+tag.xml.name+"(.*?)>(.*?)</"+tag.xml.name+">";
+                        replace = "<"+tag.xml.name+"(>|\\s+(.*?)>)(.*?)<\/"+tag.xml.name+">";
                         let regExp = new RegExp(replace,"g");
 
-                        encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, content, index, original) {
+                        encodeLiveRender = encodeLiveRender.replace(regExp, function(match, var1, attributesString, content, index, original) {
+                            let extraTooltip = null;
                             /* Computing tooltip for special tags (like Choice) ------------------------------------- */
-                            let extraTooltip = null,
-                                TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match)+2), encodeLiveRender.substring(encodeLiveRender.indexOf(match)+2, encodeLiveRender.length), null, tags, teiInfo, false);
+                            if(tag.xml.name === "choice" || tag.xml.name === "app") {
+                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match) + 2), encodeLiveRender.substring(encodeLiveRender.indexOf(match) + 2, encodeLiveRender.length), null, tags, teiInfo, false);
 
-                            if(TEIElement !== null) {
-                                if(tag.xml.name === "choice") {
-                                    let content = "",
-                                        prefix = "";
-                                    //$log.debug(TEIElement);
+                                if (TEIElement !== null) {
+                                    if (tag.xml.name === "choice") {
+                                        let content = "",
+                                            prefix = "";
+                                        //$log.debug(TEIElement);
 
-                                    for(let iC in TEIElement.children) {
-                                        let child = TEIElement.children[iC];
-                                        if(child.name === "corr") {
-                                            content = child.content;
-                                            prefix = "Forme correcte : ";
-                                        } else if(child.name === "reg") {
-                                            content = child.content;
-                                            prefix = "Forme régulière : ";
-                                        } else if(child.name === "expan") {
-                                            content = child.content;
-                                            prefix = "Forme complète : ";
+                                        for (let iC in TEIElement.children) {
+                                            let child = TEIElement.children[iC];
+                                            if (child.name === "corr") {
+                                                content = child.content;
+                                                prefix = "Forme correcte : ";
+                                            } else if (child.name === "reg") {
+                                                content = child.content;
+                                                prefix = "Forme régulière : ";
+                                            } else if (child.name === "expan") {
+                                                content = child.content;
+                                                prefix = "Forme complète : ";
+                                            }
                                         }
-                                    }
 
-                                    extraTooltip = {
-                                        type: "tooltip",
-                                        content: content,
-                                        prefix: prefix
-                                    }
-                                } else if (tag.xml.name === "app") {
-                                    let content = "";
-
-                                    for(let iC in TEIElement.children) {
-                                        let child = TEIElement.children[iC];
-                                        if(child.name === "note") {
-                                            content = child.content;
+                                        extraTooltip = {
+                                            type: "tooltip",
+                                            content: content,
+                                            prefix: prefix
                                         }
-                                    }
+                                    } else if (tag.xml.name === "app") {
+                                        let content = "";
 
-                                    extraTooltip = {
-                                        type: "popover",
-                                        content: content,
-                                        title: "Note d'apparat critique"
-                                    }
-                                } else if (tag.xml.name === "app") {
-                                    //Pas sur que ça marche ça
-                                    if(TEIElement.parent !== undefined && TEIElement.parent !== null && TEIElement.parent.name === "app") {
-                                        attributesString += "class: \"hidden\"";
+                                        for (let iC in TEIElement.children) {
+                                            let child = TEIElement.children[iC];
+                                            if (child.name === "note") {
+                                                content = child.content;
+                                            }
+                                        }
+
+                                        extraTooltip = {
+                                            type: "popover",
+                                            content: content,
+                                            title: "Note d'apparat critique"
+                                        }
+                                    } else if (tag.xml.name === "app") {
+                                        //Pas sur que ça marche ça
+                                        if (TEIElement.parent !== undefined && TEIElement.parent !== null && TEIElement.parent.name === "app") {
+                                            attributesString += "class: \"hidden\"";
+                                        }
                                     }
                                 }
                             }
