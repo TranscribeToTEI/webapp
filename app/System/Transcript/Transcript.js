@@ -78,7 +78,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.TranscriptService = TranscriptService;
             $scope.updateTEIElementInformation = function(context) {
                 // console.log(context);
-                let transcriptServiceReturn = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true);
+                let transcriptServiceReturn = TranscriptService.getTEIElementInformation($scope.functions.getLeftOfCursor(), $scope.functions.getRightOfCursor(), $scope.aceSession.getLines(0, $scope.aceSession.getLength() - 1), $scope.transcriptArea.toolbar.tags, $scope.teiInfo, true, null);
 
                 if(transcriptServiceReturn === null) {
                     $scope.transcriptArea.ace.currentTag = null;
@@ -612,6 +612,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         }
                     }
                     /* Exercise Management -------------------------------------------------------------------------- */
+
+                    console.log(TranscriptService.getArrayFromTranscript($scope.functions.getLeftOfCursor()+$scope.functions.getRightOfCursor()));
                 });
             };
 
@@ -767,6 +769,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.aceEditor.getSelection().moveCursorTo(lineNumber + 1, 4);
                     $scope.aceEditor.focus();
                 }
+                $scope.transcriptArea.ace.area = $scope.aceEditor.getValue();
             };
             /* Tags Management ------------------------------------------------------------------------------------------ */
 
@@ -825,6 +828,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.aceEditor.focus();
                     $scope.updateTEIElementInformation("addAttribute");
                 }
+                $scope.transcriptArea.ace.area = $scope.aceEditor.getValue();
             };
             /* End : Attributes Management ------------------------------------------------------------------------------ */
 

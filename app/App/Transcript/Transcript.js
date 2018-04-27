@@ -18,9 +18,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
                 }
             },
             ncyBreadcrumb: {
-                parent: function($scope) {
-                    return 'transcript.app.edition({idEntity: '+$scope.idEntity+', idResource: '+$scope.idResource+'})';
-                },
+                parent: 'transcript.app.edition({idEntity: idEntity, idResource: idResource})',
                 label: 'Transcription'
             },
             tfMetaTags: {
@@ -79,6 +77,7 @@ angular.module('transcript.app.transcript', ['ui.router'])
     }])
 
     .controller('AppTranscriptCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$timeout', '$filter', '$transitions', '$window', 'idResource', 'idEntity', function($log, $rootScope, $scope, $http, $sce, $state, $timeout, $filter, $transitions, $window, idResource, idEntity) {
-
+        $scope.idEntity = idEntity;
+        $scope.idResource = idResource;
     }])
 ;

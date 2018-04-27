@@ -24,14 +24,18 @@ angular.module('transcript.app.home', ['ui.router'])
                 contents: function(ContentService) {
                     return ContentService.getContents("blogContent", "public", "DESC", 10, null, 'id,summary');
                 },
+                topContributors: function(ContributorService) {
+                    return ContributorService.getContributors(10);
+                },
             }
         })
     }])
 
-    .controller('AppHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'entities', 'contents', 'SearchService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, entities, contents, SearchService) {
-        $scope.entities = entities; //$log.debug($scope.entities);
+    .controller('AppHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'SearchService', 'entities', 'contents', 'topContributors', function($log, $rootScope, $scope, $http, $sce, $state, $filter, SearchService, entities, contents, topContributors) {
+        $scope.entities = entities; console.log($scope.entities);
         $scope.contents = contents;
         $scope.limitToResults = 50;
+        $scope.topContributors = topContributors; console.log($scope.topContributors);
 
         $scope.count = {
             todo: 0,
@@ -40,16 +44,10 @@ angular.module('transcript.app.home', ['ui.router'])
         };
 
         for(let iEntity in $scope.entities) {
-            if($scope.entities[iEntity].will.testator.placeOfBirthNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfBirthNormalized.name = $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names[0].name;
-            }
-            else if($scope.entities[iEntity].will.testator.placeOfBirthNormalized === undefined) {
+            if($scope.entities[iEntity].will.testator.placeOfBirthNormalized === undefined) {
                 $scope.entities[iEntity].will.testator.placeOfBirthNormalized = {name: null};
             }
-            $log.debug($scope.entities[iEntity].will.testator);
-            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfDeathNormalized !== null && $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
-            } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
+            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
             }
 
@@ -71,11 +69,11 @@ angular.module('transcript.app.home', ['ui.router'])
                     testator: {
                         name: null,
                         placeOfDeathNormalized: {
-                            names: null
+                            name: null
                         },
                         yearOfDeath: null,
                         placeOfBirthNormalized: {
-                            names: null
+                            name: null
                         }
                     }
                 }

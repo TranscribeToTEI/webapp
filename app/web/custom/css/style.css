@@ -178,7 +178,9 @@ header .dropdown-item{
 .header{
 	background: url('img/bg-header.svg') no-repeat left top;
 }
-
+.header-dev{
+	background: url('img/bg-header-dev.png') no-repeat left top;
+}
 
 
 @media (min-width: 992px) and  (max-width: 1199px)
@@ -1120,6 +1122,10 @@ ul.grid a{
 .img-150px {
 	max-height: 150px;
 	max-width: 150px;
+}
+.img-20px {
+	max-height: 20px;
+	max-width: 20px;
 }
 /* @end */
 

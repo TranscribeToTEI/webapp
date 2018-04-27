@@ -133,7 +133,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                             let extraTooltip = null;
                             /* Computing tooltip for special tags (like Choice) ------------------------------------- */
                             if(tag.xml.name === "choice" || tag.xml.name === "app") {
-                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match) + 2), encodeLiveRender.substring(encodeLiveRender.indexOf(match) + 2, encodeLiveRender.length), null, tags, teiInfo, false);
+                                let TEIElement = functions.getTEIElementInformation(encodeLiveRender.substring(0, encodeLiveRender.indexOf(match) + 2), encodeLiveRender.substring(encodeLiveRender.indexOf(match) + 2, encodeLiveRender.length), null, tags, teiInfo, false, null);
 
                                 if (TEIElement !== null) {
                                     if (tag.xml.name === "choice") {
@@ -653,7 +653,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
                 let childrenRightOfCursor = content.substring(childrenLeftOfCursor.length, content.length);
 
-                return functions.getTEIElementInformation(childrenLeftOfCursor, childrenRightOfCursor, lines, tags, teiInfo, false);
+                return functions.getTEIElementInformation(childrenLeftOfCursor, childrenRightOfCursor, lines, tags, teiInfo, false, null);
             },
             /**
              * This function returns an array with every information about the current TEI Element of the caret position in the transcript
@@ -666,10 +666,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
              * @param computeParent
              * @returns object
              */
-            getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent) {
+            getTEIElementInformation: function(leftOfCursor, rightOfCursor, lines, tags, teiInfo, computeParent, child) {
                 if(!leftOfCursor || !rightOfCursor) { return null; }
-
-
 
                 /* GLOBAL INFORMATION:
                  * - Positions shouldn't depend on the caret position. It should be absolute values, not relative.
@@ -710,6 +708,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         parent: null,
                         parents: [],
                         children: [],
+                        childStatus: null,
                         parentLeftOfCursor: null,
                         parentRightOfCursor: null
                     },
@@ -873,22 +872,30 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     // If TEI Element can have parents, we compute the parents
                     if(teiElement.type === "comment") {
                         console.log('computeParentForComment');
-                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true);
+                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true, teiElement);
                         teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
                         teiElement.parents.push(teiElement.parent);
-                    } else if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0] !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.restrict_to_root === true) {
-                        // If this is a level1 tag, it can't have parent
-                        teiElement.parent = null;
-                        teiElement.parents = [];
                     } else if (computeParent === true) {
                         console.log('computeParent');
-                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true);
+                        teiElement.parent = this.getTEIElementInformation(teiElement.parentLeftOfCursor, teiElement.parentRightOfCursor, lines, tags, teiInfo, true, teiElement);
                         teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
                         teiElement.parents.push(teiElement.parent);
 
                         if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.allow_root === true && teiElement.parent === null) {
                             teiElement.parent = null;
                             teiElement.parents = [];
+                        }
+                    }
+                    /* ---------------------------------------------------------------------------------------------- */
+
+                    /* -------------------------------------------------------------------------------------------------
+                     * This part computes child status
+                     ------------------------------------------------------------------------------------------------ */
+                    if(child !== null) {
+                        if(teiInfo[teiElement.name]['content'].indexOf(child.name) !== -1) {
+                            teiElement.childStatus = {'code': 201};
+                        } else {
+                            teiElement.childStatus = {'code': 401, 'rejectedElement': child.name};
                         }
                     }
                     /* ---------------------------------------------------------------------------------------------- */
@@ -1045,6 +1052,28 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 }
                 return htmlToReturn;
                 /* End: Creation of the DOM ------------------------------------------------------------------------- */
+            },
+            getXMLToArray(xmlDoc){
+                let thisArray = {};
+                //Check XML doc
+                if($(xmlDoc).children().length > 0){
+                    //Foreach Node found
+                    $(xmlDoc).children().each(function(){
+                        if($(xmlDoc).find(this.nodeName).children().length > 0){
+                            //If it has children recursively get the inner array
+                            let NextNode = $(xmlDoc).find(this.nodeName);
+                            thisArray[this.nodeName] = functions.getXMLToArray(NextNode);
+                        } else {
+                            //If not then store the next value to the current array
+                            thisArray[this.nodeName] = $(xmlDoc).find(this.nodeName).text();
+                        }
+                    });
+                }
+                return thisArray;
+            },
+            getArrayFromTranscript(content) {
+                console.log(content);
+                return this.getXMLToArray($.parseXML( '<?xml version="1.0" encoding="UTF-8"?><root>'+content+'</root>' ));
             }
         };
         return functions;

@@ -1,4 +1,5 @@
 version:        "0-1"
+env:            "dev"
 api:            "http://localhost:8888/TestamentsDePoilus/api/web/app_dev.php"
 api_web:        "http://localhost:8888/TestamentsDePoilus/api/web/"
 iiif:

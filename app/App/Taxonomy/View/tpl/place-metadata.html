@@ -2,10 +2,10 @@
 <dl class="row pr-3 ml-1">
     <dt class="col-sm-4">Localisation</dt>
     <dd class="col-sm-8">
-        <span ng-if="entity.cities.length > 0" title="Ville">{{ entity | taxonomyEntityNameConstruct:'places':'cities' }}</span>
-        <span ng-if="entity.frenchDepartements.length > 0" title="Département"><span ng-if="entity.cities.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchDepartements' }}</span>
-        <span ng-if="entity.frenchRegions.length > 0" title="Région"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchRegions' }}</span>
-        <span ng-if="entity.countries.length > 0" title="Pays"><span ng-if="entity.cities.length > 0 || entity.frenchDepartements.length > 0 || entity.frenchRegions.length > 0">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'countries' }}</span>
+        <span ng-if="entity.city" title="Ville">{{ entity | taxonomyEntityNameConstruct:'places':'city' }}</span>
+        <span ng-if="entity.frenchDepartement" title="Département"><span ng-if="entity.city">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchDepartement' }}</span>
+        <span ng-if="entity.frenchRegion" title="Région"><span ng-if="entity.city || entity.frenchDepartement">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'frenchRegion' }}</span>
+        <span ng-if="entity.country" title="Pays"><span ng-if="entity.city || entity.frenchDepartement || entity.frenchRegion">, </span>{{ entity | taxonomyEntityNameConstruct:'places':'country' }}</span>
     </dd>
 
     <dt class="col-sm-4">Identifiant Geonames</dt>
@@ -29,7 +29,7 @@
         <div class="row">
             <div class="col-md-3 mt-4" ng-repeat="testatorContainer in entity._embedded.testators">
                 <div class="pr-0">
-                    <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testator.id })" >
+                    <a ui-sref="transcript.app.taxonomy.view({ type: 'testators', id: testatorContainer.testator.id })" >
                         <img src="/webapp/app/web/images/default-testator.png" class="img-fluid" />
                     </a>
                 </div>

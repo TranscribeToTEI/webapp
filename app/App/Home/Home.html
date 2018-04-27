@@ -63,6 +63,33 @@
                     <div class="text-right"><a ui-sref="transcript.app.contact" class="btn btn-sm btn-primary">Contactez-nous</a></div>
                 </div>
             </div>
+            <div class="card bg-white">
+                <h2 class="card-header bg-dark">Meilleurs contributeurs</h2>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Contributeur</th>
+                            <th>Contributions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="contribution in topContributors">
+                            <td>{{ $index+1 }}</td>
+                            <td>
+                                <a ui-sref="transcript.app.user.profile({id: contribution.user.id})">
+                                    <i ng-if="contribution.user.picture == null || contribution.user.picture == ''" class="fa fa-user-circle-o fa-lg" aria-hidden="true"></i>
+                                    <img ng-if="contribution.user.picture != null && contribution.user.picture != ''" class="img-fluid rounded-circle img-20px" src="{{ contribution.user.picture | imageRender }}" />
+                                    {{ contribution.user.name }}
+                                </a>
+                            </td>
+                            <td class="text-right">{{ contribution.contributions }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-lg-8 col-md-12">
             <div ng-include="'/webapp/app/App/Home/tpl/home-search.html'"></div>

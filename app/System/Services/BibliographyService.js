@@ -49,6 +49,42 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                 $log.debug(response);
                 return response;
             });
+        },
+        patchReferenceItem = function(data, id) {
+            return $http.patch($rootScope.api+"/reference-items/"+id, data).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                $log.debug(response);
+                return response;
+            });
+        },
+        deleteManuscriptReference = function(id) {
+            return $http.delete($rootScope.api+"/manuscript-references/"+id).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                $log.debug(response);
+                return response;
+            });
+        },
+        deletePrintedReference = function(id) {
+            return $http.delete($rootScope.api+"/printed-references/"+id).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                $log.debug(response);
+                return response;
+            });
+        },
+        deleteReferenceItem = function(id) {
+            return $http.delete($rootScope.api+"/reference-items/"+id).
+            then(function(response) {
+                return response.data;
+            }, function errorCallback(response) {
+                $log.debug(response);
+                return response;
+            });
         };
 
         return {
@@ -125,6 +161,11 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                             return RData;
                         });
                     });
+                } else if(type === "freeReference") {
+                    item.freeReference = reference.freeReference;
+                    return postReferenceItem(item).then(function(data) {
+                        return data;
+                    });
                 }
             },
 
@@ -135,6 +176,26 @@ angular.module('transcript.service.bibliography', ['ui.router'])
                     });
                 } else if(type === "printedReference") {
                     return patchPrintedReference(reference, id).then(function(data) {
+                        return data;
+                    });
+                } else if(type === "freeReference") {
+                    return patchReferenceItem(reference, id).then(function(data) {
+                        return data;
+                    });
+                }
+            },
+
+            deleteBibliography: function(type, id) {
+                if(type === "manuscriptReference") {
+                    return deleteManuscriptReference(id).then(function(data) {
+                        return data;
+                    });
+                } else if(type === "printedReference") {
+                    return deletePrintedReference(id).then(function(data) {
+                        return data;
+                    });
+                } else if(type === "freeReference") {
+                    return deleteReferenceItem(id).then(function(data) {
                         return data;
                     });
                 }

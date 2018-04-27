@@ -141,6 +141,7 @@ angular.module('transcriptApp', [
         'transcript.service.bibliography',
         'transcript.service.comment',
         'transcript.service.comment-log',
+        'transcript.service.contributor',
         'transcript.service.contact',
         'transcript.service.content',
         'transcript.service.entity',
@@ -203,6 +204,7 @@ angular.module('transcriptApp', [
         $rootScope.api = parameters.api;
         $rootScope.api_web = parameters.api_web;
         $rootScope.iiif = parameters.iiif;
+        $rootScope.env = parameters.env;
         $rootScope.webapp = {
             strict: parameters.webapp.strict,
             resources: parameters.webapp.resources

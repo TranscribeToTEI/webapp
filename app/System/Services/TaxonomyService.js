@@ -122,11 +122,12 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                         break;
                     case 'places':
                         form = {
-                            names: entity.names,
-                            frenchDepartements: entity.frenchDepartements,
-                            frenchRegions: entity.frenchRegions,
-                            countries: entity.countries,
-                            cities: entity.cities,
+                            indexName: entity.indexName,
+                            name: entity.name,
+                            frenchDepartement: entity.frenchDepartement,
+                            frenchRegion: entity.frenchRegion,
+                            country: entity.country,
+                            city: entity.city,
                             geonamesId: entity.geonamesId,
                             geographicalCoordinates: entity.geographicalCoordinates,
                             description: entity.description,
@@ -140,6 +141,14 @@ angular.module('transcript.service.taxonomy', ['ui.router'])
                         };
                 }
                 return form;
+            },
+
+            getNameFromPlaceName(names) {
+                if (names.length > 0) {
+                    return names[0]['name']
+                } else {
+                    return null;
+                }
             }
         };
     })

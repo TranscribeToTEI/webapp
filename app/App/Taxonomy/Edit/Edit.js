@@ -78,7 +78,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             })
     }])
 
-    .controller('AppTaxonomyEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, $filter, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
+    .controller('AppTaxonomyEditCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$transition$', '$filter', '$timeout', 'flash', 'Upload', 'TaxonomyService', 'GeonamesService', 'BibliographyService', 'entity', 'entities', 'testators', 'places', 'militaryUnits', 'bibliographies', function($log, $rootScope, $scope, $http, $sce, $state, $transition$, $filter, $timeout, flash, Upload, TaxonomyService, GeonamesService, BibliographyService, entity, entities, testators, places, militaryUnits, bibliographies) {
         if(
             ($filter('contains')($rootScope.user.roles, "ROLE_TAXONOMY_EDIT") === false && ($rootScope.preferences.taxonomyEditAccess === 'selfAuthorization' || $rootScope.preferences.taxonomyEditAccess === 'controlledAuthorization'))
             ||
@@ -244,30 +244,8 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             /* ------------------------------------------------------------------------------------------------------ */
         }
 
-        /* -- Place name management --------------------------------------------------------------------------------- */
-        function parsePlaceNames() {
-            if($scope.entity.name !== undefined && $scope.entity.name !== null) {
-                $scope.entity.names = [{name: $scope.entity.name, updateComment: "entity creation"}];
-            } else {$scope.entity.name = null;}
-            if($scope.entity.frenchDepartement !== undefined && $scope.entity.frenchDepartement !== null) {
-                $scope.entity.frenchDepartements = [{name: $scope.entity.frenchDepartement, updateComment: "entity creation"}];
-            } else {$scope.entity.frenchDepartement = null;}
-            if($scope.entity.frenchRegion !== undefined && $scope.entity.frenchRegion !== null) {
-                $scope.entity.frenchRegions = [{name: $scope.entity.frenchRegion, updateComment: "entity creation"}];
-            } else {$scope.entity.frenchRegion = null;}
-            if($scope.entity.country !== undefined && $scope.entity.country !== null) {
-                $scope.entity.countries = [{name: $scope.entity.country, updateComment: "entity creation"}];
-            } else {$scope.entity.country = null;}
-            if($scope.entity.city !== undefined && $scope.entity.city !== null) {
-                $scope.entity.cities = [{name: $scope.entity.city, updateComment: "entity creation"}];
-            } else {$scope.entity.city = null;}
-            $log.debug($scope.entity);
-        }
-        /* -- End : Place name management --------------------------------------------------------------------------- */
-
         /* Entities sort management --------------------------------------------------------------------------------- */
         if($scope.entity.dataType === 'places') {
-            $scope.entity.name = $scope.entity.indexName;
             $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
         } else if($scope.entity.dataType === 'testators') {
             $scope.entities = $filter('orderBy')($scope.entities, 'indexName');
@@ -279,9 +257,6 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
         /* -- Action management ------------------------------------------------------------------------------------- */
         $scope.submit.action = function() {
             $scope.submit.loading = true;
-
-            if($scope.entity.dataType === "places") {parsePlaceNames();}
-            $log.debug($scope.entity);
 
             if(entity === null) {
                 postEntityLoader($scope.entity, $scope.entity.dataType, "redirect");
@@ -442,14 +417,14 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                 }
 
                 $scope.bibliography.addForm.id = id;
-                if (elementToEdit.printedReference !== null) {
+                if (elementToEdit.printedReference !== undefined && elementToEdit.printedReference !== null) {
                     $scope.bibliography.addForm.type = 'printedReference';
                     $scope.bibliography.addForm.printedReference = elementToEdit.printedReference;
                     $scope.bibliography.addForm.printedReference.authorsEdit = $scope.bibliography.addForm.printedReference.authors.join(', ');
-                } else if (elementToEdit.manuscriptReference !== null) {
+                } else if (elementToEdit.manuscriptReference !== undefined && elementToEdit.manuscriptReference !== null) {
                     $scope.bibliography.addForm.type = 'manuscriptReference';
                     $scope.bibliography.addForm.manuscriptReference = elementToEdit.manuscriptReference;
-                } else {
+                } else if (elementToEdit.freeReference !== undefined && elementToEdit.freeReference !== null) {
                     $scope.bibliography.addForm.type = 'freeReference';
                     $scope.bibliography.addForm.freeReference = elementToEdit.freeReference;
                 }
@@ -482,10 +457,18 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             } else if ($scope.bibliography.addForm.type === "manuscriptReference") {
                 reference = $scope.bibliography.addForm.manuscriptReference;
                 $log.debug(reference);
+            } else if ($scope.bibliography.addForm.type === "freeReference") {
+                reference = {
+                    'id': id,
+                    'freeReference': $scope.bibliography.addForm.freeReference
+                };
             }
 
             if (method === 'post') {
                 reference.updateComment = 'Création de la référence';
+                if(reference.id !== undefined) {
+                    delete reference.id;
+                }
 
                 return BibliographyService.postBibliography($scope.entity.dataType, $scope.entity, reference, $scope.bibliography.addForm.type)
                     .then(function (response) {
@@ -498,7 +481,7 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                         });
                     });
             } else if (method === 'patch') {
-                let idToPatch = reference.id;
+                let idToPatch = reference.id; console.log(idToPatch);
                 delete reference._links;
                 delete reference.createDate;
                 delete reference.createUser;
@@ -513,6 +496,9 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
                             $scope.bibliography.elements = data;
                             $scope.bibliography.form.submit.loading = false;
                             $scope.bibliography.form.submit.success = true;
+                            $timeout(function () {
+                                $scope.bibliography.form.submit.success = false;
+                            }, 3000);
                             $('#addBibliographicElementModal').modal('hide');
                             $scope.bibliography.initForm();
                         });
@@ -520,8 +506,39 @@ angular.module('transcript.app.taxonomy.edit', ['ui.router'])
             }
         };
 
-        $scope.bibliography.remove = function(id) {
-            //TODO
+        $scope.bibliography.remove = {
+            success: false,
+            loading: false,
+            id: null,
+            type: null
+        };
+        $scope.bibliography.remove.action = function(id) {
+            $scope.bibliography.remove.loading = true;
+            $scope.bibliography.remove.id = null;
+            if (id !== undefined && id !== null) {
+                let elementToRemove = $scope.bibliography.elements.filter(function (element) {
+                    return (element.id === id);
+                });
+                if (elementToRemove !== null) {
+                    elementToRemove = elementToRemove[0];
+                }
+
+                $scope.bibliography.remove.id = id;
+                if (elementToRemove.printedReference !== undefined && elementToRemove.printedReference !== null) {
+                    $scope.bibliography.remove.type = 'printedReference';
+                } else if (elementToRemove.manuscriptReference !== undefined && elementToRemove.manuscriptReference !== null) {
+                    $scope.bibliography.remove.type = 'manuscriptReference';
+                } else if (elementToRemove.freeReference !== undefined && elementToRemove.freeReference !== null) {
+                    $scope.bibliography.remove.type = 'freeReference';
+                }
+                return BibliographyService.deleteBibliography($scope.bibliography.remove.type, $scope.bibliography.remove.id).then(function (data) {
+                    $scope.bibliography.remove.loading = false;
+                    $('#addBibliographicElementModal').modal('hide');
+                    return BibliographyService.getBibliographiesBy($transition$.params().type, $transition$.params().id, "id,bibliography").then(function(data) {
+                        $scope.bibliography.elements = data;
+                    });
+                });
+            }
         };
         /* Bibliography Management ---------------------------------------------------------------------------------- */
 
