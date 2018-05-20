@@ -135,10 +135,51 @@ Le template YML d'insertion d'un groupe est le suivant :
                     enable: false
      
     - _contains_ : Si l'on souhaite insérer un block de balises plutôt qu'un simple balise (e.g. `<app><lem></lem><note></note></app>` au lieu de simplement `<app></app>`), on définit dans cette section les balises à ajouter. Les balises sont ajoutées dans l'ordre définit ici :
-        - [nom de la  balise] lem: [est-ce qu'il s'agit de la balise qui contient le texte préselectionné (`default`) ou d'une balise vide (`emptyContent`)]                
+        - [nom de la  balise] lem: [est-ce qu'il s'agit de la balise qui contient le texte préselectionné (`default`) ou d'une balise vide (`emptyContent`)] > Le nom de la balise est le nom système d'une balise existante !        
     - _replicateOnEnter_ et _replicateOnCtrlEnter_: si la valeur est `true`, la balise est répliquée à la suite lorsque l'action `Enter` ou `CtrlEnter` est executée et que SmartTEI est activée ;
 - _complex_entry_ : cette section active ou désactive la gestion des entrées complexes pour les balises > **fonction non disponible pour le moment** ;
     - _enable_ : est-ce que la gestion des entrées complexes est activée pour cette balise ? ;
     - _children_ : détaille les cas spécifiques d'enfants possible pour cette balise > **fonction non disponible pour le moment** ;
 
 ## Gérer les éléments abstraits :
+Il peut arriver que la ligne `contains` dans la section `xml` ne suffise pas à représenter les différentes facettes d'une balise. 
+C'est notamment le cas pour `choice` et ses dérivés. Dans la version actuelle de la barre de transcription, l'utilisateur 
+peut ajouter plusieurs types de `choice` (`<choice><sic></sic><corr></corr></choice>` ou `<choice><abbr></abrr><expan></expan></choice>`). 
+Ces éléments sont définis au niveau de l'utilisateur par la balise qui fait le plus sens : `abbr` et `sic`. 
+Mais d'un point de vue du système c'est bien un `choice` qu'on insère à chaque fois. On utilise donc des éléments abstraits pour résoudre cette situation.
+**Exemple avec le `choice` des abbréviations :**
+
+    -
+        id: "choiceAbbr" # Le nom système ne pas peut être similaire à la balise car sinon il y aurait plusieurs noms système identiques
+        btn:
+            label: "Marquer une abréviation" # Ici on représente bien à l'utilisateur l'abbréviation et non le choice
+            label_forced: true
+            title: "Signaler la présence d'une abréviation"
+            icon: "fa fa-compress"
+            btn_group: "microPhenomena"
+            enabled: false
+            view: false
+            level: 2
+            separator_before: false
+        order: 1
+        caret:
+            position: "prepend"
+        html:
+            name: "span"
+            unique: false
+            attributes:
+                class: "choice text-primary"
+            marker: "[--]"
+            bgColor: "text-info"
+            bgColorText: true
+        xml:
+            name: "choice" # Mais c'est bien un choice qui est inséré
+            unique: false
+            contains:
+                abbr: "default" # Et qui contient les éléments propres à la représentation d'une abbréviation
+                expan: "emptyContent"
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: true
+            children: ""
