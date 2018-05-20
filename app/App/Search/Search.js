@@ -32,14 +32,10 @@ angular.module('transcript.app.search', ['ui.router'])
             if($scope.entities[iEntity].will.hostingOrganization === undefined) {
                 $scope.entities[iEntity].will.hostingOrganization = {name: null};
             }
-            if($scope.entities[iEntity].will.testator.placeOfBirthNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfBirthNormalized.name = $scope.entities[iEntity].will.testator.placeOfBirthNormalized.names[0].name;
-            } else if($scope.entities[iEntity].will.testator.placeOfBirthNormalized === undefined) {
+            if($scope.entities[iEntity].will.testator.placeOfBirthNormalized === undefined) {
                 $scope.entities[iEntity].will.testator.placeOfBirthNormalized = {name: null};
             }
-            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized !== undefined && $scope.entities[iEntity].will.testator.placeOfDeathNormalized !== null && $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names.length > 0) {
-                $scope.entities[iEntity].will.testator.placeOfDeathNormalized.name = $scope.entities[iEntity].will.testator.placeOfDeathNormalized.names[0].name;
-            } else if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
+            if($scope.entities[iEntity].will.testator.placeOfDeathNormalized === undefined || $scope.entities[iEntity].will.testator.placeOfDeathNormalized === null) {
                 $scope.entities[iEntity].will.testator.placeOfDeathNormalized = {name: null};
             }
 

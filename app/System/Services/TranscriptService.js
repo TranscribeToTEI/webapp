@@ -120,7 +120,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                     //$log.debug(tag.xml);
                     if(tag.xml.unique === true) {
-                        replace = "<"+tag.xml.name+"(\/>|\s+(.*?)\/>)";
+                        replace = "<"+tag.xml.name+"(\/>|\\s+(.*?)\/>)";
                         let regExp = new RegExp(replace,"g");
                         encodeLiveRender = encodeLiveRender.replace(regExp, function(match, attributesString, index, original) {
                             return functions.tagConstruction(tag, "singleTag", functions.extractAttributes(attributesString), null, isMicroObject);
@@ -247,6 +247,9 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                     break;
                                 case "superscript-underlined":
                                     value = "text-sup text-underlined";
+                                    break;
+                                case "superscript-double-underlined":
+                                    value = "text-sup text-double-underlined";
                                     break;
                                 case "capital-letters":
                                     value = "text-uppercase";

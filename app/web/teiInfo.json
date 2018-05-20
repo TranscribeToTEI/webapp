@@ -150,6 +150,14 @@
               "label": "page du testament"
             },
             {
+              "value": "codicil-page",
+              "label": "page du codicille"
+            },
+            {
+              "value": "codicil-page-part",
+              "label": "partie d'une page du codicille"
+            },
+            {
               "value": "will-page-part",
               "label": "partie d'une page du testament"
             },
@@ -172,7 +180,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "<surfaceGrp type=\"will-page\" n=\"02\"><surface type=\"will-page-part\" n=\"02a\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02a.jpg\" xml:id=\"t-0001_vue-02a_jpg\"> </graphic><!--<graphic url=\"TIFF/FRAN_Poilus_t-0001_02a.tif\" xml:id=\"t-0001_vue-02a_tif\"/>--></surface><surface type=\"will-page-part\" n=\"02b\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"t-0001_vue-02b_jpg\"/><!--<graphic url=\"TIFF/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"t-0001_vue-02b_tif\" />--></surface></surfaceGrp>"
+            "example": "<surfaceGrp type=\"will-page\" n=\"02\"><surface type=\"will-page-part\" n=\"02a\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02a.jpg\" xml:id=\"t-0001_vue-02a_jpg\"> </graphic></surface><surface type=\"will-page-part\" n=\"02b\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_02b.jpg\" xml:id=\"t-0001_vue-02b_jpg\"/></surface></surfaceGrp>"
           }
         ]
       },
@@ -227,7 +235,7 @@
         "exemplum": [
           {
             "source": null,
-            "example": "<surface type=\"will-page\" n=\"01\"><graphic url=\"TIFF/FRAN_Poilus_t-0001_01.tif\" xml:id=\"t-0001_vue-01_jpg\"/><!--<graphic url=\"JPEG/FRAN_Poilus_t-0001_01.jpg\" xml:id=\"t-0001_vue-01_tif\" />--></surface>"
+            "example": "<surface type=\"will-page\" n=\"01\"><graphic url=\"JPEG/FRAN_Poilus_t-0001_01.jpg\" xml:id=\"FRAN_t-0001_01\"/></surface>"
           }
         ]
       },
@@ -262,7 +270,7 @@
             "content": "contient une subdivision dans le texte préliminaire, dans le corps d’un texte ou dans le texte postliminaire."
           }
         ],
-        "projectDescription": "Pour ce qui est de la transcription, l'élément div englobe soit le texte du testament, soit le texte d'une enveloppe. Il est aussi utilisé pour englober les notes explicatives et commentaires dans l'élément back.",
+        "projectDescription": "Pour ce qui est de la transcription, l'élément div englobe soit le texte du testament, soi le texte d'un codicille lorsque celui-ci est un document à part entière, soit le texte d'une enveloppe. Il est aussi utilisé pour englober les notes explicatives et commentaires dans l'élément back.",
         "gloss": [
           {
             "date": "2007-06-12",
@@ -281,8 +289,10 @@
         ]
       },
       "content": [
+        "note",
         "pb",
-        "note"
+        "fw",
+        "p"
       ],
       "attributes": {
         "type": {
@@ -302,6 +312,10 @@
               "label": "le texte de l'enveloppe"
             },
             {
+              "value": "codicil",
+              "label": "le texte du codicille"
+            },
+            {
               "value": "notes",
               "label": "notes"
             }
@@ -309,6 +323,68 @@
         }
       },
       "textAllowed": false
+    },
+    "fw": {
+      "doc": {
+        "descriptions": [
+          {
+            "date": "2007-06-12",
+            "content": "permet d'encoder un titre courant (en haut ou en bas de la page), une réclame ou une autre information comparable, qui apparaît sur la page courante."
+          }
+        ],
+        "projectDescription": "Cet élément est utilisé lorsque l'unité de transcription comporte un titre courant en haut de la page, écrit par le testateur lui-même, par ex. le mot \"suite\", que l'on trouve rarement en haut de la deuxième ou de la troisième page du testament.",
+        "gloss": [
+          {
+            "date": "2018-04-13",
+            "content": "titre courant"
+          }
+        ]
+      },
+      "content": [
+        "lb",
+        "choice",
+        "gap",
+        "unclear",
+        "supplied",
+        "damage",
+        "add",
+        "del",
+        "subst",
+        "app",
+        "hi",
+        "placeName",
+        "date",
+        "persName",
+        "orgName",
+        "foreign",
+        "space",
+        "metamark"
+      ],
+      "attributes": {
+        "place": {
+          "id": "place",
+          "label": "à gauche",
+          "usage": "rec",
+          "type": "closed",
+          "desc": "Cet attribut précise la position du titre courant sur la page.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
+      "textAllowed": true
     },
     "head": {
       "doc": {
@@ -351,9 +427,34 @@
         "orgName",
         "date",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
-      "attributes": [],
+      "attributes": {
+        "rend": {
+          "id": "rend",
+          "label": "à gauche",
+          "usage": "opt",
+          "type": "open",
+          "desc": "Cet attribut est utilisé pour spécifier à quel endroit, sur la page, se trouve le composant textuel concerné.",
+          "valDesc": null,
+          "values": [
+            {
+              "value": "centered",
+              "label": "centré"
+            },
+            {
+              "value": "right",
+              "label": "à droite"
+            },
+            {
+              "value": "left",
+              "label": "à gauche"
+            }
+          ]
+        }
+      },
       "textAllowed": true
     },
     "dateline": {
@@ -402,7 +503,9 @@
         "seg",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "rend": {
@@ -474,7 +577,9 @@
         "term",
         "ref",
         "bibl",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "rend": {
@@ -544,7 +649,10 @@
         "seg",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark",
+        "address"
       ],
       "attributes": {
         "rend": {
@@ -595,6 +703,13 @@
         ]
       },
       "content": [
+        "space",
+        "metamark",
+        "pb",
+        "p",
+        "space",
+        "metamark",
+        "pb",
         "p",
         "list",
         "signed"
@@ -648,7 +763,14 @@
         ]
       },
       "content": [
-        "item"
+        "space",
+        "metamark",
+        "pb",
+        "item",
+        "item",
+        "space",
+        "metamark",
+        "pb"
       ],
       "attributes": {
         "rend": {
@@ -684,7 +806,7 @@
             "content": "contient un composant d'une liste."
           }
         ],
-        "projectDescription": "Cet élément est utilisé dans l'élément list, le plus souvent pour encoder la description d'un bien dans une liste de biens.",
+        "projectDescription": "Cet élément est utilisé dans l'élément list, le plus souvent pour encoder la description d'un bien dans une liste de biens. Un composant de liste peut dans certains cas rares contenir lui-mêe une liste (listes imbriquées).",
         "gloss": [
           {
             "date": "",
@@ -718,7 +840,10 @@
         "seg",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "list",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "rend": {
@@ -790,7 +915,9 @@
         "persName",
         "orgName",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "type": {
@@ -902,7 +1029,9 @@
         "persName",
         "orgName",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "rend": {
@@ -1011,7 +1140,10 @@
         "gap",
         "foreign",
         "seg",
-        "surplus"
+        "surplus",
+        "space",
+        "metamark",
+        "choice"
       ],
       "attributes": [],
       "textAllowed": true
@@ -1080,7 +1212,10 @@
         "unclear",
         "damage",
         "hi",
-        "gap"
+        "gap",
+        "space",
+        "metamark",
+        "choice"
       ],
       "attributes": {
         "type": {
@@ -1201,7 +1336,9 @@
         "supplied",
         "gap",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "unit": {
@@ -1504,7 +1641,9 @@
         "orgName",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "reason": {
@@ -1615,7 +1754,11 @@
         "term",
         "note",
         "ref",
-        "foreign"
+        "foreign",
+        "list",
+        "space",
+        "metamark",
+        "signed"
       ],
       "attributes": {
         "place": {
@@ -1696,7 +1839,9 @@
         "seg",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": [],
       "textAllowed": true
@@ -1772,7 +1917,9 @@
         "seg",
         "term",
         "ref",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "rend": {
@@ -1797,6 +1944,10 @@
             },
             {
               "value": "superscript-underlined",
+              "label": "en exposant et souligné"
+            },
+            {
+              "value": "superscript-double-underlined",
               "label": "en exposant et souligné"
             },
             {
@@ -1933,7 +2084,7 @@
         },
         "unit": {
           "id": "unit",
-          "label": "lignes",
+          "label": "caractères",
           "usage": "rec",
           "type": "closed",
           "desc": "Cet attribut est utiisé, conjointement avec l'attribut quantity, pour spécifier une mesure de l'espace laissé blanc par le testateur. Il sert à indiquer l'unité de mesure.",
@@ -1946,6 +2097,10 @@
             {
               "value": "lines",
               "label": "lignes"
+            },
+            {
+              "value": "chars",
+              "label": "caractères"
             }
           ]
         },
@@ -2074,7 +2229,9 @@
         "del",
         "subst",
         "app",
-        "hi"
+        "hi",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "type": {
@@ -2187,7 +2344,9 @@
         "surname",
         "forename",
         "affiliation",
-        "ref"
+        "ref",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "ref": {
@@ -2280,7 +2439,9 @@
         "placeName",
         "orgName",
         "ref",
-        "num"
+        "num",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "type": {
@@ -2377,7 +2538,9 @@
         "geogName",
         "geogFeat",
         "settlement",
-        "ref"
+        "ref",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "ref": {
@@ -2479,7 +2642,9 @@
         "persName",
         "orgName",
         "seg",
-        "ref"
+        "ref",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "type": {
@@ -2569,7 +2734,9 @@
         "orgName",
         "seg",
         "term",
-        "ref"
+        "ref",
+        "space",
+        "metamark"
       ],
       "attributes": {
         "xml:lang": {
@@ -2707,6 +2874,8 @@
         "term",
         "ref",
         "foreign",
+        "space",
+        "metamark",
         "hi",
         "ref",
         "bibl",
@@ -2833,7 +3002,9 @@
         "orgName",
         "seg",
         "term",
-        "foreign"
+        "foreign",
+        "space",
+        "metamark"
       ],
       "attributes": [],
       "textAllowed": true
@@ -3094,7 +3265,7 @@
             "content": "contient une référence bibliographique faiblement structurée dans laquelle les sous-composants peuvent ou non être explicitement balisés."
           }
         ],
-        "projectDescription": "une référence bibliographique doit être saisie conformément à la norme française AFNOR en vigueur, ou à défaut aux conventions définies pour le projet. S'il s'agit de décrire une ressource imprimée, bibl doit obligatoirement contenir au moins un élément title. S'il s'agit de décrire une source manuscrite, bibl contient un élément msIdentifier. bibl peut aussi contenir un élémnt ref pour donner l'URI d'une ressource numérique ou à toute autre ressource web.",
+        "projectDescription": "une référence bibliographique doit être saisie conformément à la norme française AFNOR en vigueur, ou à défaut aux conventions définies pour le projet. S'il s'agit de décrire une ressource imprimée, bibl doit obligatoirement contenir au moins un élément title. S'il s'agit de décrire une source manuscrite, bibl contient un élément msIdentifier. bibl peut aussi contenir un élément ref pour donner l'URI d'une ressource numérique ou à toute autre ressource web.",
         "gloss": [
           {
             "date": "2009-01-06",
@@ -3522,7 +3693,7 @@
         ]
       },
       "content": [
-        "addrLine",
+        "addressLine",
         "street",
         "district"
       ],
@@ -3969,7 +4140,9 @@
         "add",
         "del",
         "subst",
-        "ref"
+        "ref",
+        "space",
+        "metamark"
       ],
       "attributes": [],
       "textAllowed": true

@@ -11,6 +11,7 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rendu</h3>
@@ -26,6 +27,7 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Guides</h3>
@@ -41,6 +43,7 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Documentation</h3>
@@ -56,6 +59,7 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm active" title="Information"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
@@ -73,6 +77,7 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Historique : version #{{ transcriptArea.interaction.version.id }}</h3>
@@ -88,6 +93,7 @@
                         <button class="btn btn-sm active" title="Rechercher un identifiant"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Rechercher un identifiant</h3>
@@ -118,9 +124,24 @@
                         <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
                         <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
                         <!--<button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isNotes === true" ng-click="transcriptArea.interaction.historicalNotes.action()" title="Accéder aux notes"><i class="fa fa-sticky-note-o fa-lg" aria-hidden="true"></i></button>-->
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
                     </div>
                 </div>
                 <h3 class="card-header bg-light d-block">Saisie complexe</h3>
+            </div>
+        </div>
+        <div ng-if="transcriptArea.interaction.status == 'infoTestator'">
+            <div class="clearfix">
+                <div class="float-right">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.gotoLive()" title="Retour au rendu de la transcription"><i class="fa fa-columns fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.documentation.loadDocumentation()" ng-if="transcriptArea.ace.currentTag !== null" title="Documentation"><i class="fa fa-list-alt fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-click="transcriptArea.interaction.taxonomy.action()" title="Rechercher un identifiant" ng-if="transcriptArea.ace.currentTag && (transcriptArea.ace.currentTag.name === 'persName' || transcriptArea.ace.currentTag.name === 'orgName' || transcriptArea.ace.currentTag.name === 'placeName')"><i class="fa fa-id-badge fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm" ng-if="transcriptConfig.isExercise === false || transcriptConfig.isHelp === true" ng-click="transcriptArea.interaction.help(true, 'helpContent', true)" title="Guides"><i class="fa fa-question-circle fa-lg" aria-hidden="true"></i></button>
+                        <button class="btn btn-sm btn-danger active" ng-click="transcriptArea.interaction.infoTestator()" title="Information sur le testateur"><i class="fa fa-id-card fa-lg" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <h3 class="card-header bg-light d-block">Informations sur le testateur</h3>
             </div>
         </div>
     </div>
@@ -172,5 +193,6 @@
             <h3>Point de vigilance</h3>
             <div ng-bind="transcriptArea.interaction.alertZone.alerts[0].content"></div>
         </div>
+        <div id="div-interaction-info-testator" ng-if="transcriptArea.interaction.status == 'infoTestator'" ng-include="'/webapp/app/App/tpl/info-will.html'"></div>
     </div>
 </div>
