@@ -49,6 +49,7 @@ Le template YML d'insertion d'un groupe est le suivant :
             view: false
             level: 1|2
             separator_before: true|false
+            choicesByAttr: "rend"
         order: 1
         caret:
             position: "before|prepend|append|after"
@@ -86,7 +87,8 @@ Le template YML d'insertion d'un groupe est le suivant :
     - _enabled_ : la valeur est forcément `false`, il s'agit d'une ligne présente uniquement pour les aglo ;
     - _view_ : idem ;
     - _level_ : 1 pour les éléments de structure, 2 pour les autres ;
-    - _separator_before_ : optionnel, booléan : sert à indiquer lorsque l'on souhaite placer un séparateur (de sous-groupe) devant le bouton. Valable uniquement pour les boutons présents dans des groupes.
+    - _separator_before_ : optionnel, booléan : sert à indiquer lorsque l'on souhaite placer un séparateur (de sous-groupe) devant le bouton. Valable uniquement pour les boutons présents dans des groupes ;
+    - _choicesByAttr_ : si on veut transformer un bouton en liste d'attributs, on utilise cette section ;
 - _order_ : découle de `btn` (mais il n'est pas dedans), est optionnel de la même manière que `btn`. Indique l'ordre d'apparition du bouton dans les différentes lignes de boutons ou groupe.
 - _caret_ : découle de `btn` (mais il n'est pas dedans), est optionnel de la même manière que `btn`. Section dédiée à la gestion du positionnement du curseur lorsque l'on clique sur le bouton
     - _position_ : accepte 4 valeurs (`"before|prepend|append|after"`), en fonction de là où l'on souhaite faire apparaitre le curseur dans la situation où l'on sélectionne un block de texte puis on lui applique une balise. Par défaut, la valeur est `prepend`.

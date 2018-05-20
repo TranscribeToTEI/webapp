@@ -938,6 +938,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 });
             },
             buildListTagToolbar: function(transcriptArea, teiInfo, item, transcriptConfig) {
+                console.log(item);
                 let htmlToReturn = "";
 
                 /* -------------------------------------------------------------------------------------------------- */
@@ -949,6 +950,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     let button = transcriptArea.toolbar.tags[iT];
 
                     if(button.btn && button.btn.btn_group === item.id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.id)))) {
+                        console.log(button);
                         listTags.push(button);
                     }
                 }
@@ -1053,6 +1055,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         }
                     }
                 }
+                //console.log(htmlToReturn);
                 return htmlToReturn;
                 /* End: Creation of the DOM ------------------------------------------------------------------------- */
             },

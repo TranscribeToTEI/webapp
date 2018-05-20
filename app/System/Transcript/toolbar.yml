@@ -248,6 +248,34 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry: 
             enable: false
+    -
+        id: "fw"
+        btn:
+            label: false
+            title: "Signaler un titre courant"
+            label_forced: true
+            icon: "fa fa-long-arrow-right"
+            btn_group: false
+            enabled: false
+            view: false
+            level: 1
+        order: 9
+        caret:
+            position: "after"
+        html:
+            name: "div"
+            unique: false
+            attributes:
+                class: "fw"
+            icon:
+                position: "prepend"
+        xml:
+            name: "fw"
+            unique: false
+            replicateOnEnter: false
+            replicateOnCtrlEnter: false
+        complex_entry:
+            enable: false
     # Lvl2
     -
         id: "hi"

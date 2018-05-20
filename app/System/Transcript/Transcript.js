@@ -261,9 +261,9 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                 for (let iPB in $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values) {
                                     let value = $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values[iPB];
 
-                                    $scope.transcriptArea.toolbar.tags[tag.id + "-" + value.value] = {
+                                    $scope.transcriptArea.toolbar.tags.push({
+                                        id: tag.id + "-" + value.value,
                                         btn: {
-                                            id: btn + "-" + value.value,
                                             label: $filter('ucFirstStrict')(value.label),
                                             label_forced: true,
                                             title: $filter('ucFirstStrict')(value.label),
@@ -272,7 +272,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                             enabled: true,
                                             level: 2,
                                             separator_before: false,
-                                            proviTag: true
+                                            proviTag: true,
+                                            view: true
                                         },
                                         order: countNewButtons,
                                         lType: "btn",
@@ -299,11 +300,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                             enable: true,
                                             children: ""
                                         }
-                                    };
-                                    $scope.transcriptArea.toolbar.level2.push($scope.transcriptArea.toolbar.tags[tag.id + "-" + value.value]);
+                                    });
+                                    $scope.transcriptArea.toolbar.level2.push($filter('filter')($scope.transcriptArea.toolbar.tags, {id: tag.id + "-" + value.value}, true)[0]);
                                     countNewButtons += 1;
                                     /* End: Creation of the attribute buttons --------------------------------------- */
                                 }
+
+                                console.log($scope.transcriptArea.toolbar.tags);
+                                console.log($scope.transcriptArea.toolbar.level2);
                             }
                         }
                     }
@@ -608,8 +612,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         }
                     }
                     /* Exercise Management -------------------------------------------------------------------------- */
-
-                    console.log(TranscriptService.getArrayFromTranscript($scope.functions.getLeftOfCursor()+$scope.functions.getRightOfCursor()));
                 });
             };
 
@@ -626,6 +628,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
              */
             $scope.undo = function (direction) {
                 if (direction === "prev") {
+                    // Ne marche pas dans le cas où on a fait un $scope.transcriptArea.ace.area = $scope.aceEditor.getValue(); auparavant
                     $scope.aceEditor.undo();
                 } else if (direction === "next" === true) {
                     $scope.aceEditor.redo();
