@@ -33,11 +33,7 @@ tags:
             title: "Marque un en-tête"
             label_forced: true
             icon: "fa fa-header"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -65,11 +61,7 @@ tags:
             title: "Ajouter une ligne de date"
             label_forced: true
             icon: "fa fa-calendar"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -97,11 +89,7 @@ tags:
             title: "Marque un paragraphe"
             label_forced: true
             icon: "fa fa-paragraph"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -129,11 +117,7 @@ tags:
             title: "Marque une liste"
             label_forced: true
             icon: "fa fa-list"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -159,11 +143,7 @@ tags:
             title: "Marque une signature"
             label_forced: true
             icon: "fa fa-skyatlas"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -191,11 +171,7 @@ tags:
             title: "Marque un post-scriptum"
             label_forced: true
             icon: ""
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: true
             enabled: false
             view: false
             level: 1
@@ -223,11 +199,7 @@ tags:
             title: "Marque un espace"
             label_forced: true
             icon: "fa fa-arrows-v"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: false
             enabled: false
             view: false
             level: 1
@@ -255,11 +227,7 @@ tags:
             title: "Signaler une marque"
             label_forced: true
             icon: "fa fa-ellipsis-v"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: false
             enabled: false
             view: false
             level: 1
@@ -288,11 +256,7 @@ tags:
             title: "Marquer le texte"
             label_forced: true
             icon: "fa fa-codepen"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -319,11 +283,7 @@ tags:
             title: "Item dans une liste"
             label_forced: false
             icon: "fa fa-list"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -347,11 +307,7 @@ tags:
             title: "Changement de ligne"
             label_forced: false
             icon: "fa fa-level-down"
-            btn_class: ""
             btn_group: false
-            btn_is_group: false
-            allow_root: true
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -373,24 +329,6 @@ tags:
     # Particularité de l'écriture :
     -
         id: "choice"
-#        btn:
-#            label: "Particularité de l'écriture"
-#            label_forced: true
-#            title: "Consigner un micro-phénomène de l'écriture"
-#            icon: "fa fa-adjust"
-#            btn_class: ""
-#            btn_group: false
-#            btn_is_group: "microPhenomena"
-#            allow_root: true
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#            group_children: ["renderingDifficulties"]
-#        order: false
-#        caret:
-#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -412,11 +350,7 @@ tags:
             label_forced: true
             title: "Signaler la présence d'une abréviation"
             icon: "fa fa-compress"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -445,23 +379,6 @@ tags:
             children: ""
     -
         id: "abbr"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Signaliser la présence d'une abbréviation"
-#            icon: "fa fa-compress"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#        order: 1
-#        caret:
-#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -490,23 +407,6 @@ tags:
             enable: false
     -
         id: "expan"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Déplier une abbréviation"
-#            icon: "fa fa-expand"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#        order: 2
-#        caret:
-#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -527,11 +427,7 @@ tags:
             label_forced: true
             title: "Signaliser une faute"
             icon: "fa fa-thumbs-down"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -560,24 +456,6 @@ tags:
             children: ""
     -
         id: "sic"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Signaler une faute"
-#            icon: "fa fa-thumbs-down"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: true
-#            children: "surplus"
-#        order: 3
-#        caret:
-#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -606,23 +484,6 @@ tags:
             enable: false
     -
         id: "corr"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Correction d'une faute"
-#            icon: "fa fa-thumbs-up"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#        order: 4
-#        caret:
-#            position: "prepend"
         html:
             name: "span"
             unique: false
@@ -651,105 +512,6 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry:
             enable: false
-#   -
-#        id: "choiceOrig"
-#        btn:
-#            label: "Marquer une forme ancienne"
-#            label_forced: true
-#            title: "Signaliser une forme ancienne"
-#            icon: "fa fa-pagelines"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#        order: 3
-#        caret:
-#            position: "prepend"
-#        html:
-#            name: "span"
-#            unique: false
-#            attributes:
-#                class: "choice text-primary"
-#            marker: "[--]"
-#        xml:
-#            name: "choice"
-#            unique: false
-#            contains:
-#                orig: "default"
-#                reg: "emptyContent"
-#            replicateOnEnter: false
-#            replicateOnCtrlEnter: false
-#        complex_entry:
-#            enable: true
-#            children: ""
-#    -
-#        id: "orig"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Marquer une forme ancienne"
-#            icon: "fa fa-pagelines"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: true
-#        order: 5
-#        caret:
-#            position: "prepend"
-#        html:
-#            name: "span"
-#            unique: false
-#            attributes:
-#                class: "orig"
-#        xml:
-#            name: "orig"
-#            unique: false
-#            replicateOnEnter: false
-#            replicateOnCtrlEnter: false
-#        complex_entry:
-#            enable: false
-#    -
-#        id: "reg"
-#        btn:
-#            label: false
-#            label_forced: false
-#            title: "Préciser une forme correcte"
-#            icon: "fa fa-leaf"
-#            btn_class: ""
-#            btn_group: "microPhenomena"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#            separator_before: false
-#        order: 6
-#        caret:
-#            position: "prepend"
-#        html:
-#            name: "span"
-#            unique: false
-#            attributes:
-#                class: "reg"
-#                hidden: "hidden"
-#        xml:
-#            name: "reg"
-#            unique: false
-#            replicateOnEnter: false
-#            replicateOnCtrlEnter: false
-#        complex_entry:
-#            enable: false
     -
         id: "surplus"
         btn:
@@ -757,12 +519,8 @@ tags:
             title: "Marquer le texte comme superflu"
             label_forced: false
             icon: "fa fa-pause"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
             parent: "sic"
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -795,11 +553,7 @@ tags:
             title: "Marquer le texte comme ajouté"
             label_forced: false
             icon: "fa fa-indent"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -827,11 +581,7 @@ tags:
             title: "Marquer le texte comme supprimé"
             label_forced: false
             icon: "fa fa-strikethrough"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -856,11 +606,7 @@ tags:
             title: "Marquer le texte comme remplacé"
             label_forced: false
             icon: "fa fa-pencil"
-            btn_class: ""
             btn_group: "microPhenomena"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -892,11 +638,7 @@ tags:
             title: "Le texte est endommagé"
             label_forced: false
             icon: "fa fa-yelp"
-            btn_class: ""
             btn_group: "renderingDifficulties"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -926,11 +668,7 @@ tags:
             title: "Texte restitué par le transcripteur"
             label_forced: false
             icon: "fa fa-star-half-o"
-            btn_class: ""
             btn_group: "renderingDifficulties"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -960,11 +698,7 @@ tags:
             title: "Texte transcrit incertain"
             label_forced: false
             icon: "fa fa-star-half"
-            btn_class: ""
             btn_group: "renderingDifficulties"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -994,11 +728,7 @@ tags:
             title: "Présence d'un manque dans la transcription"
             label_forced: false
             icon: "fa fa-square-o"
-            btn_class: ""
             btn_group: "renderingDifficulties"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1031,11 +761,7 @@ tags:
             title: "Marquer une date"
             label_forced: false
             icon: "fa fa-calendar-o"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1063,11 +789,7 @@ tags:
             title: "Marquer un nom de personne"
             label_forced: false
             icon: "fa fa-user"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1095,11 +817,7 @@ tags:
             title: "Marquer un nom de famille"
             label_forced: false
             icon: "fa fa-users"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1127,11 +845,7 @@ tags:
             title: "Marquer un nom de lieu"
             label_forced: false
             icon: "fa fa-map-marker"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1159,11 +873,7 @@ tags:
             title: "Baliser une adresse"
             label_forced: true
             icon: "fa fa-envelope-o"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1193,11 +903,7 @@ tags:
             title: "Baliser une ligne d'adresse postale dans le corps de la transcription"
             label_forced: true
             icon: "fa fa-envelope-o"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1223,11 +929,7 @@ tags:
             title: "Marquer un nom d'organisation"
             label_forced: false
             icon: "fa fa-university"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1255,11 +957,7 @@ tags:
             title: "Marquer un terme"
             label_forced: false
             icon: "fa fa-flag-o"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1287,11 +985,7 @@ tags:
             title: "Marquer une langue autre que le français"
             label_forced: false
             icon: "fa fa-globe"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1319,11 +1013,7 @@ tags:
             title: "Segment de texte"
             label_forced: false
             icon: "fa fa-arrows-h"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1351,11 +1041,7 @@ tags:
             title: "Note d'apparat critique"
             label_forced: false
             icon: "fa fa-bookmark-o"
-            btn_class: ""
             btn_group: "notes"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1388,11 +1074,7 @@ tags:
             title: "Pointer vers une note sur le contenu"
             label_forced: false
             icon: "fa fa-tag"
-            btn_class: ""
             btn_group: "notes"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1413,20 +1095,6 @@ tags:
             enable: false
     -
         id: "lem"
-#        btn:
-#            label: false
-#            title: "Leçon textuelle"
-#            label_forced: false
-#            icon: "fa fa-graduation-cap"
-#            btn_class: ""
-#            btn_group: "notes"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#        order: 2
         caret:
             position: "prepend"
         html:
@@ -1449,11 +1117,7 @@ tags:
             title: "Note du testateur"
             label_forced: false
             icon: "fa fa-stack-overflow"
-            btn_class: ""
             btn_group: "semantic"
-            btn_is_group: false
-            allow_root: false
-            restrict_to_root: false
             enabled: false
             view: false
             level: 2
@@ -1473,33 +1137,3 @@ tags:
             replicateOnCtrlEnter: false
         complex_entry:
             enable: false
-#    -
-#        id: "bibl"
-#        btn:
-#            label: false
-#            title: "Référence bibliographique"
-#            label_forced: false
-#            icon: "fa fa-book"
-#            btn_class: ""
-#            btn_group: "notesRef"
-#            btn_is_group: false
-#            allow_root: false
-#            restrict_to_root: false
-#            enabled: false
-#            view: false
-#            level: 2
-#        order: 2
-#        caret:
-#            position: "prepend"
-#        html:
-#            name: "span"
-#            unique: false
-#            attributes:
-#                class: "bibl"
-#        xml:
-#            name: "bibl"
-#            unique: false
-#            replicateOnEnter: false
-#            replicateOnCtrlEnter: false
-#        complex_entry:
-#            enable: false

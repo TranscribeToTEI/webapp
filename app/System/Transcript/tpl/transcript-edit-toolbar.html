@@ -35,7 +35,7 @@
                 </div>
                 <button class="btn btn-sm"
                         ng-click="transcriptArea.ace.addTag(item.id, (item.xml.attributes | internalAttributesRender))"
-                        ng-if="item.lType == 'btn' && item.btn.level == 2 && item.btn.allow_root == true && item.btn.btn_group == false && item.btn.btn_is_group == false && item.btn.view == true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:item.id))"
+                        ng-if="item.lType == 'btn' && item.btn.level == 2 && item.btn.btn_group == false && item.btn.view == true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && transcriptConfig.tagsList | contains:item.id))"
                         title="{{ item.btn.title }}"
                         ng-disabled="item.btn.enabled == false"
                         ng-class="{'disabled': item.btn.enabled == false}"

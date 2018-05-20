@@ -216,7 +216,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                             tag.btn.enabled = false; // Default state, especially for level1 btn
                             tag.btn.view = true; // Default state, especially for level2 btn
 
-                            if (($scope.transcriptArea.ace.currentTag === undefined || $scope.transcriptArea.ace.currentTag === null) && tag.btn.allow_root === true && tag.btn.level === 1) {
+                            if (($scope.transcriptArea.ace.currentTag === undefined || $scope.transcriptArea.ace.currentTag === null) && tag.btn.level === 1) {
                                 // If the caret is at the root of the doc, we allow root items == true
                                 tag.btn.view = true;
                                 tag.btn.enabled = true;
@@ -268,11 +268,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                             label_forced: true,
                                             title: $filter('ucFirstStrict')(value.label),
                                             icon: "",
-                                            btn_class: "",
                                             btn_group: tag.id,
-                                            btn_is_group: false,
-                                            allow_root: false,
-                                            restrict_to_root: false,
                                             enabled: true,
                                             level: 2,
                                             separator_before: false,
@@ -424,11 +420,11 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         let line = $scope.aceEditor.getCursorPosition().row,
                             column = $scope.aceEditor.getCursorPosition().column;
 
-                        /* replicateOnCtrlEnter Management :
-                         * Conditions: if the tag has replicateOnCtrlEnter: true in the config, and the tag is empty and smartTEI is available
+                        /* replicateOnEnter Management :
+                         * Conditions: if the tag has replicateOnEnter: true in the config, and the tag is empty and smartTEI is available
                          * Result: remove the tag and jump to the end of the parent tag
                          */
-                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
+                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
                             $scope.aceSession.getDocument().remove(new AceRange($scope.transcriptArea.ace.currentTag.startTag.start.row, $scope.transcriptArea.ace.currentTag.startTag.start.column - 1, $scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1));
                             $scope.$apply(function () {
                                 $scope.updateTEIElementInformation('Enter');

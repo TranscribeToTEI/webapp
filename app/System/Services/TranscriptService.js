@@ -884,7 +884,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                         teiElement.parents = functions.getTEIElementParents(teiElement.parent, []);
                         teiElement.parents.push(teiElement.parent);
 
-                        if ($filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn !== undefined && $filter('filter')(tags, {xml: {name: teiElement.name}}, true)[0].btn.allow_root === true && teiElement.parent === null) {
+                        if (teiElement.parent === null) {
                             teiElement.parent = null;
                             teiElement.parents = [];
                         }
