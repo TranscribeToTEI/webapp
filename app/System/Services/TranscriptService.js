@@ -137,20 +137,21 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                                 if (TEIElement !== null) {
                                     if (tag.xml.name === "choice") {
+                                        TEIElement.children = functions.getArrayFromTranscript(TEIElement.content).root;
                                         let content = "",
                                             prefix = "";
                                         //$log.debug(TEIElement);
 
-                                        for (let iC in TEIElement.children) {
-                                            let child = TEIElement.children[iC];
-                                            if (child.name === "corr") {
-                                                content = child.content;
+                                        for (let child in TEIElement.children) {
+                                            let childContent = TEIElement.children[child];
+                                            if (child === "corr") {
+                                                content = childContent;
                                                 prefix = "Forme correcte : ";
-                                            } else if (child.name === "reg") {
-                                                content = child.content;
+                                            } else if (child === "reg") {
+                                                content = childContent;
                                                 prefix = "Forme régulière : ";
-                                            } else if (child.name === "expan") {
-                                                content = child.content;
+                                            } else if (child === "expan") {
+                                                content = childContent;
                                                 prefix = "Forme complète : ";
                                             }
                                         }
@@ -161,12 +162,13 @@ angular.module('transcript.service.transcript', ['ui.router'])
                                             prefix: prefix
                                         }
                                     } else if (tag.xml.name === "app") {
+                                        TEIElement.children = functions.getArrayFromTranscript(TEIElement.content).root;
                                         let content = "";
 
-                                        for (let iC in TEIElement.children) {
-                                            let child = TEIElement.children[iC];
-                                            if (child.name === "note") {
-                                                content = child.content;
+                                        for (let child in TEIElement.children) {
+                                            let childContent = TEIElement.children[child];
+                                            if (child === "note") {
+                                                content = childContent;
                                             }
                                         }
 
@@ -337,13 +339,13 @@ angular.module('transcript.service.transcript', ['ui.router'])
 
                 if(extraTooltip !== null) {
                     if(extraTooltip.type === 'tooltip') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" data-original-title="' + extraTooltip.prefix + extraTooltip.content + '" title="' + extraTooltip.prefix + extraTooltip.content + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
                     } else if(extraTooltip.type === 'popover') {
                         attributesHtml += ' data-toggle="popover" title="' + extraTooltip.title + '" data-content="' + extraTooltip.content + '" onmouseenter="$(this).popover({container:\'#transcriptContainerFullScreen\'})" ';
                     }
                 } else if(tag.html.extra !== undefined) {
                     if(tag.html.extra === 'tooltip') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" data-original-title="' + extraTooltip.prefix + extraTooltip.content + '" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
                     }
                 }
                 /* End: Attributes management ----------------------------------------------------------------------- */
@@ -938,7 +940,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 });
             },
             buildListTagToolbar: function(transcriptArea, teiInfo, item, transcriptConfig) {
-                console.log(item);
+                //console.log(item);
                 let htmlToReturn = "";
 
                 /* -------------------------------------------------------------------------------------------------- */
@@ -950,7 +952,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     let button = transcriptArea.toolbar.tags[iT];
 
                     if(button.btn && button.btn.btn_group === item.id && button.btn.view === true && (transcriptConfig.isExercise === false || (transcriptConfig.isExercise === true && $filter('contains')(transcriptConfig.tagsList, button.id)))) {
-                        console.log(button);
+                        //console.log(button);
                         listTags.push(button);
                     }
                 }

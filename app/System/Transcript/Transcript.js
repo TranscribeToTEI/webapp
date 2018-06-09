@@ -198,6 +198,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         level2.splice(index, 1);
                     }
                 });
+                $scope.transcriptArea.toolbar.tags.forEach(function(item, index, level2) {
+                    if(item.lType === "group" && item.proviGroup === true) {
+                        level2.splice(index, 1);
+                    } else if(item.lType === "btn" && item.btn.proviTag === true) {
+                        //console.log(item);
+                        level2.splice(index, 1);
+                    }
+                });
                 for (let grp in $scope.transcriptArea.toolbar.groups) {
                     if($scope.transcriptArea.toolbar.groups[grp].proviGroup !== undefined) {
                         delete $scope.transcriptArea.toolbar.groups[grp];
@@ -260,50 +268,53 @@ angular.module('transcript.system.transcript', ['ui.router'])
                                 let countNewButtons = 1;
                                 for (let iPB in $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values) {
                                     let value = $scope.teiInfo[tag.xml.name].attributes[tag.btn.choicesByAttr].values[iPB];
+                                    if($filter('filter')($scope.transcriptArea.toolbar.tags, {id: tag.id + "-" + value.value}, true).length === 0) {
+                                        console.log(value);
 
-                                    $scope.transcriptArea.toolbar.tags.push({
-                                        id: tag.id + "-" + value.value,
-                                        btn: {
-                                            label: $filter('ucFirstStrict')(value.label),
-                                            label_forced: true,
-                                            title: $filter('ucFirstStrict')(value.label),
-                                            icon: "",
-                                            btn_group: tag.id,
-                                            enabled: true,
-                                            level: 2,
-                                            separator_before: false,
-                                            proviTag: true,
-                                            view: true
-                                        },
-                                        order: countNewButtons,
-                                        lType: "btn",
-                                        caret: {
-                                            position: "prepend"
-                                        },
-                                        html: {
-                                            name: "span",
-                                            unique: false,
-                                            attributes: {
-                                                class: "hi"
-                                            }
-                                        },
-                                        xml: {
-                                            name: "hi",
-                                            attributes: {
-                                                rend: value.value
+                                        $scope.transcriptArea.toolbar.tags.push({
+                                            id: tag.id + "-" + value.value,
+                                            btn: {
+                                                label: $filter('ucFirstStrict')(value.label),
+                                                label_forced: true,
+                                                title: $filter('ucFirstStrict')(value.label),
+                                                icon: "",
+                                                btn_group: tag.id,
+                                                enabled: true,
+                                                level: 2,
+                                                separator_before: false,
+                                                proviTag: true,
+                                                view: true
                                             },
-                                            unique: false,
-                                            replicateOnEnter: false,
-                                            replicateOnCtrlEnter: false
-                                        },
-                                        complex_entry: {
-                                            enable: true,
-                                            children: ""
-                                        }
-                                    });
-                                    $scope.transcriptArea.toolbar.level2.push($filter('filter')($scope.transcriptArea.toolbar.tags, {id: tag.id + "-" + value.value}, true)[0]);
-                                    countNewButtons += 1;
-                                    /* End: Creation of the attribute buttons --------------------------------------- */
+                                            order: countNewButtons,
+                                            lType: "btn",
+                                            caret: {
+                                                position: "prepend"
+                                            },
+                                            html: {
+                                                name: "span",
+                                                unique: false,
+                                                attributes: {
+                                                    class: tag.id
+                                                }
+                                            },
+                                            xml: {
+                                                name: tag.id,
+                                                attributes: {
+                                                    rend: value.value
+                                                },
+                                                unique: false,
+                                                replicateOnEnter: false,
+                                                replicateOnCtrlEnter: false
+                                            },
+                                            complex_entry: {
+                                                enable: true,
+                                                children: ""
+                                            }
+                                        });
+                                        $scope.transcriptArea.toolbar.level2.push($filter('filter')($scope.transcriptArea.toolbar.tags, {id: tag.id + "-" + value.value}, true)[0]);
+                                        countNewButtons += 1;
+                                        /* End: Creation of the attribute buttons --------------------------------------- */
+                                    }
                                 }
 
                                 console.log($scope.transcriptArea.toolbar.tags);
@@ -628,7 +639,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
              */
             $scope.undo = function (direction) {
                 if (direction === "prev") {
-                    // Ne marche pas dans le cas où on a fait un $scope.transcriptArea.ace.area = $scope.aceEditor.getValue(); auparavant
                     $scope.aceEditor.undo();
                 } else if (direction === "next" === true) {
                     $scope.aceEditor.redo();
@@ -717,7 +727,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 }
 
                 //Special cases:
-                if (tag.xml.name === "note" && parent !== undefined && parent.xml.name === "app") {
+                if (tag.xml.name === "note" && parent !== undefined && parent !== null && parent.xml.name === "app") {
                     //In case of note from app context, we add the resp attribute
                     requiredAttributes += $scope.functions.constructAttribute("resp", null);
                 }
@@ -768,7 +778,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.aceEditor.getSelection().moveCursorTo(lineNumber + 1, 4);
                     $scope.aceEditor.focus();
                 }
-                $scope.transcriptArea.ace.area = $scope.aceEditor.getValue();
             };
             /* Tags Management ------------------------------------------------------------------------------------------ */
 
@@ -827,7 +836,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     $scope.aceEditor.focus();
                     $scope.updateTEIElementInformation("addAttribute");
                 }
-                $scope.transcriptArea.ace.area = $scope.aceEditor.getValue();
             };
             /* End : Attributes Management ------------------------------------------------------------------------------ */
 
@@ -1324,12 +1332,12 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* Submit Management */
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.submit.action = function (action) {
-                if ($scope.transcript.status === "todo" && $scope.transcriptArea.ace.area !== "") {
+                if ($scope.transcript.status === "todo" && $scope.aceEditor.getValue() !== "") {
                     // Updating status value in case of first edition
                     $scope.transcript.status = "transcription";
                 }
 
-                if ($scope.transcript.content !== $scope.transcriptArea.ace.area || ($scope.submit.form.isEnded === true && !!$scope.transcriptArea.ace.area)) {
+                if ($scope.transcript.content !== $scope.aceEditor.getValue() || ($scope.submit.form.isEnded === true && !!$scope.aceEditor.getValue())) {
                     $scope.submit.loading = true;
                     //console.log($scope.aceEditor);
                     //$scope.aceEditor.setReadonly = true;
@@ -1340,7 +1348,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     }
                     $http.patch($rootScope.api + '/transcripts/' + $scope.transcript.id + '?profile=id,pageTranscript,versioning',
                         {
-                            "content": $scope.transcriptArea.ace.area,
+                            "content": $scope.aceEditor.getValue(),
                             "updateComment": $scope.submit.form.comment,
                             "status": $scope.transcript.status,
                             "continueBefore": $scope.submit.form.continueBefore,
@@ -1350,7 +1358,6 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     ).then(function (response) {
                         $log.debug(response.data);
                         $scope.transcript = response.data;
-                        $scope.transcriptArea.ace.area = $scope.transcript.content;
                         $scope.submit.loading = false;
                         $scope.submit.form.isEnded = false;
                         $scope.submit.form.comment = "";

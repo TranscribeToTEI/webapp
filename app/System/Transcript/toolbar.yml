@@ -1024,11 +1024,11 @@ tags:
             name: "span"
             unique: false
             attributes:
-                class: "term"
+                class: "foreign"
             icon:
                 position: "prepend"
         xml:
-            name: "term"
+            name: "foreign"
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
