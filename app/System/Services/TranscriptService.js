@@ -345,7 +345,7 @@ angular.module('transcript.service.transcript', ['ui.router'])
                     }
                 } else if(tag.html.extra !== undefined) {
                     if(tag.html.extra === 'tooltip') {
-                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" data-original-title="' + extraTooltip.prefix + extraTooltip.content + '" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
+                        attributesHtml += ' tooltip-placement="top" data-toggle="tooltip" data-placement="top" data-original-title="Contenu non défini" title="' + tag.btn.title + '" onmouseenter="$(this).tooltip({container:\'#transcriptContainerFullScreen\'})"';
                     }
                 }
                 /* End: Attributes management ----------------------------------------------------------------------- */

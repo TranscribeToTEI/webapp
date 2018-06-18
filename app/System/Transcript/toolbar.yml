@@ -187,6 +187,8 @@ tags:
                 position: "prepend"
         xml:
             name: "postscript"
+            contains:
+                p: "default"
             unique: false
             replicateOnEnter: false
             replicateOnCtrlEnter: false
