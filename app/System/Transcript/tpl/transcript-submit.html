@@ -5,13 +5,13 @@
                 <h3 class="card-header bg-secondary">Demande de validation</h3>
                 <div class="card-body ml-4">
                     <form>
-                        <div id="app-transcript-edit-submit-continueBefore-group" class="form-group" ng-if="entity.resources.length > 1">
+                        <div id="app-transcript-edit-submit-continueBefore-group" class="form-group" ng-if="entity.resources.length > 0 && resource.orderInWill > 1">
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" ng-model="submit.form.continueBefore" id="app-transcript-edit-submit-continueBefore" name="app-transcript-edit-submit-continueBefore" type="checkbox" value="1">
                                 <span class="custom-control-label">Cochez cette case si le paragraphe du début de page commençait sur la page précédente.</span>
                             </label>
                         </div>
-                        <div id="app-transcript-edit-submit-continueAfter-group" class="form-group" ng-if="entity.resources.length > 1">
+                        <div id="app-transcript-edit-submit-continueAfter-group" class="form-group" ng-if="entity.resources.length > 0 && resource.orderInWill < entity.resources.length+1">
                             <label class="custom-control custom-checkbox">
                                 <input class="custom-control-input" ng-model="submit.form.continueAfter" id="app-transcript-edit-submit-continueAfter" name="app-transcript-edit-submit-continueAfter" type="checkbox" value="1">
                                 <span class="custom-control-label">Cochez cette case si le paragraphe de fin de page continue sur la page suivante.</span>

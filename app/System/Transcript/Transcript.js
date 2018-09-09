@@ -13,7 +13,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
             /* ---------------------------------------------------------------------------------------------------------- */
             $scope.transcript = transcript; $log.debug(transcript);
             $scope.resource = transcript._embedded.resource;
-            $scope.entity = $scope.resource.entity;
+            $scope.entity = $scope.resource.entity; console.log($scope.entity);
             $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
             $scope.config = config;
             $scope.transcriptConfig = transcriptConfig; console.debug($scope.transcriptConfig);
@@ -439,7 +439,8 @@ angular.module('transcript.system.transcript', ['ui.router'])
                          * Conditions: if the tag has replicateOnEnter: true in the config, and the tag is empty and smartTEI is available
                          * Result: remove the tag and jump to the end of the parent tag
                          */
-                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
+                        let currentTagInTags = $filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0];
+                        if (currentTagInTags !== undefined && currentTagInTags !== null && currentTagInTags.xml.replicateOnEnter === true && $scope.transcriptArea.ace.currentTag !== null && /^\s*$/.test($scope.transcriptArea.ace.currentTag.content) && $scope.smartTEI === true) {
                             $scope.aceSession.getDocument().remove(new AceRange($scope.transcriptArea.ace.currentTag.startTag.start.row, $scope.transcriptArea.ace.currentTag.startTag.start.column - 1, $scope.transcriptArea.ace.currentTag.endTag.end.row, $scope.transcriptArea.ace.currentTag.endTag.end.column + 1));
                             $scope.$apply(function () {
                                 $scope.updateTEIElementInformation('Enter');
@@ -477,12 +478,13 @@ angular.module('transcript.system.transcript', ['ui.router'])
                          * Conditions: if current tag has replicateOnCtrlEnter: true on the config file and smartTEI is available
                          * Result: insert the same new tag after the current one and jump into
                          */
-                        if ($scope.transcriptArea.toolbar.tags[$scope.transcriptArea.ace.currentTag.name].xml.replicateOnCtrlEnter === true && $scope.smartTEI === true) {
+                        let currentTagInTags = $filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0];
+                        if (currentTagInTags !== undefined && currentTagInTags !== null && currentTagInTags.xml.replicateOnCtrlEnter === true && $scope.smartTEI === true) {
                             let row = $scope.transcriptArea.ace.currentTag.endTag.end.row,
                                 column = $scope.transcriptArea.ace.currentTag.endTag.end.column;
 
                             $scope.aceSession.insert(
-                                {row: row, column: column + 1},
+                                {row: row, column: column},
                                 "\n" + $scope.functions.constructTag($filter('filter')($scope.transcriptArea.toolbar.tags, {id: $scope.transcriptArea.ace.currentTag.name}, true)[0], "default")
                             );
                             $scope.aceEditor.getSelection().moveCursorTo(row + 1, 2 + $scope.transcriptArea.ace.currentTag.name.length);
