@@ -60,7 +60,7 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
                         return UserService.getUsers('short');
                     },
                     config: function() {
-                        return YAML.load('System/Transcript/toolbar.yml');
+                        return YAML.load('/webapp/app/System/Transcript/toolbar.yml');
                     }
                 }
             })
@@ -192,7 +192,6 @@ angular.module('transcript.admin.training.edit', ['ui.router'])
 
                 $http.patch($rootScope.api+'/training-contents/'+$scope.trainingContent.id, $scope.form).
                 then(function (response) {
-                    $log.debug(response.data);
                     flash.success = "Votre contenu a bien été mis à jour";
                     $scope.submit.loading = false;
                     $scope.submit.success = true;

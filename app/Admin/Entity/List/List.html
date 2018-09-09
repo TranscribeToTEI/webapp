@@ -46,6 +46,7 @@
         <tr>
             <th>#</th>
             <th><a ng-click="entitiesSorting = 'willNumber'" title="Trier par numéro d'identification du testament">IdNum <i class="fa fa-caret-down"></i></a></th>
+            <th><a ng-click="entitiesSorting = 'will.id'" title="Trier par id d'entitié">IdInterne <i class="fa fa-caret-down"></i></a></th>
             <th><a ng-click="entitiesSorting = 'will.hostingOrganization.name'" title="Trier par institution de conservation">Institution <i class="fa fa-caret-down"></i></a></th>
             <th><a ng-click="entitiesSorting = 'will.title'" title="Trier par titre du testament">Titre <i class="fa fa-caret-down"></i></a></th>
             <th><a ng-click="entitiesSorting = 'will.willWritingYear'" title="Trier par année de rédaction du testament">Rédaction <i class="fa fa-caret-down"></i></a></th>
@@ -54,6 +55,7 @@
         </tr>
         <tr data-ng-repeat="entity in results|limitTo:itemsPerPage:(currentPage*itemsPerPage-itemsPerPage)|orderBy:entitiesSorting">
             <td>{{ $index+1 }}</td>
+            <td>{{ entity.id }}</td>
             <td>{{ entity.willNumber | willNumberFormat:4 }}</td>
             <td>{{ entity.will.hostingOrganization.name }}</td>
             <td><a ui-sref="transcript.app.entity({id: entity.id})">{{ entity.will.title }}</a></td>

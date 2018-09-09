@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
+<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public' || (trainingContent.status != 'public' && (user.roles | contains:'ROLE_ADMIN'))">
 
 	<div ng-include="'/webapp/app/App/Training/Content/tpl/content-header.html'"></div>
 
@@ -24,7 +24,7 @@
   		<div class="col-md-4 order-md-1 d-print-none">
             <div class="card">
                 <ul class="list-group list-group-flush mb-5">
-                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'">
+                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'" ng-if="content.status == 'public' || (content.status != 'public' && (user.roles | contains:'ROLE_ADMIN'))">
                         <a ng-if="content.id != trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</a>
                         <span class="active" ng-if="content.id === trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</span>
                     </li>

@@ -46,7 +46,7 @@
         <label for="admin-trainingContent-edit-exercise-tagsList" class="col-md-2 col-form-label text-md-right">Balises TEI actives</label>
         <div class="col-md-10">
             <select id="admin-trainingContent-edit-exercise-tagsList" name="admin-trainingContent-edit-exercise-tagsList" data-ng-model="trainingContent.exerciseTagsList" multiple size="35" class="form-control form-control-sm">
-                <option ng-repeat="tag in config.tags" ng-if="tag.btn !== undefined" value="{{ tag.btn.id }}">&lt;{{ tag.xml.name }}&gt; ({{ tag.btn.title }})</option>
+                <option ng-repeat="tag in config.tags" ng-if="tag.btn !== undefined" value="{{ tag.id }}">&lt;{{ tag.xml.name }}&gt; ({{ tag.btn.title }})</option>
             </select>
         </div>
     </div>

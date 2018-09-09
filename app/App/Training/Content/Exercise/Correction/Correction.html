@@ -7,7 +7,7 @@
     </div>
 </div>
 
-<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public'">
+<main class="container" role="main" ng-if="trainingContent.pageStatus == 'public' || (trainingContent.status != 'public' && (user.roles | contains:'ROLE_ADMIN'))">
     <div ng-include="'/webapp/app/App/Training/Content/tpl/content-header.html'"></div>
 
     <div class="card-group h-100 no-gutters" ng-if="user._embedded.preferences.transcriptionDeskPosition == 'leftRead-centerHelp-rightImage'">
