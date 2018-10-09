@@ -24,9 +24,9 @@
         <div class="col-md-4 order-md-1">
             <div class="card">
                 <ul class="list-group list-group-flush mb-5">
-                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'" ng-if="content.status == 'public' || (content.status != 'public' && (user.roles | contains:'ROLE_ADMIN'))">
+                     <li class="list-group-item" ng-repeat="content in trainingContents | orderBy:'orderInTraining'" ng-if="content.pageStatus == 'public' || (content.pageStatus != 'public' && (user.roles | contains:'ROLE_ADMIN'))">
                         <a ng-if="content.id != trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</a>
-                        <span class="active" ng-if="content.id === trainingContent.id" ui-sref="transcript.app.training.content({ order: content.orderInTraining })">{{ content.title }}</span>
+                        <span class="active" ng-if="content.id === trainingContent.id">{{ content.title }}</span>
                     </li>
                 </ul>
             </div>

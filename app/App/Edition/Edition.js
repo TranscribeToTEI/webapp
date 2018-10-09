@@ -45,6 +45,7 @@ angular.module('transcript.app.edition', ['ui.router'])
         $scope.entity = entity; $log.debug($scope.entity);
         $scope.resource = resource; console.log($scope.resource);
         $scope.role = TranscriptService.getTranscriptRights($rootScope.user);
+        console.log($scope.role);
         $scope.config = config; $log.debug($scope.config);
         $scope.teiInfo = teiInfo.data; $log.debug($scope.teiInfo);
         $scope.currentEdition = null;
@@ -93,22 +94,22 @@ angular.module('transcript.app.edition', ['ui.router'])
             $scope.buttonTranscript.enable = false;
             $scope.buttonTranscript.class = "nav-link bg-primary";
             $scope.buttonTranscript.modal = "loginModal";
-        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && ($scope.role === 'editor' || $scope.role === 'validator') && $scope.resource.transcript.status === 'todo') {
+        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && ($scope.role === 'editor' || $scope.role === 'editor-validation' || $scope.role === 'validator') && $scope.resource.transcript.status === 'todo') {
             $scope.buttonTranscript.label = "<i class=\"fa fa-edit\"></i> Commencer cette transcription";
             $scope.buttonTranscript.enable = true;
             $scope.buttonTranscript.class = "nav-link bg-primary";
             $scope.buttonTranscript.modal = false;
-        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && ($scope.role === 'editor' || $scope.role === 'validator') && $scope.resource.transcript.status === 'transcription') {
+        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && ($scope.role === 'editor' || $scope.role === 'editor-validation' || $scope.role === 'validator') && $scope.resource.transcript.status === 'transcription') {
             $scope.buttonTranscript.label = "<i class=\"fa fa-edit\"></i> Modifier cette transcription";
             $scope.buttonTranscript.enable = true;
             $scope.buttonTranscript.class = "nav-link bg-primary";
             $scope.buttonTranscript.modal = false;
-        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && $scope.role !== 'validator' && $scope.resource.transcript.status === 'validation') {
+        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === true && ($scope.role !== 'validator' || $scope.role === 'editor-validation') && $scope.resource.transcript.status === 'validation') {
             $scope.buttonTranscript.label = "<i class=\"fa fa-check-square-o\"></i> En cours de validation";
             $scope.buttonTranscript.enable = false;
             $scope.buttonTranscript.class = "nav-link bg-info disabled";
             $scope.buttonTranscript.modal = false;
-        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && $scope.role === 'validator' && $scope.resource.transcript.status === 'validation') {
+        } else if($scope.resource.transcript._embedded.isCurrentlyEdited === false && ($scope.role === 'validator' || $scope.role === 'editor-validation') && $scope.resource.transcript.status === 'validation') {
             $scope.buttonTranscript.label = "<i class=\"fa fa-check-square-o\"></i> En cours de validation";
             $scope.buttonTranscript.enable = true;
             $scope.buttonTranscript.class = "nav-link bg-info";

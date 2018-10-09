@@ -8,6 +8,8 @@ angular.module('transcript.filter.roleName', ['ui.router'])
             switch(role) {
                 case "ROLE_USER":
                     roleName = "utilisateur";
+                case "ROLE_VALIDATION":
+                    roleName = "utilisateur avec accès aux testaments en validation";
                     break;
                 case "ROLE_TAXONOMY_EDIT":
                     roleName = "contributeur aux notices";

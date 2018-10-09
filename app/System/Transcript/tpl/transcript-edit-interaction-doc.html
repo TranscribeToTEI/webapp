@@ -18,5 +18,11 @@
             <pre class="mb-1 bg-lighter p-3" ng-bind="exampleContainer.example | prettyXml"></pre>
         </div>
         <p class="mb-1 alert alert-warning text-center" ng-if="transcriptArea.interaction.doc.structure.exemplum.length == 0">Cette balise ne possède pas d'exemple.</p>
+
+        <h3 class="mt-5 mb-1">Cette balise peut contenir les balises suivantes :</h3>
+        <ul>
+            <li ng-repeat="containedElement in transcriptArea.interaction.doc.content">{{ containedElement }}</li>
+            <li ng-if="transcriptArea.interaction.doc.content.length == 0">Cette balise ne peut contenir aucun balise</li>
+        </ul>
     </div>
 </div>

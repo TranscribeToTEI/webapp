@@ -1,4 +1,7 @@
-<div class="col-lg-1 col-2 pr-0"><img class="img-fluid" src="/webapp/app/web/images/default-testator.png"/></div>
+<div class="col-lg-1 col-2 pr-0">
+    <img class="img-fluid" src="{{ entity.will.testator.picture | imageRender }}" alt="Photographie du testateur" title="Photographie du testateur" ng-if="entity.will.testator.picture !== undefined && entity.will.testator.picture !== null && entity.will.testator.picture !== ''" />
+    <img class="img-fluid" src="/webapp/app/web/images/default-testator.png" alt="icône générique testateur" ng-if="entity.will.testator.picture === undefined || entity.will.testator.picture === null || entity.will.testator.picture === ''" />
+</div>
 <div class="col-lg-11 col-10 pl-4">
     <div class="mb-1">Testament de <a class="big" href="" ui-sref="transcript.app.taxonomy.view({type: 'testators', id: entity.will.testator.id})">{{ entity.will.testator.name }}</a></div>
     <p>

@@ -27,7 +27,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                     status: "live",
                     live: { content: "", microObjects: { active: true, activeClass: 'active bg-danger'} },
                     content: { title: "", text: "", history: []},
-                    doc: { title: null, element: null, structure: null },
+                    doc: { title: null, element: null, structure: null, content: null },
                     info: { title: null, element: null, structure: null},
                     historicalNotes: { elements: null, addForm: { submit: { loading: false }, form: { content: null } } },
                     taxonomy: { result: null, dataType: null, entities: null, string: null, taxonomySelected: null},
@@ -874,6 +874,7 @@ angular.module('transcript.system.transcript', ['ui.router'])
                 $scope.transcriptArea.interaction.doc.structure = null;
                 $scope.transcriptArea.interaction.doc.title = null;
                 $scope.transcriptArea.interaction.doc.element = null;
+                $scope.transcriptArea.interaction.doc.content = null;
             };
 
             $scope.functions.resetInfoZone = function () {
@@ -936,12 +937,14 @@ angular.module('transcript.system.transcript', ['ui.router'])
             $scope.functions.defineDocumentation = function (element) {
                 $scope.transcriptArea.interaction.doc.title = element;
                 $scope.transcriptArea.interaction.doc.element = element;
+                $scope.transcriptArea.interaction.doc.content = element;
                 if ($scope.teiInfo[element] !== undefined && $scope.teiInfo[element].doc !== undefined) {
                     if ($scope.teiInfo[element].doc.gloss.length === 1) {
                         $scope.transcriptArea.interaction.doc.title = $scope.teiInfo[element].doc.gloss[0].content;
                     }
 
                     $scope.transcriptArea.interaction.doc.structure = $scope.teiInfo[element].doc;
+                    $scope.transcriptArea.interaction.doc.content = $scope.teiInfo[element].content;
 
                     if ($scope.transcriptArea.interaction.doc.structure.exemplum !== undefined) {
                         /*for (let idExample in $scope.transcriptArea.interaction.doc.structure.exemplum) {
@@ -1224,19 +1227,19 @@ angular.module('transcript.system.transcript', ['ui.router'])
                         case "testators":
                             $log.debug("testators");
                             $scope.transcriptArea.interaction.taxonomy.entities = $scope.taxonomy.testators;
-                            $scope.transcriptArea.interaction.taxonomy.values = SearchService.dataset($scope.taxonomy.testators, "name", "string");
+                            $scope.transcriptArea.interaction.taxonomy.values = $filter('orderBy')(SearchService.dataset($scope.taxonomy.testators, "name", "string"), "name");
                             $scope.transcriptArea.interaction.taxonomy.dataType = "testators";
                             break;
                         case "places":
                             $log.debug("places");
                             $scope.transcriptArea.interaction.taxonomy.entities = $scope.taxonomy.places;
-                            $scope.transcriptArea.interaction.taxonomy.values = SearchService.dataset($scope.taxonomy.places, "name", "string");
+                            $scope.transcriptArea.interaction.taxonomy.values = $filter('orderBy')(SearchService.dataset($scope.taxonomy.places, "name", "string"), "name");
                             $scope.transcriptArea.interaction.taxonomy.dataType = "places";
                             break;
                         case "militaryUnits":
                             $log.debug("militaryUnits");
                             $scope.transcriptArea.interaction.taxonomy.entities = $scope.taxonomy.militaryUnits;
-                            $scope.transcriptArea.interaction.taxonomy.values = SearchService.dataset($scope.taxonomy.militaryUnits, "name", "string");
+                            $scope.transcriptArea.interaction.taxonomy.values = $filter('orderBy')(SearchService.dataset($scope.taxonomy.militaryUnits, "name", "string"), "name");
                             $scope.transcriptArea.interaction.taxonomy.dataType = "military-units";
                             break;
                         default:

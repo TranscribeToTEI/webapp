@@ -23,6 +23,7 @@ angular.module('transcript.app.training.home', ['ui.router'])
 
     .controller('AppTrainingHomeCtrl', ['$log', '$rootScope','$scope', '$http', '$sce', '$state', '$filter', 'trainingContents', 'UserPreferenceService', function($log, $rootScope, $scope, $http, $sce, $state, $filter, trainingContents, UserPreferenceService) {
         $scope.trainingContents = trainingContents;
+        console.log(trainingContents);
         /* Updating user's preferences ------------------------------------------------------------------------------ */
         if($rootScope.user._embedded.preferences.tutorialStatus === 'todo' || $rootScope.user._embedded.preferences.tutorialStatus === 'inProgress') {
             UserPreferenceService.patchPreferences({

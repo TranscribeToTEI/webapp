@@ -73,6 +73,8 @@ angular.module('transcript.service.transcript', ['ui.router'])
                 if(user !== undefined && user !== null) {
                     if ($.inArray("ROLE_SUPER_ADMIN", user.roles) !== -1 || $.inArray("ROLE_ADMIN", user.roles) !== -1 || $.inArray("ROLE_MODO", user.roles) !== -1) {
                         role = "validator";
+                    } else if($.inArray("ROLE_VALIDATION", user.roles) !== -1) {
+                        role = "editor-validation";
                     } else {
                         role = "editor";
                     }
